@@ -17,7 +17,8 @@ import android.util.Log;
 public class Communication extends Thread implements Runnable {
 
 	final String NAMESPACE = "http://helloworld/";
-	final String URL = "http://83.212.115.57:8080/ADService/services/HelloWorld?wsdl"; 
+	//final String URL = "http://83.212.115.57:8080/ADService/services/HelloWorld?wsdl"; 
+	final String URL = Constants.URL+":8080/ADService/services/HelloWorld?wsdl";
 	
 	private Handler handler;
 	

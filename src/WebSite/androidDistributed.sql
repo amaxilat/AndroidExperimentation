@@ -46,8 +46,7 @@ CREATE TABLE IF NOT EXISTS `experiments` (
 -- Dumping data for table `experiments`
 --
 
-INSERT INTO `experiments` (`id`, `contextType`, `user_email`, `name`, `sensorDependencies`, `timeDependencies`, `expires`, `status`, `url`, `executedBy`) VALUES
-(18, 'org.ambientdynamix.contextplugins.addplugin', 'user1@gmail.com', 'Add plugin', '|gpsPosition|', '1,2,3', 'never', '', 'http://150.140.210.98/androidDistributed/dataPlace/user1/org.ambientdynamix.contextplugins.addplugin.jar', 0);
+INSERT INTO `plugins` VALUES (1,'org.ambientdynamix.contextplugins.addplugin','org.ambientdynamix.contextplugins.addplugin.PluginFactory','Add Plugin','Add Plugin','/dynamix/org.ambientdynamix.contextplugins.addplugin_9.47.1.jar'),(2,'org.ambientdynamix.contextplugins.WifiScanPlugin','org.ambientdynamix.contextplugins.addplugin.PluginFactory','WifiScanPlugin','WifiScanPlugin','/dynamix/org.ambientdynamix.contextplugins.WifiScanPlugin_9.47.1.jar'),(3,'org.ambientdynamix.contextplugins.WifiPlugin','org.ambientdynamix.contextplugins.addplugin.PluginFactory','WifiPlugin','WifiScanPlugin','/dynamix/org.ambientdynamix.contextplugins.WifiPlugin_9.47.1.jar'),(4,'org.ambientdynamix.contextplugins.batteryLevelPlugin','org.ambientdynamix.contextplugins.addplugin.PluginFactory','batteryLevelPlugin','batteryLevelPlugin','/dynamix/org.ambientdynamix.contextplugins.batteryLevelPlugin_9.47.1.jar'),(5,'org.ambientdynamix.contextplugins.batteryTemperaturePlugin','org.ambientdynamix.contextplugins.addplugin.PluginFactory','batteryTemperaturePlugin','batteryTemperaturePlugin','/dynamix/org.ambientdynamix.contextplugins.batteryTemperaturePlugin_9.47.1.jar'),(6,'org.ambientdynamix.contextplugins.GpsPlugin','org.ambientdynamix.contextplugins.addplugin.PluginFactory','GpsPlugin','GpsPlugin','/dynamix/org.ambientdynamix.contextplugins.GpsPlugin_9.47.1.jar');
 
 -- --------------------------------------------------------
 

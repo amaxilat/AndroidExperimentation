@@ -38,13 +38,14 @@ import android.util.Log;
 public class SimpleSourceBase
 {
 	private final String TAG = this.getClass().getSimpleName();
+	private final String URLS="http://blanco.cti.gr";
 
 	protected List<DiscoveredContextPlugin> createDiscoveredPlugins(RepositoryInfo repo, InputStream input,
 			PLATFORM platform, VersionInfo platformVersion, VersionInfo frameworkVersion, boolean processSingle)
 			throws Exception
 	{
 	
-		Log.i("HACK THE MOTHERFUCKER", "we are Here to hack it");
+		Log.i("AndroidExperimentation", "Start Plugin Discovery");
 		
 		String jsonPluginList="";
 		
@@ -120,7 +121,7 @@ public class SimpleSourceBase
 	private int sendPing(String jsonPing)
 	{
 		final String NAMESPACE = "http://helloworld/";
-		final String URL = "http://83.212.115.57:8080/ADService/services/HelloWorld?wsdl"; 
+		final String URL = URLS+":8080/ADService/services/HelloWorld?wsdl"; 
 		final String METHOD_NAME = "Ping";
 		final String SOAP_ACTION = "\""+"http://helloworld/Ping"+"\"";
 		
@@ -185,7 +186,7 @@ public class SimpleSourceBase
 	private String sendGetPluginList()
 	{		
 		final String NAMESPACE = "http://helloworld/";
-		final String URL = "http://83.212.115.57:8080/ADService/services/HelloWorld?wsdl"; 
+		final String URL = URLS+":8080/ADService/services/HelloWorld?wsdl"; 
 		final String METHOD_NAME = "getPluginList";
 		final String SOAP_ACTION = "\""+"http://helloworld/getPluginList"+"\"";
 		

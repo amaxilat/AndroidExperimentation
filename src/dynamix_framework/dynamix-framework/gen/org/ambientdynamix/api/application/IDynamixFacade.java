@@ -1,6 +1,6 @@
 /*
  * This file is auto-generated.  DO NOT MODIFY.
- * Original file: /home/panos/Downloads/dynamix/dynamix-framework/src/org/ambientdynamix/api/application/IDynamixFacade.aidl
+ * Original file: /home/theodori/workspace/AndroidExperimentation/src/dynamix_framework/dynamix-framework/src/org/ambientdynamix/api/application/IDynamixFacade.aidl
  */
 package org.ambientdynamix.api.application;
 /**

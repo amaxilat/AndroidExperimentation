@@ -599,4 +599,29 @@ public class SecuredContext extends Context {
 		return false;
 	}
 
+	@Override
+	public File getExternalCacheDir() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public File getExternalFilesDir(String type) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public String getPackageCodePath() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public String getPackageResourcePath() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+
 }

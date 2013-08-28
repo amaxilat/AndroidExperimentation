@@ -190,7 +190,7 @@ public class Demon extends Thread implements Runnable {
 	    if(myfile.exists()==false)
 	    {	
 	    	Downloader downloader = new Downloader();
-	    	downloader.DownloadFromUrl("http://83.212.115.57/androidDistributed/dynamixRepository/"+myFile, myFile);
+	    	downloader.DownloadFromUrl(Constants.URL+"/androidDistributed/dynamixRepository/"+myFile, myFile);
 	    }
 	}
 	

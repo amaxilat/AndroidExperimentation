@@ -1,9 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <classpath>
 	<classpathentry kind="con" path="com.android.ide.eclipse.adt.ANDROID_FRAMEWORK"/>
-	<classpathentry kind="con" path="com.android.ide.eclipse.adt.LIBRARIES"/>
-	<classpathentry kind="src" path="src"/>
-	<classpathentry kind="src" path="gen"/>
+	<classpathentry exported="true" kind="con" path="com.android.ide.eclipse.adt.LIBRARIES"/>
 	<classpathentry exported="true" kind="lib" path="lib/dynamixApiApplication.jar"/>
 	<classpathentry exported="true" kind="lib" path="lib/org.ambientdynamix.contextplugins.oneplugin_9.47.1.jar"/>
 	<classpathentry exported="true" kind="lib" path="lib/org.ambientdynamix.contextplugins.twoplugin_9.47.1.jar"/>
@@ -15,5 +13,8 @@
 	<classpathentry exported="true" kind="lib" path="lib/org.ambientdynamix.contextplugins.WifiPlugin_9.47.1.jar"/>
 	<classpathentry exported="true" kind="lib" path="lib/org.ambientdynamix.contextplugins.WifiScanPlugin_9.47.1.jar"/>
 	<classpathentry exported="true" kind="lib" path="lib/org.ambientdynamix.contextplugins.GpsPlugin_9.47.1.jar"/>
+	<classpathentry kind="src" path="src"/>
+	<classpathentry kind="src" path="gen"/>
+	<classpathentry exported="true" kind="con" path="com.android.ide.eclipse.adt.DEPENDENCIES"/>
 	<classpathentry kind="output" path="bin/classes"/>
 </classpath>
