@@ -1,0 +1,6 @@
+1) Create DB schema from AndroidExperimentation/src/WebSite/androidDistributed.sql
+2) Deploy  AndroidExperimentation/src/WebSite/androidExperimentation  php website under an APACHE installation
+	- put DB credentials in mysqli_connect.php
+3) Deploy  AndroidExperimentation/src/WebService  jax-ws Webservices under a Tomcat installation
+4) install AndroidExperimentation/androidPackages/DynamixFramework_hacked.apk on an Android 4.0 device
+5) install AndroidExperimentation/androidPackages/androidDistributed.apk on the same device
