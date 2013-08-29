@@ -13,8 +13,8 @@
 	<classpathentry exported="true" kind="lib" path="lib/simple-xml-2.6.2.jar"/>
 	<classpathentry exported="true" kind="lib" path="lib/gson-2.2.4.jar"/>
 	<classpathentry exported="true" kind="lib" path="lib/ksoap2-android-assembly-3.0.0-jar-with-dependencies.jar"/>
+	<classpathentry exported="true" kind="con" path="com.android.ide.eclipse.adt.DEPENDENCIES"/>
 	<classpathentry kind="src" path="src"/>
 	<classpathentry kind="src" path="gen"/>
-	<classpathentry exported="true" kind="con" path="com.android.ide.eclipse.adt.DEPENDENCIES"/>
 	<classpathentry kind="output" path="bin/classes"/>
 </classpath>

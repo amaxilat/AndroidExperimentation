@@ -22,7 +22,7 @@
     <file path="/dummy.sql" changelist="4ccbb714-201c-482b-a93f-dd4890c10bc1" time="1370627315640" ignored="false" />
     <file path="/hibernate.cfg.xml" changelist="4ccbb714-201c-482b-a93f-dd4890c10bc1" time="1372160326182" ignored="false" />
     <file path="/PIng.java" changelist="4ccbb714-201c-482b-a93f-dd4890c10bc1" time="1371344258430" ignored="false" />
-    <file path="/Smartphone.java" changelist="4ccbb714-201c-482b-a93f-dd4890c10bc1" time="1372160872630" ignored="false" />
+    <file path="/Smartphone.java" changelist="4ccbb714-201c-482b-a93f-dd4890c10bc1" time="1377698604481" ignored="false" />
     <file path="/Report.java" changelist="4ccbb714-201c-482b-a93f-dd4890c10bc1" time="1371449695315" ignored="false" />
     <file path="/MyPlugInfo.java" changelist="4ccbb714-201c-482b-a93f-dd4890c10bc1" time="1371946351336" ignored="false" />
     <file path="/PluginsEntity.java" changelist="4ccbb714-201c-482b-a93f-dd4890c10bc1" time="1371952404781" ignored="false" />
@@ -87,6 +87,38 @@
       </breakpoint>
     </breakpoint_any>
     <ui_properties default_suspend_policy="SuspendAll" default_condition_enabled="true" />
+    <line_breakpoints>
+      <breakpoint url="file://$PROJECT_DIR$/src/helloworld/HelloWorld.java" line="19" class="helloworld.HelloWorld" package="helloworld">
+        <option name="ENABLED" value="true" />
+        <option name="LOG_ENABLED" value="false" />
+        <option name="LOG_EXPRESSION_ENABLED" value="false" />
+        <option name="REMOVE_AFTER_HIT" value="false" />
+        <option name="SUSPEND_POLICY" value="SuspendAll" />
+        <option name="SUSPEND" value="true" />
+        <option name="COUNT_FILTER_ENABLED" value="false" />
+        <option name="COUNT_FILTER" value="0" />
+        <option name="CONDITION_ENABLED" value="true" />
+        <option name="CLASS_FILTERS_ENABLED" value="false" />
+        <option name="INSTANCE_FILTERS_ENABLED" value="false" />
+        <option name="CONDITION" value="" />
+        <option name="LOG_MESSAGE" value="" />
+      </breakpoint>
+      <breakpoint url="file://$PROJECT_DIR$/src/helloworld/HelloWorld.java" line="79" class="helloworld.HelloWorld" package="helloworld">
+        <option name="ENABLED" value="true" />
+        <option name="LOG_ENABLED" value="false" />
+        <option name="LOG_EXPRESSION_ENABLED" value="false" />
+        <option name="REMOVE_AFTER_HIT" value="false" />
+        <option name="SUSPEND_POLICY" value="SuspendAll" />
+        <option name="SUSPEND" value="true" />
+        <option name="COUNT_FILTER_ENABLED" value="false" />
+        <option name="COUNT_FILTER" value="0" />
+        <option name="CONDITION_ENABLED" value="true" />
+        <option name="CLASS_FILTERS_ENABLED" value="false" />
+        <option name="INSTANCE_FILTERS_ENABLED" value="false" />
+        <option name="CONDITION" value="" />
+        <option name="LOG_MESSAGE" value="" />
+      </breakpoint>
+    </line_breakpoints>
     <breakpoint_rules />
     <ui_properties />
   </component>
@@ -99,11 +131,20 @@
       <file leaf-file-name="HelloWorld.java" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/helloworld/HelloWorld.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="188" column="0" selection-start="6600" selection-end="6600" vertical-scroll-proportion="0.3320965">
+            <state line="80" column="0" selection-start="2431" selection-end="2431" vertical-scroll-proportion="0.47882736">
               <folding>
                 <element signature="imports" expanded="true" />
                 <element signature="e#5946#5958#0" expanded="true" />
               </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="Smartphone.java" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/helloworld/Smartphone.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="14" column="0" selection-start="267" selection-end="330" vertical-scroll-proportion="0.0">
+              <folding />
             </state>
           </provider>
         </entry>
@@ -129,11 +170,11 @@
         <option value="$PROJECT_DIR$/web/WEB-INF/sun-jaxws.xml" />
         <option value="$PROJECT_DIR$/src/helloworld/HelloWorld.wsdl" />
         <option value="$PROJECT_DIR$/src/helloworld/SmartphonesEntity.java" />
-        <option value="$PROJECT_DIR$/src/helloworld/Smartphone.java" />
         <option value="$PROJECT_DIR$/src/helloworld/Mappings.xml" />
         <option value="$PROJECT_DIR$/src/Main.java" />
         <option value="$PROJECT_DIR$/src/helloworld/HelloWorld.java" />
         <option value="$PROJECT_DIR$/src/hibernate.cfg.xml" />
+        <option value="$PROJECT_DIR$/src/helloworld/Smartphone.java" />
       </list>
     </option>
   </component>
@@ -674,7 +715,7 @@
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.17017828" sideWeight="0.90226877" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.3526735" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.6166098" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="IDEtalk Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32982457" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.24878444" sideWeight="0.67190224" order="2" side_tool="true" content_ui="tabs" />
@@ -688,7 +729,7 @@
       <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="SLIDING" type="SLIDING" visible="false" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Application Servers" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32536975" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.29946524" sideWeight="0.6473265" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.20106952" sideWeight="0.38339022" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.09773124" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
       <window_info id="soapUI Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32984293" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
@@ -809,13 +850,6 @@
     <option name="FILTER_TARGETS" value="false" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/src/helloworld/Smartphone.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="16" column="48" selection-start="308" selection-end="308" vertical-scroll-proportion="0.06593407">
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/Main.java">
       <provider selected="true" editor-type-id="text-editor">
         <state line="11" column="0" selection-start="267" selection-end="267" vertical-scroll-proportion="0.21008404">
@@ -923,9 +957,16 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/helloworld/Smartphone.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="14" column="0" selection-start="267" selection-end="330" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/helloworld/HelloWorld.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="188" column="0" selection-start="6600" selection-end="6600" vertical-scroll-proportion="0.3320965">
+        <state line="80" column="0" selection-start="2431" selection-end="2431" vertical-scroll-proportion="0.47882736">
           <folding>
             <element signature="imports" expanded="true" />
             <element signature="e#5946#5958#0" expanded="true" />

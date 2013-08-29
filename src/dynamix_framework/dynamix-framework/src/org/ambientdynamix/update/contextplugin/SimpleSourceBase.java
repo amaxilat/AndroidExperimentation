@@ -38,7 +38,7 @@ import android.util.Log;
 public class SimpleSourceBase
 {
 	private final String TAG = this.getClass().getSimpleName();
-	private final String URLS="http://blanco.cti.gr";
+	private final String URLS=Constants.URL;
 
 	protected List<DiscoveredContextPlugin> createDiscoveredPlugins(RepositoryInfo repo, InputStream input,
 			PLATFORM platform, VersionInfo platformVersion, VersionInfo frameworkVersion, boolean processSingle)

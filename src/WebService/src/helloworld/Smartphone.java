@@ -13,6 +13,11 @@ public class Smartphone
     String sensors_rules;
     String time_rules;
 
+    public Smartphone()
+    {
+        this.phoneId = -1;
+    }
+
     public Smartphone(int phoneId)
     {
         this.phoneId = phoneId;
