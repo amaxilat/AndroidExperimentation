@@ -19,7 +19,7 @@ public class Downloader
 		//
 	}
 	
-	public void DownloadFromUrl(String DownloadUrl, String fileName)
+	public void DownloadFromUrl(String DownloadUrl, String fileName) throws Exception
 	{
 		try
 		{
@@ -69,6 +69,7 @@ public class Downloader
 		catch (IOException e)
 		{
 		       Log.d("DownloadManager", "Error: " + e);
+		       throw (Exception) e;
 		}
 	}
 }

@@ -1,22 +1,21 @@
 package helloworld;
 
-import javax.jws.WebMethod;
-import javax.jws.WebService;
 import com.google.gson.Gson;
+import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 import org.hibernate.cfg.Configuration;
 
-import org.hibernate.Query;
+import javax.jws.WebMethod;
+import javax.jws.WebService;
 import java.util.*;
 
 @WebService
 public class HelloWorld {
 
     @WebMethod
-    public String registerSmartphone(String smartphoneJson)
-    {
+    public String registerSmartphone(String smartphoneJson) {
         Gson gson = new Gson();
         Smartphone smartphone = gson.fromJson(smartphoneJson, Smartphone.class);
         int phoneId = smartphone.getPhoneId();
@@ -29,12 +28,11 @@ public class HelloWorld {
         Transaction tx = session.beginTransaction();
 
         String hql = "from SmartphonesEntity where phoneId=?";
-        List<SmartphonesEntity> recordList= session.createQuery(hql).setInteger(0, phoneId).list();
+        List<SmartphonesEntity> recordList = session.createQuery(hql).setInteger(0, phoneId).list();
 
         String response = "-1";
 
-        if(recordList!=null && recordList.size()>0)
-        {
+        if (recordList != null && recordList.size() > 0) {
             SmartphonesEntity smartphoneEntity2 = recordList.get(0);
             smartphoneEntity2.setSensorsRules(sensors_rules);
             smartphoneEntity2.setTimeRules(time_rules);
@@ -42,20 +40,15 @@ public class HelloWorld {
             session.update(smartphoneEntity2);
 
             response = Integer.toString(phoneId);
-        }
-        else
-        {
+        } else {
             hql = "from SmartphonesEntity where 1=1";
-            List<SmartphonesEntity> smartphonesList= session.createQuery(hql).list();
+            List<SmartphonesEntity> smartphonesList = session.createQuery(hql).list();
 
             int smartphoneId;
 
-            if(smartphonesList.size() > 0)
-            {
-                smartphoneId = smartphonesList.get(smartphonesList.size()-1).getId() + 1;
-            }
-            else
-            {
+            if (smartphonesList.size() > 0) {
+                smartphoneId = smartphonesList.get(smartphonesList.size() - 1).getId() + 1;
+            } else {
                 smartphoneId = 1;
             }
 
@@ -75,8 +68,7 @@ public class HelloWorld {
     }
 
     @WebMethod
-    public String getExperiment(String smartphoneJson)
-    {
+    public String getExperiment(String smartphoneJson) {
         Gson gson = new Gson();
         Smartphone smartphone = gson.fromJson(smartphoneJson, Smartphone.class);
         int phoneId = smartphone.getPhoneId();
@@ -91,12 +83,11 @@ public class HelloWorld {
 //        smartphoneEntity.setPhoneId(phoneId);
 
         String hql = "from SmartphonesEntity where phoneId=?";
-        List<SmartphonesEntity> recordList= session.createQuery(hql).setInteger(0, phoneId).list();
+        List<SmartphonesEntity> recordList = session.createQuery(hql).setInteger(0, phoneId).list();
 
-        String jsonExperiment="";
+        String jsonExperiment = "";
 
-        if( recordList.size() > 0 )
-        {
+        if (recordList.size() > 0) {
             SmartphonesEntity my_smartphone = recordList.get(0);
             my_smartphone.setSensorsRules(smartphoneSensorRules);
             session.update(my_smartphone);
@@ -105,15 +96,12 @@ public class HelloWorld {
             String smarDep = smartphoneSensorRules;
             String[] smarDeps = smartphoneSensorRules.split("|");
 
-            if(recordList.size()==1)
-            {
+            if (recordList.size() == 1) {
                 hql = "from ExperimentsEntity where 1=1";
-                List<ExperimentsEntity> experimentsList= session.createQuery(hql).list();
+                List<ExperimentsEntity> experimentsList = session.createQuery(hql).list();
 
-                for(ExperimentsEntity experimentsEntity : experimentsList)
-                {
-                    if(experimentsEntity.getStatus().equals("finished"))
-                    {
+                for (ExperimentsEntity experimentsEntity : experimentsList) {
+                    if (experimentsEntity.getStatus().equals("finished")) {
                         continue;
                     }
 
@@ -123,53 +111,42 @@ public class HelloWorld {
                     Set<String> smarSet = new HashSet<String>(Arrays.asList(smarDeps));
                     Set<String> expSet = new HashSet<String>(Arrays.asList(expDeps));
 
-                    if( smarSet.equals(expSet) )
-                    {
+                    if (smarSet.equals(expSet)) {
                         Experiment experiment = new Experiment(experimentsEntity.getContextType(),
-                                        experimentsEntity.getUserEmail(), experimentsEntity.getName(),
-                            experimentsEntity.getSensorDependencies(), experimentsEntity.getTimeDependencies(),
-                            experimentsEntity.getExpires(), experimentsEntity.getUrl());
+                                experimentsEntity.getUserEmail(), experimentsEntity.getName(),
+                                experimentsEntity.getSensorDependencies(), experimentsEntity.getTimeDependencies(),
+                                experimentsEntity.getExpires(), experimentsEntity.getUrl());
 
                         jsonExperiment = gson.toJson(experiment);
                         System.out.println(jsonExperiment);
                         break;
-                    }
-                    else
-                    {
+                    } else {
                         System.out.println("this experiment violates phone's sensors rules");
                     }
                 }
             }
 
             tx.commit();
-        }
-        else
-        {
-            jsonExperiment="0";
+        } else {
+            jsonExperiment = "0";
         }
 
         return jsonExperiment;
     }
 
     @WebMethod
-    public String getPluginList(String pingJson)
-    {
+    public String getPluginList(String pingJson) {
         Gson gson = new Gson();
-
         Configuration conf = new Configuration().configure();
         SessionFactory factory = conf.buildSessionFactory();
         Session session = factory.openSession();
         Transaction tx = session.beginTransaction();
-
         String hql = "from PluginsEntity where 1=1";
-        List<PluginsEntity> pluginsList= session.createQuery(hql).list();
-
+        List<PluginsEntity> pluginsList = session.createQuery(hql).list();
         String jsonPluginList = "";
         PluginList pluginList = new PluginList();
         ArrayList<MyPlugInfo> plugList = new ArrayList<MyPlugInfo>();
-
-        for( PluginsEntity plugin : pluginsList )
-        {
+        for (PluginsEntity plugin : pluginsList) {
             String id = plugin.getPluginId();
             String description = plugin.getDescription();
             String name = plugin.getName();
@@ -180,25 +157,20 @@ public class HelloWorld {
 
             plugList.add(myPlugInfo);
         }
-
         pluginList.setPluginList(plugList);
-
         jsonPluginList = gson.toJson(pluginList);
         System.out.println(jsonPluginList);
-
         return jsonPluginList;
     }
 
 
-
     @WebMethod
-    public String reportResults(String reportJson)
-    {
+    public String reportResults(String reportJson) {
         Gson gson = new Gson();
         Report report = gson.fromJson(reportJson, Report.class);
         String contextType = report.getName();
         ArrayList<String> experimentResults = report.getResults();
-        System.out.println("contextType: " + contextType );
+        System.out.println("contextType: " + contextType);
 
         Configuration conf = new Configuration().configure();
         SessionFactory factory = conf.buildSessionFactory();
@@ -208,7 +180,7 @@ public class HelloWorld {
 
         Query q = session.createQuery("from ExperimentsEntity where contextType = :contextType ");
         q.setParameter("contextType", contextType);
-        ExperimentsEntity experiment = (ExperimentsEntity)q.list().get(0);
+        ExperimentsEntity experiment = (ExperimentsEntity) q.list().get(0);
         int experimentId = experiment.getId();
         int executedBy = experiment.getExecutedBy();
         executedBy++;
@@ -216,18 +188,14 @@ public class HelloWorld {
         experiment.setStatus("running");
         session.update(experiment);
 
-        for(String result : experimentResults)
-        {
+        for (String result : experimentResults) {
             ResultsEntity resultsEntity = new ResultsEntity();
             resultsEntity.setExperimentId(experimentId);
             resultsEntity.setSourceId(executedBy);
 
-            if(result != null)
-            {
+            if (result != null) {
                 resultsEntity.setValue(result);
-            }
-            else
-            {
+            } else {
                 resultsEntity.setValue("");
             }
 
@@ -246,13 +214,10 @@ public class HelloWorld {
     }
 
     @WebMethod
-    public String Ping(String pingJson)
-    {
+    public String Ping(String pingJson) {
         Gson gson = new Gson();
         Ping ping = gson.fromJson(pingJson, Ping.class);
-
-        if(ping.getValue() == 1)
-        {
+        if (ping.getValue() == 1) {
             return "1";
         }
 

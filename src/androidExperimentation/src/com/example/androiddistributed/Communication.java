@@ -1,5 +1,7 @@
 package com.example.androiddistributed;
 
+import java.util.ArrayList;
+
 import org.ksoap2.SoapEnvelope;
 import org.ksoap2.serialization.PropertyInfo;
 import org.ksoap2.serialization.SoapObject;
@@ -60,55 +62,27 @@ public class Communication extends Thread implements Runnable {
 		int pong = 0;
 		
 		SoapObject request = new SoapObject(NAMESPACE, METHOD_NAME); 
-
 		PropertyInfo propInfo=new PropertyInfo();
 		propInfo.name="arg0";
 		propInfo.type=PropertyInfo.STRING_CLASS;
 		propInfo.setValue(jsonPing);
-  
-		request.addProperty(propInfo);  
-
+  		request.addProperty(propInfo);  
 		SoapSerializationEnvelope envelope = new SoapSerializationEnvelope(SoapEnvelope.VER11); 
 		envelope.setOutputSoapObject(request);
-		
 		HttpTransportSE androidHttpTransport = new HttpTransportSE(URL);
 		
 		try
 		{			
 			androidHttpTransport.call(SOAP_ACTION, envelope);
-			SoapPrimitive  resultsRequestSOAP = (SoapPrimitive) envelope.getResponse();
-			
-			pong = Integer.parseInt(resultsRequestSOAP.toString()); 
-			
-			Log.i("WTF ping", resultsRequestSOAP.toString());
+			SoapPrimitive  resultsRequestSOAP = (SoapPrimitive) envelope.getResponse();	
+			pong = Integer.parseInt(resultsRequestSOAP.toString()); 			
+			Log.i("AndroidExperimentation Ping Result", resultsRequestSOAP.toString());
 		}
 		catch (Exception e)
 		{
-			Log.i("WTF catch", e.toString());
+			Log.i("AndroidExperimentation Ping Exception", e.toString());
 		}
-		
-		// ksoap2 HttpTransportSE issue -- connection never timeout or close
-		// 
-		//	connection close to server - connection stays open to client	
-		//  so the first call is ok, but the second call receive from the server a RST
-		//
-		//  this because the server receives a packet for a closed socket 
-		//  and insert RST in an attempt to block traffic
-		//
-		// connection never timeout or close -- so force it to break
-		
-		try
-		{			
-			androidHttpTransport.call(SOAP_ACTION, envelope);
-			SoapPrimitive  resultsRequestSOAP = (SoapPrimitive) envelope.getResponse();					
-		}
-		catch (Exception e)
-		{
-			//
-		}
-		
-		// ksoap2 HttpTransportSE issue
-		
+	
 		return pong;
 	}	
 	
@@ -119,32 +93,28 @@ public class Communication extends Thread implements Runnable {
 		handler.sendMessage(msg);
 	}
 	
-	public int registerSmartphone(int phoneId, String sensorsRules)
+	public int registerSmartphone(int phoneId, String sensorsRules) throws Exception
 	{
 		int serverPhoneId = 0;
 		
 		Smartphone smartphone = new Smartphone(phoneId);
 		smartphone.setSensorsRules(sensorsRules);
-		smartphone.setTimeRules("time_rules");
-		
+		smartphone.setTimeRules("time_rules");		
 		Gson gson = new Gson();
-		String jsonSmartphone = gson.toJson(smartphone);
-		
-		String serverPhoneId_s = sendRegisterSmartphone(jsonSmartphone);
-		
+		String jsonSmartphone = gson.toJson(smartphone);		
+		String serverPhoneId_s = sendRegisterSmartphone(jsonSmartphone);		
 		try
 		{
 			serverPhoneId = Integer.parseInt(serverPhoneId_s);
 		}
 		catch(Exception e)
 		{
-			serverPhoneId = -1;
-		}
-		
+			serverPhoneId = Constants.PHONE_ID_UNITIALIZED;
+		}		
 		return serverPhoneId;
 	}
 	
-	private String sendRegisterSmartphone(String jsonSmartphone)
+	private String sendRegisterSmartphone(String jsonSmartphone) throws Exception
 	{
 		Log.i(TAG, "send register smartphone");
 
@@ -169,43 +139,18 @@ public class Communication extends Thread implements Runnable {
 		
 		try
 		{			
-			androidHttpTransport.call(SOAP_ACTION, envelope);
-			
-			SoapPrimitive  resultsRequestSOAP = (SoapPrimitive) envelope.getResponse();
-			
+			androidHttpTransport.call(SOAP_ACTION, envelope);			
+			SoapPrimitive  resultsRequestSOAP = (SoapPrimitive) envelope.getResponse();			
 			serverPhoneId = resultsRequestSOAP.toString(); 
 		}
 		catch (Exception e)
 		{
-			//
+			throw e;
 		}
-		
-		// ksoap2 HttpTransportSE issue -- connection never timeout or close
-		// 
-		//	connection close to server - connection stays open to client	
-		//  so the first call is ok, but the second call receive from the server a RST
-		//
-		//  this because the server receives a packet for a closed socket 
-		//  and insert RST in an attempt to block traffic
-		//
-		// connection never timeout or close -- so force it to break
-		
-		try
-		{			
-			androidHttpTransport.call(SOAP_ACTION, envelope);
-			SoapPrimitive  resultsRequestSOAP = (SoapPrimitive) envelope.getResponse();					
-		}
-		catch (Exception e)
-		{
-			//
-		}
-		
-		// ksoap2 HttpTransportSE issue
-		
 		return serverPhoneId;
 	}
 	
-	public String getExperiment(int phoneId, String sensorRules)
+	public String getExperiment(int phoneId, String sensorRules) throws Exception
 	{
 		Smartphone smartphone = new Smartphone(phoneId);		
 		smartphone.setSensorsRules(sensorRules);
@@ -214,7 +159,7 @@ public class Communication extends Thread implements Runnable {
 		return sendGetExperiment(jsonSmartphone);
 	}
 	
-	private String sendGetExperiment(String jsonSmartphone)
+	private String sendGetExperiment(String jsonSmartphone) throws Exception
 	{
 		final String METHOD_NAME = "getExperiment";
 		final String SOAP_ACTION = "\""+"http://helloworld/getExperiment"+"\"";
@@ -237,45 +182,20 @@ public class Communication extends Thread implements Runnable {
 		
 		try
 		{			
-			androidHttpTransport.call(SOAP_ACTION, envelope);
-			
-			SoapPrimitive resultsRequestSOAP = (SoapPrimitive) envelope.getResponse();
-			
+			androidHttpTransport.call(SOAP_ACTION, envelope);	
+			SoapPrimitive resultsRequestSOAP = (SoapPrimitive) envelope.getResponse();			
 			response = resultsRequestSOAP.toString(); 
 		}
 		catch (Exception e)
 		{
-			//
+			throw e;
 		}
-		
-		// ksoap2 HttpTransportSE issue -- connection never timeout or close
-		// 
-		//	connection close to server - connection stays open to client	
-		//  so the first call is ok, but the second call receive from the server a RST
-		//
-		//  this because the server receives a packet for a closed socket 
-		//  and insert RST in an attempt to block traffic
-		//
-		// connection never timeout or close -- so force it to break
-		
-		try
-		{			
-			androidHttpTransport.call(SOAP_ACTION, envelope);
-			SoapPrimitive  resultsRequestSOAP = (SoapPrimitive) envelope.getResponse();					
-		}
-		catch (Exception e)
-		{
-			//
-		}
-		
-		// ksoap2 HttpTransportSE issue
-		
 		return response;
 	}
 	
-	public int sendReportResults(String jsonReport)
+	public int sendReportResults(String jsonReport) throws Exception
 	{
-		Log.i("WTF", "doing report call");
+		Log.i("AndroidExperimentation", "Report Call");
 		
 		final String METHOD_NAME = "reportResults";		
 		final String SOAP_ACTION = "\""+"http://helloworld/reportResults"+"\"";
@@ -305,32 +225,59 @@ public class Communication extends Thread implements Runnable {
 		}
 		catch (Exception e)
 		{
-			//
-		}
+			throw e;
+		}			
+		return ack;
+	}
+	
+	
+	public ArrayList<MyPlugInfo> sendGetPluginList() throws Exception
+	{		
+		final String METHOD_NAME = "getPluginList";
+		final String SOAP_ACTION = "\""+"http://helloworld/getPluginList"+"\"";
 		
-		// ksoap2 HttpTransportSE issue -- connection never timeout or close
-		// 
-		//	connection close to server - connection stays open to client	
-		//  so the first call is ok, but the second call receive from the server a RST
-		//
-		//  this because the server receives a packet for a closed socket 
-		//  and insert RST in an attempt to block traffic
-		//
-		// connection never timeout or close -- so force it to break
+      	String jsonPluginList="0";
+		
+		SoapObject request = new SoapObject(NAMESPACE, METHOD_NAME); 
+		
+		PropertyInfo propInfo=new PropertyInfo();
+		propInfo.name="arg0";
+		propInfo.type=PropertyInfo.STRING_CLASS;
+		propInfo.setValue("");
+  
+		request.addProperty(propInfo);  
+				
+		SoapSerializationEnvelope envelope = new SoapSerializationEnvelope(SoapEnvelope.VER11); 
+		envelope.setOutputSoapObject(request);
+		
+		HttpTransportSE androidHttpTransport = new HttpTransportSE(URL);
 		
 		try
 		{			
 			androidHttpTransport.call(SOAP_ACTION, envelope);
-			SoapPrimitive  resultsRequestSOAP = (SoapPrimitive) envelope.getResponse();					
+			
+			SoapPrimitive resultsRequestSOAP = (SoapPrimitive) envelope.getResponse();
+			
+			jsonPluginList = resultsRequestSOAP.toString(); 
 		}
 		catch (Exception e)
 		{
-			//
+			throw e;
 		}
-		
-		// ksoap2 HttpTransportSE issue
-		
-		return ack;
+			
+		if(jsonPluginList.equals("0"))
+		{
+			Log.i(TAG, "no plugin list for us");
+			throw new Exception("No available Plugins");
+		}
+		else
+		{
+			Gson gson = new Gson();
+        	PluginList pluginList = gson.fromJson(jsonPluginList, PluginList.class);        	       	        	
+        	ArrayList<MyPlugInfo> plugList = pluginList.getPluginList();
+        	return plugList;
+        }
+
 	}
 	  
 }

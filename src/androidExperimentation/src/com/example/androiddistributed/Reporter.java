@@ -104,7 +104,14 @@ public class Reporter extends Thread implements Runnable {
 						Gson gson = new Gson();
 						String jsonReport = gson.toJson(report);
 										
-						int ack = communication.sendReportResults(jsonReport);
+						int ack=0;
+						try {
+							ack = communication.sendReportResults(jsonReport);
+						} catch (Exception e) {
+							// TODO handle this....
+							e.printStackTrace();
+							ack=0;
+						}
 						
 						Log.i(TAG, Integer.toString(ack));
 						

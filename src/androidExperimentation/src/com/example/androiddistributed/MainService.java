@@ -157,7 +157,12 @@ public class MainService extends Service
 	    reporter = new Reporter(handler, context, communication);
 	    scheduler = new Scheduler(handler, context, sensorProfiler, reporter, phoneProfiler);
         demon = new Demon(handler, context, communication, scheduler, phoneProfiler, sensorProfiler);
-	    
+	       
+	    // start threads
+	    communication.start();
+		phoneProfiler.start();
+	    sensorProfiler.start();
+		registration.start();
 	    // give some time to threads to start
 	    try
 	    {
@@ -167,27 +172,16 @@ public class MainService extends Service
 	    {
 	    	//
 	    }
-	    
-	    // start threads
-	    communication.start();
-		phoneProfiler.start();
-	    sensorProfiler.start();
-		registration.start();
 	    profiler.start();
 	    reporter.start();
 		scheduler.start();
-		demon.start();
-	
-//		dynamixReceiver = new DynamixReceiver();
+	    demon.start();
 		
 	    IntentFilter filter = new IntentFilter();
 		filter.addAction("com.example.androiddistributed.MainService");
 		
-//		registerReceiver(dynamixReceiver, filter);
-		
 		// connect to dynamix framework
-		scheduler.connect_to_dynamix();
-		
+		scheduler.connect_to_dynamix();		
         return mMessenger.getBinder();
     }
        
@@ -196,7 +190,7 @@ public class MainService extends Service
         @Override
         public void onReceive(Context context, Intent intent)
         {      
-            Log.i("WTF", " ok dynamix, you start, i fucking get it");
+            Log.i("AndroidExperimentation", "Dynamix Started");
         }
         
     }
