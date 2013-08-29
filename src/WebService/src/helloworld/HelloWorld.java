@@ -79,8 +79,6 @@ public class HelloWorld {
         Session session = factory.openSession();
         Transaction tx = session.beginTransaction();
 
-//        SmartphonesEntity smartphoneEntity = new SmartphonesEntity();
-//        smartphoneEntity.setPhoneId(phoneId);
 
         String hql = "from SmartphonesEntity where phoneId=?";
         List<SmartphonesEntity> recordList = session.createQuery(hql).setInteger(0, phoneId).list();
@@ -92,8 +90,6 @@ public class HelloWorld {
             my_smartphone.setSensorsRules(smartphoneSensorRules);
             session.update(my_smartphone);
 
-            //         String smartphoneSensorRules = my_smartphone.getSensorsRules();
-            String smarDep = smartphoneSensorRules;
             String[] smarDeps = smartphoneSensorRules.split("|");
 
             if (recordList.size() == 1) {
@@ -130,7 +126,6 @@ public class HelloWorld {
         } else {
             jsonExperiment = "0";
         }
-
         return jsonExperiment;
     }
 
@@ -152,9 +147,7 @@ public class HelloWorld {
             String name = plugin.getName();
             String installUrl = plugin.getInstallUrl();
             String runtimeFactoryClass = plugin.getRuntimeFactoryClass();
-
             MyPlugInfo myPlugInfo = new MyPlugInfo(id, runtimeFactoryClass, name, description, installUrl);
-
             plugList.add(myPlugInfo);
         }
         pluginList.setPluginList(plugList);

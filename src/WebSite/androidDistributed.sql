@@ -122,15 +122,7 @@ CREATE TABLE IF NOT EXISTS `users` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=11 ;
 
---
--- Dumping data for table `users`
---
 
-INSERT INTO `users` (`id`, `firstname`, `lastname`, `username`, `password`, `email`) VALUES
-(7, 'user1', 'user1', 'user1', 'd0e4492c72e0941fbf1966a3310389f12562a4ca', 'user1@gmail.com'),
-(8, 'user2', 'user2', 'user2', 'd0e4492c72e0941fbf1966a3310389f12562a4ca', 'user2@gmail.com'),
-(9, 'user3', 'user3', 'user3', 'd0e4492c72e0941fbf1966a3310389f12562a4ca', 'user3@mail.com'),
-(10, 'user4', 'user4', 'user4', 'd0e4492c72e0941fbf1966a3310389f12562a4ca', 'user4@gmail.com');
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;

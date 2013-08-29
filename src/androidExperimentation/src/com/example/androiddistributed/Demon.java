@@ -5,13 +5,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashSet;
 import java.util.Set;
-
-import org.ksoap2.SoapEnvelope;
-import org.ksoap2.serialization.PropertyInfo;
-import org.ksoap2.serialization.SoapObject;
-import org.ksoap2.serialization.SoapPrimitive;
-import org.ksoap2.serialization.SoapSerializationEnvelope;
-import org.ksoap2.transport.HttpTransportSE;
+ 
 
 import com.google.gson.Gson;
 
@@ -72,11 +66,8 @@ public class Demon extends Thread implements Runnable {
 			if(isDeviceRegistered==false){
 				Log.d(TAG, "AndroidExperimentation Running Unregistered Device");
 				return;
-			}
-				
-			Thread.sleep(1000); //This could be something computationally intensive.
-
-			// create folder /sdcard/dynamix/
+			}				
+			Thread.sleep(1000); 
 			File root = android.os.Environment.getExternalStorageDirectory();              
 		    File dir = new File (root.getAbsolutePath() + "/dynamix");
 		    if(dir.exists()==false)
@@ -84,13 +75,11 @@ public class Demon extends Thread implements Runnable {
 		    	dir.mkdirs();
 		    }
 			
-		    ArrayList<MyPlugInfo> pluginList=communication.sendGetPluginList(); 
-		    
+		    ArrayList<MyPlugInfo> pluginList=communication.sendGetPluginList(); 		    
 		    checkFile("plugs.xml");
-		    //checkFile("org.ambientdynamix.contextplugins.GpsPlugin_9.47.1.jar");
 		    for (MyPlugInfo  plug: pluginList)
 		    {
-		    	checkFile(plug.id);
+		    	checkFile(plug.installUrl);
 		    }
 			this.isProperlyInitiallized=true;
 			handler.postDelayed(runnable, 10000);														
@@ -114,27 +103,28 @@ public class Demon extends Thread implements Runnable {
 		}
 	};
 	
-	private void checkFile(String myFile) throws Exception
+	private void checkFile(String filename) throws Exception
 	{	
 		File root = android.os.Environment.getExternalStorageDirectory();             
-	    File myfile = new File (root.getAbsolutePath() + "/dynamix/" + myFile);
+		File myfile = new File (root.getAbsolutePath() + "/dynamix/" + filename);
+	    String saveFile=root.getAbsolutePath() + "/dynamix/" + filename;
 
 	    if(myfile.exists()==false)
 	    {	
 	    	Downloader downloader = new Downloader();
-	    	downloader.DownloadFromUrl(Constants.URL+"/androidDistributed/dynamixRepository/"+myFile, myFile);
+	    	downloader.DownloadFromUrl(Constants.URL+"/androidDistributed/dynamixRepository/"+filename, saveFile); //todo online dir
 	    }
 	}
 	
 	private void checkExperiment(String contextType, String url) throws Exception
 	{		
 		File root = android.os.Environment.getExternalStorageDirectory();               
-	    File myfile = new File (root.getAbsolutePath() + "/dynamix/" + contextType + "_9.47.1.jar");
+	    File myfile = new File (root.getAbsolutePath() + "/dynamix/" + contextType);
 
 	    if(myfile.exists()==false)
 	    {
 			Downloader downloader = new Downloader();
-			downloader.DownloadFromUrl(url, contextType+"_9.47.1.jar");
+			downloader.DownloadFromUrl(url, contextType);
 	    }
 	}
 	
