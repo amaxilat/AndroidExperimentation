@@ -6,11 +6,11 @@ define('EMAIL', 'my_email@hotmail.com');
 
 define('BASE_URL', 'androidDistributed/');
 
-define('MYSQL', '/var/www/androidDistributed/mysqli_connect.php');
+define('MYSQL', 'mysqli_connect.php');
 
-define('USER_SPACE_PUBLIC', '/var/www/androidDistributed/dataPlace/');
+define('USER_SPACE_PUBLIC', 'dataPlace/');
 
-define('USER_SPACE_PRIVATE', '/var/www/dataPlace/');
+define('USER_SPACE_PRIVATE', 'user-dataPlace/');
 
 define('TMP_SPACE', '/tmp/');
 

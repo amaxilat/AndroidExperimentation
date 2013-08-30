@@ -1,14 +1,19 @@
-The AndroidDistributed project
+***********************************
+The Android Experimentation project
+***********************************
 
-This is an android project about internet of things
+Android Experimentation is related to the SmartSantander research project, aiming to provide an Android smartphone
+application augmenting the functionality of an existing Future Internet infrastructure. 
 
-distributes code on the android devices network and gets back results
-
-there is a central system that distributes the codes and collects the results
-
-uses dynamix framework for OSGI
+The Android software component distributes executable code on smartphone devices of a network of volunteers. The code
+is deployed as Ambient Dynamix plugins, performs calculations and produces sensor results, that are uploaded to a central
+server. There is a central software component responsible for distributing the plugins and collecting the results.
 
 
-website: http://83.212.115.57/androidDistributed
-web service: http://83.212.115.57:8080/ADService/services/HelloWorld?wsdl
+For more information redarging SmartSantander you can visit:
 
+http://smartsantander.eu
+
+For more information regarding the Ambient Dynamix framework you can visit:
+
+http://ambientdynamix.org
