@@ -1,6 +1,6 @@
 package eu.smartsantander.androidExperimentation.entities;
 
-import java.sql.Timestamp;
+import java.util.Date;
 
 /**
  * Created with IntelliJ IDEA.
@@ -50,23 +50,23 @@ public class Experiment {
         this.sensorDependencies = sensorDependencies;
     }
 
-    private Timestamp fromTime;
+    private Date fromTime;
 
-    public Timestamp getFromTime() {
+    public Date getFromTime() {
         return fromTime;
     }
 
-    public void setFromTime(Timestamp fromTime) {
+    public void setFromTime(Date fromTime) {
         this.fromTime = fromTime;
     }
 
-    private Timestamp toTime;
+    private Date toTime;
 
-    public Timestamp getToTime() {
+    public Date getToTime() {
         return toTime;
     }
 
-    public void setToTime(Timestamp toTime) {
+    public void setToTime(Date toTime) {
         this.toTime = toTime;
     }
 
