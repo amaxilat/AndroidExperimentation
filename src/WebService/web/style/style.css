@@ -1,0 +1,11 @@
+#menulink {
+    background-color: cornflowerblue;
+    color: white;
+    display: inline-block;
+    height: 30px;
+    line-height: 30px;
+    text-decoration: none;
+    width: auto;
+    text-align: center;
+    font-size: 18pt;
+}

@@ -12,6 +12,7 @@ import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -84,6 +85,17 @@ public class ModelManager {
         log.info("getExperiment Called");
         return null;
     }
+
+    public static List<Experiment> getExperiments() {
+
+        List<Experiment> experimentsList = getCurrentSession().createQuery("from Experiment").list();
+        if (experimentsList.size() > 0) {
+            return experimentsList;
+        }
+        log.info("getExperiment Called");
+        return new ArrayList<Experiment>();
+    }
+
 
     private static boolean match(String[] smartphoneDependencies, String[] experimentDependencies) {
         for (String expDependency : experimentDependencies) {
