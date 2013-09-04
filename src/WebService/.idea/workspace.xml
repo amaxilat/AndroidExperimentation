@@ -43,7 +43,7 @@
     <file path="/style.css" changelist="4ccbb714-201c-482b-a93f-dd4890c10bc1" time="1378298936318" ignored="false" />
     <file path="/experiment.jsp" changelist="4ccbb714-201c-482b-a93f-dd4890c10bc1" time="1378299265802" ignored="false" />
     <file path="/upload.jsp" changelist="4ccbb714-201c-482b-a93f-dd4890c10bc1" time="1378299429547" ignored="false" />
-    <file path="/experiments.jsp" changelist="4ccbb714-201c-482b-a93f-dd4890c10bc1" time="1378299621388" ignored="false" />
+    <file path="/experiments.jsp" changelist="4ccbb714-201c-482b-a93f-dd4890c10bc1" time="1378299794353" ignored="false" />
     <option name="TRACKING_ENABLED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -140,7 +140,7 @@
       <file leaf-file-name="experiments.jsp" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/web/experiments.jsp">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="32" column="48" selection-start="1223" selection-end="1223" vertical-scroll-proportion="0.6976744">
+            <state line="20" column="19" selection-start="676" selection-end="676" vertical-scroll-proportion="0.27906978">
               <folding />
             </state>
           </provider>
@@ -988,7 +988,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/web/experiments.jsp">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="32" column="48" selection-start="1223" selection-end="1223" vertical-scroll-proportion="0.6976744">
+        <state line="20" column="19" selection-start="676" selection-end="676" vertical-scroll-proportion="0.27906978">
           <folding />
         </state>
       </provider>
