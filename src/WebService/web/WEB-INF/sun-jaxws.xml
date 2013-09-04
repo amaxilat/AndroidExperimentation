@@ -3,7 +3,7 @@
            version='2.0'>
 
     <endpoint
-            name='HelloWorld'
-            implementation='helloworld.HelloWorld'
-            url-pattern='/services/HelloWorld'/>
+            name='AndroidExperimentation'
+            implementation='eu.smartsantander.androidExperimentation.AndroidExperimentationWS'
+            url-pattern='/services/AndroidExperimentationWS'/>
 </endpoints>
