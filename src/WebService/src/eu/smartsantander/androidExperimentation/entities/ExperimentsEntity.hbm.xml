@@ -7,7 +7,8 @@
     <class name="eu.smartsantander.androidExperimentation.entities.Experiment" table="experiments" schema=""
            catalog="androidExperimentation">
         <id name="id">
-            <column name="id" sql-type="int" length="10" not-null="true"/>
+            <column name="id" sql-type="int" length="10"  />
+            <generator class="increment"/>
         </id>
         <property name="name">
             <column name="name" sql-type="varchar" length="256" not-null="true"/>
@@ -19,13 +20,13 @@
             <column name="sensorDependencies" sql-type="text" length="65535" not-null="true"/>
         </property>
         <property name="fromTime">
-            <column name="fromTime" sql-type="timestamp" length="19" not-null="true"/>
+            <column name="fromTime" sql-type="timestamp" length="19" not-null="false"/>
         </property>
         <property name="toTime">
-            <column name="toTime" sql-type="timestamp" length="19" not-null="true"/>
+            <column name="toTime" sql-type="timestamp" length="19" not-null="false"/>
         </property>
         <property name="status">
-            <column name="status" sql-type="varchar" length="256" not-null="true"/>
+            <column name="status" sql-type="varchar" length="256" not-null="false"/>
         </property>
         <property name="userId">
             <column name="userID" sql-type="int" length="10"/>

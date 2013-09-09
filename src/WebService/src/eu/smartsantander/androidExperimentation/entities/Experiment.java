@@ -10,13 +10,13 @@ import java.util.Date;
  * To change this template use File | Settings | File Templates.
  */
 public class Experiment {
-    private int id;
+    private Integer id;
 
-    public int getId() {
+    public Integer getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 
@@ -57,6 +57,7 @@ public class Experiment {
     }
 
     public void setFromTime(Date fromTime) {
+        if(fromTime==null) fromTime=new Date();
         this.fromTime = fromTime;
     }
 
@@ -67,6 +68,7 @@ public class Experiment {
     }
 
     public void setToTime(Date toTime) {
+        if(toTime==null) toTime=new Date();
         this.toTime = toTime;
     }
 

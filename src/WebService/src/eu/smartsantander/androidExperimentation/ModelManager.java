@@ -115,6 +115,7 @@ public class ModelManager {
 
     public static void saveExperiment(Experiment experiment) {
         getCurrentSession().saveOrUpdate(experiment);
+        getCurrentSession().flush();
         log.info("saveExperiment Called");
     }
 

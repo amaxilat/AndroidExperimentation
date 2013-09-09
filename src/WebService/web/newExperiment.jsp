@@ -12,8 +12,7 @@
 <h3>upload new experiment ....</h3>
 Select a file to upload: <br/>
 
-<form action="fileUpload.jsp" method="post"
-      enctype="multipart/form-data">
+<form action="fileUpload.jsp" method="post"  enctype="multipart/form-data">
 
     <table>
         <tr>
