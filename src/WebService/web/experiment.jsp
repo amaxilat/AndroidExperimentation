@@ -13,48 +13,51 @@
 <%
     Experiment experiment = ModelManager.getExperiment();
 %>
-<table border="1">
-    <tr>
-    <tr></Tr>
-    <td>Id</td>
-    <td><%= experiment.getId()%>
-    </td>
-    </tr>
-    <tr>
-        <td>Name</td>
-        <td><%= experiment.getName()%>
-        </td>
-    </tr>
-    <tr>
-        <td>ContextType</td>
-        <td><%= experiment.getContextType()%>
-        </td>
-    </tr>
-    <tr>
-        <td>Filename</td>
-        <td><%= experiment.getFilename()%>
-        </td>
-    </tr>
-    <tr>
-        <td>Url</td>
-        <td><%= experiment.getUrl()%>
-        </td>
-    </tr>
-    <tr>
-        <td>Status</td>
-        <td><%= experiment.getStatus()%>
-        </td>
-    </tr>
-    <tr>
-        <td>SensorDependencies</td>
-        <td><%= experiment.getSensorDependencies()%>
-        </td>
-    </tr>
 
-    </tr>
+<div class="datagrid">
+    <table>
+        <thead>
+        <tr>
+            <th>Id</th>
+            <td><%= experiment.getId()%>
+            </td>
+        </tr>
+        <tr>
+            <th>Name</th>
+            <td><%= experiment.getName()%>
+            </td>
+        </tr>
+        <tr>
+            <th>ContextType</th>
+            <td><%= experiment.getContextType()%>
+            </td>
+        </tr>
+        <tr>
+            <th>Filename</th>
+            <td><%= experiment.getFilename()%>
+            </td>
+        </tr>
+        <tr>
+            <th>Url</th>
+            <td><%= experiment.getUrl()%>
+            </td>
+        </tr>
+        <tr>
+            <th>Status</th>
+            <td><%= experiment.getStatus()%>
+            </td>
+        </tr>
+        <tr>
+            <th>SensorDependencies</th>
+            <td><%= experiment.getSensorDependencies()%>
+            </td>
+        </tr>
 
+        </tr>
 
-</table>
+        </thead>
+    </table>
+</div>
 <jsp:include page="./includes/footer.html" flush="true"/>
 </body>
 </html>
