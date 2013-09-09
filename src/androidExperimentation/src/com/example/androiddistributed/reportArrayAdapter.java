@@ -3,6 +3,8 @@ package com.example.androiddistributed;
 import java.util.ArrayList;
 import java.util.List;
 
+import eu.smartsantander.androidExperimentation.jsonEntities.Report;
+
 import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;

@@ -17,6 +17,8 @@ import org.ksoap2.transport.HttpTransportSE;
 
 import com.google.gson.Gson;
 
+import eu.smartsantander.androidExperimentation.jsonEntities.Report;
+
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.content.SharedPreferences.Editor;

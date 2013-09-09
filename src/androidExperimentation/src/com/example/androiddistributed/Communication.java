@@ -1,6 +1,7 @@
 package com.example.androiddistributed;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import org.ksoap2.SoapEnvelope;
 import org.ksoap2.serialization.PropertyInfo;
@@ -11,6 +12,10 @@ import org.ksoap2.transport.HttpTransportSE;
 
 import com.google.gson.Gson;
 
+import eu.smartsantander.androidExperimentation.jsonEntities.Plugin;
+import eu.smartsantander.androidExperimentation.jsonEntities.PluginList;
+import eu.smartsantander.androidExperimentation.jsonEntities.Smartphone;
+
 import android.os.AsyncTask;
 import android.os.Handler;
 import android.os.Message;
@@ -18,9 +23,9 @@ import android.util.Log;
 
 public class Communication extends Thread implements Runnable {
 
-	final String NAMESPACE = "http://helloworld/";
+	final String NAMESPACE = "http://androidExperimentation.smartsantander.eu/";
 	//final String URL = "http://83.212.115.57:8080/ADService/services/HelloWorld?wsdl"; 
-	final String URL = Constants.URL+":8080/ADService/services/HelloWorld?wsdl";
+	final String URL = Constants.URL+":8080/services/AndroidExperimentationWS?wsdl";
 	
 	private Handler handler;
 	
@@ -57,7 +62,7 @@ public class Communication extends Thread implements Runnable {
 	public int sendPing(String jsonPing)
 	{
 		final String METHOD_NAME = "Ping";
-		final String SOAP_ACTION = "\""+"http://helloworld/Ping"+"\"";
+		final String SOAP_ACTION = "\""+"http://AndroidExperimentationWS/Ping"+"\"";
 		
 		int pong = 0;
 		
@@ -99,7 +104,7 @@ public class Communication extends Thread implements Runnable {
 		
 		Smartphone smartphone = new Smartphone(phoneId);
 		smartphone.setSensorsRules(sensorsRules);
-		smartphone.setTimeRules("time_rules");		
+		//smartphone.setTimeRules("time_rules");		
 		Gson gson = new Gson();
 		String jsonSmartphone = gson.toJson(smartphone);		
 		String serverPhoneId_s = sendRegisterSmartphone(jsonSmartphone);		
@@ -119,7 +124,7 @@ public class Communication extends Thread implements Runnable {
 		Log.i(TAG, "send register smartphone");
 
 		final String METHOD_NAME = "registerSmartphone";
-		final String SOAP_ACTION = "\""+"http://helloworld/registerSmartphone"+"\"";
+		final String SOAP_ACTION = "\""+"http://AndroidExperimentationWS/registerSmartphone"+"\"";
 		
 		String serverPhoneId = "";
 		
@@ -162,7 +167,7 @@ public class Communication extends Thread implements Runnable {
 	private String sendGetExperiment(String jsonSmartphone) throws Exception
 	{
 		final String METHOD_NAME = "getExperiment";
-		final String SOAP_ACTION = "\""+"http://helloworld/getExperiment"+"\"";
+		final String SOAP_ACTION = "\""+"http://AndroidExperimentationWS/getExperiment"+"\"";
 		
 		SoapObject request = new SoapObject(NAMESPACE, METHOD_NAME); 
 
@@ -198,7 +203,7 @@ public class Communication extends Thread implements Runnable {
 		Log.i("AndroidExperimentation", "Report Call");
 		
 		final String METHOD_NAME = "reportResults";		
-		final String SOAP_ACTION = "\""+"http://helloworld/reportResults"+"\"";
+		final String SOAP_ACTION = "\""+"http://AndroidExperimentationWS/reportResults"+"\"";
 		
 		int ack = 0;
 		
@@ -231,10 +236,10 @@ public class Communication extends Thread implements Runnable {
 	}
 	
 	
-	public ArrayList<MyPlugInfo> sendGetPluginList() throws Exception
+	public List<Plugin> sendGetPluginList() throws Exception
 	{		
 		final String METHOD_NAME = "getPluginList";
-		final String SOAP_ACTION = "\""+"http://helloworld/getPluginList"+"\"";
+		final String SOAP_ACTION = "\""+"http://AndroidExperimentationWS/getPluginList"+"\"";
 		
       	String jsonPluginList="0";
 		
@@ -274,7 +279,7 @@ public class Communication extends Thread implements Runnable {
 		{
 			Gson gson = new Gson();
         	PluginList pluginList = gson.fromJson(jsonPluginList, PluginList.class);        	       	        	
-        	ArrayList<MyPlugInfo> plugList = pluginList.getPluginList();
+        	List<Plugin> plugList = pluginList.getPluginList();
         	return plugList;
         }
 

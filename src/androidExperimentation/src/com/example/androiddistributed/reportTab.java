@@ -2,6 +2,9 @@ package com.example.androiddistributed;
 
 import java.io.File;
 import java.util.ArrayList;
+import java.util.List;
+
+import eu.smartsantander.androidExperimentation.jsonEntities.Report;
 
 import android.app.Activity;
 import android.os.Bundle;

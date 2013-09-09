@@ -121,14 +121,10 @@ public class ModelManager {
 
 
     public static Smartphone registerSmartphone(Smartphone smartphone) {
-        int phoneId = smartphone.getPhoneId();
-        String sensors_rules = smartphone.getSensorsRules();
-        Session session = getCurrentSession();
-        Transaction tx = session.beginTransaction();
-        session.saveOrUpdate(smartphone);
-        smartphone.setPhoneId(smartphone.getId());
-        session.saveOrUpdate(smartphone);
-        tx.commit();
+        if (smartphone.getId()==-1){
+            smartphone.setId(null);
+        }
+        getCurrentSession().saveOrUpdate(smartphone);
         return smartphone;
     }
 

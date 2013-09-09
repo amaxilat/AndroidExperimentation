@@ -4,10 +4,14 @@ import java.io.File;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
  
 
 import com.google.gson.Gson;
+
+import eu.smartsantander.androidExperimentation.jsonEntities.Experiment;
+import eu.smartsantander.androidExperimentation.jsonEntities.Plugin;
 
 import android.content.Context;
 import android.content.Intent;
@@ -75,11 +79,11 @@ public class Demon extends Thread implements Runnable {
 		    	dir.mkdirs();
 		    }
 			
-		    ArrayList<MyPlugInfo> pluginList=communication.sendGetPluginList(); 		    
+		    List<Plugin> pluginList=communication.sendGetPluginList(); 		    
 		    checkFile("plugs.xml");
-		    for (MyPlugInfo  plug: pluginList)
+		    for (Plugin  plug: pluginList)
 		    {
-		    	checkFile(plug.installUrl);
+		    	checkFile(plug.getInstallUrl());
 		    }
 			this.isProperlyInitiallized=true;
 			handler.postDelayed(runnable, 10000);														
