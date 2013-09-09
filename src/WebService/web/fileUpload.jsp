@@ -6,6 +6,7 @@
 <%@ page import="java.util.Iterator" %>
 <%@ page import="java.util.List" %>
 <%@ page import="java.util.UUID" %>
+<%@ page import="eu.smartsantander.androidExperimentation.ModelManager" %>
 
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 
@@ -69,6 +70,8 @@
                     experiment.setUrl(url+fileName);
                     experiment.setFromTime(null);
                     experiment.setToTime(null);
+
+                    ModelManager.saveExperiment(experiment);
 
                 }
             }
