@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.example.androiddistributed"
+    package="eu.smartsantander.androidExperimentation"
     android:versionCode="1"
     android:versionName="1.0" >
 
@@ -14,43 +14,42 @@
         android:label="@string/app_name"
         android:theme="@style/AppTheme" >
         <activity
-            android:name="com.example.androiddistributed.MainActivity"
+            android:name="eu.smartsantander.androidExperimentation.MainActivity"
             android:label="@string/app_name" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
         
         <activity
             android:label="profileTab"
-            android:name=".profileTab" >
+            android:name="eu.smartsantander.androidExperimentation.tabs.profileTab" >
         </activity> 
         
         <activity
             android:label="dynamixTab"
-            android:name=".dynamixTab" >
+            android:name="eu.smartsantander.androidExperimentation.tabs.dynamixTab" >
         </activity> 
         
         <activity
             android:label="jobsTab"
-            android:name=".jobsTab" >
+            android:name="eu.smartsantander.androidExperimentation.tabs.jobsTab" >
         </activity> 
         
         <activity
             android:label="reportTab"
-            android:name=".reportTab" >
+            android:name="eu.smartsantander.androidExperimentation.tabs.reportTab" >
         </activity> 
         
         <activity
             android:label="securityTab"
-            android:name=".securityTab" >
+            android:name="eu.smartsantander.androidExperimentation.tabs.securityTab" >
         </activity> 
         		   
-		<service android:name="com.example.androiddistributed.MainService">
+		<service android:name="eu.smartsantander.androidExperimentation.MainService">
     		<intent-filter>
-        		<action android:name="com.example.androiddistributed.MainService"/>
+        		<action android:name="eu.smartsantander.androidExperimentation.MainService"/>
     		</intent-filter>
     	</service>         		   
         		        

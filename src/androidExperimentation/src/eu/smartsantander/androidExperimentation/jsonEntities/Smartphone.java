@@ -1,4 +1,4 @@
-package eu.smartsantander.androidExperimentation.entities;
+package eu.smartsantander.androidExperimentation.jsonEntities;
 
 /**
  * Created with IntelliJ IDEA.
@@ -8,24 +8,30 @@ package eu.smartsantander.androidExperimentation.entities;
  * To change this template use File | Settings | File Templates.
  */
 public class Smartphone {
-    private Integer id;
+	
+	
+	
+    private int id;
 
-    public Integer getId() {
+    public Smartphone(int id){
+		this.id=id;
+	}
+    
+    public int getId() {
         return id;
     }
 
-    public void setId(Integer id) {
+    public void setId(int id) {
         this.id = id;
-        this.phoneId=this.id;
     }
 
-    private Integer phoneId;
+    private int phoneId;
 
-    public Integer getPhoneId() {
+    public int getPhoneId() {
         return phoneId;
     }
 
-    public void setPhoneId(Integer phoneId) {
+    public void setPhoneId(int phoneId) {
         this.phoneId = phoneId;
     }
 
