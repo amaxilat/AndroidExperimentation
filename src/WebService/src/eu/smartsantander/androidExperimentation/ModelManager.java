@@ -52,7 +52,10 @@ public class ModelManager {
 
 
     public static Experiment getExperiment(Smartphone smartphone) {
-        List<Smartphone> recordList = getCurrentSession().createQuery("from Smartphone where phoneId=?").setInteger(0, smartphone.getPhoneId()).list();
+        Transaction tx=getCurrentSession().beginTransaction();
+        getCurrentSession().saveOrUpdate(smartphone);
+        tx.commit();
+        List<Smartphone> recordList = getCurrentSession().createQuery("from Smartphone where phoneID=?").setInteger(0, smartphone.getPhoneId()).list();
         if (recordList.size() > 0) {
             Smartphone device = recordList.get(0);
             device.setSensorsRules(smartphone.getSensorsRules());
@@ -114,8 +117,9 @@ public class ModelManager {
     }
 
     public static void saveExperiment(Experiment experiment) {
+        Transaction tx=getCurrentSession().beginTransaction();
         getCurrentSession().saveOrUpdate(experiment);
-        getCurrentSession().flush();
+        tx.commit();
         log.info("saveExperiment Called");
     }
 
@@ -124,7 +128,9 @@ public class ModelManager {
         if (smartphone.getId()==-1){
             smartphone.setId(null);
         }
+        Transaction tx=getCurrentSession().beginTransaction();
         getCurrentSession().saveOrUpdate(smartphone);
+        tx.commit();
         return smartphone;
     }
 
