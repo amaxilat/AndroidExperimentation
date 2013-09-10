@@ -1,11 +1,10 @@
-package com.example.androiddistributed;
+package eu.smartsantander.androidExperimentation.tabs;
 
 import android.app.Activity;
 import android.os.Bundle;
-import android.widget.ArrayAdapter;
 import android.widget.ImageView;
-import android.widget.ListView;
 import android.widget.TextView;
+import eu.smartsantander.androidExperimentation.R;
 
 public class profileTab extends Activity{
 	

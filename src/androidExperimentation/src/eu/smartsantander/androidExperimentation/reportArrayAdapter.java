@@ -1,7 +1,9 @@
-package com.example.androiddistributed;
+package eu.smartsantander.androidExperimentation;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import eu.smartsantander.androidExperimentation.R;
 
 import eu.smartsantander.androidExperimentation.jsonEntities.Report;
 

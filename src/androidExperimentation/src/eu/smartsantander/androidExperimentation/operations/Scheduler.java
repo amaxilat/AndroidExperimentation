@@ -1,4 +1,4 @@
-package com.example.androiddistributed;
+package eu.smartsantander.androidExperimentation.operations;
 
 import java.io.File;
 import java.io.FileOutputStream;
@@ -28,6 +28,8 @@ import org.ksoap2.serialization.SoapSerializationEnvelope;
 import org.ksoap2.transport.HttpTransportSE;
 
 import com.google.gson.Gson;
+
+import eu.smartsantander.androidExperimentation.Job;
 
 import android.content.ComponentName;
 import android.content.Context;
@@ -62,7 +64,7 @@ public class Scheduler extends Thread implements Runnable {
 	
 	Stack jobs;
 	Stack msgs;
-    Map<String, Boolean> sensorsPermissions;
+    public Map<String, Boolean> sensorsPermissions;
 	
     private boolean free_to_commit = true;
     

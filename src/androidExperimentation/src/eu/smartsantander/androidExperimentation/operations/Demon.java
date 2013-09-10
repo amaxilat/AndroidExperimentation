@@ -1,4 +1,4 @@
-package com.example.androiddistributed;
+package eu.smartsantander.androidExperimentation.operations;
 
 import java.io.File;
 import java.util.ArrayList;
@@ -10,8 +10,10 @@ import java.util.Set;
 
 import com.google.gson.Gson;
 
+import eu.smartsantander.androidExperimentation.Constants;
 import eu.smartsantander.androidExperimentation.jsonEntities.Experiment;
 import eu.smartsantander.androidExperimentation.jsonEntities.Plugin;
+import eu.smartsantander.androidExperimentation.jsonEntities.PluginList;
 
 import android.content.Context;
 import android.content.Intent;
@@ -80,16 +82,27 @@ public class Demon extends Thread implements Runnable {
 		    }
 			
 		    List<Plugin> pluginList=communication.sendGetPluginList(); 		    
-		    checkFile("plugs.xml");
+		    Plugin pluginXML=null;
 		    for (Plugin  plug: pluginList)
 		    {
-		    	checkFile(plug.getInstallUrl());
+		    	checkFile(plug.getFilename(),plug.getInstallUrl());
+		    	if (plug.getName().equals("plugs.xml")){
+		    		pluginXML=plug;
+		    	}
 		    }
+		    pluginList.remove(pluginXML);
+		    PluginList plist=new PluginList();
+		    plist.setPluginList(pluginList);
+		    String plistString=(new Gson()).toJson(plist, PluginList.class);
+	        editor = (this.context.getSharedPreferences("pluginObjects", 0)).edit();
+	        editor.putString("pluginObjects", plistString);
+	        editor.commit();
 			this.isProperlyInitiallized=true;
-			handler.postDelayed(runnable, 10000);														
+			//handler.postDelayed(runnable, 10000);														
 		} catch (Exception e) {
 			this.isProperlyInitiallized=false;
 			e.printStackTrace();
+			Log.d(TAG, "AndroidExperimentation:"+e.getMessage());
 		}
 	}
 	
@@ -107,16 +120,16 @@ public class Demon extends Thread implements Runnable {
 		}
 	};
 	
-	private void checkFile(String filename) throws Exception
+	private void checkFile(String filename, String url) throws Exception
 	{	
 		File root = android.os.Environment.getExternalStorageDirectory();             
 		File myfile = new File (root.getAbsolutePath() + "/dynamix/" + filename);
-	    String saveFile=root.getAbsolutePath() + "/dynamix/" + filename;
+	    
 
 	    if(myfile.exists()==false)
 	    {	
 	    	Downloader downloader = new Downloader();
-	    	downloader.DownloadFromUrl(Constants.URL+"/androidDistributed/dynamixRepository/"+filename, saveFile); //todo online dir
+	    	downloader.DownloadFromUrl(url, filename);  
 	    }
 	}
 	
@@ -181,8 +194,8 @@ public class Demon extends Thread implements Runnable {
 					{						
 						Gson gson = new Gson();
 						Experiment experiment = gson.fromJson(jsonExperiment, Experiment.class);				
-						String[] smarDeps = sensorProfiler.getSensorRules().split("|");
-						String[] expDeps = experiment.getSensorDependencies().split("|");
+						String[] smarDeps = sensorProfiler.getSensorRules().split(",");
+						String[] expDeps = experiment.getSensorDependencies().split(",");
 	       				Set<String> smarSet = new HashSet<String>(Arrays.asList(smarDeps));
 						Set<String> expSet = new HashSet<String>(Arrays.asList(expDeps));
 						

@@ -5,7 +5,7 @@
  * should not be modified by hand.
  */
 
-package com.example.androiddistributed;
+package eu.smartsantander.androidExperimentation;
 
 public final class R {
     public static final class attr {
@@ -71,13 +71,8 @@ public final class R {
         public static final int TextView06=0x7f08000c;
         public static final int TextView07=0x7f08000d;
         public static final int TextView08=0x7f08000e;
-        public static final int action_settings=0x7f080016;
-        public static final int checkBox1=0x7f080010;
-        public static final int checkBox2=0x7f080011;
-        public static final int checkBox3=0x7f080012;
-        public static final int checkBox4=0x7f080013;
-        public static final int checkBox5=0x7f080014;
-        public static final int checkBox6=0x7f080015;
+        public static final int action_settings=0x7f080011;
+        public static final int checklist=0x7f080010;
         public static final int dependenciesLV=0x7f080009;
         public static final int imageView1=0x7f080001;
         public static final int imageView2=0x7f080003;

@@ -1,20 +1,19 @@
-package com.example.androiddistributed;
+package eu.smartsantander.androidExperimentation.tabs;
 
 import java.io.File;
 import java.util.ArrayList;
-import java.util.List;
-
-import eu.smartsantander.androidExperimentation.jsonEntities.Report;
 
 import android.app.Activity;
 import android.os.Bundle;
-import android.util.Log;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
+import eu.smartsantander.androidExperimentation.R;
+import eu.smartsantander.androidExperimentation.reportArrayAdapter;
+import eu.smartsantander.androidExperimentation.jsonEntities.Report;
 
 
 public class reportTab extends Activity

@@ -1,5 +1,9 @@
-package com.example.androiddistributed;
+package eu.smartsantander.androidExperimentation.tabs;
 
+import eu.smartsantander.androidExperimentation.R;
+ 
+
+ 
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;

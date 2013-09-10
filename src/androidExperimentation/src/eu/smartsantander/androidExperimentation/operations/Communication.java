@@ -1,4 +1,4 @@
-package com.example.androiddistributed;
+package eu.smartsantander.androidExperimentation.operations;
 
 import java.util.List;
 
@@ -15,6 +15,7 @@ import android.util.Log;
 
 import com.google.gson.Gson;
 
+import eu.smartsantander.androidExperimentation.Constants;
 import eu.smartsantander.androidExperimentation.jsonEntities.Plugin;
 import eu.smartsantander.androidExperimentation.jsonEntities.PluginList;
 import eu.smartsantander.androidExperimentation.jsonEntities.Smartphone;
@@ -35,23 +36,6 @@ public class Communication extends Thread implements Runnable {
 	public void run()
 	{
 		Log.d(TAG, "running");
-	}
-	
-	public boolean ping()
-	{
-		Ping ping = new Ping();
-		
-		Gson gson = new Gson();
-		String jsonPing = gson.toJson(ping);
-		
-		int pong = sendPing(jsonPing);
-		
-		if(pong == 1)
-		{
-			return true;
-		}
-		
-		return false;
 	}
 	
 	public int sendPing(String jsonPing)

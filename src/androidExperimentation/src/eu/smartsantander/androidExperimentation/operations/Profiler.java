@@ -1,4 +1,4 @@
-package com.example.androiddistributed;
+package eu.smartsantander.androidExperimentation.operations;
 
 import android.os.Handler;
 import android.os.Message;
@@ -9,7 +9,7 @@ public class Profiler extends Thread implements Runnable {
 	private Handler handler;
 	private PhoneProfiler phoneProfiler;
 	
-	private int PHONE_ID=0;
+	private int PHONE_ID;
 	
 	// get TAG name for reporting to LogCat
 	private final String TAG = this.getClass().getSimpleName();

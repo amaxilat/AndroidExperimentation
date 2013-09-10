@@ -1,9 +1,10 @@
-package com.example.androiddistributed;
+package eu.smartsantander.androidExperimentation.operations;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+
 
 import android.content.BroadcastReceiver;
 import android.content.Context;
@@ -42,7 +43,7 @@ public class SensorProfiler extends Thread implements Runnable {
 	private List<String> permissions;
 	private Map<String,Boolean> sensorsPermissions=new HashMap<String, Boolean>();
 	private Map<String,String> sensorsContextTypes=new HashMap<String, String>();
-	private String sensorRules="|";
+	private String sensorRules="";
 	
 	private  NetworkStateReceiver mReceiver;
 	
@@ -126,7 +127,7 @@ public class SensorProfiler extends Thread implements Runnable {
 	// set the user permissions about the sensors
 	private void setPermissions()
 	{	
-		sensorRules = "|";
+		sensorRules = "";
 		sensorsPermissions.clear();
 		
 		for(String sensor : sensors)
@@ -134,7 +135,7 @@ public class SensorProfiler extends Thread implements Runnable {
 			if(permissions.contains(sensor))
 			{
 				sensorsPermissions.put( sensorsContextTypes.get(sensor) , true);
-				sensorRules = sensorRules + sensor + "|";
+				sensorRules = sensorRules + sensor + ",";
 			}
 			else
 			{

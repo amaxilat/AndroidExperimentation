@@ -1,5 +1,13 @@
-package com.example.androiddistributed;
+package eu.smartsantander.androidExperimentation;
 
+import eu.smartsantander.androidExperimentation.operations.Communication;
+import eu.smartsantander.androidExperimentation.operations.Demon;
+import eu.smartsantander.androidExperimentation.operations.PhoneProfiler;
+import eu.smartsantander.androidExperimentation.operations.Profiler;
+import eu.smartsantander.androidExperimentation.operations.Registration;
+import eu.smartsantander.androidExperimentation.operations.Reporter;
+import eu.smartsantander.androidExperimentation.operations.Scheduler;
+import eu.smartsantander.androidExperimentation.operations.SensorProfiler;
 import android.app.Service;
 import android.content.BroadcastReceiver;
 import android.content.Context;
@@ -178,7 +186,7 @@ public class MainService extends Service
 	    demon.start();
 		
 	    IntentFilter filter = new IntentFilter();
-		filter.addAction("com.example.androiddistributed.MainService");
+		filter.addAction("eu.smartsantander.androidExperimentation.MainService");
 		
 		// connect to dynamix framework
 		scheduler.connect_to_dynamix();		

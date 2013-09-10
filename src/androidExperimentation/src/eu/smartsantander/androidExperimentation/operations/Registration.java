@@ -1,4 +1,4 @@
-package com.example.androiddistributed;
+package eu.smartsantander.androidExperimentation.operations;
 
 import java.util.Map;
 
@@ -10,6 +10,8 @@ import org.ksoap2.serialization.SoapSerializationEnvelope;
 import org.ksoap2.transport.HttpTransportSE;
 
 import com.google.gson.Gson;
+
+import eu.smartsantander.androidExperimentation.Constants;
 
 import android.os.Handler;
 import android.util.Log;

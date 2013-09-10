@@ -1,17 +1,16 @@
-package com.example.androiddistributed;
+package eu.smartsantander.androidExperimentation.tabs;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
+import eu.smartsantander.androidExperimentation.R;
 
 public class jobsTab extends Activity {
 

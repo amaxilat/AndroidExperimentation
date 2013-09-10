@@ -1,4 +1,4 @@
-package com.example.androiddistributed;
+package eu.smartsantander.androidExperimentation;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -13,6 +13,8 @@ import org.ambientdynamix.contextplugins.batteryLevelPlugin.IBatteryLevelPluginI
 import org.ambientdynamix.contextplugins.batteryTemperaturePlugin.IBatteryTemperaturePluginInfo;
 import org.ambientdynamix.contextplugins.myExperimentPlugin.IExperimentPluginInfo;
 import org.ambientdynamix.contextplugins.oneplugin.IOnePluginInfo;
+
+import eu.smartsantander.androidExperimentation.operations.Scheduler;
 
 import android.os.Bundle;
 import android.util.Log;

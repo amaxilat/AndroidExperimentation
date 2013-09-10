@@ -1,5 +1,6 @@
-package com.example.androiddistributed;
+package eu.smartsantander.androidExperimentation.operations;
 
+import eu.smartsantander.androidExperimentation.Constants;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.content.SharedPreferences.Editor;

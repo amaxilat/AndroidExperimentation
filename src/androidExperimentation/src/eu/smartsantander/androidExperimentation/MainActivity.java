@@ -1,4 +1,12 @@
-package com.example.androiddistributed;
+package eu.smartsantander.androidExperimentation;
+
+import eu.smartsantander.androidExperimentation.R;
+
+import eu.smartsantander.androidExperimentation.tabs.dynamixTab;
+import eu.smartsantander.androidExperimentation.tabs.jobsTab;
+import eu.smartsantander.androidExperimentation.tabs.profileTab;
+import eu.smartsantander.androidExperimentation.tabs.reportTab;
+import eu.smartsantander.androidExperimentation.tabs.securityTab;
 
 import android.os.Bundle;
 import android.os.IBinder;
