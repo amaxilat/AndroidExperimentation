@@ -7,7 +7,8 @@
     <class name="eu.smartsantander.androidExperimentation.entities.Smartphone" table="smartphones" schema=""
            catalog="androidExperimentation">
         <id name="id">
-            <column name="id" sql-type="int" length="10" not-null="true"/>
+            <column name="id" sql-type="int" length="10"/>
+            <generator class="increment"/>
         </id>
         <property name="phoneId">
             <column name="phoneID" sql-type="int" length="10" not-null="true"/>
