@@ -1,23 +1,23 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <component name="dataSourceStorage">
-  <data-source source="LOCAL" name="Data Source" product="MySQL" version="5.5.32-0ubuntu0.13.04.1" jdbc-version="4.0" driver-name="MySQL Connector Java" driver-version="mysql-connector-java-5.1.26 ( Revision: ${bzr.revision-id} )" uuid="ec19ba82-120f-43e6-96c5-26912937ccef">
+  <data-source source="LOCAL" name="Data Source" product="MySQL" version="5.6.11" jdbc-version="4.0" driver-name="MySQL Connector Java" driver-version="mysql-connector-java-5.1.26 ( Revision: ${bzr.revision-id} )" uuid="ec19ba82-120f-43e6-96c5-26912937ccef">
     <extra-name-characters>#@</extra-name-characters>
     <identifier-quote-string>`</identifier-quote-string>
     <synchronize>true</synchronize>
     <jdbc-driver>com.mysql.jdbc.Driver</jdbc-driver>
     <jdbc-url>jdbc:mysql://localhost:3306/androidExperimentation</jdbc-url>
-    <user-name>root</user-name>
-    <user-password>df9fdf9cdf9cdf98df9edf98df9adf8b</user-password>
-    <schema-pattern>androidExperimentation.*</schema-pattern>
-    <default-schemas>androidExperimentation.*</default-schemas>
+    <user-name>android</user-name>
+    <user-password>dfcbdfc4dfcedfd8dfc5dfc3dfcedfcbdfc4dfcedfd8dfc5dfc3dfce</user-password>
+    <schema-pattern>androidexperimentation.*</schema-pattern>
+    <default-schemas>androidexperimentation.*</default-schemas>
     <default-dialect>MySQL</default-dialect>
     <libraries>
       <library>
         <url>jar://$PROJECT_DIR$/lib/mysql-connector-java-5.1.26-bin.jar!/</url>
       </library>
     </libraries>
-    <schema name="" catalog="androidExperimentation"/>
-    <table name="experiments" schema="" catalog="androidExperimentation" type="TABLE">
+    <schema name="" catalog="androidexperimentation"/>
+    <table name="experiments" schema="" catalog="androidexperimentation" type="TABLE">
       <column name="id" sqlType="INT" length="10" precision="0" nullable="false" jdbcType="4" autoIncrement="true"/>
       <column name="name" sqlType="VARCHAR" length="256" precision="0" nullable="false" jdbcType="12"/>
       <column name="contextType" sqlType="VARCHAR" length="256" precision="0" nullable="false" jdbcType="12"/>
@@ -30,7 +30,7 @@
       <column name="filename" sqlType="VARCHAR" length="256" precision="0" nullable="false" jdbcType="12"/>
       <primary-key name="PRIMARY" columns="id"/>
     </table>
-    <table name="plugins" schema="" catalog="androidExperimentation" type="TABLE">
+    <table name="plugins" schema="" catalog="androidexperimentation" type="TABLE">
       <column name="id" sqlType="INT" length="10" precision="0" nullable="false" jdbcType="4" autoIncrement="true"/>
       <column name="name" sqlType="VARCHAR" length="256" precision="0" nullable="false" jdbcType="12"/>
       <column name="contextType" sqlType="VARCHAR" length="256" precision="0" nullable="false" jdbcType="12"/>
@@ -40,14 +40,14 @@
       <column name="filename" sqlType="VARCHAR" length="256" precision="0" nullable="false" jdbcType="12"/>
       <primary-key name="PRIMARY" columns="id"/>
     </table>
-    <table name="results" schema="" catalog="androidExperimentation" type="TABLE">
+    <table name="results" schema="" catalog="androidexperimentation" type="TABLE">
       <column name="id" sqlType="INT" length="10" precision="0" nullable="false" jdbcType="4" autoIncrement="true"/>
       <column name="experimentID" sqlType="INT" length="10" precision="0" nullable="false" jdbcType="4"/>
       <column name="deviceID" sqlType="INT" length="10" precision="0" nullable="false" jdbcType="4"/>
       <column name="message" sqlType="TEXT" length="65535" precision="0" nullable="false" jdbcType="-1"/>
       <primary-key name="PRIMARY" columns="id"/>
     </table>
-    <table name="smartphones" schema="" catalog="androidExperimentation" type="TABLE">
+    <table name="smartphones" schema="" catalog="androidexperimentation" type="TABLE">
       <column name="id" sqlType="INT" length="10" precision="0" nullable="false" jdbcType="4" autoIncrement="true"/>
       <column name="phoneID" sqlType="INT" length="10" precision="0" nullable="false" jdbcType="4"/>
       <column name="sensorsRules" sqlType="TEXT" length="65535" precision="0" nullable="false" jdbcType="-1"/>
