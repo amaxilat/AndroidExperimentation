@@ -14,6 +14,7 @@
     border-collapse: collapse;
     text-align: left;
     width: 100%;
+
 }
 
 .datagrid {
@@ -24,10 +25,14 @@
     -webkit-border-radius: 3px;
     -moz-border-radius: 3px;
     border-radius: 3px;
+    width: 100%;
+
 }
 
 .datagrid table td, .datagrid table th {
     padding: 3px 10px;
+    max-width: 25%;
+    word-break: break-all;
 }
 
 .datagrid table thead th {
@@ -50,6 +55,8 @@
     border-left: 1px solid #E1EEF4;
     font-size: 12px;
     font-weight: normal;
+    max-width: 250px;
+
 }
 
 .datagrid table tbody .alt td {

@@ -11,6 +11,7 @@ body
 	background-repeat: repeat-x;
 	background-attachment: fixed;
 	background-position: top left;
+    min-height: 100%;
 }
 
 #art-main
@@ -19,13 +20,15 @@ body
 	width: 100%;
 	left: 0;
 	top: 0;
+    height: 100%;
 }
 
 #art-page-background-glare
 {
 	position: absolute;
 	width: 100%;
-	height: 422px;
+    height: 100%;
+
 	left: 0;
 	top: 0;
 }
@@ -85,7 +88,7 @@ table.position
 	margin:0 auto;
 	width: 1010px;
 	min-width:59px;
-	min-height:59px;
+	min-height:100%;
 }
 
 .art-Sheet-body
@@ -93,6 +96,7 @@ table.position
 	position: relative;
 	z-index: 1;
 	padding: 5px;
+    min-height:99%;
 }
 
 .art-Sheet-tr, .art-Sheet-tl, .art-Sheet-br, .art-Sheet-bl, .art-Sheet-tc, .art-Sheet-bc,.art-Sheet-cr, .art-Sheet-cl
@@ -1361,7 +1365,9 @@ font-weight: bold;
 /* begin Footer */
 .art-Footer
 {
-	position:relative;
+	position:absolute;
+    bottom: 0;
+    height: 80;
 	z-index:0;
 	overflow:hidden;
 	width: 1000px;
@@ -1382,9 +1388,10 @@ font-weight: bold;
 	position:absolute;
 	z-index:-1;
 	background-repeat:no-repeat;
-	background-image: url('../images/Footer.png');
+	background-image: url('../images/Footer.jpg');
+    background-color: white;
 	width: 1000px;
-	height: 150px;
+	height: 80px;
 	bottom:0;
 	left:0;
 }

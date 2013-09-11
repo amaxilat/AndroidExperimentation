@@ -9,7 +9,11 @@
 <body>
 <jsp:include page="./includes/header.html" flush="true"/>
 
-<h3>Plugin List:</h3>
+<h2>Current Experiment</h2>
+
+<h3>Experiment General Information</h3>
+
+<h3>Plugins used by the current experiment</h3>
 <%
     Experiment experiment = ModelManager.getExperiment();
 %>
