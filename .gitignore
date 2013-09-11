@@ -1,14 +1,2 @@
 src/WebService/.idea/workspace.xml
 src/WebService/.idea/workspace.xml
-src/sensorPlugins/GpsPlugin/bin/classes/org/ambientdynamix/contextplugins/GpsPlugin/BuildConfig.class
-src/sensorPlugins/GpsPlugin/bin/classes/org/ambientdynamix/contextplugins/GpsPlugin/GpsPluginInfo.aidl
-src/sensorPlugins/GpsPlugin/bin/classes/org/ambientdynamix/contextplugins/GpsPlugin/GpsPluginInfo.class
-src/sensorPlugins/GpsPlugin/bin/classes/org/ambientdynamix/contextplugins/GpsPlugin/GpsPluginRuntime$CurrentLocationGps.class
-src/sensorPlugins/GpsPlugin/bin/classes/org/ambientdynamix/contextplugins/GpsPlugin/GpsPluginRuntime.class
-src/sensorPlugins/GpsPlugin/bin/classes/org/ambientdynamix/contextplugins/GpsPlugin/IGpsPluginInfo.class
-src/sensorPlugins/GpsPlugin/bin/classes/org/ambientdynamix/contextplugins/GpsPlugin/PluginFactory.class
-src/sensorPlugins/GpsPlugin/bin/classes/org/ambientdynamix/contextplugins/GpsPlugin/R$attr.class
-src/sensorPlugins/GpsPlugin/bin/classes/org/ambientdynamix/contextplugins/GpsPlugin/R$drawable.class
-src/sensorPlugins/GpsPlugin/bin/classes/org/ambientdynamix/contextplugins/GpsPlugin/R$layout.class
-src/sensorPlugins/GpsPlugin/bin/classes/org/ambientdynamix/contextplugins/GpsPlugin/R$string.class
-src/sensorPlugins/GpsPlugin/bin/classes/org/ambientdynamix/contextplugins/GpsPlugin/R.class

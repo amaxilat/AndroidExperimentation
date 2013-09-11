@@ -129,7 +129,8 @@ public class Communication extends Thread implements Runnable {
 	
 	public String getExperiment(int phoneId, String sensorRules) throws Exception
 	{
-		Smartphone smartphone = new Smartphone(phoneId);		
+		Smartphone smartphone = new Smartphone(phoneId);
+		smartphone.setPhoneId(phoneId);
 		smartphone.setSensorsRules(sensorRules);
 		Gson gson = new Gson();
 		String jsonSmartphone = gson.toJson(smartphone);

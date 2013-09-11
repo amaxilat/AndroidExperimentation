@@ -98,7 +98,7 @@ public class Demon extends Thread implements Runnable {
 	        editor.putString("pluginObjects", plistString);
 	        editor.commit();
 			this.isProperlyInitiallized=true;
-			//handler.postDelayed(runnable, 10000);														
+			//handler.postDelayed(runnable, Constants.EXPERIMENT_POLL_INTERVAL);														
 		} catch (Exception e) {
 			this.isProperlyInitiallized=false;
 			e.printStackTrace();
@@ -116,7 +116,7 @@ public class Demon extends Thread implements Runnable {
 			pingExp.cancel(true);
 			pingExp=new AsyncExperimentTask();
 			pingExp.execute();			
-			handler.postDelayed(this, 15000);
+			handler.postDelayed(this, Constants.EXPERIMENT_POLL_INTERVAL);
 		}
 	};
 	
