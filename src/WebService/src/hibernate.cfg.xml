@@ -4,11 +4,13 @@
     "http://www.hibernate.org/dtd/hibernate-configuration-3.0.dtd">
 <hibernate-configuration>
   <session-factory>
-      <property name="connection.url">jdbc:mysql://localhost:3306/androidexperimentation</property>
+      <property name="connection.url">jdbc:mysql://localhost:3306/androidExperimentation</property>
       <property name="connection.driver_class">com.mysql.jdbc.Driver</property>
       <property name="connection.username">android</property>
       <property name="connection.password">androidandroid</property>
       <property name="connection.autocommit">true</property>
+      <property name="dialect">org.hibernate.dialect.MySQLDialect</property>
+      <property name="c3p0.testConnectionOnCheckout">true</property>
       <mapping resource="eu/smartsantander/androidExperimentation/entities/ExperimentsEntity.hbm.xml"/>
       <mapping resource="eu/smartsantander/androidExperimentation/entities/PluginsEntity.hbm.xml"/>
       <mapping resource="eu/smartsantander/androidExperimentation/entities/ResultsEntity.hbm.xml"/>
