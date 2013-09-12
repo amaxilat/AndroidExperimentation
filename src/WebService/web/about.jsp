@@ -7,7 +7,12 @@
 <jsp:include page="./includes/header.html" flush="true"/>
 <h2>What is SmartSantander?</h2>
 <p>
-SmartSantander proposes a unique in the world city-scale experimental research facility in support of typical applications and services for a smart city. This unique experimental facility will be sufficiently large, open and flexible to enable horizontal and vertical federation with other experimental facilities and stimulates development of new applications by users of various types including experimental advanced research on IoT technologies and realistic assessment of users’ acceptability tests. The project envisions the deployment of 20,000 sensors in Belgrade, Guildford, Lübeck and Santander (12,000), exploiting a large variety of technologies.
+<a herf="http://smartsantander.eu">SmartSantander</a> proposes a unique in the world city-scale experimental research facility in support of typical applications and services for a smart city. This unique experimental facility will be sufficiently large, open and flexible to enable horizontal and vertical federation with other experimental facilities and stimulates development of new applications by users of various types including experimental advanced research on IoT technologies and realistic assessment of users’ acceptability tests. The project envisions the deployment of 20,000 sensors in Belgrade, Guildford, Lübeck and Santander (12,000), exploiting a large variety of technologies.
+
+<p>
+Below you can see an interactive map containing the currently deployed nodes in the center of Santander. You can click on any of the nodes to see live data regarding luminocity, noise levels, etc.
+<p>
+<iframe src="http://www.smartsantander.eu/map/" style="border: 0; width:980px; height:450px;"></iframe>
 
 <h2>What is Android Experimentation?</h2>
 <p>
