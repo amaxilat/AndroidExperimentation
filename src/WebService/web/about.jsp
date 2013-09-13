@@ -30,6 +30,8 @@ The smartphone software component is partially based on the <a href="http://ambi
 
 <h2>Can I join in?</h2>
 <p>
+Yes, you can!
+<br>
 
 
 <jsp:include page="./includes/footer.html" flush="true"/>
