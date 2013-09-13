@@ -33,214 +33,73 @@ import org.ksoap2.transport.HttpTransportSE;
 
 import com.google.gson.Gson;
 
+import eu.smartsantander.androidExperimentation.Constants;
+import eu.smartsantander.androidExperimentation.jsonEntities.Plugin;
+import eu.smartsantander.androidExperimentation.jsonEntities.PluginList;
+
 import android.util.Log;
 
-public class SimpleSourceBase
-{
+public class SimpleSourceBase {
 	private final String TAG = this.getClass().getSimpleName();
-	private final String URLS=Constants.URL;
+	private final String URLS = Constants.URL;
 
-	protected List<DiscoveredContextPlugin> createDiscoveredPlugins(RepositoryInfo repo, InputStream input,
-			PLATFORM platform, VersionInfo platformVersion, VersionInfo frameworkVersion, boolean processSingle)
-			throws Exception
-	{
-	
+	protected List<DiscoveredContextPlugin> createDiscoveredPlugins(RepositoryInfo repo, InputStream input, PLATFORM platform, VersionInfo platformVersion, VersionInfo frameworkVersion,boolean processSingle) throws Exception {
+
+		// SmartSantander Modifications
 		Log.i("AndroidExperimentation", "Start Plugin Discovery");
-		
-		String jsonPluginList="";
-		
+		String jsonPluginList = "";
 		List<DiscoveredContextPlugin> plugs = new ArrayList<DiscoveredContextPlugin>();
-				
-		if( ping() )
-		{
-			Log.i("WTF", "ping ok");
-			
+		try {
 			jsonPluginList = getPluginList();
-			
 			Log.i(TAG, jsonPluginList);
-			
-			if(jsonPluginList.equals("0"))
-			{
-				Log.i(TAG, "no plugin list for us");
+			if (jsonPluginList.equals("0")) {
+				Log.i(TAG, "No plugin List");
+			} else {
+				PluginList pluginList = (new Gson()).fromJson(jsonPluginList,PluginList.class);
+				Log.i(TAG, "Plugin List setted");
+				List<Plugin> plugList = pluginList.getPluginList();
+				for (Plugin plugInfo : plugList) {
+					ContextPluginBinder plugBinder = new ContextPluginBinder();
+						DiscoveredContextPlugin plug = plugBinder.createDiscoveredPlugin(repo, plugInfo);
+						plugs.add(plug);		
+				}
+				return plugs;
 			}
-			else
-			{
-				Gson gson = new Gson();
-	        	PluginList pluginList = gson.fromJson(jsonPluginList, PluginList.class);
-	        	
-	        	Log.i(TAG, "pluginList is ok");
-	        	
-	        	ArrayList<MyPlugInfo> plugList = pluginList.getPluginList();
-	        	
-	        	if( plugList.size() > 0 )
-	        	{
-		        	Log.i(TAG, "plugList is full");
-	        		
-	        		for(MyPlugInfo plugInfo : plugList)
-	        		{	
-	        			ContextPluginBinder plugBinder = new ContextPluginBinder();
-	        		
-	        			try
-	        			{
-	        				DiscoveredContextPlugin plug = plugBinder.createDiscoveredPlugin(repo, plugInfo);
-	        				plugs.add(plug);
-	        				
-	        			}catch (Exception e)
-	        			{
-	        				Log.w(TAG, "Exception creating plugin: " + plugBinder.id);
-	        			}
-	        		}
-	        	}
-			}
+		} catch (Exception e) {
+			Log.w(TAG, "Exception Installin plugins: "+ e.getMessage());
+			return plugs;
 		}
-		else
-		{
-			Log.i(TAG, "no ping for us");
-		}
-		
 		return plugs;
 	}
 
-	public boolean ping()
-	{
-		Ping ping = new Ping();
-		
-		Gson gson = new Gson();
-		String jsonPing = gson.toJson(ping);
-		
-		int pong = sendPing(jsonPing);
-		
-		if(pong == 1)
-		{
-			return true;
-		}
-		
-		return false;
-	}
 	
-	private int sendPing(String jsonPing)
-	{
-		final String NAMESPACE = "http://helloworld/";
-		final String URL = URLS+":8080/ADService/services/HelloWorld?wsdl"; 
-		final String METHOD_NAME = "Ping";
-		final String SOAP_ACTION = "\""+"http://helloworld/Ping"+"\"";
-		
-		int pong = 0;
-		
-		SoapObject request = new SoapObject(NAMESPACE, METHOD_NAME); 
-
-		PropertyInfo propInfo=new PropertyInfo();
-		propInfo.name="arg0";
-		propInfo.type=PropertyInfo.STRING_CLASS;
-		propInfo.setValue(jsonPing);
-  
-		request.addProperty(propInfo);  
-
-		SoapSerializationEnvelope envelope = new SoapSerializationEnvelope(SoapEnvelope.VER11); 
-		envelope.setOutputSoapObject(request);
-		
-		HttpTransportSE androidHttpTransport = new HttpTransportSE(URL);
-		
-		try
-		{			
-			androidHttpTransport.call(SOAP_ACTION, envelope);
-			SoapPrimitive  resultsRequestSOAP = (SoapPrimitive) envelope.getResponse();
-			
-			pong = Integer.parseInt(resultsRequestSOAP.toString()); 
-		}
-		catch (Exception e)
-		{
-			//
-		}
-		
-		// ksoap2 HttpTransportSE issue -- connection never timeout or close
-		// 
-		//	connection close to server - connection stays open to client	
-		//  so the first call is ok, but the second call receive from the server a RST
-		//
-		//  this because the server receives a packet for a closed socket 
-		//  and insert RST in an attempt to block traffic
-		//
-		// connection never timeout or close -- so force it to break
-		
-		try
-		{			
-			androidHttpTransport.call(SOAP_ACTION, envelope);
-			SoapPrimitive  resultsRequestSOAP = (SoapPrimitive) envelope.getResponse();					
-		}
-		catch (Exception e)
-		{
-			//
-		}
-		
-		// ksoap2 HttpTransportSE issue
-		
-		return pong;
-	}	
-	
-	private String getPluginList()
-	{
+	private String getPluginList() throws Exception {
 		return sendGetPluginList();
 	}
-	
-	private String sendGetPluginList()
-	{		
-		final String NAMESPACE = "http://helloworld/";
-		final String URL = URLS+":8080/ADService/services/HelloWorld?wsdl"; 
+
+	private String sendGetPluginList() throws Exception {
+		final String NAMESPACE = "http://androidExperimentation.smartsantander.eu/";
+		final String URL = Constants.URL+":8080/services/AndroidExperimentationWS?wsdl";
 		final String METHOD_NAME = "getPluginList";
-		final String SOAP_ACTION = "\""+"http://helloworld/getPluginList"+"\"";
-		
-		String test="0";
-		
-		SoapObject request = new SoapObject(NAMESPACE, METHOD_NAME); 
-		
-		PropertyInfo propInfo=new PropertyInfo();
-		propInfo.name="arg0";
-		propInfo.type=PropertyInfo.STRING_CLASS;
+		final String SOAP_ACTION = "\"" + "http://AndroidExperimentationWS/getPluginList"+ "\"";
+		String test = "0";
+		SoapObject request = new SoapObject(NAMESPACE, METHOD_NAME);
+		PropertyInfo propInfo = new PropertyInfo();
+		propInfo.name = "arg0";
+		propInfo.type = PropertyInfo.STRING_CLASS;
 		propInfo.setValue("");
-  
-		request.addProperty(propInfo);  
-				
-		SoapSerializationEnvelope envelope = new SoapSerializationEnvelope(SoapEnvelope.VER11); 
+		request.addProperty(propInfo);
+		SoapSerializationEnvelope envelope = new SoapSerializationEnvelope(
+				SoapEnvelope.VER11);
 		envelope.setOutputSoapObject(request);
-		
 		HttpTransportSE androidHttpTransport = new HttpTransportSE(URL);
-		
-		try
-		{			
+		try {
 			androidHttpTransport.call(SOAP_ACTION, envelope);
-			
 			SoapPrimitive resultsRequestSOAP = (SoapPrimitive) envelope.getResponse();
-			
-			test = resultsRequestSOAP.toString(); 
+			test = resultsRequestSOAP.toString();
+		} catch (Exception e) {
+			throw e;
 		}
-		catch (Exception e)
-		{
-			//
-		}
-		
-		// ksoap2 HttpTransportSE issue -- connection never timeout or close
-		// 
-		//	connection close to server - connection stays open to client	
-		//  so the first call is ok, but the second call receive from the server a RST
-		//
-		//  this because the server receives a packet for a closed socket 
-		//  and insert RST in an attempt to block traffic
-		//
-		// connection never timeout or close -- so force it to break
-		
-		try
-		{			
-			androidHttpTransport.call(SOAP_ACTION, envelope);
-			SoapPrimitive  resultsRequestSOAP = (SoapPrimitive) envelope.getResponse();					
-		}
-		catch (Exception e)
-		{
-			//
-		}
-		
-		// ksoap2 HttpTransportSE issue
-		
 		return test;
 	}
 }

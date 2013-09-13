@@ -29,8 +29,7 @@ public class securityTab extends Activity{
         setContentView(R.layout.security);
     
         LinearLayout list= (LinearLayout) findViewById(R.id.checklist);
-        
-	    
+          
         String plistString=(getApplicationContext().getSharedPreferences("pluginObjects", 0)).getString("pluginObjects", "");
         if(plistString.equals("")) return;
         PluginList pList=(new Gson()).fromJson(plistString,  PluginList.class);
