@@ -53,6 +53,7 @@ public class Registration extends Thread implements Runnable {
 			return;
 		int phoneId = phoneProfiler.getPhoneId();
 		int serverPhoneId;
+		
 		try {
 			serverPhoneId = communication.registerSmartphone(phoneId,sensorsRules);
 			phoneProfiler.setPhoneId(serverPhoneId);
