@@ -1,18 +1,7 @@
 package eu.smartsantander.androidExperimentation.operations;
 
 import java.io.File;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
-
-import com.google.gson.Gson;
-
-import eu.smartsantander.androidExperimentation.Constants;
-import eu.smartsantander.androidExperimentation.jsonEntities.Experiment;
-import eu.smartsantander.androidExperimentation.jsonEntities.Plugin;
-import eu.smartsantander.androidExperimentation.jsonEntities.PluginList;
 
 import android.content.Context;
 import android.content.Intent;
@@ -22,6 +11,13 @@ import android.os.AsyncTask;
 import android.os.Handler;
 import android.os.Message;
 import android.util.Log;
+
+import com.google.gson.Gson;
+
+import eu.smartsantander.androidExperimentation.Constants;
+import eu.smartsantander.androidExperimentation.jsonEntities.Experiment;
+import eu.smartsantander.androidExperimentation.jsonEntities.Plugin;
+import eu.smartsantander.androidExperimentation.jsonEntities.PluginList;
 
 public class Demon extends Thread implements Runnable {
 
@@ -184,8 +180,7 @@ public class Demon extends Thread implements Runnable {
 							Experiment experiment = (Experiment) gson.fromJson(jsonExperiment, Experiment.class);
 							String[] smarDeps = sensorProfiler.getSensorRules().split(",");
 							String[] expDeps = experiment.getSensorDependencies().split(",");
-							Set<String> smarSet = new HashSet<String>(Arrays.asList(smarDeps));
-							Set<String> expSet = new HashSet<String>(Arrays.asList(expDeps));
+
 
 							if (match(smarDeps,expDeps)==true) {
 								String contextType = experiment.getContextType();
@@ -193,7 +188,7 @@ public class Demon extends Thread implements Runnable {
 
 								Downloader downloader = new Downloader();
 								try {
-									downloader.DownloadFromUrl(url, contextType);
+									downloader.DownloadFromUrl(url, experiment.getFilename());
 								} catch (Exception e) {
 									e.printStackTrace();
 									return "Failed to Download Experiment";

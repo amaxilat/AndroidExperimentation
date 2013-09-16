@@ -1,10 +1,6 @@
 package eu.smartsantander.androidExperimentation.operations;
 
-import java.io.File;
 import java.io.FileOutputStream;
-import java.util.AbstractList;
-import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
@@ -14,22 +10,9 @@ import org.ambientdynamix.api.application.ContextEvent;
 import org.ambientdynamix.api.application.ContextPluginInformation;
 import org.ambientdynamix.api.application.ContextSupportInfo;
 import org.ambientdynamix.api.application.IContextInfo;
-
 import org.ambientdynamix.api.application.IDynamixFacade;
 import org.ambientdynamix.api.application.IDynamixListener;
 import org.ambientdynamix.api.application.Result;
-import org.ambientdynamix.contextplugins.WifiPlugin.IWifiPluginInfo;
-import org.ambientdynamix.contextplugins.myExperimentPlugin.IExperimentPluginInfo;
-import org.ksoap2.SoapEnvelope;
-import org.ksoap2.serialization.PropertyInfo;
-import org.ksoap2.serialization.SoapObject;
-import org.ksoap2.serialization.SoapPrimitive;
-import org.ksoap2.serialization.SoapSerializationEnvelope;
-import org.ksoap2.transport.HttpTransportSE;
-
-import com.google.gson.Gson;
-
-import eu.smartsantander.androidExperimentation.Job;
 
 import android.content.ComponentName;
 import android.content.Context;
@@ -43,6 +26,7 @@ import android.os.IBinder;
 import android.os.Message;
 import android.os.RemoteException;
 import android.util.Log;
+import eu.smartsantander.androidExperimentation.Job;
 
 public class Scheduler extends Thread implements Runnable {
 		
@@ -236,7 +220,7 @@ public class Scheduler extends Thread implements Runnable {
 		}
 
 		@Override
-		public void onSessionClosed() throws RemoteException {
+		public void onSessionClosed() throws RemoteException { 
 			Log.i(TAG, "A1 - onSessionClosed");
 			
 			sendThreadMessage("dynamix_disconnected");
@@ -323,9 +307,9 @@ public class Scheduler extends Thread implements Runnable {
 		@Override
 		public void onContextPluginDiscoveryFinished(List<ContextPluginInformation> discoveredPlugins)
 				throws RemoteException {
-			Log.i(TAG, "A1 - onContextPluginDiscoveryFinished");
+		//	Log.i(TAG, "A1 - onContextPluginDiscoveryFinished");
 			
-			commitJob("org.ambientdynamix.contextplugins.myExperimentPlugin");
+		//	commitJob("org.ambientdynamix.contextplugins.myExperimentPlugin");
 		}
 
 		@Override
@@ -537,7 +521,7 @@ public class Scheduler extends Thread implements Runnable {
 		}
 	}
 	
-	// destroy plugin with ContextType contextType
+/*	// destroy plugin with ContextType contextType
 	private void destroyPlugin(String contextType)
 	{
 		// set destroy Bundle
@@ -552,9 +536,9 @@ public class Scheduler extends Thread implements Runnable {
 		{
 			Log.w(TAG, e.toString());
 		}
-	}
+	}*/
 	
-	private void pausePlugin(String contextType)
+	/*private void pausePlugin(String contextType)
 	{
 		//set pause bundle
 		Bundle pause = new Bundle();
@@ -568,7 +552,7 @@ public class Scheduler extends Thread implements Runnable {
 		{
 			Log.w(TAG, e.toString());
 		}
-	}
+	}*/
 	
 	public void doJobPlugin(String contextType)
 	{				

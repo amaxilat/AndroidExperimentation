@@ -6,175 +6,198 @@
     </artifacts-to-build>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="4ccbb714-201c-482b-a93f-dd4890c10bc1" name="Default" comment="general config">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../sensorPlugins2/BatteryLevelPlugin-1.0.0b/BatteryLevelPlugin/bin/classes/org/ambientdynamix/contextplugins/batterylevel/BatteryLevelInfo$1.class" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../sensorPlugins2/BatteryLevelPlugin-1.0.0b/BatteryLevelPlugin/bin/classes/org/ambientdynamix/contextplugins/batterylevel/BatteryLevelInfo.class" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../sensorPlugins2/BatteryLevelPlugin-1.0.0b.zip" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../sensorPlugins2/BatteryLevelPlugin-1.0.0b/BatteryLevelPlugin/bin/BatteryLevelPlugin.apk" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../sensorPlugins2/BatteryLevelPlugin-1.0.0b/BatteryLevelPlugin/bin/classes/org/ambientdynamix/contextplugins/batterylevel/BatteryLevelPluginRuntime$1.class" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../sensorPlugins2/BatteryLevelPlugin-1.0.0b/BatteryLevelPlugin/bin/classes/org/ambientdynamix/contextplugins/batterylevel/BatteryLevelPluginRuntime.class" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../sensorPlugins2/BatteryLevelPlugin-1.0.0b/BatteryLevelPlugin/bin/classes/org/ambientdynamix/contextplugins/batterylevel/BuildConfig.class" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../dynamix_framework/dynamix-framework/bin/classes/eu/smartsantander/androidExperimentation/Constants.class" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../dynamix_framework/dynamix-framework/bin/classes/eu/smartsantander/androidExperimentation/jsonEntities/Experiment.class" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../sensorPlugins2/BatteryLevelPlugin-1.0.0b/BatteryLevelPlugin/bin/classes/org/ambientdynamix/contextplugins/batterylevel/IBatteryLevelInfo.class" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../sensorPlugins2/OpenContextPluginSDK-0.9.54.zip" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../dynamix_framework/dynamix-framework/bin/classes/eu/smartsantander/androidExperimentation/jsonEntities/Plugin.class" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../sensorPlugins2/BatteryLevelPlugin-1.0.0b/BatteryLevelPlugin/bin/classes/org/ambientdynamix/contextplugins/batterylevel/PluginFactory.class" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../dynamix_framework/dynamix-framework/bin/classes/eu/smartsantander/androidExperimentation/jsonEntities/PluginList.class" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../sensorPlugins2/BatteryLevelPlugin-1.0.0b/BatteryLevelPlugin/bin/classes/org/ambientdynamix/contextplugins/batterylevel/R$attr.class" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../sensorPlugins2/BatteryLevelPlugin-1.0.0b/BatteryLevelPlugin/bin/classes/org/ambientdynamix/contextplugins/batterylevel/R$drawable.class" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../sensorPlugins2/BatteryLevelPlugin-1.0.0b/BatteryLevelPlugin/bin/classes/org/ambientdynamix/contextplugins/batterylevel/R$layout.class" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../sensorPlugins2/BatteryLevelPlugin-1.0.0b/BatteryLevelPlugin/bin/classes/org/ambientdynamix/contextplugins/batterylevel/R$string.class" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../sensorPlugins2/BatteryLevelPlugin-1.0.0b/BatteryLevelPlugin/bin/classes/org/ambientdynamix/contextplugins/batterylevel/R.class" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../dynamix_framework/dynamix-framework/bin/classes/eu/smartsantander/androidExperimentation/jsonEntities/Report.class" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../dynamix_framework/dynamix-framework/bin/classes/eu/smartsantander/androidExperimentation/jsonEntities/Result.class" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../dynamix_framework/dynamix-framework/bin/classes/eu/smartsantander/androidExperimentation/jsonEntities/Smartphone.class" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../sensorPlugins2/BatteryLevelPlugin-1.0.0b/BatteryLevelPlugin/assets/agt_web.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../sensorPlugins2/BatteryLevelPlugin-1.0.0b/BatteryLevelPlugin/bin/dexedLibs/annotations-2b2ead248a7c3a0d63ab8d05e2e06295.jar" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../sensorPlugins2/BatteryLevelPlugin-1.0.0b/BatteryLevelPlugin/doc/resources/background.gif" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../sensorPlugins2/BatteryLevelPlugin-1.0.0b/BatteryLevelPlugin/bin/classes.dex" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../sensorPlugins2/Open Context Plugin Sdk/res/drawable-hdpi/ic_launcher.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../sensorPlugins2/Open Context Plugin Sdk/res/drawable-ldpi/ic_launcher.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../sensorPlugins2/Open Context Plugin Sdk/res/drawable-mdpi/ic_launcher.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../sensorPlugins2/Open Context Plugin Sdk/res/drawable-xhdpi/ic_launcher.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../sensorPlugins2/BatteryLevelPlugin-1.0.0b/BatteryLevelPlugin/bin/res/drawable-hdpi/icon.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../sensorPlugins2/BatteryLevelPlugin-1.0.0b/BatteryLevelPlugin/bin/res/drawable-ldpi/icon.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../sensorPlugins2/BatteryLevelPlugin-1.0.0b/BatteryLevelPlugin/bin/res/drawable-mdpi/icon.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../sensorPlugins2/BatteryLevelPlugin-1.0.0b/BatteryLevelPlugin/res/drawable-hdpi/icon.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../sensorPlugins2/BatteryLevelPlugin-1.0.0b/BatteryLevelPlugin/res/drawable-ldpi/icon.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../sensorPlugins2/BatteryLevelPlugin-1.0.0b/BatteryLevelPlugin/res/drawable-mdpi/icon.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../sensorPlugins/GpsPlugin/lib/org.ambientdynamix.contextplugin.api_v0.9.54.jar" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../sensorPlugins2/Open Context Plugin Sdk/lib/org.ambientdynamix.contextplugin.api_v0.9.54.jar" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../sensorPlugins2/BatteryLevelPlugin-1.0.0b/BatteryLevelPlugin/bin/resources.ap_" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../sensorPlugins2/BatteryLevelPlugin-1.0.0b/BatteryLevelPlugin/doc/resources/tab.gif" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../sensorPlugins2/BatteryLevelPlugin-1.0.0b/BatteryLevelPlugin/doc/resources/titlebar.gif" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../sensorPlugins2/BatteryLevelPlugin-1.0.0b/BatteryLevelPlugin/doc/resources/titlebar_end.gif" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../sensorPlugins2/BatteryLevelPlugin-1.0.0b/BatteryLevelPlugin/.classpath" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../sensorPlugins2/Open Context Plugin Sdk/.gitignore" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../sensorPlugins2/BatteryLevelPlugin-1.0.0b/BatteryLevelPlugin/.project" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../sensorPlugins2/Open Context Plugin Sdk/.project" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../sensorPlugins/GpsPlugin/bin/AndroidManifest.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../sensorPlugins2/BatteryLevelPlugin-1.0.0b/BatteryLevelPlugin/AndroidManifest.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../sensorPlugins2/BatteryLevelPlugin-1.0.0b/BatteryLevelPlugin/bin/AndroidManifest.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../sensorPlugins2/Open Context Plugin Sdk/AndroidManifest.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../sensorPlugins2/BatteryLevelPlugin-1.0.0b/BatteryLevelPlugin/bin/aidl/org/ambientdynamix/contextplugins/batterylevel/BatteryLevelInfo.aidl" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../sensorPlugins2/BatteryLevelPlugin-1.0.0b/BatteryLevelPlugin/bin/classes/org/ambientdynamix/contextplugins/batterylevel/BatteryLevelInfo.aidl" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../sensorPlugins2/BatteryLevelPlugin-1.0.0b/BatteryLevelPlugin/src/org/ambientdynamix/contextplugins/batterylevel/BatteryLevelInfo.aidl" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../sensorPlugins2/BatteryLevelPlugin-1.0.0b/BatteryLevelPlugin/doc/org/ambientdynamix/contextplugins/batterylevel/BatteryLevelInfo.html" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../sensorPlugins2/BatteryLevelPlugin-1.0.0b/BatteryLevelPlugin/doc/org/ambientdynamix/contextplugins/batterylevel/class-use/BatteryLevelInfo.html" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../sensorPlugins2/BatteryLevelPlugin-1.0.0b/BatteryLevelPlugin/src/org/ambientdynamix/contextplugins/batterylevel/BatteryLevelInfo.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../sensorPlugins2/BatteryLevelPlugin-1.0.0b/BatteryLevelPlugin/doc/org/ambientdynamix/contextplugins/batterylevel/BatteryLevelPluginRuntime.html" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../sensorPlugins2/BatteryLevelPlugin-1.0.0b/BatteryLevelPlugin/doc/org/ambientdynamix/contextplugins/batterylevel/class-use/BatteryLevelPluginRuntime.html" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../sensorPlugins2/BatteryLevelPlugin-1.0.0b/BatteryLevelPlugin/src/org/ambientdynamix/contextplugins/batterylevel/BatteryLevelPluginRuntime.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../sensorPlugins2/BatteryLevelPlugin-1.0.0b/BatteryLevelPlugin/gen/org/ambientdynamix/contextplugins/batterylevel/BuildConfig.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../dynamix_framework/dynamix-framework/src/eu/smartsantander/androidExperimentation/Constants.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../dynamix_framework/dynamix-framework/src/eu/smartsantander/androidExperimentation/jsonEntities/Experiment.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../sensorPlugins/GpsPlugin/bin/aidl/org/ambientdynamix/contextplugins/GpsPlugin/GpsPluginInfo.aidl" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../sensorPlugins2/BatteryLevelPlugin-1.0.0b/BatteryLevelPlugin/doc/org/ambientdynamix/contextplugins/batterylevel/IBatteryLevelInfo.html" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../sensorPlugins2/BatteryLevelPlugin-1.0.0b/BatteryLevelPlugin/doc/org/ambientdynamix/contextplugins/batterylevel/class-use/IBatteryLevelInfo.html" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../sensorPlugins2/BatteryLevelPlugin-1.0.0b/BatteryLevelPlugin/src/org/ambientdynamix/contextplugins/batterylevel/IBatteryLevelInfo.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../sensorPlugins2/BatteryLevelPlugin-1.0.0b/BatteryLevelPlugin/META-INF/MANIFEST.MF" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../sensorPlugins2/Open Context Plugin Sdk/META-INF/MANIFEST.MF" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../sensorPlugins2/BatteryLevelPlugin-1.0.0b/BatteryLevelPlugin/.externalToolBuilders/New_Builder.launch" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../dynamix_framework/dynamix-framework/src/eu/smartsantander/androidExperimentation/jsonEntities/Plugin.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../sensorPlugins2/BatteryLevelPlugin-1.0.0b/BatteryLevelPlugin/doc/org/ambientdynamix/contextplugins/batterylevel/PluginFactory.html" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../sensorPlugins2/BatteryLevelPlugin-1.0.0b/BatteryLevelPlugin/doc/org/ambientdynamix/contextplugins/batterylevel/class-use/PluginFactory.html" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../sensorPlugins2/BatteryLevelPlugin-1.0.0b/BatteryLevelPlugin/src/org/ambientdynamix/contextplugins/batterylevel/PluginFactory.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../dynamix_framework/dynamix-framework/src/eu/smartsantander/androidExperimentation/jsonEntities/PluginList.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../sensorPlugins2/BatteryLevelPlugin-1.0.0b/BatteryLevelPlugin/gen/org/ambientdynamix/contextplugins/batterylevel/R.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../dynamix_framework/dynamix-framework/src/eu/smartsantander/androidExperimentation/jsonEntities/Report.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../dynamix_framework/dynamix-framework/src/eu/smartsantander/androidExperimentation/jsonEntities/Result.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../dynamix_framework/dynamix-framework/src/eu/smartsantander/androidExperimentation/jsonEntities/Smartphone.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../sensorPlugins2/BatteryLevelPlugin-1.0.0b/BatteryLevelPlugin/doc/allclasses-frame.html" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../sensorPlugins2/BatteryLevelPlugin-1.0.0b/BatteryLevelPlugin/doc/allclasses-noframe.html" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../sensorPlugins2/BatteryLevelPlugin-1.0.0b/BatteryLevelPlugin/antbuild.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../sensorPlugins2/BatteryLevelPlugin-1.0.0b/BatteryLevelPlugin/Deployment/battery_level_local_repo.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../sensorPlugins2/BatteryLevelPlugin-1.0.0b/BatteryLevelPlugin/build.properties" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../sensorPlugins2/Open Context Plugin Sdk/build.properties" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../sensorPlugins2/BatteryLevelPlugin-1.0.0b/BatteryLevelPlugin/doc/constant-values.html" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../sensorPlugins2/BatteryLevelPlugin-1.0.0b/BatteryLevelPlugin/doc/deprecated-list.html" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../sensorPlugins2/BatteryLevelPlugin-1.0.0b/BatteryLevelPlugin/doc/help-doc.html" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../sensorPlugins2/BatteryLevelPlugin-1.0.0b/BatteryLevelPlugin/doc/index-files/index-1.html" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../sensorPlugins2/BatteryLevelPlugin-1.0.0b/BatteryLevelPlugin/doc/index-files/index-10.html" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../sensorPlugins2/BatteryLevelPlugin-1.0.0b/BatteryLevelPlugin/doc/index-files/index-11.html" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../sensorPlugins2/BatteryLevelPlugin-1.0.0b/BatteryLevelPlugin/doc/index-files/index-12.html" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../sensorPlugins2/BatteryLevelPlugin-1.0.0b/BatteryLevelPlugin/doc/index-files/index-2.html" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../sensorPlugins2/BatteryLevelPlugin-1.0.0b/BatteryLevelPlugin/doc/index-files/index-3.html" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../sensorPlugins2/BatteryLevelPlugin-1.0.0b/BatteryLevelPlugin/doc/index-files/index-4.html" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../sensorPlugins2/BatteryLevelPlugin-1.0.0b/BatteryLevelPlugin/doc/index-files/index-5.html" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../sensorPlugins2/BatteryLevelPlugin-1.0.0b/BatteryLevelPlugin/doc/index-files/index-6.html" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../sensorPlugins2/BatteryLevelPlugin-1.0.0b/BatteryLevelPlugin/doc/index-files/index-7.html" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../sensorPlugins2/BatteryLevelPlugin-1.0.0b/BatteryLevelPlugin/doc/index-files/index-8.html" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../sensorPlugins2/BatteryLevelPlugin-1.0.0b/BatteryLevelPlugin/doc/index-files/index-9.html" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../sensorPlugins2/BatteryLevelPlugin-1.0.0b/BatteryLevelPlugin/doc/index.html" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../sensorPlugins/GpsPlugin/bin/jarlist.cache" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../sensorPlugins2/BatteryLevelPlugin-1.0.0b/BatteryLevelPlugin/bin/jarlist.cache" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../sensorPlugins2/BatteryLevelPlugin-1.0.0b/BatteryLevelPlugin/lint.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../sensorPlugins2/BatteryLevelPlugin-1.0.0b/BatteryLevelPlugin/res/layout/main.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../sensorPlugins2/Open Context Plugin Sdk/res/layout/main.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../sensorPlugins2/BatteryLevelPlugin-1.0.0b/BatteryLevelPlugin/.settings/org.eclipse.jdt.core.prefs" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../sensorPlugins2/BatteryLevelPlugin-1.0.0b/BatteryLevelPlugin/doc/overview-tree.html" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../sensorPlugins2/BatteryLevelPlugin-1.0.0b/BatteryLevelPlugin/doc/org/ambientdynamix/contextplugins/batterylevel/package-frame.html" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../sensorPlugins2/BatteryLevelPlugin-1.0.0b/BatteryLevelPlugin/doc/package-list" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../sensorPlugins2/BatteryLevelPlugin-1.0.0b/BatteryLevelPlugin/doc/org/ambientdynamix/contextplugins/batterylevel/package-summary.html" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../sensorPlugins2/BatteryLevelPlugin-1.0.0b/BatteryLevelPlugin/doc/org/ambientdynamix/contextplugins/batterylevel/package-tree.html" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../sensorPlugins2/BatteryLevelPlugin-1.0.0b/BatteryLevelPlugin/doc/org/ambientdynamix/contextplugins/batterylevel/package-use.html" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../sensorPlugins2/Open Context Plugin Sdk/proguard-project.txt" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../sensorPlugins2/BatteryLevelPlugin-1.0.0b/BatteryLevelPlugin/proguard.cfg" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../sensorPlugins2/BatteryLevelPlugin-1.0.0b/BatteryLevelPlugin/project.properties" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../sensorPlugins2/release_notes.txt" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../sensorPlugins2/BatteryLevelPlugin-1.0.0b/BatteryLevelPlugin/doc/serialized-form.html" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../sensorPlugins2/simple_filesystem_repo_example.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../sensorPlugins2/simple_network_repo_example.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../sensorPlugins2/BatteryLevelPlugin-1.0.0b/BatteryLevelPlugin/res/values/strings.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../sensorPlugins2/Open Context Plugin Sdk/res/values/strings.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../sensorPlugins2/BatteryLevelPlugin-1.0.0b/BatteryLevelPlugin/doc/stylesheet.css" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../dynamix_framework/dynamix-framework/bin/classes/org/ambientdynamix/update/contextplugin/MyPlugInfo.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../dynamix_framework/dynamix-framework/bin/classes/org/ambientdynamix/update/contextplugin/Ping.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../dynamix_framework/dynamix-framework/bin/classes/org/ambientdynamix/update/contextplugin/PluginList.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../dynamix_framework/dynamix-framework/src/org/ambientdynamix/update/contextplugin/Constants.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../dynamix_framework/dynamix-framework/src/org/ambientdynamix/update/contextplugin/MyPlugInfo.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../dynamix_framework/dynamix-framework/src/org/ambientdynamix/update/contextplugin/Ping.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../dynamix_framework/dynamix-framework/src/org/ambientdynamix/update/contextplugin/PluginList.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../sensorPlugins/GpsPlugin/.settings/org.eclipse.jdt.core.prefs" afterPath="" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../sensorPlugins/GpsPlugin/bin/classes/org/ambientdynamix/contextplugins/GpsPlugin/BuildConfig.class" afterPath="$PROJECT_DIR$/../sensorPlugins/GpsPlugin/bin/classes/org/ambientdynamix/contextplugins/GpsPlugin/BuildConfig.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../dynamix_framework/dynamix-framework/bin/classes/org/ambientdynamix/core/ContextManager.class" afterPath="$PROJECT_DIR$/../dynamix_framework/dynamix-framework/bin/classes/org/ambientdynamix/core/ContextManager.class" />
+    <list default="true" id="4ccbb714-201c-482b-a93f-dd4890c10bc1" name="Default" comment="experiment plugin plugin installation">
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../sensorPlugins/GpsPlugin/bin/GpsPlugin.apk" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../sensorPlugins/GpsPlugin/bin/classes/org/ambientdynamix/contextplugins/GpsPlugin/GpsPluginInfo$1.class" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../sensorPlugins/GpsPlugin/bin/classes/org/ambientdynamix/contextplugins/GpsPlugin/GpsPluginRuntime$1.class" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../experiments/gps_experiment/assets/agt_web.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../sensorPlugins/GpsPlugin/bin/dexedLibs/android-support-v4-1708b8638ec9adb3c29a9cc00972e31c.jar" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../sensorPlugins/GpsPlugin/libs/android-support-v4.jar" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../experiments/gps_experiment/bin/dexedLibs/annotations-4013d70cf9a6e0503066c9c3bfaff319.jar" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../sensorPlugins/GpsPlugin/bin/dexedLibs/annotations-4013d70cf9a6e0503066c9c3bfaff319.jar" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../experiments/gps_experiment/doc/resources/background.gif" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../experiments/gps_experiment/bin/classes.dex" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../sensorPlugins/GpsPlugin/bin/classes.dex" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../experiments/gps_experiment/bin/gps_experiment.apk" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../experiments/gps_experiment/bin/res/drawable-hdpi/icon.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../experiments/gps_experiment/bin/res/drawable-ldpi/icon.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../experiments/gps_experiment/bin/res/drawable-mdpi/icon.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../experiments/gps_experiment/res/drawable-hdpi/icon.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../experiments/gps_experiment/res/drawable-ldpi/icon.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../experiments/gps_experiment/res/drawable-mdpi/icon.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../sensorPlugins/GpsPlugin/bin/res/drawable-hdpi/icon.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../sensorPlugins/GpsPlugin/bin/res/drawable-ldpi/icon.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../sensorPlugins/GpsPlugin/bin/res/drawable-mdpi/icon.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../experiments/gps_experiment/bin/resources.ap_" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../sensorPlugins/GpsPlugin/bin/resources.ap_" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../experiments/gps_experiment/doc/resources/tab.gif" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../experiments/gps_experiment/doc/resources/titlebar.gif" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../experiments/gps_experiment/doc/resources/titlebar_end.gif" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../experiments/gps_experiment/src/com/google/gson/internal/$Gson$Preconditions.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../experiments/gps_experiment/src/com/google/gson/internal/$Gson$Types.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../experiments/gps_experiment/.classpath" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../experiments/gps_experiment/bin/.gitignore" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../experiments/gps_experiment/.project" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../experiments/gps_experiment/AndroidManifest.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../experiments/gps_experiment/bin/AndroidManifest.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../experiments/gps_experiment/src/com/google/gson/internal/bind/ArrayTypeAdapter.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../experiments/gps_experiment/doc/org/ambientdynamix/contextplugins/batterylevel/BatteryLevelInfo.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../experiments/gps_experiment/doc/org/ambientdynamix/contextplugins/batterylevel/class-use/BatteryLevelInfo.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../experiments/gps_experiment/doc/org/ambientdynamix/contextplugins/batterylevel/BatteryLevelPluginRuntime.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../experiments/gps_experiment/doc/org/ambientdynamix/contextplugins/batterylevel/class-use/BatteryLevelPluginRuntime.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../experiments/gps_experiment/gen/org/ambientdynamix/contextplugins/myExperimentPlugin/BuildConfig.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../experiments/gps_experiment/src/com/google/gson/internal/bind/CollectionTypeAdapterFactory.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../experiments/gps_experiment/src/com/google/gson/internal/ConstructorConstructor.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../experiments/gps_experiment/src/com/google/gson/internal/bind/DateTypeAdapter.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../experiments/gps_experiment/src/com/google/gson/DefaultDateTypeAdapter.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../experiments/gps_experiment/src/com/google/gson/internal/Excluder.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../experiments/gps_experiment/src/com/google/gson/ExclusionStrategy.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../experiments/gps_experiment/bin/aidl/org/ambientdynamix/contextplugins/gps_experiment/ExperimentPluginInfo.aidl" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../experiments/gps_experiment/bin/aidl/org/ambientdynamix/contextplugins/myExperimentPlugin/ExperimentPluginInfo.aidl" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../experiments/gps_experiment/src/org/ambientdynamix/contextplugins/gps_experiment/ExperimentPluginInfo.aidl" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../experiments/gps_experiment/src/org/ambientdynamix/contextplugins/gps_experiment/ExperimentPluginInfo.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../experiments/gps_experiment/src/com/google/gson/annotations/Expose.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../experiments/gps_experiment/src/com/google/gson/FieldAttributes.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../experiments/gps_experiment/src/com/google/gson/FieldNamingPolicy.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../experiments/gps_experiment/src/com/google/gson/FieldNamingStrategy.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../experiments/gps_experiment/src/com/google/gson/Gson.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../experiments/gps_experiment/src/com/google/gson/GsonBuilder.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../experiments/gps_experiment/doc/org/ambientdynamix/contextplugins/batterylevel/IBatteryLevelInfo.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../experiments/gps_experiment/doc/org/ambientdynamix/contextplugins/batterylevel/class-use/IBatteryLevelInfo.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../experiments/gps_experiment/src/org/ambientdynamix/contextplugins/gps_experiment/IExperimentPluginInfo.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../experiments/gps_experiment/src/com/google/gson/InstanceCreator.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../experiments/gps_experiment/src/com/google/gson/JsonArray.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../experiments/gps_experiment/src/com/google/gson/JsonDeserializationContext.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../experiments/gps_experiment/src/com/google/gson/JsonDeserializer.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../experiments/gps_experiment/src/com/google/gson/JsonElement.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../experiments/gps_experiment/src/com/google/gson/JsonIOException.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../experiments/gps_experiment/src/com/google/gson/JsonNull.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../experiments/gps_experiment/src/com/google/gson/JsonObject.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../experiments/gps_experiment/src/com/google/gson/JsonParseException.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../experiments/gps_experiment/src/com/google/gson/JsonParser.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../experiments/gps_experiment/src/com/google/gson/JsonPrimitive.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../experiments/gps_experiment/src/com/google/gson/stream/JsonReader.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../experiments/gps_experiment/src/com/google/gson/internal/JsonReaderInternalAccess.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../experiments/gps_experiment/src/com/google/gson/stream/JsonScope.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../experiments/gps_experiment/src/com/google/gson/JsonSerializationContext.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../experiments/gps_experiment/src/com/google/gson/JsonSerializer.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../experiments/gps_experiment/src/com/google/gson/JsonStreamParser.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../experiments/gps_experiment/src/com/google/gson/JsonSyntaxException.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../experiments/gps_experiment/src/com/google/gson/stream/JsonToken.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../experiments/gps_experiment/src/com/google/gson/internal/bind/JsonTreeReader.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../experiments/gps_experiment/src/com/google/gson/internal/bind/JsonTreeWriter.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../experiments/gps_experiment/src/com/google/gson/stream/JsonWriter.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../experiments/gps_experiment/src/com/google/gson/internal/LazilyParsedNumber.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../experiments/gps_experiment/src/com/google/gson/internal/LinkedTreeMap.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../experiments/gps_experiment/src/com/google/gson/LongSerializationPolicy.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../experiments/gps_experiment/META-INF/MANIFEST.MF" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../experiments/gps_experiment/src/com/google/gson/stream/MalformedJsonException.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../experiments/gps_experiment/src/com/google/gson/internal/bind/MapTypeAdapterFactory.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../experiments/gps_experiment/.externalToolBuilders/New_Builder.launch" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../experiments/gps_experiment/src/com/google/gson/internal/ObjectConstructor.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../experiments/gps_experiment/src/com/google/gson/internal/bind/ObjectTypeAdapter.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../experiments/gps_experiment/doc/org/ambientdynamix/contextplugins/batterylevel/PluginFactory.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../experiments/gps_experiment/doc/org/ambientdynamix/contextplugins/batterylevel/class-use/PluginFactory.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../experiments/gps_experiment/src/org/ambientdynamix/contextplugins/gps_experiment/PluginFactory.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../experiments/gps_experiment/src/com/google/gson/internal/Primitives.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../experiments/gps_experiment/gen/org/ambientdynamix/contextplugins/myExperimentPlugin/R.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../experiments/gps_experiment/src/com/google/gson/internal/bind/ReflectiveTypeAdapterFactory.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../experiments/gps_experiment/src/com/google/gson/annotations/SerializedName.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../experiments/gps_experiment/src/com/google/gson/annotations/Since.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../experiments/gps_experiment/src/com/google/gson/internal/bind/SqlDateTypeAdapter.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../experiments/gps_experiment/src/com/google/gson/internal/Streams.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../experiments/gps_experiment/src/com/google/gson/internal/bind/TimeTypeAdapter.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../experiments/gps_experiment/src/com/google/gson/TreeTypeAdapter.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../experiments/gps_experiment/src/com/google/gson/TypeAdapter.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../experiments/gps_experiment/src/com/google/gson/TypeAdapterFactory.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../experiments/gps_experiment/src/com/google/gson/internal/bind/TypeAdapterRuntimeTypeWrapper.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../experiments/gps_experiment/src/com/google/gson/internal/bind/TypeAdapters.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../experiments/gps_experiment/src/com/google/gson/reflect/TypeToken.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../experiments/gps_experiment/src/com/google/gson/internal/UnsafeAllocator.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../experiments/gps_experiment/src/com/google/gson/annotations/Until.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../experiments/gps_experiment/doc/allclasses-frame.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../experiments/gps_experiment/doc/allclasses-noframe.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../experiments/gps_experiment/antbuild.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../experiments/gps_experiment/build.properties" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../experiments/gps_experiment/doc/constant-values.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../experiments/gps_experiment/doc/deprecated-list.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../experiments/gps_experiment/src/org/ambientdynamix/contextplugins/gps_experiment/gps_experiment.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../experiments/gps_experiment/doc/help-doc.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../experiments/gps_experiment/doc/index-files/index-1.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../experiments/gps_experiment/doc/index-files/index-10.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../experiments/gps_experiment/doc/index-files/index-11.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../experiments/gps_experiment/doc/index-files/index-12.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../experiments/gps_experiment/doc/index-files/index-2.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../experiments/gps_experiment/doc/index-files/index-3.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../experiments/gps_experiment/doc/index-files/index-4.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../experiments/gps_experiment/doc/index-files/index-5.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../experiments/gps_experiment/doc/index-files/index-6.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../experiments/gps_experiment/doc/index-files/index-7.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../experiments/gps_experiment/doc/index-files/index-8.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../experiments/gps_experiment/doc/index-files/index-9.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../experiments/gps_experiment/doc/index.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../experiments/gps_experiment/bin/jarlist.cache" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../experiments/gps_experiment/lint.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../sensorPlugins/Open Context Plugin Sdk/lint.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../experiments/gps_experiment/res/layout/main.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../experiments/gps_experiment/Deployment/myExperiment_local_repo.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../experiments/gps_experiment/.settings/org.eclipse.jdt.core.prefs" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../sensorPlugins/GpsPlugin/.settings/org.eclipse.ltk.core.refactoring.prefs" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../experiments/gps_experiment/doc/overview-tree.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../experiments/gps_experiment/doc/org/ambientdynamix/contextplugins/batterylevel/package-frame.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../experiments/gps_experiment/src/com/google/gson/package-info.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../experiments/gps_experiment/src/com/google/gson/annotations/package-info.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../experiments/gps_experiment/src/com/google/gson/internal/package-info.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../experiments/gps_experiment/src/com/google/gson/reflect/package-info.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../experiments/gps_experiment/doc/package-list" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../experiments/gps_experiment/doc/org/ambientdynamix/contextplugins/batterylevel/package-summary.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../experiments/gps_experiment/doc/org/ambientdynamix/contextplugins/batterylevel/package-tree.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../experiments/gps_experiment/doc/org/ambientdynamix/contextplugins/batterylevel/package-use.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../experiments/gps_experiment/proguard.cfg" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../experiments/gps_experiment/project.properties" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../experiments/gps_experiment/doc/serialized-form.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../experiments/gps_experiment/res/values/strings.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../experiments/gps_experiment/doc/stylesheet.css" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../sensorPlugins2/BatteryLevelPlugin-1.0.0b/BatteryLevelPlugin/bin/dexedLibs/annotations-2b2ead248a7c3a0d63ab8d05e2e06295.jar" afterPath="" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../sensorPlugins2/BatteryLevelPlugin-1.0.0b/BatteryLevelPlugin/bin/BatteryLevelPlugin.apk" afterPath="$PROJECT_DIR$/../sensorPlugins2/BatteryLevelPlugin-1.0.0b/BatteryLevelPlugin/bin/BatteryLevelPlugin.apk" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../dynamix_framework/dynamix-framework/bin/classes/org/ambientdynamix/update/contextplugin/ContextPluginBinder.class" afterPath="$PROJECT_DIR$/../dynamix_framework/dynamix-framework/bin/classes/org/ambientdynamix/update/contextplugin/ContextPluginBinder.class" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../dynamix_framework/dynamix-framework/bin/DynamixFramework.apk" afterPath="$PROJECT_DIR$/../dynamix_framework/dynamix-framework/bin/DynamixFramework.apk" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../sensorPlugins/GpsPlugin/bin/classes/org/ambientdynamix/contextplugins/GpsPlugin/GpsPluginInfo.class" afterPath="$PROJECT_DIR$/../sensorPlugins/GpsPlugin/bin/classes/org/ambientdynamix/contextplugins/GpsPlugin/GpsPluginInfo.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../sensorPlugins/GpsPlugin/bin/classes/org/ambientdynamix/contextplugins/GpsPlugin/GpsPluginRuntime$CurrentLocationGps.class" afterPath="$PROJECT_DIR$/../sensorPlugins/GpsPlugin/bin/classes/org/ambientdynamix/contextplugins/GpsPlugin/GpsPluginRuntime$CurrentLocationGps.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../sensorPlugins/GpsPlugin/bin/classes/org/ambientdynamix/contextplugins/GpsPlugin/GpsPluginRuntime.class" afterPath="$PROJECT_DIR$/../sensorPlugins/GpsPlugin/bin/classes/org/ambientdynamix/contextplugins/GpsPlugin/GpsPluginRuntime.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../sensorPlugins/GpsPlugin/bin/classes/org/ambientdynamix/contextplugins/GpsPlugin/IGpsPluginInfo.class" afterPath="$PROJECT_DIR$/../sensorPlugins/GpsPlugin/bin/classes/org/ambientdynamix/contextplugins/GpsPlugin/IGpsPluginInfo.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../sensorPlugins/GpsPlugin/bin/classes/org/ambientdynamix/contextplugins/GpsPlugin/PluginFactory.class" afterPath="$PROJECT_DIR$/../sensorPlugins/GpsPlugin/bin/classes/org/ambientdynamix/contextplugins/GpsPlugin/PluginFactory.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../sensorPlugins/GpsPlugin/bin/classes/org/ambientdynamix/contextplugins/GpsPlugin/R$attr.class" afterPath="$PROJECT_DIR$/../sensorPlugins/GpsPlugin/bin/classes/org/ambientdynamix/contextplugins/GpsPlugin/R$attr.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../sensorPlugins/GpsPlugin/bin/classes/org/ambientdynamix/contextplugins/GpsPlugin/R$drawable.class" afterPath="$PROJECT_DIR$/../sensorPlugins/GpsPlugin/bin/classes/org/ambientdynamix/contextplugins/GpsPlugin/R$drawable.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../sensorPlugins/GpsPlugin/bin/classes/org/ambientdynamix/contextplugins/GpsPlugin/R$layout.class" afterPath="$PROJECT_DIR$/../sensorPlugins/GpsPlugin/bin/classes/org/ambientdynamix/contextplugins/GpsPlugin/R$layout.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../sensorPlugins/GpsPlugin/bin/classes/org/ambientdynamix/contextplugins/GpsPlugin/R$string.class" afterPath="$PROJECT_DIR$/../sensorPlugins/GpsPlugin/bin/classes/org/ambientdynamix/contextplugins/GpsPlugin/R$string.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../sensorPlugins/GpsPlugin/bin/classes/org/ambientdynamix/contextplugins/GpsPlugin/R.class" afterPath="$PROJECT_DIR$/../sensorPlugins/GpsPlugin/bin/classes/org/ambientdynamix/contextplugins/GpsPlugin/R.class" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../dynamix_framework/dynamix-framework/bin/classes/org/ambientdynamix/update/contextplugin/SimpleSourceBase.class" afterPath="$PROJECT_DIR$/../dynamix_framework/dynamix-framework/bin/classes/org/ambientdynamix/update/contextplugin/SimpleSourceBase.class" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../dynamix_framework/dynamix-framework/bin/classes.dex" afterPath="$PROJECT_DIR$/../dynamix_framework/dynamix-framework/bin/classes.dex" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../dynamix_framework/dynamix-framework/bin/resources.ap_" afterPath="$PROJECT_DIR$/../dynamix_framework/dynamix-framework/bin/resources.ap_" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../sensorPlugins/GpsPlugin/.classpath" afterPath="$PROJECT_DIR$/../sensorPlugins/GpsPlugin/.classpath" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../sensorPlugins2/BatteryLevelPlugin-1.0.0b/BatteryLevelPlugin/bin/resources.ap_" afterPath="$PROJECT_DIR$/../sensorPlugins2/BatteryLevelPlugin-1.0.0b/BatteryLevelPlugin/bin/resources.ap_" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../androidExperimentation/src/eu/smartsantander/androidExperimentation/Constants.java" afterPath="$PROJECT_DIR$/../androidExperimentation/src/eu/smartsantander/androidExperimentation/Constants.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../dynamix_framework/dynamix-framework/src/org/ambientdynamix/core/ContextManager.java" afterPath="$PROJECT_DIR$/../dynamix_framework/dynamix-framework/src/org/ambientdynamix/core/ContextManager.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../dynamix_framework/dynamix-framework/src/org/ambientdynamix/update/contextplugin/ContextPluginBinder.java" afterPath="$PROJECT_DIR$/../dynamix_framework/dynamix-framework/src/org/ambientdynamix/update/contextplugin/ContextPluginBinder.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../androidExperimentation/src/eu/smartsantander/androidExperimentation/jsonEntities/Experiment.java" afterPath="$PROJECT_DIR$/../androidExperimentation/src/eu/smartsantander/androidExperimentation/jsonEntities/Experiment.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../sensorPlugins/GpsPlugin/META-INF/MANIFEST.MF" afterPath="$PROJECT_DIR$/../sensorPlugins/GpsPlugin/META-INF/MANIFEST.MF" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../androidExperimentation/src/eu/smartsantander/androidExperimentation/operations/SensorProfiler.java" afterPath="$PROJECT_DIR$/../androidExperimentation/src/eu/smartsantander/androidExperimentation/operations/SensorProfiler.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../dynamix_framework/dynamix-framework/src/org/ambientdynamix/update/contextplugin/SimpleFileSource.java" afterPath="$PROJECT_DIR$/../dynamix_framework/dynamix-framework/src/org/ambientdynamix/update/contextplugin/SimpleFileSource.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../dynamix_framework/dynamix-framework/src/org/ambientdynamix/update/contextplugin/SimpleSourceBase.java" afterPath="$PROJECT_DIR$/../dynamix_framework/dynamix-framework/src/org/ambientdynamix/update/contextplugin/SimpleSourceBase.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../sensorPlugins/GpsPlugin/project.properties" afterPath="$PROJECT_DIR$/../sensorPlugins/GpsPlugin/project.properties" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../androidExperimentation/src/eu/smartsantander/androidExperimentation/tabs/securityTab.java" afterPath="$PROJECT_DIR$/../androidExperimentation/src/eu/smartsantander/androidExperimentation/tabs/securityTab.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../androidExperimentation/src/eu/smartsantander/androidExperimentation/operations/Demon.java" afterPath="$PROJECT_DIR$/../androidExperimentation/src/eu/smartsantander/androidExperimentation/operations/Demon.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../androidExperimentation/src/eu/smartsantander/androidExperimentation/operations/Scheduler.java" afterPath="$PROJECT_DIR$/../androidExperimentation/src/eu/smartsantander/androidExperimentation/operations/Scheduler.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/misc.xml" afterPath="$PROJECT_DIR$/.idea/misc.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
-    <list id="ffed928d-c9fc-443c-9d9a-a806dbe1581e" name="Hibernate altered  Demon registration altered" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../androidExperimentation/.classpath" afterPath="$PROJECT_DIR$/../androidExperimentation/.classpath" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/eu/smartsantander/androidExperimentation/AndroidExperimentationWS.java" afterPath="$PROJECT_DIR$/src/eu/smartsantander/androidExperimentation/AndroidExperimentationWS.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../androidExperimentation/src/eu/smartsantander/androidExperimentation/operations/Demon.java" afterPath="$PROJECT_DIR$/../androidExperimentation/src/eu/smartsantander/androidExperimentation/operations/Demon.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/eu/smartsantander/androidExperimentation/entities/Experiment.java" afterPath="$PROJECT_DIR$/src/eu/smartsantander/androidExperimentation/entities/Experiment.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/eu/smartsantander/androidExperimentation/ModelManager.java" afterPath="$PROJECT_DIR$/src/eu/smartsantander/androidExperimentation/ModelManager.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../androidExperimentation/src/eu/smartsantander/androidExperimentation/operations/Registration.java" afterPath="$PROJECT_DIR$/../androidExperimentation/src/eu/smartsantander/androidExperimentation/operations/Registration.java" />
+    <list id="ffed928d-c9fc-443c-9d9a-a806dbe1581e" name="Hibernate altered  Demon registration altered" comment="" />
+    <list id="c9f92d22-8dd7-4493-ab5e-e87fa2c50b30" name="Rejected commit: Default" comment="experiment plugin plugin installation">
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/web/dynamixRepository/org.ambientdynamix.contextplugins.GpsPlugin_0.9.54.jar" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/web/experimentRepository/org.ambientdynamix.contextplugins.gps_experiment_1.0.0.jar" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/.idea/artifacts/WebService_war_exploded.xml" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/web/dynamixRepository/org.ambientdynamix.contextplugins.GpsPlugin_9.47.1.jar" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/web/dynamixRepository/org.ambientdynamix.contextplugins.WifiPlugin_9.47.1.jar" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/web/dynamixRepository/org.ambientdynamix.contextplugins.WifiScanPlugin_9.47.1.jar" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/web/dynamixRepository/org.ambientdynamix.contextplugins.batteryLevelPlugin_9.47.1.jar" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/web/dynamixRepository/org.ambientdynamix.contextplugins.batteryTemperaturePlugin_9.47.1.jar" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../sensorPlugins/GpsPlugin/lib/org.ambientdynamix.contextplugin.api_v0.9.54.jar" afterPath="" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../sensorPlugins/GpsPlugin/bin/classes/org/ambientdynamix/contextplugins/GpsPlugin/GpsPluginInfo.class" afterPath="$PROJECT_DIR$/../sensorPlugins/GpsPlugin/bin/classes/org/ambientdynamix/contextplugins/GpsPlugin/GpsPluginInfo.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../sensorPlugins/GpsPlugin/bin/classes/org/ambientdynamix/contextplugins/GpsPlugin/GpsPluginRuntime$CurrentLocationGps.class" afterPath="$PROJECT_DIR$/../sensorPlugins/GpsPlugin/bin/classes/org/ambientdynamix/contextplugins/GpsPlugin/GpsPluginRuntime$CurrentLocationGps.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../sensorPlugins/GpsPlugin/bin/classes/org/ambientdynamix/contextplugins/GpsPlugin/GpsPluginRuntime.class" afterPath="$PROJECT_DIR$/../sensorPlugins/GpsPlugin/bin/classes/org/ambientdynamix/contextplugins/GpsPlugin/GpsPluginRuntime.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../sensorPlugins/GpsPlugin/bin/classes/org/ambientdynamix/contextplugins/GpsPlugin/PluginFactory.class" afterPath="$PROJECT_DIR$/../sensorPlugins/GpsPlugin/bin/classes/org/ambientdynamix/contextplugins/GpsPlugin/PluginFactory.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../sensorPlugins/GpsPlugin/.classpath" afterPath="$PROJECT_DIR$/../sensorPlugins/GpsPlugin/.classpath" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/AndroidExperimentationWS.iml" afterPath="$PROJECT_DIR$/AndroidExperimentationWS.iml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../dynamix_framework/dynamix-framework/src/org/ambientdynamix/update/contextplugin/ContextPluginBinder.java" afterPath="$PROJECT_DIR$/../dynamix_framework/dynamix-framework/src/org/ambientdynamix/update/contextplugin/ContextPluginBinder.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../dynamix_framework/dynamix-framework/src/org/ambientdynamix/core/DynamixService.java" afterPath="$PROJECT_DIR$/../dynamix_framework/dynamix-framework/src/org/ambientdynamix/core/DynamixService.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../sensorPlugins/GpsPlugin/META-INF/MANIFEST.MF" afterPath="$PROJECT_DIR$/../sensorPlugins/GpsPlugin/META-INF/MANIFEST.MF" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../sensorPlugins2/BatteryLevelPlugin-1.0.0b/BatteryLevelPlugin/.externalToolBuilders/New_Builder.launch" afterPath="$PROJECT_DIR$/../sensorPlugins2/BatteryLevelPlugin-1.0.0b/BatteryLevelPlugin/.externalToolBuilders/New_Builder.launch" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../dynamix_framework/dynamix-framework/src/org/ambientdynamix/update/contextplugin/SimpleSourceBase.java" afterPath="$PROJECT_DIR$/../dynamix_framework/dynamix-framework/src/org/ambientdynamix/update/contextplugin/SimpleSourceBase.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../sensorPlugins/GpsPlugin/build.properties" afterPath="$PROJECT_DIR$/../sensorPlugins/GpsPlugin/build.properties" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/libraries/dynamixRepository.xml" afterPath="$PROJECT_DIR$/.idea/libraries/dynamixRepository.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/web/dynamixRepository/plugs.xml" afterPath="$PROJECT_DIR$/web/dynamixRepository/plugs.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../sensorPlugins2/BatteryLevelPlugin-1.0.0b/BatteryLevelPlugin/project.properties" afterPath="$PROJECT_DIR$/../sensorPlugins2/BatteryLevelPlugin-1.0.0b/BatteryLevelPlugin/project.properties" />
     </list>
     <ignored path="WebServicesTest.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -224,7 +247,8 @@
     <file path="/experiments-overall.jsp" changelist="4ccbb714-201c-482b-a93f-dd4890c10bc1" time="1378989486240" ignored="false" />
     <file path="$PROJECT_DIR$/web/WEB-INF/web.xml" changelist="4ccbb714-201c-482b-a93f-dd4890c10bc1" time="1378990148183" ignored="false" />
     <file path="$PROJECT_DIR$/META-INF/persistence.xml" changelist="4ccbb714-201c-482b-a93f-dd4890c10bc1" time="1378990148183" ignored="false" />
-    <file path="/Dummy.txt" changelist="4ccbb714-201c-482b-a93f-dd4890c10bc1" time="1379081511887" ignored="false" />
+    <file path="/Dummy.txt" changelist="4ccbb714-201c-482b-a93f-dd4890c10bc1" time="1379343360897" ignored="false" />
+    <file path="/plugs.xml" changelist="4ccbb714-201c-482b-a93f-dd4890c10bc1" time="1379333920417" ignored="false" />
     <option name="TRACKING_ENABLED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -262,6 +286,21 @@
         <option name="LOG_MESSAGE" value="" />
       </breakpoint>
       <breakpoint url="file://$PROJECT_DIR$/src/eu/smartsantander/androidExperimentation/AndroidExperimentationWS.java" line="26" class="eu.smartsantander.androidExperimentation.AndroidExperimentationWS" package="eu.smartsantander.androidExperimentation">
+        <option name="ENABLED" value="true" />
+        <option name="LOG_ENABLED" value="false" />
+        <option name="LOG_EXPRESSION_ENABLED" value="false" />
+        <option name="REMOVE_AFTER_HIT" value="false" />
+        <option name="SUSPEND_POLICY" value="SuspendAll" />
+        <option name="SUSPEND" value="true" />
+        <option name="COUNT_FILTER_ENABLED" value="false" />
+        <option name="COUNT_FILTER" value="0" />
+        <option name="CONDITION_ENABLED" value="true" />
+        <option name="CLASS_FILTERS_ENABLED" value="false" />
+        <option name="INSTANCE_FILTERS_ENABLED" value="false" />
+        <option name="CONDITION" value="" />
+        <option name="LOG_MESSAGE" value="" />
+      </breakpoint>
+      <breakpoint url="file://$PROJECT_DIR$/src/eu/smartsantander/androidExperimentation/AndroidExperimentationWS.java" line="16" class="eu.smartsantander.androidExperimentation.AndroidExperimentationWS" package="eu.smartsantander.androidExperimentation">
         <option name="ENABLED" value="true" />
         <option name="LOG_ENABLED" value="false" />
         <option name="LOG_EXPRESSION_ENABLED" value="false" />
@@ -321,17 +360,7 @@
     <favorites_list name="WebServicesTest" />
   </component>
   <component name="FileEditorManager">
-    <leaf>
-      <file leaf-file-name="plugs.xml" pinned="false" current="true" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/web/dynamixRepository/plugs.xml">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="74" column="1" selection-start="2972" selection-end="2972" vertical-scroll-proportion="1.630719">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-    </leaf>
+    <leaf />
   </component>
   <component name="FindManager">
     <FindUsagesManager>
@@ -350,7 +379,6 @@
   <component name="IdeDocumentHistory">
     <option name="changedFiles">
       <list>
-        <option value="$PROJECT_DIR$/web/experiments.jsp" />
         <option value="$PROJECT_DIR$/web/style/style.css" />
         <option value="$PROJECT_DIR$/web/includes/header.html" />
         <option value="$PROJECT_DIR$/web/index.jsp" />
@@ -359,13 +387,14 @@
         <option value="$PROJECT_DIR$/web/about.jsp" />
         <option value="$PROJECT_DIR$/web/experiments-overall.jsp" />
         <option value="$PROJECT_DIR$/src/hibernate.cfg.xml" />
-        <option value="dbtable:/adf69c6a/ec19ba82-120f-43e6-96c5-26912937ccef/androidExperimentation..smartphones" />
-        <option value="dbtable:/adf69c6a/ec19ba82-120f-43e6-96c5-26912937ccef/androidExperimentation..experiments" />
         <option value="$PROJECT_DIR$/src/eu/smartsantander/androidExperimentation/AndroidExperimentationWS.java" />
         <option value="$PROJECT_DIR$/src/eu/smartsantander/androidExperimentation/ModelManager.java" />
         <option value="$PROJECT_DIR$/src/eu/smartsantander/androidExperimentation/entities/Experiment.java" />
+        <option value="dbtable:/adf69c6a/ec19ba82-120f-43e6-96c5-26912937ccef/androidExperimentation..smartphones" />
         <option value="dbtable:/adf69c6a/ec19ba82-120f-43e6-96c5-26912937ccef/androidExperimentation..plugins" />
         <option value="$PROJECT_DIR$/web/dynamixRepository/plugs.xml" />
+        <option value="dbtable:/adf69c6a/ec19ba82-120f-43e6-96c5-26912937ccef/androidExperimentation..experiments" />
+        <option value="dbtable:/adf69c6a/ec19ba82-120f-43e6-96c5-26912937ccef/androidExperimentation..results" />
       </list>
     </option>
   </component>
@@ -416,7 +445,7 @@
     <ConfirmationsSetting value="0" id="Remove" />
   </component>
   <component name="ProjectReloadState">
-    <option name="STATE" value="2" />
+    <option name="STATE" value="0" />
   </component>
   <component name="ProjectView">
     <navigator currentView="Scope" currentSubView="All" proportions="" version="1" splitterProportion="0.5">
@@ -431,6 +460,16 @@
       <sortByType />
     </navigator>
     <panes>
+      <pane id="Scope">
+        <subPane subId="All">
+          <PATH>
+            <PATH_ELEMENT USER_OBJECT="Root">
+              <option name="myItemId" value="" />
+              <option name="myItemType" value="" />
+            </PATH_ELEMENT>
+          </PATH>
+        </subPane>
+      </pane>
       <pane id="PackagesPane">
         <subPane>
           <PATH>
@@ -455,16 +494,6 @@
             <PATH_ELEMENT>
               <option name="myItemId" value="eu.smartsantander.androidExperimentation" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PackageElementNode" />
-            </PATH_ELEMENT>
-          </PATH>
-        </subPane>
-      </pane>
-      <pane id="Scope">
-        <subPane subId="All">
-          <PATH>
-            <PATH_ELEMENT USER_OBJECT="Root">
-              <option name="myItemId" value="" />
-              <option name="myItemType" value="" />
             </PATH_ELEMENT>
           </PATH>
         </subPane>
@@ -507,7 +536,7 @@
   </component>
   <component name="PropertiesComponent">
     <property name="GenerateAntBuildDialog.generateIdeaHomeProperty" value="false" />
-    <property name="project.structure.last.edited" value="Modules" />
+    <property name="project.structure.last.edited" value="Artifacts" />
     <property name="project.structure.proportion" value="0.15" />
     <property name="options.splitter.main.proportions" value="0.3" />
     <property name="Repository.Attach.JavaDocs" value="false" />
@@ -515,7 +544,7 @@
     <property name="recentsLimit" value="5" />
     <property name="MemberChooser.sorted" value="false" />
     <property name="GenerateAntBuildDialog.inclineRuntiemClasspath" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/../.." />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/web" />
     <property name="GenerateAntBuildDialog.outputFileNameProperty" value="webservicestest" />
     <property name="Database.TableEditor.Splitter" value="0.9" />
     <property name="GenerateAntBuildDialog.enableUiFormCompile" value="true" />
@@ -543,17 +572,13 @@
       <recent name="eu.smartsantander.androidExperimentation" />
     </key>
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/web/experimentRepository" />
+      <recent name="$PROJECT_DIR$/web/dynamixRepository" />
       <recent name="$PROJECT_DIR$/web" />
       <recent name="$PROJECT_DIR$/web/style" />
       <recent name="$PROJECT_DIR$/src/eu/smartsantander/androidExperimentation" />
-      <recent name="$PROJECT_DIR$/src/jsonEntities" />
-      <recent name="$PROJECT_DIR$/lib" />
     </key>
     <key name="CreateClassDialog.RecentsKey">
-      <recent name="helloworld" />
-    </key>
-    <key name="ImportMappingsDialog.RecentPackages">
-      <recent name="eu.smartsantander.androidExperimentation" />
       <recent name="helloworld" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
@@ -562,6 +587,10 @@
       <recent name="$PROJECT_DIR$/src/eu/smartsantander/androidExperimentation/entities" />
       <recent name="$PROJECT_DIR$/lib" />
       <recent name="$PROJECT_DIR$/web" />
+    </key>
+    <key name="ImportMappingsDialog.RecentPackages">
+      <recent name="eu.smartsantander.androidExperimentation" />
+      <recent name="helloworld" />
     </key>
   </component>
   <component name="RunManager" selected="Tomcat Server.Tomcat 7.0">
@@ -956,18 +985,19 @@
     <frame x="0" y="24" width="1920" height="1032" extended-state="6" />
     <editor active="false" />
     <layout>
-      <window_info id="Changes" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.6177474" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.6177474" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="JetGradle" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="Persistence" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.29868075" sideWeight="0.27531284" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
-      <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.11497326" sideWeight="0.38225257" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.11497326" sideWeight="0.4050057" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3606371" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.47440273" sideWeight="0.9139038" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="IDEtalk Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="15" side_tool="false" content_ui="tabs" />
-      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32982457" sideWeight="0.5" order="8" side_tool="true" content_ui="tabs" />
+      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.5949943" sideWeight="0.5" order="8" side_tool="true" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.24878444" sideWeight="0.67190224" order="4" side_tool="true" content_ui="tabs" />
       <window_info id="IDEtalk" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
-      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.16648291" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
+      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4334471" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
+      <window_info id="Messages" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.5949943" sideWeight="0.5" order="11" side_tool="false" content_ui="tabs" />
       <window_info id="CDI" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Web" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.24878444" sideWeight="0.67190224" order="3" side_tool="true" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32764506" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
@@ -975,7 +1005,7 @@
       <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="SLIDING" type="SLIDING" visible="false" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Application Servers" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32536975" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.2989305" sideWeight="0.38225257" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.2090909" sideWeight="0.4050057" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32668883" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="SVN Repositories" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32992035" sideWeight="0.5" order="16" side_tool="false" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
@@ -984,7 +1014,6 @@
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4977221" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Hibernate Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3287827" sideWeight="0.5" order="13" side_tool="false" content_ui="tabs" />
-      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.5949943" sideWeight="0.5" order="11" side_tool="false" content_ui="tabs" />
       <window_info id="Dependency Viewer" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.8807018" sideWeight="0.5" order="14" side_tool="false" content_ui="tabs" />
       <window_info id="soapUI Navigator" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.39965096" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
@@ -1032,7 +1061,7 @@
     <option name="WRAP_WHEN_TYPING_REACHES_RIGHT_MARGIN" value="false" />
     <option name="FORCE_NON_EMPTY_COMMENT" value="false" />
     <option name="CLEAR_INITIAL_COMMIT_MESSAGE" value="false" />
-    <option name="LAST_COMMIT_MESSAGE" value="Hibernate altered&#10;&#10;Demon registration altered" />
+    <option name="LAST_COMMIT_MESSAGE" value="experiment plugin plugin installation" />
     <option name="MAKE_NEW_CHANGELIST_ACTIVE" value="false" />
     <option name="OPTIMIZE_IMPORTS_BEFORE_PROJECT_COMMIT" value="false" />
     <option name="CHECK_FILES_UP_TO_DATE_BEFORE_COMMIT" value="false" />
@@ -1050,6 +1079,7 @@
     <MESSAGE value="gitignore" />
     <MESSAGE value="general config" />
     <MESSAGE value="Hibernate altered&#10;&#10;Demon registration altered" />
+    <MESSAGE value="experiment plugin plugin installation" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -1107,33 +1137,6 @@
     <option name="FILTER_TARGETS" value="false" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/web/includes/header.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="6" column="83" selection-start="310" selection-end="310" vertical-scroll-proportion="0.0" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/web/style/santander-template.css">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="7" column="35" selection-start="120" selection-end="121" vertical-scroll-proportion="0.0" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/web/about.jsp">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="32" column="53" selection-start="2722" selection-end="2722" vertical-scroll-proportion="0.0" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/web/experiments-overall.jsp">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="22" column="7" selection-start="732" selection-end="732" vertical-scroll-proportion="1.0216718" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/hibernate.cfg.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="6" column="73" selection-start="318" selection-end="318" vertical-scroll-proportion="0.1863354">
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="jar://$PROJECT_DIR$/lib/gson-1.1.jar!/com/google/gson/Gson.class">
       <provider selected="true" editor-type-id="text-editor">
         <state line="45" column="18" selection-start="2703" selection-end="2703" vertical-scroll-proportion="-12.96" />
@@ -1142,14 +1145,6 @@
     <entry file="jar://$PROJECT_DIR$/lib/hibernate-core-4.2.2.Final.jar!/org/hibernate/Session.class">
       <provider selected="true" editor-type-id="text-editor">
         <state line="75" column="9" selection-start="2352" selection-end="2352" vertical-scroll-proportion="0.3512304" />
-      </provider>
-    </entry>
-    <entry file="dbDummy://dbtable:/adf69c6a/ec19ba82-120f-43e6-96c5-26912937ccef/androidExperimentation..smartphones">
-      <provider editor-type-id="text-editor">
-        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" />
-      </provider>
-      <provider selected="true" editor-type-id="com.intellij.persistence.database.editor.DatabaseTableFileEditorProvider">
-        <state />
       </provider>
     </entry>
     <entry file="jar://$USER_HOME$/programs/jdk1.6.0_45/src.zip!/java/util/Date.java">
@@ -1178,24 +1173,42 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/eu/smartsantander/androidExperimentation/AndroidExperimentationWS.java">
+    <entry file="file://$PROJECT_DIR$/web/experiment.jsp">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="28" column="41" selection-start="941" selection-end="941" vertical-scroll-proportion="0.46632123">
+        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0">
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="dbDummy://dbtable:/adf69c6a/ec19ba82-120f-43e6-96c5-26912937ccef/androidExperimentation..plugins">
+    <entry file="file://$PROJECT_DIR$/web/showcase.jsp">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/web/includes/header.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="dbDummy://dbtable:/adf69c6a/ec19ba82-120f-43e6-96c5-26912937ccef/androidExperimentation..smartphones">
       <provider editor-type-id="text-editor">
-        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" />
+        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
       </provider>
       <provider selected="true" editor-type-id="com.intellij.persistence.database.editor.DatabaseTableFileEditorProvider">
         <state />
       </provider>
     </entry>
-    <entry file="dbDummy://dbtable:/adf69c6a/ec19ba82-120f-43e6-96c5-26912937ccef/androidExperimentation..experiments">
+    <entry file="dbDummy://dbtable:/adf69c6a/ec19ba82-120f-43e6-96c5-26912937ccef/androidExperimentation..plugins">
       <provider editor-type-id="text-editor">
-        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" />
+        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
       </provider>
       <provider selected="true" editor-type-id="com.intellij.persistence.database.editor.DatabaseTableFileEditorProvider">
         <state />
@@ -1203,7 +1216,41 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/web/dynamixRepository/plugs.xml">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="74" column="1" selection-start="2972" selection-end="2972" vertical-scroll-proportion="1.630719">
+        <state line="14" column="76" selection-start="599" selection-end="599" vertical-scroll-proportion="0.33546326">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="dbDummy://dbtable:/adf69c6a/ec19ba82-120f-43e6-96c5-26912937ccef/androidExperimentation..results">
+      <provider editor-type-id="text-editor">
+        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+      <provider selected="true" editor-type-id="com.intellij.persistence.database.editor.DatabaseTableFileEditorProvider">
+        <state />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/eu/smartsantander/androidExperimentation/AndroidExperimentationWS.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="38" column="56" selection-start="1276" selection-end="1276" vertical-scroll-proportion="1.1425061">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="dbDummy://dbtable:/adf69c6a/ec19ba82-120f-43e6-96c5-26912937ccef/androidExperimentation..experiments">
+      <provider editor-type-id="text-editor">
+        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+      <provider selected="true" editor-type-id="com.intellij.persistence.database.editor.DatabaseTableFileEditorProvider">
+        <state />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/../dynamix_framework/dynamix-framework/src/org/ambientdynamix/update/contextplugin/SimpleSourceBase.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="23" column="11" selection-start="804" selection-end="804" vertical-scroll-proportion="0.46875">
           <folding />
         </state>
       </provider>
@@ -1285,7 +1332,7 @@
       </state>
       <state key="ProjectLibrariesConfigurable.UI">
         <settings>
-          <last-edited>log4j-1.2.17</last-edited>
+          <last-edited>dynamixRepository</last-edited>
           <splitter-proportions>
             <option name="proportions">
               <list>
