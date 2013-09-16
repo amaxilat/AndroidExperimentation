@@ -11,12 +11,38 @@
 
 <h2>Current Experiment</h2>
 
-<h3>Experiment General Information</h3>
-
-<h3>Plugins used by the current experiment</h3>
 <%
     Experiment experiment = ModelManager.getExperiment();
 %>
+
+<h3>Experiment General Information</h3>
+
+<div class="datagrid">
+    <table>
+        <thead>
+        <tr>
+            <th>Description</th>
+            <td></td>
+        </tr>
+        <tr>
+            <th>Actual running time</th>
+            <td></td>
+        </tr>
+        <tr>
+            <th>Submitted at</th>
+            <td></td>
+        </tr>
+        <tr>
+            <th>Data size produced</th>
+            <td></td>
+        </tr>
+        </thead>
+     </table>
+
+</div>
+
+
+<h3>Plugins used by the current experiment</h3>
 
 <div class="datagrid">
     <table>
@@ -32,7 +58,7 @@
             </td>
         </tr>
         <tr>
-            <th>ContextType</th>
+            <th>Context Type</th>
             <td><%= experiment.getContextType()%>
             </td>
         </tr>
@@ -52,7 +78,7 @@
             </td>
         </tr>
         <tr>
-            <th>SensorDependencies</th>
+            <th>Sensor Dependencies</th>
             <td><%= experiment.getSensorDependencies()%>
             </td>
         </tr>
