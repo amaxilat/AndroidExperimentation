@@ -48,7 +48,7 @@ public class AndroidExperimentationWS {
         Smartphone smartphone = gson.fromJson(smartphoneJson, Smartphone.class);
         Experiment exp = ModelManager.getExperiment(smartphone);
         if (exp == null) return "0";
-        return gson.toJson(smartphone, Smartphone.class);
+        return gson.toJson(exp, Experiment.class);
     }
 
     @WebMethod

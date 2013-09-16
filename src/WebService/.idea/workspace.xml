@@ -5,15 +5,176 @@
       <artifact name="WebServicesTest:war" />
     </artifacts-to-build>
   </component>
-  <component name="BookmarkManager">
-    <bookmark url="file://$PROJECT_DIR$/src/eu/smartsantander/androidExperimentation/entities/Experiment.java" description="private int id;" line="12" />
-  </component>
   <component name="ChangeListManager">
-    <list default="true" id="4ccbb714-201c-482b-a93f-dd4890c10bc1" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/web/showcase.jsp" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/web/experiment.jsp" afterPath="$PROJECT_DIR$/web/experiment.jsp" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/web/includes/header.html" afterPath="$PROJECT_DIR$/web/includes/header.html" />
+    <list default="true" id="4ccbb714-201c-482b-a93f-dd4890c10bc1" name="Default" comment="general config">
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../sensorPlugins2/BatteryLevelPlugin-1.0.0b/BatteryLevelPlugin/bin/classes/org/ambientdynamix/contextplugins/batterylevel/BatteryLevelInfo$1.class" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../sensorPlugins2/BatteryLevelPlugin-1.0.0b/BatteryLevelPlugin/bin/classes/org/ambientdynamix/contextplugins/batterylevel/BatteryLevelInfo.class" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../sensorPlugins2/BatteryLevelPlugin-1.0.0b.zip" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../sensorPlugins2/BatteryLevelPlugin-1.0.0b/BatteryLevelPlugin/bin/BatteryLevelPlugin.apk" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../sensorPlugins2/BatteryLevelPlugin-1.0.0b/BatteryLevelPlugin/bin/classes/org/ambientdynamix/contextplugins/batterylevel/BatteryLevelPluginRuntime$1.class" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../sensorPlugins2/BatteryLevelPlugin-1.0.0b/BatteryLevelPlugin/bin/classes/org/ambientdynamix/contextplugins/batterylevel/BatteryLevelPluginRuntime.class" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../sensorPlugins2/BatteryLevelPlugin-1.0.0b/BatteryLevelPlugin/bin/classes/org/ambientdynamix/contextplugins/batterylevel/BuildConfig.class" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../dynamix_framework/dynamix-framework/bin/classes/eu/smartsantander/androidExperimentation/Constants.class" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../dynamix_framework/dynamix-framework/bin/classes/eu/smartsantander/androidExperimentation/jsonEntities/Experiment.class" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../sensorPlugins2/BatteryLevelPlugin-1.0.0b/BatteryLevelPlugin/bin/classes/org/ambientdynamix/contextplugins/batterylevel/IBatteryLevelInfo.class" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../sensorPlugins2/OpenContextPluginSDK-0.9.54.zip" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../dynamix_framework/dynamix-framework/bin/classes/eu/smartsantander/androidExperimentation/jsonEntities/Plugin.class" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../sensorPlugins2/BatteryLevelPlugin-1.0.0b/BatteryLevelPlugin/bin/classes/org/ambientdynamix/contextplugins/batterylevel/PluginFactory.class" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../dynamix_framework/dynamix-framework/bin/classes/eu/smartsantander/androidExperimentation/jsonEntities/PluginList.class" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../sensorPlugins2/BatteryLevelPlugin-1.0.0b/BatteryLevelPlugin/bin/classes/org/ambientdynamix/contextplugins/batterylevel/R$attr.class" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../sensorPlugins2/BatteryLevelPlugin-1.0.0b/BatteryLevelPlugin/bin/classes/org/ambientdynamix/contextplugins/batterylevel/R$drawable.class" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../sensorPlugins2/BatteryLevelPlugin-1.0.0b/BatteryLevelPlugin/bin/classes/org/ambientdynamix/contextplugins/batterylevel/R$layout.class" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../sensorPlugins2/BatteryLevelPlugin-1.0.0b/BatteryLevelPlugin/bin/classes/org/ambientdynamix/contextplugins/batterylevel/R$string.class" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../sensorPlugins2/BatteryLevelPlugin-1.0.0b/BatteryLevelPlugin/bin/classes/org/ambientdynamix/contextplugins/batterylevel/R.class" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../dynamix_framework/dynamix-framework/bin/classes/eu/smartsantander/androidExperimentation/jsonEntities/Report.class" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../dynamix_framework/dynamix-framework/bin/classes/eu/smartsantander/androidExperimentation/jsonEntities/Result.class" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../dynamix_framework/dynamix-framework/bin/classes/eu/smartsantander/androidExperimentation/jsonEntities/Smartphone.class" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../sensorPlugins2/BatteryLevelPlugin-1.0.0b/BatteryLevelPlugin/assets/agt_web.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../sensorPlugins2/BatteryLevelPlugin-1.0.0b/BatteryLevelPlugin/bin/dexedLibs/annotations-2b2ead248a7c3a0d63ab8d05e2e06295.jar" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../sensorPlugins2/BatteryLevelPlugin-1.0.0b/BatteryLevelPlugin/doc/resources/background.gif" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../sensorPlugins2/BatteryLevelPlugin-1.0.0b/BatteryLevelPlugin/bin/classes.dex" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../sensorPlugins2/Open Context Plugin Sdk/res/drawable-hdpi/ic_launcher.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../sensorPlugins2/Open Context Plugin Sdk/res/drawable-ldpi/ic_launcher.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../sensorPlugins2/Open Context Plugin Sdk/res/drawable-mdpi/ic_launcher.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../sensorPlugins2/Open Context Plugin Sdk/res/drawable-xhdpi/ic_launcher.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../sensorPlugins2/BatteryLevelPlugin-1.0.0b/BatteryLevelPlugin/bin/res/drawable-hdpi/icon.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../sensorPlugins2/BatteryLevelPlugin-1.0.0b/BatteryLevelPlugin/bin/res/drawable-ldpi/icon.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../sensorPlugins2/BatteryLevelPlugin-1.0.0b/BatteryLevelPlugin/bin/res/drawable-mdpi/icon.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../sensorPlugins2/BatteryLevelPlugin-1.0.0b/BatteryLevelPlugin/res/drawable-hdpi/icon.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../sensorPlugins2/BatteryLevelPlugin-1.0.0b/BatteryLevelPlugin/res/drawable-ldpi/icon.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../sensorPlugins2/BatteryLevelPlugin-1.0.0b/BatteryLevelPlugin/res/drawable-mdpi/icon.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../sensorPlugins/GpsPlugin/lib/org.ambientdynamix.contextplugin.api_v0.9.54.jar" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../sensorPlugins2/Open Context Plugin Sdk/lib/org.ambientdynamix.contextplugin.api_v0.9.54.jar" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../sensorPlugins2/BatteryLevelPlugin-1.0.0b/BatteryLevelPlugin/bin/resources.ap_" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../sensorPlugins2/BatteryLevelPlugin-1.0.0b/BatteryLevelPlugin/doc/resources/tab.gif" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../sensorPlugins2/BatteryLevelPlugin-1.0.0b/BatteryLevelPlugin/doc/resources/titlebar.gif" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../sensorPlugins2/BatteryLevelPlugin-1.0.0b/BatteryLevelPlugin/doc/resources/titlebar_end.gif" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../sensorPlugins2/BatteryLevelPlugin-1.0.0b/BatteryLevelPlugin/.classpath" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../sensorPlugins2/Open Context Plugin Sdk/.gitignore" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../sensorPlugins2/BatteryLevelPlugin-1.0.0b/BatteryLevelPlugin/.project" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../sensorPlugins2/Open Context Plugin Sdk/.project" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../sensorPlugins/GpsPlugin/bin/AndroidManifest.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../sensorPlugins2/BatteryLevelPlugin-1.0.0b/BatteryLevelPlugin/AndroidManifest.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../sensorPlugins2/BatteryLevelPlugin-1.0.0b/BatteryLevelPlugin/bin/AndroidManifest.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../sensorPlugins2/Open Context Plugin Sdk/AndroidManifest.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../sensorPlugins2/BatteryLevelPlugin-1.0.0b/BatteryLevelPlugin/bin/aidl/org/ambientdynamix/contextplugins/batterylevel/BatteryLevelInfo.aidl" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../sensorPlugins2/BatteryLevelPlugin-1.0.0b/BatteryLevelPlugin/bin/classes/org/ambientdynamix/contextplugins/batterylevel/BatteryLevelInfo.aidl" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../sensorPlugins2/BatteryLevelPlugin-1.0.0b/BatteryLevelPlugin/src/org/ambientdynamix/contextplugins/batterylevel/BatteryLevelInfo.aidl" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../sensorPlugins2/BatteryLevelPlugin-1.0.0b/BatteryLevelPlugin/doc/org/ambientdynamix/contextplugins/batterylevel/BatteryLevelInfo.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../sensorPlugins2/BatteryLevelPlugin-1.0.0b/BatteryLevelPlugin/doc/org/ambientdynamix/contextplugins/batterylevel/class-use/BatteryLevelInfo.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../sensorPlugins2/BatteryLevelPlugin-1.0.0b/BatteryLevelPlugin/src/org/ambientdynamix/contextplugins/batterylevel/BatteryLevelInfo.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../sensorPlugins2/BatteryLevelPlugin-1.0.0b/BatteryLevelPlugin/doc/org/ambientdynamix/contextplugins/batterylevel/BatteryLevelPluginRuntime.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../sensorPlugins2/BatteryLevelPlugin-1.0.0b/BatteryLevelPlugin/doc/org/ambientdynamix/contextplugins/batterylevel/class-use/BatteryLevelPluginRuntime.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../sensorPlugins2/BatteryLevelPlugin-1.0.0b/BatteryLevelPlugin/src/org/ambientdynamix/contextplugins/batterylevel/BatteryLevelPluginRuntime.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../sensorPlugins2/BatteryLevelPlugin-1.0.0b/BatteryLevelPlugin/gen/org/ambientdynamix/contextplugins/batterylevel/BuildConfig.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../dynamix_framework/dynamix-framework/src/eu/smartsantander/androidExperimentation/Constants.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../dynamix_framework/dynamix-framework/src/eu/smartsantander/androidExperimentation/jsonEntities/Experiment.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../sensorPlugins/GpsPlugin/bin/aidl/org/ambientdynamix/contextplugins/GpsPlugin/GpsPluginInfo.aidl" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../sensorPlugins2/BatteryLevelPlugin-1.0.0b/BatteryLevelPlugin/doc/org/ambientdynamix/contextplugins/batterylevel/IBatteryLevelInfo.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../sensorPlugins2/BatteryLevelPlugin-1.0.0b/BatteryLevelPlugin/doc/org/ambientdynamix/contextplugins/batterylevel/class-use/IBatteryLevelInfo.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../sensorPlugins2/BatteryLevelPlugin-1.0.0b/BatteryLevelPlugin/src/org/ambientdynamix/contextplugins/batterylevel/IBatteryLevelInfo.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../sensorPlugins2/BatteryLevelPlugin-1.0.0b/BatteryLevelPlugin/META-INF/MANIFEST.MF" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../sensorPlugins2/Open Context Plugin Sdk/META-INF/MANIFEST.MF" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../sensorPlugins2/BatteryLevelPlugin-1.0.0b/BatteryLevelPlugin/.externalToolBuilders/New_Builder.launch" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../dynamix_framework/dynamix-framework/src/eu/smartsantander/androidExperimentation/jsonEntities/Plugin.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../sensorPlugins2/BatteryLevelPlugin-1.0.0b/BatteryLevelPlugin/doc/org/ambientdynamix/contextplugins/batterylevel/PluginFactory.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../sensorPlugins2/BatteryLevelPlugin-1.0.0b/BatteryLevelPlugin/doc/org/ambientdynamix/contextplugins/batterylevel/class-use/PluginFactory.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../sensorPlugins2/BatteryLevelPlugin-1.0.0b/BatteryLevelPlugin/src/org/ambientdynamix/contextplugins/batterylevel/PluginFactory.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../dynamix_framework/dynamix-framework/src/eu/smartsantander/androidExperimentation/jsonEntities/PluginList.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../sensorPlugins2/BatteryLevelPlugin-1.0.0b/BatteryLevelPlugin/gen/org/ambientdynamix/contextplugins/batterylevel/R.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../dynamix_framework/dynamix-framework/src/eu/smartsantander/androidExperimentation/jsonEntities/Report.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../dynamix_framework/dynamix-framework/src/eu/smartsantander/androidExperimentation/jsonEntities/Result.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../dynamix_framework/dynamix-framework/src/eu/smartsantander/androidExperimentation/jsonEntities/Smartphone.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../sensorPlugins2/BatteryLevelPlugin-1.0.0b/BatteryLevelPlugin/doc/allclasses-frame.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../sensorPlugins2/BatteryLevelPlugin-1.0.0b/BatteryLevelPlugin/doc/allclasses-noframe.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../sensorPlugins2/BatteryLevelPlugin-1.0.0b/BatteryLevelPlugin/antbuild.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../sensorPlugins2/BatteryLevelPlugin-1.0.0b/BatteryLevelPlugin/Deployment/battery_level_local_repo.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../sensorPlugins2/BatteryLevelPlugin-1.0.0b/BatteryLevelPlugin/build.properties" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../sensorPlugins2/Open Context Plugin Sdk/build.properties" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../sensorPlugins2/BatteryLevelPlugin-1.0.0b/BatteryLevelPlugin/doc/constant-values.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../sensorPlugins2/BatteryLevelPlugin-1.0.0b/BatteryLevelPlugin/doc/deprecated-list.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../sensorPlugins2/BatteryLevelPlugin-1.0.0b/BatteryLevelPlugin/doc/help-doc.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../sensorPlugins2/BatteryLevelPlugin-1.0.0b/BatteryLevelPlugin/doc/index-files/index-1.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../sensorPlugins2/BatteryLevelPlugin-1.0.0b/BatteryLevelPlugin/doc/index-files/index-10.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../sensorPlugins2/BatteryLevelPlugin-1.0.0b/BatteryLevelPlugin/doc/index-files/index-11.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../sensorPlugins2/BatteryLevelPlugin-1.0.0b/BatteryLevelPlugin/doc/index-files/index-12.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../sensorPlugins2/BatteryLevelPlugin-1.0.0b/BatteryLevelPlugin/doc/index-files/index-2.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../sensorPlugins2/BatteryLevelPlugin-1.0.0b/BatteryLevelPlugin/doc/index-files/index-3.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../sensorPlugins2/BatteryLevelPlugin-1.0.0b/BatteryLevelPlugin/doc/index-files/index-4.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../sensorPlugins2/BatteryLevelPlugin-1.0.0b/BatteryLevelPlugin/doc/index-files/index-5.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../sensorPlugins2/BatteryLevelPlugin-1.0.0b/BatteryLevelPlugin/doc/index-files/index-6.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../sensorPlugins2/BatteryLevelPlugin-1.0.0b/BatteryLevelPlugin/doc/index-files/index-7.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../sensorPlugins2/BatteryLevelPlugin-1.0.0b/BatteryLevelPlugin/doc/index-files/index-8.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../sensorPlugins2/BatteryLevelPlugin-1.0.0b/BatteryLevelPlugin/doc/index-files/index-9.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../sensorPlugins2/BatteryLevelPlugin-1.0.0b/BatteryLevelPlugin/doc/index.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../sensorPlugins/GpsPlugin/bin/jarlist.cache" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../sensorPlugins2/BatteryLevelPlugin-1.0.0b/BatteryLevelPlugin/bin/jarlist.cache" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../sensorPlugins2/BatteryLevelPlugin-1.0.0b/BatteryLevelPlugin/lint.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../sensorPlugins2/BatteryLevelPlugin-1.0.0b/BatteryLevelPlugin/res/layout/main.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../sensorPlugins2/Open Context Plugin Sdk/res/layout/main.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../sensorPlugins2/BatteryLevelPlugin-1.0.0b/BatteryLevelPlugin/.settings/org.eclipse.jdt.core.prefs" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../sensorPlugins2/BatteryLevelPlugin-1.0.0b/BatteryLevelPlugin/doc/overview-tree.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../sensorPlugins2/BatteryLevelPlugin-1.0.0b/BatteryLevelPlugin/doc/org/ambientdynamix/contextplugins/batterylevel/package-frame.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../sensorPlugins2/BatteryLevelPlugin-1.0.0b/BatteryLevelPlugin/doc/package-list" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../sensorPlugins2/BatteryLevelPlugin-1.0.0b/BatteryLevelPlugin/doc/org/ambientdynamix/contextplugins/batterylevel/package-summary.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../sensorPlugins2/BatteryLevelPlugin-1.0.0b/BatteryLevelPlugin/doc/org/ambientdynamix/contextplugins/batterylevel/package-tree.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../sensorPlugins2/BatteryLevelPlugin-1.0.0b/BatteryLevelPlugin/doc/org/ambientdynamix/contextplugins/batterylevel/package-use.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../sensorPlugins2/Open Context Plugin Sdk/proguard-project.txt" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../sensorPlugins2/BatteryLevelPlugin-1.0.0b/BatteryLevelPlugin/proguard.cfg" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../sensorPlugins2/BatteryLevelPlugin-1.0.0b/BatteryLevelPlugin/project.properties" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../sensorPlugins2/release_notes.txt" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../sensorPlugins2/BatteryLevelPlugin-1.0.0b/BatteryLevelPlugin/doc/serialized-form.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../sensorPlugins2/simple_filesystem_repo_example.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../sensorPlugins2/simple_network_repo_example.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../sensorPlugins2/BatteryLevelPlugin-1.0.0b/BatteryLevelPlugin/res/values/strings.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../sensorPlugins2/Open Context Plugin Sdk/res/values/strings.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../sensorPlugins2/BatteryLevelPlugin-1.0.0b/BatteryLevelPlugin/doc/stylesheet.css" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../dynamix_framework/dynamix-framework/bin/classes/org/ambientdynamix/update/contextplugin/MyPlugInfo.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../dynamix_framework/dynamix-framework/bin/classes/org/ambientdynamix/update/contextplugin/Ping.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../dynamix_framework/dynamix-framework/bin/classes/org/ambientdynamix/update/contextplugin/PluginList.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../dynamix_framework/dynamix-framework/src/org/ambientdynamix/update/contextplugin/Constants.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../dynamix_framework/dynamix-framework/src/org/ambientdynamix/update/contextplugin/MyPlugInfo.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../dynamix_framework/dynamix-framework/src/org/ambientdynamix/update/contextplugin/Ping.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../dynamix_framework/dynamix-framework/src/org/ambientdynamix/update/contextplugin/PluginList.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../sensorPlugins/GpsPlugin/.settings/org.eclipse.jdt.core.prefs" afterPath="" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../sensorPlugins/GpsPlugin/bin/classes/org/ambientdynamix/contextplugins/GpsPlugin/BuildConfig.class" afterPath="$PROJECT_DIR$/../sensorPlugins/GpsPlugin/bin/classes/org/ambientdynamix/contextplugins/GpsPlugin/BuildConfig.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../dynamix_framework/dynamix-framework/bin/classes/org/ambientdynamix/core/ContextManager.class" afterPath="$PROJECT_DIR$/../dynamix_framework/dynamix-framework/bin/classes/org/ambientdynamix/core/ContextManager.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../dynamix_framework/dynamix-framework/bin/classes/org/ambientdynamix/update/contextplugin/ContextPluginBinder.class" afterPath="$PROJECT_DIR$/../dynamix_framework/dynamix-framework/bin/classes/org/ambientdynamix/update/contextplugin/ContextPluginBinder.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../dynamix_framework/dynamix-framework/bin/DynamixFramework.apk" afterPath="$PROJECT_DIR$/../dynamix_framework/dynamix-framework/bin/DynamixFramework.apk" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../sensorPlugins/GpsPlugin/bin/classes/org/ambientdynamix/contextplugins/GpsPlugin/GpsPluginInfo.class" afterPath="$PROJECT_DIR$/../sensorPlugins/GpsPlugin/bin/classes/org/ambientdynamix/contextplugins/GpsPlugin/GpsPluginInfo.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../sensorPlugins/GpsPlugin/bin/classes/org/ambientdynamix/contextplugins/GpsPlugin/GpsPluginRuntime$CurrentLocationGps.class" afterPath="$PROJECT_DIR$/../sensorPlugins/GpsPlugin/bin/classes/org/ambientdynamix/contextplugins/GpsPlugin/GpsPluginRuntime$CurrentLocationGps.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../sensorPlugins/GpsPlugin/bin/classes/org/ambientdynamix/contextplugins/GpsPlugin/GpsPluginRuntime.class" afterPath="$PROJECT_DIR$/../sensorPlugins/GpsPlugin/bin/classes/org/ambientdynamix/contextplugins/GpsPlugin/GpsPluginRuntime.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../sensorPlugins/GpsPlugin/bin/classes/org/ambientdynamix/contextplugins/GpsPlugin/IGpsPluginInfo.class" afterPath="$PROJECT_DIR$/../sensorPlugins/GpsPlugin/bin/classes/org/ambientdynamix/contextplugins/GpsPlugin/IGpsPluginInfo.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../sensorPlugins/GpsPlugin/bin/classes/org/ambientdynamix/contextplugins/GpsPlugin/PluginFactory.class" afterPath="$PROJECT_DIR$/../sensorPlugins/GpsPlugin/bin/classes/org/ambientdynamix/contextplugins/GpsPlugin/PluginFactory.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../sensorPlugins/GpsPlugin/bin/classes/org/ambientdynamix/contextplugins/GpsPlugin/R$attr.class" afterPath="$PROJECT_DIR$/../sensorPlugins/GpsPlugin/bin/classes/org/ambientdynamix/contextplugins/GpsPlugin/R$attr.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../sensorPlugins/GpsPlugin/bin/classes/org/ambientdynamix/contextplugins/GpsPlugin/R$drawable.class" afterPath="$PROJECT_DIR$/../sensorPlugins/GpsPlugin/bin/classes/org/ambientdynamix/contextplugins/GpsPlugin/R$drawable.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../sensorPlugins/GpsPlugin/bin/classes/org/ambientdynamix/contextplugins/GpsPlugin/R$layout.class" afterPath="$PROJECT_DIR$/../sensorPlugins/GpsPlugin/bin/classes/org/ambientdynamix/contextplugins/GpsPlugin/R$layout.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../sensorPlugins/GpsPlugin/bin/classes/org/ambientdynamix/contextplugins/GpsPlugin/R$string.class" afterPath="$PROJECT_DIR$/../sensorPlugins/GpsPlugin/bin/classes/org/ambientdynamix/contextplugins/GpsPlugin/R$string.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../sensorPlugins/GpsPlugin/bin/classes/org/ambientdynamix/contextplugins/GpsPlugin/R.class" afterPath="$PROJECT_DIR$/../sensorPlugins/GpsPlugin/bin/classes/org/ambientdynamix/contextplugins/GpsPlugin/R.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../dynamix_framework/dynamix-framework/bin/classes/org/ambientdynamix/update/contextplugin/SimpleSourceBase.class" afterPath="$PROJECT_DIR$/../dynamix_framework/dynamix-framework/bin/classes/org/ambientdynamix/update/contextplugin/SimpleSourceBase.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../dynamix_framework/dynamix-framework/bin/classes.dex" afterPath="$PROJECT_DIR$/../dynamix_framework/dynamix-framework/bin/classes.dex" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../dynamix_framework/dynamix-framework/bin/resources.ap_" afterPath="$PROJECT_DIR$/../dynamix_framework/dynamix-framework/bin/resources.ap_" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../sensorPlugins/GpsPlugin/.classpath" afterPath="$PROJECT_DIR$/../sensorPlugins/GpsPlugin/.classpath" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../androidExperimentation/src/eu/smartsantander/androidExperimentation/Constants.java" afterPath="$PROJECT_DIR$/../androidExperimentation/src/eu/smartsantander/androidExperimentation/Constants.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../dynamix_framework/dynamix-framework/src/org/ambientdynamix/core/ContextManager.java" afterPath="$PROJECT_DIR$/../dynamix_framework/dynamix-framework/src/org/ambientdynamix/core/ContextManager.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../dynamix_framework/dynamix-framework/src/org/ambientdynamix/update/contextplugin/ContextPluginBinder.java" afterPath="$PROJECT_DIR$/../dynamix_framework/dynamix-framework/src/org/ambientdynamix/update/contextplugin/ContextPluginBinder.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../androidExperimentation/src/eu/smartsantander/androidExperimentation/jsonEntities/Experiment.java" afterPath="$PROJECT_DIR$/../androidExperimentation/src/eu/smartsantander/androidExperimentation/jsonEntities/Experiment.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../sensorPlugins/GpsPlugin/META-INF/MANIFEST.MF" afterPath="$PROJECT_DIR$/../sensorPlugins/GpsPlugin/META-INF/MANIFEST.MF" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../androidExperimentation/src/eu/smartsantander/androidExperimentation/operations/SensorProfiler.java" afterPath="$PROJECT_DIR$/../androidExperimentation/src/eu/smartsantander/androidExperimentation/operations/SensorProfiler.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../dynamix_framework/dynamix-framework/src/org/ambientdynamix/update/contextplugin/SimpleFileSource.java" afterPath="$PROJECT_DIR$/../dynamix_framework/dynamix-framework/src/org/ambientdynamix/update/contextplugin/SimpleFileSource.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../dynamix_framework/dynamix-framework/src/org/ambientdynamix/update/contextplugin/SimpleSourceBase.java" afterPath="$PROJECT_DIR$/../dynamix_framework/dynamix-framework/src/org/ambientdynamix/update/contextplugin/SimpleSourceBase.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../sensorPlugins/GpsPlugin/project.properties" afterPath="$PROJECT_DIR$/../sensorPlugins/GpsPlugin/project.properties" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../androidExperimentation/src/eu/smartsantander/androidExperimentation/tabs/securityTab.java" afterPath="$PROJECT_DIR$/../androidExperimentation/src/eu/smartsantander/androidExperimentation/tabs/securityTab.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+    </list>
+    <list id="ffed928d-c9fc-443c-9d9a-a806dbe1581e" name="Hibernate altered  Demon registration altered" comment="">
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../androidExperimentation/.classpath" afterPath="$PROJECT_DIR$/../androidExperimentation/.classpath" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/eu/smartsantander/androidExperimentation/AndroidExperimentationWS.java" afterPath="$PROJECT_DIR$/src/eu/smartsantander/androidExperimentation/AndroidExperimentationWS.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../androidExperimentation/src/eu/smartsantander/androidExperimentation/operations/Demon.java" afterPath="$PROJECT_DIR$/../androidExperimentation/src/eu/smartsantander/androidExperimentation/operations/Demon.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/eu/smartsantander/androidExperimentation/entities/Experiment.java" afterPath="$PROJECT_DIR$/src/eu/smartsantander/androidExperimentation/entities/Experiment.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/eu/smartsantander/androidExperimentation/ModelManager.java" afterPath="$PROJECT_DIR$/src/eu/smartsantander/androidExperimentation/ModelManager.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../androidExperimentation/src/eu/smartsantander/androidExperimentation/operations/Registration.java" afterPath="$PROJECT_DIR$/../androidExperimentation/src/eu/smartsantander/androidExperimentation/operations/Registration.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/web/dynamixRepository/plugs.xml" afterPath="$PROJECT_DIR$/web/dynamixRepository/plugs.xml" />
     </list>
     <ignored path="WebServicesTest.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -28,7 +189,7 @@
     <file path="$PROJECT_DIR$/../untitled/web/WEB-INF/sun-jaxws.xml" changelist="4ccbb714-201c-482b-a93f-dd4890c10bc1" time="1370580376889" ignored="false" />
     <file path="/a.sql" changelist="4ccbb714-201c-482b-a93f-dd4890c10bc1" time="1378296441594" ignored="false" />
     <file path="/dummy.sql" changelist="4ccbb714-201c-482b-a93f-dd4890c10bc1" time="1378296441594" ignored="false" />
-    <file path="/hibernate.cfg.xml" changelist="4ccbb714-201c-482b-a93f-dd4890c10bc1" time="1378991153333" ignored="false" />
+    <file path="/hibernate.cfg.xml" changelist="4ccbb714-201c-482b-a93f-dd4890c10bc1" time="1379067140138" ignored="false" />
     <file path="/PIng.java" changelist="4ccbb714-201c-482b-a93f-dd4890c10bc1" time="1371344258430" ignored="false" />
     <file path="/Smartphone.java" changelist="4ccbb714-201c-482b-a93f-dd4890c10bc1" time="1377698604481" ignored="false" />
     <file path="/Report.java" changelist="4ccbb714-201c-482b-a93f-dd4890c10bc1" time="1378289273275" ignored="false" />
@@ -39,32 +200,31 @@
     <file path="$PROJECT_DIR$/../TestService/.idea/misc.xml" changelist="4ccbb714-201c-482b-a93f-dd4890c10bc1" time="1372057527318" ignored="false" />
     <file path="$PROJECT_DIR$/../TestService/.idea/workspace.xml" changelist="4ccbb714-201c-482b-a93f-dd4890c10bc1" time="1372058103023" ignored="false" />
     <file path="/SmartphonesEntity.java" changelist="4ccbb714-201c-482b-a93f-dd4890c10bc1" time="1372160703885" ignored="false" />
-    <file path="/ModelManager.java" changelist="4ccbb714-201c-482b-a93f-dd4890c10bc1" time="1378732417928" ignored="false" />
-    <file path="/AndroidExperimentationWS.java" changelist="4ccbb714-201c-482b-a93f-dd4890c10bc1" time="1378289156705" ignored="false" />
+    <file path="/ModelManager.java" changelist="4ccbb714-201c-482b-a93f-dd4890c10bc1" time="1379066482716" ignored="false" />
+    <file path="/AndroidExperimentationWS.java" changelist="4ccbb714-201c-482b-a93f-dd4890c10bc1" time="1379065649599" ignored="false" />
     <file path="/PluginList.java" changelist="4ccbb714-201c-482b-a93f-dd4890c10bc1" time="1378283964835" ignored="false" />
-    <file path="/header.html" changelist="4ccbb714-201c-482b-a93f-dd4890c10bc1" time="1379075960959" ignored="false" />
+    <file path="/header.html" changelist="4ccbb714-201c-482b-a93f-dd4890c10bc1" time="1378901240806" ignored="false" />
     <file path="/WSManager.java" changelist="4ccbb714-201c-482b-a93f-dd4890c10bc1" time="1378290946633" ignored="false" />
     <file path="/*.regexp" changelist="4ccbb714-201c-482b-a93f-dd4890c10bc1" time="1378301274316" ignored="false" />
     <file path="/ExperimentsEntity.hbm.xml" changelist="4ccbb714-201c-482b-a93f-dd4890c10bc1" time="1378731768578" ignored="false" />
-    <file path="/Experiment.java" changelist="4ccbb714-201c-482b-a93f-dd4890c10bc1" time="1378731682400" ignored="false" />
+    <file path="/Experiment.java" changelist="4ccbb714-201c-482b-a93f-dd4890c10bc1" time="1379067057111" ignored="false" />
     <file path="/plugins.jsp" changelist="4ccbb714-201c-482b-a93f-dd4890c10bc1" time="1378298865977" ignored="false" />
     <file path="/style.css" changelist="4ccbb714-201c-482b-a93f-dd4890c10bc1" time="1378898225573" ignored="false" />
-    <file path="/experiment.jsp" changelist="4ccbb714-201c-482b-a93f-dd4890c10bc1" time="1379079900688" ignored="false" />
+    <file path="/experiment.jsp" changelist="4ccbb714-201c-482b-a93f-dd4890c10bc1" time="1378299265802" ignored="false" />
     <file path="/upload.jsp" changelist="4ccbb714-201c-482b-a93f-dd4890c10bc1" time="1378299429547" ignored="false" />
     <file path="/experiments.jsp" changelist="4ccbb714-201c-482b-a93f-dd4890c10bc1" time="1378894032268" ignored="false" />
-    <file path="/newExperiment.jsp" changelist="4ccbb714-201c-482b-a93f-dd4890c10bc1" time="1379069868595" ignored="false" />
+    <file path="/newExperiment.jsp" changelist="4ccbb714-201c-482b-a93f-dd4890c10bc1" time="1378728997070" ignored="false" />
     <file path="/info.txt" changelist="4ccbb714-201c-482b-a93f-dd4890c10bc1" time="1378302486219" ignored="false" />
     <file path="/fileUpload.jsp" changelist="4ccbb714-201c-482b-a93f-dd4890c10bc1" time="1378731670714" ignored="false" />
     <file path="/web.xml" changelist="4ccbb714-201c-482b-a93f-dd4890c10bc1" time="1378304886329" ignored="false" />
     <file path="/Utilities.java" changelist="4ccbb714-201c-482b-a93f-dd4890c10bc1" time="1378727448175" ignored="false" />
-    <file path="/santander-template.css" changelist="4ccbb714-201c-482b-a93f-dd4890c10bc1" time="1379058588495" ignored="false" />
-    <file path="/footer.html" changelist="4ccbb714-201c-482b-a93f-dd4890c10bc1" time="1379059499337" ignored="false" />
-    <file path="/about.jsp" changelist="4ccbb714-201c-482b-a93f-dd4890c10bc1" time="1379059211206" ignored="false" />
+    <file path="/santander-template.css" changelist="4ccbb714-201c-482b-a93f-dd4890c10bc1" time="1378903153370" ignored="false" />
+    <file path="/footer.html" changelist="4ccbb714-201c-482b-a93f-dd4890c10bc1" time="1378900644332" ignored="false" />
+    <file path="/about.jsp" changelist="4ccbb714-201c-482b-a93f-dd4890c10bc1" time="1378979844071" ignored="false" />
     <file path="/experiments-overall.jsp" changelist="4ccbb714-201c-482b-a93f-dd4890c10bc1" time="1378989486240" ignored="false" />
     <file path="$PROJECT_DIR$/web/WEB-INF/web.xml" changelist="4ccbb714-201c-482b-a93f-dd4890c10bc1" time="1378990148183" ignored="false" />
     <file path="$PROJECT_DIR$/META-INF/persistence.xml" changelist="4ccbb714-201c-482b-a93f-dd4890c10bc1" time="1378990148183" ignored="false" />
-    <file path="/Dummy.txt" changelist="4ccbb714-201c-482b-a93f-dd4890c10bc1" time="1379055577539" ignored="false" />
-    <file path="/showcase.jsp" changelist="4ccbb714-201c-482b-a93f-dd4890c10bc1" time="1379078703387" ignored="false" />
+    <file path="/Dummy.txt" changelist="4ccbb714-201c-482b-a93f-dd4890c10bc1" time="1379081511887" ignored="false" />
     <option name="TRACKING_ENABLED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -84,6 +244,39 @@
     <sortChildren value="false" />
   </component>
   <component name="DebuggerManager">
+    <ui_properties default_suspend_policy="SuspendAll" default_condition_enabled="true" />
+    <line_breakpoints default_suspend_policy="SuspendAll" default_condition_enabled="true">
+      <breakpoint url="file://$PROJECT_DIR$/src/eu/smartsantander/androidExperimentation/ModelManager.java" line="125" class="eu.smartsantander.androidExperimentation.ModelManager" package="eu.smartsantander.androidExperimentation">
+        <option name="ENABLED" value="true" />
+        <option name="LOG_ENABLED" value="false" />
+        <option name="LOG_EXPRESSION_ENABLED" value="false" />
+        <option name="REMOVE_AFTER_HIT" value="false" />
+        <option name="SUSPEND_POLICY" value="SuspendAll" />
+        <option name="SUSPEND" value="true" />
+        <option name="COUNT_FILTER_ENABLED" value="false" />
+        <option name="COUNT_FILTER" value="0" />
+        <option name="CONDITION_ENABLED" value="true" />
+        <option name="CLASS_FILTERS_ENABLED" value="false" />
+        <option name="INSTANCE_FILTERS_ENABLED" value="false" />
+        <option name="CONDITION" value="" />
+        <option name="LOG_MESSAGE" value="" />
+      </breakpoint>
+      <breakpoint url="file://$PROJECT_DIR$/src/eu/smartsantander/androidExperimentation/AndroidExperimentationWS.java" line="26" class="eu.smartsantander.androidExperimentation.AndroidExperimentationWS" package="eu.smartsantander.androidExperimentation">
+        <option name="ENABLED" value="true" />
+        <option name="LOG_ENABLED" value="false" />
+        <option name="LOG_EXPRESSION_ENABLED" value="false" />
+        <option name="REMOVE_AFTER_HIT" value="false" />
+        <option name="SUSPEND_POLICY" value="SuspendAll" />
+        <option name="SUSPEND" value="true" />
+        <option name="COUNT_FILTER_ENABLED" value="false" />
+        <option name="COUNT_FILTER" value="0" />
+        <option name="CONDITION_ENABLED" value="true" />
+        <option name="CLASS_FILTERS_ENABLED" value="false" />
+        <option name="INSTANCE_FILTERS_ENABLED" value="false" />
+        <option name="CONDITION" value="" />
+        <option name="LOG_MESSAGE" value="" />
+      </breakpoint>
+    </line_breakpoints>
     <breakpoint_any default_suspend_policy="SuspendAll" default_condition_enabled="true">
       <breakpoint>
         <option name="NOTIFY_CAUGHT" value="true" />
@@ -120,24 +313,6 @@
         <option name="LOG_MESSAGE" value="" />
       </breakpoint>
     </breakpoint_any>
-    <ui_properties default_suspend_policy="SuspendAll" default_condition_enabled="true" />
-    <line_breakpoints default_suspend_policy="SuspendAll" default_condition_enabled="true">
-      <breakpoint url="file://$PROJECT_DIR$/src/eu/smartsantander/androidExperimentation/ModelManager.java" line="122" class="eu.smartsantander.androidExperimentation.ModelManager" package="eu.smartsantander.androidExperimentation">
-        <option name="ENABLED" value="true" />
-        <option name="LOG_ENABLED" value="false" />
-        <option name="LOG_EXPRESSION_ENABLED" value="false" />
-        <option name="REMOVE_AFTER_HIT" value="false" />
-        <option name="SUSPEND_POLICY" value="SuspendAll" />
-        <option name="SUSPEND" value="true" />
-        <option name="COUNT_FILTER_ENABLED" value="false" />
-        <option name="COUNT_FILTER" value="0" />
-        <option name="CONDITION_ENABLED" value="true" />
-        <option name="CLASS_FILTERS_ENABLED" value="false" />
-        <option name="INSTANCE_FILTERS_ENABLED" value="false" />
-        <option name="CONDITION" value="" />
-        <option name="LOG_MESSAGE" value="" />
-      </breakpoint>
-    </line_breakpoints>
     <breakpoint_rules />
     <ui_properties />
   </component>
@@ -147,98 +322,11 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="experiments.jsp" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/web/experiments.jsp">
+      <file leaf-file-name="plugs.xml" pinned="false" current="true" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/web/dynamixRepository/plugs.xml">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="0" column="0" selection-start="0" selection-end="192" vertical-scroll-proportion="7.8461537">
+            <state line="74" column="1" selection-start="2972" selection-end="2972" vertical-scroll-proportion="1.630719">
               <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="experiment.jsp" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/web/experiment.jsp">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="38" column="8" selection-start="909" selection-end="909" vertical-scroll-proportion="-11.923077">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="style.css" pinned="false" current="true" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/web/style/style.css">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="newExperiment.jsp" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/web/newExperiment.jsp">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="51" column="23" selection-start="1676" selection-end="1676" vertical-scroll-proportion="-16.346153">
-              <folding>
-                <marker date="1379070071495" expanded="true" signature="1137:1527" placeholder="..." />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="header.html" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/web/includes/header.html">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="38" column="131" selection-start="2341" selection-end="2341" vertical-scroll-proportion="-18.961538">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="showcase.jsp" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/web/showcase.jsp">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="18" column="49" selection-start="386" selection-end="386" vertical-scroll-proportion="-11.769231">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="experiments-overall.jsp" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/web/experiments-overall.jsp">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="22" column="13" selection-start="0" selection-end="732" vertical-scroll-proportion="-14.384615">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="Main.java" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/eu/smartsantander/androidExperimentation/Main.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="11" column="13" selection-start="289" selection-end="289" vertical-scroll-proportion="0.0">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="ModelManager.java" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/eu/smartsantander/androidExperimentation/ModelManager.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="50" column="39" selection-start="1730" selection-end="1730" vertical-scroll-proportion="0.0">
-              <folding>
-                <element signature="imports" expanded="false" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="HibernateUtil.java" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/eu/smartsantander/androidExperimentation/HibernateUtil.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="19" column="13" selection-start="477" selection-end="477" vertical-scroll-proportion="0.0">
-              <folding>
-                <element signature="imports" expanded="false" />
-              </folding>
             </state>
           </provider>
         </entry>
@@ -264,20 +352,20 @@
       <list>
         <option value="$PROJECT_DIR$/web/experiments.jsp" />
         <option value="$PROJECT_DIR$/web/style/style.css" />
+        <option value="$PROJECT_DIR$/web/includes/header.html" />
         <option value="$PROJECT_DIR$/web/index.jsp" />
-        <option value="$PROJECT_DIR$/web/experiments-overall.jsp" />
-        <option value="$PROJECT_DIR$/src/hibernate.cfg.xml" />
-        <option value="$PROJECT_DIR$/web/fileUpload.jsp" />
+        <option value="$PROJECT_DIR$/web/includes/footer.html" />
         <option value="$PROJECT_DIR$/web/style/santander-template.css" />
         <option value="$PROJECT_DIR$/web/about.jsp" />
-        <option value="$PROJECT_DIR$/web/includes/footer.html" />
-        <option value="dbtable:/f2a97787/ec19ba82-120f-43e6-96c5-26912937ccef/androidExperimentation..smartphones" />
-        <option value="dbtable:/f2a97787/ec19ba82-120f-43e6-96c5-26912937ccef/androidExperimentation..plugins" />
-        <option value="dbtable:/f2a97787/ec19ba82-120f-43e6-96c5-26912937ccef/androidExperimentation..experiments" />
-        <option value="$PROJECT_DIR$/web/newExperiment.jsp" />
-        <option value="$PROJECT_DIR$/web/includes/header.html" />
-        <option value="$PROJECT_DIR$/web/showcase.jsp" />
-        <option value="$PROJECT_DIR$/web/experiment.jsp" />
+        <option value="$PROJECT_DIR$/web/experiments-overall.jsp" />
+        <option value="$PROJECT_DIR$/src/hibernate.cfg.xml" />
+        <option value="dbtable:/adf69c6a/ec19ba82-120f-43e6-96c5-26912937ccef/androidExperimentation..smartphones" />
+        <option value="dbtable:/adf69c6a/ec19ba82-120f-43e6-96c5-26912937ccef/androidExperimentation..experiments" />
+        <option value="$PROJECT_DIR$/src/eu/smartsantander/androidExperimentation/AndroidExperimentationWS.java" />
+        <option value="$PROJECT_DIR$/src/eu/smartsantander/androidExperimentation/ModelManager.java" />
+        <option value="$PROJECT_DIR$/src/eu/smartsantander/androidExperimentation/entities/Experiment.java" />
+        <option value="dbtable:/adf69c6a/ec19ba82-120f-43e6-96c5-26912937ccef/androidExperimentation..plugins" />
+        <option value="$PROJECT_DIR$/web/dynamixRepository/plugs.xml" />
       </list>
     </option>
   </component>
@@ -289,10 +377,9 @@
     <option name="CUSTOM_FILTER" />
   </component>
   <component name="ProjectFrameBounds">
-    <option name="x" value="-8" />
-    <option name="y" value="-8" />
-    <option name="width" value="1936" />
-    <option name="height" value="1056" />
+    <option name="y" value="24" />
+    <option name="width" value="1920" />
+    <option name="height" value="1032" />
   </component>
   <component name="ProjectInspectionProfilesVisibleTreeState">
     <entry key="Project Default">
@@ -329,7 +416,7 @@
     <ConfirmationsSetting value="0" id="Remove" />
   </component>
   <component name="ProjectReloadState">
-    <option name="STATE" value="0" />
+    <option name="STATE" value="2" />
   </component>
   <component name="ProjectView">
     <navigator currentView="Scope" currentSubView="All" proportions="" version="1" splitterProportion="0.5">
@@ -344,128 +431,38 @@
       <sortByType />
     </navigator>
     <panes>
+      <pane id="PackagesPane">
+        <subPane>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="AndroidExperimentation" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PackageViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="AndroidExperimentationWS" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PackageViewModuleNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="AndroidExperimentation" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PackageViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="AndroidExperimentationWS" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PackageViewModuleNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="eu.smartsantander.androidExperimentation" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PackageElementNode" />
+            </PATH_ELEMENT>
+          </PATH>
+        </subPane>
+      </pane>
       <pane id="Scope">
         <subPane subId="All">
           <PATH>
             <PATH_ELEMENT USER_OBJECT="Root">
-              <option name="myItemId" value="" />
-              <option name="myItemType" value="" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT USER_OBJECT="WebService">
-              <option name="myItemId" value="" />
-              <option name="myItemType" value="" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT USER_OBJECT="Root">
-              <option name="myItemId" value="" />
-              <option name="myItemType" value="" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT USER_OBJECT="WebService">
-              <option name="myItemId" value="" />
-              <option name="myItemType" value="" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT USER_OBJECT="web">
-              <option name="myItemId" value="" />
-              <option name="myItemType" value="" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT USER_OBJECT="Root">
-              <option name="myItemId" value="" />
-              <option name="myItemType" value="" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT USER_OBJECT="WebService">
-              <option name="myItemId" value="" />
-              <option name="myItemType" value="" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT USER_OBJECT="web">
-              <option name="myItemId" value="" />
-              <option name="myItemType" value="" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT USER_OBJECT="style">
-              <option name="myItemId" value="" />
-              <option name="myItemType" value="" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT USER_OBJECT="Root">
-              <option name="myItemId" value="" />
-              <option name="myItemType" value="" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT USER_OBJECT="WebService">
-              <option name="myItemId" value="" />
-              <option name="myItemType" value="" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT USER_OBJECT="web">
-              <option name="myItemId" value="" />
-              <option name="myItemType" value="" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT USER_OBJECT="includes">
-              <option name="myItemId" value="" />
-              <option name="myItemType" value="" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT USER_OBJECT="Root">
-              <option name="myItemId" value="" />
-              <option name="myItemType" value="" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT USER_OBJECT="WebService">
-              <option name="myItemId" value="" />
-              <option name="myItemType" value="" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT USER_OBJECT="web">
-              <option name="myItemId" value="" />
-              <option name="myItemType" value="" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT USER_OBJECT="experimentRepository">
-              <option name="myItemId" value="" />
-              <option name="myItemType" value="" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT USER_OBJECT="Root">
-              <option name="myItemId" value="" />
-              <option name="myItemType" value="" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT USER_OBJECT="WebService">
-              <option name="myItemId" value="" />
-              <option name="myItemType" value="" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT USER_OBJECT="src">
-              <option name="myItemId" value="" />
-              <option name="myItemType" value="" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT USER_OBJECT="Root">
-              <option name="myItemId" value="" />
-              <option name="myItemType" value="" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT USER_OBJECT="WebService">
-              <option name="myItemId" value="" />
-              <option name="myItemType" value="" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT USER_OBJECT="src">
-              <option name="myItemId" value="" />
-              <option name="myItemType" value="" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT USER_OBJECT="eu/smartsantander/androidExperimentation">
-              <option name="myItemId" value="" />
-              <option name="myItemType" value="" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT USER_OBJECT="Root">
-              <option name="myItemId" value="" />
-              <option name="myItemType" value="" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT USER_OBJECT="WebService">
-              <option name="myItemId" value="" />
-              <option name="myItemType" value="" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT USER_OBJECT="lib">
               <option name="myItemId" value="" />
               <option name="myItemType" value="" />
             </PATH_ELEMENT>
@@ -506,34 +503,6 @@
           </PATH>
         </subPane>
       </pane>
-      <pane id="PackagesPane">
-        <subPane>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="AndroidExperimentation" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PackageViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="AndroidExperimentationWS" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PackageViewModuleNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="AndroidExperimentation" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PackageViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="AndroidExperimentationWS" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PackageViewModuleNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="eu.smartsantander.androidExperimentation" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PackageElementNode" />
-            </PATH_ELEMENT>
-          </PATH>
-        </subPane>
-      </pane>
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -542,11 +511,11 @@
     <property name="project.structure.proportion" value="0.15" />
     <property name="options.splitter.main.proportions" value="0.3" />
     <property name="Repository.Attach.JavaDocs" value="false" />
-    <property name="MemberChooser.sorted" value="false" />
-    <property name="recentsLimit" value="5" />
     <property name="GenerateAntBuildDialog.generateSingleFile" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/../.." />
+    <property name="recentsLimit" value="5" />
+    <property name="MemberChooser.sorted" value="false" />
     <property name="GenerateAntBuildDialog.inclineRuntiemClasspath" value="false" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/../.." />
     <property name="GenerateAntBuildDialog.outputFileNameProperty" value="webservicestest" />
     <property name="Database.TableEditor.Splitter" value="0.9" />
     <property name="GenerateAntBuildDialog.enableUiFormCompile" value="true" />
@@ -560,14 +529,14 @@
     <property name="options.splitter.details.proportions" value="0.2" />
     <property name="GoToFile.includeJavaFiles" value="false" />
     <property name="options.lastSelected" value="project.propVCSSupport.Mappings" />
-    <property name="project.structure.side.proportion" value="0.28529122" />
     <property name="GenerateAntBuildDialog.forceTargetJdk" value="true" />
+    <property name="project.structure.side.proportion" value="0.28529122" />
     <property name="MemberChooser.copyJavadoc" value="false" />
     <property name="findjar.last.used.dir" value="$PROJECT_DIR$/lib" />
     <property name="restartRequiresConfirmation" value="true" />
     <property name="GenerateAntBuildDialog.backupFiles" value="true" />
-    <property name="options.searchVisible" value="true" />
     <property name="dynamic.classpath" value="false" />
+    <property name="options.searchVisible" value="true" />
   </component>
   <component name="RecentsManager">
     <key name="CopyClassDialog.RECENTS_KEY">
@@ -710,6 +679,19 @@
       <option name="PORT" value="5005" />
       <method />
     </configuration>
+    <configuration default="true" type="Applet" factoryName="Applet">
+      <module name="" />
+      <option name="MAIN_CLASS_NAME" />
+      <option name="HTML_FILE_NAME" />
+      <option name="HTML_USED" value="false" />
+      <option name="WIDTH" value="400" />
+      <option name="HEIGHT" value="300" />
+      <option name="POLICY_FILE" value="$APPLICATION_HOME_DIR$/bin/appletviewer.policy" />
+      <option name="VM_PARAMETERS" />
+      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
+      <option name="ALTERNATIVE_JRE_PATH" />
+      <method />
+    </configuration>
     <configuration default="true" type="TestNG" factoryName="TestNG">
       <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea" />
       <module name="" />
@@ -736,19 +718,6 @@
       <envs />
       <properties />
       <listeners />
-      <method />
-    </configuration>
-    <configuration default="true" type="Applet" factoryName="Applet">
-      <module name="" />
-      <option name="MAIN_CLASS_NAME" />
-      <option name="HTML_FILE_NAME" />
-      <option name="HTML_USED" value="false" />
-      <option name="WIDTH" value="400" />
-      <option name="HEIGHT" value="300" />
-      <option name="POLICY_FILE" value="$APPLICATION_HOME_DIR$/bin/appletviewer.policy" />
-      <option name="VM_PARAMETERS" />
-      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
-      <option name="ALTERNATIVE_JRE_PATH" />
       <method />
     </configuration>
     <configuration default="true" type="Application" factoryName="Application">
@@ -794,23 +763,6 @@
       <patterns />
       <method />
     </configuration>
-    <configuration default="true" type="#com.intellij.j2ee.web.tomcat.TomcatRunConfigurationFactory" factoryName="Local">
-      <deployment />
-      <server-settings />
-      <predefined_log_file id="Tomcat" enabled="true" />
-      <predefined_log_file id="Tomcat Catalina" enabled="true" />
-      <predefined_log_file id="Tomcat Manager" enabled="false" />
-      <predefined_log_file id="Tomcat Host Manager" enabled="false" />
-      <predefined_log_file id="Tomcat Localhost Access" enabled="false" />
-      <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea" />
-      <method />
-    </configuration>
-    <configuration default="true" type="com.intellij.persistence.run.ConsoleRunConfigurationType" factoryName="Query Language Console">
-      <option name="VM_PARAMETERS" value="" />
-      <option name="USER_CFG_CLASS" />
-      <option name="CONTEXT_PROVIDER" />
-      <method />
-    </configuration>
     <configuration default="true" type="#com.intellij.j2ee.web.tomcat.TomcatRunConfigurationFactory" factoryName="Remote">
       <option name="LOCAL" value="false" />
       <deployment />
@@ -821,6 +773,23 @@
       </server-settings>
       <predefined_log_file id="Tomcat" enabled="true" />
       <predefined_log_file id="TOMCAT_LOCALHOST_LOG_ID" enabled="true" />
+      <method />
+    </configuration>
+    <configuration default="true" type="com.intellij.persistence.run.ConsoleRunConfigurationType" factoryName="Query Language Console">
+      <option name="VM_PARAMETERS" value="" />
+      <option name="USER_CFG_CLASS" />
+      <option name="CONTEXT_PROVIDER" />
+      <method />
+    </configuration>
+    <configuration default="true" type="#com.intellij.j2ee.web.tomcat.TomcatRunConfigurationFactory" factoryName="Local">
+      <deployment />
+      <server-settings />
+      <predefined_log_file id="Tomcat" enabled="true" />
+      <predefined_log_file id="Tomcat Catalina" enabled="true" />
+      <predefined_log_file id="Tomcat Manager" enabled="false" />
+      <predefined_log_file id="Tomcat Host Manager" enabled="false" />
+      <predefined_log_file id="Tomcat Localhost Access" enabled="false" />
+      <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea" />
       <method />
     </configuration>
     <configuration default="false" name="Tomcat 7.0" type="#com.intellij.j2ee.web.tomcat.TomcatRunConfigurationFactory" factoryName="Local" APPLICATION_SERVER_NAME="Tomcat 7.0">
@@ -914,7 +883,12 @@
       <Port>5050</Port>
     </configuration>
   </component>
-  <component name="ShelveChangesManager" show_recycled="false" />
+  <component name="ShelveChangesManager" show_recycled="false">
+    <recycled_changelist date="1379081446600">
+      <option name="PATH" value="$USER_HOME$/.IntelliJIdea12/config/shelf/Hibernate_altered__Demon_registration_altered.patch" />
+      <option name="DESCRIPTION" value="Hibernate altered  Demon registration altered" />
+    </recycled_changelist>
+  </component>
   <component name="SvnConfiguration" maxAnnotateRevisions="500" myUseAcceleration="nothing" myAutoUpdateAfterCommit="false" cleanupOnStartRun="false" SSL_PROTOCOLS="sslv3">
     <option name="USER" value="" />
     <option name="PASSWORD" value="" />
@@ -935,9 +909,27 @@
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
       <changelist id="4ccbb714-201c-482b-a93f-dd4890c10bc1" name="Default" comment="" />
+      <changelist id="ffed928d-c9fc-443c-9d9a-a806dbe1581e" name="Hibernate altered  Demon registration altered" comment="" />
       <created>1370507766568</created>
       <updated>1370507766568</updated>
     </task>
+    <task id="LOCAL-00001" summary="hibernate config fixed">
+      <created>1378991753570</created>
+      <updated>1378991753570</updated>
+    </task>
+    <task id="LOCAL-00002" summary="gitignore">
+      <created>1378991794557</created>
+      <updated>1378991794557</updated>
+    </task>
+    <task id="LOCAL-00003" summary="general config">
+      <created>1378991811257</created>
+      <updated>1378991811257</updated>
+    </task>
+    <task id="LOCAL-00004" summary="Hibernate altered&#10;&#10;Demon registration altered">
+      <created>1379081446974</created>
+      <updated>1379081446974</updated>
+    </task>
+    <option name="localTasksCounter" value="5" />
     <servers />
   </component>
   <component name="TodoView" selected-index="2">
@@ -961,31 +953,30 @@
     </todo-panel>
   </component>
   <component name="ToolWindowManager">
-    <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
+    <frame x="0" y="24" width="1920" height="1032" extended-state="6" />
     <editor active="false" />
     <layout>
-      <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.6228956" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Changes" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.6177474" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="JetGradle" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
-      <window_info id="Persistence" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.29881656" sideWeight="0.07394767" order="2" side_tool="true" content_ui="tabs" />
+      <window_info id="Persistence" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.29868075" sideWeight="0.27531284" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
-      <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.17662753" sideWeight="0.6734007" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.11497326" sideWeight="0.38225257" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.41638225" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3606371" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="IDEtalk Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="15" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32982457" sideWeight="0.5" order="8" side_tool="true" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.24878444" sideWeight="0.67190224" order="4" side_tool="true" content_ui="tabs" />
       <window_info id="IDEtalk" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
-      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
-      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.5949943" sideWeight="0.5" order="11" side_tool="false" content_ui="tabs" />
+      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.16648291" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
+      <window_info id="CDI" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Web" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.24878444" sideWeight="0.67190224" order="3" side_tool="true" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32764506" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.2486631" sideWeight="0.18998863" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="SLIDING" type="SLIDING" visible="false" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="SLIDING" type="SLIDING" visible="false" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Application Servers" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32536975" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.11152615" sideWeight="0.6734007" order="0" side_tool="false" content_ui="combo" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32659933" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
-      <window_info id="CDI" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.2989305" sideWeight="0.38225257" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32668883" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="SVN Repositories" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32992035" sideWeight="0.5" order="16" side_tool="false" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
       <window_info id="soapUI Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32984293" sideWeight="0.5" order="12" side_tool="false" content_ui="tabs" />
@@ -993,6 +984,7 @@
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4977221" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Hibernate Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3287827" sideWeight="0.5" order="13" side_tool="false" content_ui="tabs" />
+      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.5949943" sideWeight="0.5" order="11" side_tool="false" content_ui="tabs" />
       <window_info id="Dependency Viewer" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.8807018" sideWeight="0.5" order="14" side_tool="false" content_ui="tabs" />
       <window_info id="soapUI Navigator" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.39965096" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
@@ -1040,7 +1032,7 @@
     <option name="WRAP_WHEN_TYPING_REACHES_RIGHT_MARGIN" value="false" />
     <option name="FORCE_NON_EMPTY_COMMENT" value="false" />
     <option name="CLEAR_INITIAL_COMMIT_MESSAGE" value="false" />
-    <option name="LAST_COMMIT_MESSAGE" />
+    <option name="LAST_COMMIT_MESSAGE" value="Hibernate altered&#10;&#10;Demon registration altered" />
     <option name="MAKE_NEW_CHANGELIST_ACTIVE" value="false" />
     <option name="OPTIMIZE_IMPORTS_BEFORE_PROJECT_COMMIT" value="false" />
     <option name="CHECK_FILES_UP_TO_DATE_BEFORE_COMMIT" value="false" />
@@ -1054,6 +1046,10 @@
     <option name="UPDATE_FILTER_BY_SCOPE" value="false" />
     <option name="SHOW_FILE_HISTORY_AS_TREE" value="false" />
     <option name="FILE_HISTORY_SPLITTER_PROPORTION" value="0.6" />
+    <MESSAGE value="hibernate config fixed" />
+    <MESSAGE value="gitignore" />
+    <MESSAGE value="general config" />
+    <MESSAGE value="Hibernate altered&#10;&#10;Demon registration altered" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -1111,122 +1107,103 @@
     <option name="FILTER_TARGETS" value="false" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="jar://$PROJECT_DIR$/lib/gson-1.1.jar!/com/google/gson/Gson.class">
+    <entry file="file://$PROJECT_DIR$/web/includes/header.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="6" column="19" selection-start="145" selection-end="2980" vertical-scroll-proportion="0.16504854">
+        <state line="6" column="83" selection-start="310" selection-end="310" vertical-scroll-proportion="0.0" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/web/style/santander-template.css">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="7" column="35" selection-start="120" selection-end="121" vertical-scroll-proportion="0.0" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/web/about.jsp">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="32" column="53" selection-start="2722" selection-end="2722" vertical-scroll-proportion="0.0" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/web/experiments-overall.jsp">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="22" column="7" selection-start="732" selection-end="732" vertical-scroll-proportion="1.0216718" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/hibernate.cfg.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="6" column="73" selection-start="318" selection-end="318" vertical-scroll-proportion="0.1863354">
           <folding />
         </state>
+      </provider>
+    </entry>
+    <entry file="jar://$PROJECT_DIR$/lib/gson-1.1.jar!/com/google/gson/Gson.class">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="45" column="18" selection-start="2703" selection-end="2703" vertical-scroll-proportion="-12.96" />
+      </provider>
+    </entry>
+    <entry file="jar://$PROJECT_DIR$/lib/hibernate-core-4.2.2.Final.jar!/org/hibernate/Session.class">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="75" column="9" selection-start="2352" selection-end="2352" vertical-scroll-proportion="0.3512304" />
+      </provider>
+    </entry>
+    <entry file="dbDummy://dbtable:/adf69c6a/ec19ba82-120f-43e6-96c5-26912937ccef/androidExperimentation..smartphones">
+      <provider editor-type-id="text-editor">
+        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" />
+      </provider>
+      <provider selected="true" editor-type-id="com.intellij.persistence.database.editor.DatabaseTableFileEditorProvider">
+        <state />
+      </provider>
+    </entry>
+    <entry file="jar://$USER_HOME$/programs/jdk1.6.0_45/src.zip!/java/util/Date.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="111" column="13" selection-start="5183" selection-end="5183" vertical-scroll-proportion="0.33333334" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/eu/smartsantander/androidExperimentation/entities/Experiment.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="48" column="27" selection-start="923" selection-end="925" vertical-scroll-proportion="36.72">
+        <state line="81" column="62" selection-start="0" selection-end="3998" vertical-scroll-proportion="0.44642857">
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/eu/smartsantander/androidExperimentation/AndroidExperimentationWS.java">
+    <entry file="file://$PROJECT_DIR$/src/eu/smartsantander/androidExperimentation/entities/ExperimentsEntity.hbm.xml">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="26" column="10" selection-start="797" selection-end="797" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/eu/smartsantander/androidExperimentation/jsonEntities/PluginList.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="7" column="13" selection-start="195" selection-end="195" vertical-scroll-proportion="0.0">
-          <folding>
-            <element signature="imports" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/eu/smartsantander/androidExperimentation/entities/Plugin.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="9" column="13" selection-start="229" selection-end="229" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/eu/smartsantander/androidExperimentation/Utilities.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="9" column="13" selection-start="219" selection-end="219" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/eu/smartsantander/androidExperimentation/HibernateUtil.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="19" column="13" selection-start="477" selection-end="477" vertical-scroll-proportion="0.0">
-          <folding>
-            <element signature="imports" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/eu/smartsantander/androidExperimentation/Main.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="11" column="13" selection-start="289" selection-end="289" vertical-scroll-proportion="0.0">
+        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0">
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/eu/smartsantander/androidExperimentation/ModelManager.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="50" column="39" selection-start="1730" selection-end="1730" vertical-scroll-proportion="0.0">
-          <folding>
-            <element signature="imports" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/web/experiments.jsp">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="0" column="0" selection-start="0" selection-end="192" vertical-scroll-proportion="7.8461537">
+        <state line="105" column="0" selection-start="3933" selection-end="4477" vertical-scroll-proportion="0.31099194">
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/web/newExperiment.jsp">
+    <entry file="file://$PROJECT_DIR$/src/eu/smartsantander/androidExperimentation/AndroidExperimentationWS.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="51" column="23" selection-start="1676" selection-end="1676" vertical-scroll-proportion="-16.346153">
-          <folding>
-            <marker date="1379070071495" expanded="true" signature="1137:1527" placeholder="..." />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/web/includes/header.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="38" column="131" selection-start="2341" selection-end="2341" vertical-scroll-proportion="-18.961538">
+        <state line="28" column="41" selection-start="941" selection-end="941" vertical-scroll-proportion="0.46632123">
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/web/experiments-overall.jsp">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="22" column="13" selection-start="0" selection-end="732" vertical-scroll-proportion="-14.384615">
-          <folding />
-        </state>
+    <entry file="dbDummy://dbtable:/adf69c6a/ec19ba82-120f-43e6-96c5-26912937ccef/androidExperimentation..plugins">
+      <provider editor-type-id="text-editor">
+        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" />
+      </provider>
+      <provider selected="true" editor-type-id="com.intellij.persistence.database.editor.DatabaseTableFileEditorProvider">
+        <state />
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/web/showcase.jsp">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="18" column="49" selection-start="386" selection-end="386" vertical-scroll-proportion="-11.769231">
-          <folding />
-        </state>
+    <entry file="dbDummy://dbtable:/adf69c6a/ec19ba82-120f-43e6-96c5-26912937ccef/androidExperimentation..experiments">
+      <provider editor-type-id="text-editor">
+        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" />
+      </provider>
+      <provider selected="true" editor-type-id="com.intellij.persistence.database.editor.DatabaseTableFileEditorProvider">
+        <state />
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/web/experiment.jsp">
+    <entry file="file://$PROJECT_DIR$/web/dynamixRepository/plugs.xml">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="38" column="8" selection-start="909" selection-end="909" vertical-scroll-proportion="-11.923077">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/web/style/style.css">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0">
+        <state line="74" column="1" selection-start="2972" selection-end="2972" vertical-scroll-proportion="1.630719">
           <folding />
         </state>
       </provider>
@@ -1273,7 +1250,7 @@
       </state>
       <state key="JdkListConfigurable.UI">
         <settings>
-          <last-edited>1.7</last-edited>
+          <last-edited>1.6</last-edited>
           <splitter-proportions>
             <option name="proportions">
               <list>

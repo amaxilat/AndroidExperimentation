@@ -35,6 +35,8 @@ import org.simpleframework.xml.Attribute;
 import org.simpleframework.xml.Element;
 import org.simpleframework.xml.ElementList;
 
+import eu.smartsantander.androidExperimentation.jsonEntities.Plugin;
+
 import android.util.Log;
 /**
  * Simple Framework binder class for XML parsing.
@@ -155,13 +157,14 @@ public class ContextPluginBinder
 			throw new Exception("Context Plugin Invalid");
 	}
 	
-	public DiscoveredContextPlugin createDiscoveredPlugin(RepositoryInfo source, MyPlugInfo plugInfo) throws Exception
+	//SmartSantander Modification
+	public DiscoveredContextPlugin createDiscoveredPlugin(RepositoryInfo source, Plugin plugInfo) throws Exception
 	{
-		String id = plugInfo.id;
-		String runtimeFactoryClass = plugInfo.runtimeFactoryClass;
-		String name = plugInfo.name;
-		String description = plugInfo.description;
-		String installUrl = plugInfo.installUrl;
+		String id = String.valueOf(plugInfo.getContextType());
+		String runtimeFactoryClass = plugInfo.getRuntimeFactoryClass();
+		String name = plugInfo.getName();
+		String description = plugInfo.getDescription();
+		String installUrl = plugInfo.getInstallUrl();
 		
 		Log.i(TAG, id);
 		Log.i(TAG, runtimeFactoryClass);
@@ -187,7 +190,7 @@ public class ContextPluginBinder
 		newPlug.setHasConfigurationView(hasConfigurationView);
 		newPlug.setRuntimeFactoryClass(runtimeFactoryClass);
 		newPlug.setName(name);
-		newPlug.setDescription(description);
+		newPlug.setDescription(description); 
 		// Setup the plug-in's type
 		newPlug.setContextPluginType(Utils.getEnumFromString(ContextPluginType.class, pluginType));
 		// Setup supported privacy risk levels

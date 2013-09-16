@@ -52,14 +52,17 @@ public class ModelManager {
 
 
     public static Experiment getExperiment(Smartphone smartphone) {
-        Transaction tx=getCurrentSession().beginTransaction();
-        getCurrentSession().saveOrUpdate(smartphone);
-        tx.commit();
-        List<Smartphone> recordList = getCurrentSession().createQuery("from Smartphone where phoneID=?").setInteger(0, smartphone.getPhoneId()).list();
+        try {
+            Transaction tx = getCurrentSession().beginTransaction();
+            getCurrentSession().saveOrUpdate(smartphone);
+            tx.commit();
+        } catch (Exception e) {
+            getCurrentSession().getTransaction().commit();
+        }
+        List<Smartphone> recordList = getCurrentSession().createQuery("from Smartphone where phoneId=?").setInteger(0, smartphone.getPhoneId()).list();
         if (recordList.size() > 0) {
             Smartphone device = recordList.get(0);
             device.setSensorsRules(smartphone.getSensorsRules());
-            getCurrentSession().update(device);
             String[] smartphoneDependencies = smartphone.getSensorsRules().split(",");
 
             if (recordList.size() == 1) {
@@ -117,7 +120,7 @@ public class ModelManager {
     }
 
     public static void saveExperiment(Experiment experiment) {
-        Transaction tx=getCurrentSession().beginTransaction();
+        Transaction tx = getCurrentSession().beginTransaction();
         getCurrentSession().saveOrUpdate(experiment);
         tx.commit();
         log.info("saveExperiment Called");
@@ -125,10 +128,10 @@ public class ModelManager {
 
 
     public static Smartphone registerSmartphone(Smartphone smartphone) {
-        if (smartphone.getId()==-1){
+        if (smartphone.getId() == -1) {
             smartphone.setId(null);
         }
-        Transaction tx=getCurrentSession().beginTransaction();
+        Transaction tx = getCurrentSession().beginTransaction();
         getCurrentSession().saveOrUpdate(smartphone);
         tx.commit();
         return smartphone;

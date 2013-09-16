@@ -1,7 +1,5 @@
 package eu.smartsantander.androidExperimentation.entities;
 
-import java.util.Date;
-
 /**
  * Created with IntelliJ IDEA.
  * User: theodori
@@ -50,25 +48,23 @@ public class Experiment {
         this.sensorDependencies = sensorDependencies;
     }
 
-    private Date fromTime;
+    private Long fromTime;
 
-    public Date getFromTime() {
+    public Long getFromTime() {
         return fromTime;
     }
 
-    public void setFromTime(Date fromTime) {
-        if(fromTime==null) fromTime=new Date();
+    public void setFromTime(Long fromTime) {
         this.fromTime = fromTime;
     }
 
-    private Date toTime;
+    private Long toTime;
 
-    public Date getToTime() {
+    public Long getToTime() {
         return toTime;
     }
 
-    public void setToTime(Date toTime) {
-        if(toTime==null) toTime=new Date();
+    public void setToTime(Long toTime) {
         this.toTime = toTime;
     }
 

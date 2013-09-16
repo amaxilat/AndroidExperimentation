@@ -5,6 +5,11 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import com.google.gson.Gson;
+
+import eu.smartsantander.androidExperimentation.jsonEntities.Plugin;
+import eu.smartsantander.androidExperimentation.jsonEntities.PluginList;
+
 
 import android.content.BroadcastReceiver;
 import android.content.Context;
@@ -19,35 +24,31 @@ import android.net.NetworkInfo;
 import android.os.Handler;
 import android.os.Message;
 import android.util.Log;
+import android.widget.CheckBox;
 
 public class SensorProfiler extends Thread implements Runnable {
 
 	private Handler handler;
 	private Communication communication;
 	private PhoneProfiler phoneProfiler;
+	private Context context;	
+
 	
 	// get TAG name for reporting to LogCat
 	private final String TAG = this.getClass().getSimpleName();
 
-	private boolean batteryEnabled;
-	private boolean batteryLevelEnabled;
-	private boolean batteryTemperatureEnabled;
-	private boolean gpsEnabled;
-	private boolean gpsPositionEnabled;
-	private boolean wifiEnabled;
-	private boolean wifiBSSIDEnabled;
 	private SharedPreferences pref;
 	private Editor editor;
 	
-	private List<String> sensors;
+	//private List<String> sensors;
 	private List<String> permissions;
 	private Map<String,Boolean> sensorsPermissions=new HashMap<String, Boolean>();
 	private Map<String,String> sensorsContextTypes=new HashMap<String, String>();
 	private String sensorRules="";
-	
+	private PluginList pList;
 	private  NetworkStateReceiver mReceiver;
 	
-	Context context;
+
 	
 	public SensorProfiler(Handler handler, Context context, Communication communication, PhoneProfiler phoneProfiler)
 	{		
@@ -55,20 +56,22 @@ public class SensorProfiler extends Thread implements Runnable {
 		this.context = context;
 		this.communication = communication;
 		this.phoneProfiler = phoneProfiler;
+		
+		
+		String plistString=(this.context.getSharedPreferences("pluginObjects", 0)).getString("pluginObjects", "");
+        if(plistString.equals("")) return;
+        pList=(new Gson()).fromJson(plistString,  PluginList.class);       
+        
+        for(Plugin plugin : pList.getPluginList()){
+        	// map sensors to contextTypes
+    		sensorsContextTypes.put(plugin.getName(), plugin.getContextType());
+        }
 				
         pref = context.getApplicationContext().getSharedPreferences("sensors", 0); // 0 - for private mode
-        editor = pref.edit();
-		
-        mReceiver = new NetworkStateReceiver();
-        
-		sensors= new ArrayList<String>();
-		sensors = getAvailableSensors(context);
-		
-		// map sensors to contextTypes
-		sensorsContextTypes.put("batteryLevel", "org.ambientdynamix.contextplugins.batteryLevelPlugin");
-		sensorsContextTypes.put("batteryTemperature", "org.ambientdynamix.contextplugins.batteryTemperaturePlugin");		
-		sensorsContextTypes.put("gpsPosition", "org.ambientdynamix.contextplugins.GpsPlugin");		
-		sensorsContextTypes.put("wifiBSSID", "org.ambientdynamix.contextplugins.WifiScanPlugin");
+        editor = pref.edit();		
+        mReceiver = new NetworkStateReceiver();        
+		//sensors= new ArrayList<String>();
+		//sensors = getAvailableSensors(context);
 		
 		// get sensor permissions
 		permissions = new ArrayList<String>();
@@ -130,16 +133,16 @@ public class SensorProfiler extends Thread implements Runnable {
 		sensorRules = "";
 		sensorsPermissions.clear();
 		
-		for(String sensor : sensors)
+		for(Plugin sensor : pList.getPluginList())
 		{
-			if(permissions.contains(sensor))
+			if(permissions.contains(sensor.getName()))
 			{
-				sensorsPermissions.put( sensorsContextTypes.get(sensor) , true);
-				sensorRules = sensorRules + sensor + ",";
+				sensorsPermissions.put( sensorsContextTypes.get(sensor.getName()) , true);
+				sensorRules = sensorRules + sensor.getContextType() + ",";
 			}
 			else
 			{
-				sensorsPermissions.put( sensorsContextTypes.get(sensor) , false);
+				sensorsPermissions.put( sensorsContextTypes.get(sensor.getName()) , false);
 			}
 		}
 	}
@@ -147,69 +150,24 @@ public class SensorProfiler extends Thread implements Runnable {
 	// get user permissions about the sensors
 	private void getPermissions()
 	{		
-		permissions.clear();
-		
-		editor.commit();
-    	
-	    // run first time after installation - or data clean
-	    if( !(pref.contains("firstTime")) )
-	    {
-        	editor.putBoolean("firstTime", false);
-        	
-        	editor.putBoolean("battery", false);
-        	editor.putBoolean("batteryLevel", false);
-        	editor.putBoolean("batteryTemperature", false);
-        	
-        	editor.putBoolean("gps", false);
-        	editor.putBoolean("gpsPosition", false);
-        	
-        	editor.putBoolean("wifi", false);
-        	editor.putBoolean("wifiBSSID", false);
-           	
-        	editor.commit();
-	    }
-
-
-        batteryEnabled = pref.getBoolean("battery", false);
-        batteryLevelEnabled = pref.getBoolean("batteryLevel", false);
-        batteryTemperatureEnabled = pref.getBoolean("batteryTemperature", false);
-	    gpsEnabled = pref.getBoolean("gps", false);
-	    gpsPositionEnabled = pref.getBoolean("gpsPosition", false);
-	    wifiEnabled = pref.getBoolean("wifi", false);
-	   	wifiBSSIDEnabled = pref.getBoolean("wifiBSSID", false);
-	    
-	    if( batteryEnabled )
-	    {
-	    	if( batteryLevelEnabled )
-	    	{
-	    		permissions.add("batteryLevel");
-	    	}
-	    	
-	    	if( batteryTemperatureEnabled )
-	    	{
-	    		permissions.add("batteryTemperature");
-	    	}
-	    }
-	   	
-	    if( gpsEnabled )
-	    {
-	    	if( gpsPositionEnabled )
-	    	{
-	    		permissions.add("gpsPosition");
-	    	}
-	    }
-	    	
-	    if( wifiEnabled )
-	    {
-	    	if( wifiBSSIDEnabled )
-	    	{
-	    		permissions.add("wifiBSSID");
-	    	}
-	    }				
+		permissions.clear();	
+		editor.commit();    	
+		 if( !(pref.contains("firstTime")) )
+	        {
+	        	editor.putBoolean("firstTime", false);       
+	            for(Plugin plugin : pList.getPluginList()){
+	        		editor.putBoolean(plugin.getName(), false);
+	        	}
+	        	editor.commit();
+	        }
+	        for(Plugin plugin : pList.getPluginList()){        
+	        	Boolean enabled = pref.getBoolean(plugin.getName(), false);
+	        	 if (enabled==true) permissions.add(plugin.getName());
+	        }	
 	}
 	
 	// get list of the available sensor types
-	private List<String> getAvailableSensors(Context context)
+	/*private List<String> getAvailableSensors(Context context)
 	{
 		List<String> listSensorType = new ArrayList<String>();
 
@@ -242,7 +200,7 @@ public class SensorProfiler extends Thread implements Runnable {
 	    listSensorType.add("wifiBSSID");
 	    
 	    return listSensorType;
-	}
+	}*/
 	
 	// checks if there is a network interface - call and a service to make sure it goes to the internet 
 	private boolean isNetworkAvailable()
@@ -268,7 +226,6 @@ public class SensorProfiler extends Thread implements Runnable {
 	{
 		getPermissions();
 		setPermissions();
-	//	communication.registerSmartphone(phoneProfiler.getPhoneId(), this.sensorRules);
 	}
 	
 	public void sendThreadMessage(String message)

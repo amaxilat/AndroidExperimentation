@@ -112,7 +112,7 @@ public class SimpleFileSource extends SimpleSourceBase implements IContextPlugin
 			files.add(sourceFile);
 		if (!cancel) {
 			for (File f : files) {
-				try {
+				try { //smartsantander modification
 					updates.addAll(createDiscoveredPlugins(repo, new FileInputStream(f), platform,
 							platformVersion, frameworkVersion, false));
 					
