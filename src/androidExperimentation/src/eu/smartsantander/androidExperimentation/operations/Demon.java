@@ -48,8 +48,7 @@ public class Demon extends Thread implements Runnable {
 		this.phoneProfiler = phoneProfiler;
 		this.communication = communication;
 		this.sensorProfiler = sensorProfiler;
-		pref = context.getApplicationContext().getSharedPreferences(
-				"runningJob", 0); // 0 - for private mode
+		pref = context.getApplicationContext().getSharedPreferences("runningJob", 0); // 0 - for private mode
 		editor = pref.edit();
 		runningJob = pref.getString("runningJob", "-1");
 		lastRunned = pref.getString("lastExperiment", "-1");
@@ -87,12 +86,11 @@ public class Demon extends Thread implements Runnable {
 			PluginList plist = new PluginList();
 			plist.setPluginList(pluginList);
 			String plistString = (new Gson()).toJson(plist, PluginList.class);
-			editor = (this.context.getSharedPreferences("pluginObjects", 0))
-					.edit();
+			editor = (this.context.getSharedPreferences("pluginObjects", 0)).edit();
 			editor.putString("pluginObjects", plistString);
 			editor.commit();
 			this.isProperlyInitiallized = true;
-			handler.postDelayed(runnable, Constants.EXPERIMENT_POLL_INTERVAL);
+			handler.postDelayed(runnable, 1000);
 		} catch (Exception e) {
 			this.isProperlyInitiallized = false;
 			e.printStackTrace();
