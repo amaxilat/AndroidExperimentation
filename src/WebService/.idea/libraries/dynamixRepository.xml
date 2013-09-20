@@ -1,11 +1,7 @@
 <component name="libraryTable">
   <library name="dynamixRepository">
     <CLASSES>
-      <root url="jar://$PROJECT_DIR$/web/dynamixRepository/org.ambientdynamix.contextplugins.WifiScanPlugin_9.47.1.jar!/" />
-      <root url="jar://$PROJECT_DIR$/web/dynamixRepository/org.ambientdynamix.contextplugins.batteryLevelPlugin_9.47.1.jar!/" />
-      <root url="jar://$PROJECT_DIR$/web/dynamixRepository/org.ambientdynamix.contextplugins.WifiPlugin_9.47.1.jar!/" />
       <root url="jar://$PROJECT_DIR$/web/dynamixRepository/org.ambientdynamix.contextplugins.GpsPlugin_0.9.54.jar!/" />
-      <root url="jar://$PROJECT_DIR$/web/dynamixRepository/org.ambientdynamix.contextplugins.batteryTemperaturePlugin_9.47.1.jar!/" />
     </CLASSES>
     <JAVADOC />
     <SOURCES />

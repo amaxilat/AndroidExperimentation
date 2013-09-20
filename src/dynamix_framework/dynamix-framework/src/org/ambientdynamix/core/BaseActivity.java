@@ -17,6 +17,13 @@ package org.ambientdynamix.core;
 
 import org.ambientdynamix.util.AndroidNotification;
 
+import org.ambientdynamix.core.R;
+import eu.smartsantander.androidExperimentation.tabs.dynamixTab;
+import eu.smartsantander.androidExperimentation.tabs.jobsTab;
+import eu.smartsantander.androidExperimentation.tabs.profileTab;
+import eu.smartsantander.androidExperimentation.tabs.reportTab;
+import eu.smartsantander.androidExperimentation.tabs.securityTab;
+
 import android.app.AlertDialog;
 import android.app.TabActivity;
 import android.content.Context;
@@ -34,6 +41,7 @@ import android.view.View;
 import android.view.ViewParent;
 import android.widget.TabHost;
 import android.widget.Toast;
+import android.widget.TabHost.TabSpec;
 
 /**
  * Base Activity for the Dynamix Framework UI. Responsible for hosting Tabs and booting Dynamix, which launches the
@@ -173,6 +181,54 @@ public class BaseActivity extends TabActivity {
 		tabHost.addTab(spec);
 		// Boot Dynamix
 		DynamixService.boot(this, true, false, false);
+		
+		
+		 Resources ressources = getResources(); 
+	        TabHost tabHost = getTabHost();
+	       
+	        // profile tab
+	        Intent intentProfile = new Intent().setClass(this, profileTab.class);
+	        TabSpec tabSpecProfile = tabHost.newTabSpec("profile")
+	                .setIndicator("", ressources.getDrawable(R.drawable.ic_tab_profile))
+	                .setContent(intentProfile);
+	        
+	        // security tab
+	        Intent intentSecurity = new Intent().setClass(this, securityTab.class);
+	        TabSpec tabSpecSecurity = tabHost.newTabSpec("security")
+	                .setIndicator("", ressources.getDrawable(R.drawable.ic_tab_security))
+	                .setContent(intentSecurity);
+
+	        // dynamix tab
+	        Intent intentDynamix = new Intent().setClass(this, dynamixTab.class);
+	        TabSpec tabSpecDynamix = tabHost.newTabSpec("dynamix")
+	                .setIndicator("", ressources.getDrawable(R.drawable.ic_tab_dynamix))
+	                .setContent(intentDynamix);         
+	       
+	        //jobs tab
+	        Intent intentJobs = new Intent().setClass(this, jobsTab.class);
+	        TabSpec tabSpecJobs = tabHost.newTabSpec("jobs")
+	                .setIndicator("", ressources.getDrawable(R.drawable.ic_tab_jobs))
+	                .setContent(intentJobs);    
+	        
+	        //report tab
+	        Intent intentReports = new Intent().setClass(this, reportTab.class);
+	        TabSpec tabSpecReports = tabHost.newTabSpec("reports")
+	                .setIndicator("", ressources.getDrawable(R.drawable.ic_tab_reports))
+	                .setContent(intentReports);    
+
+	        // add all tabs 
+	        tabHost.addTab(tabSpecProfile);
+	        tabHost.addTab(tabSpecSecurity);
+	        tabHost.addTab(tabSpecDynamix);
+	        tabHost.addTab(tabSpecJobs);
+	        tabHost.addTab(tabSpecReports);
+
+	     /*   //set Windows tab as default (zero based) -- first wake up all tab activities
+	        tabHost.setCurrentTab(1);
+	        tabHost.setCurrentTab(2);
+	        tabHost.setCurrentTab(3);
+	        tabHost.setCurrentTab(4);
+	        tabHost.setCurrentTab(0); */
 	}
 
 	/**
