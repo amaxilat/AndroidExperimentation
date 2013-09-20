@@ -9,9 +9,9 @@
 <jsp:include page="./includes/header.html" flush="true"/>
 
 <div class="artPpost">
-
+<img src="./images/intro.jpg" width="100%">
 <p></p>
-Android Experimentation is related to the SmartSantander research project, aiming to provide an Android smartphone
+Android Experimentation is related to the <a href="http://smartsantander.eu">SmartSantander</a> research project, aiming to provide an Android smartphone
 application augmenting the functionality of an existing Future Internet infrastructure.
 </p>
 <p>
