@@ -7,198 +7,12 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="4ccbb714-201c-482b-a93f-dd4890c10bc1" name="Default" comment="experiment plugin plugin installation">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../sensorPlugins/GpsPlugin/bin/GpsPlugin.apk" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../sensorPlugins/GpsPlugin/bin/classes/org/ambientdynamix/contextplugins/GpsPlugin/GpsPluginInfo$1.class" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../sensorPlugins/GpsPlugin/bin/classes/org/ambientdynamix/contextplugins/GpsPlugin/GpsPluginRuntime$1.class" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../experiments/gps_experiment/assets/agt_web.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../sensorPlugins/GpsPlugin/bin/dexedLibs/android-support-v4-1708b8638ec9adb3c29a9cc00972e31c.jar" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../sensorPlugins/GpsPlugin/libs/android-support-v4.jar" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../experiments/gps_experiment/bin/dexedLibs/annotations-4013d70cf9a6e0503066c9c3bfaff319.jar" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../sensorPlugins/GpsPlugin/bin/dexedLibs/annotations-4013d70cf9a6e0503066c9c3bfaff319.jar" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../experiments/gps_experiment/doc/resources/background.gif" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../experiments/gps_experiment/bin/classes.dex" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../sensorPlugins/GpsPlugin/bin/classes.dex" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../experiments/gps_experiment/bin/gps_experiment.apk" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../experiments/gps_experiment/bin/res/drawable-hdpi/icon.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../experiments/gps_experiment/bin/res/drawable-ldpi/icon.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../experiments/gps_experiment/bin/res/drawable-mdpi/icon.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../experiments/gps_experiment/res/drawable-hdpi/icon.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../experiments/gps_experiment/res/drawable-ldpi/icon.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../experiments/gps_experiment/res/drawable-mdpi/icon.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../sensorPlugins/GpsPlugin/bin/res/drawable-hdpi/icon.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../sensorPlugins/GpsPlugin/bin/res/drawable-ldpi/icon.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../sensorPlugins/GpsPlugin/bin/res/drawable-mdpi/icon.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../experiments/gps_experiment/bin/resources.ap_" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../sensorPlugins/GpsPlugin/bin/resources.ap_" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../experiments/gps_experiment/doc/resources/tab.gif" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../experiments/gps_experiment/doc/resources/titlebar.gif" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../experiments/gps_experiment/doc/resources/titlebar_end.gif" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../experiments/gps_experiment/src/com/google/gson/internal/$Gson$Preconditions.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../experiments/gps_experiment/src/com/google/gson/internal/$Gson$Types.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../experiments/gps_experiment/.classpath" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../experiments/gps_experiment/bin/.gitignore" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../experiments/gps_experiment/.project" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../experiments/gps_experiment/AndroidManifest.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../experiments/gps_experiment/bin/AndroidManifest.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../experiments/gps_experiment/src/com/google/gson/internal/bind/ArrayTypeAdapter.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../experiments/gps_experiment/doc/org/ambientdynamix/contextplugins/batterylevel/BatteryLevelInfo.html" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../experiments/gps_experiment/doc/org/ambientdynamix/contextplugins/batterylevel/class-use/BatteryLevelInfo.html" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../experiments/gps_experiment/doc/org/ambientdynamix/contextplugins/batterylevel/BatteryLevelPluginRuntime.html" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../experiments/gps_experiment/doc/org/ambientdynamix/contextplugins/batterylevel/class-use/BatteryLevelPluginRuntime.html" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../experiments/gps_experiment/gen/org/ambientdynamix/contextplugins/myExperimentPlugin/BuildConfig.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../experiments/gps_experiment/src/com/google/gson/internal/bind/CollectionTypeAdapterFactory.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../experiments/gps_experiment/src/com/google/gson/internal/ConstructorConstructor.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../experiments/gps_experiment/src/com/google/gson/internal/bind/DateTypeAdapter.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../experiments/gps_experiment/src/com/google/gson/DefaultDateTypeAdapter.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../experiments/gps_experiment/src/com/google/gson/internal/Excluder.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../experiments/gps_experiment/src/com/google/gson/ExclusionStrategy.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../experiments/gps_experiment/bin/aidl/org/ambientdynamix/contextplugins/gps_experiment/ExperimentPluginInfo.aidl" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../experiments/gps_experiment/bin/aidl/org/ambientdynamix/contextplugins/myExperimentPlugin/ExperimentPluginInfo.aidl" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../experiments/gps_experiment/src/org/ambientdynamix/contextplugins/gps_experiment/ExperimentPluginInfo.aidl" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../experiments/gps_experiment/src/org/ambientdynamix/contextplugins/gps_experiment/ExperimentPluginInfo.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../experiments/gps_experiment/src/com/google/gson/annotations/Expose.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../experiments/gps_experiment/src/com/google/gson/FieldAttributes.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../experiments/gps_experiment/src/com/google/gson/FieldNamingPolicy.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../experiments/gps_experiment/src/com/google/gson/FieldNamingStrategy.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../experiments/gps_experiment/src/com/google/gson/Gson.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../experiments/gps_experiment/src/com/google/gson/GsonBuilder.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../experiments/gps_experiment/doc/org/ambientdynamix/contextplugins/batterylevel/IBatteryLevelInfo.html" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../experiments/gps_experiment/doc/org/ambientdynamix/contextplugins/batterylevel/class-use/IBatteryLevelInfo.html" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../experiments/gps_experiment/src/org/ambientdynamix/contextplugins/gps_experiment/IExperimentPluginInfo.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../experiments/gps_experiment/src/com/google/gson/InstanceCreator.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../experiments/gps_experiment/src/com/google/gson/JsonArray.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../experiments/gps_experiment/src/com/google/gson/JsonDeserializationContext.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../experiments/gps_experiment/src/com/google/gson/JsonDeserializer.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../experiments/gps_experiment/src/com/google/gson/JsonElement.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../experiments/gps_experiment/src/com/google/gson/JsonIOException.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../experiments/gps_experiment/src/com/google/gson/JsonNull.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../experiments/gps_experiment/src/com/google/gson/JsonObject.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../experiments/gps_experiment/src/com/google/gson/JsonParseException.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../experiments/gps_experiment/src/com/google/gson/JsonParser.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../experiments/gps_experiment/src/com/google/gson/JsonPrimitive.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../experiments/gps_experiment/src/com/google/gson/stream/JsonReader.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../experiments/gps_experiment/src/com/google/gson/internal/JsonReaderInternalAccess.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../experiments/gps_experiment/src/com/google/gson/stream/JsonScope.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../experiments/gps_experiment/src/com/google/gson/JsonSerializationContext.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../experiments/gps_experiment/src/com/google/gson/JsonSerializer.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../experiments/gps_experiment/src/com/google/gson/JsonStreamParser.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../experiments/gps_experiment/src/com/google/gson/JsonSyntaxException.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../experiments/gps_experiment/src/com/google/gson/stream/JsonToken.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../experiments/gps_experiment/src/com/google/gson/internal/bind/JsonTreeReader.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../experiments/gps_experiment/src/com/google/gson/internal/bind/JsonTreeWriter.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../experiments/gps_experiment/src/com/google/gson/stream/JsonWriter.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../experiments/gps_experiment/src/com/google/gson/internal/LazilyParsedNumber.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../experiments/gps_experiment/src/com/google/gson/internal/LinkedTreeMap.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../experiments/gps_experiment/src/com/google/gson/LongSerializationPolicy.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../experiments/gps_experiment/META-INF/MANIFEST.MF" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../experiments/gps_experiment/src/com/google/gson/stream/MalformedJsonException.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../experiments/gps_experiment/src/com/google/gson/internal/bind/MapTypeAdapterFactory.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../experiments/gps_experiment/.externalToolBuilders/New_Builder.launch" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../experiments/gps_experiment/src/com/google/gson/internal/ObjectConstructor.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../experiments/gps_experiment/src/com/google/gson/internal/bind/ObjectTypeAdapter.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../experiments/gps_experiment/doc/org/ambientdynamix/contextplugins/batterylevel/PluginFactory.html" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../experiments/gps_experiment/doc/org/ambientdynamix/contextplugins/batterylevel/class-use/PluginFactory.html" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../experiments/gps_experiment/src/org/ambientdynamix/contextplugins/gps_experiment/PluginFactory.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../experiments/gps_experiment/src/com/google/gson/internal/Primitives.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../experiments/gps_experiment/gen/org/ambientdynamix/contextplugins/myExperimentPlugin/R.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../experiments/gps_experiment/src/com/google/gson/internal/bind/ReflectiveTypeAdapterFactory.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../experiments/gps_experiment/src/com/google/gson/annotations/SerializedName.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../experiments/gps_experiment/src/com/google/gson/annotations/Since.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../experiments/gps_experiment/src/com/google/gson/internal/bind/SqlDateTypeAdapter.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../experiments/gps_experiment/src/com/google/gson/internal/Streams.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../experiments/gps_experiment/src/com/google/gson/internal/bind/TimeTypeAdapter.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../experiments/gps_experiment/src/com/google/gson/TreeTypeAdapter.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../experiments/gps_experiment/src/com/google/gson/TypeAdapter.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../experiments/gps_experiment/src/com/google/gson/TypeAdapterFactory.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../experiments/gps_experiment/src/com/google/gson/internal/bind/TypeAdapterRuntimeTypeWrapper.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../experiments/gps_experiment/src/com/google/gson/internal/bind/TypeAdapters.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../experiments/gps_experiment/src/com/google/gson/reflect/TypeToken.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../experiments/gps_experiment/src/com/google/gson/internal/UnsafeAllocator.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../experiments/gps_experiment/src/com/google/gson/annotations/Until.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../experiments/gps_experiment/doc/allclasses-frame.html" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../experiments/gps_experiment/doc/allclasses-noframe.html" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../experiments/gps_experiment/antbuild.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../experiments/gps_experiment/build.properties" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../experiments/gps_experiment/doc/constant-values.html" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../experiments/gps_experiment/doc/deprecated-list.html" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../experiments/gps_experiment/src/org/ambientdynamix/contextplugins/gps_experiment/gps_experiment.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../experiments/gps_experiment/doc/help-doc.html" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../experiments/gps_experiment/doc/index-files/index-1.html" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../experiments/gps_experiment/doc/index-files/index-10.html" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../experiments/gps_experiment/doc/index-files/index-11.html" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../experiments/gps_experiment/doc/index-files/index-12.html" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../experiments/gps_experiment/doc/index-files/index-2.html" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../experiments/gps_experiment/doc/index-files/index-3.html" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../experiments/gps_experiment/doc/index-files/index-4.html" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../experiments/gps_experiment/doc/index-files/index-5.html" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../experiments/gps_experiment/doc/index-files/index-6.html" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../experiments/gps_experiment/doc/index-files/index-7.html" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../experiments/gps_experiment/doc/index-files/index-8.html" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../experiments/gps_experiment/doc/index-files/index-9.html" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../experiments/gps_experiment/doc/index.html" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../experiments/gps_experiment/bin/jarlist.cache" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../experiments/gps_experiment/lint.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../sensorPlugins/Open Context Plugin Sdk/lint.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../experiments/gps_experiment/res/layout/main.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../experiments/gps_experiment/Deployment/myExperiment_local_repo.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../experiments/gps_experiment/.settings/org.eclipse.jdt.core.prefs" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../sensorPlugins/GpsPlugin/.settings/org.eclipse.ltk.core.refactoring.prefs" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../experiments/gps_experiment/doc/overview-tree.html" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../experiments/gps_experiment/doc/org/ambientdynamix/contextplugins/batterylevel/package-frame.html" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../experiments/gps_experiment/src/com/google/gson/package-info.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../experiments/gps_experiment/src/com/google/gson/annotations/package-info.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../experiments/gps_experiment/src/com/google/gson/internal/package-info.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../experiments/gps_experiment/src/com/google/gson/reflect/package-info.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../experiments/gps_experiment/doc/package-list" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../experiments/gps_experiment/doc/org/ambientdynamix/contextplugins/batterylevel/package-summary.html" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../experiments/gps_experiment/doc/org/ambientdynamix/contextplugins/batterylevel/package-tree.html" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../experiments/gps_experiment/doc/org/ambientdynamix/contextplugins/batterylevel/package-use.html" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../experiments/gps_experiment/proguard.cfg" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../experiments/gps_experiment/project.properties" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../experiments/gps_experiment/doc/serialized-form.html" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../experiments/gps_experiment/res/values/strings.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../experiments/gps_experiment/doc/stylesheet.css" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../sensorPlugins2/BatteryLevelPlugin-1.0.0b/BatteryLevelPlugin/bin/dexedLibs/annotations-2b2ead248a7c3a0d63ab8d05e2e06295.jar" afterPath="" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../sensorPlugins2/BatteryLevelPlugin-1.0.0b/BatteryLevelPlugin/bin/BatteryLevelPlugin.apk" afterPath="$PROJECT_DIR$/../sensorPlugins2/BatteryLevelPlugin-1.0.0b/BatteryLevelPlugin/bin/BatteryLevelPlugin.apk" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../dynamix_framework/dynamix-framework/bin/classes/org/ambientdynamix/update/contextplugin/ContextPluginBinder.class" afterPath="$PROJECT_DIR$/../dynamix_framework/dynamix-framework/bin/classes/org/ambientdynamix/update/contextplugin/ContextPluginBinder.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../dynamix_framework/dynamix-framework/bin/DynamixFramework.apk" afterPath="$PROJECT_DIR$/../dynamix_framework/dynamix-framework/bin/DynamixFramework.apk" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../dynamix_framework/dynamix-framework/bin/classes/org/ambientdynamix/update/contextplugin/SimpleSourceBase.class" afterPath="$PROJECT_DIR$/../dynamix_framework/dynamix-framework/bin/classes/org/ambientdynamix/update/contextplugin/SimpleSourceBase.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../dynamix_framework/dynamix-framework/bin/classes.dex" afterPath="$PROJECT_DIR$/../dynamix_framework/dynamix-framework/bin/classes.dex" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../dynamix_framework/dynamix-framework/bin/resources.ap_" afterPath="$PROJECT_DIR$/../dynamix_framework/dynamix-framework/bin/resources.ap_" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../sensorPlugins2/BatteryLevelPlugin-1.0.0b/BatteryLevelPlugin/bin/resources.ap_" afterPath="$PROJECT_DIR$/../sensorPlugins2/BatteryLevelPlugin-1.0.0b/BatteryLevelPlugin/bin/resources.ap_" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../androidExperimentation/src/eu/smartsantander/androidExperimentation/Constants.java" afterPath="$PROJECT_DIR$/../androidExperimentation/src/eu/smartsantander/androidExperimentation/Constants.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../androidExperimentation/src/eu/smartsantander/androidExperimentation/operations/Demon.java" afterPath="$PROJECT_DIR$/../androidExperimentation/src/eu/smartsantander/androidExperimentation/operations/Demon.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../androidExperimentation/src/eu/smartsantander/androidExperimentation/operations/Scheduler.java" afterPath="$PROJECT_DIR$/../androidExperimentation/src/eu/smartsantander/androidExperimentation/operations/Scheduler.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/misc.xml" afterPath="$PROJECT_DIR$/.idea/misc.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/web/showcase.jsp" afterPath="$PROJECT_DIR$/web/showcase.jsp" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/web/wardriving.jsp" afterPath="$PROJECT_DIR$/web/wardriving.jsp" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <list id="ffed928d-c9fc-443c-9d9a-a806dbe1581e" name="Hibernate altered  Demon registration altered" comment="" />
-    <list id="c9f92d22-8dd7-4493-ab5e-e87fa2c50b30" name="Rejected commit: Default" comment="experiment plugin plugin installation">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/web/dynamixRepository/org.ambientdynamix.contextplugins.GpsPlugin_0.9.54.jar" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/web/experimentRepository/org.ambientdynamix.contextplugins.gps_experiment_1.0.0.jar" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/.idea/artifacts/WebService_war_exploded.xml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/web/dynamixRepository/org.ambientdynamix.contextplugins.GpsPlugin_9.47.1.jar" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/web/dynamixRepository/org.ambientdynamix.contextplugins.WifiPlugin_9.47.1.jar" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/web/dynamixRepository/org.ambientdynamix.contextplugins.WifiScanPlugin_9.47.1.jar" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/web/dynamixRepository/org.ambientdynamix.contextplugins.batteryLevelPlugin_9.47.1.jar" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/web/dynamixRepository/org.ambientdynamix.contextplugins.batteryTemperaturePlugin_9.47.1.jar" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../sensorPlugins/GpsPlugin/lib/org.ambientdynamix.contextplugin.api_v0.9.54.jar" afterPath="" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../sensorPlugins/GpsPlugin/bin/classes/org/ambientdynamix/contextplugins/GpsPlugin/GpsPluginInfo.class" afterPath="$PROJECT_DIR$/../sensorPlugins/GpsPlugin/bin/classes/org/ambientdynamix/contextplugins/GpsPlugin/GpsPluginInfo.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../sensorPlugins/GpsPlugin/bin/classes/org/ambientdynamix/contextplugins/GpsPlugin/GpsPluginRuntime$CurrentLocationGps.class" afterPath="$PROJECT_DIR$/../sensorPlugins/GpsPlugin/bin/classes/org/ambientdynamix/contextplugins/GpsPlugin/GpsPluginRuntime$CurrentLocationGps.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../sensorPlugins/GpsPlugin/bin/classes/org/ambientdynamix/contextplugins/GpsPlugin/GpsPluginRuntime.class" afterPath="$PROJECT_DIR$/../sensorPlugins/GpsPlugin/bin/classes/org/ambientdynamix/contextplugins/GpsPlugin/GpsPluginRuntime.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../sensorPlugins/GpsPlugin/bin/classes/org/ambientdynamix/contextplugins/GpsPlugin/PluginFactory.class" afterPath="$PROJECT_DIR$/../sensorPlugins/GpsPlugin/bin/classes/org/ambientdynamix/contextplugins/GpsPlugin/PluginFactory.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../sensorPlugins/GpsPlugin/.classpath" afterPath="$PROJECT_DIR$/../sensorPlugins/GpsPlugin/.classpath" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/AndroidExperimentationWS.iml" afterPath="$PROJECT_DIR$/AndroidExperimentationWS.iml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../dynamix_framework/dynamix-framework/src/org/ambientdynamix/update/contextplugin/ContextPluginBinder.java" afterPath="$PROJECT_DIR$/../dynamix_framework/dynamix-framework/src/org/ambientdynamix/update/contextplugin/ContextPluginBinder.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../dynamix_framework/dynamix-framework/src/org/ambientdynamix/core/DynamixService.java" afterPath="$PROJECT_DIR$/../dynamix_framework/dynamix-framework/src/org/ambientdynamix/core/DynamixService.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../sensorPlugins/GpsPlugin/META-INF/MANIFEST.MF" afterPath="$PROJECT_DIR$/../sensorPlugins/GpsPlugin/META-INF/MANIFEST.MF" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../sensorPlugins2/BatteryLevelPlugin-1.0.0b/BatteryLevelPlugin/.externalToolBuilders/New_Builder.launch" afterPath="$PROJECT_DIR$/../sensorPlugins2/BatteryLevelPlugin-1.0.0b/BatteryLevelPlugin/.externalToolBuilders/New_Builder.launch" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../dynamix_framework/dynamix-framework/src/org/ambientdynamix/update/contextplugin/SimpleSourceBase.java" afterPath="$PROJECT_DIR$/../dynamix_framework/dynamix-framework/src/org/ambientdynamix/update/contextplugin/SimpleSourceBase.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../sensorPlugins/GpsPlugin/build.properties" afterPath="$PROJECT_DIR$/../sensorPlugins/GpsPlugin/build.properties" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/libraries/dynamixRepository.xml" afterPath="$PROJECT_DIR$/.idea/libraries/dynamixRepository.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/web/dynamixRepository/plugs.xml" afterPath="$PROJECT_DIR$/web/dynamixRepository/plugs.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../sensorPlugins2/BatteryLevelPlugin-1.0.0b/BatteryLevelPlugin/project.properties" afterPath="$PROJECT_DIR$/../sensorPlugins2/BatteryLevelPlugin-1.0.0b/BatteryLevelPlugin/project.properties" />
-    </list>
+    <list id="c9f92d22-8dd7-4493-ab5e-e87fa2c50b30" name="Rejected commit: Default" comment="experiment plugin plugin installation" />
     <ignored path="WebServicesTest.iws" />
     <ignored path=".idea/workspace.xml" />
     <file path="/index.jsp" changelist="4ccbb714-201c-482b-a93f-dd4890c10bc1" time="1378902104346" ignored="false" />
@@ -247,8 +61,9 @@
     <file path="/experiments-overall.jsp" changelist="4ccbb714-201c-482b-a93f-dd4890c10bc1" time="1378989486240" ignored="false" />
     <file path="$PROJECT_DIR$/web/WEB-INF/web.xml" changelist="4ccbb714-201c-482b-a93f-dd4890c10bc1" time="1378990148183" ignored="false" />
     <file path="$PROJECT_DIR$/META-INF/persistence.xml" changelist="4ccbb714-201c-482b-a93f-dd4890c10bc1" time="1378990148183" ignored="false" />
-    <file path="/Dummy.txt" changelist="4ccbb714-201c-482b-a93f-dd4890c10bc1" time="1379343360897" ignored="false" />
+    <file path="/Dummy.txt" changelist="4ccbb714-201c-482b-a93f-dd4890c10bc1" time="1379664459305" ignored="false" />
     <file path="/plugs.xml" changelist="4ccbb714-201c-482b-a93f-dd4890c10bc1" time="1379333920417" ignored="false" />
+    <file path="/showcase.jsp" changelist="4ccbb714-201c-482b-a93f-dd4890c10bc1" time="1379668119958" ignored="false" />
     <option name="TRACKING_ENABLED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -268,7 +83,42 @@
     <sortChildren value="false" />
   </component>
   <component name="DebuggerManager">
-    <ui_properties default_suspend_policy="SuspendAll" default_condition_enabled="true" />
+    <breakpoint_any default_suspend_policy="SuspendAll" default_condition_enabled="true">
+      <breakpoint>
+        <option name="NOTIFY_CAUGHT" value="true" />
+        <option name="NOTIFY_UNCAUGHT" value="true" />
+        <option name="ENABLED" value="false" />
+        <option name="LOG_ENABLED" value="false" />
+        <option name="LOG_EXPRESSION_ENABLED" value="false" />
+        <option name="REMOVE_AFTER_HIT" value="false" />
+        <option name="SUSPEND_POLICY" value="SuspendAll" />
+        <option name="SUSPEND" value="true" />
+        <option name="COUNT_FILTER_ENABLED" value="false" />
+        <option name="COUNT_FILTER" value="0" />
+        <option name="CONDITION_ENABLED" value="true" />
+        <option name="CLASS_FILTERS_ENABLED" value="false" />
+        <option name="INSTANCE_FILTERS_ENABLED" value="false" />
+        <option name="CONDITION" value="" />
+        <option name="LOG_MESSAGE" value="" />
+      </breakpoint>
+      <breakpoint>
+        <option name="NOTIFY_CAUGHT" value="true" />
+        <option name="NOTIFY_UNCAUGHT" value="true" />
+        <option name="ENABLED" value="false" />
+        <option name="LOG_ENABLED" value="false" />
+        <option name="LOG_EXPRESSION_ENABLED" value="false" />
+        <option name="REMOVE_AFTER_HIT" value="false" />
+        <option name="SUSPEND_POLICY" value="SuspendAll" />
+        <option name="SUSPEND" value="true" />
+        <option name="COUNT_FILTER_ENABLED" value="false" />
+        <option name="COUNT_FILTER" value="0" />
+        <option name="CONDITION_ENABLED" value="true" />
+        <option name="CLASS_FILTERS_ENABLED" value="false" />
+        <option name="INSTANCE_FILTERS_ENABLED" value="false" />
+        <option name="CONDITION" value="" />
+        <option name="LOG_MESSAGE" value="" />
+      </breakpoint>
+    </breakpoint_any>
     <line_breakpoints default_suspend_policy="SuspendAll" default_condition_enabled="true">
       <breakpoint url="file://$PROJECT_DIR$/src/eu/smartsantander/androidExperimentation/ModelManager.java" line="125" class="eu.smartsantander.androidExperimentation.ModelManager" package="eu.smartsantander.androidExperimentation">
         <option name="ENABLED" value="true" />
@@ -316,42 +166,7 @@
         <option name="LOG_MESSAGE" value="" />
       </breakpoint>
     </line_breakpoints>
-    <breakpoint_any default_suspend_policy="SuspendAll" default_condition_enabled="true">
-      <breakpoint>
-        <option name="NOTIFY_CAUGHT" value="true" />
-        <option name="NOTIFY_UNCAUGHT" value="true" />
-        <option name="ENABLED" value="false" />
-        <option name="LOG_ENABLED" value="false" />
-        <option name="LOG_EXPRESSION_ENABLED" value="false" />
-        <option name="REMOVE_AFTER_HIT" value="false" />
-        <option name="SUSPEND_POLICY" value="SuspendAll" />
-        <option name="SUSPEND" value="true" />
-        <option name="COUNT_FILTER_ENABLED" value="false" />
-        <option name="COUNT_FILTER" value="0" />
-        <option name="CONDITION_ENABLED" value="true" />
-        <option name="CLASS_FILTERS_ENABLED" value="false" />
-        <option name="INSTANCE_FILTERS_ENABLED" value="false" />
-        <option name="CONDITION" value="" />
-        <option name="LOG_MESSAGE" value="" />
-      </breakpoint>
-      <breakpoint>
-        <option name="NOTIFY_CAUGHT" value="true" />
-        <option name="NOTIFY_UNCAUGHT" value="true" />
-        <option name="ENABLED" value="false" />
-        <option name="LOG_ENABLED" value="false" />
-        <option name="LOG_EXPRESSION_ENABLED" value="false" />
-        <option name="REMOVE_AFTER_HIT" value="false" />
-        <option name="SUSPEND_POLICY" value="SuspendAll" />
-        <option name="SUSPEND" value="true" />
-        <option name="COUNT_FILTER_ENABLED" value="false" />
-        <option name="COUNT_FILTER" value="0" />
-        <option name="CONDITION_ENABLED" value="true" />
-        <option name="CLASS_FILTERS_ENABLED" value="false" />
-        <option name="INSTANCE_FILTERS_ENABLED" value="false" />
-        <option name="CONDITION" value="" />
-        <option name="LOG_MESSAGE" value="" />
-      </breakpoint>
-    </breakpoint_any>
+    <ui_properties default_suspend_policy="SuspendAll" default_condition_enabled="true" />
     <breakpoint_rules />
     <ui_properties />
   </component>
@@ -360,7 +175,17 @@
     <favorites_list name="WebServicesTest" />
   </component>
   <component name="FileEditorManager">
-    <leaf />
+    <leaf>
+      <file leaf-file-name="wardriving.jsp" pinned="false" current="true" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/web/wardriving.jsp">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="13" column="26" selection-start="289" selection-end="289" vertical-scroll-proportion="0.40328467">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+    </leaf>
   </component>
   <component name="FindManager">
     <FindUsagesManager>
@@ -379,8 +204,6 @@
   <component name="IdeDocumentHistory">
     <option name="changedFiles">
       <list>
-        <option value="$PROJECT_DIR$/web/style/style.css" />
-        <option value="$PROJECT_DIR$/web/includes/header.html" />
         <option value="$PROJECT_DIR$/web/index.jsp" />
         <option value="$PROJECT_DIR$/web/includes/footer.html" />
         <option value="$PROJECT_DIR$/web/style/santander-template.css" />
@@ -395,6 +218,8 @@
         <option value="$PROJECT_DIR$/web/dynamixRepository/plugs.xml" />
         <option value="dbtable:/adf69c6a/ec19ba82-120f-43e6-96c5-26912937ccef/androidExperimentation..experiments" />
         <option value="dbtable:/adf69c6a/ec19ba82-120f-43e6-96c5-26912937ccef/androidExperimentation..results" />
+        <option value="$PROJECT_DIR$/web/showcase.jsp" />
+        <option value="$PROJECT_DIR$/web/wardriving.jsp" />
       </list>
     </option>
   </component>
@@ -406,9 +231,10 @@
     <option name="CUSTOM_FILTER" />
   </component>
   <component name="ProjectFrameBounds">
-    <option name="y" value="24" />
-    <option name="width" value="1920" />
-    <option name="height" value="1032" />
+    <option name="x" value="-8" />
+    <option name="y" value="-8" />
+    <option name="width" value="1936" />
+    <option name="height" value="1056" />
   </component>
   <component name="ProjectInspectionProfilesVisibleTreeState">
     <entry key="Project Default">
@@ -467,33 +293,73 @@
               <option name="myItemId" value="" />
               <option name="myItemType" value="" />
             </PATH_ELEMENT>
-          </PATH>
-        </subPane>
-      </pane>
-      <pane id="PackagesPane">
-        <subPane>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="AndroidExperimentation" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PackageViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="AndroidExperimentationWS" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PackageViewModuleNode" />
+            <PATH_ELEMENT USER_OBJECT="WebService">
+              <option name="myItemId" value="" />
+              <option name="myItemType" value="" />
             </PATH_ELEMENT>
           </PATH>
           <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="AndroidExperimentation" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PackageViewProjectNode" />
+            <PATH_ELEMENT USER_OBJECT="Root">
+              <option name="myItemId" value="" />
+              <option name="myItemType" value="" />
             </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="AndroidExperimentationWS" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PackageViewModuleNode" />
+            <PATH_ELEMENT USER_OBJECT="WebService">
+              <option name="myItemId" value="" />
+              <option name="myItemType" value="" />
             </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="eu.smartsantander.androidExperimentation" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PackageElementNode" />
+            <PATH_ELEMENT USER_OBJECT="web">
+              <option name="myItemId" value="" />
+              <option name="myItemType" value="" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT USER_OBJECT="Root">
+              <option name="myItemId" value="" />
+              <option name="myItemType" value="" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT USER_OBJECT="WebService">
+              <option name="myItemId" value="" />
+              <option name="myItemType" value="" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT USER_OBJECT="web">
+              <option name="myItemId" value="" />
+              <option name="myItemType" value="" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT USER_OBJECT="js">
+              <option name="myItemId" value="" />
+              <option name="myItemType" value="" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT USER_OBJECT="Root">
+              <option name="myItemId" value="" />
+              <option name="myItemType" value="" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT USER_OBJECT="WebService">
+              <option name="myItemId" value="" />
+              <option name="myItemType" value="" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT USER_OBJECT="web">
+              <option name="myItemId" value="" />
+              <option name="myItemType" value="" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT USER_OBJECT="includes">
+              <option name="myItemId" value="" />
+              <option name="myItemType" value="" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT USER_OBJECT="Root">
+              <option name="myItemId" value="" />
+              <option name="myItemType" value="" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT USER_OBJECT="WebService">
+              <option name="myItemId" value="" />
+              <option name="myItemType" value="" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT USER_OBJECT="src">
+              <option name="myItemId" value="" />
+              <option name="myItemType" value="" />
             </PATH_ELEMENT>
           </PATH>
         </subPane>
@@ -532,6 +398,34 @@
           </PATH>
         </subPane>
       </pane>
+      <pane id="PackagesPane">
+        <subPane>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="AndroidExperimentation" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PackageViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="AndroidExperimentationWS" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PackageViewModuleNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="AndroidExperimentation" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PackageViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="AndroidExperimentationWS" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PackageViewModuleNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="eu.smartsantander.androidExperimentation" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PackageElementNode" />
+            </PATH_ELEMENT>
+          </PATH>
+        </subPane>
+      </pane>
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -540,11 +434,11 @@
     <property name="project.structure.proportion" value="0.15" />
     <property name="options.splitter.main.proportions" value="0.3" />
     <property name="Repository.Attach.JavaDocs" value="false" />
-    <property name="GenerateAntBuildDialog.generateSingleFile" value="false" />
-    <property name="recentsLimit" value="5" />
     <property name="MemberChooser.sorted" value="false" />
-    <property name="GenerateAntBuildDialog.inclineRuntiemClasspath" value="false" />
+    <property name="recentsLimit" value="5" />
+    <property name="GenerateAntBuildDialog.generateSingleFile" value="false" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$/web" />
+    <property name="GenerateAntBuildDialog.inclineRuntiemClasspath" value="false" />
     <property name="GenerateAntBuildDialog.outputFileNameProperty" value="webservicestest" />
     <property name="Database.TableEditor.Splitter" value="0.9" />
     <property name="GenerateAntBuildDialog.enableUiFormCompile" value="true" />
@@ -558,14 +452,14 @@
     <property name="options.splitter.details.proportions" value="0.2" />
     <property name="GoToFile.includeJavaFiles" value="false" />
     <property name="options.lastSelected" value="project.propVCSSupport.Mappings" />
-    <property name="GenerateAntBuildDialog.forceTargetJdk" value="true" />
     <property name="project.structure.side.proportion" value="0.28529122" />
+    <property name="GenerateAntBuildDialog.forceTargetJdk" value="true" />
     <property name="MemberChooser.copyJavadoc" value="false" />
     <property name="findjar.last.used.dir" value="$PROJECT_DIR$/lib" />
     <property name="restartRequiresConfirmation" value="true" />
     <property name="GenerateAntBuildDialog.backupFiles" value="true" />
-    <property name="dynamic.classpath" value="false" />
     <property name="options.searchVisible" value="true" />
+    <property name="dynamic.classpath" value="false" />
   </component>
   <component name="RecentsManager">
     <key name="CopyClassDialog.RECENTS_KEY">
@@ -708,19 +602,6 @@
       <option name="PORT" value="5005" />
       <method />
     </configuration>
-    <configuration default="true" type="Applet" factoryName="Applet">
-      <module name="" />
-      <option name="MAIN_CLASS_NAME" />
-      <option name="HTML_FILE_NAME" />
-      <option name="HTML_USED" value="false" />
-      <option name="WIDTH" value="400" />
-      <option name="HEIGHT" value="300" />
-      <option name="POLICY_FILE" value="$APPLICATION_HOME_DIR$/bin/appletviewer.policy" />
-      <option name="VM_PARAMETERS" />
-      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
-      <option name="ALTERNATIVE_JRE_PATH" />
-      <method />
-    </configuration>
     <configuration default="true" type="TestNG" factoryName="TestNG">
       <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea" />
       <module name="" />
@@ -747,6 +628,19 @@
       <envs />
       <properties />
       <listeners />
+      <method />
+    </configuration>
+    <configuration default="true" type="Applet" factoryName="Applet">
+      <module name="" />
+      <option name="MAIN_CLASS_NAME" />
+      <option name="HTML_FILE_NAME" />
+      <option name="HTML_USED" value="false" />
+      <option name="WIDTH" value="400" />
+      <option name="HEIGHT" value="300" />
+      <option name="POLICY_FILE" value="$APPLICATION_HOME_DIR$/bin/appletviewer.policy" />
+      <option name="VM_PARAMETERS" />
+      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
+      <option name="ALTERNATIVE_JRE_PATH" />
       <method />
     </configuration>
     <configuration default="true" type="Application" factoryName="Application">
@@ -792,6 +686,23 @@
       <patterns />
       <method />
     </configuration>
+    <configuration default="true" type="#com.intellij.j2ee.web.tomcat.TomcatRunConfigurationFactory" factoryName="Local">
+      <deployment />
+      <server-settings />
+      <predefined_log_file id="Tomcat" enabled="true" />
+      <predefined_log_file id="Tomcat Catalina" enabled="true" />
+      <predefined_log_file id="Tomcat Manager" enabled="false" />
+      <predefined_log_file id="Tomcat Host Manager" enabled="false" />
+      <predefined_log_file id="Tomcat Localhost Access" enabled="false" />
+      <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea" />
+      <method />
+    </configuration>
+    <configuration default="true" type="com.intellij.persistence.run.ConsoleRunConfigurationType" factoryName="Query Language Console">
+      <option name="VM_PARAMETERS" value="" />
+      <option name="USER_CFG_CLASS" />
+      <option name="CONTEXT_PROVIDER" />
+      <method />
+    </configuration>
     <configuration default="true" type="#com.intellij.j2ee.web.tomcat.TomcatRunConfigurationFactory" factoryName="Remote">
       <option name="LOCAL" value="false" />
       <deployment />
@@ -802,23 +713,6 @@
       </server-settings>
       <predefined_log_file id="Tomcat" enabled="true" />
       <predefined_log_file id="TOMCAT_LOCALHOST_LOG_ID" enabled="true" />
-      <method />
-    </configuration>
-    <configuration default="true" type="com.intellij.persistence.run.ConsoleRunConfigurationType" factoryName="Query Language Console">
-      <option name="VM_PARAMETERS" value="" />
-      <option name="USER_CFG_CLASS" />
-      <option name="CONTEXT_PROVIDER" />
-      <method />
-    </configuration>
-    <configuration default="true" type="#com.intellij.j2ee.web.tomcat.TomcatRunConfigurationFactory" factoryName="Local">
-      <deployment />
-      <server-settings />
-      <predefined_log_file id="Tomcat" enabled="true" />
-      <predefined_log_file id="Tomcat Catalina" enabled="true" />
-      <predefined_log_file id="Tomcat Manager" enabled="false" />
-      <predefined_log_file id="Tomcat Host Manager" enabled="false" />
-      <predefined_log_file id="Tomcat Localhost Access" enabled="false" />
-      <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea" />
       <method />
     </configuration>
     <configuration default="false" name="Tomcat 7.0" type="#com.intellij.j2ee.web.tomcat.TomcatRunConfigurationFactory" factoryName="Local" APPLICATION_SERVER_NAME="Tomcat 7.0">
@@ -912,12 +806,7 @@
       <Port>5050</Port>
     </configuration>
   </component>
-  <component name="ShelveChangesManager" show_recycled="false">
-    <recycled_changelist date="1379081446600">
-      <option name="PATH" value="$USER_HOME$/.IntelliJIdea12/config/shelf/Hibernate_altered__Demon_registration_altered.patch" />
-      <option name="DESCRIPTION" value="Hibernate altered  Demon registration altered" />
-    </recycled_changelist>
-  </component>
+  <component name="ShelveChangesManager" show_recycled="false" />
   <component name="SvnConfiguration" maxAnnotateRevisions="500" myUseAcceleration="nothing" myAutoUpdateAfterCommit="false" cleanupOnStartRun="false" SSL_PROTOCOLS="sslv3">
     <option name="USER" value="" />
     <option name="PASSWORD" value="" />
@@ -982,31 +871,31 @@
     </todo-panel>
   </component>
   <component name="ToolWindowManager">
-    <frame x="0" y="24" width="1920" height="1032" extended-state="6" />
-    <editor active="false" />
+    <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
+    <editor active="true" />
     <layout>
       <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.6177474" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="JetGradle" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="Persistence" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.29868075" sideWeight="0.27531284" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
-      <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.11497326" sideWeight="0.4050057" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.114727855" sideWeight="0.6734007" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.47440273" sideWeight="0.9139038" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="IDEtalk Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="15" side_tool="false" content_ui="tabs" />
-      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.5949943" sideWeight="0.5" order="8" side_tool="true" content_ui="tabs" />
+      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.32659933" sideWeight="0.5" order="8" side_tool="true" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.24878444" sideWeight="0.67190224" order="4" side_tool="true" content_ui="tabs" />
       <window_info id="IDEtalk" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4334471" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
-      <window_info id="Messages" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.5949943" sideWeight="0.5" order="11" side_tool="false" content_ui="tabs" />
-      <window_info id="CDI" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
+      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.5959596" sideWeight="0.5" order="11" side_tool="false" content_ui="tabs" />
       <window_info id="Web" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.24878444" sideWeight="0.67190224" order="3" side_tool="true" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32764506" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.2486631" sideWeight="0.18998863" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="SLIDING" type="SLIDING" visible="false" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
+      <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Application Servers" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32536975" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.2090909" sideWeight="0.4050057" order="0" side_tool="false" content_ui="combo" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32668883" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.20864461" sideWeight="0.6734007" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.32659933" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="CDI" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="SVN Repositories" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32992035" sideWeight="0.5" order="16" side_tool="false" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
       <window_info id="soapUI Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32984293" sideWeight="0.5" order="12" side_tool="false" content_ui="tabs" />
@@ -1147,16 +1036,9 @@
         <state line="75" column="9" selection-start="2352" selection-end="2352" vertical-scroll-proportion="0.3512304" />
       </provider>
     </entry>
-    <entry file="jar://$USER_HOME$/programs/jdk1.6.0_45/src.zip!/java/util/Date.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="111" column="13" selection-start="5183" selection-end="5183" vertical-scroll-proportion="0.33333334" />
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/eu/smartsantander/androidExperimentation/entities/Experiment.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="81" column="62" selection-start="0" selection-end="3998" vertical-scroll-proportion="0.44642857">
-          <folding />
-        </state>
+        <state line="81" column="62" selection-start="0" selection-end="3998" vertical-scroll-proportion="0.44642857" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/eu/smartsantander/androidExperimentation/entities/ExperimentsEntity.hbm.xml">
@@ -1180,38 +1062,11 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/web/showcase.jsp">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/web/includes/header.html">
       <provider selected="true" editor-type-id="text-editor">
         <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0">
           <folding />
         </state>
-      </provider>
-    </entry>
-    <entry file="dbDummy://dbtable:/adf69c6a/ec19ba82-120f-43e6-96c5-26912937ccef/androidExperimentation..smartphones">
-      <provider editor-type-id="text-editor">
-        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-      <provider selected="true" editor-type-id="com.intellij.persistence.database.editor.DatabaseTableFileEditorProvider">
-        <state />
-      </provider>
-    </entry>
-    <entry file="dbDummy://dbtable:/adf69c6a/ec19ba82-120f-43e6-96c5-26912937ccef/androidExperimentation..plugins">
-      <provider editor-type-id="text-editor">
-        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-      <provider selected="true" editor-type-id="com.intellij.persistence.database.editor.DatabaseTableFileEditorProvider">
-        <state />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/web/dynamixRepository/plugs.xml">
@@ -1221,16 +1076,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="dbDummy://dbtable:/adf69c6a/ec19ba82-120f-43e6-96c5-26912937ccef/androidExperimentation..results">
-      <provider editor-type-id="text-editor">
-        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-      <provider selected="true" editor-type-id="com.intellij.persistence.database.editor.DatabaseTableFileEditorProvider">
-        <state />
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/eu/smartsantander/androidExperimentation/AndroidExperimentationWS.java">
       <provider selected="true" editor-type-id="text-editor">
         <state line="38" column="56" selection-start="1276" selection-end="1276" vertical-scroll-proportion="1.1425061">
@@ -1238,19 +1083,26 @@
         </state>
       </provider>
     </entry>
-    <entry file="dbDummy://dbtable:/adf69c6a/ec19ba82-120f-43e6-96c5-26912937ccef/androidExperimentation..experiments">
-      <provider editor-type-id="text-editor">
-        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
+    <entry file="file://$PROJECT_DIR$/../dynamix_framework/dynamix-framework/src/org/ambientdynamix/update/contextplugin/SimpleSourceBase.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="23" column="11" selection-start="804" selection-end="804" vertical-scroll-proportion="0.46875" />
       </provider>
-      <provider selected="true" editor-type-id="com.intellij.persistence.database.editor.DatabaseTableFileEditorProvider">
+    </entry>
+    <entry file="file://$PROJECT_DIR$/web/images/intro.jpg">
+      <provider selected="true" editor-type-id="images">
         <state />
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/../dynamix_framework/dynamix-framework/src/org/ambientdynamix/update/contextplugin/SimpleSourceBase.java">
+    <entry file="file://$PROJECT_DIR$/web/showcase.jsp">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="23" column="11" selection-start="804" selection-end="804" vertical-scroll-proportion="0.46875">
+        <state line="23" column="47" selection-start="1100" selection-end="1100" vertical-scroll-proportion="0.7308411">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/web/wardriving.jsp">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="13" column="26" selection-start="289" selection-end="289" vertical-scroll-proportion="0.40328467">
           <folding />
         </state>
       </provider>
