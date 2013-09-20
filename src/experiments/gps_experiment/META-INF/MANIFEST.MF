@@ -1,0 +1,11 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: GPS Experiment Plugin
+Bundle-Vendor: Ambient Dynamix
+Bundle-SymbolicName: org.ambientdynamix.contextplugins.gps_experiment
+Bundle-Version: 1.0.0
+Export-Package: org.ambientdynamix.contextplugins.gps_experiment
+Import-Package: org.ambientdynamix.api.application,
+ org.ambientdynamix.api.contextplugin,
+ org.ambientdynamix.api.contextplugin.security
+DynamicImport-Package: *

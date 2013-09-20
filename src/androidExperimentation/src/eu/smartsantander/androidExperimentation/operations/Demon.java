@@ -1,18 +1,7 @@
 package eu.smartsantander.androidExperimentation.operations;
 
 import java.io.File;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
-
-import com.google.gson.Gson;
-
-import eu.smartsantander.androidExperimentation.Constants;
-import eu.smartsantander.androidExperimentation.jsonEntities.Experiment;
-import eu.smartsantander.androidExperimentation.jsonEntities.Plugin;
-import eu.smartsantander.androidExperimentation.jsonEntities.PluginList;
 
 import android.content.Context;
 import android.content.Intent;
@@ -22,6 +11,13 @@ import android.os.AsyncTask;
 import android.os.Handler;
 import android.os.Message;
 import android.util.Log;
+
+import com.google.gson.Gson;
+
+import eu.smartsantander.androidExperimentation.Constants;
+import eu.smartsantander.androidExperimentation.jsonEntities.Experiment;
+import eu.smartsantander.androidExperimentation.jsonEntities.Plugin;
+import eu.smartsantander.androidExperimentation.jsonEntities.PluginList;
 
 public class Demon extends Thread implements Runnable {
 
@@ -52,8 +48,7 @@ public class Demon extends Thread implements Runnable {
 		this.phoneProfiler = phoneProfiler;
 		this.communication = communication;
 		this.sensorProfiler = sensorProfiler;
-		pref = context.getApplicationContext().getSharedPreferences(
-				"runningJob", 0); // 0 - for private mode
+		pref = context.getApplicationContext().getSharedPreferences("runningJob", 0); // 0 - for private mode
 		editor = pref.edit();
 		runningJob = pref.getString("runningJob", "-1");
 		lastRunned = pref.getString("lastExperiment", "-1");
@@ -91,12 +86,11 @@ public class Demon extends Thread implements Runnable {
 			PluginList plist = new PluginList();
 			plist.setPluginList(pluginList);
 			String plistString = (new Gson()).toJson(plist, PluginList.class);
-			editor = (this.context.getSharedPreferences("pluginObjects", 0))
-					.edit();
+			editor = (this.context.getSharedPreferences("pluginObjects", 0)).edit();
 			editor.putString("pluginObjects", plistString);
 			editor.commit();
 			this.isProperlyInitiallized = true;
-			handler.postDelayed(runnable, Constants.EXPERIMENT_POLL_INTERVAL);
+			handler.postDelayed(runnable, 1000);
 		} catch (Exception e) {
 			this.isProperlyInitiallized = false;
 			e.printStackTrace();
@@ -184,8 +178,7 @@ public class Demon extends Thread implements Runnable {
 							Experiment experiment = (Experiment) gson.fromJson(jsonExperiment, Experiment.class);
 							String[] smarDeps = sensorProfiler.getSensorRules().split(",");
 							String[] expDeps = experiment.getSensorDependencies().split(",");
-							Set<String> smarSet = new HashSet<String>(Arrays.asList(smarDeps));
-							Set<String> expSet = new HashSet<String>(Arrays.asList(expDeps));
+
 
 							if (match(smarDeps,expDeps)==true) {
 								String contextType = experiment.getContextType();
@@ -193,7 +186,7 @@ public class Demon extends Thread implements Runnable {
 
 								Downloader downloader = new Downloader();
 								try {
-									downloader.DownloadFromUrl(url, contextType);
+									downloader.DownloadFromUrl(url, experiment.getFilename());
 								} catch (Exception e) {
 									e.printStackTrace();
 									return "Failed to Download Experiment";
