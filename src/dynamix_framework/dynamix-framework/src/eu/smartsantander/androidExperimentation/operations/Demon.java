@@ -68,7 +68,7 @@ public class Demon extends Thread implements Runnable {
 				return;
 			}
 			Thread.sleep(1000);
-			File root = android.os.Environment.getExternalStorageDirectory();
+			/*File root = android.os.Environment.getExternalStorageDirectory();
 			File dir = new File(root.getAbsolutePath() + "/dynamix");
 			if (dir.exists() == false) {
 				dir.mkdirs();
@@ -77,7 +77,7 @@ public class Demon extends Thread implements Runnable {
 			List<Plugin> pluginList = communication.sendGetPluginList();
 			Plugin pluginXML = null;
 			for (Plugin plug : pluginList) {
-				checkFile(plug.getFilename(), plug.getInstallUrl());
+				Constants.checkFile(plug.getFilename(), plug.getInstallUrl());
 				if (plug.getName().equals("plugs.xml")) {
 					pluginXML = plug;
 				}
@@ -89,6 +89,7 @@ public class Demon extends Thread implements Runnable {
 			editor = (this.context.getSharedPreferences("pluginObjects", 0)).edit();
 			editor.putString("pluginObjects", plistString);
 			editor.commit();
+			*/
 			this.isProperlyInitiallized = true;
 			handler.postDelayed(runnable, 1000);
 		} catch (Exception e) {
@@ -110,27 +111,7 @@ public class Demon extends Thread implements Runnable {
 		}
 	};
 
-	private void checkFile(String filename, String url) throws Exception {
-		File root = android.os.Environment.getExternalStorageDirectory();
-		File myfile = new File(root.getAbsolutePath() + "/dynamix/" + filename);
-
-		if (myfile.exists() == false) {
-			Downloader downloader = new Downloader();
-			downloader.DownloadFromUrl(url, filename);
-		}
-	}
-
-	private void checkExperiment(String contextType, String url)
-			throws Exception {
-		File root = android.os.Environment.getExternalStorageDirectory();
-		File myfile = new File(root.getAbsolutePath() + "/dynamix/"
-				+ contextType);
-
-		if (myfile.exists() == false) {
-			Downloader downloader = new Downloader();
-			downloader.DownloadFromUrl(url, contextType);
-		}
-	}
+	
 
 	private void updateDynamixRepository() {
 		Log.i(TAG, "send update dynamix repository intent");
@@ -221,7 +202,7 @@ public class Demon extends Thread implements Runnable {
 					String runningExperimentUrl = pref.getString(
 							"runningExperimentUrl", "-1");
 					try {
-						checkExperiment(runningJob, runningExperimentUrl);
+						Constants.checkExperiment(runningJob, runningExperimentUrl);
 					} catch (Exception e) {
 						// TODO Auto-generated catch block
 						e.printStackTrace();

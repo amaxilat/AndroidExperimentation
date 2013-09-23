@@ -19,7 +19,7 @@ import android.os.Message;
 import android.os.Messenger;
 import android.util.Log;
 
-public class MainService extends Service
+public class AndroidExperimentationService extends Service
 {
 	private final String TAG = this.getClass().getSimpleName();
 		
@@ -28,7 +28,7 @@ public class MainService extends Service
 //	private DynamixReceiver dynamixReceiver;
 	
 	private Demon demon;
-    private Scheduler scheduler;
+    //private Scheduler scheduler;
     private Profiler profiler;
     private SensorProfiler sensorProfiler;
     private Reporter reporter;
@@ -36,11 +36,11 @@ public class MainService extends Service
     private Registration registration;
     private Communication communication;
 	
-    static final int MSG_CONNECT_TO_DYNAMIX = 1;
-    static final int MSG_DISCONNECT_DYNAMIX = 2;
-    static final int MSG_STOP_JOB = 3;
-    static final int MSG_START_JOB = 4;
-    static final int MSG_SENSORS_PERMISSIONS_CHANGED = 5;
+    public static final int MSG_CONNECT_TO_DYNAMIX = 1;
+    public static final int MSG_DISCONNECT_DYNAMIX = 2;
+    public static final int MSG_STOP_JOB = 3;
+    public static final int MSG_START_JOB = 4;
+    public static final int MSG_SENSORS_PERMISSIONS_CHANGED = 5;
 
     // Handler of incoming messages from MainActivity
     class IncomingHandler extends Handler
@@ -51,20 +51,20 @@ public class MainService extends Service
             switch (msg.what)
             {
                 case MSG_CONNECT_TO_DYNAMIX:
-                    scheduler.connect_to_dynamix();
+                    //scheduler.connect_to_dynamix();
                     break;
                 case MSG_DISCONNECT_DYNAMIX:
-                	scheduler.disconnect_from_dynamix();
+                	//scheduler.disconnect_from_dynamix();
                 	break;
                 case MSG_STOP_JOB:
-                    scheduler.stopCurrentPlugin();
+                    //scheduler.stopCurrentPlugin();
                 	break;
                 case MSG_START_JOB:
-                	scheduler.startCurrentJob();
+                	//scheduler.startCurrentJob();
                 	break;
                 case MSG_SENSORS_PERMISSIONS_CHANGED:
                 	sensorProfiler.sensorsPermissionsChanged();
-                	scheduler.sensorsPermissionsChanged();
+                	//scheduler.sensorsPermissionsChanged();
                 default:
                     super.handleMessage(msg);
             }
@@ -163,8 +163,8 @@ public class MainService extends Service
 	    registration = new Registration(handler, communication, phoneProfiler, sensorProfiler);
 		profiler = new Profiler(handler, phoneProfiler);
 	    reporter = new Reporter(handler, context, communication);
-	    scheduler = new Scheduler(handler, context, sensorProfiler, reporter, phoneProfiler);
-        demon = new Demon(handler, context, communication, scheduler, phoneProfiler, sensorProfiler);
+	    //scheduler = new Scheduler(handler, context, sensorProfiler, reporter, phoneProfiler);
+        demon = new Demon(handler, context, communication, null, phoneProfiler, sensorProfiler);
 	       
 	    // start threads
 	    communication.start();
@@ -182,14 +182,14 @@ public class MainService extends Service
 	    }
 	    profiler.start();
 	    reporter.start();
-		scheduler.start();
+		//scheduler.start();
 	    demon.start();
 		
 	    IntentFilter filter = new IntentFilter();
 		filter.addAction("eu.smartsantander.androidExperimentation.MainService");
 		
 		// connect to dynamix framework
-		scheduler.connect_to_dynamix();		
+		//scheduler.connect_to_dynamix();		
         return mMessenger.getBinder();
     }
        

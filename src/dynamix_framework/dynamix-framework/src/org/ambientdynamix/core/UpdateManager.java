@@ -201,8 +201,7 @@ class UpdateManager {
 							currentSource = source;
 							try {
 								Log.d(TAG, "Updating from PluginSource: " + source);
-								List<DiscoveredContextPlugin> potentialUpdates = source.getContextPlugins(platform,
-										platformVersion, frameworkVersion);
+								List<DiscoveredContextPlugin> potentialUpdates = source.getContextPlugins(platform,	platformVersion, frameworkVersion);
 								List<DiscoveredContextPlugin> remove = new ArrayList<DiscoveredContextPlugin>();
 								for (DiscoveredContextPlugin update : potentialUpdates) {
 									if (update.hasError()) {
@@ -252,8 +251,9 @@ class UpdateManager {
 						});
 					} else {
 						final List<PluginDiscoveryResult> results = new Vector<PluginDiscoveryResult>();
-						for (DiscoveredContextPlugin update : updates)
+						for (DiscoveredContextPlugin update : updates){
 							results.add(new PluginDiscoveryResult(update));
+						}
 						if (callback != null) {
 							Utils.dispatch(new Runnable() {
 								@Override
@@ -266,6 +266,7 @@ class UpdateManager {
 					Log.d(TAG, "Completed checking for context plug-in updates");
 					// Restart the update timer, if necessary
 					DynamixService.startContextPluginUpdateTimer();
+					
 					DynamixService.updateNotifications();
 					processingContextPluginUpdates = false;
 				}

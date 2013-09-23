@@ -18,6 +18,8 @@ package org.ambientdynamix.core;
 import org.ambientdynamix.util.AndroidNotification;
 
 import org.ambientdynamix.core.R;
+
+import eu.smartsantander.androidExperimentation.AndroidExperimentationService;
 import eu.smartsantander.androidExperimentation.tabs.dynamixTab;
 import eu.smartsantander.androidExperimentation.tabs.jobsTab;
 import eu.smartsantander.androidExperimentation.tabs.profileTab;
@@ -26,13 +28,21 @@ import eu.smartsantander.androidExperimentation.tabs.securityTab;
 
 import android.app.AlertDialog;
 import android.app.TabActivity;
+import android.content.BroadcastReceiver;
+import android.content.ComponentName;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.IntentFilter;
+import android.content.ServiceConnection;
 import android.content.res.Resources;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.os.Handler;
+import android.os.IBinder;
+import android.os.Message;
+import android.os.Messenger;
+import android.os.RemoteException;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -44,10 +54,11 @@ import android.widget.Toast;
 import android.widget.TabHost.TabSpec;
 
 /**
- * Base Activity for the Dynamix Framework UI. Responsible for hosting Tabs and booting Dynamix, which launches the
- * Dynamix background service.
+ * Base Activity for the Dynamix Framework UI. Responsible for hosting Tabs and
+ * booting Dynamix, which launches the Dynamix background service.
  * <p>
- * Note: This Activity is registered as the 'application' in the AndroidManifest.xml, so it's started first.
+ * Note: This Activity is registered as the 'application' in the
+ * AndroidManifest.xml, so it's started first.
  * 
  * @see DynamixService
  * @author Darren Carlson
@@ -55,12 +66,19 @@ import android.widget.TabHost.TabSpec;
 public class BaseActivity extends TabActivity {
 	private final static String TAG = BaseActivity.class.getSimpleName();
 	/*
-	 * Useful Links: Fancy ListViews: http://www.androidguys.com/tag/android-listview/ Custom ListView Adapters:
-	 * http://www.softwarepassion.com/android-series-custom-listview-items -and-adapters/ Common layout objects:
-	 * http://developer.android.com/guide/topics/ui/layout-objects.html Layout tricks!
-	 * http://www.curious-creature.org/2009/02/22/android-layout-tricks-1/ Table Layout (Good):
-	 * http://www.vbsteven.be/blog/using-the-simpleadapter-with-a- listview-in-android/ MultiColumn ListView:
-	 * http://www.heikkitoivonen.net/blog /2009/02/15/multicolumn-listview-in-android/
+	 * Useful Links: Fancy ListViews:
+	 * http://www.androidguys.com/tag/android-listview/ Custom ListView
+	 * Adapters:
+	 * http://www.softwarepassion.com/android-series-custom-listview-items
+	 * -and-adapters/ Common layout objects:
+	 * http://developer.android.com/guide/topics/ui/layout-objects.html Layout
+	 * tricks!
+	 * http://www.curious-creature.org/2009/02/22/android-layout-tricks-1/ Table
+	 * Layout (Good):
+	 * http://www.vbsteven.be/blog/using-the-simpleadapter-with-a-
+	 * listview-in-android/ MultiColumn ListView:
+	 * http://www.heikkitoivonen.net/blog
+	 * /2009/02/15/multicolumn-listview-in-android/
 	 */
 	/**
 	 * Allows external callers to activate the specified Tab.
@@ -78,6 +96,19 @@ public class BaseActivity extends TabActivity {
 	private TabHost tabHost = null;
 	private final Handler uiHandler = new Handler();
 	private static boolean activityVisible;
+
+	// Android Experimentation Members
+	private Boolean tabIntentListenerIsRegistered = false;
+	private tabIntentListener tabIntentlistener = null;
+	private Boolean serviceIntentListenerIsRegistered = false;
+	private ServiceIntentListener serviceIntentlistener = null;
+	Messenger mService = null;
+	private dynamixTab dTab;
+	private profileTab pTab;
+	private jobsTab jTab;
+	private reportTab rTab;
+	private securityTab sTab;
+	boolean mBound;
 
 	public static void close() {
 		if (baseActivity != null)
@@ -109,14 +140,14 @@ public class BaseActivity extends TabActivity {
 
 	protected static void setTitlebarDisabled() {
 		if (baseActivity != null)
-			baseActivity.changeTitlebarState(Color.RED, "Dynamix " + DynamixService.getFrameworkVersion()
-					+ " is disabled");
+			baseActivity.changeTitlebarState(Color.RED, "Dynamix "
+					+ DynamixService.getFrameworkVersion() + " is disabled");
 	}
 
 	protected static void setTitlebarEnabled() {
 		if (baseActivity != null)
-			baseActivity.changeTitlebarState(Color.rgb(0, 225, 50), "Dynamix " + DynamixService.getFrameworkVersion()
-					+ " is enabled");
+			baseActivity.changeTitlebarState(Color.rgb(0, 225, 50), "Dynamix "
+					+ DynamixService.getFrameworkVersion() + " is enabled");
 	}
 
 	public static boolean isActivityVisible() {
@@ -130,6 +161,117 @@ public class BaseActivity extends TabActivity {
 	public static void activityPaused() {
 		activityVisible = false;
 	}
+
+	// AndroidExperimentation Classes
+	private ServiceConnection mConnection = new ServiceConnection() {
+		public void onServiceConnected(ComponentName className, IBinder service) {
+			// This is called when the connection with the service has been
+			// established, giving us the object we can use to
+			// interact with the service. We are communicating with the
+			// service using a Messenger, so here we get a client-side
+			// representation of that from the raw IBinder object.
+			mService = new Messenger(service);
+			mBound = true;
+			Log.i(TAG, "main service connected ok");
+		}
+
+		public void onServiceDisconnected(ComponentName className) {
+			// This is called when the connection with the service has been
+			// unexpectedly disconnected -- that is, its process crashed.
+			mService = null;
+			mBound = false;
+		}
+	};
+
+	// listener to receive intents from service
+	protected class ServiceIntentListener extends BroadcastReceiver {
+		@Override
+		public void onReceive(Context context, Intent intent) {
+			if (intent.getAction().equals("dynamix_state")) {
+				String state = intent.getExtras().getString("value");
+
+				if (state.equals("connected")) {
+					dTab.setDynamixConnected();
+				} else if (state.equals("disconnected")) {
+					dTab.setDynamixDisconnected();
+				}
+			} else if (intent.getAction().equals("job_state")) {
+				String state = intent.getExtras().getString("value");
+				jTab.setJobState(state);
+			} else if (intent.getAction().equals("phone_id")) {
+				String phoneId = intent.getExtras().getString("value");
+				pTab.setPhoneId(phoneId);
+			} else if (intent.getAction().equals("jobDependencies")) {
+				String dependencies = intent.getExtras().getString("value");
+				jTab.loaJobdDependencies(dependencies);
+			} else if (intent.getAction().equals("internet_status")) {
+				String internet_status = intent.getExtras().getString("value");
+				rTab.setInternetStatus(internet_status);
+				pTab.setInternetStatus(internet_status);
+			} else if (intent.getAction().equals("job_report")) {
+				String jobName = intent.getExtras().getString("value");
+				rTab.jobToReport(jobName);
+			} else if (intent.getAction().equals("job_name")) {
+				String jobName = intent.getExtras().getString("value");
+				jTab.commitJob(jobName);
+			}
+		}
+	}
+
+	// listener to receive intents from child tabs
+	protected class tabIntentListener extends BroadcastReceiver {
+		@Override
+		public void onReceive(Context context, Intent intent) {
+			if (intent.getAction().equals("connect_dynamix")) {
+				sendMessage("connect_to_dynamix");
+			} else if (intent.getAction().equals("disconnect_dynamix")) {
+				sendMessage("disconnect_dynamix");
+			} else if (intent.getAction().equals("stop_job")) {
+				sendMessage("stop_job");
+			} else if (intent.getAction().equals("start_job")) {
+				sendMessage("start_job");
+			} else if (intent.getAction().equals("sensors_permissions_changed")) {
+				sendMessage("sensorsPermissionsChanged");
+			}
+		}
+	}
+
+	// send message to main service
+	public void sendMessage(String message) {
+		if (!mBound)
+			return;
+
+		Message msg = null;
+
+		// Create and send a message to the service, using a supported 'what'
+		// value
+		if (message.equals("connect_to_dynamix")) {
+			msg = Message.obtain(null,
+					AndroidExperimentationService.MSG_CONNECT_TO_DYNAMIX, 0, 0);
+		} else if (message.equals("disconnect_dynamix")) {
+			msg = Message.obtain(null,
+					AndroidExperimentationService.MSG_DISCONNECT_DYNAMIX, 0, 0);
+		} else if (message.equals("stop_job")) {
+			msg = Message.obtain(null,
+					AndroidExperimentationService.MSG_STOP_JOB, 0, 0);
+		} else if (message.equals("start_job")) {
+			msg = Message.obtain(null,
+					AndroidExperimentationService.MSG_START_JOB, 0, 0);
+		} else if (message.equals("sensorsPermissionsChanged")) {
+			msg = Message
+					.obtain(null,
+							AndroidExperimentationService.MSG_SENSORS_PERMISSIONS_CHANGED,
+							0, 0);
+		}
+
+		try {
+			mService.send(msg);
+		} catch (RemoteException e) {
+			e.printStackTrace();
+		}
+	}
+
+	// ----------------------------------------------
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
@@ -146,7 +288,9 @@ public class BaseActivity extends TabActivity {
 		baseActivity = this;
 		// setContentView(R.layout.main);
 		/*
-		 * Setup the Tab UI Reference: http://developer.android.com/resources/tutorials /views/hello-tabwidget.html
+		 * Setup the Tab UI Reference:
+		 * http://developer.android.com/resources/tutorials
+		 * /views/hello-tabwidget.html
 		 */
 		Resources res = getResources(); // Resource object to get Drawables
 		tabHost = getTabHost(); // The activity TabHost
@@ -157,78 +301,111 @@ public class BaseActivity extends TabActivity {
 		Bundle b = new Bundle();
 		b.putBoolean("fromTab", true);
 		// Initialize a TabSpec for each tab and add it to the TabHost
-		spec = tabHost.newTabSpec("home").setIndicator("Home", res.getDrawable(R.drawable.tab_home)).setContent(intent);
+		spec = tabHost.newTabSpec("home")
+				.setIndicator("Home", res.getDrawable(R.drawable.tab_home))
+				.setContent(intent);
 		tabHost.addTab(spec);
 		intent = new Intent().setClass(this, PendingApplicationActivity.class);
 		intent.putExtras(b);
-		spec = tabHost.newTabSpec("pending").setIndicator("Pending", res.getDrawable(R.drawable.tab_pending))
+		spec = tabHost
+				.newTabSpec("pending")
+				.setIndicator("Pending",
+						res.getDrawable(R.drawable.tab_pending))
 				.setContent(intent);
 		tabHost.addTab(spec);
 		intent = new Intent().setClass(this, PrivacyActivity.class);
 		intent.putExtras(b);
-		spec = tabHost.newTabSpec("privacy").setIndicator("Privacy", res.getDrawable(R.drawable.tab_profiles))
+		spec = tabHost
+				.newTabSpec("privacy")
+				.setIndicator("Privacy",
+						res.getDrawable(R.drawable.tab_profiles))
 				.setContent(intent);
 		tabHost.addTab(spec);
 		intent = new Intent().setClass(this, PluginsActivity.class);
 		intent.putExtras(b);
-		spec = tabHost.newTabSpec("plugins").setIndicator("Plugins", res.getDrawable(R.drawable.tab_plugins))
+		spec = tabHost
+				.newTabSpec("plugins")
+				.setIndicator("Plugins",
+						res.getDrawable(R.drawable.tab_plugins))
 				.setContent(intent);
 		tabHost.addTab(spec);
 		intent = new Intent().setClass(this, UpdatesActivity.class);
 		intent.putExtras(b);
-		spec = tabHost.newTabSpec("updates").setIndicator("Updates", res.getDrawable(R.drawable.tab_updates))
+		spec = tabHost
+				.newTabSpec("updates")
+				.setIndicator("Updates",
+						res.getDrawable(R.drawable.tab_updates))
 				.setContent(intent);
 		tabHost.addTab(spec);
 		// Boot Dynamix
 		DynamixService.boot(this, true, false, false);
+
+		Resources ressources = getResources();
+		TabHost tabHost = getTabHost();
+
+		// profile tab
+		Intent intentProfile = new Intent().setClass(this, profileTab.class);
+		TabSpec tabSpecProfile = tabHost
+				.newTabSpec("profile")
+				.setIndicator("",
+						ressources.getDrawable(R.drawable.ic_tab_profile))
+				.setContent(intentProfile);
+
+		// security tab
+		Intent intentSecurity = new Intent().setClass(this, securityTab.class);
+		TabSpec tabSpecSecurity = tabHost
+				.newTabSpec("security")
+				.setIndicator("",
+						ressources.getDrawable(R.drawable.ic_tab_security))
+				.setContent(intentSecurity);
+
+		// dynamix tab
+		Intent intentDynamix = new Intent().setClass(this, dynamixTab.class);
+		TabSpec tabSpecDynamix = tabHost
+				.newTabSpec("dynamix")
+				.setIndicator("",
+						ressources.getDrawable(R.drawable.ic_tab_dynamix))
+				.setContent(intentDynamix);
+
+		// jobs tab
+		Intent intentJobs = new Intent().setClass(this, jobsTab.class);
+		TabSpec tabSpecJobs = tabHost
+				.newTabSpec("jobs")
+				.setIndicator("",
+						ressources.getDrawable(R.drawable.ic_tab_jobs))
+				.setContent(intentJobs);
+
+		// report tab
+		Intent intentReports = new Intent().setClass(this, reportTab.class);
+		TabSpec tabSpecReports = tabHost
+				.newTabSpec("reports")
+				.setIndicator("",
+						ressources.getDrawable(R.drawable.ic_tab_reports))
+				.setContent(intentReports);
+
+		// add all tabs
+		tabHost.addTab(tabSpecProfile);
+		tabHost.addTab(tabSpecSecurity);
+		tabHost.addTab(tabSpecDynamix);
+		tabHost.addTab(tabSpecJobs);
+		tabHost.addTab(tabSpecReports);
 		
-		
-		 Resources ressources = getResources(); 
-	        TabHost tabHost = getTabHost();
-	       
-	        // profile tab
-	        Intent intentProfile = new Intent().setClass(this, profileTab.class);
-	        TabSpec tabSpecProfile = tabHost.newTabSpec("profile")
-	                .setIndicator("", ressources.getDrawable(R.drawable.ic_tab_profile))
-	                .setContent(intentProfile);
-	        
-	        // security tab
-	        Intent intentSecurity = new Intent().setClass(this, securityTab.class);
-	        TabSpec tabSpecSecurity = tabHost.newTabSpec("security")
-	                .setIndicator("", ressources.getDrawable(R.drawable.ic_tab_security))
-	                .setContent(intentSecurity);
-
-	        // dynamix tab
-	        Intent intentDynamix = new Intent().setClass(this, dynamixTab.class);
-	        TabSpec tabSpecDynamix = tabHost.newTabSpec("dynamix")
-	                .setIndicator("", ressources.getDrawable(R.drawable.ic_tab_dynamix))
-	                .setContent(intentDynamix);         
-	       
-	        //jobs tab
-	        Intent intentJobs = new Intent().setClass(this, jobsTab.class);
-	        TabSpec tabSpecJobs = tabHost.newTabSpec("jobs")
-	                .setIndicator("", ressources.getDrawable(R.drawable.ic_tab_jobs))
-	                .setContent(intentJobs);    
-	        
-	        //report tab
-	        Intent intentReports = new Intent().setClass(this, reportTab.class);
-	        TabSpec tabSpecReports = tabHost.newTabSpec("reports")
-	                .setIndicator("", ressources.getDrawable(R.drawable.ic_tab_reports))
-	                .setContent(intentReports);    
-
-	        // add all tabs 
-	        tabHost.addTab(tabSpecProfile);
-	        tabHost.addTab(tabSpecSecurity);
-	        tabHost.addTab(tabSpecDynamix);
-	        tabHost.addTab(tabSpecJobs);
-	        tabHost.addTab(tabSpecReports);
-
-	     /*   //set Windows tab as default (zero based) -- first wake up all tab activities
-	        tabHost.setCurrentTab(1);
-	        tabHost.setCurrentTab(2);
-	        tabHost.setCurrentTab(3);
-	        tabHost.setCurrentTab(4);
-	        tabHost.setCurrentTab(0); */
+        tabHost.setCurrentTabByTag("profile");
+        tabHost.setCurrentTabByTag("dynamix");
+        tabHost.setCurrentTabByTag("jobs");
+        tabHost.setCurrentTabByTag("reports");
+        tabHost.setCurrentTabByTag("security"); 
+ 
+		pTab = (profileTab) this.getLocalActivityManager().getActivity("profile");
+		dTab = (dynamixTab) this.getLocalActivityManager().getActivity("dynamix");
+		jTab = (jobsTab) this.getLocalActivityManager().getActivity("jobs");
+		rTab = (reportTab) this.getLocalActivityManager().getActivity("reports");
+		sTab = (securityTab) this.getLocalActivityManager().getActivity("security");
+		tabIntentlistener = new tabIntentListener();
+		serviceIntentlistener = new ServiceIntentListener();
+		bindService(new Intent(this.context,
+				AndroidExperimentationService.class), mConnection,
+				Context.BIND_AUTO_CREATE);
 	}
 
 	/**
@@ -242,7 +419,8 @@ public class BaseActivity extends TabActivity {
 		MenuItem item1 = menu.add(1, Menu.FIRST, Menu.NONE, "Change Settings");
 		item1.setOnMenuItemClickListener(new OnMenuItemClickListener() {
 			public boolean onMenuItemClick(MenuItem item) {
-				startActivity(new Intent(BaseActivity.this, DynamixPreferenceActivity.class));
+				startActivity(new Intent(BaseActivity.this,
+						DynamixPreferenceActivity.class));
 				return true;
 			}
 		});
@@ -251,17 +429,25 @@ public class BaseActivity extends TabActivity {
 		item3.setOnMenuItemClickListener(new OnMenuItemClickListener() {
 			public boolean onMenuItemClick(MenuItem item) {
 				// Present "Are You Sure" dialog box
-				AlertDialog.Builder builder = new AlertDialog.Builder(BaseActivity.this);
-				builder.setMessage("Shut Down Dynamix?").setCancelable(false)
-						.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
-							public void onClick(DialogInterface dialog, int id) {
-								DynamixService.destroyFramework(true, false);
-							}
-						}).setNegativeButton("No", new DialogInterface.OnClickListener() {
-							public void onClick(DialogInterface dialog, int id) {
-								dialog.cancel();
-							}
-						});
+				AlertDialog.Builder builder = new AlertDialog.Builder(
+						BaseActivity.this);
+				builder.setMessage("Shut Down Dynamix?")
+						.setCancelable(false)
+						.setPositiveButton("Yes",
+								new DialogInterface.OnClickListener() {
+									public void onClick(DialogInterface dialog,
+											int id) {
+										DynamixService.destroyFramework(true,
+												false);
+									}
+								})
+						.setNegativeButton("No",
+								new DialogInterface.OnClickListener() {
+									public void onClick(DialogInterface dialog,
+											int id) {
+										dialog.cancel();
+									}
+								});
 				builder.create().show();
 				return true;
 			}
@@ -295,7 +481,8 @@ public class BaseActivity extends TabActivity {
 		Bundle extras = i.getExtras();
 		AndroidNotification notification = null;
 		if (extras != null)
-			notification = (AndroidNotification) extras.getSerializable("notification");
+			notification = (AndroidNotification) extras
+					.getSerializable("notification");
 		// If we have a notification, set the current tab to the notification's
 		// tab id, otherwise set it to 0 (Home)
 		if (notification != null) {
@@ -311,12 +498,38 @@ public class BaseActivity extends TabActivity {
 		// Update visibility
 		activityResumed();
 		/*
-		 * Reset the titlebar state onResume, since our Activity's state will be lost if the app is paused.
+		 * Reset the titlebar state onResume, since our Activity's state will be
+		 * lost if the app is paused.
 		 */
 		if (DynamixService.isFrameworkStarted())
 			setTitlebarEnabled();
 		else
 			setTitlebarDisabled();
+
+		// register intent listener for tabs
+		if (!tabIntentListenerIsRegistered) {
+			registerReceiver(tabIntentlistener, new IntentFilter("disconnect_dynamix"));
+			registerReceiver(tabIntentlistener, new IntentFilter("connect_dynamix"));
+			registerReceiver(tabIntentlistener, new IntentFilter("stop_job"));
+			registerReceiver(tabIntentlistener, new IntentFilter("start_job"));
+			registerReceiver(tabIntentlistener, new IntentFilter("WTF"));
+			registerReceiver(tabIntentlistener, new IntentFilter("sensors_permissions_changed"));
+
+			tabIntentListenerIsRegistered = true;
+		}
+
+		// register intent listener for MainService
+		if (!serviceIntentListenerIsRegistered) {
+			registerReceiver(serviceIntentlistener, new IntentFilter("hi"));
+			registerReceiver(serviceIntentlistener, new IntentFilter("dynamix_state"));
+			registerReceiver(serviceIntentlistener, new IntentFilter("job_state"));
+			registerReceiver(serviceIntentlistener,	new IntentFilter("phone_id"));
+			registerReceiver(serviceIntentlistener, new IntentFilter("jobDependencies"));
+			registerReceiver(serviceIntentlistener, new IntentFilter("internet_status"));
+			registerReceiver(serviceIntentlistener, new IntentFilter("job_report"));
+			registerReceiver(serviceIntentlistener,	new IntentFilter("job_name"));
+			serviceIntentListenerIsRegistered = true;
+		}
 	}
 
 	@Override
@@ -325,5 +538,20 @@ public class BaseActivity extends TabActivity {
 		// Update visibility
 		activityPaused();
 		// this.finish();
+		// unregister intent listener
+		if (tabIntentListenerIsRegistered)
+		{
+			unregisterReceiver(tabIntentlistener);
+			tabIntentListenerIsRegistered = false;
+		}
+		
+		// unregister intent listener
+		if (serviceIntentListenerIsRegistered)
+		{
+			unregisterReceiver(serviceIntentlistener);
+			serviceIntentListenerIsRegistered = false;
+		}
+		
 	}
+
 }

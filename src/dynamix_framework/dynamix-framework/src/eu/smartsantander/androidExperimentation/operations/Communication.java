@@ -33,6 +33,11 @@ public class Communication extends Thread implements Runnable {
 		this.handler = handler;
 	}
 	
+	public Communication( )
+	{
+		this.handler = null;
+	}
+	
 	public void run()
 	{
 		Log.d(TAG, "running");
@@ -72,6 +77,7 @@ public class Communication extends Thread implements Runnable {
 	
 	public void sendThreadMessage(String message)
 	{
+		if (handler==null) return;
 		Message msg = new Message();
 		msg.obj = message;
 		handler.sendMessage(msg);

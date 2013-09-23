@@ -25,6 +25,11 @@ import org.ambientdynamix.api.application.VersionInfo;
 import org.ambientdynamix.api.contextplugin.PluginConstants.PLATFORM;
 import org.ambientdynamix.util.RepositoryInfo;
 
+import com.google.gson.Gson;
+
+import eu.smartsantander.androidExperimentation.Constants;
+import eu.smartsantander.androidExperimentation.jsonEntities.PluginList;
+
 import android.os.Environment;
 import android.util.Log;
 
@@ -94,8 +99,20 @@ public class SimpleFileSource extends SimpleSourceBase implements IContextPlugin
 		 * PLUG_INF/plug.xml http://stackoverflow.com/questions/4473256/reading-text-files-in-a-zip-archive
 		 */
 		cancel = false;
+		
+		Log.i(TAG, "Checking for context plug-ins using: SmartSantander");
+		Log.i(TAG, "Repository URL is: " + Constants.URL);
 		List<DiscoveredContextPlugin> updates = new Vector<DiscoveredContextPlugin>();
-		List<File> files = new Vector<File>();
+		try { //smartsantander modification
+			updates.addAll(createDiscoveredPlugins(repo, null, platform,platformVersion, frameworkVersion, false));
+			
+		} catch (Exception e) {
+			Log.w(TAG, "Update exception: " + e);
+		}
+		 
+		
+		
+		/*List<File> files = new Vector<File>();
 		Log.i(TAG, "Checking for context plug-ins using: " + repo.getAlias());
 		Log.i(TAG, "Repository URL is: " + repo.getUrl());
 		File sourceFile = new File(repo.getUrl());
@@ -113,19 +130,18 @@ public class SimpleFileSource extends SimpleSourceBase implements IContextPlugin
 		if (!cancel) {
 			for (File f : files) {
 				try { //smartsantander modification
-					updates.addAll(createDiscoveredPlugins(repo, new FileInputStream(f), platform,
-							platformVersion, frameworkVersion, false));
+					updates.addAll(createDiscoveredPlugins(repo, new FileInputStream(f), platform,platformVersion, frameworkVersion, false));
 					
 				} catch (Exception e) {
 					Log.w(TAG, "Update exception: " + e);
 					updates.add(new DiscoveredContextPlugin(e.toString()));
 				}
 			}
-			/*
+			
 			 * Because the path to user-manageable external storage may vary depending on the device, the path to each
 			 * plugin Bundle JAR MUST be relative to the root of external storage. Dynamix automatically rewrites the
 			 * install path using the proper URL format and external storage directory.
-			 */
+			 
 			for (DiscoveredContextPlugin update : updates) {
 				if (!update.hasError()) {
 					String relativeInstallPath = update.getContextPlugin().getInstallUrl();
@@ -133,7 +149,7 @@ public class SimpleFileSource extends SimpleSourceBase implements IContextPlugin
 							"file:/" + Environment.getExternalStorageDirectory() + "/" + relativeInstallPath);
 				}
 			}
-		}
+		}*/
 		return updates;
 	}
 
