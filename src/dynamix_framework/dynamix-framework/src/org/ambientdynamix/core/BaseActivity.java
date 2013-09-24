@@ -384,17 +384,19 @@ public class BaseActivity extends TabActivity {
 				.setContent(intentReports);
 
 		// add all tabs
-		tabHost.addTab(tabSpecProfile);
-		tabHost.addTab(tabSpecSecurity);
+		tabHost.addTab(tabSpecProfile);		
+		tabHost.addTab(tabSpecSecurity);	
 		tabHost.addTab(tabSpecDynamix);
 		tabHost.addTab(tabSpecJobs);
 		tabHost.addTab(tabSpecReports);
+			
 		
         tabHost.setCurrentTabByTag("profile");
+  
         tabHost.setCurrentTabByTag("dynamix");
         tabHost.setCurrentTabByTag("jobs");
         tabHost.setCurrentTabByTag("reports");
-        tabHost.setCurrentTabByTag("security"); 
+        
  
 		pTab = (profileTab) this.getLocalActivityManager().getActivity("profile");
 		dTab = (dynamixTab) this.getLocalActivityManager().getActivity("dynamix");

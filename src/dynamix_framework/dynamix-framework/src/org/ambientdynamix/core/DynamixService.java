@@ -37,6 +37,7 @@ import java.util.TimerTask;
 import java.util.UUID;
 import java.util.Vector;
 
+import org.ambientdynamix.api.application.AppConstants.PluginInstallStatus;
 import org.ambientdynamix.api.application.ContextPluginInformation;
 import org.ambientdynamix.api.application.ErrorCodes;
 import org.ambientdynamix.api.application.IDynamixListener;
@@ -78,6 +79,8 @@ import org.ambientdynamix.util.AndroidNotification;
 import org.ambientdynamix.util.ContextPluginRuntimeWrapper;
 import org.ambientdynamix.util.Utils;
 import org.osgi.framework.ServiceEvent;
+
+import eu.smartsantander.androidExperimentation.Constants;
 
 import android.app.Activity;
 import android.app.AlarmManager;
@@ -172,17 +175,43 @@ public final class DynamixService extends Service {
 	private static DynamixNotificationManager notificationMgr;
 	private static PendingIntent RESTART_INTENT;
 	private static String keyStorePath;
-
-	public static boolean PanosMaster = true;
-
 	public static Context context;
-	
 	private MyReceiver myReceiver;
 	
-	public static boolean isPanosMaster()
-	{
-		return PanosMaster;
+	//SmartSantanter	
+	private static int deviceId=Constants.PHONE_ID_UNITIALIZED;
+	private static Boolean isInitialized=false;
+	
+	static public int getDeviceId() {
+		return deviceId;
 	}
+
+	static public void setDeviceId(int deviceId) {
+		deviceId = deviceId;
+	}
+
+	static public Boolean getIsInitialized() {
+		return isInitialized;
+	}
+
+	static  public void setIsInitialized(Boolean isInitialized) {
+		isInitialized = isInitialized;
+	}
+
+	
+	static public int numberOfInstalledPlugins(){
+		int counter=0;
+		for (ContextPluginInformation plugin :DynamixService.getAllContextPluginInfo()){
+			if (plugin.getInstallStatus()==PluginInstallStatus.INSTALLED)
+				counter++;
+		}
+		
+		return counter;
+	}
+	
+	
+	
+	
 	
 	// stop bundle 
 	public static void stopPlugin(ContextPlugin contextPlugin)
@@ -1078,7 +1107,7 @@ public final class DynamixService extends Service {
 	 * Returns a List of both installed and pending ContextPlugins from the SettingsManager (as as List of
 	 * ContextPluginInformation).
 	 */
-	static List<ContextPluginInformation> getAllContextPluginInfo() {
+	public static List<ContextPluginInformation> getAllContextPluginInfo() {
 		List<ContextPluginInformation> plugInfoList = new ArrayList<ContextPluginInformation>();
 		plugInfoList.addAll(getInstalledContextPluginInfo());
 		plugInfoList.addAll(getPendingContextPluginInfo());

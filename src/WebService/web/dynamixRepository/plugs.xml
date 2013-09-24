@@ -4,14 +4,13 @@
             metadataVersion="1.0.0"
             repoType="simple-filesystem"
             id="org.ambientdynamix.contextplugins.GpsPlugin"
-            pluginVersion="9.47.1"
+            pluginVersion="0.9.54"
             pluginType="REACTIVE"
             provider="Dynamix Project"
             platform="android"
             minPlatformVersion="2.0"
             minFrameworkVersion="0.9.47"
             requiresConfiguration="false"
-
             hasConfigurationView="false"
             runtimeFactoryClass="org.ambientdynamix.contextplugins.GpsPlugin.PluginFactory">
         <name>GPS Plugin</name>
@@ -23,7 +22,7 @@
             <contextType>org.ambientdynamix.contextplugins.GpsPlugin</contextType>
         </supportedContextTypes>
         <permissions/>
-        <installUrl>/dynamix/org.ambientdynamix.contextplugins.GpsPlugin.54.1.jar</installUrl>
+        <installUrl>/dynamix/org.ambientdynamix.contextplugins.GpsPlugin_0.9.54.jar</installUrl>
         <updateUrl></updateUrl>
         <updateMessage priority="OPTIONAL"></updateMessage>
     </contextPlugin>

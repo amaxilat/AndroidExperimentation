@@ -3,6 +3,8 @@ package eu.smartsantander.androidExperimentation.operations;
 import java.io.File;
 import java.util.List;
 
+import org.ambientdynamix.core.DynamixService;
+
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -31,7 +33,6 @@ public class Demon extends Thread implements Runnable {
 	private SharedPreferences pref;
 	private Editor editor;
 	private boolean isDeviceRegistered;
-	private boolean isProperlyInitiallized;
 
 	String runningJob = "-1";
 	String lastRunned = "-1";
@@ -68,32 +69,13 @@ public class Demon extends Thread implements Runnable {
 				return;
 			}
 			Thread.sleep(1000);
-			/*File root = android.os.Environment.getExternalStorageDirectory();
-			File dir = new File(root.getAbsolutePath() + "/dynamix");
-			if (dir.exists() == false) {
-				dir.mkdirs();
-			}
-
-			List<Plugin> pluginList = communication.sendGetPluginList();
-			Plugin pluginXML = null;
-			for (Plugin plug : pluginList) {
-				Constants.checkFile(plug.getFilename(), plug.getInstallUrl());
-				if (plug.getName().equals("plugs.xml")) {
-					pluginXML = plug;
-				}
-			}
-			pluginList.remove(pluginXML);
-			PluginList plist = new PluginList();
-			plist.setPluginList(pluginList);
-			String plistString = (new Gson()).toJson(plist, PluginList.class);
-			editor = (this.context.getSharedPreferences("pluginObjects", 0)).edit();
-			editor.putString("pluginObjects", plistString);
-			editor.commit();
-			*/
-			this.isProperlyInitiallized = true;
+			if (DynamixService.getDeviceId()!=Constants.PHONE_ID_UNITIALIZED && DynamixService.numberOfInstalledPlugins()>0)
+				DynamixService.setIsInitialized(true);
+			else 
+				DynamixService.setIsInitialized(false);
 			handler.postDelayed(runnable, 1000);
 		} catch (Exception e) {
-			this.isProperlyInitiallized = false;
+			DynamixService.setIsInitialized(false);
 			e.printStackTrace();
 			Log.d(TAG, "AndroidExperimentation:" + e.getMessage());
 		}
@@ -102,7 +84,7 @@ public class Demon extends Thread implements Runnable {
 	private Runnable runnable = new Runnable() {
 		@Override
 		public void run() {
-			if (isProperlyInitiallized = false)
+			if (DynamixService.getIsInitialized()== false)
 				return;
 			pingExp.cancel(true);
 			pingExp = new AsyncExperimentTask();

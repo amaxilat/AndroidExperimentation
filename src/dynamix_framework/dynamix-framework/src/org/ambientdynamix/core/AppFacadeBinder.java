@@ -90,10 +90,7 @@ class AppFacadeBinder extends IDynamixFacade.Stub implements IDynamixFrameworkLi
 		return DynamixService.isFrameworkStarted();
 	}
 	
-	@Override
-	public boolean isPanosMaster() throws RemoteException{
-		return DynamixService.isPanosMaster();
-	}
+	 
 
 	@Override
 	public void stopPlugin(String pluginId) throws RemoteException{
@@ -982,5 +979,11 @@ class AppFacadeBinder extends IDynamixFacade.Stub implements IDynamixFrameworkLi
 	@Override
 	public void onDynamixError(String message) {
 		// TODO Auto-generated method stub
+	}
+
+	@Override
+	public boolean isPanosMaster() throws RemoteException {
+		// TODO Auto-generated method stub
+		return false;
 	}
 }

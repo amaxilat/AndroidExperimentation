@@ -3,9 +3,7 @@ Bundle-ManifestVersion: 2
 Bundle-Name: Gps Plugin
 Bundle-Vendor: Ambient Dynamix
 Bundle-SymbolicName: org.ambientdynamix.contextplugins.GpsPlugin
-Bundle-Version: 9.47.1
+Bundle-Version: 0.9.54
 Export-Package: org.ambientdynamix.contextplugins.GpsPlugin
-Import-Package: org.ambientdynamix.api.application
-Import-Package: org.ambientdynamix.api.contextplugin
-Import-Package:org.ambientdynamix.api.contextplugin.security
+Import-Package: org.ambientdynamix.api.application,org.ambientdynamix.api.contextplugin,org.ambientdynamix.api.contextplugin.security
 DynamicImport-Package: *
