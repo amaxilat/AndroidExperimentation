@@ -278,7 +278,7 @@ public class PluginsActivity extends ListActivity implements IContextPluginInsta
 				List<ContextPlugin> plugs = new Vector<ContextPlugin>();
 				for (PluginDiscoveryResult ur : installables.keySet()) {
 					plugs.add(ur.getDiscoveredPlugin().getContextPlugin());
-				}
+				}				
 				DynamixService.installPlugins(Utils.getSortedContextPluginList(plugs), PluginsActivity.this);
 			}
 		});
@@ -438,9 +438,9 @@ public class PluginsActivity extends ListActivity implements IContextPluginInsta
 		if (installedAdapter != null) {
 			installedAdapter.clear();
 			for (ContextPlugin plug : DynamixService.SettingsManager.getInstalledContextPlugins()) {
-				if (plug.isInstalled())
+				if (plug.isInstalled()){
 					installedAdapter.add(plug);
-				else {
+				}else {
 					// Plug-in is registered in the settings, but not installed
 					installedAdapter.add(plug);
 				}

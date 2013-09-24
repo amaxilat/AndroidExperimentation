@@ -15,11 +15,9 @@ public class profileTab extends Activity{
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.profile);
-        
+        setContentView(R.layout.profile);        
         phoneIdTv = (TextView) this.findViewById(R.id.textView1);
-        internetStatusImgv = (ImageView) findViewById(R.id.imageView2);
-        
+        internetStatusImgv = (ImageView) findViewById(R.id.imageView2);      
         tabActive = true;
     }
     

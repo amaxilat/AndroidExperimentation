@@ -15,6 +15,7 @@
  */
 package org.ambientdynamix.update.contextplugin;
 
+import java.io.File;
 import java.io.InputStream;
 import java.io.Reader;
 import java.io.StringReader;
@@ -23,6 +24,7 @@ import java.util.List;
 
 import org.ambientdynamix.api.application.VersionInfo;
 import org.ambientdynamix.api.contextplugin.PluginConstants.PLATFORM;
+import org.ambientdynamix.core.DynamixService;
 import org.ambientdynamix.util.RepositoryInfo;
 import org.ksoap2.SoapEnvelope;
 import org.ksoap2.serialization.PropertyInfo;
@@ -36,70 +38,70 @@ import com.google.gson.Gson;
 import eu.smartsantander.androidExperimentation.Constants;
 import eu.smartsantander.androidExperimentation.jsonEntities.Plugin;
 import eu.smartsantander.androidExperimentation.jsonEntities.PluginList;
+import eu.smartsantander.androidExperimentation.operations.Communication;
 
+import android.content.SharedPreferences;
+import android.content.SharedPreferences.Editor;
 import android.util.Log;
 
 public class SimpleSourceBase {
 	private final String TAG = this.getClass().getSimpleName();
 	private final String URLS = Constants.URL;
 
-	protected List<DiscoveredContextPlugin> createDiscoveredPlugins(RepositoryInfo repo, InputStream input, PLATFORM platform, VersionInfo platformVersion, VersionInfo frameworkVersion,boolean processSingle) throws Exception {
+	protected List<DiscoveredContextPlugin> createDiscoveredPlugins(
+			RepositoryInfo repo, InputStream input, PLATFORM platform,
+			VersionInfo platformVersion, VersionInfo frameworkVersion,
+			boolean processSingle) throws Exception {
 
 		// SmartSantander Modifications
 		Log.i("AndroidExperimentation", "Start Plugin Discovery");
 		String jsonPluginList = "";
 		List<DiscoveredContextPlugin> plugs = new ArrayList<DiscoveredContextPlugin>();
 		try {
-			jsonPluginList = getPluginList();
-			Log.i(TAG, jsonPluginList);
-			if (jsonPluginList.equals("0")) {
-				Log.i(TAG, "No plugin List");
-			} else {
-				PluginList pluginList = (new Gson()).fromJson(jsonPluginList,PluginList.class);
-				Log.i(TAG, "Plugin List setted");
-				List<Plugin> plugList = pluginList.getPluginList();
-				for (Plugin plugInfo : plugList) {
-					ContextPluginBinder plugBinder = new ContextPluginBinder();
-						DiscoveredContextPlugin plug = plugBinder.createDiscoveredPlugin(repo, plugInfo);
-						plugs.add(plug);		
-				}
-				return plugs;
+			PluginList pluginList = getPluginList();
+			Log.i(TAG, "Plugin List setted");
+			List<Plugin> plugList = pluginList.getPluginList();
+			for (Plugin plugInfo : plugList) {
+				ContextPluginBinder plugBinder = new ContextPluginBinder();
+				DiscoveredContextPlugin plug = plugBinder.createDiscoveredPlugin(repo, plugInfo);
+				plugs.add(plug);
 			}
+			return plugs;
 		} catch (Exception e) {
-			Log.w(TAG, "Exception Installin plugins: "+ e.getMessage());
+			Log.w(TAG, "Exception Installin plugins: " + e.getMessage());
 			return plugs;
 		}
-		return plugs;
 	}
 
-	
-	private String getPluginList() throws Exception {
-		return sendGetPluginList();
-	}
-
-	private String sendGetPluginList() throws Exception {
-		final String NAMESPACE = "http://androidExperimentation.smartsantander.eu/";
-		final String URL = Constants.URL+":8080/services/AndroidExperimentationWS?wsdl";
-		final String METHOD_NAME = "getPluginList";
-		final String SOAP_ACTION = "\"" + "http://AndroidExperimentationWS/getPluginList"+ "\"";
-		String test = "0";
-		SoapObject request = new SoapObject(NAMESPACE, METHOD_NAME);
-		PropertyInfo propInfo = new PropertyInfo();
-		propInfo.name = "arg0";
-		propInfo.type = PropertyInfo.STRING_CLASS;
-		propInfo.setValue("");
-		request.addProperty(propInfo);
-		SoapSerializationEnvelope envelope = new SoapSerializationEnvelope(
-				SoapEnvelope.VER11);
-		envelope.setOutputSoapObject(request);
-		HttpTransportSE androidHttpTransport = new HttpTransportSE(URL);
-		try {
-			androidHttpTransport.call(SOAP_ACTION, envelope);
-			SoapPrimitive resultsRequestSOAP = (SoapPrimitive) envelope.getResponse();
-			test = resultsRequestSOAP.toString();
-		} catch (Exception e) {
-			throw e;
+	public PluginList getPluginList() throws Exception {
+		File root = android.os.Environment.getExternalStorageDirectory();
+		File dir = new File(root.getAbsolutePath() + "/dynamix");
+		if (dir.exists() == false) {
+			dir.mkdirs();
 		}
-		return test;
+		Communication communication = new Communication();
+		List<Plugin> pluginList = communication.sendGetPluginList();
+		Plugin pluginXML = null;
+		for (Plugin plug : pluginList) {
+			Constants.checkFile(plug.getFilename(), plug.getInstallUrl());
+			if (plug.getName().equals("plugs.xml")) {
+				pluginXML = plug;
+			}
+		}
+		pluginList.remove(pluginXML);
+		PluginList plist = new PluginList();
+		plist.setPluginList(pluginList);
+		
+		
+		SharedPreferences pref = DynamixService.getAndroidContext().getApplicationContext().getSharedPreferences("runningJob", 0); // 0 - for private mode
+		Editor editor = pref.edit();
+		editor = (DynamixService.getAndroidContext().getSharedPreferences("pluginObjects", 0)).edit();
+		String plistString = (new Gson()).toJson(plist, PluginList.class);
+		editor.putString("pluginObjects", plistString);
+		editor.commit();
+		
+		
+		return plist;
+
 	}
 }

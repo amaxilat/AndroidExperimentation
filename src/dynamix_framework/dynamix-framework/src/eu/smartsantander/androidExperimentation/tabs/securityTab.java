@@ -26,15 +26,11 @@ public class securityTab extends Activity{
     public void onCreate(Bundle savedInstanceState)
     {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.security);
-    
-        LinearLayout list= (LinearLayout) findViewById(R.id.checklist);
-          
+        setContentView(R.layout.security);    
+        LinearLayout list= (LinearLayout) findViewById(R.id.checklist);        
         String plistString=(getApplicationContext().getSharedPreferences("pluginObjects", 0)).getString("pluginObjects", "");
         if(plistString.equals("")) return;
-        PluginList pList=(new Gson()).fromJson(plistString,  PluginList.class);
-        
-        
+        PluginList pList=(new Gson()).fromJson(plistString,  PluginList.class);              
         for(Plugin plugin : pList.getPluginList()){
         	CheckBox option = (CheckBox) new CheckBox(this.getBaseContext());
         	option.setText(plugin.getName());
@@ -62,10 +58,8 @@ public class securityTab extends Activity{
             	
         }
         pref = getApplicationContext().getSharedPreferences("sensors", 0); // 0 - for private mode
-        editor = pref.edit();
-                     
-        setRules();
-                
+        editor = pref.edit();                     
+        setRules();                
         tabActive = true;
     }
     
