@@ -123,6 +123,40 @@
             android:label="@string/title_activity_test"
             android:theme="@android:style/Theme.Dialog" >
         </activity>
+        
+        
+        
+        <!-- SmartSantander Android Experimentation -->                       
+        <activity
+            android:label="profileTab"
+            android:name="eu.smartsantander.androidExperimentation.tabs.profileTab" >
+        </activity> 
+        
+        <activity
+            android:label="dynamixTab"
+            android:name="eu.smartsantander.androidExperimentation.tabs.dynamixTab" >
+        </activity> 
+        
+        <activity
+            android:label="jobsTab"
+            android:name="eu.smartsantander.androidExperimentation.tabs.jobsTab" >
+        </activity> 
+        
+        <activity
+            android:label="reportTab"
+            android:name="eu.smartsantander.androidExperimentation.tabs.reportTab" >
+        </activity> 
+        
+        <activity
+            android:label="securityTab"
+            android:name="eu.smartsantander.androidExperimentation.tabs.securityTab" >
+        </activity> 
+        		   
+		<service android:name="eu.smartsantander.androidExperimentation.MainService">
+    		<intent-filter>
+        		<action android:name="eu.smartsantander.androidExperimentation.MainService"/>
+    		</intent-filter>
+    	</service>   
     </application>
 
     <uses-sdk android:minSdkVersion="5" />
