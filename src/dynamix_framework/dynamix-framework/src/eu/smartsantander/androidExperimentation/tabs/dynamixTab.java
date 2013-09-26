@@ -10,7 +10,6 @@ import android.widget.ImageView;
 public class dynamixTab extends Activity {
 	
 	private final String TAG = this.getClass().getSimpleName();
-	private boolean tabActive = false;
 	
 	private ImageView plugDynamixImgv;
 	
@@ -19,16 +18,10 @@ public class dynamixTab extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.dynamix);
         
-        tabActive = true;
-        
         plugDynamixImgv = (ImageView) findViewById(R.id.imageView1);
 		plugDynamixImgv.setImageResource(R.drawable.unplugged_dynamix);
     }
 
-    public boolean isTabActive()
-    {
-    	return this.tabActive;
-    }
     
     public void plugDynamix(View view)
     {  

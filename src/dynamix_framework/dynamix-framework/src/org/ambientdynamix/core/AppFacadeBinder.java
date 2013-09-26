@@ -471,8 +471,7 @@ class AppFacadeBinder extends IDynamixFacade.Stub implements IDynamixFrameworkLi
 				DynamixSession session = SessionManager.getSession(app);
 				if (session != null && session.isSessionOpen()) {
 					// Request the context scan and return the result
-					IdResult result = DynamixService.handleContextRequest(app, session, listener, pluginId,
-							contextType, scanConfig);
+ 					IdResult result = DynamixService.handleContextRequest(app, session, listener, pluginId,	contextType, scanConfig);
 					if (!result.wasSuccessful())
 						Log.w(TAG, "Request Context Scan Failed: " + result.getMessage());
 					return result;
@@ -826,14 +825,14 @@ class AppFacadeBinder extends IDynamixFacade.Stub implements IDynamixFrameworkLi
 			Log.v(TAG, "Checking authorization for app id: " + id + " myUid is " + android.os.Process.myUid()
 					+ " getCallingUid is " + Binder.getCallingUid());
 		// Handle embedded mode, if necessary
-		if (embeddedMode) {
+		//if (embeddedMode) { //smartsantander hack
 			Log.w(TAG, "Setting up Admin app for " + id);
 			if (!DynamixService.SettingsManager.checkApplicationAuthorized(getCallerId(null))) {
 				DynamixApplication app = createNewApplicationFromCaller(id, true);
 				DynamixService.SettingsManager.addPendingApplication(app);
 				DynamixService.authorizeApplication(app);
 			}
-		}
+		//}
 		// Check if the application has been authorized to receive events
 		if (DynamixService.SettingsManager.checkApplicationAuthorized(id)) {
 			// Grab the application from the SettingsMaanger using the calling UID as the key
@@ -863,7 +862,7 @@ class AppFacadeBinder extends IDynamixFacade.Stub implements IDynamixFrameworkLi
 			else {
 				if (Binder.getCallingUid() == android.os.Process.myUid()) {
 					Log.w(TAG, "Caller was Dynamix when not running in embedded mode... invalid");
-					return -1;
+					return Binder.getCallingUid(); //SmartSantander shortcut...
 				} else
 					return Binder.getCallingUid();
 			}

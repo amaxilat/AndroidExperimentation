@@ -4,11 +4,11 @@ import android.app.Activity;
 import android.os.Bundle;
 import android.widget.ImageView;
 import android.widget.TextView;
+
+import org.ambientdynamix.core.DynamixService;
 import org.ambientdynamix.core.R;
 
 public class profileTab extends Activity{
-	
-	private boolean tabActive = false;
 	private TextView phoneIdTv;
 	private ImageView internetStatusImgv;
 	
@@ -18,17 +18,13 @@ public class profileTab extends Activity{
         setContentView(R.layout.profile);        
         phoneIdTv = (TextView) this.findViewById(R.id.textView1);
         internetStatusImgv = (ImageView) findViewById(R.id.imageView2);      
-        tabActive = true;
     }
     
-    public boolean isTabActive()
-    {
-    	return this.tabActive;
-    }
-    
-    public void setPhoneId(String phoneId)
-    {
-    	phoneIdTv.setText(phoneId);
+    @Override
+    public void onResume(){
+    	super.onResume();
+  		phoneIdTv.setText(String.valueOf(DynamixService.getPhoneProfiler().getPhoneId()));
+
     }
     
     public void setInternetStatus(String internet_status)

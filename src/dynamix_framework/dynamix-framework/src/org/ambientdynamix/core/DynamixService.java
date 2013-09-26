@@ -40,6 +40,7 @@ import java.util.Vector;
 import org.ambientdynamix.api.application.AppConstants.PluginInstallStatus;
 import org.ambientdynamix.api.application.ContextPluginInformation;
 import org.ambientdynamix.api.application.ErrorCodes;
+import org.ambientdynamix.api.application.IDynamixFacade;
 import org.ambientdynamix.api.application.IDynamixListener;
 import org.ambientdynamix.api.application.IdResult;
 import org.ambientdynamix.api.application.Result;
@@ -81,6 +82,11 @@ import org.ambientdynamix.util.Utils;
 import org.osgi.framework.ServiceEvent;
 
 import eu.smartsantander.androidExperimentation.Constants;
+import eu.smartsantander.androidExperimentation.operations.Communication;
+import eu.smartsantander.androidExperimentation.operations.Demon;
+import eu.smartsantander.androidExperimentation.operations.DynamixServiceListenerUtility;
+import eu.smartsantander.androidExperimentation.operations.PhoneProfiler;
+import eu.smartsantander.androidExperimentation.operations.Reporter;
 
 import android.app.Activity;
 import android.app.AlarmManager;
@@ -90,9 +96,11 @@ import android.app.PendingIntent;
 import android.app.ProgressDialog;
 import android.app.Service;
 import android.content.BroadcastReceiver;
+import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
+import android.content.ServiceConnection;
 import android.content.res.Resources.NotFoundException;
 import android.os.Binder;
 import android.os.Bundle;
@@ -169,33 +177,61 @@ public final class DynamixService extends Service {
 	private AndroidForeground foregroundHandler;
 	private static ProgressDialog bootProgress = null;
 	private ProgressDialog progressDialog = null;
-	private static boolean embeddedMode = false;
+	private static boolean embeddedMode = false; //smartsantander false->true
 	private static ClassLoader embeddedHostClassLoader;
 	private static List<IDynamixFrameworkListener> frameworkListeners = new ArrayList<DynamixService.IDynamixFrameworkListener>();
 	private static DynamixNotificationManager notificationMgr;
 	private static PendingIntent RESTART_INTENT;
 	private static String keyStorePath;
 	public static Context context;
-	private MyReceiver myReceiver;
+	//private MyReceiver myReceiver;
+	
+	
+	public static IDynamixListener dynamixCallback;
+	public static IDynamixFacade dynamix;	
+	public static ServiceConnection sConnection; 
+	
+	
 	
 	//SmartSantanter	
-	private static int deviceId=Constants.PHONE_ID_UNITIALIZED;
+	private static PhoneProfiler phoneProfiler=new PhoneProfiler();
+
 	private static Boolean isInitialized=false;
+	private static Communication communication= new Communication();
 	
-	static public int getDeviceId() {
-		return deviceId;
+	
+	static public PhoneProfiler getPhoneProfiler(){
+		return phoneProfiler;
 	}
-
-	static public void setDeviceId(int deviceId) {
-		deviceId = deviceId;
+	static public Communication getCommunication(){
+		return communication;
 	}
-
-	static public Boolean getIsInitialized() {
+	
+	private static Demon demon=new Demon();
+	
+	public static boolean sessionStarted;
+	
+	static public Demon getDemon(){
+		return demon;
+	}
+    private Reporter reporter;
+	
+	
+	static public Boolean isDeviceRegistered(){
+		if (phoneProfiler.getPhoneId()!=Constants.PHONE_ID_UNITIALIZED){
+			return true;
+		}else{
+			return false;
+		}			
+	}
+	
+	static public Boolean isInitialized() {
+		if (phoneProfiler.getPhoneId()!=Constants.PHONE_ID_UNITIALIZED && numberOfInstalledPlugins()>0){
+			isInitialized=true;
+		}else{
+			isInitialized=false;
+		}
 		return isInitialized;
-	}
-
-	static  public void setIsInitialized(Boolean isInitialized) {
-		isInitialized = isInitialized;
 	}
 
 	
@@ -209,7 +245,9 @@ public final class DynamixService extends Service {
 		return counter;
 	}
 	
-	
+	static public Handler getUIHandler(){
+		return uiHandler;
+	}
 	
 	
 	
@@ -1468,8 +1506,9 @@ public final class DynamixService extends Service {
 				// Make sure the plug-in is enabled
 				if (plug.isEnabled()) {
 					// Get the plug-in's runtime
-					ContextPluginRuntime runtime = ContextMgr.getContextPluginRuntime(pluginId)
-							.getContextPluginRuntime();
+					//ContextMgr.getContextPluginRuntime(pluginId).setExecuting(true); //smartsantander change
+					
+					ContextPluginRuntime runtime = ContextMgr.getContextPluginRuntime(pluginId).getContextPluginRuntime();
 					if (runtime != null) {
 						// Ensure the app has a context support registration
 						if (session.hasContextSupport(listener, contextType)) {
@@ -1484,8 +1523,7 @@ public final class DynamixService extends Service {
 									AutoReactiveInteractiveContextPluginRuntime tmp = (AutoReactiveInteractiveContextPluginRuntime) runtime;
 									// Check if the runtime has a UI for the contextType
 									if (tmp.hasUserInterfaceForContextType(contextType)) {
-										return launchUserInterfaceForInteractivePlugin(plug, app, listener, session,
-												contextType);
+										return launchUserInterfaceForInteractivePlugin(plug, app, listener, session,contextType);
 									} else {
 										// No UI for the context type, so handle as ReactiveContextPluginRuntime
 										UUID requestId = registerRequestUUID(app, listener, plug);
@@ -1872,9 +1910,11 @@ public final class DynamixService extends Service {
 				}
 				Log.i(TAG, "Dynamix has finished booting!");
 				
-		        Intent i = new Intent();
-		        i.setAction("com.example.androiddistributed.MainService");        
-		        context.sendBroadcast(i);
+		        
+				//SmartSantander
+				//Intent i = new Intent();
+		        //i.setAction("com.example.androiddistributed.MainService");        
+		        //context.sendBroadcast(i);
 				
 			} else
 				Log.w(TAG, "completeBoot called when not booting");
@@ -2039,19 +2079,7 @@ public final class DynamixService extends Service {
 		}
 	}
 	
-    public class MyReceiver extends BroadcastReceiver
-    {
-        @Override
-        public void onReceive(Context context, Intent intent)
-        {      
-            Log.i("WTF", "i fucking get it");
-		
-            checkForNewContextPlugins(null);
-            
-            Log.i("WTF", "what the fuck just happen");
-        }
-        
-    }
+   
 
 	@Override
 	public void onDestroy() {
@@ -2184,12 +2212,12 @@ public final class DynamixService extends Service {
 				};
 				registerReceiver(sleepReceiver, new IntentFilter(Intent.ACTION_SCREEN_OFF));
 				
-				myReceiver = new MyReceiver();
+				/*myReceiver = new MyReceiver();
 
 				IntentFilter filter = new IntentFilter();
 				filter.addAction("org.ambiendynamix.core.DynamixService");
 				registerReceiver(myReceiver, filter);
-				Log.i("WTF", "if you see this, you win");
+				Log.i("WTF", "if you see this, you win");*/
 				
 				/*
 				 * Complete start on a thread...
@@ -2230,14 +2258,10 @@ public final class DynamixService extends Service {
 								.getPrimaryDynamixServer().getUrl(), new DynamixUpdatesCallbackHandler());
 						Log.i(TAG, "Dynamix Service Started!");
 	
-		//				myReceiver = new MyReceiver();
 
-		//			    	IntentFilter filter = new IntentFilter();
-		//				filter.addAction("org.ambiendynamix.core.DynamixService");
-		
-		//				registerReceiver(myReceiver, filter);
-
-		//				Log.i("WTF", "if you see this, you win");
+						//SmartSantander
+						DynamixService.getPhoneProfiler().start();
+						DynamixService.getDemon().start();	
 
 						if (!embeddedMode)
 							uiHandle.post(new Runnable() {
