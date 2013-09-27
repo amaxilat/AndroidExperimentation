@@ -23,16 +23,24 @@ import android.util.Log;
 public class PhoneProfiler extends Thread implements Runnable {
 	private SharedPreferences pref;
 	private Editor editor;	
-
-	private int PHONE_ID;
+	private Boolean started=false;
+	private int PHONE_ID=Constants.PHONE_ID_UNITIALIZED;
 
 	private final String TAG = this.getClass().getSimpleName();
 
 	public PhoneProfiler() {
-		this.PHONE_ID = 0;
+		this.PHONE_ID = Constants.PHONE_ID_UNITIALIZED;
 	}
 
-	public void run() {
+	public Boolean getStarted(){
+		return started;
+	}
+	public void run() {		
+		startJob();
+		started=true;
+	}
+
+	public void startJob(){
 		try {
 			Log.d(TAG, "running");
 			Thread.sleep(5000);  
@@ -48,9 +56,9 @@ public class PhoneProfiler extends Thread implements Runnable {
 			}
 		} catch (InterruptedException e) {
 			e.printStackTrace();
-		}
+		}	
 	}
-
+	
 	public void register() {	
 		if ( DynamixService.isDeviceRegistered()==true)
 			return;
@@ -59,6 +67,8 @@ public class PhoneProfiler extends Thread implements Runnable {
 		
 		try {
 			serverPhoneId = DynamixService.getCommunication().registerSmartphone(phoneId,getSensorRules());
+			if(serverPhoneId<=0)
+				serverPhoneId=Constants.PHONE_ID_UNITIALIZED;
 			DynamixService.getPhoneProfiler().setPhoneId(serverPhoneId);
 		} catch (Exception e) {
 			DynamixService.getPhoneProfiler().setPhoneId(Constants.PHONE_ID_UNITIALIZED);

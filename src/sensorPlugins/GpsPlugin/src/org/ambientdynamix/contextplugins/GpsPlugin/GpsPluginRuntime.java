@@ -10,6 +10,8 @@ import org.ambientdynamix.api.contextplugin.security.PrivacyRiskLevel;
 import org.ambientdynamix.api.contextplugin.security.SecuredContextInfo;
 
 import android.content.Context;
+import android.content.Intent;
+import android.content.IntentFilter;
 import android.location.GpsStatus;
 import android.location.Location;
 import android.location.LocationListener;
@@ -18,8 +20,10 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Handler;
 import android.util.Log;
+import android.widget.Toast;
 
 public class GpsPluginRuntime extends ReactiveContextPluginRuntime {
+	
     private final String TAG = this.getClass().getSimpleName();
 	private Context context;
 	private String location = "unknown";
@@ -30,7 +34,7 @@ public class GpsPluginRuntime extends ReactiveContextPluginRuntime {
 	public void init(PowerScheme powerScheme, ContextPluginSettings settings) throws Exception {
 		this.setPowerScheme(powerScheme);
 		this.context = this.getSecuredContext();
-		location = "unknown";
+		location = "unknown_";
 		Log.d(TAG, "Inited!");
 	}
 
@@ -40,21 +44,25 @@ public class GpsPluginRuntime extends ReactiveContextPluginRuntime {
 	{	
 		Log.d(TAG, "handleContextRequest!");
 		Location gps;
-	        try
-	        {
-	        	 gps=locationManager.getLastKnownLocation(LocationManager.GPS_PROVIDER);
-	        	 this.location=gps.getLatitude()+","+gps.getLongitude();
-	        }
-	        catch (Exception e)
-	        {
-	        	Log.i("GPS Plugin Error", e.toString());
-	        	this.location="unknown"; 
-	        }
-       
+		try {
+			locationManager = (LocationManager) this.context.getSystemService(Context.LOCATION_SERVICE);
+			gps = locationManager.getLastKnownLocation(LocationManager.GPS_PROVIDER);
+			if (gps == null)
+				gps = locationManager.getLastKnownLocation(LocationManager.NETWORK_PROVIDER);
+			if (gps != null)
+				this.location = gps.getLatitude() + "," + gps.getLongitude();
+			else
+				this.location = "unknown+";
+		} catch (Exception e) {
+			Log.i("GPS Plugin Error", e.toString());
+			this.location = "unknown++";
+		}
 	        
-		Log.i("GPS PLUGIN:", this.location);
+		Log.i("GPS Plugin:", this.location);
 		GpsPluginInfo info = new GpsPluginInfo(this.location);
-		info.setState("OK");	
+		info.setState("OK");
+		sendContextEvent(requestId, new SecuredContextInfo(info,	PrivacyRiskLevel.LOW), 60000);
+		
 	}
 
 	@Override
@@ -65,7 +73,7 @@ public class GpsPluginRuntime extends ReactiveContextPluginRuntime {
 	@Override
 	public void start()
 	{		
-		 locationManager = (LocationManager)context.getSystemService(Context.LOCATION_SERVICE);
+		 
 	}
 	
 	@Override

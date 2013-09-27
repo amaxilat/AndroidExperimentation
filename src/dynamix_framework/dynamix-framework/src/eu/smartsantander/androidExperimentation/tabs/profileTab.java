@@ -23,8 +23,10 @@ public class profileTab extends Activity{
     @Override
     public void onResume(){
     	super.onResume();
+    	if(DynamixService.isDeviceRegistered()==false){
+    		DynamixService.getPhoneProfiler().register();
+    	}
   		phoneIdTv.setText(String.valueOf(DynamixService.getPhoneProfiler().getPhoneId()));
-
     }
     
     public void setInternetStatus(String internet_status)

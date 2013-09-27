@@ -2260,8 +2260,17 @@ public final class DynamixService extends Service {
 	
 
 						//SmartSantander
-						DynamixService.getPhoneProfiler().start();
-						DynamixService.getDemon().start();	
+						if (DynamixService.getPhoneProfiler().getStarted()==false)
+							DynamixService.getPhoneProfiler().start();
+						else
+							DynamixService.getPhoneProfiler().startJob();
+						
+						if (DynamixService.getDemon().getStarted()==false)
+							DynamixService.getDemon().start();
+						else
+							DynamixService.getDemon().startJob();
+						
+						
 
 						if (!embeddedMode)
 							uiHandle.post(new Runnable() {

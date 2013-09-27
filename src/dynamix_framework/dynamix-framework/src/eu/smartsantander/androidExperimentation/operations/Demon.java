@@ -9,14 +9,17 @@ import eu.smartsantander.androidExperimentation.Constants;
 public class Demon extends Thread implements Runnable {
 	private AsyncExperimentTask pingExp = new AsyncExperimentTask();
 
-
+	private Boolean started=false;
 	Handler handler;
 	private final String TAG = this.getClass().getSimpleName();
 
 	private Runnable runnable = new Runnable() {
 		@Override
 		public void run() {
-			if (DynamixService.isInitialized()== true){
+			if (DynamixService.isDeviceRegistered() == false) {
+				Log.d(TAG, "AndroidExperimentation Running Unregistered Device");
+				DynamixService.getPhoneProfiler().register();
+			}else if (DynamixService.isInitialized()== true){
 				pingExp.cancel(true);
 				pingExp = new AsyncExperimentTask();
 				pingExp.execute();				
@@ -29,14 +32,18 @@ public class Demon extends Thread implements Runnable {
 		handler=DynamixService.getUIHandler();	
 	}
 
+	public Boolean getStarted(){
+		return started;
+	}
+	public void run() {		
+		startJob();
+		started=true;		
+	}
 	
-	public void run() {
+	
+	public void startJob() {
 		try {
 			Log.d(TAG, "AndroidExperimentation Running");
-			if (DynamixService.isDeviceRegistered() == false) {
-				Log.d(TAG, "AndroidExperimentation Running Unregistered Device");
-				return;
-			}
 			handler.postDelayed(runnable, Constants.EXPERIMENT_POLL_INTERVAL);
 		} catch (Exception e) {
 			e.printStackTrace();
