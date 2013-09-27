@@ -59,10 +59,10 @@ public class GpsPluginRuntime extends ReactiveContextPluginRuntime {
 		}
 	        
 		Log.i("GPS Plugin:", this.location);
-		GpsPluginInfo info = new GpsPluginInfo(this.location);
-		info.setState("OK");
-		sendContextEvent(requestId, new SecuredContextInfo(info,	PrivacyRiskLevel.LOW), 60000);
-		
+		PluginInfo info = new PluginInfo();
+		info.setState("ACTIVE");
+		info.setPayload(this.location);		
+		sendContextEvent(requestId, new SecuredContextInfo(info,	PrivacyRiskLevel.LOW), 60000);		
 	}
 
 	@Override

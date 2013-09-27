@@ -1,8 +1,7 @@
 package eu.smartsantander.androidExperimentation.operations;
 
 import java.util.Set;
-
-public interface IGpsPluginInfo {
+public interface IPluginInfo {
 	public abstract String getStringRepresentation(String format);
 
 	public abstract String getImplementingClassname();
@@ -15,5 +14,7 @@ public interface IGpsPluginInfo {
 
 	public abstract void setState(String state);
 	
-	public abstract String getPosition();
+	public abstract String getPayload();
+	
+	public abstract void setPayload(String payload);
 }

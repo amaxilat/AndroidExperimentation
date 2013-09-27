@@ -15,4 +15,4 @@
  */
 package org.ambientdynamix.contextplugins.GpsPlugin;
 
-parcelable GpsPluginInfo;
+parcelable PluginInfo;

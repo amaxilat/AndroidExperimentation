@@ -20,6 +20,7 @@ import android.content.Intent;
 import android.content.ServiceConnection;
 import android.os.IBinder;
 import android.os.RemoteException;
+import android.widget.Toast;
 
 public class DynamixServiceListenerUtility {
 
@@ -83,10 +84,11 @@ public class DynamixServiceListenerUtility {
 				if (event.hasIContextInfo()) {
 					Log.i(TAG,"Event contains native IContextInfo: "+ event.getIContextInfo());
 					IContextInfo nativeInfo = event.getIContextInfo();
-					if (nativeInfo instanceof IGpsPluginInfo) {
-						IGpsPluginInfo info = (IGpsPluginInfo) nativeInfo;
-						Log.i(TAG,"Received ExperimentInfo: "+ info.getPosition());
-					}
+					//if (nativeInfo instanceof PluginInfo) {
+						IPluginInfo info = (IPluginInfo) nativeInfo;
+						Log.i(TAG,"Received ExperimentInfo: "+ info.getPayload());
+						Toast.makeText(DynamixService.getAndroidContext(), info.getPayload(), 5000);
+					//}
 				}
 			}
 
