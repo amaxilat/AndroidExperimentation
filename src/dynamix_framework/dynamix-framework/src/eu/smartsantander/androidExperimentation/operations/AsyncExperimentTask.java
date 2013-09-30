@@ -20,7 +20,7 @@ public class AsyncExperimentTask extends AsyncTask<String, Void, String> {
 			DynamixServiceListenerUtility.start();
 	    }else{
 			try {
-				IdResult r=DynamixService.dynamix.contextRequest(DynamixService.dynamixCallback,"org.ambientdynamix.contextplugins.GpsPlugin", "org.ambientdynamix.contextplugins.GpsPlugin");
+				IdResult r=DynamixService.dynamix.contextRequest(DynamixService.dynamixCallback,"org.ambientdynamix.contextplugins.ExperimentPlugin", "org.ambientdynamix.contextplugins.ExperimentPlugin");
 				Log.i("contextRequest", r.getMessage());
 			} catch (RemoteException e) {
 				// TODO Auto-generated catch block

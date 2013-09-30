@@ -30,7 +30,6 @@ public class AndroidExperimentationWS {
         return Integer.toString(smartphone.getPhoneId());
     }
 
-
     @WebMethod
     public String getPluginList() throws Exception {
         Gson gson = new Gson();

@@ -4,13 +4,12 @@ import java.util.List;
 
 import org.ambientdynamix.api.application.ContextEvent;
 import org.ambientdynamix.api.application.ContextPluginInformation;
-import org.ambientdynamix.api.application.ContextPluginInformationResult;
 import org.ambientdynamix.api.application.ContextSupportInfo;
-import org.ambientdynamix.api.application.ContextSupportResult;
 import org.ambientdynamix.api.application.IContextInfo;
 import org.ambientdynamix.api.application.IDynamixFacade;
 import org.ambientdynamix.api.application.IDynamixListener;
 import org.ambientdynamix.api.application.Result;
+import org.ambientdynamix.contextplugins.ExperimentPlugin.PluginInfo;
 import org.ambientdynamix.core.DynamixService;
 import org.ambientdynamix.util.Log;
 
@@ -39,7 +38,7 @@ public class DynamixServiceListenerUtility {
 
 			@Override
 			public void onSessionOpened(String sessionId)throws RemoteException {
-				Result r=DynamixService.dynamix.addContextSupport(DynamixService.dynamixCallback, "org.ambientdynamix.contextplugins.GpsPlugin");
+				Result r=DynamixService.dynamix.addContextSupport(DynamixService.dynamixCallback, "org.ambientdynamix.contextplugins.ExperimentPlugin");
 				DynamixService.sessionStarted=true;
 				Log.i(TAG,	"SESSION STATUS"	+r.getMessage());
 			}
@@ -85,9 +84,9 @@ public class DynamixServiceListenerUtility {
 					Log.i(TAG,"Event contains native IContextInfo: "+ event.getIContextInfo());
 					IContextInfo nativeInfo = event.getIContextInfo();
 					//if (nativeInfo instanceof PluginInfo) {
-						IPluginInfo info = (IPluginInfo) nativeInfo;
-						Log.i(TAG,"Received ExperimentInfo: "+ info.getPayload());
-						Toast.makeText(DynamixService.getAndroidContext(), info.getPayload(), 5000);
+						String msg=nativeInfo.getStringRepresentation("");
+						Log.i(TAG,"Received ExperimentInfo: "+ msg);
+						Toast.makeText(DynamixService.getAndroidContext(), msg, 5000);
 					//}
 				}
 			}
