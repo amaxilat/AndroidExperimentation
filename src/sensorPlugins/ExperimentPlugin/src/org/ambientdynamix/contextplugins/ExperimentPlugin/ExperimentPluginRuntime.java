@@ -57,7 +57,7 @@ public class ExperimentPluginRuntime extends ReactiveContextPluginRuntime {
 			public void onSessionOpened(String sessionId)throws RemoteException {
 				Result r=dynamix.addContextSupport(dynamixCallback, "org.ambientdynamix.contextplugins.GpsPlugin");
 				this.sessionStarted=true;
-				//Log.i(TAG,	"SESSION STATUS"	+r.getMessage());
+				Log.w(TAG,	"SESSION STATUS"	+r.getMessage());
 			}
 
 			@Override
@@ -73,23 +73,23 @@ public class ExperimentPluginRuntime extends ReactiveContextPluginRuntime {
 
 			@Override
 			public void onContextEvent(ContextEvent event) throws RemoteException {
-				Log.i(TAG, "Event timestamp "+ event.getTimeStamp().toLocaleString());
+				Log.w(TAG, "Event timestamp "+ event.getTimeStamp().toLocaleString());
 				if (event.expires())
-					Log.i(TAG, "Event expires at "+ event.getExpireTime().toLocaleString());
+					Log.w(TAG, "Event expires at "+ event.getExpireTime().toLocaleString());
 				else
-					Log.i(TAG, "Event does not expire");
+					Log.w(TAG, "Event does not expire");
 				// Log each string-based context type format supported by the
 				// event
 				for (String format : event.getStringRepresentationFormats()) {
-					Log.i(TAG, "Event string-based format: " + format+ " size: "+ event.getStringRepresentation(format).length());
-					Log.i(TAG,"Event string-based format: " + format+ " contained: "+ event.getStringRepresentation(format));
+					Log.w(TAG, "Event string-based format: " + format+ " size: "+ event.getStringRepresentation(format).length());
+					Log.w(TAG,"Event string-based format: " + format+ " contained: "+ event.getStringRepresentation(format));
 				}
 				// Check for native IContextInfo
 				if (event.hasIContextInfo()) {
-					Log.i(TAG,"Event contains native IContextInfo: "+ event.getIContextInfo());
+					Log.w(TAG,"Event contains native IContextInfo: "+ event.getIContextInfo());
 					IContextInfo nativeInfo = event.getIContextInfo();
 					IPluginInfo info = (IPluginInfo) nativeInfo;
-					Log.i(TAG,"Received ExperimentInfo: "+ info.getPayload());
+					Log.w(TAG,"Received ExperimentInfo: "+ info.getPayload());
 					gpsPayload=info.getPayload();				
 				}
 				
@@ -97,7 +97,7 @@ public class ExperimentPluginRuntime extends ReactiveContextPluginRuntime {
 
 			@Override
 			public void onContextSupportAdded(ContextSupportInfo supportInfo)throws RemoteException {				
-					 Log.i(TAG,	"CONTENT SUPPORT ADDED: "	+ supportInfo.getPlugin().getPluginId());	
+					Log.w(TAG,	"CONTENT SUPPORT ADDED: "	+ supportInfo.getPlugin().getPluginId());	
 					 this.sessionStarted=true;
 			}
 
@@ -109,7 +109,7 @@ public class ExperimentPluginRuntime extends ReactiveContextPluginRuntime {
 
 			@Override
 			public void onContextTypeNotSupported(String contextType)throws RemoteException {
-				Log.i(TAG,	"CONTENT NO SUPPORTED"	+ contextType);
+				Log.w(TAG,	"CONTENT NO SUPPORTED"	+ contextType);
 				this.sessionStarted=false;
 			}
 
@@ -182,7 +182,7 @@ public class ExperimentPluginRuntime extends ReactiveContextPluginRuntime {
 
 			@Override
 			public void onContextPluginError(ContextPluginInformation plug,	String message) throws RemoteException {
-				Log.i(TAG,	"Pluginf Error "	+plug.getPluginDescription() +","+message);
+				Log.w(TAG,	"Pluginf Error "	+plug.getPluginDescription() +","+message);
 
 			}
 
@@ -221,7 +221,7 @@ public class ExperimentPluginRuntime extends ReactiveContextPluginRuntime {
 	    };
 	    
 	    this.context.bindService(new Intent(IDynamixFacade.class.getName()),  sConnection, Context.BIND_AUTO_CREATE);
-		Log.d(TAG, "Experiment Inited!");
+		Log.w(TAG, "Experiment Inited!");
 		
 	    
 	}
@@ -230,22 +230,24 @@ public class ExperimentPluginRuntime extends ReactiveContextPluginRuntime {
 	@Override
 	public void handleContextRequest(UUID requestId, String contextType)
 	{	
-		Log.d(TAG, "Experiment handleContextRequest!");
+		Log.w(TAG, "Experiment handleContextRequest!");
 		try {
 			if (dynamix==null){
 				PluginInfo info = new PluginInfo();
 				info.setState("STILL INACTIVE");
 				info.setPayload(this.msg);
 				sendContextEvent(requestId, new SecuredContextInfo(info,	PrivacyRiskLevel.LOW), 60000);	
+				this.context.bindService(new Intent(IDynamixFacade.class.getName()),  sConnection, Context.BIND_AUTO_CREATE);
+				Log.w(TAG, "dymaix still null");
 				return;
 			}
 			Result r=dynamix.contextRequest(dynamixCallback,"org.ambientdynamix.contextplugins.GpsPlugin", "org.ambientdynamix.contextplugins.GpsPlugin");						
 		} catch (Exception e) {
-			Log.i("Experiment Workload Error", e.toString());
+			Log.w("Experiment Workload Error", e.toString());
 			this.msg="";
 		}
 	        
-		Log.i("Experiment Message:", this.msg);
+		Log.w("Experiment Message:", this.msg);
 		PluginInfo info = new PluginInfo();
 		info.setState("ACTIVE");
 		info.setPayload(this.msg);

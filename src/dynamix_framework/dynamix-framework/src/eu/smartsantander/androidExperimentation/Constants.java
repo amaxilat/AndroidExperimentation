@@ -7,7 +7,7 @@ import eu.smartsantander.androidExperimentation.operations.Downloader;
 public class Constants {
 	public static String URL="http://blanco.cti.gr";
 	public static int PHONE_ID_UNITIALIZED=-1;
-	public static final long EXPERIMENT_POLL_INTERVAL = 15000;//5*60000;
+	public static final long EXPERIMENT_POLL_INTERVAL = 5000;//5*60000;
 
 	public static void checkFile(String filename, String url) throws Exception {
 		File root = android.os.Environment.getExternalStorageDirectory();

@@ -9,7 +9,6 @@ import org.ambientdynamix.api.application.IContextInfo;
 import org.ambientdynamix.api.application.IDynamixFacade;
 import org.ambientdynamix.api.application.IDynamixListener;
 import org.ambientdynamix.api.application.Result;
-import org.ambientdynamix.contextplugins.ExperimentPlugin.PluginInfo;
 import org.ambientdynamix.core.DynamixService;
 import org.ambientdynamix.util.Log;
 
@@ -28,8 +27,9 @@ public class DynamixServiceListenerUtility {
 			private final String TAG = this.getClass().getSimpleName();
 
 			@Override
-			public void onDynamixListenerAdded(String listenerId)throws RemoteException {
-				
+			public void onDynamixListenerAdded(String listenerId)
+					throws RemoteException {
+
 			}
 
 			@Override
@@ -37,19 +37,22 @@ public class DynamixServiceListenerUtility {
 			}
 
 			@Override
-			public void onSessionOpened(String sessionId)throws RemoteException {
-				Result r=DynamixService.dynamix.addContextSupport(DynamixService.dynamixCallback, "org.ambientdynamix.contextplugins.ExperimentPlugin");
-				DynamixService.sessionStarted=true;
-				Log.i(TAG,	"SESSION STATUS"	+r.getMessage());
+			public void onSessionOpened(String sessionId)
+					throws RemoteException {
+				Result r = DynamixService.dynamix.addContextSupport(DynamixService.dynamixCallback,"org.ambientdynamix.contextplugins.ExperimentPlugin");
+				r = DynamixService.dynamix.addContextSupport(DynamixService.dynamixCallback,"org.ambientdynamix.contextplugins.GpsPlugin");
+				DynamixService.sessionStarted = true;
+				Log.w(TAG, "SESSION STATUS" + r.getMessage());
 			}
 
 			@Override
 			public void onSessionClosed() throws RemoteException {
-				DynamixService.sessionStarted=false;
+				DynamixService.sessionStarted = false;
 			}
 
 			@Override
-			public void onAwaitingSecurityAuthorization()throws RemoteException {
+			public void onAwaitingSecurityAuthorization()
+					throws RemoteException {
 				// TODO Auto-generated method stub
 
 			}
@@ -67,98 +70,124 @@ public class DynamixServiceListenerUtility {
 			}
 
 			@Override
-			public void onContextEvent(ContextEvent event)	throws RemoteException {
-				Log.i(TAG, "Event timestamp "+ event.getTimeStamp().toLocaleString());
+			public void onContextEvent(ContextEvent event)
+					throws RemoteException {
+				Log.w(TAG, "Event timestamp "
+						+ event.getTimeStamp().toLocaleString());
 				if (event.expires())
-					Log.i(TAG, "Event expires at "+ event.getExpireTime().toLocaleString());
+					Log.w(TAG, "Event expires at "
+							+ event.getExpireTime().toLocaleString());
 				else
 					Log.i(TAG, "Event does not expire");
 				// Log each string-based context type format supported by the
 				// event
 				for (String format : event.getStringRepresentationFormats()) {
-					Log.i(TAG, "Event string-based format: " + format+ " size: "+ event.getStringRepresentation(format).length());
-					Log.i(TAG,"Event string-based format: " + format+ " contained: "+ event.getStringRepresentation(format));
+					Log.w(TAG, "Event string-based format: " + format
+							+ " size: "
+							+ event.getStringRepresentation(format).length());
+					Log.w(TAG,
+							"Event string-based format: " + format
+									+ " contained: "
+									+ event.getStringRepresentation(format));
 				}
 				// Check for native IContextInfo
 				if (event.hasIContextInfo()) {
-					Log.i(TAG,"Event contains native IContextInfo: "+ event.getIContextInfo());
+					Log.w(TAG,
+							"Event contains native IContextInfo: "
+									+ event.getIContextInfo());
 					IContextInfo nativeInfo = event.getIContextInfo();
-					//if (nativeInfo instanceof PluginInfo) {
-						String msg=nativeInfo.getStringRepresentation("");
-						Log.i(TAG,"Received ExperimentInfo: "+ msg);
-						Toast.makeText(DynamixService.getAndroidContext(), msg, 5000);
-					//}
+					// if (nativeInfo instanceof PluginInfo) {
+					String msg = nativeInfo.getStringRepresentation("");
+					Log.w(TAG, "Received ExperimentInfo: " + msg);
+					Toast.makeText(DynamixService.getAndroidContext(), msg,	5000);
+					// }
 				}
 			}
 
 			@Override
-			public void onContextSupportAdded(ContextSupportInfo supportInfo)throws RemoteException {				
-					 Log.i(TAG,	"CONTENT SUPPORT ADDED: "	+ supportInfo.getPlugin().getPluginId());	
-					 DynamixService.sessionStarted=true;
+			public void onContextSupportAdded(ContextSupportInfo supportInfo)
+					throws RemoteException {
+				Log.w(TAG, "CONTENT SUPPORT ADDED: "
+						+ supportInfo.getPlugin().getPluginId());
+				DynamixService.sessionStarted = true;
 			}
 
 			@Override
-			public void onContextSupportRemoved(ContextSupportInfo supportInfo)	throws RemoteException {
+			public void onContextSupportRemoved(ContextSupportInfo supportInfo)
+					throws RemoteException {
 				// TODO Auto-generated method stub
 
 			}
 
 			@Override
-			public void onContextTypeNotSupported(String contextType)throws RemoteException {
-				Log.i(TAG,	"CONTENT NO SUPPORTED"	+ contextType);
-				DynamixService.sessionStarted=false;
+			public void onContextTypeNotSupported(String contextType)
+					throws RemoteException {
+				Log.w(TAG, "CONTENT NO SUPPORTED" + contextType);
+				DynamixService.sessionStarted = false;
 			}
 
 			@Override
-			public void onInstallingContextSupport(			ContextPluginInformation plugin, String contextType)throws RemoteException {
+			public void onInstallingContextSupport(
+					ContextPluginInformation plugin, String contextType)
+					throws RemoteException {
 				// TODO Auto-generated method stub
 
 			}
 
 			@Override
-			public void onInstallingContextPlugin(ContextPluginInformation plugin) throws RemoteException {
+			public void onInstallingContextPlugin(
+					ContextPluginInformation plugin) throws RemoteException {
 				// TODO Auto-generated method stub
 
 			}
 
 			@Override
-			public void onContextPluginInstallProgress(	ContextPluginInformation plugin, int percentComplete)	throws RemoteException {
+			public void onContextPluginInstallProgress(
+					ContextPluginInformation plugin, int percentComplete)
+					throws RemoteException {
 				// TODO Auto-generated method stub
 
 			}
 
 			@Override
-			public void onContextPluginInstalled(ContextPluginInformation plugin)throws RemoteException {
+			public void onContextPluginInstalled(ContextPluginInformation plugin)
+					throws RemoteException {
 				// TODO Auto-generated method stub
 
 			}
 
 			@Override
-			public void onContextPluginUninstalled(ContextPluginInformation plugin) throws RemoteException {
+			public void onContextPluginUninstalled(
+					ContextPluginInformation plugin) throws RemoteException {
 				// TODO Auto-generated method stub
 
 			}
 
 			@Override
-			public void onContextPluginInstallFailed(ContextPluginInformation plug, String message)throws RemoteException {
+			public void onContextPluginInstallFailed(
+					ContextPluginInformation plug, String message)
+					throws RemoteException {
 				// TODO Auto-generated method stub
 
 			}
 
 			@Override
-			public void onContextRequestFailed(String requestId,String message, int errorCode) throws RemoteException {
+			public void onContextRequestFailed(String requestId,
+					String message, int errorCode) throws RemoteException {
 				// TODO Auto-generated method stub
 
 			}
 
 			@Override
-			public void onContextPluginDiscoveryStarted()throws RemoteException {
+			public void onContextPluginDiscoveryStarted()
+					throws RemoteException {
 				// TODO Auto-generated method stub
 
 			}
 
 			@Override
-			public void onContextPluginDiscoveryFinished(List<ContextPluginInformation> discoveredPlugins)
+			public void onContextPluginDiscoveryFinished(
+					List<ContextPluginInformation> discoveredPlugins)
 					throws RemoteException {
 				// TODO Auto-generated method stub
 
@@ -177,47 +206,58 @@ public class DynamixServiceListenerUtility {
 			}
 
 			@Override
-			public void onContextPluginError(ContextPluginInformation plug,	String message) throws RemoteException {
-				Log.i(TAG,	"Pluginf Error "	+plug.getPluginDescription() +","+message);
+			public void onContextPluginError(ContextPluginInformation plug,
+					String message) throws RemoteException {
+				Log.i(TAG, "Pluginf Error " + plug.getPluginDescription() + ","
+						+ message);
 
 			}
 		};
 
 	}
-	
+
 	public static ServiceConnection createServiceConnection() {
 		return new ServiceConnection() {
 			private final String TAG = this.getClass().getSimpleName();
-	        @Override
-	        public void onServiceConnected(ComponentName name, IBinder service) {
-	            try {
-	                DynamixService.dynamix = IDynamixFacade.Stub.asInterface(service);
-	                DynamixService.dynamix.addDynamixListener(DynamixService.dynamixCallback);
-	                DynamixService.dynamix.openSession();	                
-                    Log.w(TAG, "Experiment Connected");
-	            } catch (Exception e) {
-	                Log.w(TAG, e.getMessage());
-	            }
-	        }
-	        @Override
-	        public void onServiceDisconnected(ComponentName name) {
-	        	DynamixService.dynamix = null;
-	        }
-	    };
+
+			@Override
+			public void onServiceConnected(ComponentName name, IBinder service) {
+				try {
+					DynamixService.dynamix = IDynamixFacade.Stub
+							.asInterface(service);
+					DynamixService.dynamix
+							.addDynamixListener(DynamixService.dynamixCallback);
+					DynamixService.dynamix.openSession();
+					Log.w(TAG, "Experiment Connected");
+				} catch (Exception e) {
+					Log.w(TAG, e.getMessage());
+				}
+			}
+
+			@Override
+			public void onServiceDisconnected(ComponentName name) {
+				DynamixService.dynamix = null;
+			}
+		};
 	}
 
-	public static void BindService(){
-		DynamixService.getAndroidContext().bindService(new Intent(IDynamixFacade.class.getName()),  DynamixService.sConnection, Context.BIND_AUTO_CREATE);
+	public static void BindService() {
+		DynamixService.getAndroidContext().bindService(
+				new Intent(IDynamixFacade.class.getName()),
+				DynamixService.sConnection, Context.BIND_AUTO_CREATE);
 	}
 
-	
-	public static void start(){
-		DynamixService.dynamixCallback=DynamixServiceListenerUtility.getListerner();
-		DynamixService.sConnection=DynamixServiceListenerUtility.createServiceConnection();
-		DynamixService.getAndroidContext().bindService(new Intent(IDynamixFacade.class.getName()),  DynamixService.sConnection, Context.BIND_AUTO_CREATE);
- 	}
-	
-	public static void stop(){
+	public static void start() {
+		DynamixService.dynamixCallback = DynamixServiceListenerUtility
+				.getListerner();
+		DynamixService.sConnection = DynamixServiceListenerUtility
+				.createServiceConnection();
+		DynamixService.getAndroidContext().bindService(
+				new Intent(IDynamixFacade.class.getName()),
+				DynamixService.sConnection, Context.BIND_AUTO_CREATE);
+	}
+
+	public static void stop() {
 		try {
 			DynamixService.dynamix.removeAllContextSupport();
 			DynamixService.dynamix.closeSession();

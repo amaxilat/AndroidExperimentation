@@ -5,6 +5,8 @@ import java.util.Set;
 
 import org.ambientdynamix.api.application.IContextInfo;
 
+import com.google.gson.Gson;
+
 import android.os.Parcel;
 import android.os.Parcelable;
 
@@ -45,9 +47,13 @@ class PluginInfo implements IContextInfo,IPluginInfo  {
 		{
 			return CONTEXT_TYPE ;
 		}
+		else if (format.equalsIgnoreCase("json"))
+		{
+			return (new Gson()).toJson(this);
+		}
 		else
 		{
-			return "";
+			return (new Gson()).toJson(this);
 		}
 	}
 

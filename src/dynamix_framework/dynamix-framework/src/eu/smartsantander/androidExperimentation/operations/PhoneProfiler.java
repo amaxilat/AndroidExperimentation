@@ -81,6 +81,11 @@ public class PhoneProfiler extends Thread implements Runnable {
 
 	public void setPhoneId(int PHONE_ID) {
 		this.PHONE_ID = PHONE_ID;
+		if (editor==null){
+			pref = DynamixService.getAndroidContext().getApplicationContext().getSharedPreferences("phoneId",0);
+			editor = pref.edit();	
+		}
+		
 		editor.putInt("phoneId", this.PHONE_ID);
 		editor.commit();
 	}
