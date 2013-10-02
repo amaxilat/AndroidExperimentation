@@ -7,6 +7,8 @@ import org.ambientdynamix.api.application.IContextInfo;
 
 import com.google.gson.Gson;
 
+import eu.smartsantander.androidExperimentation.jsonEntities.Reading;
+
 import android.os.Parcel;
 import android.os.Parcelable;
 
@@ -72,9 +74,10 @@ class PluginInfo implements IContextInfo,IPluginInfo  {
 		return this.payload;
 	}
 
-	public void setPayload(String data)
+	public void setPayload(Reading r)
 	{
-		this.payload = data;
+		r.setContext(CONTEXT_TYPE);		
+		this.payload = r.toJson();
 	}
 	
 	

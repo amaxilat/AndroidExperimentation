@@ -8,6 +8,8 @@ import org.ambientdynamix.api.contextplugin.PowerScheme;
 import org.ambientdynamix.api.contextplugin.security.PrivacyRiskLevel;
 import org.ambientdynamix.api.contextplugin.security.SecuredContextInfo;
 
+import eu.smartsantander.androidExperimentation.jsonEntities.Reading;
+
 import android.content.Context;
 import android.location.Location;
 import android.location.LocationManager;
@@ -20,6 +22,7 @@ public class GpsPluginRuntime extends AutoReactiveContextPluginRuntime {
     private final String TAG = this.getClass().getSimpleName();
 	private Context context;
 	private String location = "unknown";
+	private String status;
     private LocationManager locationManager;
     private Handler handler;
     private long SENSOR_POLL_INTERVAL=5000;
@@ -41,19 +44,23 @@ public class GpsPluginRuntime extends AutoReactiveContextPluginRuntime {
 			gps = locationManager.getLastKnownLocation(LocationManager.GPS_PROVIDER);
 			if (gps == null)
 				gps = locationManager.getLastKnownLocation(LocationManager.NETWORK_PROVIDER);
-			if (gps != null)
+			if (gps != null){
 				this.location = gps.getLatitude() + "," + gps.getLongitude();
-			else
-				this.location = "unknown+";
+				this.status="valid";
+			}else{
+				this.location = "";
+				this.status="invalid";
+			}
 		} catch (Exception e) {
 			Log.w("GPS Plugin Error", e.toString());
-			this.location = "unknown++";
+			this.location = "";
+			this.status="invalid";
 		}
 	        
 		Log.w("GPS Plugin:", this.location);
 		PluginInfo info = new PluginInfo();
-		info.setState("ACTIVE");
-		info.setPayload(this.location);		
+		info.setState(this.status);
+		info.setPayload(new Reading(Reading.Datatype.String, this.location));		
 		if (requestId!=null)
 			sendContextEvent(requestId, new SecuredContextInfo(info,	PrivacyRiskLevel.LOW), 60000);
 		else 
@@ -64,7 +71,7 @@ public class GpsPluginRuntime extends AutoReactiveContextPluginRuntime {
 	public void init(PowerScheme powerScheme, ContextPluginSettings settings) throws Exception {
 		this.setPowerScheme(powerScheme);
 		this.context = this.getSecuredContext();
-		location = "unknown_";
+		location = "";
 		handler = new Handler();
 		Log.w(TAG, "GPS Inited!");
 	}
@@ -85,14 +92,13 @@ public class GpsPluginRuntime extends AutoReactiveContextPluginRuntime {
 	@Override
 	public void start()
 	{
-			Log.d(TAG, "GPS Plugin Started!");	
-		 
+			Log.d(TAG, "GPS Plugin Started!");			 
 	}
 	
 	@Override
 	public void stop()
 	{
- 	
+		Log.d(TAG, "GPS Plugin Stopped!");	
 	}
 
 	@Override
@@ -101,24 +107,17 @@ public class GpsPluginRuntime extends AutoReactiveContextPluginRuntime {
 		 * At this point, the plug-in should stop and release any resources. Nothing to do in this case except for stop.
 		 */
 		this.stop();
-		Log.d(TAG, "Destroyed!");
+		Log.d(TAG, "GPS Plugin Destroyed!");	
 	}
 
 	@Override
-	public void updateSettings(ContextPluginSettings settings) {
-		// Not supported
-	}
+	public void updateSettings(ContextPluginSettings settings) {}
 
 	@Override
-	public void setPowerScheme(PowerScheme scheme) {
-		// Not supported
-	}
+	public void setPowerScheme(PowerScheme scheme) {}
 
 	@Override
-	public void doManualContextScan() {
-		// TODO Auto-generated method stub
-		
-	}
+	public void doManualContextScan() {}
 
 	 
 	

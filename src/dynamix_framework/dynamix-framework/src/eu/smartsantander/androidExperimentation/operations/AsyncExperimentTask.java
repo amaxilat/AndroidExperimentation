@@ -4,6 +4,7 @@ import org.ambientdynamix.api.application.IdResult;
 import org.ambientdynamix.core.DynamixService;
 
 import android.os.AsyncTask;
+import android.os.Bundle;
 import android.os.RemoteException;
 import android.util.Log;
 
@@ -20,8 +21,15 @@ public class AsyncExperimentTask extends AsyncTask<String, Void, String> {
 			DynamixServiceListenerUtility.start();
 	    }else{
 			try {
-				IdResult r=DynamixService.dynamix.contextRequest(DynamixService.dynamixCallback,"org.ambientdynamix.contextplugins.GpsPlugin", "org.ambientdynamix.contextplugins.GpsPlugin");
+				IdResult r;
+				
+				//do it for all plugins....
 				r=DynamixService.dynamix.contextRequest(DynamixService.dynamixCallback,"org.ambientdynamix.contextplugins.ExperimentPlugin", "org.ambientdynamix.contextplugins.ExperimentPlugin");
+				
+				
+				//ping experiment....
+				//r=DynamixService.dynamix.contextRequest(DynamixService.dynamixCallback,"org.ambientdynamix.contextplugins.GpsPlugin", "org.ambientdynamix.contextplugins.GpsPlugin");
+				r=DynamixService.dynamix.configuredContextRequest(DynamixService.dynamixCallback,"org.ambientdynamix.contextplugins.GpsPlugin", "org.ambientdynamix.contextplugins.GpsPlugin",DynamixService.getReadingStorage().getBundle() );
 				Log.i("contextRequest", r.getMessage());
 			} catch (RemoteException e) {
 				// TODO Auto-generated catch block

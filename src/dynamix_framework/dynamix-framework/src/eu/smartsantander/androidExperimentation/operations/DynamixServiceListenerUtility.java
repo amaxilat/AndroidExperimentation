@@ -9,8 +9,13 @@ import org.ambientdynamix.api.application.IContextInfo;
 import org.ambientdynamix.api.application.IDynamixFacade;
 import org.ambientdynamix.api.application.IDynamixListener;
 import org.ambientdynamix.api.application.Result;
+import org.ambientdynamix.contextplugins.ExperimentPlugin.PluginInfo;
 import org.ambientdynamix.core.DynamixService;
 import org.ambientdynamix.util.Log;
+
+import com.google.gson.Gson;
+
+import eu.smartsantander.androidExperimentation.jsonEntities.Reading;
 
 import android.content.ComponentName;
 import android.content.Context;
@@ -92,15 +97,26 @@ public class DynamixServiceListenerUtility {
 				}
 				// Check for native IContextInfo
 				if (event.hasIContextInfo()) {
-					Log.w(TAG,
-							"Event contains native IContextInfo: "
-									+ event.getIContextInfo());
+					
+					Log.w(TAG,"Event contains native IContextInfo: "+ event.getIContextInfo());
 					IContextInfo nativeInfo = event.getIContextInfo();
-					// if (nativeInfo instanceof PluginInfo) {
 					String msg = nativeInfo.getStringRepresentation("");
-					Log.w(TAG, "Received ExperimentInfo: " + msg);
-					Toast.makeText(DynamixService.getAndroidContext(), msg,	5000);
-					// }
+					try{
+						Log.w(TAG, "Received Experiment/Plugin Info: " + msg);
+						PluginInfo plugInfo=(new Gson()).fromJson(msg, PluginInfo.class);
+						String readingMsg=plugInfo.getPayload();
+						Reading reading=(new Gson()).fromJson(readingMsg, Reading.class);
+						Log.w(TAG, "Received Reading: " + reading);
+						Toast.makeText(DynamixService.getAndroidContext(), readingMsg,	5000).show();
+						if(reading.getContext().equals("org.ambientdynamix.contextplugins.ExperimentPlugin")){
+							// push back on experimentation reading 
+							
+						}else{
+							DynamixService.getReadingStorage().pushReading(reading);						
+						}
+					}catch(Exception e){
+						Log.w(TAG, "Bad Formed Reading" + msg);
+					}
 				}
 			}
 

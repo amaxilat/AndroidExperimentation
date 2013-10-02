@@ -82,6 +82,7 @@ import org.ambientdynamix.util.Utils;
 import org.osgi.framework.ServiceEvent;
 
 import eu.smartsantander.androidExperimentation.Constants;
+import eu.smartsantander.androidExperimentation.jsonEntities.ReadingStorage;
 import eu.smartsantander.androidExperimentation.operations.Communication;
 import eu.smartsantander.androidExperimentation.operations.Demon;
 import eu.smartsantander.androidExperimentation.operations.DynamixServiceListenerUtility;
@@ -190,7 +191,7 @@ public final class DynamixService extends Service {
 	public static IDynamixListener dynamixCallback;
 	public static IDynamixFacade dynamix;	
 	public static ServiceConnection sConnection; 
-	
+	public static ReadingStorage contextReadings=new ReadingStorage();
 	
 	
 	//SmartSantanter	
@@ -199,6 +200,9 @@ public final class DynamixService extends Service {
 	private static Boolean isInitialized=false;
 	private static Communication communication= new Communication();
 	
+	static public ReadingStorage getReadingStorage(){
+		return contextReadings;
+	}
 	
 	static public PhoneProfiler getPhoneProfiler(){
 		return phoneProfiler;

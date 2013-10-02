@@ -1,6 +1,8 @@
 package org.ambientdynamix.contextplugins.ExperimentPlugin;
 
 import java.util.Set;
+
+import eu.smartsantander.androidExperimentation.jsonEntities.Reading;
 public interface IPluginInfo {
 	public abstract String getStringRepresentation(String format);
 
@@ -16,5 +18,5 @@ public interface IPluginInfo {
 	
 	public abstract String getPayload();
 	
-	public abstract void setPayload(String payload);
+	public abstract void setPayload(Reading payload);
 }
