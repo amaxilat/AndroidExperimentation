@@ -22,8 +22,10 @@ import java.io.StringReader;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.ambientdynamix.api.application.ContextPluginInformation;
 import org.ambientdynamix.api.application.VersionInfo;
 import org.ambientdynamix.api.contextplugin.PluginConstants.PLATFORM;
+import org.ambientdynamix.core.BaseActivity;
 import org.ambientdynamix.core.DynamixService;
 import org.ambientdynamix.util.RepositoryInfo;
 import org.ksoap2.SoapEnvelope;
@@ -43,6 +45,7 @@ import eu.smartsantander.androidExperimentation.operations.Communication;
 import android.content.SharedPreferences;
 import android.content.SharedPreferences.Editor;
 import android.util.Log;
+import android.widget.Toast;
 
 public class SimpleSourceBase {
 	private final String TAG = this.getClass().getSimpleName();
@@ -62,15 +65,29 @@ public class SimpleSourceBase {
 			Log.i(TAG, "Plugin List setted");
 			List<Plugin> plugList = pluginList.getPluginList();
 			for (Plugin plugInfo : plugList) {
+				if (isEnabled(plugInfo) == true)
+					continue;
 				ContextPluginBinder plugBinder = new ContextPluginBinder();
-				DiscoveredContextPlugin plug = plugBinder.createDiscoveredPlugin(repo, plugInfo);
+				DiscoveredContextPlugin plug = plugBinder
+						.createDiscoveredPlugin(repo, plugInfo);
 				plugs.add(plug);
 			}
 			return plugs;
 		} catch (Exception e) {
 			Log.w(TAG, "Exception Installin plugins: " + e.getMessage());
+			BaseActivity.toast("uException Installin plugins:"+e.getMessage(), Toast.LENGTH_LONG);
 			return plugs;
 		}
+	}
+
+	Boolean isEnabled(Plugin plugInfo) {
+		for (ContextPluginInformation plugin : DynamixService
+				.getAllContextPluginInfo()) {
+			if (plugin.getPluginName().equals(plugInfo.getName()) == true) {
+				return true;
+			}
+		}
+		return false;
 	}
 
 	public PluginList getPluginList() throws Exception {
@@ -91,16 +108,20 @@ public class SimpleSourceBase {
 		pluginList.remove(pluginXML);
 		PluginList plist = new PluginList();
 		plist.setPluginList(pluginList);
-		
-		
-		SharedPreferences pref = DynamixService.getAndroidContext().getApplicationContext().getSharedPreferences("runningJob", 0); // 0 - for private mode
+
+		SharedPreferences pref = DynamixService.getAndroidContext()
+				.getApplicationContext().getSharedPreferences("runningJob", 0); // 0
+																				// -
+																				// for
+																				// private
+																				// mode
 		Editor editor = pref.edit();
-		editor = (DynamixService.getAndroidContext().getSharedPreferences("pluginObjects", 0)).edit();
+		editor = (DynamixService.getAndroidContext().getSharedPreferences(
+				"pluginObjects", 0)).edit();
 		String plistString = (new Gson()).toJson(plist, PluginList.class);
 		editor.putString("pluginObjects", plistString);
 		editor.commit();
-		
-		
+
 		return plist;
 
 	}

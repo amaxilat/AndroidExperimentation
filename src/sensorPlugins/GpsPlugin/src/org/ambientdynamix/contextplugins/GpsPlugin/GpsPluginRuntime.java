@@ -8,146 +8,97 @@ import org.ambientdynamix.api.contextplugin.PowerScheme;
 import org.ambientdynamix.api.contextplugin.security.PrivacyRiskLevel;
 import org.ambientdynamix.api.contextplugin.security.SecuredContextInfo;
 
+import eu.smartsantander.androidExperimentation.jsonEntities.Reading;
+
 import android.content.Context;
 import android.location.Location;
-import android.location.LocationListener;
 import android.location.LocationManager;
-import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Handler;
 import android.util.Log;
 
 public class GpsPluginRuntime extends AutoReactiveContextPluginRuntime {
-	// Static logging TAG
-	private final String TAG = this.getClass().getSimpleName();
-	// Our secure context
+	
+    private final String TAG = this.getClass().getSimpleName();
 	private Context context;
-	
-	private String location = "-1";
+	private String location = "unknown";
+	private String status;
     private LocationManager locationManager;
-    private LocationListener locationListenerGps;
-	
-	public class CurrentLocationGps implements LocationListener
-	{
-	    @Override
-	    public void onLocationChanged(Location loc) 
-	    {
-	        double lat = loc.getLatitude();
-	        double lon = loc.getLongitude();
-	        
-	        Log.i("GPS", "location changed" + lat + " " + loc);
-	        
-	        location = lat + " " + lon;
-	    }
-
+    private Handler handler;
+    private long SENSOR_POLL_INTERVAL=5000;
+    
+    private Runnable runnable = new Runnable() {
 		@Override
-		public void onProviderDisabled(String arg0)
-		{
-			// TODO Auto-generated method stub	
-			location = "-2";
-		}
-
-		@Override
-		public void onProviderEnabled(String provider)
-		{
-			// TODO Auto-generated method stub			
-			location = "-1";
-		}
-
-		@Override
-		public void onStatusChanged(String provider, int status, Bundle extras)
-		{
-			// TODO Auto-generated method stub
-			location = "-3";
-		}
-	}
-	
-	
-	private boolean running = false;
-	private Handler handler;
-	private String state;
-	private Runnable runnable = new Runnable()
-	{
-		@Override
-		public void run()
-		{
-			if(running)
-			{	
-				doJob();
-				handler.postDelayed(this, 20000);
-			}
+		public void run() {	
+			  broadcastGPS(null);
+		      handler.postDelayed(this, SENSOR_POLL_INTERVAL);
 		}
 	};
-	
-	
+    
+    
+	public void broadcastGPS(UUID requestId) {
+		Log.w(TAG, "GPS Broadcast!");
+		Location gps;
+		try {
+			locationManager = (LocationManager) this.context.getSystemService(Context.LOCATION_SERVICE);
+			gps = locationManager.getLastKnownLocation(LocationManager.GPS_PROVIDER);
+			if (gps == null)
+				gps = locationManager.getLastKnownLocation(LocationManager.NETWORK_PROVIDER);
+			if (gps != null){
+				this.location = gps.getLatitude() + "," + gps.getLongitude();
+				this.status="valid";
+			}else{
+				this.location = "";
+				this.status="invalid";
+			}
+		} catch (Exception e) {
+			Log.w("GPS Plugin Error", e.toString());
+			this.location = "";
+			this.status="invalid";
+		}
+	        
+		Log.w("GPS Plugin:", this.location);
+		PluginInfo info = new PluginInfo();
+		info.setState(this.status);
+		info.setPayload(new Reading(Reading.Datatype.String, this.location));		
+		if (requestId!=null)
+			sendContextEvent(requestId, new SecuredContextInfo(info,	PrivacyRiskLevel.LOW), 60000);
+		else 
+			sendBroadcastContextEvent(new SecuredContextInfo(info,	PrivacyRiskLevel.LOW), 60000);
+	}
+		
 	@Override
 	public void init(PowerScheme powerScheme, ContextPluginSettings settings) throws Exception {
-		// Set the power scheme
 		this.setPowerScheme(powerScheme);
-		// Store our secure context
 		this.context = this.getSecuredContext();
-		
-		state = "not_ready";
+		location = "";
 		handler = new Handler();
-		running = false;
-		location = "-1";
+		Log.w(TAG, "GPS Inited!");
 	}
 
 	// handle incoming context request
 	@Override
 	public void handleContextRequest(UUID requestId, String contextType)
-	{
-		//
+	{	
+		Log.w(TAG, "GPS Broadcast handleContextRequest!");
+		broadcastGPS(requestId);
 	}
 
 	@Override
-	public void handleConfiguredContextRequest(UUID requestId, String contextType, Bundle config)
-	{
-		// get command
-		String command = (String) config.get("command");
-		// get data
-		String data = (String) config.get("data");
-		
-		if( command.equals("ping") )
-		{
-			pong();
-		}
-		else if( command.equals("do") )
-		{
-			startDoJob();
-		}
-		else if( command.equals("stop") )
-		{
-			stop();
-		}
-		else
-		{
-			Log.i(TAG, "command not supported");
-		}
+	public void handleConfiguredContextRequest(UUID requestId, String contextType, Bundle config){
+		handleContextRequest(requestId,contextType);
 	}	
 	
 	@Override
 	public void start()
-	{		
-		Log.d(TAG, "ready!");	
-		setState("ready");
-		doJob();
+	{
+			Log.d(TAG, "GPS Plugin Started!");			 
 	}
 	
 	@Override
 	public void stop()
 	{
-		/*
-		 * At this point, the plug-in should stop scanning for context and/or handling context requests; however, we
-		 * should retain resources needed to run again.
-		 */
-
-		setState("stopped");
-		
-		locationManager.removeUpdates(locationListenerGps);
-		
-		running = false;
-		Log.d(TAG, "Stopped!");
+		Log.d(TAG, "GPS Plugin Stopped!");	
 	}
 
 	@Override
@@ -155,70 +106,25 @@ public class GpsPluginRuntime extends AutoReactiveContextPluginRuntime {
 		/*
 		 * At this point, the plug-in should stop and release any resources. Nothing to do in this case except for stop.
 		 */
-		Log.d(TAG, "Destroyed!");
+		this.stop();
+		Log.d(TAG, "GPS Plugin Destroyed!");	
 	}
 
 	@Override
-	public void updateSettings(ContextPluginSettings settings) {
-		// Not supported
-	}
+	public void updateSettings(ContextPluginSettings settings) {}
 
 	@Override
-	public void setPowerScheme(PowerScheme scheme) {
-		// Not supported
-	}
+	public void setPowerScheme(PowerScheme scheme) {}
 
 	@Override
-	public void doManualContextScan() {
-		// Not supported
-	}
-	
-	
-	private void startDoJob()
-	{
-        locationManager = (LocationManager)context.getSystemService(Context.LOCATION_SERVICE);
-        locationListenerGps = new CurrentLocationGps();
+	public void doManualContextScan() {}
 
-        try
-        {
-        	locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 1000L, 1.0f, locationListenerGps);
-        }
-        catch (Exception e)
-        {
-        	Log.i("WTF", e.toString());
-        }
-        
-		setState("running");
-		running = true;
-		handler.postDelayed(runnable, 20000);
-	}
+	 
 	
-	private void doJob()
-	{
-        try
-        {
-        	locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 1000L, 1.0f, locationListenerGps);
-        }
-        catch (Exception e)
-        {
-        	Log.i("WTF", e.toString());
-        }
-        	
-		Log.i("gps plugin", this.location);
-		GpsPluginInfo info = new GpsPluginInfo(this.location);
-		this.sendBroadcastContextEvent(new SecuredContextInfo(info, PrivacyRiskLevel.LOW), 60000);
-	}
 	
-	private void setState(String state)
-	{
-		this.state = state;
-		pong();
-	}
+ 
 	
-	private void pong()
-	{
-		GpsPluginInfo info = new GpsPluginInfo(this.location);
-		info.setState(state);		
-		this.sendBroadcastContextEvent(new SecuredContextInfo(info, PrivacyRiskLevel.LOW), 60000);
-	}
+ 
+	
+	 
 }

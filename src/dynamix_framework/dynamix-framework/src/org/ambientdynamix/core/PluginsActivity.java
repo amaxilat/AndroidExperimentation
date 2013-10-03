@@ -21,6 +21,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Vector;
 
+import org.ambientdynamix.api.application.ContextPluginInformation;
 import org.ambientdynamix.api.contextplugin.ContextPlugin;
 import org.ambientdynamix.core.UpdateManager.IContextPluginUpdateListener;
 import org.ambientdynamix.data.ContextPluginAdapter;
@@ -39,6 +40,8 @@ import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
+import android.content.SharedPreferences.Editor;
 import android.content.res.Configuration;
 import android.os.Bundle;
 import android.os.Handler;
@@ -266,6 +269,8 @@ public class PluginsActivity extends ListActivity implements IContextPluginInsta
 		btnFindPlugs.setOnClickListener(new View.OnClickListener() {
 			public void onClick(View view) {
 				DynamixService.checkForNewContextPlugins(PluginsActivity.this);
+				//SmartSantander
+				updateSensorPermissionInfo();
 			}
 		});
 		/*
@@ -278,14 +283,35 @@ public class PluginsActivity extends ListActivity implements IContextPluginInsta
 				List<ContextPlugin> plugs = new Vector<ContextPlugin>();
 				for (PluginDiscoveryResult ur : installables.keySet()) {
 					plugs.add(ur.getDiscoveredPlugin().getContextPlugin());
+					
 				}				
 				DynamixService.installPlugins(Utils.getSortedContextPluginList(plugs), PluginsActivity.this);
+				//SmartSantander
+				updateSensorPermissionInfo();			
 			}
 		});
 		registerForContextMenu(plugList);
 		refresh();
+	
 	}
 
+	//SmartSantander
+	private void updateSensorPermissionInfo(){
+		SharedPreferences pref = getApplicationContext().getSharedPreferences("sensors", 0); // 0 - for private mode
+        Editor editor = pref.edit();
+        
+        for (ContextPluginInformation pl : DynamixService.getAllContextPluginInfo()) {
+			if(pl.isEnabled()==true){
+				editor.putBoolean(pl.getPluginName(),true);
+			}
+			else{
+				editor.putBoolean(pl.getPluginName(),false);
+			}
+		}	      
+	}
+	
+	
+	
 	@Override
 	public void onCreateContextMenu(ContextMenu menu, View v, ContextMenuInfo menuInfo) {
 		super.onCreateContextMenu(menu, v, menuInfo);

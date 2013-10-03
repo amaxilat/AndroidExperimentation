@@ -25,17 +25,14 @@ public class Communication extends Thread implements Runnable {
 	final String NAMESPACE = "http://androidExperimentation.smartsantander.eu/";
 	final String URL = Constants.URL+":8080/services/AndroidExperimentationWS?wsdl";
 	
-	private Handler handler;
+	//private Handler handler;
 	private final String TAG = this.getClass().getSimpleName();
 	
-	public Communication(Handler handler)
-	{
-		this.handler = handler;
-	}
+ 
 	
 	public Communication( )
 	{
-		this.handler = null;
+		 
 	}
 	
 	public void run()
@@ -75,13 +72,7 @@ public class Communication extends Thread implements Runnable {
 		return pong;
 	}	
 	
-	public void sendThreadMessage(String message)
-	{
-		if (handler==null) return;
-		Message msg = new Message();
-		msg.obj = message;
-		handler.sendMessage(msg);
-	}
+
 	
 	public int registerSmartphone(int phoneId, String sensorsRules) throws Exception
 	{

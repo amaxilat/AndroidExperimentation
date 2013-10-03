@@ -118,7 +118,7 @@ class UpdateManager {
 				}
 			});
 		} else {
-			BaseActivity.toast("use AndroidDistributed", Toast.LENGTH_LONG);
+			//BaseActivity.toast("use AndroidDistributed", Toast.LENGTH_LONG);
 			Log.w(TAG, "Updated cancelled");
 			listener.onUpdateCancelled();
 		}

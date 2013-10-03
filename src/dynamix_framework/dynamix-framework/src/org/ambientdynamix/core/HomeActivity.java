@@ -21,19 +21,11 @@ import java.util.TimerTask;
 
 import org.ambientdynamix.data.DynamixPreferences;
 
-import org.ambientdynamix.core.R;
-import eu.smartsantander.androidExperimentation.tabs.dynamixTab;
-import eu.smartsantander.androidExperimentation.tabs.jobsTab;
-import eu.smartsantander.androidExperimentation.tabs.profileTab;
-import eu.smartsantander.androidExperimentation.tabs.reportTab;
-import eu.smartsantander.androidExperimentation.tabs.securityTab;
-
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.ListActivity;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.content.res.Resources;
 import android.os.Bundle;
 import android.os.Handler;
 import android.util.Log;
@@ -44,9 +36,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.AdapterView.AdapterContextMenuInfo;
-import android.widget.TabHost.TabSpec;
 import android.widget.ListView;
-import android.widget.TabHost;
 import android.widget.ToggleButton;
 
 /**

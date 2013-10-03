@@ -9,9 +9,13 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.CheckBox;
 import android.widget.LinearLayout;
+import android.widget.TextView;
 
 import com.google.gson.Gson;
 
+import org.ambientdynamix.api.application.ContextPluginInformation;
+import org.ambientdynamix.api.application.AppConstants.PluginInstallStatus;
+import org.ambientdynamix.core.DynamixService;
 import org.ambientdynamix.core.R;
 import eu.smartsantander.androidExperimentation.jsonEntities.Plugin;
 import eu.smartsantander.androidExperimentation.jsonEntities.PluginList;
@@ -19,9 +23,7 @@ import eu.smartsantander.androidExperimentation.jsonEntities.PluginList;
 public class securityTab extends Activity{
 
 	private boolean tabActive = false;
- 	private SharedPreferences pref;
-	private Editor editor;
-	
+ 
     @Override
     public void onCreate(Bundle savedInstanceState)
     {
@@ -30,73 +32,47 @@ public class securityTab extends Activity{
         LinearLayout list= (LinearLayout) findViewById(R.id.checklist);        
         String plistString=(getApplicationContext().getSharedPreferences("pluginObjects", 0)).getString("pluginObjects", "");
         if(plistString.equals("")) return;
-        PluginList pList=(new Gson()).fromJson(plistString,  PluginList.class);              
-        for(Plugin plugin : pList.getPluginList()){
+        PluginList pList=(new Gson()).fromJson(plistString,  PluginList.class);  
+        if (DynamixService.getAllContextPluginInfo()!=null){
+        for(ContextPluginInformation plugin : DynamixService.getAllContextPluginInfo()){
         	CheckBox option = (CheckBox) new CheckBox(this.getBaseContext());
-        	option.setText(plugin.getName());
-        	option.setId(plugin.getId());
-        	option.setOnClickListener(new OnClickListener()
-            {
-            	@Override
-            	public void onClick(View v)
-            	{
-            		String value=((CheckBox) v).getText().toString();
-            		if (((CheckBox) v).isChecked())
-            		{
-            			editor.putBoolean(value,true);
-            		}
-            		else
-            		{
-            			editor.putBoolean(value, false);
-            		}
-            		
-            		editor.commit();
-            		sendPermissionsChangedIntent();
-            	}
-        	});
-            list.addView(option);
-            	
+        	option.setText(plugin.getPluginName());
+        	option.setEnabled(false);        	
+        	if (plugin.getInstallStatus()== PluginInstallStatus.INSTALLED){
+        		option.setSelected(true);
+        	}else{
+        		option.setSelected(false);
+        	}    
+            list.addView(option);            	
         }
-        pref = getApplicationContext().getSharedPreferences("sensors", 0); // 0 - for private mode
-        editor = pref.edit();                     
-        setRules();                
+        }             
         tabActive = true;
     }
     
-    private void setRules()
-    {    	
-    	editor.commit();
-    	String plistString=(getApplicationContext().getSharedPreferences("pluginObjects", 0)).getString("pluginObjects", "");
-        PluginList pList=(new Gson()).fromJson(plistString,  PluginList.class);
-        
-        if( !(pref.contains("firstTime")) )
-        {
-        	editor.putBoolean("firstTime", false);       
-            for(Plugin plugin : pList.getPluginList()){
-        		editor.putBoolean(plugin.getName(), false);
-        	}
-        	editor.commit();
-        }
-        for(Plugin plugin : pList.getPluginList()){        
-        	Boolean enabled = pref.getBoolean(plugin.getName(), false);
-        	CheckBox option = (CheckBox) findViewById(plugin.getId());
-        	option.setChecked(enabled);
-        }
-     
-    } 
-         
     
     public boolean isTabActive()
     {
     	return this.tabActive;
     }
     
-	// send intent to MainActivity to tell to scheduler to refresh sensor permissions
-	private void sendPermissionsChangedIntent()
-	{
-	    Intent i = new Intent();
-	    i.setAction("sensors_permissions_changed");
-	    sendBroadcast(i);
-	} 
-    
+ 
+	
+	@Override
+	public void onResume(){
+		super.onResume();
+		LinearLayout list= (LinearLayout) findViewById(R.id.checklist);
+		list.removeAllViews();
+		for(ContextPluginInformation plugin : DynamixService.getAllContextPluginInfo()){
+			TextView option = (TextView) new TextView(this.getBaseContext());        	
+        	option.setEnabled(false);        	
+        	if (plugin.getInstallStatus()== PluginInstallStatus.INSTALLED){
+        		option.setText(plugin.getPluginName() +":INSTALLED");
+        	}else{
+        		option.setText(plugin.getPluginName() +":Disabled");
+        	}
+        	
+            list.addView(option);            	
+        }
+		
+	}
 }

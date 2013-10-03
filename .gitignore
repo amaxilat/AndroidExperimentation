@@ -1,3 +1,6 @@
 /src/WebService/.idea/workspace.xml
 src/WebService/.idea/workspace.xml
 src/WebService/AndroidExperimentationWS.iml
+
+/src/dynamix_framework/dynamix-framework/bin
+/src/sensorPlugins/GpsPlugin/bin
