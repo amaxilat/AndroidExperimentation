@@ -24,12 +24,12 @@ public class AsyncExperimentTask extends AsyncTask<String, Void, String> {
 				IdResult r;
 				
 				//do it for all plugins....
-				r=DynamixService.dynamix.contextRequest(DynamixService.dynamixCallback,"org.ambientdynamix.contextplugins.ExperimentPlugin", "org.ambientdynamix.contextplugins.ExperimentPlugin");
+				r=DynamixService.dynamix.contextRequest(DynamixService.dynamixCallback,"org.ambientdynamix.contextplugins.GpsPlugin", "org.ambientdynamix.contextplugins.GpsPlugin");
 				
 				
 				//ping experiment....
 				//r=DynamixService.dynamix.contextRequest(DynamixService.dynamixCallback,"org.ambientdynamix.contextplugins.GpsPlugin", "org.ambientdynamix.contextplugins.GpsPlugin");
-				r=DynamixService.dynamix.configuredContextRequest(DynamixService.dynamixCallback,"org.ambientdynamix.contextplugins.GpsPlugin", "org.ambientdynamix.contextplugins.GpsPlugin",DynamixService.getReadingStorage().getBundle() );
+				r=DynamixService.dynamix.configuredContextRequest(DynamixService.dynamixCallback,"org.ambientdynamix.contextplugins.ExperimentPlugin", "org.ambientdynamix.contextplugins.ExperimentPlugin",DynamixService.getReadingStorage().getBundle() );
 				Log.i("contextRequest", r.getMessage());
 			} catch (RemoteException e) {
 				// TODO Auto-generated catch block

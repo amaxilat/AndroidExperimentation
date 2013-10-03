@@ -2,11 +2,13 @@ package eu.smartsantander.androidExperimentation.jsonEntities;
 
 import java.util.HashMap;
 
-public class ReadingStrorage {
+import android.os.Bundle;
+
+public class ReadingStorage {
 	
 	HashMap<String,Reading> store;
 	
-	public ReadingStrorage(){
+	public ReadingStorage(){
 		this.store=new HashMap<String,Reading>();
 	}
 	
@@ -16,5 +18,14 @@ public class ReadingStrorage {
 
 	public Reading getReading(String context){
 		return this.store.get(context);
+	}
+	
+	public Bundle getBundle(){
+		Bundle b=new Bundle();
+		for (String context:store.keySet()){
+			Reading r=store.get(context);
+			b.putString(context, r.toJson());
+		}		
+		return b;
 	}
 }

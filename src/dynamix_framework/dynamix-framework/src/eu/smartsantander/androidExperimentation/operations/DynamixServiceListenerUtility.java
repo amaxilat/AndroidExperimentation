@@ -42,8 +42,7 @@ public class DynamixServiceListenerUtility {
 			}
 
 			@Override
-			public void onSessionOpened(String sessionId)
-					throws RemoteException {
+			public void onSessionOpened(String sessionId)	throws RemoteException {
 				Result r = DynamixService.dynamix.addContextSupport(DynamixService.dynamixCallback,"org.ambientdynamix.contextplugins.ExperimentPlugin");
 				r = DynamixService.dynamix.addContextSupport(DynamixService.dynamixCallback,"org.ambientdynamix.contextplugins.GpsPlugin");
 				DynamixService.sessionStarted = true;
@@ -105,7 +104,7 @@ public class DynamixServiceListenerUtility {
 						Log.w(TAG, "Received Experiment/Plugin Info: " + msg);
 						PluginInfo plugInfo=(new Gson()).fromJson(msg, PluginInfo.class);
 						String readingMsg=plugInfo.getPayload();
-						Reading reading=(new Gson()).fromJson(readingMsg, Reading.class);
+						Reading reading=Reading.fromJson(readingMsg);
 						Log.w(TAG, "Received Reading: " + reading);
 						Toast.makeText(DynamixService.getAndroidContext(), readingMsg,	5000).show();
 						if(reading.getContext().equals("org.ambientdynamix.contextplugins.ExperimentPlugin")){
@@ -239,10 +238,8 @@ public class DynamixServiceListenerUtility {
 			@Override
 			public void onServiceConnected(ComponentName name, IBinder service) {
 				try {
-					DynamixService.dynamix = IDynamixFacade.Stub
-							.asInterface(service);
-					DynamixService.dynamix
-							.addDynamixListener(DynamixService.dynamixCallback);
+					DynamixService.dynamix = IDynamixFacade.Stub	.asInterface(service);
+					DynamixService.dynamix.addDynamixListener(DynamixService.dynamixCallback);
 					DynamixService.dynamix.openSession();
 					Log.w(TAG, "Experiment Connected");
 				} catch (Exception e) {
@@ -264,13 +261,9 @@ public class DynamixServiceListenerUtility {
 	}
 
 	public static void start() {
-		DynamixService.dynamixCallback = DynamixServiceListenerUtility
-				.getListerner();
-		DynamixService.sConnection = DynamixServiceListenerUtility
-				.createServiceConnection();
-		DynamixService.getAndroidContext().bindService(
-				new Intent(IDynamixFacade.class.getName()),
-				DynamixService.sConnection, Context.BIND_AUTO_CREATE);
+		DynamixService.dynamixCallback = DynamixServiceListenerUtility.getListerner();
+		DynamixService.sConnection = DynamixServiceListenerUtility.createServiceConnection();
+		DynamixService.getAndroidContext().bindService(	new Intent(IDynamixFacade.class.getName()),DynamixService.sConnection, Context.BIND_AUTO_CREATE);
 	}
 
 	public static void stop() {

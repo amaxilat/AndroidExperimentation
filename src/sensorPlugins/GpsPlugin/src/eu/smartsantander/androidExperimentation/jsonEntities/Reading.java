@@ -41,4 +41,9 @@ public class Reading implements Serializable {
 	public String toJson(){
 		return (new Gson()).toJson(this);
 	}
+	
+	
+	public static Reading fromJson(String json){
+		return (new Gson()).fromJson(json, Reading.class);
+	}
 }

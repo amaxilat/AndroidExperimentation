@@ -7,18 +7,23 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="4ccbb714-201c-482b-a93f-dd4890c10bc1" name="Default" comment="experiment plugin plugin installation">
+      <change type="DELETED" beforePath="C:\Users\theodori\Desktop\AndroidExperimentation\src\sensorPlugins\GpsPlugin\src\eu\smartsantander\androidExperimentation\jsonEntities\ReadingStrorage.java" afterPath="" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/web/dynamixRepository/org.ambientdynamix.contextplugins.ExperimentPlugin_0.9.54.jar" afterPath="$PROJECT_DIR$/web/dynamixRepository/org.ambientdynamix.contextplugins.ExperimentPlugin_0.9.54.jar" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/web/dynamixRepository/org.ambientdynamix.contextplugins.GpsPlugin_0.9.54.jar" afterPath="$PROJECT_DIR$/web/dynamixRepository/org.ambientdynamix.contextplugins.GpsPlugin_0.9.54.jar" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../dynamix_framework/dynamix-framework/src/eu/smartsantander/androidExperimentation/operations/AsyncExperimentTask.java" afterPath="$PROJECT_DIR$/../dynamix_framework/dynamix-framework/src/eu/smartsantander/androidExperimentation/operations/AsyncExperimentTask.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../dynamix_framework/dynamix-framework/src/eu/smartsantander/androidExperimentation/Constants.java" afterPath="$PROJECT_DIR$/../dynamix_framework/dynamix-framework/src/eu/smartsantander/androidExperimentation/Constants.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../dynamix_framework/dynamix-framework/src/org/ambientdynamix/core/DynamixService.java" afterPath="$PROJECT_DIR$/../dynamix_framework/dynamix-framework/src/org/ambientdynamix/core/DynamixService.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../androidExperimentation/gen/eu/smartsantander/androidExperimentation/BuildConfig.java" afterPath="$PROJECT_DIR$/../androidExperimentation/gen/eu/smartsantander/androidExperimentation/BuildConfig.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../dynamix_framework/dynamix-framework/src/eu/smartsantander/androidExperimentation/operations/DynamixServiceListenerUtility.java" afterPath="$PROJECT_DIR$/../dynamix_framework/dynamix-framework/src/eu/smartsantander/androidExperimentation/operations/DynamixServiceListenerUtility.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../sensorPlugins/ExperimentPlugin/src/org/ambientdynamix/contextplugins/ExperimentPlugin/ExperimentPluginRuntime.java" afterPath="$PROJECT_DIR$/../sensorPlugins/ExperimentPlugin/src/org/ambientdynamix/contextplugins/ExperimentPlugin/ExperimentPluginRuntime.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../sensorPlugins/GpsPlugin/src/org/ambientdynamix/contextplugins/GpsPlugin/GpsPluginRuntime.java" afterPath="$PROJECT_DIR$/../sensorPlugins/GpsPlugin/src/org/ambientdynamix/contextplugins/GpsPlugin/GpsPluginRuntime.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../sensorPlugins/ExperimentPlugin/src/org/ambientdynamix/contextplugins/ExperimentPlugin/IPluginInfo.java" afterPath="$PROJECT_DIR$/../sensorPlugins/ExperimentPlugin/src/org/ambientdynamix/contextplugins/ExperimentPlugin/IPluginInfo.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../sensorPlugins/GpsPlugin/src/org/ambientdynamix/contextplugins/GpsPlugin/IPluginInfo.java" afterPath="$PROJECT_DIR$/../sensorPlugins/GpsPlugin/src/org/ambientdynamix/contextplugins/GpsPlugin/IPluginInfo.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../sensorPlugins/ExperimentPlugin/src/org/ambientdynamix/contextplugins/ExperimentPlugin/PluginInfo.java" afterPath="$PROJECT_DIR$/../sensorPlugins/ExperimentPlugin/src/org/ambientdynamix/contextplugins/ExperimentPlugin/PluginInfo.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../sensorPlugins/GpsPlugin/META-INF/MANIFEST.MF" afterPath="$PROJECT_DIR$/../sensorPlugins/GpsPlugin/META-INF/MANIFEST.MF" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../sensorPlugins/GpsPlugin/src/org/ambientdynamix/contextplugins/GpsPlugin/PluginInfo.java" afterPath="$PROJECT_DIR$/../sensorPlugins/GpsPlugin/src/org/ambientdynamix/contextplugins/GpsPlugin/PluginInfo.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../androidExperimentation/gen/eu/smartsantander/androidExperimentation/R.java" afterPath="$PROJECT_DIR$/../androidExperimentation/gen/eu/smartsantander/androidExperimentation/R.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../dynamix_framework/dynamix-framework/src/eu/smartsantander/androidExperimentation/jsonEntities/Reading.java" afterPath="$PROJECT_DIR$/../dynamix_framework/dynamix-framework/src/eu/smartsantander/androidExperimentation/jsonEntities/Reading.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../sensorPlugins/ExperimentPlugin/src/eu/smartsantander/androidExperimentation/jsonEntities/Reading.java" afterPath="$PROJECT_DIR$/../sensorPlugins/ExperimentPlugin/src/eu/smartsantander/androidExperimentation/jsonEntities/Reading.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../sensorPlugins/GpsPlugin/src/eu/smartsantander/androidExperimentation/jsonEntities/Reading.java" afterPath="$PROJECT_DIR$/../sensorPlugins/GpsPlugin/src/eu/smartsantander/androidExperimentation/jsonEntities/Reading.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../dynamix_framework/dynamix-framework/src/eu/smartsantander/androidExperimentation/jsonEntities/ReadingStorage.java" afterPath="$PROJECT_DIR$/../dynamix_framework/dynamix-framework/src/eu/smartsantander/androidExperimentation/jsonEntities/ReadingStorage.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../sensorPlugins/ExperimentPlugin/build.properties" afterPath="$PROJECT_DIR$/../sensorPlugins/ExperimentPlugin/build.properties" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../sensorPlugins/GpsPlugin/build.properties" afterPath="$PROJECT_DIR$/../sensorPlugins/GpsPlugin/build.properties" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <list id="ffed928d-c9fc-443c-9d9a-a806dbe1581e" name="Hibernate altered  Demon registration altered" comment="" />
@@ -70,9 +75,9 @@
     <file path="/about.jsp" changelist="4ccbb714-201c-482b-a93f-dd4890c10bc1" time="1378979844071" ignored="false" />
     <file path="/experiments-overall.jsp" changelist="4ccbb714-201c-482b-a93f-dd4890c10bc1" time="1378989486240" ignored="false" />
     <file path="$PROJECT_DIR$/META-INF/persistence.xml" changelist="4ccbb714-201c-482b-a93f-dd4890c10bc1" time="1378990148183" ignored="false" />
-    <file path="/Dummy.txt" changelist="4ccbb714-201c-482b-a93f-dd4890c10bc1" time="1380713813708" ignored="false" />
+    <file path="/Dummy.txt" changelist="4ccbb714-201c-482b-a93f-dd4890c10bc1" time="1380794374023" ignored="false" />
     <file path="/plugs.xml" changelist="4ccbb714-201c-482b-a93f-dd4890c10bc1" time="1380010819153" ignored="false" />
-    <file path="$PROJECT_DIR$/web/dynamixRepository/org.ambientdynamix.contextplugins.GpsPlugin_0.9.54.jar!/bin/AndroidManifest.xml" changelist="4ccbb714-201c-482b-a93f-dd4890c10bc1" time="1380629343671" ignored="false" />
+    <file path="$PROJECT_DIR$/web/dynamixRepository/org.ambientdynamix.contextplugins.GpsPlugin_0.9.54.jar!/bin/AndroidManifest.xml" changelist="4ccbb714-201c-482b-a93f-dd4890c10bc1" time="1380803891726" ignored="false" />
     <file path="/a.txt" changelist="4ccbb714-201c-482b-a93f-dd4890c10bc1" time="1380713889783" ignored="false" />
     <file path="$PROJECT_DIR$/../../../html5wicket/html5wicket/web/WEB-INF/web.xml" changelist="4ccbb714-201c-482b-a93f-dd4890c10bc1" time="1380716972259" ignored="false" />
     <file path="$PROJECT_DIR$/../../../html5wicket/html5wicket/src/java/mycompany/reports/TplReportCreator.java" changelist="4ccbb714-201c-482b-a93f-dd4890c10bc1" time="1380714530881" ignored="false" />
@@ -333,6 +338,9 @@
           </PATH>
         </subPane>
       </pane>
+      <pane id="Scope">
+        <subPane subId="All" />
+      </pane>
       <pane id="ProjectPane">
         <subPane>
           <PATH>
@@ -385,9 +393,6 @@
           </PATH>
         </subPane>
       </pane>
-      <pane id="Scope">
-        <subPane subId="All" />
-      </pane>
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -437,16 +442,16 @@
     <key name="CreateClassDialog.RecentsKey">
       <recent name="helloworld" />
     </key>
+    <key name="ImportMappingsDialog.RecentPackages">
+      <recent name="eu.smartsantander.androidExperimentation" />
+      <recent name="helloworld" />
+    </key>
     <key name="MoveFile.RECENT_KEYS">
       <recent name="$PROJECT_DIR$/AndroidExperimentationWeb/web" />
       <recent name="$PROJECT_DIR$/src" />
       <recent name="$PROJECT_DIR$/src/eu/smartsantander/androidExperimentation/entities" />
       <recent name="$PROJECT_DIR$/lib" />
       <recent name="$PROJECT_DIR$/web" />
-    </key>
-    <key name="ImportMappingsDialog.RecentPackages">
-      <recent name="eu.smartsantander.androidExperimentation" />
-      <recent name="helloworld" />
     </key>
   </component>
   <component name="RunManager" selected="Tomcat Server.Tomcat 7.0">
@@ -1037,15 +1042,15 @@
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/web/WEB-INF/web.xml">
-      <provider editor-type-id="com.intellij.javaee.module.view.web.viewlets.WebModuleGeneralEditorProvider">
-        <state />
-      </provider>
       <provider selected="true" editor-type-id="text-editor">
         <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0">
           <folding />
         </state>
       </provider>
       <provider editor-type-id="com.intellij.javaee.module.view.web.viewlets.WebModuleAssemblyDescriptorReferencesProvider">
+        <state />
+      </provider>
+      <provider editor-type-id="com.intellij.javaee.module.view.web.viewlets.WebModuleGeneralEditorProvider">
         <state />
       </provider>
       <provider editor-type-id="com.intellij.javaee.module.view.web.viewlets.WebModuleAssemblyDescriptorProvider">

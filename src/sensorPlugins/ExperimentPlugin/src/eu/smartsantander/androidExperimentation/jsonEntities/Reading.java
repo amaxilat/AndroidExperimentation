@@ -7,6 +7,12 @@ import com.google.gson.Gson;
 
 
 public class Reading implements Serializable {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
+
 	public static enum Datatype {Integer,Float,String};
 	
 	private String context;
@@ -40,5 +46,10 @@ public class Reading implements Serializable {
 	
 	public String toJson(){
 		return (new Gson()).toJson(this);
+	}
+	
+	
+	public static Reading fromJson(String json){
+		return (new Gson()).fromJson(json, Reading.class);
 	}
 }

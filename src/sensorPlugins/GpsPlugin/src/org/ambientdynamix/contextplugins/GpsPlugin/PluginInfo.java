@@ -2,13 +2,9 @@ package org.ambientdynamix.contextplugins.GpsPlugin;
 
 import java.util.HashSet;
 import java.util.Set;
-
 import org.ambientdynamix.api.application.IContextInfo;
-
 import com.google.gson.Gson;
-
 import eu.smartsantander.androidExperimentation.jsonEntities.Reading;
-
 import android.os.Parcel;
 import android.os.Parcelable;
 

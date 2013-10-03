@@ -37,7 +37,10 @@ public class GpsPluginRuntime extends AutoReactiveContextPluginRuntime {
     
     
 	public void broadcastGPS(UUID requestId) {
-		Log.w(TAG, "GPS Broadcast!");
+		if (requestId!=null)
+			Log.w(TAG, "GPS Broadcast:"+requestId);
+		else
+			Log.w(TAG, "GPS Broadcast Timer!");
 		Location gps;
 		try {
 			locationManager = (LocationManager) this.context.getSystemService(Context.LOCATION_SERVICE);
@@ -57,14 +60,18 @@ public class GpsPluginRuntime extends AutoReactiveContextPluginRuntime {
 			this.status="invalid";
 		}
 	        
-		Log.w("GPS Plugin:", this.location);
+		Log.w(TAG,"GPS Plugin:"+ this.location);
 		PluginInfo info = new PluginInfo();
 		info.setState(this.status);
 		info.setPayload(new Reading(Reading.Datatype.String, this.location));		
-		if (requestId!=null)
+		Log.w(TAG, "GPS Plugin:"+ info.getPayload());
+		if (requestId!=null){
 			sendContextEvent(requestId, new SecuredContextInfo(info,	PrivacyRiskLevel.LOW), 60000);
-		else 
+			Log.w(TAG,"GPS Plugin from Request:"+ info.getPayload());
+		}else{ 
 			sendBroadcastContextEvent(new SecuredContextInfo(info,	PrivacyRiskLevel.LOW), 60000);
+			Log.w(TAG,"GPS Plugin Broadcast:"+ info.getPayload());
+		}
 	}
 		
 	@Override
@@ -80,7 +87,7 @@ public class GpsPluginRuntime extends AutoReactiveContextPluginRuntime {
 	@Override
 	public void handleContextRequest(UUID requestId, String contextType)
 	{	
-		Log.w(TAG, "GPS Broadcast handleContextRequest!");
+		//Log.w(TAG, "GPS Broadcast handleContextRequest!");
 		broadcastGPS(requestId);
 	}
 

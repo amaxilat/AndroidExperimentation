@@ -24,7 +24,7 @@ public class ReadingStorage {
 		Bundle b=new Bundle();
 		for (String context:store.keySet()){
 			Reading r=store.get(context);
-			b.putSerializable(context, r);
+			b.putString(context, r.toJson());
 		}		
 		return b;
 	}
