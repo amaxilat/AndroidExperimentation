@@ -2,6 +2,12 @@ package eu.smartsantander.androidExperimentation.operations;
 
 import org.ambientdynamix.api.application.IdResult;
 import org.ambientdynamix.core.DynamixService;
+ 
+
+import com.google.gson.Gson;
+
+import eu.smartsantander.androidExperimentation.Constants;
+import eu.smartsantander.androidExperimentation.jsonEntities.Experiment;
 
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -21,6 +27,9 @@ public class AsyncExperimentTask extends AsyncTask<String, Void, String> {
 			DynamixServiceListenerUtility.start();
 	    }else{
 			try {
+				manageExperiment();
+				
+				
 				IdResult r;
 				
 				//do it for all plugins....
@@ -64,60 +73,52 @@ public class AsyncExperimentTask extends AsyncTask<String, Void, String> {
 		Log.i("AndroidExperimentation",
 				"AndroidExperimentation Async Experiment Task cancelled");
 	}
-}
-
-
-
-/*
-if (runningJob.equals("-1")) {
 	
-	// if registered ask for experiment
-	if (phoneProfiler.getPhoneId() != Constants.PHONE_ID_UNITIALIZED) {
+	
+
+	
+	
+	public String manageExperiment(){
 		String jsonExperiment = "0";
 		try {
-			jsonExperiment = communication.getExperiment(
-					phoneProfiler.getPhoneId(),
-					sensorProfiler.getSensorRules());
+			jsonExperiment = DynamixService.getCommunication().getExperiment(
+					DynamixService.getPhoneProfiler().getPhoneId(),
+					DynamixService.getPhoneProfiler().getSensorRules());
 		} catch (Exception e) {
-			// TODO handle this
 			e.printStackTrace();
 			return "No experiment Fetched";
 		}
-
 		Log.i(TAG, jsonExperiment);
 		if (jsonExperiment.equals("0")) {
 			Log.i(TAG, "No experiment Fetched");
+			DynamixService.removeExperiment();
 			return "No experiment Fetched";
 		} else {
 			try {
 				Gson gson = new Gson();
+				Experiment experiment = (Experiment) gson.fromJson(
+						jsonExperiment, Experiment.class);
+				String[] smarDeps = DynamixService.getPhoneProfiler()
+						.getSensorRules().split(",");
+				String[] expDeps = experiment.getSensorDependencies()
+						.split(",");
+				if (Constants.match(smarDeps, expDeps) == true) {
 
-				Experiment experiment = (Experiment) gson.fromJson(jsonExperiment, Experiment.class);
-				String[] smarDeps = sensorProfiler.getSensorRules().split(",");
-				String[] expDeps = experiment.getSensorDependencies().split(",");
-
-
-				if (match(smarDeps,expDeps)==true) {
 					String contextType = experiment.getContextType();
 					String url = experiment.getUrl();
-
 					Downloader downloader = new Downloader();
 					try {
-						downloader.DownloadFromUrl(url, experiment.getFilename());
+						downloader.DownloadFromUrl(url,
+								experiment.getFilename());
 					} catch (Exception e) {
 						e.printStackTrace();
 						return "Failed to Download Experiment";
 					}
-
-					editor.putString("runningJob", contextType);
-					editor.putString("runningExperimentUrl",experiment.getUrl());
-					editor.commit();
-					sendThreadMessage("job_name:"+ experiment.getName());
-
-					// tell to dynamix Framework to update its
-					// repository
-					updateDynamixRepository();
-					scheduler.commitJob(contextType);
+					if (experiment.getId() == DynamixService.getExperimentId()) {
+						DynamixService.removeExperiment();
+						DynamixService.setExperimentId(experiment.getId());
+						DynamixService.checkForContextPluginUpdates();
+					}
 					return "Experiment Commited";
 				} else {
 					Log.i(TAG, "Experiment violates Sensor Rules");
@@ -125,27 +126,12 @@ if (runningJob.equals("-1")) {
 				}
 			} catch (Exception e) {
 				e.printStackTrace();
-				Log.i(TAG, "Exception in consuming experiment" +e.getMessage());
+				Log.i(TAG, "Exception in consuming experiment" + e.getMessage());
 				return "Exception in consuming experiment";
 			}
 		}
-	} else {
-		Log.i("AndroidExperimentation", "Ping failed");
-		return "Ping failed";
-	}
-} else {
-	if (scheduler.currentJob.jobState == null) {
-		String runningExperimentUrl = pref.getString(
-				"runningExperimentUrl", "-1");
-		try {
-			Constants.checkExperiment(runningJob, runningExperimentUrl);
-		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		sendThreadMessage("job_name:" + runningJob);
-		scheduler.commitJob(runningJob);
-		return "Experiment Commited";
-	}
 
-}*/
+	}
+}
+
+ 

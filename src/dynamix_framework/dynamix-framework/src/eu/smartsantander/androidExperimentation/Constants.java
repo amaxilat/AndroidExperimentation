@@ -7,7 +7,11 @@ import eu.smartsantander.androidExperimentation.operations.Downloader;
 public class Constants {
 	public static String URL="http://blanco.cti.gr";
 	public static int PHONE_ID_UNITIALIZED=-1;
+	public static int NO_EXPERIMENT_ID=-1;
 	public static final long EXPERIMENT_POLL_INTERVAL = 15000;//5*60000;
+	
+	
+	
 	//public enum Datatype {Integer,Float,String};
 	
 	public static void checkFile(String filename, String url) throws Exception {
@@ -29,6 +33,22 @@ public class Constants {
 			downloader.DownloadFromUrl(url, contextType);
 		}
 	}
+	
+    public static boolean match(String[] smartphoneDependencies, String[] experimentDependencies) {
+        for (String expDependency : experimentDependencies) {
+            boolean found = false;
+            for (String smartphoneDependency : smartphoneDependencies) {
+                if (smartphoneDependency.equals(expDependency)) {
+                    found = true;
+                    break;
+                }
+            }
+            if (found == false) {
+                return false;
+            }
+        }
+        return true;
+    }
 
 }
 

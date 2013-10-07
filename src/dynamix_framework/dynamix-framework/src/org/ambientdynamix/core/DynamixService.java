@@ -194,11 +194,21 @@ public final class DynamixService extends Service {
 	public static ReadingStorage contextReadings=new ReadingStorage();
 	
 	
+	
 	//SmartSantanter	
 	private static PhoneProfiler phoneProfiler=new PhoneProfiler();
 
 	private static Boolean isInitialized=false;
 	private static Communication communication= new Communication();
+	public static int experimentId;
+	
+	static public int getExperimentId(){
+		return experimentId;
+	}
+	
+	static public void setExperimentId(int expId){
+		experimentId=expId;
+	}
 	
 	static public ReadingStorage getReadingStorage(){
 		return contextReadings;
@@ -248,6 +258,22 @@ public final class DynamixService extends Service {
 		
 		return counter;
 	}
+	
+	public static void removeExperiment(){
+		DynamixService.setExperimentId(Constants.NO_EXPERIMENT_ID);
+		ContextPlugin exp=getInstalledContextPlugin("org.ambientdynamix.contextplugins.ExperimentPlugin");	
+		if (exp!=null)
+			uninstallPlugin(exp,true);
+	}		
+	
+	public static void startExperiment(){
+		ContextPlugin exp= getInstalledContextPlugin("org.ambientdynamix.contextplugins.ExperimentPlugin");	
+		if (exp!=null)
+			uninstallPlugin(exp,true);
+	}	
+	
+	/////////////////////////////////
+	
 	
 	static public Handler getUIHandler(){
 		return uiHandler;
