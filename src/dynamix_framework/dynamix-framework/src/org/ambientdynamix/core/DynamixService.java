@@ -231,6 +231,11 @@ public final class DynamixService extends Service {
     private Reporter reporter;
 	
 	
+    static public Boolean isEnabled(){
+    	if(androidContext==null)return false;
+    	return DynamixPreferences.isDynamixEnabled(androidContext);
+    }
+    
 	static public Boolean isDeviceRegistered(){
 		if (phoneProfiler.getPhoneId()!=Constants.PHONE_ID_UNITIALIZED){
 			return true;

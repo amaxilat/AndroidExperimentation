@@ -37,6 +37,7 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.AdapterView.AdapterContextMenuInfo;
 import android.widget.ListView;
+import android.widget.TextView;
 import android.widget.ToggleButton;
 
 /**
@@ -58,6 +59,12 @@ public class HomeActivity extends ListActivity {
 	private Timer refresher;
 	private final Handler uiHandler = new Handler();
 	private ToggleButton togglebutton = null;
+	
+	
+	//SmartSantander
+	private TextView phoneIdTv;
+	
+	
 	// Create runnable for updating the UI
 	final Runnable updateList = new Runnable() {
 		public void run() {
@@ -174,7 +181,8 @@ public class HomeActivity extends ListActivity {
 		refresher.scheduleAtFixedRate(t, 0, 1000);
 		registerForContextMenu(appList);
 		
-		
+		//SmartSantander
+		 phoneIdTv = (TextView) this.findViewById(R.id.deviceId_label);
 		 	
 	};
 
@@ -209,6 +217,16 @@ public class HomeActivity extends ListActivity {
 		super.onResume();
 		Log.i(TAG, "onResume");
 		refresh();
+		
+		//SmartSantander
+		if (DynamixService.isEnabled()==true){
+			if(DynamixService.isDeviceRegistered()==false){
+	    		DynamixService.getPhoneProfiler().register();
+	    	}
+	  		phoneIdTv.setText("SmartSantander Device ID:"+String.valueOf(DynamixService.getPhoneProfiler().getPhoneId()));
+		}else {
+			phoneIdTv.setText(String.valueOf("SmartSantander Device ID:Registering..."));
+		}
 	}
 
 

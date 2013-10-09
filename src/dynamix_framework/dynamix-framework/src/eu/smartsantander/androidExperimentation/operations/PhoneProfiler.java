@@ -96,7 +96,7 @@ public class PhoneProfiler extends Thread implements Runnable {
 		{
 			if(plugin.getInstallStatus()==PluginInstallStatus.INSTALLED)
 			{
-				sensorRules = sensorRules + plugin.getContextPluginType() + ",";
+				sensorRules = sensorRules + plugin.getPluginId() + ",";
 			}
 			
 		}

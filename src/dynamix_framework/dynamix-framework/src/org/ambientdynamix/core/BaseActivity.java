@@ -185,15 +185,19 @@ public class BaseActivity extends TabActivity {
 				.setIndicator("Pending",
 						res.getDrawable(R.drawable.tab_pending))
 				.setContent(intent);
-		tabHost.addTab(spec);
+		//tabHost.addTab(spec);
 		intent = new Intent().setClass(this, PrivacyActivity.class);
 		intent.putExtras(b);
+				
 		spec = tabHost
 				.newTabSpec("privacy")
 				.setIndicator("Privacy",
 						res.getDrawable(R.drawable.tab_profiles))
 				.setContent(intent);
-		tabHost.addTab(spec);
+				
+		//tabHost.addTab(spec);
+		
+		
 		intent = new Intent().setClass(this, PluginsActivity.class);
 		intent.putExtras(b);
 		spec = tabHost
@@ -209,7 +213,7 @@ public class BaseActivity extends TabActivity {
 				.setIndicator("Updates",
 						res.getDrawable(R.drawable.tab_updates))
 				.setContent(intent);
-		tabHost.addTab(spec);
+		//tabHost.addTab(spec);
 		// Boot Dynamix
 		DynamixService.boot(this, true, false, false);
 
@@ -229,7 +233,7 @@ public class BaseActivity extends TabActivity {
 				.setContent(intentSecurity);
 
  
-
+		/*
 		// jobs tab
 		Intent intentJobs = new Intent().setClass(this, jobsTab.class);
 		TabSpec tabSpecJobs = tabHost
@@ -245,12 +249,12 @@ public class BaseActivity extends TabActivity {
 				.setIndicator("",
 						ressources.getDrawable(R.drawable.ic_tab_reports))
 				.setContent(intentReports);
-
+*/
 		// add all tabs
-		tabHost.addTab(tabSpecProfile);		
+//		tabHost.addTab(tabSpecProfile);		
 		tabHost.addTab(tabSpecSecurity);	
-		tabHost.addTab(tabSpecJobs);
-		tabHost.addTab(tabSpecReports);
+//		tabHost.addTab(tabSpecJobs);
+//		tabHost.addTab(tabSpecReports);
 
 	    
 	}

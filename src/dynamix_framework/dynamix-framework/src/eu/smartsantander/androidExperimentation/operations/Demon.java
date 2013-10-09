@@ -16,14 +16,16 @@ public class Demon extends Thread implements Runnable {
 	private Runnable runnable = new Runnable() {
 		@Override
 		public void run() {
-			if (DynamixService.isDeviceRegistered() == false) {
-				Log.d(TAG, "AndroidExperimentation Running Unregistered Device");
-				DynamixService.getPhoneProfiler().register();
-			}else if (DynamixService.isInitialized()== true){
-				pingExp.cancel(true);
-				pingExp = new AsyncExperimentTask();
-				pingExp.execute();				
-			}						
+			if (DynamixService.isEnabled()==true){
+				if (DynamixService.isDeviceRegistered() == false) {
+					Log.d(TAG, "AndroidExperimentation Running Unregistered Device");
+					DynamixService.getPhoneProfiler().register();
+				}else if (DynamixService.isInitialized()== true){
+					pingExp.cancel(true);
+					pingExp = new AsyncExperimentTask();
+					pingExp.execute();				
+				}				
+			}
 			handler.postDelayed(this, Constants.EXPERIMENT_POLL_INTERVAL);
 		}
 	};

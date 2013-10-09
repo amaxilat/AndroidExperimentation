@@ -47,6 +47,7 @@ public class PrivacyActivity extends Activity {
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
+		
 		setContentView(R.layout.privacy_tab);
 		policyList = (ListView) findViewById(R.id.privacy_policy_list);
 		policyList.setClickable(true);
@@ -67,6 +68,7 @@ public class PrivacyActivity extends Activity {
 				// Do something thrilling here!
 			}
 		});
+ 
 	}
 
 	@Override
