@@ -62,7 +62,11 @@ public class HomeActivity extends ListActivity {
 	
 	
 	//SmartSantander
-	private TextView phoneIdTv;
+	private TextView phoneIdTv;		 
+	private TextView expIdTv;
+	private TextView expTitleTv;
+	private TextView expDescriptionTv;
+	
 	
 	
 	// Create runnable for updating the UI
@@ -183,6 +187,9 @@ public class HomeActivity extends ListActivity {
 		
 		//SmartSantander
 		 phoneIdTv = (TextView) this.findViewById(R.id.deviceId_label);
+		 expIdTv = (TextView) this.findViewById(R.id.experiment_id);
+		 expTitleTv = (TextView) this.findViewById(R.id.experiment_title);
+		 expDescriptionTv = (TextView) this.findViewById(R.id.experiment_description);
 		 	
 	};
 
@@ -222,10 +229,19 @@ public class HomeActivity extends ListActivity {
 		if (DynamixService.isEnabled()==true){
 			if(DynamixService.isDeviceRegistered()==false){
 	    		DynamixService.getPhoneProfiler().register();
-	    	}
+	    		phoneIdTv.setText(String.valueOf("SmartSantander Device ID:Registering..."));
+	    	}else{
 	  		phoneIdTv.setText("SmartSantander Device ID:"+String.valueOf(DynamixService.getPhoneProfiler().getPhoneId()));
+	    	}
 		}else {
-			phoneIdTv.setText(String.valueOf("SmartSantander Device ID:Registering..."));
+			phoneIdTv.setText(String.valueOf("SmartSantander Device ID: Enable Application"));
+		}
+		
+		if (DynamixService.getExperiment()!=null){
+			phoneIdTv.setText("SmartSantander Device ID: "+String.valueOf(DynamixService.getPhoneProfiler().getPhoneId()));
+			expIdTv.setText("Experiment ID: "+String.valueOf(DynamixService.getExperiment().getId()));
+			expTitleTv.setText("SmartSantander Device ID: "+String.valueOf(DynamixService.getExperiment().getContextType()));
+			expDescriptionTv.setText("SmartSantander Device ID: "+String.valueOf(DynamixService.getExperiment().getSensorDependencies()));			
 		}
 	}
 

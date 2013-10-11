@@ -2,6 +2,7 @@ package eu.smartsantander.androidExperimentation.operations;
 
 import org.ambientdynamix.core.DynamixService;
 
+import android.os.AsyncTask.Status;
 import android.os.Handler;
 import android.util.Log;
 import eu.smartsantander.androidExperimentation.Constants;
@@ -21,9 +22,11 @@ public class Demon extends Thread implements Runnable {
 					Log.d(TAG, "AndroidExperimentation Running Unregistered Device");
 					DynamixService.getPhoneProfiler().register();
 				}else if (DynamixService.isInitialized()== true){
-					pingExp.cancel(true);
-					pingExp = new AsyncExperimentTask();
-					pingExp.execute();				
+					if (pingExp.getStatus().equals(Status.FINISHED)==true){
+							pingExp.cancel(true);
+							pingExp = new AsyncExperimentTask();
+							pingExp.execute();	
+					}
 				}				
 			}
 			handler.postDelayed(this, Constants.EXPERIMENT_POLL_INTERVAL);
@@ -46,7 +49,7 @@ public class Demon extends Thread implements Runnable {
 	public void startJob() {
 		try {
 			Log.d(TAG, "AndroidExperimentation Running");
-			handler.postDelayed(runnable, Constants.EXPERIMENT_POLL_INTERVAL);
+			handler.postDelayed(runnable, Constants.EXPERIMENT_POLL_INTERVAL+5000);
 		} catch (Exception e) {
 			e.printStackTrace();
 			Log.d(TAG, "AndroidExperimentation:" + e.getMessage());

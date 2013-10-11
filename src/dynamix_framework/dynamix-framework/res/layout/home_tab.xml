@@ -22,6 +22,14 @@
     
     
     <TextView
+        android:id="@+id/experiment_id"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:editable="false" 
+        android:text="-"
+        android:textAppearance="?android:attr/textAppearanceMedium" />
+    
+    <TextView
         android:id="@+id/experiment_title"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
@@ -31,14 +39,6 @@
     
     <TextView
         android:id="@+id/experiment_description"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:editable="false" 
-        android:text="-"
-        android:textAppearance="?android:attr/textAppearanceMedium" />
-    
-    <TextView
-        android:id="@+id/experiment_dependencies"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:editable="false" 

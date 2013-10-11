@@ -1,5 +1,7 @@
 package eu.smartsantander.androidExperimentation.operations;
 
+import java.lang.reflect.Type;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -9,8 +11,10 @@ import org.ambientdynamix.api.application.AppConstants.PluginInstallStatus;
 import org.ambientdynamix.core.DynamixService;
 
 import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 
 import eu.smartsantander.androidExperimentation.Constants;
+import eu.smartsantander.androidExperimentation.jsonEntities.Experiment;
 import eu.smartsantander.androidExperimentation.jsonEntities.Plugin;
 import eu.smartsantander.androidExperimentation.jsonEntities.PluginList;
 import android.content.Context;
@@ -25,6 +29,7 @@ public class PhoneProfiler extends Thread implements Runnable {
 	private Editor editor;	
 	private Boolean started=false;
 	private int PHONE_ID=Constants.PHONE_ID_UNITIALIZED;
+	private List<Experiment> experiments;
 
 	private final String TAG = this.getClass().getSimpleName();
 
@@ -87,9 +92,11 @@ public class PhoneProfiler extends Thread implements Runnable {
 		}
 		
 		editor.putInt("phoneId", this.PHONE_ID);
+		editor.putString("experiment", "");
 		editor.commit();
 	}
 
+	
 	public String getSensorRules(){
 		String sensorRules="";
 		for(ContextPluginInformation plugin :  DynamixService.getAllContextPluginInfo())
@@ -103,4 +110,29 @@ public class PhoneProfiler extends Thread implements Runnable {
 		return sensorRules;		
 	}
 
+	
+	public void experimentPush(Experiment exp){
+		if (editor==null){
+			pref = DynamixService.getAndroidContext().getApplicationContext().getSharedPreferences("phoneId",0);
+			editor = pref.edit();	
+		}
+		String experimentsJson=pref.getString("experiments","");
+		if (experimentsJson!=null && experimentsJson.length()>0){
+			Type listType = new TypeToken<ArrayList<Experiment>>() { }.getType();
+			experiments= (new Gson()).fromJson(experimentsJson, listType);
+		}
+		if (experiments==null){
+			experiments=new ArrayList<Experiment>();
+		}
+		experiments.add(exp);		
+		editor.putInt("phoneId", this.PHONE_ID);
+		experimentsJson= (new Gson()).toJson(experiments);
+		editor.putString("experiment", experimentsJson);
+		editor.commit();
+	}
+	
+	public List<Experiment> getExperiments(){
+		return experiments;
+	}
+	
 }

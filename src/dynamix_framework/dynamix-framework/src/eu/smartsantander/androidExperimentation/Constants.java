@@ -7,7 +7,6 @@ import eu.smartsantander.androidExperimentation.operations.Downloader;
 public class Constants {
 	public static String URL="http://blanco.cti.gr";
 	public static int PHONE_ID_UNITIALIZED=-1;
-	public static int NO_EXPERIMENT_ID=-1;
 	public static final long EXPERIMENT_POLL_INTERVAL = 15000;//5*60000;
 	
 	

@@ -1,48 +1,27 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-        android:layout_width="fill_parent"
-        android:layout_height="fill_parent"
-        android:orientation="vertical"
-        android:background="#000000" >
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:background="#000000"
+    android:orientation="vertical" >
 
-    <LinearLayout
-        android:layout_width="fill_parent"
+    <TextView
+        android:id="@+id/textView13"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:orientation="vertical" >
+        android:layout_gravity="center"
+        android:layout_weight="0.15"
+        android:text="Sensors Rules"
+        android:textColor="#36ACF5"
+        android:textSize="15dp" />
 
-       <TextView
-           android:id="@+id/textView3"
-           android:layout_width="wrap_content"
-           android:layout_height="wrap_content"
-           android:layout_gravity="center"
-           android:layout_weight="0.15"
-           android:text="Sensors Rules"
-           android:textColor="#36ACF5"
-           android:textSize="15dp" />
-        
-    </LinearLayout>
-
-     <View
+    <View
         android:layout_width="fill_parent"
         android:layout_height="1dp"
         android:background="#7F7E85" />
 
-             <LinearLayout
-                 android:layout_width="wrap_content"
-                 android:layout_height="wrap_content"
-                 android:orientation="vertical" 
-                 android:id="@+id/checklist">
-             </LinearLayout>
+    <ListView
+        android:id="@+id/checklist"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
 
-      <View
-        android:layout_width="fill_parent"
-        android:layout_height="1dp"
-        android:background="#7F7E85" />
-     
-    <LinearLayout
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical" >
-        
-    </LinearLayout>
-    	
- </LinearLayout>
+</LinearLayout>

@@ -233,7 +233,7 @@ public class BaseActivity extends TabActivity {
 				.setContent(intentSecurity);
 
  
-		/*
+		
 		// jobs tab
 		Intent intentJobs = new Intent().setClass(this, jobsTab.class);
 		TabSpec tabSpecJobs = tabHost
@@ -242,6 +242,7 @@ public class BaseActivity extends TabActivity {
 						ressources.getDrawable(R.drawable.ic_tab_jobs))
 				.setContent(intentJobs);
 
+		/*
 		// report tab
 		Intent intentReports = new Intent().setClass(this, reportTab.class);
 		TabSpec tabSpecReports = tabHost
@@ -253,7 +254,7 @@ public class BaseActivity extends TabActivity {
 		// add all tabs
 //		tabHost.addTab(tabSpecProfile);		
 		tabHost.addTab(tabSpecSecurity);	
-//		tabHost.addTab(tabSpecJobs);
+		tabHost.addTab(tabSpecJobs);
 //		tabHost.addTab(tabSpecReports);
 
 	    

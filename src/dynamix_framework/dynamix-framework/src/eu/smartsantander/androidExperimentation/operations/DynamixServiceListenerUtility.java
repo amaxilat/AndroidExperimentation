@@ -106,7 +106,7 @@ public class DynamixServiceListenerUtility {
 						String readingMsg=plugInfo.getPayload();
 						Reading reading=Reading.fromJson(readingMsg);
 						Log.w(TAG, "Received Reading: " + reading);
-						Toast.makeText(DynamixService.getAndroidContext(), readingMsg,	5000).show();
+						Toast.makeText(DynamixService.getAndroidContext(), readingMsg,	8000).show();
 						if(reading.getContext().equals("org.ambientdynamix.contextplugins.ExperimentPlugin")){
 							// push back on experimentation reading 
 							

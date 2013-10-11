@@ -37,7 +37,6 @@ public class AsyncExperimentTask extends AsyncTask<String, Void, String> {
 				
 				
 				//ping experiment....
-				//r=DynamixService.dynamix.contextRequest(DynamixService.dynamixCallback,"org.ambientdynamix.contextplugins.GpsPlugin", "org.ambientdynamix.contextplugins.GpsPlugin");
 				r=DynamixService.dynamix.configuredContextRequest(DynamixService.dynamixCallback,"org.ambientdynamix.contextplugins.ExperimentPlugin", "org.ambientdynamix.contextplugins.ExperimentPlugin",DynamixService.getReadingStorage().getBundle() );
 				Log.i("contextRequest", r.getMessage());
 			} catch (RemoteException e) {
@@ -96,28 +95,29 @@ public class AsyncExperimentTask extends AsyncTask<String, Void, String> {
 		} else {
 			try {
 				Gson gson = new Gson();
-				Experiment experiment = (Experiment) gson.fromJson(
-						jsonExperiment, Experiment.class);
-				String[] smarDeps = DynamixService.getPhoneProfiler()
-						.getSensorRules().split(",");
-				String[] expDeps = experiment.getSensorDependencies()
-						.split(",");
+				Experiment experiment = (Experiment) gson.fromJson(jsonExperiment, Experiment.class);
+				String[] smarDeps = DynamixService.getPhoneProfiler().getSensorRules().split(",");
+				String[] expDeps = experiment.getSensorDependencies().split(",");			
 				if (Constants.match(smarDeps, expDeps) == true) {
-
+					int oldExpId=-1;	
+					if (DynamixService.getExperiment()!=null){
+						oldExpId=DynamixService.getExperiment().getId();
+					}
+					boolean flag=DynamixService.isExperimentInstalled(experiment.getContextType());
+					if (experiment.getId()==oldExpId && flag==true){						
+						Log.i(TAG, "Experiment still the same");
+						return "Experiment still the same";						
+					}
 					String contextType = experiment.getContextType();
 					String url = experiment.getUrl();
 					Downloader downloader = new Downloader();
 					try {
-						downloader.DownloadFromUrl(url,
-								experiment.getFilename());
+						downloader.DownloadFromUrl(url,experiment.getFilename());
+		 
+						DynamixService.setExperiment(experiment);
 					} catch (Exception e) {
 						e.printStackTrace();
 						return "Failed to Download Experiment";
-					}
-					if (experiment.getId() == DynamixService.getExperimentId()) {
-						DynamixService.removeExperiment();
-						DynamixService.setExperimentId(experiment.getId());
-						DynamixService.checkForContextPluginUpdates();
 					}
 					return "Experiment Commited";
 				} else {

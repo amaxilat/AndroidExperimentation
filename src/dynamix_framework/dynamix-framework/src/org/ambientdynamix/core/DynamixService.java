@@ -37,6 +37,7 @@ import java.util.TimerTask;
 import java.util.UUID;
 import java.util.Vector;
 
+import org.ambientdynamix.api.application.AppConstants.ContextPluginType;
 import org.ambientdynamix.api.application.AppConstants.PluginInstallStatus;
 import org.ambientdynamix.api.application.ContextPluginInformation;
 import org.ambientdynamix.api.application.ErrorCodes;
@@ -72,6 +73,7 @@ import org.ambientdynamix.security.PrivacyPolicy;
 import org.ambientdynamix.security.TrustedCert;
 import org.ambientdynamix.update.DynamixUpdates;
 import org.ambientdynamix.update.TrustedCertBinder;
+import org.ambientdynamix.update.contextplugin.ContextPluginBinder;
 import org.ambientdynamix.update.contextplugin.DiscoveredContextPlugin;
 import org.ambientdynamix.update.contextplugin.IContextPluginConnector;
 import org.ambientdynamix.update.contextplugin.IContextPluginInstallListener;
@@ -82,6 +84,8 @@ import org.ambientdynamix.util.Utils;
 import org.osgi.framework.ServiceEvent;
 
 import eu.smartsantander.androidExperimentation.Constants;
+import eu.smartsantander.androidExperimentation.jsonEntities.Experiment;
+import eu.smartsantander.androidExperimentation.jsonEntities.Plugin;
 import eu.smartsantander.androidExperimentation.jsonEntities.ReadingStorage;
 import eu.smartsantander.androidExperimentation.operations.Communication;
 import eu.smartsantander.androidExperimentation.operations.Demon;
@@ -200,16 +204,51 @@ public final class DynamixService extends Service {
 
 	private static Boolean isInitialized=false;
 	private static Communication communication= new Communication();
-	public static int experimentId;
 	
-	static public int getExperimentId(){
-		return experimentId;
+	private static Experiment experiment;
+	
+	public static void setExperiment(Experiment exp){
+		if (exp!=null)
+			phoneProfiler.experimentPush(exp);
+			
+		if (exp==null) return;
+		
+		DynamixService.removeExperiment();
+		experiment=exp;	
+		Plugin pluginfo=new Plugin();
+		pluginfo.setContextType(experiment.getContextType());
+		pluginfo.setDescription(experiment.getContextType());
+		pluginfo.setFilename(experiment.getFilename());
+		pluginfo.setId(experiment.getId());
+		pluginfo.setInstallUrl(experiment.getUrl());
+		pluginfo.setName(experiment.getName());
+		pluginfo.setRuntimeFactoryClass("org.ambientdynamix.contextplugins.ExperimentPlugin.PluginFactory");
+		ContextPluginBinder plugBinder = new ContextPluginBinder();
+		ContextPlugin plug;
+		try {
+			plug = plugBinder.createContextPlugin(DynamixService.getConfig().getPrimaryContextPluginRepo(), pluginfo);
+			installPlugin( plug, null);
+			DynamixService.ContextMgr.startPlugin(plug);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 	
-	static public void setExperimentId(int expId){
-		experimentId=expId;
+	
+	public static void removeExperiment(){
+		ContextPlugin exp=getInstalledContextPlugin("org.ambientdynamix.contextplugins.ExperimentPlugin");	
+		if (exp!=null)
+			uninstallPlugin(exp,true);
+		DynamixService.setExperiment(null);
+	}		
+	
+	
+	public static Experiment getExperiment(){
+		return experiment;
 	}
 	
+ 
 	static public ReadingStorage getReadingStorage(){
 		return contextReadings;
 	}
@@ -263,20 +302,17 @@ public final class DynamixService extends Service {
 		
 		return counter;
 	}
+
 	
-	public static void removeExperiment(){
-		DynamixService.setExperimentId(Constants.NO_EXPERIMENT_ID);
-		ContextPlugin exp=getInstalledContextPlugin("org.ambientdynamix.contextplugins.ExperimentPlugin");	
-		if (exp!=null)
-			uninstallPlugin(exp,true);
-	}		
-	
-	public static void startExperiment(){
-		ContextPlugin exp= getInstalledContextPlugin("org.ambientdynamix.contextplugins.ExperimentPlugin");	
-		if (exp!=null)
-			uninstallPlugin(exp,true);
-	}	
-	
+	static public boolean isExperimentInstalled(String contexttype){
+		for (ContextPluginInformation info:DynamixService.getAllContextPluginInfo()){
+			if(info.getPluginId().equals(contexttype)){
+				return true;
+			}
+		}
+		return false;
+	}
+ 
 	/////////////////////////////////
 	
 	
