@@ -175,7 +175,7 @@ public class BaseActivity extends TabActivity {
 		b.putBoolean("fromTab", true);
 		// Initialize a TabSpec for each tab and add it to the TabHost
 		spec = tabHost.newTabSpec("home")
-				.setIndicator("Home", res.getDrawable(R.drawable.tab_home))
+				.setIndicator("", res.getDrawable(R.drawable.tab_home))
 				.setContent(intent);
 		tabHost.addTab(spec);
 		intent = new Intent().setClass(this, PendingApplicationActivity.class);
@@ -202,7 +202,7 @@ public class BaseActivity extends TabActivity {
 		intent.putExtras(b);
 		spec = tabHost
 				.newTabSpec("plugins")
-				.setIndicator("Plugins",
+				.setIndicator("",
 						res.getDrawable(R.drawable.tab_plugins))
 				.setContent(intent);
 		tabHost.addTab(spec);
@@ -242,7 +242,7 @@ public class BaseActivity extends TabActivity {
 						ressources.getDrawable(R.drawable.ic_tab_jobs))
 				.setContent(intentJobs);
 
-		/*
+		
 		// report tab
 		Intent intentReports = new Intent().setClass(this, reportTab.class);
 		TabSpec tabSpecReports = tabHost
@@ -250,12 +250,10 @@ public class BaseActivity extends TabActivity {
 				.setIndicator("",
 						ressources.getDrawable(R.drawable.ic_tab_reports))
 				.setContent(intentReports);
-*/
-		// add all tabs
-//		tabHost.addTab(tabSpecProfile);		
+
 		tabHost.addTab(tabSpecSecurity);	
 		tabHost.addTab(tabSpecJobs);
-//		tabHost.addTab(tabSpecReports);
+		tabHost.addTab(tabSpecReports);
 
 	    
 	}

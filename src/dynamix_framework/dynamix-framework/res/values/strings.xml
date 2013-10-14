@@ -66,5 +66,14 @@
     <string name="hello_world">Hello world!</string>
     <string name="menu_settings">Settings</string>
     <string name="title_activity_test">TestActivity</string>
-
+    <string name="about1">Android Experimentation is related to the SmartSantander research project, aiming to provide an Android smartphone application augmenting the functionality of an existing Future Internet infrastructure.
+			The Android software component distributes executable code on smartphone devices of a network of volunteers. The code is deployed as Ambient Dynamix plugins, performs calculations and produces sensor results, that are uploaded to a central server. There is a central software component responsible for distributing the plugins and collecting the results.
+	</string>
+    <string name="about2">
+		For more information regarding SmartSantander you can visit: 
+		http://smartsantander.eu 
+		For more information regarding the Ambient Dynamix framework you can visit: 
+		http://ambientdynamix.org
+	</string>
+    
 </resources>
