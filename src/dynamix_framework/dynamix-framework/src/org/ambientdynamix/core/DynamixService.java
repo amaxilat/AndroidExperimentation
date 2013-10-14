@@ -107,6 +107,8 @@ import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.ServiceConnection;
 import android.content.res.Resources.NotFoundException;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.os.Binder;
 import android.os.Bundle;
 import android.os.CountDownTimer;
@@ -2855,4 +2857,10 @@ public final class DynamixService extends Service {
 
 		void onDynamixError(String message);
 	}
+	
+	public static boolean isNetworkAvailable() {
+	        ConnectivityManager connectivityManager = (ConnectivityManager) DynamixService.getAndroidContext().getSystemService(Context.CONNECTIVITY_SERVICE);
+	        NetworkInfo activeNetworkInfo = connectivityManager.getActiveNetworkInfo();
+	        return activeNetworkInfo != null && activeNetworkInfo.isConnected();
+	    }
 }

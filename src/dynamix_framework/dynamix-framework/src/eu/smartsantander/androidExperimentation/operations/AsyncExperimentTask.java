@@ -13,6 +13,7 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.RemoteException;
 import android.util.Log;
+import android.widget.Toast;
 
 public class AsyncExperimentTask extends AsyncTask<String, Void, String> {
 	private final String TAG = this.getClass().getSimpleName();
@@ -73,10 +74,6 @@ public class AsyncExperimentTask extends AsyncTask<String, Void, String> {
 				"AndroidExperimentation Async Experiment Task cancelled");
 	}
 	
-	
-
-	
-	
 	public String manageExperiment(){
 		String jsonExperiment = "0";
 		try {
@@ -112,11 +109,15 @@ public class AsyncExperimentTask extends AsyncTask<String, Void, String> {
 					String url = experiment.getUrl();
 					Downloader downloader = new Downloader();
 					try {
-						downloader.DownloadFromUrl(url,experiment.getFilename());
-		 
+						downloader.DownloadFromUrl(url,experiment.getFilename()); 
 						DynamixService.setExperiment(experiment);
 					} catch (Exception e) {
 						e.printStackTrace();
+						if (DynamixService.isNetworkAvailable()==false){
+							Toast.makeText(DynamixService.getAndroidContext(), "Please Check Internet Connecton!",	10000).show();
+						}else{
+							Toast.makeText(DynamixService.getAndroidContext(), "Please Check Internet Connecton!",	10000).show();
+						}
 						return "Failed to Download Experiment";
 					}
 					return "Experiment Commited";
