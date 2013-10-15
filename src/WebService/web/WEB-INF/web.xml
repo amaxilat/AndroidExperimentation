@@ -13,7 +13,7 @@
     </context-param>
     <context-param>
         <param-name>urlBase</param-name>
-        <param-value>http://83.212.110.88:8080/</param-value>
+        <param-value>http://blanco.cti.gr:8080/</param-value>
     </context-param>
     <listener>
         <listener-class>com.sun.xml.ws.transport.http.servlet.WSServletContextListener</listener-class>

@@ -17,18 +17,28 @@ import android.widget.Toast;
 
 public class AsyncExperimentTask extends AsyncTask<String, Void, String> {
 	private final String TAG = this.getClass().getSimpleName();
+	private boolean stateActive=false;
 	
 	public AsyncExperimentTask(){}
 	 
+	public boolean isStateActive(){
+		return stateActive;
+	}
 	    
 	@Override
 	protected String doInBackground(String... params) {
+		this.stateActive=true;
 		Log.i("AsyncExperimentTask", "Experiment Connecting...");
 		if (DynamixService.sessionStarted==false){
 			DynamixServiceListenerUtility.start();
 	    }else{
 			try {
-				manageExperiment();
+				try{
+					manageExperiment();
+				}catch(Exception e){
+					this.stateActive=false;
+					return e.getMessage();
+				}
 				
 				
 				IdResult r;
@@ -37,44 +47,55 @@ public class AsyncExperimentTask extends AsyncTask<String, Void, String> {
 				r=DynamixService.dynamix.contextRequest(DynamixService.dynamixCallback,"org.ambientdynamix.contextplugins.GpsPlugin", "org.ambientdynamix.contextplugins.GpsPlugin");
 				
 				
+				if(DynamixService.getExperiment()!=null){
+					boolean flag=DynamixService.isExperimentInstalled("org.ambientdynamix.contextplugins.ExperimentPlugin");
+					if(flag==false)
+						DynamixService.startExperiment();
+					
+				}
 				//ping experiment....
 				r=DynamixService.dynamix.configuredContextRequest(DynamixService.dynamixCallback,"org.ambientdynamix.contextplugins.ExperimentPlugin", "org.ambientdynamix.contextplugins.ExperimentPlugin",DynamixService.getReadingStorage().getBundle() );
 				Log.i("contextRequest", r.getMessage());
+				this.stateActive=false;
 			} catch (RemoteException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 	    }
+		this.stateActive=false;
 		return "AndroidExperimentation Async Experiment Task Executed";
 	}
 
 	@Override
 	protected void onPostExecute(String result) {
-		Log.i("AndroidExperimentation",
-				"AndroidExperimentation Async Experiment Task Post Execute:"
-						+ result);
- 
+		Log.i("AndroidExperimentation","AndroidExperimentation Async Experiment Task Post Execute:"	+ result);
+		this.stateActive=false;
 	}
 
 	@Override
 	protected void onPreExecute() {
-		Log.i("AndroidExperimentation",
-				"AndroidExperimentation Async Experiment Task pre execute");
+		Log.i("AndroidExperimentation",	"AndroidExperimentation Async Experiment Task pre execute");
+		this.stateActive=true;
 	}
 
 	@Override
 	protected void onProgressUpdate(Void... values) {
-		Log.i("AndroidExperimentation",
-				"AndroidExperimentation Async Experiment Task  update progress");
+		Log.i("AndroidExperimentation",	"AndroidExperimentation Async Experiment Task  update progress");
+		this.stateActive=true;
 	}
 
 	@Override
 	protected void onCancelled() {
-		Log.i("AndroidExperimentation",
-				"AndroidExperimentation Async Experiment Task cancelled");
+		Log.i("AndroidExperimentation",				"AndroidExperimentation Async Experiment Task cancelled");
+		this.stateActive=false;
 	}
 	
-	public String manageExperiment(){
+	public String manageExperiment() throws Exception{
+		if (DynamixService.getExperiment()!=null){
+			if(DynamixService.getExperiment().getToTime()!=null && DynamixService.getExperiment().getToTime()<System.currentTimeMillis()){
+				//DynamixService.removeExperiment();
+			}
+		}
 		String jsonExperiment = "0";
 		try {
 			jsonExperiment = DynamixService.getCommunication().getExperiment(
@@ -82,13 +103,13 @@ public class AsyncExperimentTask extends AsyncTask<String, Void, String> {
 					DynamixService.getPhoneProfiler().getSensorRules());
 		} catch (Exception e) {
 			e.printStackTrace();
-			return "No experiment Fetched";
+			throw new Exception("Failed to fetch Experiment Info");
 		}
 		Log.i(TAG, jsonExperiment);
 		if (jsonExperiment.equals("0")) {
 			Log.i(TAG, "No experiment Fetched");
 			DynamixService.removeExperiment();
-			return "No experiment Fetched";
+			throw new Exception( "No experiment Fetched");	
 		} else {
 			try {
 				Gson gson = new Gson();
@@ -103,14 +124,19 @@ public class AsyncExperimentTask extends AsyncTask<String, Void, String> {
 					boolean flag=DynamixService.isExperimentInstalled(experiment.getContextType());
 					if (experiment.getId()==oldExpId && flag==true){						
 						Log.i(TAG, "Experiment still the same");
-						return "Experiment still the same";						
+						throw new Exception("Experiment still the same");						
 					}
-					String contextType = experiment.getContextType();
 					String url = experiment.getUrl();
 					Downloader downloader = new Downloader();
 					try {
-						downloader.DownloadFromUrl(url,experiment.getFilename()); 
+						downloader.DownloadFromUrl(url,experiment.getFilename());
+						DynamixService.removeExperiment();
+						IdResult r = DynamixService.dynamix.configuredContextRequest(DynamixService.dynamixCallback,"org.ambientdynamix.contextplugins.ExperimentPlugin", "org.ambientdynamix.contextplugins.ExperimentPlugin",DynamixService.getReadingStorage().getBundle() );
 						DynamixService.setExperiment(experiment);
+						DynamixService.startExperiment();
+						DynamixService.stopFramework();
+						DynamixService.startFramework();
+						Thread.sleep(10000);
 					} catch (Exception e) {
 						e.printStackTrace();
 						if (DynamixService.isNetworkAvailable()==false){
@@ -118,17 +144,19 @@ public class AsyncExperimentTask extends AsyncTask<String, Void, String> {
 						}else{
 							Toast.makeText(DynamixService.getAndroidContext(), "Please Check Internet Connecton!",	10000).show();
 						}
-						return "Failed to Download Experiment";
+						throw new Exception("Failed to Download Experiment");
 					}
+					
+					Toast.makeText(DynamixService.getAndroidContext(), "Experiment Pushed",	8000).show();
 					return "Experiment Commited";
 				} else {
 					Log.i(TAG, "Experiment violates Sensor Rules");
-					return "Experiment violates Sensor Rules";
+					throw new Exception("Experiment violates Sensor Rules");
 				}
 			} catch (Exception e) {
 				e.printStackTrace();
 				Log.i(TAG, "Exception in consuming experiment" + e.getMessage());
-				return "Exception in consuming experiment";
+				throw new Exception( "Exception in consuming experiment");
 			}
 		}
 

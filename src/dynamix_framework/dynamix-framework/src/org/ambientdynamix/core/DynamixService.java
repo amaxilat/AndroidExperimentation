@@ -212,11 +212,14 @@ public final class DynamixService extends Service {
 	public static void setExperiment(Experiment exp){
 		if (exp!=null)
 			phoneProfiler.experimentPush(exp);
-			
-		if (exp==null) return;
+		else
+			return;
 		
-		DynamixService.removeExperiment();
 		experiment=exp;	
+	}
+	
+	public static void startExperiment(){
+		if (experiment==null) return;
 		Plugin pluginfo=new Plugin();
 		pluginfo.setContextType(experiment.getContextType());
 		pluginfo.setDescription(experiment.getContextType());

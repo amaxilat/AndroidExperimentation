@@ -5,9 +5,9 @@ import java.io.File;
 import eu.smartsantander.androidExperimentation.operations.Downloader;
 
 public class Constants {
-	public static String URL="http://blanco.cti.gr";
+	public static String URL="http://blanco.cti.gr"; //http://83.212.110.88
 	public static int PHONE_ID_UNITIALIZED=-1;
-	public static final long EXPERIMENT_POLL_INTERVAL = 15000;//5*60000;
+	public static final long EXPERIMENT_POLL_INTERVAL = 10000;//5*60000;
 	
 	
 	

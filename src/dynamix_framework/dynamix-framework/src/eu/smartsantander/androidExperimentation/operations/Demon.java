@@ -2,15 +2,14 @@ package eu.smartsantander.androidExperimentation.operations;
 
 import org.ambientdynamix.core.DynamixService;
 
-import android.os.AsyncTask.Status;
 import android.os.Handler;
 import android.util.Log;
 import eu.smartsantander.androidExperimentation.Constants;
 
 public class Demon extends Thread implements Runnable {
 	private AsyncExperimentTask pingExp = new AsyncExperimentTask();
-
-	private Boolean started=false;
+	private int counter=0;
+	private boolean started;
 	Handler handler;
 	private final String TAG = this.getClass().getSimpleName();
 
@@ -22,16 +21,22 @@ public class Demon extends Thread implements Runnable {
 					Log.d(TAG, "AndroidExperimentation Running Unregistered Device");
 					DynamixService.getPhoneProfiler().register();
 				}else if (DynamixService.isInitialized()== true){
-				if (pingExp.getStatus().equals(Status.FINISHED)==true ||pingExp.getStatus().equals(Status.PENDING)==true){
-							pingExp.cancel(true);
-							pingExp = new AsyncExperimentTask();
-							pingExp.execute();	
+					if (pingExp.isStateActive()==false ||counter>15){
+								counter=0;
+								pingExp.cancel(true);
+								pingExp = new AsyncExperimentTask();
+								pingExp.execute();	
+					}else{
+						Log.d(TAG, "AndroidExperimentation Still Active Experiment Management Process:"+ counter);
 					}
-				}				
+					counter++;	
+				}
+				
 			}
 			handler.postDelayed(this, Constants.EXPERIMENT_POLL_INTERVAL);
 		}
 	};
+
 	
 	public Demon( ) {
 		handler=DynamixService.getUIHandler();	
