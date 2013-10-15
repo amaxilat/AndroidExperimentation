@@ -4,5 +4,5 @@
     <item android:drawable="@drawable/home_icon"
           android:state_selected="true" />
     <!-- When not selected, use white-->
-    <item android:drawable="@drawable/home_icon" />
+    <item android:drawable="@drawable/home_icon_gray" />
 </selector>

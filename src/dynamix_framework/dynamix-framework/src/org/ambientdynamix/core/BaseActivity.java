@@ -120,14 +120,16 @@ public class BaseActivity extends TabActivity {
 
 	protected static void setTitlebarDisabled() {
 		if (baseActivity != null)
-			baseActivity.changeTitlebarState(Color.RED, "Dynamix "
-					+ DynamixService.getFrameworkVersion() + " is disabled");
+			baseActivity.changeTitlebarState(Color.RED, "Experimentation"
+					//+ DynamixService.getFrameworkVersion()
+					+ " is disabled");
 	}
 
 	protected static void setTitlebarEnabled() {
 		if (baseActivity != null)
-			baseActivity.changeTitlebarState(Color.rgb(0, 225, 50), "Dynamix "
-					+ DynamixService.getFrameworkVersion() + " is enabled");
+			baseActivity.changeTitlebarState(Color.rgb(0, 225, 50), "Experimentation"
+					//+ DynamixService.getFrameworkVersion()
+					+ " is enabled");
 	}
 
 	public static boolean isActivityVisible() {

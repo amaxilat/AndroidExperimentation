@@ -4,5 +4,5 @@
     <item android:drawable="@drawable/keylockicon"
           android:state_selected="true" />
     <!-- When not selected, use white-->
-    <item android:drawable="@drawable/keylockicon" />
+    <item android:drawable="@drawable/keylock_icon_gray" />
 </selector>
