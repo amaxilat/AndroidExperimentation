@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
-  <component name="DataSourceManagerImpl" format="xml" hash="2944596871">
-    <data-source source="LOCAL" name="Data Source" product="MySQL" version="5.5.32-0ubuntu0.13.04.1" jdbc-version="4.0" driver-name="MySQL Connector Java" driver-version="mysql-connector-java-5.1.26 ( Revision: ${bzr.revision-id} )" uuid="ec19ba82-120f-43e6-96c5-26912937ccef">
+  <component name="DataSourceManagerImpl" format="xml" hash="3905761961">
+    <data-source source="LOCAL" name="Data Source" product="MySQL" version="5.6.13-log" jdbc-version="4.0" driver-name="MySQL Connector Java" driver-version="mysql-connector-java-5.1.26 ( Revision: ${bzr.revision-id} )" uuid="ec19ba82-120f-43e6-96c5-26912937ccef">
       <extra-name-characters>#@</extra-name-characters>
       <identifier-quote-string>`</identifier-quote-string>
       <synchronize>true</synchronize>
@@ -9,8 +9,8 @@
       <jdbc-url>jdbc:mysql://localhost:3306/androidExperimentation</jdbc-url>
       <user-name>android</user-name>
       <user-password>dfcbdfc4dfcedfd8dfc5dfc3dfcedfcbdfc4dfcedfd8dfc5dfc3dfce</user-password>
-      <schema-pattern>androidExperimentation.*</schema-pattern>
-      <default-schemas>androidExperimentation.*</default-schemas>
+      <schema-pattern>androidexperimentation.*</schema-pattern>
+      <default-schemas>androidexperimentation.*</default-schemas>
       <default-dialect>MySQL</default-dialect>
       <libraries>
         <library>

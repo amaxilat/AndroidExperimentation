@@ -138,14 +138,14 @@ public class ModelManager {
     }
 
     public static void reportResults(Report report) {
-        String contextType = report.getName();
+        String expId = report.getName();
         List<String> experimentResults = report.getResults();
-        System.out.println("contextType: " + contextType);
+        System.out.println("experiment Id: " + expId);
 
         Transaction tx = getCurrentSession().beginTransaction();
 
-        Query q = getCurrentSession().createQuery("from Experiment where contextType = :contextType ");
-        q.setParameter("contextType", contextType);
+        Query q = getCurrentSession().createQuery("from Experiment where id = :expId ");
+        q.setParameter("expId", Integer.valueOf(expId));
         Experiment experiment = (Experiment) q.list().get(0);
         getCurrentSession().update(experiment);
 

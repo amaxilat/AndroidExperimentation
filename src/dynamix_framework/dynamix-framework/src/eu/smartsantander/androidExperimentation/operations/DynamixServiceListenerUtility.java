@@ -1,5 +1,6 @@
 package eu.smartsantander.androidExperimentation.operations;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.ambientdynamix.api.application.ContextEvent;
@@ -16,6 +17,7 @@ import org.ambientdynamix.util.Log;
 import com.google.gson.Gson;
 
 import eu.smartsantander.androidExperimentation.jsonEntities.Reading;
+import eu.smartsantander.androidExperimentation.jsonEntities.Report;
 
 import android.content.ComponentName;
 import android.content.Context;
@@ -109,7 +111,15 @@ public class DynamixServiceListenerUtility {
 						Toast.makeText(DynamixService.getAndroidContext(), readingMsg,	8000).show();
 						if(reading.getContext().equals("org.ambientdynamix.contextplugins.ExperimentPlugin")){
 							// push back on experimentation reading 
-							
+							Log.w(TAG, "Experiment Reading: " + reading);
+							if (DynamixService.getExperiment()==null) 
+								return;
+							Report rObject=new Report(DynamixService.getExperiment().getId().toString());
+							rObject.setDeviceId(DynamixService.getPhoneProfiler().getPhoneId());
+							List<String> mlist=new ArrayList<String>();
+							mlist.add(reading.getValue());
+							rObject.setResults(mlist);
+							DynamixService.getCommunication().sendReportResults(rObject.toJson());
 						}else{
 							DynamixService.getReadingStorage().pushReading(reading);						
 						}
