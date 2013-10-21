@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">SmartSantander Experimentation</string>
+    <string name="showDisconnected">Αποσυνδεδεμένες εφαρμογές</string>
+    <string name="Version">0.1</string>
+    <string name="home_no_apps">Αναμονή για σύνδεση εφαρμογών...</string>
+    <string name="deviceId_label">SmartSantander Device ID:</string>
+    <string name="experiment_label">SmartSantander πείραμα:</string>
+    <string name="app_list_label">Εφαρμογές με έγκριση</string>
+    <string name="app_contextmenu_remove">Αφαίρεση εφαρμογής</string>
+    <string name="app_settings">Ρυθμίσεις εφαρμογής</string>
+    <string name="save_app_authorization">Αποθήκευση ρυθμίσεων</string>
+    <string name="plug_list_label">Εγκατεστημένα Context Plugins</string>
+    <string name="app_list_contextmenu_title">Επιλογές εφαρμογής</string>
+    <string name="plug_contextmenu_remove">Απεγκατάσταση Context Plugin</string>
+    <string name="plug_list_context_menu_title">Επιλογές Context Plugin</string>
+    <string name="plug_details_label">Λεπτομέρειες Context Plugin</string>
+    <string name="plug_description_label">Περιγραφή</string>
+    <string name="plug_fidelity_label">Supported Context Information</string>
+    <string name="dynamix_enable_toggle_on">Ενεργοποιημένη λειτουργία</string>
+    <string name="dynamix_enable_toggle_off">Απενεργοποιημένη λειτουργία</string>
+    <string name="plugin_enable_toggle_on">Plugin Ενεργό</string>
+    <string name="plugin_enable_toggle_off">Plugin Ανενεργό</string>
+    <string name="btn_plugin_uninstall">Απεγκατάσταση Plugin</string>
+    <string name="app_settings_label">Ρυθμίσεις εφαρμογής</string>
+    <string name="app_description_label">Περιγραφή</string>
+    <string name="plugin_settings_label">Ρυθμίσεις ιδιωτικότητας Plugin</string>
+    <string name="btn_uninstall_app">Απεγκατάσταση εφαρμογής</string>
+    <string name="app_contextmenu_block">Φραγή εφαρμογής</string>
+    <string name="app_privacy_policy_label">Πολιτική ιδιωτικότητας</string>
+    <string name="app_settings_contextmenu_fidelity">Ορισμός νέου προφίλ εμπιστοσύνης</string>
+    <string name="btn_add_new_privacy_policy">Προσθήκη πολιτικής ιδιωτικότητας</string>
+    <string name="privacy_policy_list_label">Διαθέσιμες πολιτικές ιδιωτικότητας</string>
+    <string name="privacy_policy_description_label">Περιγραφή</string>
+    <string name="privacy_policy_click_me">Tap για λεπτομέρειες...</string>
+    <string name="enable_disable_label">Enable/Disable</string>
+    <string name="pending_app_list_label">Pending εφαρμογές</string>
+    <string name="app_pending_message">Tap για ορισμό πολιτικής ιδιωτικότητας...</string>
+    <string name="btn_update_scan">Εύρεση ενημερώσεων</string>
+    <string name="dynamix_notification_titlebar">Μήνυμα Dynamix</string>
+    <string name="dynamix_notification_title">Dynamix Context Framework</string>
+    <string name="pending_app_notification">Εφαρμογές που αναμένουν έγκριση</string>
+    <string name="btn_finished_app_edit">Αποθήκευση ρυθμίσεων</string>
+    <string name="btn_finished_app_pending">Έγκριση εφαρμογής</string>
+    <string name="dynamix_settings_label">Ρυθμίσεις Dynamix</string>
+    <string name="updates_list_label">Διαθέσιμες ενημερώσεις</string>
+    <string name="btn_do_updates">Εγκατάσταση ενημερώσεων</string>
+    <string name="btn_configure_context_plugin">Ρύθμιση Plugin</string>
+    <string name="pref_audible_alerts_title">Audible Alerts</string>
+    <string name="plug_stats_label">Πρόσφατες καταγραφές</string>
+    <string name="plug_stats_summary_label">Στατιστικά στοιχεία Plugin</string>
+    <string name="btn_see_plugin_stats">Στατιστικά στοιχεία</string>
+    <string name="btn_find_plugs">Εύρεση plugin</string>
+    <string name="btn_install_plugs">Εγκατάσταση plugin</string>
+    <string name="btn_see_plugin_details">Λεπτομέρειες plugin</string>
+    <string name="update_description_label">Ανανέωση περιγραφής</string>
+    <string name="update_priority_label">Προτεραιότητα update</string>
+    <string name="update_target_label">Πληροφορίες έκδοσης</string>
+    <string name="context_plugin_updates_available">Διαθέσιμες ενημερώσεις Context Plug-in</string>
+    <string name="privacy_policy_summary"></string>
+    <string name="custom_policy_summary">Tap and hold any Context Plug-in below to set a custom trust level, or tap it to view its description.</string>
+    <string name="custom_privacy_settings_label">Custom Privacy Settings</string>
+    <string name="cancel_install_label">Ακύρωση εγκατάστασης</string>
+    <string name="cancel_update_label">Ακύρωση ενημέρωσης</string>
+    <string name="hello_world">Χαίρε κόσμε!</string>
+    <string name="menu_settings">Ρυθμίσεις</string>
+    <string name="title_activity_test">TestActivity</string>
+    <string name="about1">Η εφαρμογή Android Experimentation αποτελεί μέρος του ερευνητικού έργου SmartSantander και στοχεύει στον εμπλουτισμό της λειτουργίας της Future Internet υποδομής που είναι εγκατεστημένη στο Santander.
+			Η εφαρμογή βοηθά στο διαμοιρασμό και την εγκατάσταση εκτελέσιμου κώδικα σε Android smartphone ενός δικτύου εθελοντών. Ο κώδικας είναι σε μορφή Ambient Dynamix plugins, παίρνει μετρήσεις από τους αισθητήρες του smartphone και εκτελεί υπολογισμούς, στέλνοντας τα αντίστοιχα αποτελέσματα σε έναν κεντρικό server.
+	</string>
+    <string name="about2">
+		Για περισσότερες πληροφορίες σχετικά με το SmartSantander μπορείτε να επισκεφθείτε το: 
+		http://smartsantander.eu 
+		Για περισσότερες πληροφορίες σχετικά με το Ambient Dynamix μπορείτε να επισκεφθείτε το: 
+		http://ambientdynamix.org
+	</string>
+    
+</resources>
