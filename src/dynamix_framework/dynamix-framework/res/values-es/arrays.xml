@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<resources>
+
+    <string-array name="updateInterval">
+        <item name="60000">Cada minuto</item>
+        <item name="600000">Cada 10 minutos</item>
+        <item name="3600000">Cada hora</item>
+        <item name="21600000">Cada 6 horas</item>
+        <item name="43200000">Cada 12 horas</item>
+        <item name="86400000">Cada día</item>
+        <item name="604800000">Una vez por semana</item>
+        <item name="18144000000">Cada 30 días</item>
+    </string-array>
+    
+    <string-array name="updateIntervalValues">
+        <item name="60000">60000</item>
+        <item name="600000">600000</item>
+        <item name="3600000">3600000</item>
+        <item name="21600000">21600000</item>
+        <item name="43200000">43200000</item>
+        <item name="86400000">86400000</item>
+        <item name="604800000">604800000</item>
+        <item name="18144000000">18144000000</item>
+    </string-array>
+    
+</resources>
