@@ -19,7 +19,8 @@ public class ExperimentPluginRuntime extends ReactiveContextPluginRuntime {
 	
     private final String TAG = this.getClass().getSimpleName();
 	private Context context;
-	private Reading r;
+	private Reading gpsReading;
+	private Reading wifiScanReading;
 	private Bundle b;
  
 	@Override
@@ -27,32 +28,39 @@ public class ExperimentPluginRuntime extends ReactiveContextPluginRuntime {
 		this.setPowerScheme(powerScheme);
 		this.context = this.getSecuredContext();
 		b=new Bundle();
-		Log.w(TAG, "Experiment Inited!");
+		Log.w(TAG, "ExperimentPluginWifiScan Inited!");
 	}
 
 	// handle incoming context request
 	@Override
 	public void handleContextRequest(UUID requestId, String contextType)
 	{	
-		Log.w(TAG, "Experiment Workload Started!");
+		Log.w(TAG, "ExperimentPluginWifiScan Workload Started!");
 		try {
 			
 			String jsonReading= b.getString("org.ambientdynamix.contextplugins.GpsPlugin");
-			this.r= Reading.fromJson(jsonReading);
+			String jsonReadingWifiScan= b.getString("org.ambientdynamix.contextplugins.WifiScanPlugin");
+			this.gpsReading= Reading.fromJson(jsonReading);
+			this.wifiScanReading= Reading.fromJson(jsonReadingWifiScan);
+			List<Reading> readings=new ArrayList<Reading>();
 			PluginInfo info = new PluginInfo();
-			info.setState("ACTIVE");			
-			if (this.r!=null){
-				Log.w("Experiment Message:", r.toJson());
-				List<Reading> r=new ArrayList<Reading>();
-				r.add(new Reading(Reading.Datatype.String, this.r.toJson(),PluginInfo.CONTEXT_TYPE));
-				info.setPayload(r);		
-				sendContextEvent(requestId, new SecuredContextInfo(info,	PrivacyRiskLevel.LOW), 60000);
+			info.setState("ACTIVE");	
+				
+			if (this.gpsReading!=null){
+				Log.w("Experiment Message:", gpsReading.toJson());						
+				readings.add(new Reading(Reading.Datatype.String, this.gpsReading.toJson(),PluginInfo.CONTEXT_TYPE));
 			}else{
-				List<Reading> r=new ArrayList<Reading>();
-				r.add(new Reading(Reading.Datatype.String, "",PluginInfo.CONTEXT_TYPE));
-				info.setPayload(r);		
-				sendContextEvent(requestId, new SecuredContextInfo(info,	PrivacyRiskLevel.LOW), 60000);
+				readings.add(new Reading(Reading.Datatype.String, "",PluginInfo.CONTEXT_TYPE));						
 			}
+			if (this.wifiScanReading!=null){
+				Log.w("Experiment Message:", wifiScanReading.toJson());						
+				readings.add(new Reading(Reading.Datatype.String, this.wifiScanReading.toJson(),PluginInfo.CONTEXT_TYPE));
+			}else{
+				readings.add(new Reading(Reading.Datatype.String, "",PluginInfo.CONTEXT_TYPE));						
+			}
+			
+			info.setPayload(readings);
+			sendContextEvent(requestId, new SecuredContextInfo(info,	PrivacyRiskLevel.LOW), 60000);
 		} catch (Exception e) {
 			Log.w("Experiment Workload Error", e.toString());
 		}
@@ -84,7 +92,7 @@ public class ExperimentPluginRuntime extends ReactiveContextPluginRuntime {
 		 * At this point, the plug-in should stop and release any resources. Nothing to do in this case except for stop.
 		 */
 		this.stop();
-		Log.d(TAG, "Experiment Destroyed!");
+		Log.d(TAG, "ExperimentPluginWifiScan Destroyed!");
 	}
 
 	@Override

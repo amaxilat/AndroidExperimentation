@@ -1,5 +1,6 @@
 package org.ambientdynamix.contextplugins.ExperimentPlugin;
 
+import java.util.List;
 import java.util.Set;
 
 import eu.smartsantander.androidExperimentation.jsonEntities.Reading;
@@ -18,5 +19,5 @@ public interface IPluginInfo {
 	
 	public abstract String getPayload();
 	
-	public abstract void setPayload(Reading payload);
+	public abstract void setPayload(List<Reading> payload);
 }

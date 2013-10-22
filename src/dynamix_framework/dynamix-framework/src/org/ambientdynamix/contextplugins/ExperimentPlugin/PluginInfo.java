@@ -1,12 +1,11 @@
 package org.ambientdynamix.contextplugins.ExperimentPlugin;
 
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
-
 import org.ambientdynamix.api.application.IContextInfo;
-
 import com.google.gson.Gson;
-
+import eu.smartsantander.androidExperimentation.jsonEntities.Reading;
 import android.os.Parcel;
 import android.os.Parcelable;
 
@@ -20,13 +19,23 @@ public class PluginInfo implements IContextInfo,IPluginInfo  {
 		}
 	};
 	
-	public static String CONTEXT_TYPE = "org.ambientdynamix.contextplugins.EpxerimentPlugin";
+	public  String CONTEXT_TYPE;
 	private String state;
 	private String payload = "";
+	private String context;
 	
-	public PluginInfo() {
 	
+	
+	
+	public String getContext() {
+		return context;
 	}
+
+	public void setContext(String context) {
+		this.context = context;
+	}
+
+	public PluginInfo() {}
 
 	@Override
 	public Set<String> getStringRepresentationFormats() {
@@ -72,9 +81,9 @@ public class PluginInfo implements IContextInfo,IPluginInfo  {
 		return this.payload;
 	}
 
-	public void setPayload(String data)
+	public void setPayload(List<Reading> r)
 	{
-		this.payload = data;
+		this.payload = (new Gson()).toJson(r);
 	}
 	
 	

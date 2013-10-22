@@ -1,5 +1,7 @@
 package org.ambientdynamix.contextplugins.GpsPlugin;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.UUID;
 
 import org.ambientdynamix.api.contextplugin.AutoReactiveContextPluginRuntime;
@@ -63,7 +65,9 @@ public class GpsPluginRuntime extends AutoReactiveContextPluginRuntime {
 		Log.w(TAG,"GPS Plugin:"+ this.location);
 		PluginInfo info = new PluginInfo();
 		info.setState(this.status);
-		info.setPayload(new Reading(Reading.Datatype.String, this.location));		
+		List<Reading> r=new ArrayList<Reading>();
+		r.add(new Reading(Reading.Datatype.String, this.location, PluginInfo.CONTEXT_TYPE));
+		info.setPayload(r);		
 		Log.w(TAG, "GPS Plugin:"+ info.getPayload());
 		if (requestId!=null){
 			sendContextEvent(requestId, new SecuredContextInfo(info,	PrivacyRiskLevel.LOW), 60000);
@@ -87,7 +91,6 @@ public class GpsPluginRuntime extends AutoReactiveContextPluginRuntime {
 	@Override
 	public void handleContextRequest(UUID requestId, String contextType)
 	{	
-		//Log.w(TAG, "GPS Broadcast handleContextRequest!");
 		broadcastGPS(requestId);
 	}
 
@@ -110,9 +113,7 @@ public class GpsPluginRuntime extends AutoReactiveContextPluginRuntime {
 
 	@Override
 	public void destroy() {
-		/*
-		 * At this point, the plug-in should stop and release any resources. Nothing to do in this case except for stop.
-		 */
+ 
 		this.stop();
 		Log.d(TAG, "GPS Plugin Destroyed!");	
 	}

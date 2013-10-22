@@ -1,4 +1,4 @@
-package org.ambientdynamix.contextplugins.ExperimentPlugin;
+package org.ambientdynamix.contextplugins.WifiScanPlugin;
 
 import java.util.HashSet;
 import java.util.List;
@@ -19,7 +19,7 @@ class PluginInfo implements IContextInfo,IPluginInfo  {
 		}
 	};
 	
-	public static String CONTEXT_TYPE = "org.ambientdynamix.contextplugins.ExperimentPlugin";
+	public static String CONTEXT_TYPE = "org.ambientdynamix.contextplugins.WifiScanPlugin";
 	private String state;
 	private String payload = "";
 	private String context;

@@ -7,7 +7,357 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="4ccbb714-201c-482b-a93f-dd4890c10bc1" name="Default" comment="experiment plugin plugin installation">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../dynamix_framework/dynamix-framework/src/eu/smartsantander/androidExperimentation/tabs/jobsTab.java" afterPath="$PROJECT_DIR$/../dynamix_framework/dynamix-framework/src/eu/smartsantander/androidExperimentation/tabs/jobsTab.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/web/dynamixRepository/org.ambientdynamix.contextplugins.ExperimentPluginWifiScan_0.9.54.jar" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/web/dynamixRepository/org.ambientdynamix.contextplugins.WifiScanPlugin_0.9.54.jar" />
+      <change type="DELETED" beforePath="C:\Users\theodori\Desktop\AndroidExperimentation\src\androidExperimentation\.classpath" afterPath="" />
+      <change type="DELETED" beforePath="C:\Users\theodori\Desktop\AndroidExperimentation\src\androidExperimentation\.gitignore" afterPath="" />
+      <change type="DELETED" beforePath="C:\Users\theodori\Desktop\AndroidExperimentation\src\androidExperimentation\.idea\.name" afterPath="" />
+      <change type="DELETED" beforePath="C:\Users\theodori\Desktop\AndroidExperimentation\src\androidExperimentation\.idea\compiler.xml" afterPath="" />
+      <change type="DELETED" beforePath="C:\Users\theodori\Desktop\AndroidExperimentation\src\androidExperimentation\.idea\copyright\profiles_settings.xml" afterPath="" />
+      <change type="DELETED" beforePath="C:\Users\theodori\Desktop\AndroidExperimentation\src\androidExperimentation\.idea\encodings.xml" afterPath="" />
+      <change type="DELETED" beforePath="C:\Users\theodori\Desktop\AndroidExperimentation\src\androidExperimentation\.idea\misc.xml" afterPath="" />
+      <change type="DELETED" beforePath="C:\Users\theodori\Desktop\AndroidExperimentation\src\androidExperimentation\.idea\modules.xml" afterPath="" />
+      <change type="DELETED" beforePath="C:\Users\theodori\Desktop\AndroidExperimentation\src\androidExperimentation\.idea\scopes\scope_settings.xml" afterPath="" />
+      <change type="DELETED" beforePath="C:\Users\theodori\Desktop\AndroidExperimentation\src\androidExperimentation\.idea\uiDesigner.xml" afterPath="" />
+      <change type="DELETED" beforePath="C:\Users\theodori\Desktop\AndroidExperimentation\src\androidExperimentation\.idea\vcs.xml" afterPath="" />
+      <change type="DELETED" beforePath="C:\Users\theodori\Desktop\AndroidExperimentation\src\androidExperimentation\.idea\workspace.xml" afterPath="" />
+      <change type="DELETED" beforePath="C:\Users\theodori\Desktop\AndroidExperimentation\src\androidExperimentation\.project" afterPath="" />
+      <change type="DELETED" beforePath="C:\Users\theodori\Desktop\AndroidExperimentation\src\androidExperimentation\.settings\org.eclipse.jdt.core.prefs" afterPath="" />
+      <change type="DELETED" beforePath="C:\Users\theodori\Desktop\AndroidExperimentation\src\androidExperimentation\AndroidManifest.xml" afterPath="" />
+      <change type="DELETED" beforePath="C:\Users\theodori\Desktop\AndroidExperimentation\src\androidExperimentation\SmartSantanderExperimentation.iml" afterPath="" />
+      <change type="DELETED" beforePath="C:\Users\theodori\Desktop\AndroidExperimentation\src\androidExperimentation\gen\eu\smartsantander\androidExperimentation\BuildConfig.java" afterPath="" />
+      <change type="DELETED" beforePath="C:\Users\theodori\Desktop\AndroidExperimentation\src\androidExperimentation\gen\eu\smartsantander\androidExperimentation\Manifest.java" afterPath="" />
+      <change type="DELETED" beforePath="C:\Users\theodori\Desktop\AndroidExperimentation\src\androidExperimentation\gen\eu\smartsantander\androidExperimentation\R.java" afterPath="" />
+      <change type="DELETED" beforePath="C:\Users\theodori\Desktop\AndroidExperimentation\src\androidExperimentation\ic_launcher-web.png" afterPath="" />
+      <change type="DELETED" beforePath="C:\Users\theodori\Desktop\AndroidExperimentation\src\androidExperimentation\lib\dynamixApiApplication.jar" afterPath="" />
+      <change type="DELETED" beforePath="C:\Users\theodori\Desktop\AndroidExperimentation\src\androidExperimentation\lib\gson-2.2.4.jar" afterPath="" />
+      <change type="DELETED" beforePath="C:\Users\theodori\Desktop\AndroidExperimentation\src\androidExperimentation\lib\ksoap2-android-assembly-3.0.0-jar-with-dependencies.jar" afterPath="" />
+      <change type="DELETED" beforePath="C:\Users\theodori\Desktop\AndroidExperimentation\src\androidExperimentation\lib\org.ambientdynamix.contextplugins.GpsPlugin_9.47.1.jar" afterPath="" />
+      <change type="DELETED" beforePath="C:\Users\theodori\Desktop\AndroidExperimentation\src\androidExperimentation\lib\org.ambientdynamix.contextplugins.WifiPlugin_9.47.1.jar" afterPath="" />
+      <change type="DELETED" beforePath="C:\Users\theodori\Desktop\AndroidExperimentation\src\androidExperimentation\lib\org.ambientdynamix.contextplugins.WifiScanPlugin_9.47.1.jar" afterPath="" />
+      <change type="DELETED" beforePath="C:\Users\theodori\Desktop\AndroidExperimentation\src\androidExperimentation\lib\org.ambientdynamix.contextplugins.batteryLevelPlugin_9.47.1.jar" afterPath="" />
+      <change type="DELETED" beforePath="C:\Users\theodori\Desktop\AndroidExperimentation\src\androidExperimentation\lib\org.ambientdynamix.contextplugins.batteryTemperaturePlugin_9.47.1.jar" afterPath="" />
+      <change type="DELETED" beforePath="C:\Users\theodori\Desktop\AndroidExperimentation\src\androidExperimentation\lib\org.ambientdynamix.contextplugins.experimentPlugin_9.47.1.jar" afterPath="" />
+      <change type="DELETED" beforePath="C:\Users\theodori\Desktop\AndroidExperimentation\src\androidExperimentation\lib\org.ambientdynamix.contextplugins.oneplugin_9.47.1.jar" afterPath="" />
+      <change type="DELETED" beforePath="C:\Users\theodori\Desktop\AndroidExperimentation\src\androidExperimentation\lib\org.ambientdynamix.contextplugins.twoplugin_9.47.1.jar" afterPath="" />
+      <change type="DELETED" beforePath="C:\Users\theodori\Desktop\AndroidExperimentation\src\androidExperimentation\libs\android-support-v4.jar" afterPath="" />
+      <change type="DELETED" beforePath="C:\Users\theodori\Desktop\AndroidExperimentation\src\androidExperimentation\lint.xml" afterPath="" />
+      <change type="DELETED" beforePath="C:\Users\theodori\Desktop\AndroidExperimentation\src\androidExperimentation\proguard-project.txt" afterPath="" />
+      <change type="DELETED" beforePath="C:\Users\theodori\Desktop\AndroidExperimentation\src\androidExperimentation\project.properties" afterPath="" />
+      <change type="DELETED" beforePath="C:\Users\theodori\Desktop\AndroidExperimentation\src\androidExperimentation\res\drawable-hdpi\ic_launcher.png" afterPath="" />
+      <change type="DELETED" beforePath="C:\Users\theodori\Desktop\AndroidExperimentation\src\androidExperimentation\res\drawable-mdpi\Graphite-Stripped-Folder-Experiments-copy-icon.png" afterPath="" />
+      <change type="DELETED" beforePath="C:\Users\theodori\Desktop\AndroidExperimentation\src\androidExperimentation\res\drawable-mdpi\battery_disabled.png" afterPath="" />
+      <change type="DELETED" beforePath="C:\Users\theodori\Desktop\AndroidExperimentation\src\androidExperimentation\res\drawable-mdpi\battery_enabled.png" afterPath="" />
+      <change type="DELETED" beforePath="C:\Users\theodori\Desktop\AndroidExperimentation\src\androidExperimentation\res\drawable-mdpi\cancel.png" afterPath="" />
+      <change type="DELETED" beforePath="C:\Users\theodori\Desktop\AndroidExperimentation\src\androidExperimentation\res\drawable-mdpi\database_connected.png" afterPath="" />
+      <change type="DELETED" beforePath="C:\Users\theodori\Desktop\AndroidExperimentation\src\androidExperimentation\res\drawable-mdpi\database_disconnected.png" afterPath="" />
+      <change type="DELETED" beforePath="C:\Users\theodori\Desktop\AndroidExperimentation\src\androidExperimentation\res\drawable-mdpi\device_selected.png" afterPath="" />
+      <change type="DELETED" beforePath="C:\Users\theodori\Desktop\AndroidExperimentation\src\androidExperimentation\res\drawable-mdpi\device_unselected.png" afterPath="" />
+      <change type="DELETED" beforePath="C:\Users\theodori\Desktop\AndroidExperimentation\src\androidExperimentation\res\drawable-mdpi\dynamix_selected.png" afterPath="" />
+      <change type="DELETED" beforePath="C:\Users\theodori\Desktop\AndroidExperimentation\src\androidExperimentation\res\drawable-mdpi\dynamix_unselected.png" afterPath="" />
+      <change type="DELETED" beforePath="C:\Users\theodori\Desktop\AndroidExperimentation\src\androidExperimentation\res\drawable-mdpi\emel_icon.png" afterPath="" />
+      <change type="DELETED" beforePath="C:\Users\theodori\Desktop\AndroidExperimentation\src\androidExperimentation\res\drawable-mdpi\emel_icon_gray.png" afterPath="" />
+      <change type="DELETED" beforePath="C:\Users\theodori\Desktop\AndroidExperimentation\src\androidExperimentation\res\drawable-mdpi\gps_disabled.png" afterPath="" />
+      <change type="DELETED" beforePath="C:\Users\theodori\Desktop\AndroidExperimentation\src\androidExperimentation\res\drawable-mdpi\gps_enabled.png" afterPath="" />
+      <change type="DELETED" beforePath="C:\Users\theodori\Desktop\AndroidExperimentation\src\androidExperimentation\res\drawable-mdpi\home_icon.png" afterPath="" />
+      <change type="DELETED" beforePath="C:\Users\theodori\Desktop\AndroidExperimentation\src\androidExperimentation\res\drawable-mdpi\home_icon_gray.png" afterPath="" />
+      <change type="DELETED" beforePath="C:\Users\theodori\Desktop\AndroidExperimentation\src\androidExperimentation\res\drawable-mdpi\ic_launcher.png" afterPath="" />
+      <change type="DELETED" beforePath="C:\Users\theodori\Desktop\AndroidExperimentation\src\androidExperimentation\res\drawable-mdpi\ic_tab_dynamix.xml" afterPath="" />
+      <change type="DELETED" beforePath="C:\Users\theodori\Desktop\AndroidExperimentation\src\androidExperimentation\res\drawable-mdpi\ic_tab_jobs.xml" afterPath="" />
+      <change type="DELETED" beforePath="C:\Users\theodori\Desktop\AndroidExperimentation\src\androidExperimentation\res\drawable-mdpi\ic_tab_profile.xml" afterPath="" />
+      <change type="DELETED" beforePath="C:\Users\theodori\Desktop\AndroidExperimentation\src\androidExperimentation\res\drawable-mdpi\ic_tab_reports.xml" afterPath="" />
+      <change type="DELETED" beforePath="C:\Users\theodori\Desktop\AndroidExperimentation\src\androidExperimentation\res\drawable-mdpi\ic_tab_security.xml" afterPath="" />
+      <change type="DELETED" beforePath="C:\Users\theodori\Desktop\AndroidExperimentation\src\androidExperimentation\res\drawable-mdpi\job_canceled.png" afterPath="" />
+      <change type="DELETED" beforePath="C:\Users\theodori\Desktop\AndroidExperimentation\src\androidExperimentation\res\drawable-mdpi\job_initialized.png" afterPath="" />
+      <change type="DELETED" beforePath="C:\Users\theodori\Desktop\AndroidExperimentation\src\androidExperimentation\res\drawable-mdpi\job_ready.png" afterPath="" />
+      <change type="DELETED" beforePath="C:\Users\theodori\Desktop\AndroidExperimentation\src\androidExperimentation\res\drawable-mdpi\job_report.png" afterPath="" />
+      <change type="DELETED" beforePath="C:\Users\theodori\Desktop\AndroidExperimentation\src\androidExperimentation\res\drawable-mdpi\job_running.png" afterPath="" />
+      <change type="DELETED" beforePath="C:\Users\theodori\Desktop\AndroidExperimentation\src\androidExperimentation\res\drawable-mdpi\job_stoped.png" afterPath="" />
+      <change type="DELETED" beforePath="C:\Users\theodori\Desktop\AndroidExperimentation\src\androidExperimentation\res\drawable-mdpi\job_wait.png" afterPath="" />
+      <change type="DELETED" beforePath="C:\Users\theodori\Desktop\AndroidExperimentation\src\androidExperimentation\res\drawable-mdpi\jobs_selected.png" afterPath="" />
+      <change type="DELETED" beforePath="C:\Users\theodori\Desktop\AndroidExperimentation\src\androidExperimentation\res\drawable-mdpi\jobs_unselected.png" afterPath="" />
+      <change type="DELETED" beforePath="C:\Users\theodori\Desktop\AndroidExperimentation\src\androidExperimentation\res\drawable-mdpi\keylock_icon.png" afterPath="" />
+      <change type="DELETED" beforePath="C:\Users\theodori\Desktop\AndroidExperimentation\src\androidExperimentation\res\drawable-mdpi\keylock_icon_gray.png" afterPath="" />
+      <change type="DELETED" beforePath="C:\Users\theodori\Desktop\AndroidExperimentation\src\androidExperimentation\res\drawable-mdpi\no_job_report.png" afterPath="" />
+      <change type="DELETED" beforePath="C:\Users\theodori\Desktop\AndroidExperimentation\src\androidExperimentation\res\drawable-mdpi\play.png" afterPath="" />
+      <change type="DELETED" beforePath="C:\Users\theodori\Desktop\AndroidExperimentation\src\androidExperimentation\res\drawable-mdpi\plug_small.png" afterPath="" />
+      <change type="DELETED" beforePath="C:\Users\theodori\Desktop\AndroidExperimentation\src\androidExperimentation\res\drawable-mdpi\plugged_dynamix.png" afterPath="" />
+      <change type="DELETED" beforePath="C:\Users\theodori\Desktop\AndroidExperimentation\src\androidExperimentation\res\drawable-mdpi\profile_selected.png" afterPath="" />
+      <change type="DELETED" beforePath="C:\Users\theodori\Desktop\AndroidExperimentation\src\androidExperimentation\res\drawable-mdpi\profile_unselected.png" afterPath="" />
+      <change type="DELETED" beforePath="C:\Users\theodori\Desktop\AndroidExperimentation\src\androidExperimentation\res\drawable-mdpi\register.png" afterPath="" />
+      <change type="DELETED" beforePath="C:\Users\theodori\Desktop\AndroidExperimentation\src\androidExperimentation\res\drawable-mdpi\report.png" afterPath="" />
+      <change type="DELETED" beforePath="C:\Users\theodori\Desktop\AndroidExperimentation\src\androidExperimentation\res\drawable-mdpi\reports_selected.png" afterPath="" />
+      <change type="DELETED" beforePath="C:\Users\theodori\Desktop\AndroidExperimentation\src\androidExperimentation\res\drawable-mdpi\reports_unselected.png" afterPath="" />
+      <change type="DELETED" beforePath="C:\Users\theodori\Desktop\AndroidExperimentation\src\androidExperimentation\res\drawable-mdpi\science_test_chemistry_laboratory.png" afterPath="" />
+      <change type="DELETED" beforePath="C:\Users\theodori\Desktop\AndroidExperimentation\src\androidExperimentation\res\drawable-mdpi\security_selected.png" afterPath="" />
+      <change type="DELETED" beforePath="C:\Users\theodori\Desktop\AndroidExperimentation\src\androidExperimentation\res\drawable-mdpi\security_unselected.png" afterPath="" />
+      <change type="DELETED" beforePath="C:\Users\theodori\Desktop\AndroidExperimentation\src\androidExperimentation\res\drawable-mdpi\settings_icon.png" afterPath="" />
+      <change type="DELETED" beforePath="C:\Users\theodori\Desktop\AndroidExperimentation\src\androidExperimentation\res\drawable-mdpi\settings_icon_gray.png" afterPath="" />
+      <change type="DELETED" beforePath="C:\Users\theodori\Desktop\AndroidExperimentation\src\androidExperimentation\res\drawable-mdpi\stop.png" afterPath="" />
+      <change type="DELETED" beforePath="C:\Users\theodori\Desktop\AndroidExperimentation\src\androidExperimentation\res\drawable-mdpi\unplug_small.png" afterPath="" />
+      <change type="DELETED" beforePath="C:\Users\theodori\Desktop\AndroidExperimentation\src\androidExperimentation\res\drawable-mdpi\unplugged_dynamix.png" afterPath="" />
+      <change type="DELETED" beforePath="C:\Users\theodori\Desktop\AndroidExperimentation\src\androidExperimentation\res\drawable-mdpi\wifi_disabled.png" afterPath="" />
+      <change type="DELETED" beforePath="C:\Users\theodori\Desktop\AndroidExperimentation\src\androidExperimentation\res\drawable-mdpi\wifi_enabled.png" afterPath="" />
+      <change type="DELETED" beforePath="C:\Users\theodori\Desktop\AndroidExperimentation\src\androidExperimentation\res\drawable-xhdpi\ic_launcher.png" afterPath="" />
+      <change type="DELETED" beforePath="C:\Users\theodori\Desktop\AndroidExperimentation\src\androidExperimentation\res\drawable-xxhdpi\ic_launcher.png" afterPath="" />
+      <change type="DELETED" beforePath="C:\Users\theodori\Desktop\AndroidExperimentation\src\androidExperimentation\res\layout\activity_main.xml" afterPath="" />
+      <change type="DELETED" beforePath="C:\Users\theodori\Desktop\AndroidExperimentation\src\androidExperimentation\res\layout\dependency_row.xml" afterPath="" />
+      <change type="DELETED" beforePath="C:\Users\theodori\Desktop\AndroidExperimentation\src\androidExperimentation\res\layout\dynamix.xml" afterPath="" />
+      <change type="DELETED" beforePath="C:\Users\theodori\Desktop\AndroidExperimentation\src\androidExperimentation\res\layout\jobs.xml" afterPath="" />
+      <change type="DELETED" beforePath="C:\Users\theodori\Desktop\AndroidExperimentation\src\androidExperimentation\res\layout\profile.xml" afterPath="" />
+      <change type="DELETED" beforePath="C:\Users\theodori\Desktop\AndroidExperimentation\src\androidExperimentation\res\layout\report_row.xml" afterPath="" />
+      <change type="DELETED" beforePath="C:\Users\theodori\Desktop\AndroidExperimentation\src\androidExperimentation\res\layout\reporter.xml" afterPath="" />
+      <change type="DELETED" beforePath="C:\Users\theodori\Desktop\AndroidExperimentation\src\androidExperimentation\res\layout\security.xml" afterPath="" />
+      <change type="DELETED" beforePath="C:\Users\theodori\Desktop\AndroidExperimentation\src\androidExperimentation\res\menu\main.xml" afterPath="" />
+      <change type="DELETED" beforePath="C:\Users\theodori\Desktop\AndroidExperimentation\src\androidExperimentation\res\values-sw600dp\dimens.xml" afterPath="" />
+      <change type="DELETED" beforePath="C:\Users\theodori\Desktop\AndroidExperimentation\src\androidExperimentation\res\values-sw720dp-land\dimens.xml" afterPath="" />
+      <change type="DELETED" beforePath="C:\Users\theodori\Desktop\AndroidExperimentation\src\androidExperimentation\res\values\dimens.xml" afterPath="" />
+      <change type="DELETED" beforePath="C:\Users\theodori\Desktop\AndroidExperimentation\src\androidExperimentation\res\values\strings.xml" afterPath="" />
+      <change type="DELETED" beforePath="C:\Users\theodori\Desktop\AndroidExperimentation\src\androidExperimentation\res\values\styles.xml" afterPath="" />
+      <change type="DELETED" beforePath="C:\Users\theodori\Desktop\AndroidExperimentation\src\androidExperimentation\src\eu\smartsantander\androidExperimentation\Constants.java" afterPath="" />
+      <change type="DELETED" beforePath="C:\Users\theodori\Desktop\AndroidExperimentation\src\androidExperimentation\src\eu\smartsantander\androidExperimentation\Job.java" afterPath="" />
+      <change type="DELETED" beforePath="C:\Users\theodori\Desktop\AndroidExperimentation\src\androidExperimentation\src\eu\smartsantander\androidExperimentation\MainActivity.java" afterPath="" />
+      <change type="DELETED" beforePath="C:\Users\theodori\Desktop\AndroidExperimentation\src\androidExperimentation\src\eu\smartsantander\androidExperimentation\MainService.java" afterPath="" />
+      <change type="DELETED" beforePath="C:\Users\theodori\Desktop\AndroidExperimentation\src\androidExperimentation\src\eu\smartsantander\androidExperimentation\Sensor.java" afterPath="" />
+      <change type="DELETED" beforePath="C:\Users\theodori\Desktop\AndroidExperimentation\src\androidExperimentation\src\eu\smartsantander\androidExperimentation\jsonEntities\Experiment.java" afterPath="" />
+      <change type="DELETED" beforePath="C:\Users\theodori\Desktop\AndroidExperimentation\src\androidExperimentation\src\eu\smartsantander\androidExperimentation\jsonEntities\Plugin.java" afterPath="" />
+      <change type="DELETED" beforePath="C:\Users\theodori\Desktop\AndroidExperimentation\src\androidExperimentation\src\eu\smartsantander\androidExperimentation\jsonEntities\PluginList.java" afterPath="" />
+      <change type="DELETED" beforePath="C:\Users\theodori\Desktop\AndroidExperimentation\src\androidExperimentation\src\eu\smartsantander\androidExperimentation\jsonEntities\Report.java" afterPath="" />
+      <change type="DELETED" beforePath="C:\Users\theodori\Desktop\AndroidExperimentation\src\androidExperimentation\src\eu\smartsantander\androidExperimentation\jsonEntities\Result.java" afterPath="" />
+      <change type="DELETED" beforePath="C:\Users\theodori\Desktop\AndroidExperimentation\src\androidExperimentation\src\eu\smartsantander\androidExperimentation\jsonEntities\Smartphone.java" afterPath="" />
+      <change type="DELETED" beforePath="C:\Users\theodori\Desktop\AndroidExperimentation\src\androidExperimentation\src\eu\smartsantander\androidExperimentation\operations\Communication.java" afterPath="" />
+      <change type="DELETED" beforePath="C:\Users\theodori\Desktop\AndroidExperimentation\src\androidExperimentation\src\eu\smartsantander\androidExperimentation\operations\Demon.java" afterPath="" />
+      <change type="DELETED" beforePath="C:\Users\theodori\Desktop\AndroidExperimentation\src\androidExperimentation\src\eu\smartsantander\androidExperimentation\operations\Downloader.java" afterPath="" />
+      <change type="DELETED" beforePath="C:\Users\theodori\Desktop\AndroidExperimentation\src\androidExperimentation\src\eu\smartsantander\androidExperimentation\operations\PhoneProfiler.java" afterPath="" />
+      <change type="DELETED" beforePath="C:\Users\theodori\Desktop\AndroidExperimentation\src\androidExperimentation\src\eu\smartsantander\androidExperimentation\operations\Profiler.java" afterPath="" />
+      <change type="DELETED" beforePath="C:\Users\theodori\Desktop\AndroidExperimentation\src\androidExperimentation\src\eu\smartsantander\androidExperimentation\operations\Registration.java" afterPath="" />
+      <change type="DELETED" beforePath="C:\Users\theodori\Desktop\AndroidExperimentation\src\androidExperimentation\src\eu\smartsantander\androidExperimentation\operations\Reporter.java" afterPath="" />
+      <change type="DELETED" beforePath="C:\Users\theodori\Desktop\AndroidExperimentation\src\androidExperimentation\src\eu\smartsantander\androidExperimentation\operations\Scheduler.java" afterPath="" />
+      <change type="DELETED" beforePath="C:\Users\theodori\Desktop\AndroidExperimentation\src\androidExperimentation\src\eu\smartsantander\androidExperimentation\operations\SensorProfiler.java" afterPath="" />
+      <change type="DELETED" beforePath="C:\Users\theodori\Desktop\AndroidExperimentation\src\androidExperimentation\src\eu\smartsantander\androidExperimentation\reportArrayAdapter.java" afterPath="" />
+      <change type="DELETED" beforePath="C:\Users\theodori\Desktop\AndroidExperimentation\src\androidExperimentation\src\eu\smartsantander\androidExperimentation\tabs\dynamixTab.java" afterPath="" />
+      <change type="DELETED" beforePath="C:\Users\theodori\Desktop\AndroidExperimentation\src\androidExperimentation\src\eu\smartsantander\androidExperimentation\tabs\jobsTab.java" afterPath="" />
+      <change type="DELETED" beforePath="C:\Users\theodori\Desktop\AndroidExperimentation\src\androidExperimentation\src\eu\smartsantander\androidExperimentation\tabs\profileTab.java" afterPath="" />
+      <change type="DELETED" beforePath="C:\Users\theodori\Desktop\AndroidExperimentation\src\androidExperimentation\src\eu\smartsantander\androidExperimentation\tabs\reportTab.java" afterPath="" />
+      <change type="DELETED" beforePath="C:\Users\theodori\Desktop\AndroidExperimentation\src\androidExperimentation\src\eu\smartsantander\androidExperimentation\tabs\securityTab.java" afterPath="" />
+      <change type="DELETED" beforePath="C:\Users\theodori\Desktop\AndroidExperimentation\src\sensorPlugins\GpsPlugin\src\eu\smartsantander\androidExperimentation\jsonEntities\ReadingStorage.java" afterPath="" />
+      <change type="DELETED" beforePath="C:\Users\theodori\Desktop\AndroidExperimentation\src\sensorPlugins\WifiScanPlugin\bin\.gitignore" afterPath="" />
+      <change type="DELETED" beforePath="C:\Users\theodori\Desktop\AndroidExperimentation\src\sensorPlugins\WifiScanPlugin\src\com\google\gson\DefaultDateTypeAdapter.java" afterPath="" />
+      <change type="DELETED" beforePath="C:\Users\theodori\Desktop\AndroidExperimentation\src\sensorPlugins\WifiScanPlugin\src\com\google\gson\ExclusionStrategy.java" afterPath="" />
+      <change type="DELETED" beforePath="C:\Users\theodori\Desktop\AndroidExperimentation\src\sensorPlugins\WifiScanPlugin\src\com\google\gson\FieldAttributes.java" afterPath="" />
+      <change type="DELETED" beforePath="C:\Users\theodori\Desktop\AndroidExperimentation\src\sensorPlugins\WifiScanPlugin\src\com\google\gson\FieldNamingPolicy.java" afterPath="" />
+      <change type="DELETED" beforePath="C:\Users\theodori\Desktop\AndroidExperimentation\src\sensorPlugins\WifiScanPlugin\src\com\google\gson\FieldNamingStrategy.java" afterPath="" />
+      <change type="DELETED" beforePath="C:\Users\theodori\Desktop\AndroidExperimentation\src\sensorPlugins\WifiScanPlugin\src\com\google\gson\Gson.java" afterPath="" />
+      <change type="DELETED" beforePath="C:\Users\theodori\Desktop\AndroidExperimentation\src\sensorPlugins\WifiScanPlugin\src\com\google\gson\GsonBuilder.java" afterPath="" />
+      <change type="DELETED" beforePath="C:\Users\theodori\Desktop\AndroidExperimentation\src\sensorPlugins\WifiScanPlugin\src\com\google\gson\InstanceCreator.java" afterPath="" />
+      <change type="DELETED" beforePath="C:\Users\theodori\Desktop\AndroidExperimentation\src\sensorPlugins\WifiScanPlugin\src\com\google\gson\JsonArray.java" afterPath="" />
+      <change type="DELETED" beforePath="C:\Users\theodori\Desktop\AndroidExperimentation\src\sensorPlugins\WifiScanPlugin\src\com\google\gson\JsonDeserializationContext.java" afterPath="" />
+      <change type="DELETED" beforePath="C:\Users\theodori\Desktop\AndroidExperimentation\src\sensorPlugins\WifiScanPlugin\src\com\google\gson\JsonDeserializer.java" afterPath="" />
+      <change type="DELETED" beforePath="C:\Users\theodori\Desktop\AndroidExperimentation\src\sensorPlugins\WifiScanPlugin\src\com\google\gson\JsonElement.java" afterPath="" />
+      <change type="DELETED" beforePath="C:\Users\theodori\Desktop\AndroidExperimentation\src\sensorPlugins\WifiScanPlugin\src\com\google\gson\JsonIOException.java" afterPath="" />
+      <change type="DELETED" beforePath="C:\Users\theodori\Desktop\AndroidExperimentation\src\sensorPlugins\WifiScanPlugin\src\com\google\gson\JsonNull.java" afterPath="" />
+      <change type="DELETED" beforePath="C:\Users\theodori\Desktop\AndroidExperimentation\src\sensorPlugins\WifiScanPlugin\src\com\google\gson\JsonObject.java" afterPath="" />
+      <change type="DELETED" beforePath="C:\Users\theodori\Desktop\AndroidExperimentation\src\sensorPlugins\WifiScanPlugin\src\com\google\gson\JsonParseException.java" afterPath="" />
+      <change type="DELETED" beforePath="C:\Users\theodori\Desktop\AndroidExperimentation\src\sensorPlugins\WifiScanPlugin\src\com\google\gson\JsonParser.java" afterPath="" />
+      <change type="DELETED" beforePath="C:\Users\theodori\Desktop\AndroidExperimentation\src\sensorPlugins\WifiScanPlugin\src\com\google\gson\JsonPrimitive.java" afterPath="" />
+      <change type="DELETED" beforePath="C:\Users\theodori\Desktop\AndroidExperimentation\src\sensorPlugins\WifiScanPlugin\src\com\google\gson\JsonSerializationContext.java" afterPath="" />
+      <change type="DELETED" beforePath="C:\Users\theodori\Desktop\AndroidExperimentation\src\sensorPlugins\WifiScanPlugin\src\com\google\gson\JsonSerializer.java" afterPath="" />
+      <change type="DELETED" beforePath="C:\Users\theodori\Desktop\AndroidExperimentation\src\sensorPlugins\WifiScanPlugin\src\com\google\gson\JsonStreamParser.java" afterPath="" />
+      <change type="DELETED" beforePath="C:\Users\theodori\Desktop\AndroidExperimentation\src\sensorPlugins\WifiScanPlugin\src\com\google\gson\JsonSyntaxException.java" afterPath="" />
+      <change type="DELETED" beforePath="C:\Users\theodori\Desktop\AndroidExperimentation\src\sensorPlugins\WifiScanPlugin\src\com\google\gson\LongSerializationPolicy.java" afterPath="" />
+      <change type="DELETED" beforePath="C:\Users\theodori\Desktop\AndroidExperimentation\src\sensorPlugins\WifiScanPlugin\src\com\google\gson\TreeTypeAdapter.java" afterPath="" />
+      <change type="DELETED" beforePath="C:\Users\theodori\Desktop\AndroidExperimentation\src\sensorPlugins\WifiScanPlugin\src\com\google\gson\TypeAdapter.java" afterPath="" />
+      <change type="DELETED" beforePath="C:\Users\theodori\Desktop\AndroidExperimentation\src\sensorPlugins\WifiScanPlugin\src\com\google\gson\TypeAdapterFactory.java" afterPath="" />
+      <change type="DELETED" beforePath="C:\Users\theodori\Desktop\AndroidExperimentation\src\sensorPlugins\WifiScanPlugin\src\com\google\gson\annotations\Expose.java" afterPath="" />
+      <change type="DELETED" beforePath="C:\Users\theodori\Desktop\AndroidExperimentation\src\sensorPlugins\WifiScanPlugin\src\com\google\gson\annotations\SerializedName.java" afterPath="" />
+      <change type="DELETED" beforePath="C:\Users\theodori\Desktop\AndroidExperimentation\src\sensorPlugins\WifiScanPlugin\src\com\google\gson\annotations\Since.java" afterPath="" />
+      <change type="DELETED" beforePath="C:\Users\theodori\Desktop\AndroidExperimentation\src\sensorPlugins\WifiScanPlugin\src\com\google\gson\annotations\Until.java" afterPath="" />
+      <change type="DELETED" beforePath="C:\Users\theodori\Desktop\AndroidExperimentation\src\sensorPlugins\WifiScanPlugin\src\com\google\gson\annotations\package-info.java" afterPath="" />
+      <change type="DELETED" beforePath="C:\Users\theodori\Desktop\AndroidExperimentation\src\sensorPlugins\WifiScanPlugin\src\com\google\gson\internal\$Gson$Preconditions.java" afterPath="" />
+      <change type="DELETED" beforePath="C:\Users\theodori\Desktop\AndroidExperimentation\src\sensorPlugins\WifiScanPlugin\src\com\google\gson\internal\$Gson$Types.java" afterPath="" />
+      <change type="DELETED" beforePath="C:\Users\theodori\Desktop\AndroidExperimentation\src\sensorPlugins\WifiScanPlugin\src\com\google\gson\internal\ConstructorConstructor.java" afterPath="" />
+      <change type="DELETED" beforePath="C:\Users\theodori\Desktop\AndroidExperimentation\src\sensorPlugins\WifiScanPlugin\src\com\google\gson\internal\Excluder.java" afterPath="" />
+      <change type="DELETED" beforePath="C:\Users\theodori\Desktop\AndroidExperimentation\src\sensorPlugins\WifiScanPlugin\src\com\google\gson\internal\JsonReaderInternalAccess.java" afterPath="" />
+      <change type="DELETED" beforePath="C:\Users\theodori\Desktop\AndroidExperimentation\src\sensorPlugins\WifiScanPlugin\src\com\google\gson\internal\LazilyParsedNumber.java" afterPath="" />
+      <change type="DELETED" beforePath="C:\Users\theodori\Desktop\AndroidExperimentation\src\sensorPlugins\WifiScanPlugin\src\com\google\gson\internal\LinkedTreeMap.java" afterPath="" />
+      <change type="DELETED" beforePath="C:\Users\theodori\Desktop\AndroidExperimentation\src\sensorPlugins\WifiScanPlugin\src\com\google\gson\internal\ObjectConstructor.java" afterPath="" />
+      <change type="DELETED" beforePath="C:\Users\theodori\Desktop\AndroidExperimentation\src\sensorPlugins\WifiScanPlugin\src\com\google\gson\internal\Primitives.java" afterPath="" />
+      <change type="DELETED" beforePath="C:\Users\theodori\Desktop\AndroidExperimentation\src\sensorPlugins\WifiScanPlugin\src\com\google\gson\internal\Streams.java" afterPath="" />
+      <change type="DELETED" beforePath="C:\Users\theodori\Desktop\AndroidExperimentation\src\sensorPlugins\WifiScanPlugin\src\com\google\gson\internal\UnsafeAllocator.java" afterPath="" />
+      <change type="DELETED" beforePath="C:\Users\theodori\Desktop\AndroidExperimentation\src\sensorPlugins\WifiScanPlugin\src\com\google\gson\internal\bind\ArrayTypeAdapter.java" afterPath="" />
+      <change type="DELETED" beforePath="C:\Users\theodori\Desktop\AndroidExperimentation\src\sensorPlugins\WifiScanPlugin\src\com\google\gson\internal\bind\CollectionTypeAdapterFactory.java" afterPath="" />
+      <change type="DELETED" beforePath="C:\Users\theodori\Desktop\AndroidExperimentation\src\sensorPlugins\WifiScanPlugin\src\com\google\gson\internal\bind\DateTypeAdapter.java" afterPath="" />
+      <change type="DELETED" beforePath="C:\Users\theodori\Desktop\AndroidExperimentation\src\sensorPlugins\WifiScanPlugin\src\com\google\gson\internal\bind\JsonTreeReader.java" afterPath="" />
+      <change type="DELETED" beforePath="C:\Users\theodori\Desktop\AndroidExperimentation\src\sensorPlugins\WifiScanPlugin\src\com\google\gson\internal\bind\JsonTreeWriter.java" afterPath="" />
+      <change type="DELETED" beforePath="C:\Users\theodori\Desktop\AndroidExperimentation\src\sensorPlugins\WifiScanPlugin\src\com\google\gson\internal\bind\MapTypeAdapterFactory.java" afterPath="" />
+      <change type="DELETED" beforePath="C:\Users\theodori\Desktop\AndroidExperimentation\src\sensorPlugins\WifiScanPlugin\src\com\google\gson\internal\bind\ObjectTypeAdapter.java" afterPath="" />
+      <change type="DELETED" beforePath="C:\Users\theodori\Desktop\AndroidExperimentation\src\sensorPlugins\WifiScanPlugin\src\com\google\gson\internal\bind\ReflectiveTypeAdapterFactory.java" afterPath="" />
+      <change type="DELETED" beforePath="C:\Users\theodori\Desktop\AndroidExperimentation\src\sensorPlugins\WifiScanPlugin\src\com\google\gson\internal\bind\SqlDateTypeAdapter.java" afterPath="" />
+      <change type="DELETED" beforePath="C:\Users\theodori\Desktop\AndroidExperimentation\src\sensorPlugins\WifiScanPlugin\src\com\google\gson\internal\bind\TimeTypeAdapter.java" afterPath="" />
+      <change type="DELETED" beforePath="C:\Users\theodori\Desktop\AndroidExperimentation\src\sensorPlugins\WifiScanPlugin\src\com\google\gson\internal\bind\TypeAdapterRuntimeTypeWrapper.java" afterPath="" />
+      <change type="DELETED" beforePath="C:\Users\theodori\Desktop\AndroidExperimentation\src\sensorPlugins\WifiScanPlugin\src\com\google\gson\internal\bind\TypeAdapters.java" afterPath="" />
+      <change type="DELETED" beforePath="C:\Users\theodori\Desktop\AndroidExperimentation\src\sensorPlugins\WifiScanPlugin\src\com\google\gson\internal\package-info.java" afterPath="" />
+      <change type="DELETED" beforePath="C:\Users\theodori\Desktop\AndroidExperimentation\src\sensorPlugins\WifiScanPlugin\src\com\google\gson\package-info.java" afterPath="" />
+      <change type="DELETED" beforePath="C:\Users\theodori\Desktop\AndroidExperimentation\src\sensorPlugins\WifiScanPlugin\src\com\google\gson\reflect\TypeToken.java" afterPath="" />
+      <change type="DELETED" beforePath="C:\Users\theodori\Desktop\AndroidExperimentation\src\sensorPlugins\WifiScanPlugin\src\com\google\gson\reflect\package-info.java" afterPath="" />
+      <change type="DELETED" beforePath="C:\Users\theodori\Desktop\AndroidExperimentation\src\sensorPlugins\WifiScanPlugin\src\com\google\gson\stream\JsonReader.java" afterPath="" />
+      <change type="DELETED" beforePath="C:\Users\theodori\Desktop\AndroidExperimentation\src\sensorPlugins\WifiScanPlugin\src\com\google\gson\stream\JsonScope.java" afterPath="" />
+      <change type="DELETED" beforePath="C:\Users\theodori\Desktop\AndroidExperimentation\src\sensorPlugins\WifiScanPlugin\src\com\google\gson\stream\JsonToken.java" afterPath="" />
+      <change type="DELETED" beforePath="C:\Users\theodori\Desktop\AndroidExperimentation\src\sensorPlugins\WifiScanPlugin\src\com\google\gson\stream\JsonWriter.java" afterPath="" />
+      <change type="DELETED" beforePath="C:\Users\theodori\Desktop\AndroidExperimentation\src\sensorPlugins\WifiScanPlugin\src\com\google\gson\stream\MalformedJsonException.java" afterPath="" />
+      <change type="DELETED" beforePath="C:\Users\theodori\Desktop\AndroidExperimentation\src\sensorPlugins\WifiScanPlugin\src\org\ambientdynamix\contextplugins\WifiScanPlugin\IWifiScanPluginInfo.java" afterPath="" />
+      <change type="DELETED" beforePath="C:\Users\theodori\Desktop\AndroidExperimentation\src\sensorPlugins\WifiScanPlugin\src\org\ambientdynamix\contextplugins\WifiScanPlugin\Scan.java" afterPath="" />
+      <change type="DELETED" beforePath="C:\Users\theodori\Desktop\AndroidExperimentation\src\sensorPlugins\WifiScanPlugin\src\org\ambientdynamix\contextplugins\WifiScanPlugin\WifiScanPluginInfo.aidl" afterPath="" />
+      <change type="DELETED" beforePath="C:\Users\theodori\Desktop\AndroidExperimentation\src\sensorPlugins\WifiScanPlugin\src\org\ambientdynamix\contextplugins\WifiScanPlugin\WifiScanPluginInfo.java" afterPath="" />
+      <change type="DELETED" beforePath="C:\Users\theodori\Desktop\AndroidExperimentation\src\sensorPlugins\myExperimentPlugin\.classpath" afterPath="" />
+      <change type="DELETED" beforePath="C:\Users\theodori\Desktop\AndroidExperimentation\src\sensorPlugins\myExperimentPlugin\.externalToolBuilders\New_Builder.launch" afterPath="" />
+      <change type="DELETED" beforePath="C:\Users\theodori\Desktop\AndroidExperimentation\src\sensorPlugins\myExperimentPlugin\.project" afterPath="" />
+      <change type="DELETED" beforePath="C:\Users\theodori\Desktop\AndroidExperimentation\src\sensorPlugins\myExperimentPlugin\.settings\org.eclipse.jdt.core.prefs" afterPath="" />
+      <change type="DELETED" beforePath="C:\Users\theodori\Desktop\AndroidExperimentation\src\sensorPlugins\myExperimentPlugin\AndroidManifest.xml" afterPath="" />
+      <change type="DELETED" beforePath="C:\Users\theodori\Desktop\AndroidExperimentation\src\sensorPlugins\myExperimentPlugin\Deployment\myExperiment_local_repo.xml" afterPath="" />
+      <change type="DELETED" beforePath="C:\Users\theodori\Desktop\AndroidExperimentation\src\sensorPlugins\myExperimentPlugin\META-INF\MANIFEST.MF" afterPath="" />
+      <change type="DELETED" beforePath="C:\Users\theodori\Desktop\AndroidExperimentation\src\sensorPlugins\myExperimentPlugin\antbuild.xml" afterPath="" />
+      <change type="DELETED" beforePath="C:\Users\theodori\Desktop\AndroidExperimentation\src\sensorPlugins\myExperimentPlugin\assets\agt_web.png" afterPath="" />
+      <change type="DELETED" beforePath="C:\Users\theodori\Desktop\AndroidExperimentation\src\sensorPlugins\myExperimentPlugin\bin\.gitignore" afterPath="" />
+      <change type="DELETED" beforePath="C:\Users\theodori\Desktop\AndroidExperimentation\src\sensorPlugins\myExperimentPlugin\build.properties" afterPath="" />
+      <change type="DELETED" beforePath="C:\Users\theodori\Desktop\AndroidExperimentation\src\sensorPlugins\myExperimentPlugin\doc\allclasses-frame.html" afterPath="" />
+      <change type="DELETED" beforePath="C:\Users\theodori\Desktop\AndroidExperimentation\src\sensorPlugins\myExperimentPlugin\doc\allclasses-noframe.html" afterPath="" />
+      <change type="DELETED" beforePath="C:\Users\theodori\Desktop\AndroidExperimentation\src\sensorPlugins\myExperimentPlugin\doc\constant-values.html" afterPath="" />
+      <change type="DELETED" beforePath="C:\Users\theodori\Desktop\AndroidExperimentation\src\sensorPlugins\myExperimentPlugin\doc\deprecated-list.html" afterPath="" />
+      <change type="DELETED" beforePath="C:\Users\theodori\Desktop\AndroidExperimentation\src\sensorPlugins\myExperimentPlugin\doc\help-doc.html" afterPath="" />
+      <change type="DELETED" beforePath="C:\Users\theodori\Desktop\AndroidExperimentation\src\sensorPlugins\myExperimentPlugin\doc\index-files\index-1.html" afterPath="" />
+      <change type="DELETED" beforePath="C:\Users\theodori\Desktop\AndroidExperimentation\src\sensorPlugins\myExperimentPlugin\doc\index-files\index-10.html" afterPath="" />
+      <change type="DELETED" beforePath="C:\Users\theodori\Desktop\AndroidExperimentation\src\sensorPlugins\myExperimentPlugin\doc\index-files\index-11.html" afterPath="" />
+      <change type="DELETED" beforePath="C:\Users\theodori\Desktop\AndroidExperimentation\src\sensorPlugins\myExperimentPlugin\doc\index-files\index-12.html" afterPath="" />
+      <change type="DELETED" beforePath="C:\Users\theodori\Desktop\AndroidExperimentation\src\sensorPlugins\myExperimentPlugin\doc\index-files\index-2.html" afterPath="" />
+      <change type="DELETED" beforePath="C:\Users\theodori\Desktop\AndroidExperimentation\src\sensorPlugins\myExperimentPlugin\doc\index-files\index-3.html" afterPath="" />
+      <change type="DELETED" beforePath="C:\Users\theodori\Desktop\AndroidExperimentation\src\sensorPlugins\myExperimentPlugin\doc\index-files\index-4.html" afterPath="" />
+      <change type="DELETED" beforePath="C:\Users\theodori\Desktop\AndroidExperimentation\src\sensorPlugins\myExperimentPlugin\doc\index-files\index-5.html" afterPath="" />
+      <change type="DELETED" beforePath="C:\Users\theodori\Desktop\AndroidExperimentation\src\sensorPlugins\myExperimentPlugin\doc\index-files\index-6.html" afterPath="" />
+      <change type="DELETED" beforePath="C:\Users\theodori\Desktop\AndroidExperimentation\src\sensorPlugins\myExperimentPlugin\doc\index-files\index-7.html" afterPath="" />
+      <change type="DELETED" beforePath="C:\Users\theodori\Desktop\AndroidExperimentation\src\sensorPlugins\myExperimentPlugin\doc\index-files\index-8.html" afterPath="" />
+      <change type="DELETED" beforePath="C:\Users\theodori\Desktop\AndroidExperimentation\src\sensorPlugins\myExperimentPlugin\doc\index-files\index-9.html" afterPath="" />
+      <change type="DELETED" beforePath="C:\Users\theodori\Desktop\AndroidExperimentation\src\sensorPlugins\myExperimentPlugin\doc\index.html" afterPath="" />
+      <change type="DELETED" beforePath="C:\Users\theodori\Desktop\AndroidExperimentation\src\sensorPlugins\myExperimentPlugin\doc\org\ambientdynamix\contextplugins\batterylevel\BatteryLevelInfo.html" afterPath="" />
+      <change type="DELETED" beforePath="C:\Users\theodori\Desktop\AndroidExperimentation\src\sensorPlugins\myExperimentPlugin\doc\org\ambientdynamix\contextplugins\batterylevel\BatteryLevelPluginRuntime.html" afterPath="" />
+      <change type="DELETED" beforePath="C:\Users\theodori\Desktop\AndroidExperimentation\src\sensorPlugins\myExperimentPlugin\doc\org\ambientdynamix\contextplugins\batterylevel\IBatteryLevelInfo.html" afterPath="" />
+      <change type="DELETED" beforePath="C:\Users\theodori\Desktop\AndroidExperimentation\src\sensorPlugins\myExperimentPlugin\doc\org\ambientdynamix\contextplugins\batterylevel\PluginFactory.html" afterPath="" />
+      <change type="DELETED" beforePath="C:\Users\theodori\Desktop\AndroidExperimentation\src\sensorPlugins\myExperimentPlugin\doc\org\ambientdynamix\contextplugins\batterylevel\class-use\BatteryLevelInfo.html" afterPath="" />
+      <change type="DELETED" beforePath="C:\Users\theodori\Desktop\AndroidExperimentation\src\sensorPlugins\myExperimentPlugin\doc\org\ambientdynamix\contextplugins\batterylevel\class-use\BatteryLevelPluginRuntime.html" afterPath="" />
+      <change type="DELETED" beforePath="C:\Users\theodori\Desktop\AndroidExperimentation\src\sensorPlugins\myExperimentPlugin\doc\org\ambientdynamix\contextplugins\batterylevel\class-use\IBatteryLevelInfo.html" afterPath="" />
+      <change type="DELETED" beforePath="C:\Users\theodori\Desktop\AndroidExperimentation\src\sensorPlugins\myExperimentPlugin\doc\org\ambientdynamix\contextplugins\batterylevel\class-use\PluginFactory.html" afterPath="" />
+      <change type="DELETED" beforePath="C:\Users\theodori\Desktop\AndroidExperimentation\src\sensorPlugins\myExperimentPlugin\doc\org\ambientdynamix\contextplugins\batterylevel\package-frame.html" afterPath="" />
+      <change type="DELETED" beforePath="C:\Users\theodori\Desktop\AndroidExperimentation\src\sensorPlugins\myExperimentPlugin\doc\org\ambientdynamix\contextplugins\batterylevel\package-summary.html" afterPath="" />
+      <change type="DELETED" beforePath="C:\Users\theodori\Desktop\AndroidExperimentation\src\sensorPlugins\myExperimentPlugin\doc\org\ambientdynamix\contextplugins\batterylevel\package-tree.html" afterPath="" />
+      <change type="DELETED" beforePath="C:\Users\theodori\Desktop\AndroidExperimentation\src\sensorPlugins\myExperimentPlugin\doc\org\ambientdynamix\contextplugins\batterylevel\package-use.html" afterPath="" />
+      <change type="DELETED" beforePath="C:\Users\theodori\Desktop\AndroidExperimentation\src\sensorPlugins\myExperimentPlugin\doc\overview-tree.html" afterPath="" />
+      <change type="DELETED" beforePath="C:\Users\theodori\Desktop\AndroidExperimentation\src\sensorPlugins\myExperimentPlugin\doc\package-list" afterPath="" />
+      <change type="DELETED" beforePath="C:\Users\theodori\Desktop\AndroidExperimentation\src\sensorPlugins\myExperimentPlugin\doc\resources\background.gif" afterPath="" />
+      <change type="DELETED" beforePath="C:\Users\theodori\Desktop\AndroidExperimentation\src\sensorPlugins\myExperimentPlugin\doc\resources\tab.gif" afterPath="" />
+      <change type="DELETED" beforePath="C:\Users\theodori\Desktop\AndroidExperimentation\src\sensorPlugins\myExperimentPlugin\doc\resources\titlebar.gif" afterPath="" />
+      <change type="DELETED" beforePath="C:\Users\theodori\Desktop\AndroidExperimentation\src\sensorPlugins\myExperimentPlugin\doc\resources\titlebar_end.gif" afterPath="" />
+      <change type="DELETED" beforePath="C:\Users\theodori\Desktop\AndroidExperimentation\src\sensorPlugins\myExperimentPlugin\doc\serialized-form.html" afterPath="" />
+      <change type="DELETED" beforePath="C:\Users\theodori\Desktop\AndroidExperimentation\src\sensorPlugins\myExperimentPlugin\doc\stylesheet.css" afterPath="" />
+      <change type="DELETED" beforePath="C:\Users\theodori\Desktop\AndroidExperimentation\src\sensorPlugins\myExperimentPlugin\gen\org\ambientdynamix\contextplugins\myExperimentPlugin\BuildConfig.java" afterPath="" />
+      <change type="DELETED" beforePath="C:\Users\theodori\Desktop\AndroidExperimentation\src\sensorPlugins\myExperimentPlugin\gen\org\ambientdynamix\contextplugins\myExperimentPlugin\R.java" afterPath="" />
+      <change type="DELETED" beforePath="C:\Users\theodori\Desktop\AndroidExperimentation\src\sensorPlugins\myExperimentPlugin\lint.xml" afterPath="" />
+      <change type="DELETED" beforePath="C:\Users\theodori\Desktop\AndroidExperimentation\src\sensorPlugins\myExperimentPlugin\proguard.cfg" afterPath="" />
+      <change type="DELETED" beforePath="C:\Users\theodori\Desktop\AndroidExperimentation\src\sensorPlugins\myExperimentPlugin\project.properties" afterPath="" />
+      <change type="DELETED" beforePath="C:\Users\theodori\Desktop\AndroidExperimentation\src\sensorPlugins\myExperimentPlugin\res\drawable-hdpi\icon.png" afterPath="" />
+      <change type="DELETED" beforePath="C:\Users\theodori\Desktop\AndroidExperimentation\src\sensorPlugins\myExperimentPlugin\res\drawable-ldpi\icon.png" afterPath="" />
+      <change type="DELETED" beforePath="C:\Users\theodori\Desktop\AndroidExperimentation\src\sensorPlugins\myExperimentPlugin\res\drawable-mdpi\icon.png" afterPath="" />
+      <change type="DELETED" beforePath="C:\Users\theodori\Desktop\AndroidExperimentation\src\sensorPlugins\myExperimentPlugin\res\layout\main.xml" afterPath="" />
+      <change type="DELETED" beforePath="C:\Users\theodori\Desktop\AndroidExperimentation\src\sensorPlugins\myExperimentPlugin\res\values\strings.xml" afterPath="" />
+      <change type="DELETED" beforePath="C:\Users\theodori\Desktop\AndroidExperimentation\src\sensorPlugins\myExperimentPlugin\src\com\google\gson\DefaultDateTypeAdapter.java" afterPath="" />
+      <change type="DELETED" beforePath="C:\Users\theodori\Desktop\AndroidExperimentation\src\sensorPlugins\myExperimentPlugin\src\com\google\gson\ExclusionStrategy.java" afterPath="" />
+      <change type="DELETED" beforePath="C:\Users\theodori\Desktop\AndroidExperimentation\src\sensorPlugins\myExperimentPlugin\src\com\google\gson\FieldAttributes.java" afterPath="" />
+      <change type="DELETED" beforePath="C:\Users\theodori\Desktop\AndroidExperimentation\src\sensorPlugins\myExperimentPlugin\src\com\google\gson\FieldNamingPolicy.java" afterPath="" />
+      <change type="DELETED" beforePath="C:\Users\theodori\Desktop\AndroidExperimentation\src\sensorPlugins\myExperimentPlugin\src\com\google\gson\FieldNamingStrategy.java" afterPath="" />
+      <change type="DELETED" beforePath="C:\Users\theodori\Desktop\AndroidExperimentation\src\sensorPlugins\myExperimentPlugin\src\com\google\gson\Gson.java" afterPath="" />
+      <change type="DELETED" beforePath="C:\Users\theodori\Desktop\AndroidExperimentation\src\sensorPlugins\myExperimentPlugin\src\com\google\gson\GsonBuilder.java" afterPath="" />
+      <change type="DELETED" beforePath="C:\Users\theodori\Desktop\AndroidExperimentation\src\sensorPlugins\myExperimentPlugin\src\com\google\gson\InstanceCreator.java" afterPath="" />
+      <change type="DELETED" beforePath="C:\Users\theodori\Desktop\AndroidExperimentation\src\sensorPlugins\myExperimentPlugin\src\com\google\gson\JsonArray.java" afterPath="" />
+      <change type="DELETED" beforePath="C:\Users\theodori\Desktop\AndroidExperimentation\src\sensorPlugins\myExperimentPlugin\src\com\google\gson\JsonDeserializationContext.java" afterPath="" />
+      <change type="DELETED" beforePath="C:\Users\theodori\Desktop\AndroidExperimentation\src\sensorPlugins\myExperimentPlugin\src\com\google\gson\JsonDeserializer.java" afterPath="" />
+      <change type="DELETED" beforePath="C:\Users\theodori\Desktop\AndroidExperimentation\src\sensorPlugins\myExperimentPlugin\src\com\google\gson\JsonElement.java" afterPath="" />
+      <change type="DELETED" beforePath="C:\Users\theodori\Desktop\AndroidExperimentation\src\sensorPlugins\myExperimentPlugin\src\com\google\gson\JsonIOException.java" afterPath="" />
+      <change type="DELETED" beforePath="C:\Users\theodori\Desktop\AndroidExperimentation\src\sensorPlugins\myExperimentPlugin\src\com\google\gson\JsonNull.java" afterPath="" />
+      <change type="DELETED" beforePath="C:\Users\theodori\Desktop\AndroidExperimentation\src\sensorPlugins\myExperimentPlugin\src\com\google\gson\JsonObject.java" afterPath="" />
+      <change type="DELETED" beforePath="C:\Users\theodori\Desktop\AndroidExperimentation\src\sensorPlugins\myExperimentPlugin\src\com\google\gson\JsonParseException.java" afterPath="" />
+      <change type="DELETED" beforePath="C:\Users\theodori\Desktop\AndroidExperimentation\src\sensorPlugins\myExperimentPlugin\src\com\google\gson\JsonParser.java" afterPath="" />
+      <change type="DELETED" beforePath="C:\Users\theodori\Desktop\AndroidExperimentation\src\sensorPlugins\myExperimentPlugin\src\com\google\gson\JsonPrimitive.java" afterPath="" />
+      <change type="DELETED" beforePath="C:\Users\theodori\Desktop\AndroidExperimentation\src\sensorPlugins\myExperimentPlugin\src\com\google\gson\JsonSerializationContext.java" afterPath="" />
+      <change type="DELETED" beforePath="C:\Users\theodori\Desktop\AndroidExperimentation\src\sensorPlugins\myExperimentPlugin\src\com\google\gson\JsonSerializer.java" afterPath="" />
+      <change type="DELETED" beforePath="C:\Users\theodori\Desktop\AndroidExperimentation\src\sensorPlugins\myExperimentPlugin\src\com\google\gson\JsonStreamParser.java" afterPath="" />
+      <change type="DELETED" beforePath="C:\Users\theodori\Desktop\AndroidExperimentation\src\sensorPlugins\myExperimentPlugin\src\com\google\gson\JsonSyntaxException.java" afterPath="" />
+      <change type="DELETED" beforePath="C:\Users\theodori\Desktop\AndroidExperimentation\src\sensorPlugins\myExperimentPlugin\src\com\google\gson\LongSerializationPolicy.java" afterPath="" />
+      <change type="DELETED" beforePath="C:\Users\theodori\Desktop\AndroidExperimentation\src\sensorPlugins\myExperimentPlugin\src\com\google\gson\TreeTypeAdapter.java" afterPath="" />
+      <change type="DELETED" beforePath="C:\Users\theodori\Desktop\AndroidExperimentation\src\sensorPlugins\myExperimentPlugin\src\com\google\gson\TypeAdapter.java" afterPath="" />
+      <change type="DELETED" beforePath="C:\Users\theodori\Desktop\AndroidExperimentation\src\sensorPlugins\myExperimentPlugin\src\com\google\gson\TypeAdapterFactory.java" afterPath="" />
+      <change type="DELETED" beforePath="C:\Users\theodori\Desktop\AndroidExperimentation\src\sensorPlugins\myExperimentPlugin\src\com\google\gson\annotations\Expose.java" afterPath="" />
+      <change type="DELETED" beforePath="C:\Users\theodori\Desktop\AndroidExperimentation\src\sensorPlugins\myExperimentPlugin\src\com\google\gson\annotations\SerializedName.java" afterPath="" />
+      <change type="DELETED" beforePath="C:\Users\theodori\Desktop\AndroidExperimentation\src\sensorPlugins\myExperimentPlugin\src\com\google\gson\annotations\Since.java" afterPath="" />
+      <change type="DELETED" beforePath="C:\Users\theodori\Desktop\AndroidExperimentation\src\sensorPlugins\myExperimentPlugin\src\com\google\gson\annotations\Until.java" afterPath="" />
+      <change type="DELETED" beforePath="C:\Users\theodori\Desktop\AndroidExperimentation\src\sensorPlugins\myExperimentPlugin\src\com\google\gson\annotations\package-info.java" afterPath="" />
+      <change type="DELETED" beforePath="C:\Users\theodori\Desktop\AndroidExperimentation\src\sensorPlugins\myExperimentPlugin\src\com\google\gson\internal\$Gson$Preconditions.java" afterPath="" />
+      <change type="DELETED" beforePath="C:\Users\theodori\Desktop\AndroidExperimentation\src\sensorPlugins\myExperimentPlugin\src\com\google\gson\internal\$Gson$Types.java" afterPath="" />
+      <change type="DELETED" beforePath="C:\Users\theodori\Desktop\AndroidExperimentation\src\sensorPlugins\myExperimentPlugin\src\com\google\gson\internal\ConstructorConstructor.java" afterPath="" />
+      <change type="DELETED" beforePath="C:\Users\theodori\Desktop\AndroidExperimentation\src\sensorPlugins\myExperimentPlugin\src\com\google\gson\internal\Excluder.java" afterPath="" />
+      <change type="DELETED" beforePath="C:\Users\theodori\Desktop\AndroidExperimentation\src\sensorPlugins\myExperimentPlugin\src\com\google\gson\internal\JsonReaderInternalAccess.java" afterPath="" />
+      <change type="DELETED" beforePath="C:\Users\theodori\Desktop\AndroidExperimentation\src\sensorPlugins\myExperimentPlugin\src\com\google\gson\internal\LazilyParsedNumber.java" afterPath="" />
+      <change type="DELETED" beforePath="C:\Users\theodori\Desktop\AndroidExperimentation\src\sensorPlugins\myExperimentPlugin\src\com\google\gson\internal\LinkedTreeMap.java" afterPath="" />
+      <change type="DELETED" beforePath="C:\Users\theodori\Desktop\AndroidExperimentation\src\sensorPlugins\myExperimentPlugin\src\com\google\gson\internal\ObjectConstructor.java" afterPath="" />
+      <change type="DELETED" beforePath="C:\Users\theodori\Desktop\AndroidExperimentation\src\sensorPlugins\myExperimentPlugin\src\com\google\gson\internal\Primitives.java" afterPath="" />
+      <change type="DELETED" beforePath="C:\Users\theodori\Desktop\AndroidExperimentation\src\sensorPlugins\myExperimentPlugin\src\com\google\gson\internal\Streams.java" afterPath="" />
+      <change type="DELETED" beforePath="C:\Users\theodori\Desktop\AndroidExperimentation\src\sensorPlugins\myExperimentPlugin\src\com\google\gson\internal\UnsafeAllocator.java" afterPath="" />
+      <change type="DELETED" beforePath="C:\Users\theodori\Desktop\AndroidExperimentation\src\sensorPlugins\myExperimentPlugin\src\com\google\gson\internal\bind\ArrayTypeAdapter.java" afterPath="" />
+      <change type="DELETED" beforePath="C:\Users\theodori\Desktop\AndroidExperimentation\src\sensorPlugins\myExperimentPlugin\src\com\google\gson\internal\bind\CollectionTypeAdapterFactory.java" afterPath="" />
+      <change type="DELETED" beforePath="C:\Users\theodori\Desktop\AndroidExperimentation\src\sensorPlugins\myExperimentPlugin\src\com\google\gson\internal\bind\DateTypeAdapter.java" afterPath="" />
+      <change type="DELETED" beforePath="C:\Users\theodori\Desktop\AndroidExperimentation\src\sensorPlugins\myExperimentPlugin\src\com\google\gson\internal\bind\JsonTreeReader.java" afterPath="" />
+      <change type="DELETED" beforePath="C:\Users\theodori\Desktop\AndroidExperimentation\src\sensorPlugins\myExperimentPlugin\src\com\google\gson\internal\bind\JsonTreeWriter.java" afterPath="" />
+      <change type="DELETED" beforePath="C:\Users\theodori\Desktop\AndroidExperimentation\src\sensorPlugins\myExperimentPlugin\src\com\google\gson\internal\bind\MapTypeAdapterFactory.java" afterPath="" />
+      <change type="DELETED" beforePath="C:\Users\theodori\Desktop\AndroidExperimentation\src\sensorPlugins\myExperimentPlugin\src\com\google\gson\internal\bind\ObjectTypeAdapter.java" afterPath="" />
+      <change type="DELETED" beforePath="C:\Users\theodori\Desktop\AndroidExperimentation\src\sensorPlugins\myExperimentPlugin\src\com\google\gson\internal\bind\ReflectiveTypeAdapterFactory.java" afterPath="" />
+      <change type="DELETED" beforePath="C:\Users\theodori\Desktop\AndroidExperimentation\src\sensorPlugins\myExperimentPlugin\src\com\google\gson\internal\bind\SqlDateTypeAdapter.java" afterPath="" />
+      <change type="DELETED" beforePath="C:\Users\theodori\Desktop\AndroidExperimentation\src\sensorPlugins\myExperimentPlugin\src\com\google\gson\internal\bind\TimeTypeAdapter.java" afterPath="" />
+      <change type="DELETED" beforePath="C:\Users\theodori\Desktop\AndroidExperimentation\src\sensorPlugins\myExperimentPlugin\src\com\google\gson\internal\bind\TypeAdapterRuntimeTypeWrapper.java" afterPath="" />
+      <change type="DELETED" beforePath="C:\Users\theodori\Desktop\AndroidExperimentation\src\sensorPlugins\myExperimentPlugin\src\com\google\gson\internal\bind\TypeAdapters.java" afterPath="" />
+      <change type="DELETED" beforePath="C:\Users\theodori\Desktop\AndroidExperimentation\src\sensorPlugins\myExperimentPlugin\src\com\google\gson\internal\package-info.java" afterPath="" />
+      <change type="DELETED" beforePath="C:\Users\theodori\Desktop\AndroidExperimentation\src\sensorPlugins\myExperimentPlugin\src\com\google\gson\package-info.java" afterPath="" />
+      <change type="DELETED" beforePath="C:\Users\theodori\Desktop\AndroidExperimentation\src\sensorPlugins\myExperimentPlugin\src\com\google\gson\reflect\TypeToken.java" afterPath="" />
+      <change type="DELETED" beforePath="C:\Users\theodori\Desktop\AndroidExperimentation\src\sensorPlugins\myExperimentPlugin\src\com\google\gson\reflect\package-info.java" afterPath="" />
+      <change type="DELETED" beforePath="C:\Users\theodori\Desktop\AndroidExperimentation\src\sensorPlugins\myExperimentPlugin\src\com\google\gson\stream\JsonReader.java" afterPath="" />
+      <change type="DELETED" beforePath="C:\Users\theodori\Desktop\AndroidExperimentation\src\sensorPlugins\myExperimentPlugin\src\com\google\gson\stream\JsonScope.java" afterPath="" />
+      <change type="DELETED" beforePath="C:\Users\theodori\Desktop\AndroidExperimentation\src\sensorPlugins\myExperimentPlugin\src\com\google\gson\stream\JsonToken.java" afterPath="" />
+      <change type="DELETED" beforePath="C:\Users\theodori\Desktop\AndroidExperimentation\src\sensorPlugins\myExperimentPlugin\src\com\google\gson\stream\JsonWriter.java" afterPath="" />
+      <change type="DELETED" beforePath="C:\Users\theodori\Desktop\AndroidExperimentation\src\sensorPlugins\myExperimentPlugin\src\com\google\gson\stream\MalformedJsonException.java" afterPath="" />
+      <change type="DELETED" beforePath="C:\Users\theodori\Desktop\AndroidExperimentation\src\sensorPlugins\myExperimentPlugin\src\org\ambientdynamix\contextplugins\myExperimentPlugin\ExperimentPluginInfo.aidl" afterPath="" />
+      <change type="DELETED" beforePath="C:\Users\theodori\Desktop\AndroidExperimentation\src\sensorPlugins\myExperimentPlugin\src\org\ambientdynamix\contextplugins\myExperimentPlugin\ExperimentPluginInfo.java" afterPath="" />
+      <change type="DELETED" beforePath="C:\Users\theodori\Desktop\AndroidExperimentation\src\sensorPlugins\myExperimentPlugin\src\org\ambientdynamix\contextplugins\myExperimentPlugin\IExperimentPluginInfo.java" afterPath="" />
+      <change type="DELETED" beforePath="C:\Users\theodori\Desktop\AndroidExperimentation\src\sensorPlugins\myExperimentPlugin\src\org\ambientdynamix\contextplugins\myExperimentPlugin\MyExperimentPluginRuntime.java" afterPath="" />
+      <change type="DELETED" beforePath="C:\Users\theodori\Desktop\AndroidExperimentation\src\sensorPlugins\myExperimentPlugin\src\org\ambientdynamix\contextplugins\myExperimentPlugin\PluginFactory.java" afterPath="" />
+      <change type="DELETED" beforePath="C:\Users\theodori\Desktop\AndroidExperimentation\src\sensorPlugins\myExperimentPlugin\src\org\ambientdynamix\contextplugins\myExperimentPlugin\Scan.java" afterPath="" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/web/dynamixRepository/org.ambientdynamix.contextplugins.ExperimentPlugin_0.9.54.jar" afterPath="$PROJECT_DIR$/web/dynamixRepository/org.ambientdynamix.contextplugins.ExperimentPlugin_0.9.54.jar" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/web/dynamixRepository/org.ambientdynamix.contextplugins.GpsPlugin_0.9.54.jar" afterPath="$PROJECT_DIR$/web/dynamixRepository/org.ambientdynamix.contextplugins.GpsPlugin_0.9.54.jar" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../sensorPlugins/WifiScanPlugin/.classpath" afterPath="$PROJECT_DIR$/../sensorPlugins/WifiScanPlugin/.classpath" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../dynamix_framework/dynamix-framework/src/eu/smartsantander/androidExperimentation/operations/AsyncExperimentTask.java" afterPath="$PROJECT_DIR$/../dynamix_framework/dynamix-framework/src/eu/smartsantander/androidExperimentation/operations/AsyncExperimentTask.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../sensorPlugins/WifiScanPlugin/gen/org/ambientdynamix/contextplugins/WifiScanPlugin/BuildConfig.java" afterPath="$PROJECT_DIR$/../sensorPlugins/WifiScanPlugin/gen/org/ambientdynamix/contextplugins/WifiScanPlugin/BuildConfig.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../dynamix_framework/dynamix-framework/src/eu/smartsantander/androidExperimentation/operations/DynamixServiceListenerUtility.java" afterPath="$PROJECT_DIR$/../dynamix_framework/dynamix-framework/src/eu/smartsantander/androidExperimentation/operations/DynamixServiceListenerUtility.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../sensorPlugins/ExperimentPlugin/src/org/ambientdynamix/contextplugins/ExperimentPlugin/ExperimentPluginRuntime.java" afterPath="$PROJECT_DIR$/../sensorPlugins/ExperimentPlugin/src/org/ambientdynamix/contextplugins/ExperimentPlugin/ExperimentPluginRuntime.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../sensorPlugins/GpsPlugin/src/org/ambientdynamix/contextplugins/GpsPlugin/GpsPluginRuntime.java" afterPath="$PROJECT_DIR$/../sensorPlugins/GpsPlugin/src/org/ambientdynamix/contextplugins/GpsPlugin/GpsPluginRuntime.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../dynamix_framework/dynamix-framework/src/org/ambientdynamix/contextplugins/ExperimentPlugin/IPluginInfo.java" afterPath="$PROJECT_DIR$/../dynamix_framework/dynamix-framework/src/org/ambientdynamix/contextplugins/ExperimentPlugin/IPluginInfo.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../sensorPlugins/ExperimentPlugin/src/org/ambientdynamix/contextplugins/ExperimentPlugin/IPluginInfo.java" afterPath="$PROJECT_DIR$/../sensorPlugins/ExperimentPlugin/src/org/ambientdynamix/contextplugins/ExperimentPlugin/IPluginInfo.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../sensorPlugins/GpsPlugin/src/org/ambientdynamix/contextplugins/GpsPlugin/IPluginInfo.java" afterPath="$PROJECT_DIR$/../sensorPlugins/GpsPlugin/src/org/ambientdynamix/contextplugins/GpsPlugin/IPluginInfo.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../sensorPlugins/WifiScanPlugin/META-INF/MANIFEST.MF" afterPath="$PROJECT_DIR$/../sensorPlugins/WifiScanPlugin/META-INF/MANIFEST.MF" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../dynamix_framework/dynamix-framework/src/org/ambientdynamix/contextplugins/ExperimentPlugin/PluginInfo.java" afterPath="$PROJECT_DIR$/../dynamix_framework/dynamix-framework/src/org/ambientdynamix/contextplugins/ExperimentPlugin/PluginInfo.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../sensorPlugins/ExperimentPlugin/src/org/ambientdynamix/contextplugins/ExperimentPlugin/PluginInfo.java" afterPath="$PROJECT_DIR$/../sensorPlugins/ExperimentPlugin/src/org/ambientdynamix/contextplugins/ExperimentPlugin/PluginInfo.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../sensorPlugins/GpsPlugin/src/org/ambientdynamix/contextplugins/GpsPlugin/PluginInfo.java" afterPath="$PROJECT_DIR$/../sensorPlugins/GpsPlugin/src/org/ambientdynamix/contextplugins/GpsPlugin/PluginInfo.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../dynamix_framework/dynamix-framework/src/eu/smartsantander/androidExperimentation/jsonEntities/Reading.java" afterPath="$PROJECT_DIR$/../dynamix_framework/dynamix-framework/src/eu/smartsantander/androidExperimentation/jsonEntities/Reading.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../sensorPlugins/ExperimentPlugin/src/eu/smartsantander/androidExperimentation/jsonEntities/Reading.java" afterPath="$PROJECT_DIR$/../sensorPlugins/ExperimentPlugin/src/eu/smartsantander/androidExperimentation/jsonEntities/Reading.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../sensorPlugins/GpsPlugin/src/eu/smartsantander/androidExperimentation/jsonEntities/Reading.java" afterPath="$PROJECT_DIR$/../sensorPlugins/GpsPlugin/src/eu/smartsantander/androidExperimentation/jsonEntities/Reading.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../sensorPlugins/WifiScanPlugin/src/org/ambientdynamix/contextplugins/WifiScanPlugin/WifiScanPluginRuntime.java" afterPath="$PROJECT_DIR$/../sensorPlugins/WifiScanPlugin/src/org/ambientdynamix/contextplugins/WifiScanPlugin/WifiScanPluginRuntime.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../sensorPlugins/WifiScanPlugin/build.properties" afterPath="$PROJECT_DIR$/../sensorPlugins/WifiScanPlugin/build.properties" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../sensorPlugins/WifiScanPlugin/project.properties" afterPath="$PROJECT_DIR$/../sensorPlugins/WifiScanPlugin/project.properties" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <list id="ffed928d-c9fc-443c-9d9a-a806dbe1581e" name="Hibernate altered  Demon registration altered" comment="" />
@@ -36,8 +386,8 @@
     <file path="$PROJECT_DIR$/../TestService/.idea/misc.xml" changelist="4ccbb714-201c-482b-a93f-dd4890c10bc1" time="1372057527318" ignored="false" />
     <file path="$PROJECT_DIR$/../TestService/.idea/workspace.xml" changelist="4ccbb714-201c-482b-a93f-dd4890c10bc1" time="1372058103023" ignored="false" />
     <file path="/SmartphonesEntity.java" changelist="4ccbb714-201c-482b-a93f-dd4890c10bc1" time="1372160703885" ignored="false" />
-    <file path="/ModelManager.java" changelist="4ccbb714-201c-482b-a93f-dd4890c10bc1" time="1379066482716" ignored="false" />
-    <file path="/AndroidExperimentationWS.java" changelist="4ccbb714-201c-482b-a93f-dd4890c10bc1" time="1379065649599" ignored="false" />
+    <file path="/ModelManager.java" changelist="4ccbb714-201c-482b-a93f-dd4890c10bc1" time="1382364330556" ignored="false" />
+    <file path="/AndroidExperimentationWS.java" changelist="4ccbb714-201c-482b-a93f-dd4890c10bc1" time="1382362727468" ignored="false" />
     <file path="/PluginList.java" changelist="4ccbb714-201c-482b-a93f-dd4890c10bc1" time="1378283964835" ignored="false" />
     <file path="/header.html" changelist="4ccbb714-201c-482b-a93f-dd4890c10bc1" time="1378901240806" ignored="false" />
     <file path="/WSManager.java" changelist="4ccbb714-201c-482b-a93f-dd4890c10bc1" time="1378290946633" ignored="false" />
@@ -52,16 +402,16 @@
     <file path="/newExperiment.jsp" changelist="4ccbb714-201c-482b-a93f-dd4890c10bc1" time="1378728997070" ignored="false" />
     <file path="/info.txt" changelist="4ccbb714-201c-482b-a93f-dd4890c10bc1" time="1378302486219" ignored="false" />
     <file path="/fileUpload.jsp" changelist="4ccbb714-201c-482b-a93f-dd4890c10bc1" time="1378731670714" ignored="false" />
-    <file path="/web.xml" changelist="4ccbb714-201c-482b-a93f-dd4890c10bc1" time="1380715109186" ignored="false" />
+    <file path="/web.xml" changelist="4ccbb714-201c-482b-a93f-dd4890c10bc1" time="1381830865708" ignored="false" />
     <file path="/Utilities.java" changelist="4ccbb714-201c-482b-a93f-dd4890c10bc1" time="1378727448175" ignored="false" />
     <file path="/santander-template.css" changelist="4ccbb714-201c-482b-a93f-dd4890c10bc1" time="1378903153370" ignored="false" />
     <file path="/footer.html" changelist="4ccbb714-201c-482b-a93f-dd4890c10bc1" time="1378900644332" ignored="false" />
     <file path="/about.jsp" changelist="4ccbb714-201c-482b-a93f-dd4890c10bc1" time="1378979844071" ignored="false" />
     <file path="/experiments-overall.jsp" changelist="4ccbb714-201c-482b-a93f-dd4890c10bc1" time="1378989486240" ignored="false" />
     <file path="$PROJECT_DIR$/META-INF/persistence.xml" changelist="4ccbb714-201c-482b-a93f-dd4890c10bc1" time="1378990148183" ignored="false" />
-    <file path="/Dummy.txt" changelist="4ccbb714-201c-482b-a93f-dd4890c10bc1" time="1381740189330" ignored="false" />
+    <file path="/Dummy.txt" changelist="4ccbb714-201c-482b-a93f-dd4890c10bc1" time="1382102827143" ignored="false" />
     <file path="/plugs.xml" changelist="4ccbb714-201c-482b-a93f-dd4890c10bc1" time="1380010819153" ignored="false" />
-    <file path="$PROJECT_DIR$/web/dynamixRepository/org.ambientdynamix.contextplugins.GpsPlugin_0.9.54.jar!/bin/AndroidManifest.xml" changelist="4ccbb714-201c-482b-a93f-dd4890c10bc1" time="1380803891726" ignored="false" />
+    <file path="$PROJECT_DIR$/web/dynamixRepository/org.ambientdynamix.contextplugins.GpsPlugin_0.9.54.jar!/bin/AndroidManifest.xml" changelist="4ccbb714-201c-482b-a93f-dd4890c10bc1" time="1382447789068" ignored="false" />
     <file path="/a.txt" changelist="4ccbb714-201c-482b-a93f-dd4890c10bc1" time="1380713889783" ignored="false" />
     <file path="$PROJECT_DIR$/../../../html5wicket/html5wicket/web/WEB-INF/web.xml" changelist="4ccbb714-201c-482b-a93f-dd4890c10bc1" time="1380716972259" ignored="false" />
     <file path="$PROJECT_DIR$/../../../html5wicket/html5wicket/src/java/mycompany/reports/TplReportCreator.java" changelist="4ccbb714-201c-482b-a93f-dd4890c10bc1" time="1380714530881" ignored="false" />
@@ -83,6 +433,7 @@
     <file path="/WicketApplication.java" changelist="4ccbb714-201c-482b-a93f-dd4890c10bc1" time="1380715648789" ignored="false" />
     <file path="$PROJECT_DIR$/../../../html5wicket/html5wicket/src/com/mycompany/HomePage.html" changelist="4ccbb714-201c-482b-a93f-dd4890c10bc1" time="1380716192737" ignored="false" />
     <file path="$PROJECT_DIR$/../../../html5wicket/html5wicket/ear/META-INF/application.xml" changelist="4ccbb714-201c-482b-a93f-dd4890c10bc1" time="1380716807986" ignored="false" />
+    <file path="/a.dummy" changelist="4ccbb714-201c-482b-a93f-dd4890c10bc1" time="1381828127364" ignored="false" />
     <option name="TRACKING_ENABLED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -118,23 +469,7 @@
         <option name="CONDITION" value="" />
         <option name="LOG_MESSAGE" value="" />
       </breakpoint>
-      <breakpoint url="file://$PROJECT_DIR$/src/eu/smartsantander/androidExperimentation/AndroidExperimentationWS.java" line="16" class="eu.smartsantander.androidExperimentation.AndroidExperimentationWS" package="eu.smartsantander.androidExperimentation">
-        <option name="ENABLED" value="true" />
-        <option name="LOG_ENABLED" value="false" />
-        <option name="LOG_EXPRESSION_ENABLED" value="false" />
-        <option name="REMOVE_AFTER_HIT" value="false" />
-        <option name="SUSPEND_POLICY" value="SuspendAll" />
-        <option name="SUSPEND" value="true" />
-        <option name="COUNT_FILTER_ENABLED" value="false" />
-        <option name="COUNT_FILTER" value="0" />
-        <option name="CONDITION_ENABLED" value="true" />
-        <option name="CLASS_FILTERS_ENABLED" value="false" />
-        <option name="INSTANCE_FILTERS_ENABLED" value="false" />
-        <option name="CONDITION" value="" />
-        <option name="LOG_MESSAGE" value="" />
-      </breakpoint>
     </line_breakpoints>
-    <ui_properties default_suspend_policy="SuspendAll" default_condition_enabled="true" />
     <breakpoint_any default_suspend_policy="SuspendAll" default_condition_enabled="true">
       <breakpoint>
         <option name="NOTIFY_CAUGHT" value="true" />
@@ -171,6 +506,7 @@
         <option name="LOG_MESSAGE" value="" />
       </breakpoint>
     </breakpoint_any>
+    <ui_properties default_suspend_policy="SuspendAll" default_condition_enabled="true" />
     <breakpoint_rules />
     <ui_properties />
   </component>
@@ -183,18 +519,21 @@
       <file leaf-file-name="AndroidExperimentationWS.java" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/eu/smartsantander/androidExperimentation/AndroidExperimentationWS.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="49" column="0" selection-start="1646" selection-end="1646" vertical-scroll-proportion="0.0">
+            <state line="48" column="0" selection-start="1602" selection-end="1602" vertical-scroll-proportion="0.0">
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="ModelManager.java" pinned="false" current="true" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/src/eu/smartsantander/androidExperimentation/ModelManager.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="115" column="65" selection-start="4426" selection-end="4426" vertical-scroll-proportion="-2.0">
+      <file leaf-file-name="androidexperimentation.experiments" pinned="false" current="true" current-in-tab="true">
+        <entry file="dbDummy://dbtable:/4a56989/ec19ba82-120f-43e6-96c5-26912937ccef/androidexperimentation..experiments">
+          <provider editor-type-id="text-editor">
+            <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0">
               <folding />
             </state>
+          </provider>
+          <provider selected="true" editor-type-id="com.intellij.persistence.database.editor.DatabaseTableFileEditorProvider">
+            <state />
           </provider>
         </entry>
       </file>
@@ -217,22 +556,22 @@
   <component name="IdeDocumentHistory">
     <option name="changedFiles">
       <list>
-        <option value="$PROJECT_DIR$/web/index.jsp" />
-        <option value="$PROJECT_DIR$/web/includes/footer.html" />
-        <option value="$PROJECT_DIR$/web/style/santander-template.css" />
-        <option value="$PROJECT_DIR$/web/about.jsp" />
-        <option value="$PROJECT_DIR$/web/experiments-overall.jsp" />
         <option value="$PROJECT_DIR$/src/hibernate.cfg.xml" />
-        <option value="$PROJECT_DIR$/src/eu/smartsantander/androidExperimentation/ModelManager.java" />
         <option value="$PROJECT_DIR$/src/eu/smartsantander/androidExperimentation/entities/Experiment.java" />
         <option value="dbtable:/adf69c6a/ec19ba82-120f-43e6-96c5-26912937ccef/androidExperimentation..smartphones" />
         <option value="dbtable:/adf69c6a/ec19ba82-120f-43e6-96c5-26912937ccef/androidExperimentation..plugins" />
         <option value="dbtable:/adf69c6a/ec19ba82-120f-43e6-96c5-26912937ccef/androidExperimentation..experiments" />
         <option value="dbtable:/adf69c6a/ec19ba82-120f-43e6-96c5-26912937ccef/androidExperimentation..results" />
         <option value="$PROJECT_DIR$/web/dynamixRepository/plugs.xml" />
-        <option value="$PROJECT_DIR$/src/eu/smartsantander/androidExperimentation/AndroidExperimentationWS.java" />
-        <option value="dbtable:/4a56989/ec19ba82-120f-43e6-96c5-26912937ccef/androidExperimentation..experiments" />
         <option value="dbtable:/4a56989/ec19ba82-120f-43e6-96c5-26912937ccef/androidExperimentation..plugins" />
+        <option value="$PROJECT_DIR$/web/WEB-INF/web.xml" />
+        <option value="dbtable:/4a56989/ec19ba82-120f-43e6-96c5-26912937ccef/androidExperimentation..experiments" />
+        <option value="dbtable:/4a56989/ec19ba82-120f-43e6-96c5-26912937ccef/androidexperimentation..results" />
+        <option value="$PROJECT_DIR$/src/eu/smartsantander/androidExperimentation/AndroidExperimentationWS.java" />
+        <option value="$PROJECT_DIR$/src/eu/smartsantander/androidExperimentation/jsonEntities/Report.java" />
+        <option value="dbtable:/4a56989/ec19ba82-120f-43e6-96c5-26912937ccef/androidexperimentation..experiments" />
+        <option value="$PROJECT_DIR$/src/eu/smartsantander/androidExperimentation/ModelManager.java" />
+        <option value="dbtable:/4a56989/ec19ba82-120f-43e6-96c5-26912937ccef/androidexperimentation..plugins" />
       </list>
     </option>
   </component>
@@ -422,47 +761,7 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="web" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="dynamixRepository" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="org.ambientdynamix.contextplugins.GpsPlugin_0.9.54.jar" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiFileNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="AndroidExperimentation" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="WebService" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
               <option name="myItemId" value="src" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="AndroidExperimentation" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="WebService" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="src" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="androidExperimentation" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -517,16 +816,16 @@
     <key name="CreateClassDialog.RecentsKey">
       <recent name="helloworld" />
     </key>
-    <key name="ImportMappingsDialog.RecentPackages">
-      <recent name="eu.smartsantander.androidExperimentation" />
-      <recent name="helloworld" />
-    </key>
     <key name="MoveFile.RECENT_KEYS">
       <recent name="$PROJECT_DIR$/AndroidExperimentationWeb/web" />
       <recent name="$PROJECT_DIR$/src" />
       <recent name="$PROJECT_DIR$/src/eu/smartsantander/androidExperimentation/entities" />
       <recent name="$PROJECT_DIR$/lib" />
       <recent name="$PROJECT_DIR$/web" />
+    </key>
+    <key name="ImportMappingsDialog.RecentPackages">
+      <recent name="eu.smartsantander.androidExperimentation" />
+      <recent name="helloworld" />
     </key>
   </component>
   <component name="RunManager" selected="Tomcat Server.Tomcat 7.0">
@@ -914,18 +1213,18 @@
     </todo-panel>
   </component>
   <component name="ToolWindowManager">
-    <frame x="1" y="1" width="1918" height="1038" extended-state="0" />
+    <frame x="1" y="1" width="1918" height="1038" extended-state="1" />
     <editor active="false" />
     <layout>
       <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.6177474" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="JetGradle" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="Persistence" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.29868075" sideWeight="0.27531284" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
-      <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.1330819" sideWeight="0.28929386" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.15840517" sideWeight="0.523918" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Debug" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.7107062" sideWeight="0.92025864" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Debug" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.476082" sideWeight="0.92025864" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="IDEtalk Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="15" side_tool="false" content_ui="tabs" />
-      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.7107062" sideWeight="0.07974138" order="8" side_tool="true" content_ui="tabs" />
+      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.476082" sideWeight="0.07974138" order="8" side_tool="true" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.24878444" sideWeight="0.67190224" order="4" side_tool="true" content_ui="tabs" />
       <window_info id="IDEtalk" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4334471" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
@@ -937,14 +1236,14 @@
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="SLIDING" type="SLIDING" visible="false" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Application Servers" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32536975" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.15032327" sideWeight="0.28929386" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.03825431" sideWeight="0.523918" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32589287" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="SVN Repositories" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32992035" sideWeight="0.5" order="16" side_tool="false" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
       <window_info id="soapUI Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32984293" sideWeight="0.5" order="12" side_tool="false" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
-      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4977221" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.4977221" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Hibernate Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3287827" sideWeight="0.5" order="13" side_tool="false" content_ui="tabs" />
       <window_info id="Dependency Viewer" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.8807018" sideWeight="0.5" order="14" side_tool="false" content_ui="tabs" />
       <window_info id="soapUI Navigator" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
@@ -1069,62 +1368,6 @@
     <option name="FILTER_TARGETS" value="false" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="jar://$PROJECT_DIR$/lib/hibernate-core-4.2.2.Final.jar!/org/hibernate/Session.class">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="75" column="9" selection-start="2352" selection-end="2352" vertical-scroll-proportion="0.3512304" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/eu/smartsantander/androidExperimentation/entities/ExperimentsEntity.hbm.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/web/experiment.jsp">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/web/showcase.jsp">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/web/includes/header.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/../dynamix_framework/dynamix-framework/src/org/ambientdynamix/update/contextplugin/SimpleSourceBase.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="23" column="11" selection-start="804" selection-end="804" vertical-scroll-proportion="0.46875" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/web/WEB-INF/web.xml">
-      <provider editor-type-id="com.intellij.javaee.module.view.web.viewlets.WebModuleGeneralEditorProvider">
-        <state />
-      </provider>
-      <provider editor-type-id="com.intellij.javaee.module.view.web.viewlets.WebModuleAssemblyDescriptorReferencesProvider">
-        <state />
-      </provider>
-      <provider editor-type-id="com.intellij.javaee.module.view.web.viewlets.WebModuleAssemblyDescriptorProvider">
-        <state />
-      </provider>
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/web/WEB-INF/sun-jaxws.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="6" column="27" selection-start="213" selection-end="213" vertical-scroll-proportion="0.2035928" />
-      </provider>
-    </entry>
-    <entry file="jar://$PROJECT_DIR$/web/dynamixRepository/org.ambientdynamix.contextplugins.GpsPlugin_0.9.54.jar!/META-INF/MANIFEST.MF">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" />
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/web/dynamixRepository/plugs.xml">
       <provider selected="true" editor-type-id="text-editor">
         <state line="6" column="29" selection-start="257" selection-end="257" vertical-scroll-proportion="0.03761062" />
@@ -1132,9 +1375,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/eu/smartsantander/androidExperimentation/entities/Experiment.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="9" column="13" selection-start="229" selection-end="229" vertical-scroll-proportion="0.24757281">
-          <folding />
-        </state>
+        <state line="9" column="13" selection-start="229" selection-end="229" vertical-scroll-proportion="0.24757281" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/web/images/header_santander.jpg">
@@ -1142,34 +1383,117 @@
         <state />
       </provider>
     </entry>
-    <entry file="dbDummy://dbtable:/4a56989/ec19ba82-120f-43e6-96c5-26912937ccef/androidExperimentation..experiments">
-      <provider selected="true" editor-type-id="com.intellij.persistence.database.editor.DatabaseTableFileEditorProvider">
-        <state />
-      </provider>
-      <provider editor-type-id="text-editor">
-        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" />
-      </provider>
-    </entry>
     <entry file="dbDummy://dbtable:/4a56989/ec19ba82-120f-43e6-96c5-26912937ccef/androidExperimentation..plugins">
-      <provider selected="true" editor-type-id="com.intellij.persistence.database.editor.DatabaseTableFileEditorProvider">
-        <state />
-      </provider>
       <provider editor-type-id="text-editor">
         <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" />
       </provider>
+      <provider selected="true" editor-type-id="com.intellij.persistence.database.editor.DatabaseTableFileEditorProvider">
+        <state />
+      </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/eu/smartsantander/androidExperimentation/AndroidExperimentationWS.java">
+    <entry file="dbDummy://dbtable:/4a56989/ec19ba82-120f-43e6-96c5-26912937ccef/androidExperimentation..experiments">
+      <provider editor-type-id="text-editor">
+        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" />
+      </provider>
+      <provider selected="true" editor-type-id="com.intellij.persistence.database.editor.DatabaseTableFileEditorProvider">
+        <state />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/web/WEB-INF/web.xml">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="49" column="0" selection-start="1646" selection-end="1646" vertical-scroll-proportion="0.0">
+        <state line="27" column="33" selection-start="1061" selection-end="1061" vertical-scroll-proportion="1.3114285">
           <folding />
         </state>
+      </provider>
+      <provider editor-type-id="com.intellij.javaee.module.view.web.viewlets.WebModuleAssemblyDescriptorReferencesProvider">
+        <state />
+      </provider>
+      <provider editor-type-id="com.intellij.javaee.module.view.web.viewlets.WebModuleAssemblyDescriptorProvider">
+        <state />
+      </provider>
+      <provider editor-type-id="com.intellij.javaee.module.view.web.viewlets.WebModuleGeneralEditorProvider">
+        <state />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/eu/smartsantander/androidExperimentation/Main.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="11" column="13" selection-start="289" selection-end="289" vertical-scroll-proportion="0.456">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/eu/smartsantander/androidExperimentation/HibernateUtil.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="19" column="13" selection-start="477" selection-end="477" vertical-scroll-proportion="0.045333333">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/eu/smartsantander/androidExperimentation/Utilities.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="11" column="0" selection-start="219" selection-end="232" vertical-scroll-proportion="0.49866667">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="dbDummy://dbtable:/4a56989/ec19ba82-120f-43e6-96c5-26912937ccef/androidexperimentation..results">
+      <provider editor-type-id="text-editor">
+        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+      <provider selected="true" editor-type-id="com.intellij.persistence.database.editor.DatabaseTableFileEditorProvider">
+        <state />
+      </provider>
+    </entry>
+    <entry file="dbDummy://dbtable:/4a56989/ec19ba82-120f-43e6-96c5-26912937ccef/androidexperimentation..plugins">
+      <provider editor-type-id="text-editor">
+        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+      <provider selected="true" editor-type-id="com.intellij.persistence.database.editor.DatabaseTableFileEditorProvider">
+        <state />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/eu/smartsantander/androidExperimentation/ModelManager.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="115" column="65" selection-start="4426" selection-end="4426" vertical-scroll-proportion="-2.0">
+        <state line="162" column="0" selection-start="5992" selection-end="5992" vertical-scroll-proportion="0.55508476">
           <folding />
         </state>
+      </provider>
+    </entry>
+    <entry file="jar://$PROJECT_DIR$/lib/gson-1.1.jar!/com/google/gson/Gson.class">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="19" column="11" selection-start="1050" selection-end="1050" vertical-scroll-proportion="0.8056872">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/eu/smartsantander/androidExperimentation/jsonEntities/Report.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="57" column="0" selection-start="1016" selection-end="1016" vertical-scroll-proportion="1.4899598">
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/eu/smartsantander/androidExperimentation/AndroidExperimentationWS.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="48" column="0" selection-start="1602" selection-end="1602" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="dbDummy://dbtable:/4a56989/ec19ba82-120f-43e6-96c5-26912937ccef/androidexperimentation..experiments">
+      <provider editor-type-id="text-editor">
+        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+      <provider selected="true" editor-type-id="com.intellij.persistence.database.editor.DatabaseTableFileEditorProvider">
+        <state />
       </provider>
     </entry>
   </component>

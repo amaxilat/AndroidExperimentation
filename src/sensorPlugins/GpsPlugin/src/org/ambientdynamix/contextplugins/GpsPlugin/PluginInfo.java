@@ -1,6 +1,7 @@
 package org.ambientdynamix.contextplugins.GpsPlugin;
 
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 import org.ambientdynamix.api.application.IContextInfo;
 import com.google.gson.Gson;
@@ -21,9 +22,18 @@ class PluginInfo implements IContextInfo,IPluginInfo  {
 	public static String CONTEXT_TYPE = "org.ambientdynamix.contextplugins.GpsPlugin";
 	private String state;
 	private String payload = "";
+	private String context;
+	
+	public String getContext() {
+		return context;
+	}
+
+	public void setContext(String context) {
+		this.context = context;
+	}
 	
 	public PluginInfo() {
-	
+		this.context=CONTEXT_TYPE;
 	}
 
 	@Override
@@ -70,10 +80,9 @@ class PluginInfo implements IContextInfo,IPluginInfo  {
 		return this.payload;
 	}
 
-	public void setPayload(Reading r)
+	public void setPayload(List<Reading> r)
 	{
-		r.setContext(CONTEXT_TYPE);		
-		this.payload = r.toJson();
+		this.payload = (new Gson()).toJson(r);
 	}
 	
 	

@@ -10,12 +10,17 @@ import org.ambientdynamix.api.contextplugin.PowerScheme;
 import org.ambientdynamix.api.contextplugin.security.PrivacyRiskLevel;
 import org.ambientdynamix.api.contextplugin.security.SecuredContextInfo;
 
+
 import com.google.gson.Gson;
+
+import eu.smartsantander.androidExperimentation.jsonEntities.Reading;
 
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
+import android.location.Location;
+import android.location.LocationManager;
 import android.net.wifi.ScanResult;
 import android.net.wifi.WifiManager;
 import android.os.Bundle;
@@ -30,24 +35,11 @@ public class WifiScanPluginRuntime extends AutoReactiveContextPluginRuntime {
 	
 	
 	WifiManager mainWifi;
-	WifiReceiver receiverWifi;
 	List<ScanResult> wifiList;
 	private String scanJson = "-1";
-	private Scan scan;
-	
-	class WifiReceiver extends BroadcastReceiver
-	{
-		public void onReceive(Context c, Intent intent)
-		{						
-			wifiList = mainWifi.getScanResults();
-			
-			doJob();
-		}
-	}
-	
 	private boolean running = false;
 	private Handler handler;
-	private String state;
+
 	private Runnable runnable = new Runnable()
 	{
 		@Override
@@ -55,89 +47,86 @@ public class WifiScanPluginRuntime extends AutoReactiveContextPluginRuntime {
 		{
 			if(running)
 			{	
-				doJob();
+				broadcastWifiScan(null);
 				handler.postDelayed(this, 20000);
 			}
 		}
 	};
 	
 	
+	
+	public void broadcastWifiScan(UUID requestId) {
+		if (requestId!=null)
+			Log.w(TAG, "WifiScan Broadcast:"+requestId);
+		else
+			Log.w(TAG, "WifiScan Broadcast Timer!");
+		
+		wifiList = new ArrayList<ScanResult>();
+		mainWifi = (WifiManager) context.getSystemService(Context.WIFI_SERVICE);
+		mainWifi.startScan();
+		try {
+			Thread.sleep(5000);
+		} catch (InterruptedException e) {
+ 			e.printStackTrace();
+		}
+		wifiList=mainWifi.getScanResults();	
+	
+		Gson gson = new Gson();
+		scanJson = gson.toJson(wifiList);
+		
+		Log.i("scan wifi scan plugin", this.scanJson);
+		PluginInfo info = new PluginInfo();
+		info.setState("valid");
+		List<Reading> readings=new ArrayList<Reading>();
+		readings.add(new Reading(Reading.Datatype.String, scanJson, PluginInfo.CONTEXT_TYPE));
+		info.setPayload(readings);
+		Log.w(TAG, "WifiScan Plugin:"+ info.getPayload());
+		if (requestId!=null){
+			sendContextEvent(requestId, new SecuredContextInfo(info,	PrivacyRiskLevel.LOW), 60000);
+			Log.w(TAG,"WifiScan Plugin from Request:"+ info.getPayload());
+		}else{ 
+			sendBroadcastContextEvent(new SecuredContextInfo(info,	PrivacyRiskLevel.LOW), 60000);
+			Log.w(TAG,"WifiScan Plugin Broadcast:"+ info.getPayload());
+		}
+		wifiList.clear();
+	}
+	
+ 
 	@Override
 	public void init(PowerScheme powerScheme, ContextPluginSettings settings) throws Exception {
-		// Set the power scheme
 		this.setPowerScheme(powerScheme);
-		// Store our secure context
 		this.context = this.getSecuredContext();
-		
-		state = "not_ready";
-		handler = new Handler();
-		running = false;
-		scanJson = "-1";
-		wifiList = new ArrayList<ScanResult>();
-		scan = new Scan();
+		Log.w(TAG, "WifiScan Inited!");
 	}
 
 	// handle incoming context request
 	@Override
 	public void handleContextRequest(UUID requestId, String contextType)
 	{
-		//
+		broadcastWifiScan(requestId);
 	}
 
 	@Override
 	public void handleConfiguredContextRequest(UUID requestId, String contextType, Bundle config)
 	{
-		// get command
-		String command = (String) config.get("command");
-		// get data
-		String data = (String) config.get("data");
-		
-		if( command.equals("ping") )
-		{
-			pong();
-		}
-		else if( command.equals("do") )
-		{
-			startDoJob();
-		}
-		else if( command.equals("stop") )
-		{
-			stop();
-		}
-		else
-		{
-			Log.i(TAG, "command not supported");
-		}
+		handleContextRequest(requestId,contextType);
 	}	
 	
 	@Override
 	public void start()
 	{		
-		Log.d(TAG, "ready!");	
-		setState("ready");
-		doJob();
-	}
+		Log.d(TAG, "WifiScan Plugin Started!");			}
 	
 	@Override
 	public void stop()
 	{
-		/*
-		 * At this point, the plug-in should stop scanning for context and/or handling context requests; however, we
-		 * should retain resources needed to run again.
-		 */
-
-		setState("stopped");
-		context.unregisterReceiver(this.receiverWifi);
-		running = false;
-		Log.d(TAG, "Stopped!");
+		Log.d(TAG, "WifiScan Plugin Stoped!");			
 	}
 
 	@Override
 	public void destroy() {
-		/*
-		 * At this point, the plug-in should stop and release any resources. Nothing to do in this case except for stop.
-		 */
-		Log.d(TAG, "Destroyed!");
+		this.stop();
+		Log.d(TAG, "WifiScan Plugin Destroyed!");
 	}
 
 	@Override
@@ -156,49 +145,5 @@ public class WifiScanPluginRuntime extends AutoReactiveContextPluginRuntime {
 	}
 	
 	
-	private void startDoJob()
-	{
-		mainWifi = (WifiManager) context.getSystemService(Context.WIFI_SERVICE);
-		receiverWifi = new WifiReceiver();
-		
-	    context.registerReceiver(receiverWifi, new IntentFilter(WifiManager.SCAN_RESULTS_AVAILABLE_ACTION));
-		
-		mainWifi.startScan();
-	    
-	    setState("running");
-		running = true;
-		handler.postDelayed(runnable, 20000);
-	}
-	
-	private void doJob()
-	{
-		scan.addWifiList(wifiList);
-		
-		Gson gson = new Gson();
-		scanJson = gson.toJson(this.scan);
-		
-		Log.i("scan wifi scan plugin", this.scanJson);
-		WifiScanPluginInfo info = new WifiScanPluginInfo(this.scanJson);
-		this.sendBroadcastContextEvent(new SecuredContextInfo(info, PrivacyRiskLevel.LOW), 60000);
-		
-		// clear scan list
-		scan.clearScanList();
-	}
-	
-	private void setState(String state)
-	{
-		this.state = state;
-		pong();
-	}
-	
-	private void pong()
-	{
-		Gson gson = new Gson();
-		scanJson = gson.toJson(this.scan);
-		
-		WifiScanPluginInfo info = new WifiScanPluginInfo(this.scanJson);
-		info.setState(state);		
-		this.sendBroadcastContextEvent(new SecuredContextInfo(info, PrivacyRiskLevel.LOW), 60000);
-	}
 
 }

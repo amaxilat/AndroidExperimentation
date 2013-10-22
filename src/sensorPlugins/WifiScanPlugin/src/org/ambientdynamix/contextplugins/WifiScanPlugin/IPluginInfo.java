@@ -1,4 +1,4 @@
-package org.ambientdynamix.contextplugins.ExperimentPlugin;
+package org.ambientdynamix.contextplugins.WifiScanPlugin;
 
 import java.util.List;
 import java.util.Set;

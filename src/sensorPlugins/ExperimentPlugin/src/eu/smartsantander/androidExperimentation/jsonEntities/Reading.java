@@ -4,24 +4,19 @@ import java.io.Serializable;
 
 import com.google.gson.Gson;
 
-
-
 public class Reading implements Serializable {
-	/**
-	 * 
-	 */
-	private static final long serialVersionUID = 1L;
-
-
 	public static enum Datatype {Integer,Float,String};
 	
 	private String context;
 	private String value;	
 	private Datatype type;
+	private long timestamp;
 	
-	public Reading(Datatype t, String val){
+	public Reading(Datatype t, String val, String context){
 		this.type=t;
 		this.value=val;
+		this.context=context;
+		this.timestamp=System.currentTimeMillis();
 	}
 	
 	public String getContext() {
@@ -47,7 +42,6 @@ public class Reading implements Serializable {
 	public String toJson(){
 		return (new Gson()).toJson(this);
 	}
-	
 	
 	public static Reading fromJson(String json){
 		return (new Gson()).fromJson(json, Reading.class);

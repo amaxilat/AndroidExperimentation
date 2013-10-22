@@ -1,5 +1,6 @@
 package eu.smartsantander.androidExperimentation.operations;
 
+import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -15,6 +16,7 @@ import org.ambientdynamix.core.DynamixService;
 import org.ambientdynamix.util.Log;
 
 import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 
 import eu.smartsantander.androidExperimentation.jsonEntities.Reading;
 import eu.smartsantander.androidExperimentation.jsonEntities.Report;
@@ -47,6 +49,7 @@ public class DynamixServiceListenerUtility {
 			public void onSessionOpened(String sessionId)	throws RemoteException {
 				Result r = DynamixService.dynamix.addContextSupport(DynamixService.dynamixCallback,"org.ambientdynamix.contextplugins.ExperimentPlugin");
 				r = DynamixService.dynamix.addContextSupport(DynamixService.dynamixCallback,"org.ambientdynamix.contextplugins.GpsPlugin");
+				r = DynamixService.dynamix.addContextSupport(DynamixService.dynamixCallback,"org.ambientdynamix.contextplugins.WifiScanPlugin");				
 				DynamixService.sessionStarted = true;
 				Log.w(TAG, "SESSION STATUS" + r.getMessage());
 			}
@@ -102,28 +105,37 @@ public class DynamixServiceListenerUtility {
 					Log.w(TAG,"Event contains native IContextInfo: "+ event.getIContextInfo());
 					IContextInfo nativeInfo = event.getIContextInfo();
 					String msg = nativeInfo.getStringRepresentation("");
-					try{
+					try {
 						Log.w(TAG, "Received Experiment/Plugin Info: " + msg);
-						PluginInfo plugInfo=(new Gson()).fromJson(msg, PluginInfo.class);
-						String readingMsg=plugInfo.getPayload();
-						Reading reading=Reading.fromJson(readingMsg);
-						Log.w(TAG, "Received Reading: " + reading);
-						Toast.makeText(DynamixService.getAndroidContext(), readingMsg,	8000).show();
-						if(reading.getContext().equals("org.ambientdynamix.contextplugins.ExperimentPlugin")){
-							// push back on experimentation reading 
-							Log.w(TAG, "Experiment Reading: " + reading);
-							if (DynamixService.getExperiment()==null) 
-								return;
-							Report rObject=new Report(DynamixService.getExperiment().getId().toString());
-							rObject.setDeviceId(DynamixService.getPhoneProfiler().getPhoneId());
-							List<String> mlist=new ArrayList<String>();
-							mlist.add(reading.getValue());
-							rObject.setResults(mlist);
-							DynamixService.getCommunication().sendReportResults(rObject.toJson());
-						}else{
-							DynamixService.getReadingStorage().pushReading(reading);						
+						PluginInfo plugInfo = (new Gson()).fromJson(msg,PluginInfo.class);
+						if (plugInfo != null&& plugInfo.getContext() != null&& plugInfo.getContext().equals("org.ambientdynamix.contextplugins.ExperimentPlugin")) {
+							String readingMsg = plugInfo.getPayload();
+							Type listType = new TypeToken<ArrayList<Reading>>() {}.getType();
+							List<Reading> readings = (new Gson()).fromJson(readingMsg, listType);
+							for (Reading reading : readings) {
+								Log.w(TAG, "Received Reading: " + reading);
+								Toast.makeText(DynamixService.getAndroidContext(),readingMsg, 8000).show();
+								if (DynamixService.getExperiment() == null)
+									return;
+								Report rObject = new Report(DynamixService.getExperiment().getId().toString());
+								rObject.setDeviceId(DynamixService.getPhoneProfiler().getPhoneId());
+								List<String> mlist = new ArrayList<String>();
+								mlist.add(reading.getValue());
+								rObject.setResults(mlist);
+								DynamixService.getCommunication().sendReportResults(rObject.toJson());
+							}
+						} else {
+							String readingMsg = plugInfo.getPayload();
+							Type listType = new TypeToken<ArrayList<Reading>>() {}.getType();
+							List<Reading> readings = (new Gson()).fromJson(readingMsg, listType);
+							for (Reading reading : readings) {
+								Toast.makeText(DynamixService.getAndroidContext(),readingMsg, 8000).show();
+								Log.w(TAG, "Plugin Reading: " + reading);
+								DynamixService.getReadingStorage().pushReading(	reading);
+							}
+							
 						}
-					}catch(Exception e){
+					} catch (Exception e) {
 						Log.w(TAG, "Bad Formed Reading" + msg);
 					}
 				}
