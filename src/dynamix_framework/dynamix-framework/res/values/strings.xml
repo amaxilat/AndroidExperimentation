@@ -4,7 +4,7 @@
     <string name="app_name">SmartSantander Experimentation</string>
     <string name="showDisconnected">Show Disconnected Applications</string>
     <string name="Version">0.1</string>
-    <string name="home_no_apps">Waiting for applications to connect...</string>
+    <string name="home_no_apps">Waiting for applications to connect&#8230;</string>
     <string name="deviceId_label">SmartSantander Device ID:</string>
     <string name="experiment_label">SmartSantander Experiment:</string>
     <string name="app_list_label">Authorized Applications</string>
@@ -33,10 +33,10 @@
     <string name="btn_add_new_privacy_policy">Add New Privacy Policy</string>
     <string name="privacy_policy_list_label">Available Privacy Policies</string>
     <string name="privacy_policy_description_label">Description</string>
-    <string name="privacy_policy_click_me">Tap to view details...</string>
+    <string name="privacy_policy_click_me">Tap to view details&#8230;</string>
     <string name="enable_disable_label">Enable/Disable</string>
     <string name="pending_app_list_label">Pending Applications</string>
-    <string name="app_pending_message">Tap to setup application privacy...</string>
+    <string name="app_pending_message">Tap to setup application privacy&#8230;</string>
     <string name="btn_update_scan">Find Updates</string>
     <string name="dynamix_notification_titlebar">Dynamix Message</string>
     <string name="dynamix_notification_title">Dynamix Context Framework</string>
@@ -67,13 +67,13 @@
     <string name="menu_settings">Settings</string>
     <string name="title_activity_test">TestActivity</string>
     <string name="about1">Android Experimentation is related to the SmartSantander research project, aiming to provide an Android smartphone application augmenting the functionality of an existing Future Internet infrastructure.
-			The Android software component distributes executable code on smartphone devices of a network of volunteers. The code is deployed as Ambient Dynamix plugins, performs calculations and produces sensor results, that are uploaded to a central server. There is a central software component responsible for distributing the plugins and collecting the results.
+        &lt;p&gt;The Android software component distributes executable code on smartphone devices of a network of volunteers. The code is deployed as Ambient Dynamix plugins, performs calculations and produces sensor results, that are uploaded to a central server. There is a central software component responsible for distributing the plugins and collecting the results.
+    	&lt;p&gt;For more information regarding SmartSantander you can visit: 
+		&lt;a href=&quot;http://smartsantander.eu&quot;&gt;http://smartsantander.eu&lt;a&gt;
+		&lt;p&gt;For more information regarding the Ambient Dynamix framework you can visit: 
+		&lt;a href=&quot;http://ambientdynamix.org&quot;&gt;http://ambientdynamix.org&lt;a&gt;
 	</string>
-    <string name="about2">
-		For more information regarding SmartSantander you can visit: 
-		http://smartsantander.eu 
-		For more information regarding the Ambient Dynamix framework you can visit: 
-		http://ambientdynamix.org
-	</string>
+	<string name="expIsEnabled">Experimentation is enabled</string>
+	<string name="expIsDisabled">Experimentation is disabled</string>
     
 </resources>

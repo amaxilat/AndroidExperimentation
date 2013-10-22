@@ -4,7 +4,7 @@
     <string name="app_name">SmartSantander Experimentation</string>
     <string name="showDisconnected">Mostrar las aplicaciones desconectadas</string>
     <string name="Version">0.1</string>
-    <string name="home_no_apps">Esperando las aplicaciones se conecten...</string>
+    <string name="home_no_apps">Esperando las aplicaciones se conecten&#8230;</string>
     <string name="deviceId_label">SmartSantander Dispotivo ID:</string>
     <string name="experiment_label">SmartSantander Experiment:</string>
     <string name="app_list_label">Aplicaciones Autorizadas</string>
@@ -23,7 +23,7 @@
     <string name="plugin_enable_toggle_on">Plugin Enabled</string>
     <string name="plugin_enable_toggle_off">Plugin Disabled</string>
     <string name="btn_plugin_uninstall">Uninstall Plugin</string>
-    <string name="app_settings_label">Application Settings</string>
+    <string name="app_settings_label">Configuración de la aplicación</string>
     <string name="app_description_label">Descripción</string>
     <string name="plugin_settings_label">Configuración de plugin privacidad </string>
     <string name="btn_uninstall_app">Desinstalar aplicación</string>
@@ -33,17 +33,17 @@
     <string name="btn_add_new_privacy_policy">Nueva Política de privacidad</string>
     <string name="privacy_policy_list_label">Disponible Políticas de Privacidad</string>
     <string name="privacy_policy_description_label">Descripción</string>
-    <string name="privacy_policy_click_me">Tap to view details...</string>
+    <string name="privacy_policy_click_me">Pulse para ver detalles&#8230;</string>
     <string name="enable_disable_label">Activar / Desactivar</string>
     <string name="pending_app_list_label">Pending Applications</string>
-    <string name="app_pending_message">Tap to setup application privacy...</string>
+    <string name="app_pending_message">Pulse para configurar la privacidad de aplicaciones&#8230;</string>
     <string name="btn_update_scan">Buscar updates</string>
     <string name="dynamix_notification_titlebar">Dynamix Mensaje</string>
     <string name="dynamix_notification_title">Dynamix Context Framework</string>
     <string name="pending_app_notification">Application(s) awaiting authorization</string>
     <string name="btn_finished_app_edit">Guardar configuración</string>
     <string name="btn_finished_app_pending">Autorizar la aplicación</string>
-    <string name="dynamix_settings_label">Dynamix Settings</string>
+    <string name="dynamix_settings_label">Dynamix Configuración</string>
     <string name="updates_list_label">Available Updates</string>
     <string name="btn_do_updates">Instalar Updates</string>
     <string name="btn_configure_context_plugin">Configure Plugin</string>
@@ -67,13 +67,12 @@
     <string name="menu_settings">Configuración</string>
     <string name="title_activity_test">TestActivity</string>
     <string name="about1">Android Experimentation is related to the SmartSantander research project, aiming to provide an Android smartphone application augmenting the functionality of an existing Future Internet infrastructure.
-			The Android software component distributes executable code on smartphone devices of a network of volunteers. The code is deployed as Ambient Dynamix plugins, performs calculations and produces sensor results, that are uploaded to a central server. There is a central software component responsible for distributing the plugins and collecting the results.
+			&lt;p&gt;The Android software component distributes executable code on smartphone devices of a network of volunteers. The code is deployed as Ambient Dynamix plugins, performs calculations and produces sensor results, that are uploaded to a central server. There is a central software component responsible for distributing the plugins and collecting the results.
+			&lt;p&gt;Para obtener más información sobre SmartSantander se puede visitar 
+		&lt;a href=&quot;http://smartsantander.eu&quot;&gt;http://smartsantander.eu&lt;a&gt; 
+		&lt;p&gt;Para obtener más información sobre Ambient Dynamix se puede visitar 
+		&lt;a href=&quot;http://ambientdynamix.org&quot;&gt;http://ambientdynamix.org&lt;a&gt;
 	</string>
-    <string name="about2">
-		Para obtener más información sobre SmartSantander se puede visitar: 
-		http://smartsantander.eu 
-		Para obtener más información sobre Ambient Dynamix se puede visitar: 
-		http://ambientdynamix.org
-	</string>
-    
+	<string name="expIsEnabled">La experimentación está habilitado</string>
+	<string name="expIsDisabled">La experimentación está desactivado</string>    
 </resources>

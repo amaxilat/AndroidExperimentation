@@ -89,7 +89,6 @@ public class BaseActivity extends TabActivity {
 	private Boolean serviceIntentListenerIsRegistered = false;
  
 	
-
 	public static void close() {
 		if (baseActivity != null)
 			baseActivity.finish();
@@ -120,16 +119,16 @@ public class BaseActivity extends TabActivity {
 
 	protected static void setTitlebarDisabled() {
 		if (baseActivity != null)
-			baseActivity.changeTitlebarState(Color.RED, "Experimentation"
+			baseActivity.changeTitlebarState(Color.RED,  "Experimentation is disabled" );//"Experimentation"
 					//+ DynamixService.getFrameworkVersion()
-					+ " is disabled");
+					//+ " is disabled");
 	}
 
 	protected static void setTitlebarEnabled() {
 		if (baseActivity != null)
-			baseActivity.changeTitlebarState(Color.rgb(0, 225, 50), "Experimentation"
+			baseActivity.changeTitlebarState(Color.rgb(0, 225, 50), "Experimentation is enabled" );//"Experimentation"
 					//+ DynamixService.getFrameworkVersion()
-					+ " is enabled");
+					//+ " is enabled");
 	}
 
 	public static boolean isActivityVisible() {

@@ -1,12 +1,12 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <resources>
 
     <string name="app_name">SmartSantander Experimentation</string>
     <string name="showDisconnected">Αποσυνδεδεμένες εφαρμογές</string>
     <string name="Version">0.1</string>
-    <string name="home_no_apps">Αναμονή για σύνδεση εφαρμογών...</string>
+    <string name="home_no_apps">Αναμονή για σύνδεση εφαρμογών&#8230;</string>
     <string name="deviceId_label">SmartSantander Device ID:</string>
-    <string name="experiment_label">SmartSantander πείραμα:</string>
+    <string name="experiment_label">Πείραμα SmartSantander:</string>
     <string name="app_list_label">Εφαρμογές με έγκριση</string>
     <string name="app_contextmenu_remove">Αφαίρεση εφαρμογής</string>
     <string name="app_settings">Ρυθμίσεις εφαρμογής</string>
@@ -33,10 +33,10 @@
     <string name="btn_add_new_privacy_policy">Προσθήκη πολιτικής ιδιωτικότητας</string>
     <string name="privacy_policy_list_label">Διαθέσιμες πολιτικές ιδιωτικότητας</string>
     <string name="privacy_policy_description_label">Περιγραφή</string>
-    <string name="privacy_policy_click_me">Tap για λεπτομέρειες...</string>
+    <string name="privacy_policy_click_me">Tap για λεπτομέρειες&#8230;</string>
     <string name="enable_disable_label">Enable/Disable</string>
     <string name="pending_app_list_label">Pending εφαρμογές</string>
-    <string name="app_pending_message">Tap για ορισμό πολιτικής ιδιωτικότητας...</string>
+    <string name="app_pending_message">Tap για ορισμό πολιτικής ιδιωτικότητας&#8230;</string>
     <string name="btn_update_scan">Εύρεση ενημερώσεων</string>
     <string name="dynamix_notification_titlebar">Μήνυμα Dynamix</string>
     <string name="dynamix_notification_title">Dynamix Context Framework</string>
@@ -60,20 +60,20 @@
     <string name="context_plugin_updates_available">Διαθέσιμες ενημερώσεις Context Plug-in</string>
     <string name="privacy_policy_summary"></string>
     <string name="custom_policy_summary">Tap and hold any Context Plug-in below to set a custom trust level, or tap it to view its description.</string>
-    <string name="custom_privacy_settings_label">Custom Privacy Settings</string>
+    <string name="custom_privacy_settings_label">Custom ρυθμίσεις ιδιωτικότητας</string>
     <string name="cancel_install_label">Ακύρωση εγκατάστασης</string>
     <string name="cancel_update_label">Ακύρωση ενημέρωσης</string>
     <string name="hello_world">Χαίρε κόσμε!</string>
     <string name="menu_settings">Ρυθμίσεις</string>
     <string name="title_activity_test">TestActivity</string>
     <string name="about1">Η εφαρμογή Android Experimentation αποτελεί μέρος του ερευνητικού έργου SmartSantander και στοχεύει στον εμπλουτισμό της λειτουργίας της Future Internet υποδομής που είναι εγκατεστημένη στο Santander.
-			Η εφαρμογή βοηθά στο διαμοιρασμό και την εγκατάσταση εκτελέσιμου κώδικα σε Android smartphone ενός δικτύου εθελοντών. Ο κώδικας είναι σε μορφή Ambient Dynamix plugins, παίρνει μετρήσεις από τους αισθητήρες του smartphone και εκτελεί υπολογισμούς, στέλνοντας τα αντίστοιχα αποτελέσματα σε έναν κεντρικό server.
+			&lt;p&gt;Η εφαρμογή βοηθά στο διαμοιρασμό και την εγκατάσταση εκτελέσιμου κώδικα σε Android smartphone ενός δικτύου εθελοντών. Ο κώδικας είναι σε μορφή Ambient Dynamix plugins, παίρνει μετρήσεις από τους αισθητήρες του smartphone και εκτελεί υπολογισμούς, στέλνοντας τα αντίστοιχα αποτελέσματα σε έναν κεντρικό server.
+			&lt;p&gt;Για περισσότερες πληροφορίες σχετικά με το SmartSantander μπορείτε να επισκεφθείτε το 
+		&lt;a href=&quot;http://smartsantander.eu&quot;&gt;http://smartsantander.eu&lt;a&gt;
+		&lt;p&gt;Για περισσότερες πληροφορίες σχετικά με το Ambient Dynamix μπορείτε να επισκεφθείτε το 
+		&lt;a href=&quot;http://ambientdynamix.org&quot;&gt;http://ambientdynamix.org&lt;a&gt;
 	</string>
-    <string name="about2">
-		Για περισσότερες πληροφορίες σχετικά με το SmartSantander μπορείτε να επισκεφθείτε το: 
-		http://smartsantander.eu 
-		Για περισσότερες πληροφορίες σχετικά με το Ambient Dynamix μπορείτε να επισκεφθείτε το: 
-		http://ambientdynamix.org
-	</string>
+    <string name="expIsEnabled">Πειραματισμός ενεργός</string>
+	<string name="expIsDisabled">Πειραματισμός ανενεργός</string>
     
 </resources>

@@ -248,7 +248,6 @@ containing a value of this type.
     public static final class string {
         public static final int Version=0x7f070002;
         public static final int about1=0x7f070041;
-        public static final int about2=0x7f070042;
         public static final int app_contextmenu_block=0x7f07001a;
         public static final int app_contextmenu_remove=0x7f070007;
         public static final int app_description_label=0x7f070017;
@@ -284,6 +283,8 @@ containing a value of this type.
         public static final int dynamix_notification_titlebar=0x7f070025;
         public static final int dynamix_settings_label=0x7f07002a;
         public static final int enable_disable_label=0x7f070021;
+        public static final int expIsDisabled=0x7f070043;
+        public static final int expIsEnabled=0x7f070042;
         public static final int experiment_label=0x7f070005;
         public static final int hello_world=0x7f07003e;
         public static final int home_no_apps=0x7f070003;
