@@ -33,12 +33,7 @@ public class AsyncExperimentTask extends AsyncTask<String, Void, String> {
 			DynamixServiceListenerUtility.start();
 	    }else{
 			try {
-				try{
-					manageExperiment();
-				}catch(Exception e){
-					this.stateActive=false;
-					return e.getMessage();
-				}
+
 				
 				
 				IdResult r;
@@ -56,6 +51,14 @@ public class AsyncExperimentTask extends AsyncTask<String, Void, String> {
 				//ping experiment....
 				r=DynamixService.dynamix.configuredContextRequest(DynamixService.dynamixCallback,"org.ambientdynamix.contextplugins.ExperimentPlugin", "org.ambientdynamix.contextplugins.ExperimentPlugin",DynamixService.getReadingStorage().getBundle() );
 				Log.i("contextRequest", r.getMessage());
+			
+				try{
+					manageExperiment();
+				}catch(Exception e){
+					this.stateActive=false;
+					return e.getMessage();
+				}
+				
 				this.stateActive=false;
 			} catch (RemoteException e) {
 				// TODO Auto-generated catch block
@@ -135,8 +138,10 @@ public class AsyncExperimentTask extends AsyncTask<String, Void, String> {
 						DynamixService.setExperiment(experiment);
 						DynamixService.startExperiment();
 						DynamixService.stopFramework();
+						Thread.sleep(5000);
 						DynamixService.startFramework();
 						Thread.sleep(10000);
+						DynamixServiceListenerUtility.start();
 					} catch (Exception e) {
 						e.printStackTrace();
 						if (DynamixService.isNetworkAvailable()==false){

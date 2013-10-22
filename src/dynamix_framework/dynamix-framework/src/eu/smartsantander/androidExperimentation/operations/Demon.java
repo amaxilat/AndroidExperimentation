@@ -21,7 +21,7 @@ public class Demon extends Thread implements Runnable {
 					Log.d(TAG, "AndroidExperimentation Running Unregistered Device");
 					DynamixService.getPhoneProfiler().register();
 				}else if (DynamixService.isInitialized()== true){
-					if (pingExp.isStateActive()==false ||counter>15){
+					if (pingExp.isStateActive()==false ||counter>30){
 								counter=0;
 								pingExp.cancel(true);
 								pingExp = new AsyncExperimentTask();

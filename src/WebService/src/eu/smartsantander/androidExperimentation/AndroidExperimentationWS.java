@@ -14,8 +14,7 @@ public class AndroidExperimentationWS {
 
     @WebMethod
     public String reportResults(String reportJson) {
-        Gson gson = new Gson();
-        Report report = gson.fromJson(reportJson, Report.class);
+        Report report = Report.fromJson(reportJson);
         ModelManager.reportResults(report);
 
         return "1";
