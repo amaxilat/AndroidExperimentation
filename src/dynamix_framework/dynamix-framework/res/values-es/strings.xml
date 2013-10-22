@@ -41,7 +41,7 @@
     <string name="dynamix_notification_titlebar">Dynamix Mensaje</string>
     <string name="dynamix_notification_title">Dynamix Context Framework</string>
     <string name="pending_app_notification">Application(s) awaiting authorization</string>
-    <string name="btn_finished_app_edit">Save Settings</string>
+    <string name="btn_finished_app_edit">Guardar configuración</string>
     <string name="btn_finished_app_pending">Autorizar la aplicación</string>
     <string name="dynamix_settings_label">Dynamix Settings</string>
     <string name="updates_list_label">Available Updates</string>
@@ -56,13 +56,13 @@
     <string name="btn_see_plugin_details">View Plug-in Details</string>
     <string name="update_description_label">Actualizar Descripción</string>
     <string name="update_priority_label">Update Priority</string>
-    <string name="update_target_label">Version Information</string>
+    <string name="update_target_label">Información de la versión</string>
     <string name="context_plugin_updates_available">Context Plug-in Update(s) Available</string>
     <string name="privacy_policy_summary"></string>
-    <string name="custom_policy_summary">Tap and hold any Context Plug-in below to set a custom trust level, or tap it to view its Descripción.</string>
+    <string name="custom_policy_summary">Toque y mantenga cualquier contexto plugin para configurar un nivel de confianza de encargo, o toque para ver su descripción.</string>
     <string name="custom_privacy_settings_label">Custom Privacy Settings</string>
-    <string name="cancel_install_label">Cancel Installation</string>
-    <string name="cancel_update_label">Cancel Update</string>
+    <string name="cancel_install_label">Cancelar la instalación</string>
+    <string name="cancel_update_label">Cancelar el Update</string>
     <string name="hello_world">Hola Mundo!</string>
     <string name="menu_settings">Configuración</string>
     <string name="title_activity_test">TestActivity</string>
@@ -70,9 +70,9 @@
 			The Android software component distributes executable code on smartphone devices of a network of volunteers. The code is deployed as Ambient Dynamix plugins, performs calculations and produces sensor results, that are uploaded to a central server. There is a central software component responsible for distributing the plugins and collecting the results.
 	</string>
     <string name="about2">
-		For more information regarding SmartSantander you can visit: 
+		Para obtener más información sobre SmartSantander se puede visitar: 
 		http://smartsantander.eu 
-		For more information regarding the Ambient Dynamix framework you can visit: 
+		Para obtener más información sobre Ambient Dynamix se puede visitar: 
 		http://ambientdynamix.org
 	</string>
     
