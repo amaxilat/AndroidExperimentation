@@ -16,7 +16,7 @@
     <string name="plug_contextmenu_remove">Uninstall Context Plugin</string>
     <string name="plug_list_context_menu_title">Context Plugin Options</string>
     <string name="plug_details_label">Context Plugin Details</string>
-    <string name="plug_Descripción_label">Descripción</string>
+    <string name="plug_description_label">Descripción</string>
     <string name="plug_fidelity_label">Supported Context Information</string>
     <string name="dynamix_enable_toggle_on">Experimentation Enabled</string>
     <string name="dynamix_enable_toggle_off">Experimentation Disabled</string>
