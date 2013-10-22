@@ -1,6 +1,6 @@
 /*
  * This file is auto-generated.  DO NOT MODIFY.
- * Original file: C:\\Users\\theodori\\Desktop\\AndroidExperimentation\\src\\dynamix_framework\\dynamix-framework\\src\\org\\ambientdynamix\\api\\application\\IDynamixListener.aidl
+ * Original file: C:\\AndroidExperimentation\\src\\dynamix_framework\\dynamix-framework\\src\\org\\ambientdynamix\\api\\application\\IDynamixListener.aidl
  */
 package org.ambientdynamix.api.application;
 /**
