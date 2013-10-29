@@ -84,9 +84,8 @@ public class ModelManager {
     public static Experiment getExperiment() {
 
         List<Experiment> experimentsList = getCurrentSession().createQuery("from Experiment").list();
-        if (experimentsList.size() > 0) {
-            Experiment experiment = experimentsList.get(experimentsList.size() - 1);
-            return experiment;
+        for (Experiment exp : experimentsList) {
+            if (exp.getStatus().equals("active")) return exp;
         }
         log.info("getExperiment Called");
         return null;

@@ -14,6 +14,7 @@
 
 <%
     Experiment experiment = ModelManager.getExperiment();
+    if (experiment != null) {
 %>
 
 <h3>Experiment General Information</h3>
@@ -33,7 +34,8 @@
         </tr>
         <tr>
             <th>Number of Reported Readings</th>
-            <td><%= ModelManager.getResults(experiment.getId()).size()%></td>
+            <td><%= ModelManager.getResults(experiment.getId()).size()%>
+            </td>
         </tr>
         </thead>
     </table>
@@ -91,6 +93,14 @@
         </thead>
     </table>
 </div>
+<%
+} else{
+%>
+<h3>No Active Experiment</h3>
+
+<%
+    }
+%>
 <jsp:include page="./includes/footer.html" flush="true"/>
 </body>
 </html>
