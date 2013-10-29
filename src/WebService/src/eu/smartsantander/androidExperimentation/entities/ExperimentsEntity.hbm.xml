@@ -37,5 +37,12 @@
         <property name="filename">
             <column name="filename" sql-type="varchar" length="256" not-null="true"/>
         </property>
+        <property name="description">
+            <column name="description" sql-type="varchar" length="2056" not-null="true"/>
+        </property>
+        <property name="timestamp">
+            <column name="timestamp" sql-type="bigint" length="20" not-null="true"/>
+        </property>
+
     </class>
 </hibernate-mapping>

@@ -153,6 +153,7 @@ public class ModelManager {
             Result resultsEntity = new Result();
             resultsEntity.setExperimentId(experiment.getId());
             resultsEntity.setDeviceId(report.getDeviceId());
+            resultsEntity.setTimestamp(System.currentTimeMillis());
 
             if (result != null) {
                 resultsEntity.setMessage(result);
@@ -164,5 +165,14 @@ public class ModelManager {
             getCurrentSession().flush();
         }
         tx.commit();
+    }
+
+
+    public static List<Result> getResults(Integer experimentId) {
+        if (experimentId == null)
+            return new ArrayList<Result>();
+        Query q = getCurrentSession().createQuery("from Result where experimentId = :expId ");
+        q.setParameter("expId", Integer.valueOf(experimentId));
+        return (List<Result>) q.list();
     }
 }

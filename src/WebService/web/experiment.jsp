@@ -1,5 +1,6 @@
 <%@ page import="eu.smartsantander.androidExperimentation.ModelManager" %>
 <%@ page import="eu.smartsantander.androidExperimentation.entities.Experiment" %>
+<%@ page import="java.util.Date" %>
 
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
@@ -21,28 +22,26 @@
     <table>
         <thead>
         <tr>
-            <th>Description</th>
-            <td></td>
-        </tr>
-        <tr>
             <th>Actual running time</th>
-            <td></td>
+            <td><%= (new Date(System.currentTimeMillis() - experiment.getTimestamp())).toString()%>
+            </td>
         </tr>
         <tr>
             <th>Submitted at</th>
-            <td></td>
+            <td><%= experiment.getTimestamp()%>
+            </td>
         </tr>
         <tr>
-            <th>Data size produced</th>
-            <td></td>
+            <th>Number of Reported Readings</th>
+            <td><%= ModelManager.getResults(experiment.getId()).size()%></td>
         </tr>
         </thead>
-     </table>
+    </table>
 
 </div>
 
 
-<h3>Plugins used by the current experiment</h3>
+<h3>Experiment Information</h3>
 
 <div class="datagrid">
     <table>
@@ -82,7 +81,11 @@
             <td><%= experiment.getSensorDependencies()%>
             </td>
         </tr>
-
+        <tr>
+            <th>Description</th>
+            <td><%= experiment.getDescription()%>
+            </td>
+        </tr>
         </tr>
 
         </thead>

@@ -27,6 +27,7 @@
     String path = jspFilePath.substring(0, jspFilePath.lastIndexOf("/")) + "/experimentRepository/" + uuid + "/";
     String url = context.getInitParameter("urlBase") + "/experimentRepository/" + uuid + "/";
     String contentType = request.getContentType();
+    String description="-";
 
     Boolean parameterCheckOK = true;
     String name = "";
@@ -50,30 +51,31 @@
                 if (fieldName.equals("name")) name = fieldValue;
                 else if (fieldName.equals("contextType")) contextType = fieldValue;
                 else if (fieldName.equals("sensorDependencies")) dependencies = fieldValue;
+                else if (fieldName.equals("experimentDescription")) description = fieldValue;
+                else if (fieldName.equals("dependencies")){
+                    dependencies +=","+ fieldValue;
+                }
             } else {
                 hasFile = true;
             }
         }
 
-        if (Utilities.isNullOrEmpty(name) == true || Utilities.isNullOrEmpty(contextType) == true || Utilities.isNullOrEmpty(dependencies) || hasFile == false) {
-            out.println("<p>Name, ContextType, sensorDepedencies, and jar-experiment are required!</p>");
+        if(dependencies.length()>1){
+            dependencies=dependencies.substring(1);
+        }
 
+        if (Utilities.isNullOrEmpty(name) == true    || hasFile == false) {
+            out.println("<p>Name and jar-experiment are required!</p>");
         } else {
-
             if ((contentType.indexOf("multipart/form-data") >= 0)) {
-
-
                 i = fileItems.iterator();
-
                 File directory = new File(path);
                 directory.mkdirs();
                 while (i.hasNext()) {
                     FileItem item = (FileItem) i.next();
-
                     if (item.isFormField()) {
                         continue;
                     }
-
                     FileItem fi = item;
                     // Get the uploaded file parameters
                     String fieldName = fi.getFieldName();
@@ -81,14 +83,12 @@
                     boolean isInMemory = fi.isInMemory();
                     long sizeInBytes = fi.getSize();
                     // Write the file
-
                     if (fileName.lastIndexOf("\\") >= 0) {
                         file = new File(path + fileName.substring(fileName.lastIndexOf("\\")));
                     } else {
                         file = new File(path + fileName.substring(fileName.lastIndexOf("\\") + 1));
                     }
                     fi.write(file);
-
                     Experiment experiment = new Experiment();
                     experiment.setId(null);
                     experiment.setUserId(1);
@@ -100,6 +100,8 @@
                     experiment.setFromTime(null);
                     experiment.setToTime(null);
                     experiment.setStatus("active");
+                    experiment.setDescription(description);
+                    experiment.setTimestamp(System.currentTimeMillis());
                     ModelManager.saveExperiment(experiment);
                     out.println("Uploaded Filename: " + fileName + "<br>");
 

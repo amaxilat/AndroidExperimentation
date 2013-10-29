@@ -16,7 +16,6 @@ public class AndroidExperimentationWS {
     public String reportResults(String reportJson) {
         Report report = Report.fromJson(reportJson);
         ModelManager.reportResults(report);
-
         return "1";
     }
 

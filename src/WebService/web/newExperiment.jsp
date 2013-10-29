@@ -1,7 +1,5 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ page import="eu.smartsantander.androidExperimentation.ModelManager" %>
-<%@ page import="eu.smartsantander.androidExperimentation.entities.Experiment" %>
-<%@ page import="java.util.List" %>
 <%@ page import="eu.smartsantander.androidExperimentation.entities.Plugin" %>
 <%@ page import="eu.smartsantander.androidExperimentation.jsonEntities.PluginList" %>
 <html>
@@ -12,11 +10,12 @@
 <jsp:include page="./includes/header.html" flush="true"/>
 
 <h2>Upload a new experiment</h2>
-<p>
-Select a file to upload:
-<br>
 
-<form action="fileUpload.jsp" method="post"  enctype="multipart/form-data">
+<p>
+    Select a file to upload:
+    <br>
+
+<form action="fileUpload.jsp" method="post" enctype="multipart/form-data">
 
     <table>
         <tr>
@@ -31,16 +30,19 @@ Select a file to upload:
             <td>Context Type</td>
             <td>
                 <select name="contextType">
-                    <%
-                        PluginList pl = ModelManager.getPlugins();
+                    <option value="org.ambientdynamix.contextplugins.ExperimentPlugin">
+                        org.ambientdynamix.contextplugins.ExperimentPlugin
+                    </option>
+                    <%--                   <%
 
-                        List<Plugin> pList= pl.getPluginList();
 
-                        for ( Plugin p: pList ){
-                            out.println("<option value=\">"+p.getName()+"\" >" + p.getName() + "</option>");
-                        }
+                                           List<Plugin> pList = pl.getPluginList();
 
-                    %>
+                                           for (Plugin p : pList) {
+                                               out.println("<option value=\">" + p.getName() + "\" >" + p.getName() + "</option>");
+                                           }
+
+                                       %>--%>
                 </select>
             </td>
         </tr>
@@ -48,27 +50,31 @@ Select a file to upload:
             <td>Sensor Dependencies</td>
             <td>
                 <ul>
-                    <%
+                    <select name="dependencies" multiple>
+                        <%
+                            PluginList pList = ModelManager.getPlugins();
+                            for (Plugin p : pList.getPluginList()) {
+                                if (p.getName().equals("plugs.xml") == false)
+                                    out.println("<option value=\"" + p.getName() + "\" >" + p.getName() + "</option>");
+                                //out.println("<li><option type=\"checkbox\" name=\"sensorD\">" + p.getName() + "</input></li>");
+                            }
 
-                        for ( Plugin p: pList ){
-                            out.println("<li><input type=\"checkbox\" name=\"sensorD\">"+p.getName()+"</input></li>");
-                        }
-
-                    %>
+                        %>
+                    </select>
                 </ul>
             </td>
         </tr>
         <tr>
             <td>Public data</td>
-            <td><input type="checkbox" name="isPublic" /></td>
+            <td><input type="checkbox" name="isPublic"/></td>
         </tr>
         <tr>
             <td>Starting at:</td>
-            <td><input type="datetime-local" name="startingTime" /></td>
-         </tr>
+            <td><input type="datetime-local" name="startingTime"/></td>
+        </tr>
         <tr>
             <td>Ending at:</td>
-            <td><input type="datetime-local" name="endingTime" /></td>
+            <td><input type="datetime-local" name="endingTime"/></td>
         </tr>
         </tr>
         <tr>

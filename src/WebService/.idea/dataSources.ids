@@ -28,6 +28,8 @@
       <column name="userID" sqlType="INT" length="10" precision="0" nullable="true" jdbcType="4"/>
       <column name="url" sqlType="VARCHAR" length="256" precision="0" nullable="false" jdbcType="12"/>
       <column name="filename" sqlType="VARCHAR" length="256" precision="0" nullable="false" jdbcType="12"/>
+      <column name="description" sqlType="TEXT" length="65535" precision="0" nullable="true" jdbcType="-1"/>
+      <column name="timestamp" sqlType="BIGINT" length="19" precision="0" nullable="false" jdbcType="-5"/>
       <primary-key name="PRIMARY" columns="id"/>
     </table>
     <table name="plugins" schema="" catalog="androidexperimentation" type="TABLE">
@@ -45,6 +47,7 @@
       <column name="experimentID" sqlType="INT" length="10" precision="0" nullable="false" jdbcType="4"/>
       <column name="deviceID" sqlType="INT" length="10" precision="0" nullable="false" jdbcType="4"/>
       <column name="message" sqlType="TEXT" length="65535" precision="0" nullable="false" jdbcType="-1"/>
+      <column name="timestamp" sqlType="BIGINT" length="19" precision="0" nullable="false" jdbcType="-5"/>
       <primary-key name="PRIMARY" columns="id"/>
     </table>
     <table name="smartphones" schema="" catalog="androidexperimentation" type="TABLE">

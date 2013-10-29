@@ -18,5 +18,8 @@
         <property name="message">
             <column name="message" sql-type="text" length="65535" not-null="true"/>
         </property>
+        <property name="timestamp">
+            <column name="timestamp" sql-type="bigint" length="20" not-null="true"/>
+        </property>
     </class>
 </hibernate-mapping>

@@ -9,6 +9,24 @@ package eu.smartsantander.androidExperimentation.entities;
  */
 public class Experiment {
     private Integer id;
+    private String description;
+    private long timestamp;
+
+    public long getTimestamp() {
+        return timestamp;
+    }
+
+    public void setTimestamp(long timestamp) {
+        this.timestamp = timestamp;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
 
     public Integer getId() {
         return id;

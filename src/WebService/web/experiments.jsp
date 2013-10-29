@@ -14,8 +14,6 @@
 
 <h3>Experiment General Information</h3>
 
-<h3>Plugins used by the experiment</h3>
-
 <div class="datagrid">
     <table border="1">
         <thead>
@@ -37,7 +35,7 @@
                 out.print("<td>" + exp.getUrl() + "<br>");
                 out.print("" + exp.getFilename() + "<br>");
                 out.print("" + exp.getSensorDependencies() + "</td>");
-                out.print("<td>" + "link to data...." + "</td>");
+                out.print("<td> <a href='results.jsp?id="+exp.getId() + "'>Data....</a>" + "</td>");
                 out.print("</tr>");
             }
         %>
