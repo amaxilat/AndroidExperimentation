@@ -24,12 +24,12 @@
         <thead>
         <tr>
             <th>Actual running time</th>
-            <td><%= (new Date(System.currentTimeMillis() - experiment.getTimestamp())).toString()%>
+            <td><%= ModelManager.durationString(System.currentTimeMillis() - experiment.getTimestamp())%>
             </td>
         </tr>
         <tr>
             <th>Submitted at</th>
-            <td><%= experiment.getTimestamp()%>
+            <td><%=(new Date( experiment.getTimestamp())).toString()%>
             </td>
         </tr>
         <tr>
