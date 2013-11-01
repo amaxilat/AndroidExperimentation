@@ -87,6 +87,8 @@ public class BaseActivity extends TabActivity {
 	// Android Experimentation Members
 	private Boolean tabIntentListenerIsRegistered = false;
 	private Boolean serviceIntentListenerIsRegistered = false;
+	
+	public static Resources myRes;
  
 	
 	public static void close() {
@@ -119,14 +121,14 @@ public class BaseActivity extends TabActivity {
 
 	protected static void setTitlebarDisabled() {
 		if (baseActivity != null)
-			baseActivity.changeTitlebarState(Color.RED,  "Experimentation is disabled" );//"Experimentation"
+			baseActivity.changeTitlebarState(Color.RED, myRes.getString(R.string.dynamix_enable_toggle_off) );//"Experimentation is disabled" );//"Experimentation"
 					//+ DynamixService.getFrameworkVersion()
 					//+ " is disabled");
 	}
 
 	protected static void setTitlebarEnabled() {
 		if (baseActivity != null)
-			baseActivity.changeTitlebarState(Color.rgb(0, 225, 50), "Experimentation is enabled" );//"Experimentation"
+			baseActivity.changeTitlebarState(Color.rgb(0, 225, 50), myRes.getString(R.string.dynamix_enable_toggle_on) );//"Experimentation"
 					//+ DynamixService.getFrameworkVersion()
 					//+ " is enabled");
 	}
@@ -166,6 +168,7 @@ public class BaseActivity extends TabActivity {
 		 * http://developer.android.com/resources/tutorials
 		 * /views/hello-tabwidget.html
 		 */
+		myRes = getResources();
 		Resources res = getResources(); // Resource object to get Drawables
 		tabHost = getTabHost(); // The activity TabHost
 		TabHost.TabSpec spec; // Resusable TabSpec for each tab

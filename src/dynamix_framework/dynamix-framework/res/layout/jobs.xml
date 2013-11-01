@@ -15,7 +15,7 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:layout_weight="0.15"
-        android:text="Executed Experiment"
+        android:text="@string/executed_experiment"
         android:textColor="#36ACF5"
         android:textSize="15dp" />
 

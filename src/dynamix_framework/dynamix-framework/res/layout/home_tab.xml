@@ -75,7 +75,7 @@
         android:layout_height="wrap_content"
         android:layout_gravity="top"
         android:layout_weight="1"
-        android:text="No authorized applications" />
+        android:text="@string/noAuthApps" />
 
     <LinearLayout
         android:id="@+id/TableLayout01"

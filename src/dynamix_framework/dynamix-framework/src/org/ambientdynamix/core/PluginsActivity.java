@@ -83,8 +83,8 @@ public class PluginsActivity extends ListActivity implements IContextPluginInsta
 	private static final int CANCEL_ID = Menu.FIRST + 3;
 	private final Handler uiHandler = new Handler();
 	private static PluginsActivity activity;
-	final String INSTALLED_PLUGS_SECTION = "Installed Context Plug-ins";
-	final String NEW_PLUGS_SECTION = "Available Context Plug-ins";
+	//final String INSTALLED_PLUGS_SECTION = "Installed Context Plug-ins";
+	//final String NEW_PLUGS_SECTION = "Available Context Plug-ins";
 	private Map<PluginDiscoveryResult, Integer> installables = new Hashtable<PluginDiscoveryResult, Integer>();
 	private ProgressDialog updateProgress = null;
 	private InstalledContextPluginAdapter installedAdapter;
@@ -200,7 +200,7 @@ public class PluginsActivity extends ListActivity implements IContextPluginInsta
 						.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
 							public void onClick(DialogInterface dialog, int id) {
 								if (DynamixService.uninstallPlugin(plug, true)) {
-									Adapter a = adapter.getAdapterForSection(INSTALLED_PLUGS_SECTION);
+									Adapter a = adapter.getAdapterForSection(getString(R.string.installed_context_plugins));//INSTALLED_PLUGS_SECTION);
 									if (a instanceof ArrayAdapter) {
 										((ArrayAdapter) a).remove(plug);
 									}
@@ -235,15 +235,15 @@ public class PluginsActivity extends ListActivity implements IContextPluginInsta
 		// create our list and custom adapter
 		adapter = new SeparatedListAdapter(this);
 		installedAdapter = new InstalledContextPluginAdapter(this, R.layout.icon_row, new ArrayList<ContextPlugin>(),
-				"No Context Plug-ins Installed", "");
+				getString(R.string.no_context_plugins), "");
 		installedAdapter.setNotifyOnChange(true);
-		adapter.addSection(INSTALLED_PLUGS_SECTION, installedAdapter);
+		adapter.addSection(getString(R.string.installed_context_plugins), installedAdapter);
 		newPlugsAdapter = new ContextPluginAdapter(this, R.layout.installable_row,
 				(LayoutInflater) getSystemService(Context.LAYOUT_INFLATER_SERVICE),
-				new ArrayList<PluginDiscoveryResult>(), installables, false, "No Available Context Plug-ins",
-				"Tap 'Find Plug-ins' to search for compatible Context Plug-ins.");
+				new ArrayList<PluginDiscoveryResult>(), installables, false, getString(R.string.no_available_context_plugins),
+				getString(R.string.tap_find_plugins));
 		newPlugsAdapter.setNotifyOnChange(true);
-		adapter.addSection(NEW_PLUGS_SECTION, newPlugsAdapter);
+		adapter.addSection(getString(R.string.available_context_plugins), newPlugsAdapter);
 		plugList.setAdapter(this.adapter);
 		/*
 		 * Setup the OnItemClickListener for the plugList ListView. When clicked, edit the plugin using the
@@ -319,7 +319,7 @@ public class PluginsActivity extends ListActivity implements IContextPluginInsta
 		 * Make sure that we only show the context menu for installed context plug-ins.
 		 */
 		AdapterView.AdapterContextMenuInfo info = (AdapterView.AdapterContextMenuInfo) menuInfo;
-		int newPlugStart = adapter.getPositionForSection(NEW_PLUGS_SECTION);
+		int newPlugStart = adapter.getPositionForSection(getString(R.string.available_context_plugins));
 		if (info.position < newPlugStart) {
 			menu.setHeaderTitle(R.string.plug_list_context_menu_title);
 			menu.add(0, ENABLE_ID, 0, R.string.enable_disable_label);
@@ -361,7 +361,7 @@ public class PluginsActivity extends ListActivity implements IContextPluginInsta
 		}
 		refresh();
 		if (!newPlugsAdapter.isEmpty()) {
-			scrollTo(PluginsActivity.this.adapter.getPositionForSection(NEW_PLUGS_SECTION));
+			scrollTo(PluginsActivity.this.adapter.getPositionForSection(getString(R.string.available_context_plugins)));
 		}
 	}
 

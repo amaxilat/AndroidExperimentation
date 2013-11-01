@@ -10,7 +10,7 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:layout_weight="0.15"
-        android:text="Sensors Rules"
+        android:text="@string/sensor_rules"
         android:textColor="#36ACF5"
         android:textSize="15dp" />
 

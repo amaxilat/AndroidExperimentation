@@ -18,8 +18,8 @@
     <string name="plug_details_label">Context Plugin Details</string>
     <string name="plug_description_label">Description</string>
     <string name="plug_fidelity_label">Supported Context Information</string>
-    <string name="dynamix_enable_toggle_on">Experimentation Enabled</string>
-    <string name="dynamix_enable_toggle_off">Experimentation Disabled</string>
+    <string name="dynamix_enable_toggle_on">Experimentation is Enabled</string>
+    <string name="dynamix_enable_toggle_off">Experimentation is Disabled</string>
     <string name="plugin_enable_toggle_on">Plugin Enabled</string>
     <string name="plugin_enable_toggle_off">Plugin Disabled</string>
     <string name="btn_plugin_uninstall">Uninstall Plugin</string>
@@ -75,5 +75,12 @@
 	</string>
 	<string name="expIsEnabled">Experimentation is enabled</string>
 	<string name="expIsDisabled">Experimentation is disabled</string>
-    
+    <string name="noAuthApps">No authorized applications</string>
+    <string name="no_context_plugins">No context plug-ins</string>
+    <string name="installed_context_plugins">Installed context plug-ins</string>
+    <string name="available_context_plugins">Available context plug-ins</string>
+    <string name="no_available_context_plugins">No available context plug-ins</string>
+    <string name="tap_find_plugins">"Tap 'Find Plug-ins' to search for compatible Context Plug-ins."</string>
+    <string name="sensor_rules">Sensor Rules</string>
+    <string name="executed_experiment">Executed Experiment</string>
 </resources>

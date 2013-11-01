@@ -74,5 +74,13 @@
 		&lt;a href=&quot;http://ambientdynamix.org&quot;&gt;http://ambientdynamix.org&lt;a&gt;
 	</string>
 	<string name="expIsEnabled">La experimentación está habilitado</string>
-	<string name="expIsDisabled">La experimentación está desactivado</string>    
+	<string name="expIsDisabled">La experimentación está desactivado</string>
+	<string name="noAuthApps">No hay aplicaciones</string>   
+	<string name="no_context_plugins">No hay context plug-ins</string>
+    <string name="installed_context_plugins">Context plug-ins installados</string>
+    <string name="available_context_plugins">Context plug-ins disponiblos</string>
+    <string name="no_available_context_plugins">No hay context plug-ins disponiblos</string>
+    <string name="tap_find_plugins">"Tap 'Find Plug-ins' to search for compatible Context Plug-ins."</string>
+    <string name="sensor_rules">Reglas para sensores</string>
+    <string name="executed_experiment">Experimento ejecutado</string>
 </resources>
