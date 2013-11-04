@@ -49,7 +49,8 @@ public class DynamixServiceListenerUtility {
 			public void onSessionOpened(String sessionId)	throws RemoteException {
 				Result r = DynamixService.dynamix.addContextSupport(DynamixService.dynamixCallback,"org.ambientdynamix.contextplugins.ExperimentPlugin");
 				r = DynamixService.dynamix.addContextSupport(DynamixService.dynamixCallback,"org.ambientdynamix.contextplugins.GpsPlugin");
-				r = DynamixService.dynamix.addContextSupport(DynamixService.dynamixCallback,"org.ambientdynamix.contextplugins.WifiScanPlugin");				
+				r = DynamixService.dynamix.addContextSupport(DynamixService.dynamixCallback,"org.ambientdynamix.contextplugins.WifiScanPlugin");
+				r = DynamixService.dynamix.addContextSupport(DynamixService.dynamixCallback,"org.ambientdynamix.contextplugins.NoiseLevelPlugin");
 				DynamixService.sessionStarted = true;
 				Log.w(TAG, "SESSION STATUS" + r.getMessage());
 			}
@@ -114,7 +115,7 @@ public class DynamixServiceListenerUtility {
 							List<Reading> readings = (new Gson()).fromJson(readingMsg, listType);
 							for (Reading reading : readings) {
 								Log.w(TAG, "Received Reading: " + reading);
-								Toast.makeText(DynamixService.getAndroidContext(),readingMsg, 8000).show();
+								Toast.makeText(DynamixService.getAndroidContext(),readingMsg, 5000).show();
 								if (DynamixService.getExperiment() == null)
 									return;
 								Report rObject = new Report(DynamixService.getExperiment().getId().toString());
@@ -129,7 +130,7 @@ public class DynamixServiceListenerUtility {
 							Type listType = new TypeToken<ArrayList<Reading>>() {}.getType();
 							List<Reading> readings = (new Gson()).fromJson(readingMsg, listType);
 							for (Reading reading : readings) {
-								Toast.makeText(DynamixService.getAndroidContext(),readingMsg, 8000).show();
+								Toast.makeText(DynamixService.getAndroidContext(),reading.getContext(), 500).show();
 								Log.w(TAG, "Plugin Reading: " + reading);
 								DynamixService.getReadingStorage().pushReading(	reading);
 							}

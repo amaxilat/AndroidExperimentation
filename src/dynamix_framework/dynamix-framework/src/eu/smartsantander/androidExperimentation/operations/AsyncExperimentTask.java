@@ -41,6 +41,7 @@ public class AsyncExperimentTask extends AsyncTask<String, Void, String> {
 				//do it for all plugins....
 				r=DynamixService.dynamix.contextRequest(DynamixService.dynamixCallback,"org.ambientdynamix.contextplugins.GpsPlugin", "org.ambientdynamix.contextplugins.GpsPlugin");
 				r=DynamixService.dynamix.contextRequest(DynamixService.dynamixCallback,"org.ambientdynamix.contextplugins.WifiScanPlugin", "org.ambientdynamix.contextplugins.WifiScanPlugin");
+				r=DynamixService.dynamix.contextRequest(DynamixService.dynamixCallback,"org.ambientdynamix.contextplugins.NoiseLevelPlugin", "org.ambientdynamix.contextplugins.NoiseLevelPlugin");
 				
 				if(DynamixService.getExperiment()!=null){
 					boolean flag=DynamixService.isExperimentInstalled("org.ambientdynamix.contextplugins.ExperimentPlugin");

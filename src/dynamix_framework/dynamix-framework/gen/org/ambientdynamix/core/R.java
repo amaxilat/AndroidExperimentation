@@ -259,6 +259,7 @@ containing a value of this type.
         public static final int app_settings=0x7f070008;
         public static final int app_settings_contextmenu_fidelity=0x7f07001c;
         public static final int app_settings_label=0x7f070016;
+        public static final int available_context_plugins=0x7f070047;
         public static final int btn_add_new_privacy_policy=0x7f07001d;
         public static final int btn_configure_context_plugin=0x7f07002d;
         public static final int btn_do_updates=0x7f07002c;
@@ -283,12 +284,17 @@ containing a value of this type.
         public static final int dynamix_notification_titlebar=0x7f070025;
         public static final int dynamix_settings_label=0x7f07002a;
         public static final int enable_disable_label=0x7f070021;
+        public static final int executed_experiment=0x7f07004b;
         public static final int expIsDisabled=0x7f070043;
         public static final int expIsEnabled=0x7f070042;
         public static final int experiment_label=0x7f070005;
         public static final int hello_world=0x7f07003e;
         public static final int home_no_apps=0x7f070003;
+        public static final int installed_context_plugins=0x7f070046;
         public static final int menu_settings=0x7f07003f;
+        public static final int noAuthApps=0x7f070044;
+        public static final int no_available_context_plugins=0x7f070048;
+        public static final int no_context_plugins=0x7f070045;
         public static final int pending_app_list_label=0x7f070022;
         public static final int pending_app_notification=0x7f070027;
         public static final int plug_contextmenu_remove=0x7f07000c;
@@ -308,7 +314,9 @@ containing a value of this type.
         public static final int privacy_policy_list_label=0x7f07001e;
         public static final int privacy_policy_summary=0x7f070039;
         public static final int save_app_authorization=0x7f070009;
+        public static final int sensor_rules=0x7f07004a;
         public static final int showDisconnected=0x7f070001;
+        public static final int tap_find_plugins=0x7f070049;
         public static final int title_activity_test=0x7f070040;
         public static final int update_description_label=0x7f070035;
         public static final int update_priority_label=0x7f070036;
