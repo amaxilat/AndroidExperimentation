@@ -268,9 +268,10 @@ public class BaseActivity extends TabActivity {
 
 		tabHost.addTab(tabSpecSecurity);	
 		tabHost.addTab(tabSpecJobs);
+		tabHost.addTab(tabSpecStats);
 		tabHost.addTab(tabSpecReports);
 		
-		tabHost.addTab(tabSpecStats);
+		
 
 	    
 	}
