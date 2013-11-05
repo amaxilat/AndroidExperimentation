@@ -152,6 +152,11 @@
             android:label="securityTab"
             android:name="eu.smartsantander.androidExperimentation.tabs.securityTab" >
         </activity> 
+        
+        <activity
+            android:label="statsTab"
+            android:name="eu.smartsantander.androidExperimentation.tabs.statsTab" >
+        </activity> 
         		   
 		<service android:name="eu.smartsantander.androidExperimentation.AndroidExperimentationService">
     		<intent-filter>
