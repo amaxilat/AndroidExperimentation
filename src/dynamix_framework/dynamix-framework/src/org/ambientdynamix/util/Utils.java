@@ -74,6 +74,7 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.DialogInterface.OnClickListener;
 import android.content.Intent;
+import android.content.res.Resources;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.Build;
@@ -96,9 +97,10 @@ public class Utils {
 	private static SSLSocketFactory defaultSSLSocketFactory;
 	private static TrustManager[] defaultTrustManagers;
 	private static SSLContext sc;
-
+	
 	// Singleton constructor
 	private Utils() {
+				
 	}
 
 	/**
@@ -391,6 +393,8 @@ public class Utils {
 	 * Creates a DescriptiveIcon for the specified ContextPlugin.
 	 */
 	public static DescriptiveIcon getDescriptiveIcon(ContextPlugin plug) {
+		
+		
 		if (plug.isEnabled()) {
 			if (!plug.isInstalled()) {
 				return new DescriptiveIcon(R.drawable.plugin_disabled, "Install pending...");

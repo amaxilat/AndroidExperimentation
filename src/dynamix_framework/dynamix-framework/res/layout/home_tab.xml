@@ -10,7 +10,9 @@
         android:layout_height="wrap_content"
         android:editable="false" 
         android:text="@string/deviceId_label"
-        android:textAppearance="?android:attr/textAppearanceMedium" />
+        android:textAppearance="?android:attr/textAppearanceSmall"
+        android:background="@drawable/customcatborder"
+        />
 
     <TextView
         android:id="@+id/experiment_label"
@@ -18,7 +20,9 @@
         android:layout_height="wrap_content"
         android:editable="false" 
         android:text="@string/experiment_label"
-        android:textAppearance="?android:attr/textAppearanceMedium" />
+        android:textAppearance="?android:attr/textAppearanceSmall"
+        android:background="@drawable/customcatborder"
+        />
     
     
     <TextView
@@ -27,7 +31,9 @@
         android:layout_height="wrap_content"
         android:editable="false" 
         android:text="-"
-        android:textAppearance="?android:attr/textAppearanceMedium" />
+        android:textAppearance="?android:attr/textAppearanceMedium" 
+        android:background="@drawable/customsubcatborder"
+        />
     
     <TextView
         android:id="@+id/experiment_title"
@@ -60,7 +66,9 @@
         android:layout_height="wrap_content"
         android:editable="false"
         android:text="@string/app_list_label"
-        android:textAppearance="?android:attr/textAppearanceMedium" />
+        android:textAppearance="?android:attr/textAppearanceSmall"
+        android:background="@drawable/customcatborder"
+        />
 
 
     <ListView

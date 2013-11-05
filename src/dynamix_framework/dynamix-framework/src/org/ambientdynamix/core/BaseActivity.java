@@ -39,6 +39,7 @@ import eu.smartsantander.androidExperimentation.tabs.jobsTab;
 import eu.smartsantander.androidExperimentation.tabs.profileTab;
 import eu.smartsantander.androidExperimentation.tabs.reportTab;
 import eu.smartsantander.androidExperimentation.tabs.securityTab;
+import eu.smartsantander.androidExperimentation.tabs.statsTab;
 
 /**
  * Base Activity for the Dynamix Framework UI. Responsible for hosting Tabs and
@@ -254,10 +255,22 @@ public class BaseActivity extends TabActivity {
 				.setIndicator("",
 						ressources.getDrawable(R.drawable.ic_tab_reports))
 				.setContent(intentReports);
+		
+		// stats tab
+		// TODO: create new content for statistics
+		Intent intentStats = new Intent().setClass(this, statsTab.class);
+		 
+		TabSpec tabSpecStats = tabHost
+				.newTabSpec("stats")
+				.setIndicator("",
+						ressources.getDrawable(R.drawable.ic_tab_stats))
+				.setContent(intentReports);
 
 		tabHost.addTab(tabSpecSecurity);	
 		tabHost.addTab(tabSpecJobs);
 		tabHost.addTab(tabSpecReports);
+		
+		tabHost.addTab(tabSpecStats);
 
 	    
 	}
