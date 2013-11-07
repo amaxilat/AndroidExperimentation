@@ -26,6 +26,13 @@ import org.ambientdynamix.core.R;
 import eu.smartsantander.androidExperimentation.jsonEntities.Plugin;
 import eu.smartsantander.androidExperimentation.jsonEntities.PluginList;
 
+/**
+ * This tab displays rules about the sensing plugins installed
+ *
+ */
+
+
+
 public class securityTab extends Activity {
 
 	List<HashMap<String,String>> sensorOptionsL=new ArrayList<HashMap<String,String>>();	

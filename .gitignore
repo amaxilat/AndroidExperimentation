@@ -4,3 +4,12 @@ src/WebService/AndroidExperimentationWS.iml
 
 /src/dynamix_framework/dynamix-framework/bin
 /src/sensorPlugins/GpsPlugin/bin
+src/androidExperimentation/bin/classes/eu
+src/sensorPlugins/myExperimentPLugin/bin
+src/sensorPlugins/WifiScanPlugin/bin
+src/sensorPlugins/myExperimentPlugin/bin
+src/androidExperimentation/bin/jarlist.cache
+src/dynamix_framework/dynamix_framework/gen/org/
+src/dynamix_framework/dynamix-framework/gen/org/
+src/dynamix_framework/dynamix-framework/gen/org/ambientdynamix
+src/dynamix_framework/dynamix-framework/gen/org/ambientdynamix/api/application/IDataInputStream.java src/dynamix_framework/dynamix-framework/gen/org/ambientdynamix/api/application/IDynamixFacade.java src/dynamix_framework/dynamix-framework/gen/org/ambientdynamix/api/application/IDynamixListener.java

@@ -7,6 +7,17 @@ import android.os.Bundle;
 import android.webkit.WebView;
 
 
+/**
+ * This tab displays info about the SmartSantander project using a WebView, mainly because of styling, i.e., couldn't
+ * find a simpler way to display fully aligned text :)
+ *
+ * Charset is set to utf-8 due to using greek and spanish translation for the app
+ * 
+ * TODO: rename to info, report name is misleading
+ * 
+ */
+
+
 public class reportTab extends Activity
 {
 
@@ -16,12 +27,11 @@ public class reportTab extends Activity
         setContentView(R.layout.reporter);
         String text = "<html><body style=\"text-align:justify\" bgcolor=\"black\" text=\"white\"> %s </body></Html>";
         
-        //String data ="Android Experimentation is related to the <a href='http://smartsantander.eu'>SmartSantander</a> research project, providing an Android smartphone application to extend the functionality of an existing Future Internet infrastructure.<p></p><p>The Android software component downloads executable code on volunteers' smartphones, to gather sensors' readings and perform calculations, that are uploaded to a central server. The server is responsible for distributing the code and collecting the results. </p><p> For more information about SmartSantander you can visit <a href='http://smartsantander.eu'>http://smartsantander.eu</a> <br> </p><p> For more information regarding the Ambient Dynamix framework you can visit: <br> <a href='http://ambientdynamix.org'>http://ambientdynamix.org</a></p>";
-       
         WebView webView = (WebView) findViewById(R.id.webview1);
         
-        //must add "text/html; charset=utf-8" to the call to handle Greek and Spanish correctly in the WebView or
+        //must add both "text/html; AND charset=utf-8" to the call to handle Greek and Spanish correctly in the WebView or
         //else it displays gibberish
+        
         webView.loadData(String.format(text, getString(R.string.about1)), "text/html; charset=utf-8", "utf-8");
                   
     } 

@@ -229,12 +229,12 @@ public class HomeActivity extends ListActivity {
 		if (DynamixService.isEnabled()==true){
 			if(DynamixService.isDeviceRegistered()==false){
 	    		DynamixService.getPhoneProfiler().register();
-	    		phoneIdTv.setText(String.valueOf("SmartSantander Device ID:Registering..."));
+	    		phoneIdTv.setText(String.valueOf("SmartSantander Device ID: Registering..."));
 	    	}else{
 	  		phoneIdTv.setText("SmartSantander Device ID:"+String.valueOf(DynamixService.getPhoneProfiler().getPhoneId()));
 	    	}
 		}else {
-			phoneIdTv.setText(String.valueOf("SmartSantander Device ID: Enable Application"));
+			phoneIdTv.setText(String.valueOf("SmartSantander Device ID: Not Connected"));
 		}
 		
 		if (DynamixService.getExperiment()!=null){

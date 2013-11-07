@@ -19,19 +19,15 @@
         android:text="@string/about1"
         android:visibility="visible" />
 
-    <LinearLayout
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content" 
-        android:orientation="vertical"
-        >
-
-        <ImageView
-            android:id="@+id/imageView2"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_margin="5dp"
-            android:src="@drawable/smartsantander" />
-
-    </LinearLayout>
+    <ImageView
+        android:id="@+id/imageView2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:baselineAlignBottom="true"
+        android:clickable="false"
+        android:cropToPadding="true"
+        android:longClickable="false"
+        android:scaleType="fitXY"
+        android:src="@drawable/smartsantander" />
 
 </LinearLayout>

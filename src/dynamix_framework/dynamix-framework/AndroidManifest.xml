@@ -4,7 +4,7 @@
     android:versionCode="1"
     android:versionName="1.0" >
 
-    <application android:icon="@drawable/home_icon" >
+    <application android:icon="@drawable/smartsantander_logo" >
         <activity
             android:name="org.ambientdynamix.core.BaseActivity"
             android:screenOrientation="portrait"
@@ -151,6 +151,11 @@
         <activity
             android:label="securityTab"
             android:name="eu.smartsantander.androidExperimentation.tabs.securityTab" >
+        </activity> 
+        
+        <activity
+            android:label="statsTab"
+            android:name="eu.smartsantander.androidExperimentation.tabs.statsTab" >
         </activity> 
         		   
 		<service android:name="eu.smartsantander.androidExperimentation.AndroidExperimentationService">
