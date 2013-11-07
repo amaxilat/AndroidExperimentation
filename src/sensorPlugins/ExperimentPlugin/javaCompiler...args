@@ -1,0 +1,3 @@
+#ADAPTER#ACCESS#Open Context Plugin Sdk/bin/classes[+org/ambientdynamix/api/application/*;+org/ambientdynamix/api/contextplugin/*;+org/ambientdynamix/api/contextplugin/security/*;?**/*]
+#ADAPTER#ACCESS#Open Context Plugin Sdk/@dot[+org/ambientdynamix/api/application/*;+org/ambientdynamix/api/contextplugin/*;+org/ambientdynamix/api/contextplugin/security/*;?**/*]
+#ADAPTER#ACCESS#Open Context Plugin Sdk/lib/org.ambientdynamix.contextplugin.api_v0.9.54.jar[+org/ambientdynamix/api/application/*;+org/ambientdynamix/api/contextplugin/*;+org/ambientdynamix/api/contextplugin/security/*;?**/*]

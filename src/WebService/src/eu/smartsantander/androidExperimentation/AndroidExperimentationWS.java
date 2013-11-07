@@ -16,6 +16,7 @@ public class AndroidExperimentationWS {
     public String reportResults(String reportJson) {
         Report report = Report.fromJson(reportJson);
         ModelManager.reportResults(report);
+        System.out.println(report.getDeviceId());
         return "1";
     }
 

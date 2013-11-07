@@ -57,13 +57,18 @@ public class NoiseLevelPluginRuntime extends AutoReactiveContextPluginRuntime {
 	        mRecorder.setOutputFile("/dev/null"); 
 	        mRecorder.prepare();
 	        mRecorder.start();
-	        Thread.sleep(2000);
 	        double ma=mRecorder.getMaxAmplitude();
+	        Thread.sleep(250);
+	        ma=mRecorder.getMaxAmplitude();	        
+	        Thread.sleep(250);
+	        ma+=mRecorder.getMaxAmplitude();	        
+	        Thread.sleep(250);
+	        ma+=mRecorder.getMaxAmplitude();
+	        ma=ma/4;
 	        double value=(ma/2700.0);
 	        Log.w(TAG,"NoiseLevel Max Anplitute:"+ ma);
 	        mEMA = EMA_FILTER * value + (1.0 - EMA_FILTER) * mEMA;
 	        this.reading=String.valueOf(mEMA);
-	        Thread.sleep(500);
 	        mRecorder.stop();
 	        mRecorder.release();
 		} catch (Exception e) {

@@ -130,7 +130,7 @@ public class DynamixServiceListenerUtility {
 							Type listType = new TypeToken<ArrayList<Reading>>() {}.getType();
 							List<Reading> readings = (new Gson()).fromJson(readingMsg, listType);
 							for (Reading reading : readings) {
-								Toast.makeText(DynamixService.getAndroidContext(),reading.getContext(), 500).show();
+								//Toast.makeText(DynamixService.getAndroidContext(),reading.getContext(), 500).show();
 								Log.w(TAG, "Plugin Reading: " + reading);
 								DynamixService.getReadingStorage().pushReading(	reading);
 							}

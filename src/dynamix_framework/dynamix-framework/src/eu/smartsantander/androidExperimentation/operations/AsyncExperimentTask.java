@@ -29,6 +29,10 @@ public class AsyncExperimentTask extends AsyncTask<String, Void, String> {
 	protected String doInBackground(String... params) {
 		this.stateActive=true;
 		Log.i("AsyncExperimentTask", "Experiment Connecting...");
+		if (DynamixService.isEnabled()==false){
+			return "AndroidExperimentation Async Experiment Task Executed Dynamix Disabled";
+		}
+		
 		if (DynamixService.sessionStarted==false){
 			DynamixServiceListenerUtility.start();
 	    }else{
