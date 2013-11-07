@@ -169,7 +169,7 @@ public class BaseActivity extends TabActivity {
 		 * http://developer.android.com/resources/tutorials
 		 * /views/hello-tabwidget.html
 		 */
-		myRes = getResources();
+		myRes = getResources(); 
 		Resources res = getResources(); // Resource object to get Drawables
 		tabHost = getTabHost(); // The activity TabHost
 		TabHost.TabSpec spec; // Resusable TabSpec for each tab
@@ -264,14 +264,14 @@ public class BaseActivity extends TabActivity {
 				.newTabSpec("stats")
 				.setIndicator("",
 						ressources.getDrawable(R.drawable.ic_tab_stats))
-				.setContent(intentReports);
+				.setContent(intentStats);
 
 		tabHost.addTab(tabSpecSecurity);	
 		tabHost.addTab(tabSpecJobs);
 		tabHost.addTab(tabSpecStats);
 		tabHost.addTab(tabSpecReports);
 		
-		
+		//
 
 	    
 	}
@@ -369,8 +369,10 @@ public class BaseActivity extends TabActivity {
 		 * Reset the titlebar state onResume, since our Activity's state will be
 		 * lost if the app is paused.
 		 */
-		if (DynamixService.isFrameworkStarted())
+		if (DynamixService.isFrameworkStarted()) {
 			setTitlebarEnabled();
+			
+		}
 		else
 			setTitlebarDisabled();
 

@@ -8,6 +8,13 @@ import android.widget.TextView;
 import org.ambientdynamix.core.DynamixService;
 import org.ambientdynamix.core.R;
 
+
+/**
+ * This tab displays ....
+ *
+ */
+
+
 public class profileTab extends Activity{
 	private TextView phoneIdTv;
 	private ImageView internetStatusImgv;

@@ -10,7 +10,7 @@
         android:layout_height="wrap_content"
         android:editable="false" 
         android:text="@string/deviceId_label"
-        android:textAppearance="?android:attr/textAppearanceSmall"
+        android:textAppearance="?android:attr/textAppearanceMedium"
         android:background="@drawable/customcatborder"
         />
 
@@ -20,7 +20,7 @@
         android:layout_height="wrap_content"
         android:editable="false" 
         android:text="@string/experiment_label"
-        android:textAppearance="?android:attr/textAppearanceSmall"
+        android:textAppearance="?android:attr/textAppearanceMedium"
         android:background="@drawable/customcatborder"
         />
     

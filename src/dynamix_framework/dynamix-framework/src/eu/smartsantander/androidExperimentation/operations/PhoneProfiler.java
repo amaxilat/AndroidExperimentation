@@ -2,6 +2,7 @@ package eu.smartsantander.androidExperimentation.operations;
 
 import java.lang.reflect.Type;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -17,6 +18,7 @@ import eu.smartsantander.androidExperimentation.Constants;
 import eu.smartsantander.androidExperimentation.jsonEntities.Experiment;
 import eu.smartsantander.androidExperimentation.jsonEntities.Plugin;
 import eu.smartsantander.androidExperimentation.jsonEntities.PluginList;
+import android.R;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.content.SharedPreferences.Editor;
@@ -74,7 +76,12 @@ public class PhoneProfiler extends Thread implements Runnable {
 			serverPhoneId = DynamixService.getCommunication().registerSmartphone(phoneId,getSensorRules());
 			if(serverPhoneId<=0)
 				serverPhoneId=Constants.PHONE_ID_UNITIALIZED;
-			DynamixService.getPhoneProfiler().setPhoneId(serverPhoneId);
+			else {
+				DynamixService.getPhoneProfiler().setPhoneId(serverPhoneId);
+				setLastOnlineLogin();
+			}
+			
+			
 		} catch (Exception e) {
 			DynamixService.getPhoneProfiler().setPhoneId(Constants.PHONE_ID_UNITIALIZED);
 		}		
@@ -135,4 +142,32 @@ public class PhoneProfiler extends Thread implements Runnable {
 		return experiments;
 	}
 	
+	// keep stats for total time connected to the service
+	
+	public void setLastOnlineLogin() {
+				
+		Date dat = new Date();
+		
+		if (editor==null){
+			pref = DynamixService.getAndroidContext().getApplicationContext().getSharedPreferences("phoneId",0);
+			editor = pref.edit();	
+		}
+		
+		editor.putLong("lastOnlineLoginDate", dat.getTime());
+		editor.commit();
+			
+	}
+	
+	public Date getLastOnlineLogin() {
+		
+		Date lastLoginDate;
+		
+		if (editor==null){
+			pref = DynamixService.getAndroidContext().getApplicationContext().getSharedPreferences("phoneId",0);
+		}
+		
+		lastLoginDate = new Date(pref.getLong("lastOnlineLoginDate", 0));
+			
+		return lastLoginDate;
+	}
 }

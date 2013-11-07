@@ -7,6 +7,14 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageView;
 
+
+/**
+ * This tab displays ....
+ *
+ */
+
+
+
 public class dynamixTab extends Activity {
 	
 	private final String TAG = this.getClass().getSimpleName();
