@@ -160,7 +160,6 @@ public class ModelManager {
             } else {
                 resultsEntity.setMessage("");
             }
-
             getCurrentSession().save(resultsEntity);
             getCurrentSession().flush();
         }
@@ -174,6 +173,21 @@ public class ModelManager {
         Query q = getCurrentSession().createQuery("from Result where experimentId = :expId ");
         q.setParameter("expId", Integer.valueOf(experimentId));
         return (List<Result>) q.list();
+    }
+
+    public static String [] getResults(Integer experimentId, Long timestamp, int deviceID) {
+        Query q = getCurrentSession().createQuery("from Result where experimentId = :expId AND deviceId= :devId AND timestamp>= :t");
+        q.setParameter("expId", Integer.valueOf(experimentId));
+        q.setParameter("devId", Integer.valueOf(deviceID));
+        q.setParameter("t", Long.valueOf(timestamp));
+        List<Result> results=(List<Result>) q.list();
+        if (results.size()==0) return null;
+        String [] messages=new String[results.size()];
+        int i=0;
+        for (Result result : results) {
+            messages[i++]=result.getMessage();
+        }
+        return  messages;
     }
 
 

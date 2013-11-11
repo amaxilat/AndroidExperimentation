@@ -1,6 +1,6 @@
 Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
-Bundle-Name: Experiment Plugin
+Bundle-Name: Experiment Plugin Gps
 Bundle-Vendor: Ambient Dynamix
 Bundle-SymbolicName: org.ambientdynamix.contextplugins.ExperimentPlugin
 Bundle-Version: 0.9.54

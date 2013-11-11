@@ -2,7 +2,7 @@ Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: Experiment Plugin WifiScan
 Bundle-Vendor: Ambient Dynamix
-Bundle-SymbolicName: org.ambientdynamix.contextplugins.ExperimentPluginWifiScan
+Bundle-SymbolicName: org.ambientdynamix.contextplugins.ExperimentPlugin
 Bundle-Version: 0.9.54
 Bundle-ClassPath: .,lib/gson-2.2.4.jar
 Export-Package: org.ambientdynamix.contextplugins.ExperimentPlugin
