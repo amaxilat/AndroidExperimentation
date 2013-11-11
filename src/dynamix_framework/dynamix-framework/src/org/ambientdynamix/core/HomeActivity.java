@@ -65,6 +65,7 @@ public class HomeActivity extends ListActivity {
 	private TextView phoneIdTv;		 
 	private TextView expIdTv;
 	private TextView expDescriptionTv;
+	private TextView connectionStatus;
 	
 	
 	
@@ -188,6 +189,7 @@ public class HomeActivity extends ListActivity {
 		 phoneIdTv = (TextView) this.findViewById(R.id.deviceId_label);
 		 expIdTv = (TextView) this.findViewById(R.id.experiment_id);		 
 		 expDescriptionTv = (TextView) this.findViewById(R.id.experiment_description);
+		 connectionStatus = (TextView) this.findViewById(R.id.connection_status);
 		 appList.setVisibility(View.GONE);
 		 	
 	};
@@ -241,6 +243,11 @@ public class HomeActivity extends ListActivity {
 			expIdTv.setText("ID: "+String.valueOf(DynamixService.getExperiment().getId()));		 
 			expDescriptionTv.setText("Description: "+String.valueOf(DynamixService.getExperiment().getDescription()));			
 		}
+		
+		if (DynamixService.getConnectionStatus())
+			expDescriptionTv.setText("Connected with SmartSantander Server");	
+		else
+			expDescriptionTv.setText("Disconnected with SmartSantander Server");
 		this.appList.setVisibility(View.GONE);
 	}
 

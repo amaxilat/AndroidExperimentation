@@ -36,6 +36,15 @@
         />
     
   
+        <TextView
+        android:id="@+id/connection_status"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:editable="false" 
+        android:text="-"
+        android:textAppearance="?android:attr/textAppearanceMedium" 
+        android:background="@drawable/customsubcatborder"
+        />
     
     <TextView
         android:id="@+id/experiment_description"

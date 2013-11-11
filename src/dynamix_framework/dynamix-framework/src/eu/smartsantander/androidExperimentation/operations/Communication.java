@@ -2,6 +2,7 @@ package eu.smartsantander.androidExperimentation.operations;
 
 import java.util.List;
 
+import org.ambientdynamix.core.DynamixService;
 import org.ksoap2.SoapEnvelope;
 import org.ksoap2.serialization.PropertyInfo;
 import org.ksoap2.serialization.SoapObject;
@@ -62,10 +63,10 @@ public class Communication extends Thread implements Runnable {
 			androidHttpTransport.call(SOAP_ACTION, envelope);
 			SoapPrimitive  resultsRequestSOAP = (SoapPrimitive) envelope.getResponse();	
 			pong = Integer.parseInt(resultsRequestSOAP.toString()); 			
-			Log.i("AndroidExperimentation Ping Result", resultsRequestSOAP.toString());
+			Log.i("AndroidExperimentation Ping Result", resultsRequestSOAP.toString());		
 		}
 		catch (Exception e)
-		{
+		{		
 			Log.i("AndroidExperimentation Ping Exception", e.toString());
 		}
 	
@@ -160,9 +161,11 @@ public class Communication extends Thread implements Runnable {
 			androidHttpTransport.call(SOAP_ACTION, envelope);	
 			SoapPrimitive resultsRequestSOAP = (SoapPrimitive) envelope.getResponse();			
 			response = resultsRequestSOAP.toString(); 
+			DynamixService.setConnectionStatus(true);
 		}
 		catch (Exception e)
 		{
+			DynamixService.setConnectionStatus(false);
 			throw e;
 		}
 		return response;
@@ -197,9 +200,11 @@ public class Communication extends Thread implements Runnable {
 			SoapPrimitive  resultsRequestSOAP = (SoapPrimitive) envelope.getResponse();
 			
 			ack = Integer.parseInt(resultsRequestSOAP.toString()); 
+			DynamixService.setConnectionStatus(true);
 		}
 		catch (Exception e)
 		{
+			DynamixService.setConnectionStatus(false);
 			throw e;
 		}			
 		return ack;
@@ -234,9 +239,11 @@ public class Communication extends Thread implements Runnable {
 			SoapPrimitive resultsRequestSOAP = (SoapPrimitive) envelope.getResponse();
 			
 			jsonPluginList = resultsRequestSOAP.toString(); 
+			DynamixService.setConnectionStatus(true);
 		}
 		catch (Exception e)
 		{
+			DynamixService.setConnectionStatus(false);
 			throw e;
 		}
 			
