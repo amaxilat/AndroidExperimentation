@@ -35,13 +35,7 @@
         android:background="@drawable/customsubcatborder"
         />
     
-    <TextView
-        android:id="@+id/experiment_title"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:editable="false" 
-        android:text="-"
-        android:textAppearance="?android:attr/textAppearanceMedium" />
+  
     
     <TextView
         android:id="@+id/experiment_description"
@@ -52,30 +46,15 @@
         android:textAppearance="?android:attr/textAppearanceMedium" />
     
     
-    <TextView
-        android:id="@+id/empty"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:editable="false" 
-        android:text=""
-        android:textAppearance="?android:attr/textAppearanceMedium" />
-    
-    <TextView
-        android:id="@+id/app_list_label"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:editable="false"
-        android:text="@string/app_list_label"
-        android:textAppearance="?android:attr/textAppearanceSmall"
-        android:background="@drawable/customcatborder"
-        />
+ 
+ 
 
 
     <ListView
         android:id="@android:id/list"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:layout_weight="1" />
+        android:layout_weight="1" android:visibility="gone"/>
 
     <TextView
         android:id="@android:id/empty"
