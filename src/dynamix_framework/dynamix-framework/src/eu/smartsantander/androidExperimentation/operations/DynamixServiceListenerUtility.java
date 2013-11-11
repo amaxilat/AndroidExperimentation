@@ -82,6 +82,9 @@ public class DynamixServiceListenerUtility {
 			@Override
 			public void onContextEvent(ContextEvent event)
 					throws RemoteException {
+								
+				NotificationHQManager noteManager = NotificationHQManager.getInstance();				
+				
 				Log.w(TAG, "Event timestamp "
 						+ event.getTimeStamp().toLocaleString());
 				if (event.expires())
@@ -115,7 +118,10 @@ public class DynamixServiceListenerUtility {
 							List<Reading> readings = (new Gson()).fromJson(readingMsg, listType);
 							for (Reading reading : readings) {
 								Log.w(TAG, "Received Reading: " + reading);
-								Toast.makeText(DynamixService.getAndroidContext(),readingMsg, 5000).show();
+								//Toast.makeText(DynamixService.getAndroidContext(),readingMsg, 5000).show();
+								
+								noteManager.postNotification(readingMsg);
+								
 								if (DynamixService.getExperiment() == null)
 									return;
 								Report rObject = new Report(DynamixService.getExperiment().getId().toString());
@@ -130,7 +136,9 @@ public class DynamixServiceListenerUtility {
 							Type listType = new TypeToken<ArrayList<Reading>>() {}.getType();
 							List<Reading> readings = (new Gson()).fromJson(readingMsg, listType);
 							for (Reading reading : readings) {
-								Toast.makeText(DynamixService.getAndroidContext(),reading.getContext(), 500).show();
+								//Toast.makeText(DynamixService.getAndroidContext(),reading.getContext(), 500).show();
+								noteManager.postNotification(reading.getContext());
+								
 								Log.w(TAG, "Plugin Reading: " + reading);
 								DynamixService.getReadingStorage().pushReading(	reading);
 							}

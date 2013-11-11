@@ -11,6 +11,7 @@ import android.content.SharedPreferences.Editor;
 import android.os.Bundle;
 import android.view.View;
 import android.view.View.OnClickListener;
+import android.widget.ArrayAdapter;
 import android.widget.CheckBox;
 import android.widget.LinearLayout;
 import android.widget.ListView;
@@ -25,9 +26,12 @@ import org.ambientdynamix.core.DynamixService;
 import org.ambientdynamix.core.R;
 import eu.smartsantander.androidExperimentation.jsonEntities.Plugin;
 import eu.smartsantander.androidExperimentation.jsonEntities.PluginList;
+import eu.smartsantander.androidExperimentation.operations.NotificationHQManager;
 
 /**
- * This tab displays rules about the sensing plugins installed
+ * This tab displays various kinds of messages about the sensing plugins installed
+ * and events triggered by the Ambient Dynamix framework. Kind of replaces the previous
+ * way of posting notifications using the Toast mechanism provided by Android.
  *
  */
 
@@ -35,41 +39,54 @@ import eu.smartsantander.androidExperimentation.jsonEntities.PluginList;
 
 public class securityTab extends Activity {
 
-	List<HashMap<String,String>> sensorOptionsL=new ArrayList<HashMap<String,String>>();	
-	HashMap<String, String> sensorOptions = new HashMap<String, String>();
-	SimpleAdapter simpleAdptl;
+	//List<HashMap<String,String>> sensorOptionsL=new ArrayList<HashMap<String,String>>();	
+	//HashMap<String, String> sensorOptions = new HashMap<String, String>();
+	//SimpleAdapter simpleAdptl;
+	NotificationHQManager notesManager;
+	String[] notes;
 	
- 
-
+	ArrayAdapter<String> noteAdapter;
 	
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.security);
 		
-		ListView list1 = (ListView) findViewById(R.id.checklist); 	
-		simpleAdptl = new SimpleAdapter(this, sensorOptionsL, android.R.layout.simple_list_item_1, new String[] {"sensor"}, new int[] {android.R.id.text1});
-		list1.setAdapter(simpleAdptl);
+		notesManager = NotificationHQManager.getInstance();
+		
+		notes = notesManager.getNotifications();
+		
+		// find listview in the tab for debug messages
+		ListView list1 = (ListView) findViewById(R.id.notification_messages_list);
+		
+		//simpleAdptl = new SimpleAdapter(this, sensorOptionsL, android.R.layout.simple_list_item_1, new String[] {"sensor"}, new int[] {android.R.id.text1});
+		
+		noteAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, notes);
+		
+		list1.setAdapter(noteAdapter);
 		
 	}
 
 	@Override
 	public void onResume() {
 		super.onResume();
-		sensorOptionsL.clear();
-		for (ContextPluginInformation plugin : DynamixService.getAllContextPluginInfo()) {
-			sensorOptions=new HashMap<String,String>();
-			if (plugin.getInstallStatus() == PluginInstallStatus.INSTALLED) {
-				sensorOptions.put("sensor",plugin.getPluginName() + ":INSTALLED");
-			} else {
-				sensorOptions.put("sensor",plugin.getPluginName() + ":DISABLED");				
-				
-			}
-			sensorOptionsL.add(sensorOptions);	
-			sensorOptions= new HashMap<String, String>();				
-		}
+//		sensorOptionsL.clear();
+//		for (ContextPluginInformation plugin : DynamixService.getAllContextPluginInfo()) {
+//			sensorOptions=new HashMap<String,String>();
+//			if (plugin.getInstallStatus() == PluginInstallStatus.INSTALLED) {
+//				sensorOptions.put("sensor",plugin.getPluginName() + ":INSTALLED");
+//			} else {
+//				sensorOptions.put("sensor",plugin.getPluginName() + ":DISABLED");				
+//				
+//			}
+//			sensorOptionsL.add(sensorOptions);	
+//			sensorOptions= new HashMap<String, String>();				
+//		}
 		
-		simpleAdptl.notifyDataSetChanged();
+		//simpleAdptl.notifyDataSetChanged();
+		
+		notes = notesManager.getNotifications();
+		noteAdapter.notifyDataSetChanged();
  	}
 	
 	

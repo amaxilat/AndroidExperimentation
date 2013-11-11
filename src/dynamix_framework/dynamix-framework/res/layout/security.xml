@@ -4,24 +4,9 @@
     android:background="#000000"
     android:orientation="vertical" >
 
-    <TextView
-        android:id="@+id/textView13"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:layout_weight="0.15"
-        android:text="@string/sensor_rules"
-        android:textColor="#36ACF5"
-        android:textSize="15dp" />
-
-    <View
-        android:layout_width="fill_parent"
-        android:layout_height="1dp"
-        android:background="#7F7E85" />
-
     <ListView
-        android:id="@+id/checklist"
+        android:id="@+id/notification_messages_list"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content" />
-
-</LinearLayout>
+    
+ </LinearLayout>

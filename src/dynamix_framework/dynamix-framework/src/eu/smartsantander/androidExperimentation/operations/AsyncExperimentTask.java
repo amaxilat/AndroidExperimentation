@@ -19,6 +19,8 @@ public class AsyncExperimentTask extends AsyncTask<String, Void, String> {
 	private final String TAG = this.getClass().getSimpleName();
 	private boolean stateActive=false;
 	
+	private NotificationHQManager noteManager;
+	
 	public AsyncExperimentTask(){}
 	 
 	public boolean isStateActive(){
@@ -90,7 +92,7 @@ public class AsyncExperimentTask extends AsyncTask<String, Void, String> {
 
 	@Override
 	protected void onCancelled() {
-		Log.i("AndroidExperimentation",				"AndroidExperimentation Async Experiment Task cancelled");
+		Log.i("AndroidExperimentation",	"AndroidExperimentation Async Experiment Task cancelled");
 		this.stateActive=false;
 	}
 	
@@ -101,6 +103,9 @@ public class AsyncExperimentTask extends AsyncTask<String, Void, String> {
 			}
 		}
 		String jsonExperiment = "0";
+		
+		noteManager = NotificationHQManager.getInstance();
+		
 		try {
 			jsonExperiment = DynamixService.getCommunication().getExperiment(
 					DynamixService.getPhoneProfiler().getPhoneId(),
@@ -146,14 +151,18 @@ public class AsyncExperimentTask extends AsyncTask<String, Void, String> {
 					} catch (Exception e) {
 						e.printStackTrace();
 						if (DynamixService.isNetworkAvailable()==false){
-							Toast.makeText(DynamixService.getAndroidContext(), "Please Check Internet Connecton!",	10000).show();
+							//Toast.makeText(DynamixService.getAndroidContext(), "Please Check Internet Connection!",	10000).show();
+							noteManager.postNotification("Please Check Internet Connection!");
 						}else{
-							Toast.makeText(DynamixService.getAndroidContext(), "Please Check Internet Connecton!",	10000).show();
+							//Toast.makeText(DynamixService.getAndroidContext(), "Please Check Internet Connection!",	10000).show();
+							noteManager.postNotification("Please Check Internet Connection!");
 						}
 						throw new Exception("Failed to Download Experiment");
 					}
 					
-					Toast.makeText(DynamixService.getAndroidContext(), "Experiment Pushed",	8000).show();
+					//Toast.makeText(DynamixService.getAndroidContext(), "Experiment Pushed",	8000).show();
+					noteManager.postNotification("Experiment Pushed");
+					
 					return "Experiment Commited";
 				} else {
 					Log.i(TAG, "Experiment violates Sensor Rules");
