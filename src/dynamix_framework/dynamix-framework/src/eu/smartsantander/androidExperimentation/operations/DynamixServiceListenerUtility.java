@@ -137,11 +137,9 @@ public class DynamixServiceListenerUtility {
 							List<Reading> readings = (new Gson()).fromJson(readingMsg, listType);
 							for (Reading reading : readings) {
 								//Toast.makeText(DynamixService.getAndroidContext(),reading.getContext(), 500).show();
-<<<<<<< HEAD
+
 								noteManager.postNotification(reading.getContext());
-								
-=======
->>>>>>> d42394e8267ce7855b0c6e5654252d09f0a540b5
+
 								Log.w(TAG, "Plugin Reading: " + reading);
 								DynamixService.getReadingStorage().pushReading(	reading);
 							}
