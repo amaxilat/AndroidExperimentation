@@ -1,5 +1,6 @@
 package eu.smartsantander.androidExperimentation.jsonEntities;
  
+
 /**
  * Created with IntelliJ IDEA.
  * User: theodori
@@ -9,6 +10,24 @@ package eu.smartsantander.androidExperimentation.jsonEntities;
  */
 public class Experiment {
     private Integer id;
+    private String description;
+    private long timestamp;
+
+    public long getTimestamp() {
+        return timestamp;
+    }
+
+    public void setTimestamp(long timestamp) {
+        this.timestamp = timestamp;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
 
     public Integer getId() {
         return id;

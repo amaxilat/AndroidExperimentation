@@ -138,6 +138,7 @@ public class DynamixServiceListenerUtility {
 							for (Reading reading : readings) {
 								//Toast.makeText(DynamixService.getAndroidContext(),reading.getContext(), 500).show();
 								noteManager.postNotification(reading.getContext());							
+
 								Log.w(TAG, "Plugin Reading: " + reading);
 								DynamixService.getReadingStorage().pushReading(	reading);
 							}

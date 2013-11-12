@@ -209,6 +209,8 @@ public final class DynamixService extends Service {
 	
 	private static Experiment experiment;
 	
+	private static Boolean connectionStatus=false;
+	
 	public static void setExperiment(Experiment exp){
 		if (exp!=null)
 			phoneProfiler.experimentPush(exp);
@@ -2866,4 +2868,12 @@ public final class DynamixService extends Service {
 	        NetworkInfo activeNetworkInfo = connectivityManager.getActiveNetworkInfo();
 	        return activeNetworkInfo != null && activeNetworkInfo.isConnected();
 	    }
+
+	public static boolean getConnectionStatus() {
+		return connectionStatus;
+	}
+	
+	public static void setConnectionStatus(Boolean status) {
+		connectionStatus=status;
+	}
 }

@@ -64,8 +64,8 @@ public class HomeActivity extends ListActivity {
 	//SmartSantander
 	private TextView phoneIdTv;		 
 	private TextView expIdTv;
-	private TextView expTitleTv;
 	private TextView expDescriptionTv;
+	private TextView connectionStatus;
 	
 	
 	
@@ -187,9 +187,10 @@ public class HomeActivity extends ListActivity {
 		
 		//SmartSantander
 		 phoneIdTv = (TextView) this.findViewById(R.id.deviceId_label);
-		 expIdTv = (TextView) this.findViewById(R.id.experiment_id);
-		 expTitleTv = (TextView) this.findViewById(R.id.experiment_title);
+		 expIdTv = (TextView) this.findViewById(R.id.experiment_id);		 
 		 expDescriptionTv = (TextView) this.findViewById(R.id.experiment_description);
+		 connectionStatus = (TextView) this.findViewById(R.id.connection_status);
+		 appList.setVisibility(View.GONE);
 		 	
 	};
 
@@ -239,10 +240,15 @@ public class HomeActivity extends ListActivity {
 		
 		if (DynamixService.getExperiment()!=null){
 			phoneIdTv.setText("SmartSantander Device ID: "+String.valueOf(DynamixService.getPhoneProfiler().getPhoneId()));
-			expIdTv.setText("Experiment ID: "+String.valueOf(DynamixService.getExperiment().getId()));
-			expTitleTv.setText("SmartSantander Device ID: "+String.valueOf(DynamixService.getExperiment().getContextType()));
-			expDescriptionTv.setText("SmartSantander Device ID: "+String.valueOf(DynamixService.getExperiment().getSensorDependencies()));			
+			expIdTv.setText("ID: "+String.valueOf(DynamixService.getExperiment().getId()));		 
+			expDescriptionTv.setText("Description: "+String.valueOf(DynamixService.getExperiment().getDescription()));			
 		}
+		
+		if (DynamixService.getConnectionStatus())
+			expDescriptionTv.setText("Connected with SmartSantander Server");	
+		else
+			expDescriptionTv.setText("Disconnected with SmartSantander Server");
+		this.appList.setVisibility(View.GONE);
 	}
 
 
@@ -276,6 +282,8 @@ public class HomeActivity extends ListActivity {
 					DynamixService.SettingsManager.getAuthorizedApplications()), false);
 			this.adapter.setNotifyOnChange(true);
 			appList.setAdapter(this.adapter);
+				
 		}
+		appList.setVisibility(View.GONE);//smartsantander
 	}
 }

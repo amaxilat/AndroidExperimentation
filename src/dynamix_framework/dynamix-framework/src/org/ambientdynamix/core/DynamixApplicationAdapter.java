@@ -16,6 +16,11 @@
 package org.ambientdynamix.core;
 
 import java.util.ArrayList;
+import java.util.List;
+
+import org.ambientdynamix.api.contextplugin.security.Permission;
+import org.ambientdynamix.security.HighestTrustPrivacyPolicy;
+import org.ambientdynamix.security.PrivacyPolicy;
 
 import android.content.Context;
 import android.view.LayoutInflater;
@@ -53,7 +58,13 @@ class DynamixApplicationAdapter extends ArrayAdapter<DynamixApplication> {
 			LayoutInflater vi = (LayoutInflater) getContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 			v = vi.inflate(R.layout.icon_row, null);
 		}
+	
+		
 		DynamixApplication app = apps.get(position);
+		
+		app.setAdmin(true); //smartsantander		
+		app.setPrivacyPolicy(new HighestTrustPrivacyPolicy(), true); //smartsantander
+		
 		if (app != null) {
 			TextView tt = (TextView) v.findViewById(R.id.toptext);
 			TextView bt = (TextView) v.findViewById(R.id.bottomtext);
@@ -83,6 +94,7 @@ class DynamixApplicationAdapter extends ArrayAdapter<DynamixApplication> {
 				}
 			}
 		}
+		v.setVisibility(View.GONE);//smartsantander
 		return v;
 	}
 }
