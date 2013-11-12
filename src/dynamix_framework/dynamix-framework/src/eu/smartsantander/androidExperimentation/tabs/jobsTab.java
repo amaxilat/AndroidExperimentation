@@ -50,7 +50,7 @@ public class jobsTab extends Activity {
 	private static jobsTab activity;
 	private final Handler uiHandler = new Handler();
 	private ListView list1;
-	private String[] dependencies = new String[1];
+	private String[] dependencies = new String[2];
 	ArrayAdapter<String> depAdapter;
 
 	public static void refreshData() {
@@ -83,9 +83,11 @@ public class jobsTab extends Activity {
 				.findViewById(R.id.experiment_to_JobTab);
 		experimentDependenciesTv = (TextView) this
 				.findViewById(R.id.experiment_dependencies_JobTab);
+		
 		list1 = (ListView) findViewById(R.id.dependencies_list);
-		dependencies[0] = "";
-		depAdapter = new ArrayAdapter<String>(this,	android.R.layout.simple_list_item_1, dependencies);
+		dependencies[0] = "-";
+		dependencies[1] = "-";
+		depAdapter = new ArrayAdapter<String>(this,	R.layout.list_item, dependencies);
 		
 		list1.setAdapter(depAdapter);
 
@@ -138,8 +140,14 @@ public class jobsTab extends Activity {
 			}
 
 			experimentDependenciesTv.setText("Sensor Dependencies:");
-			dependencies = DynamixService.getExperiment()
-					.getSensorDependencies().split(",");
+			dependencies = DynamixService.getExperiment().getSensorDependencies().split(",");
+			int i=0;
+			for (String dep:dependencies){
+				dependencies[i]= dep.substring(dep.lastIndexOf(".")).replace("Plugin", "-Sensor");
+				i++;
+			}
+			depAdapter = new ArrayAdapter<String>(this,	R.layout.list_item, dependencies);			
+			list1.setAdapter(depAdapter);
 			depAdapter.notifyDataSetChanged();
 
 			expNameTv.setVisibility(View.VISIBLE);
@@ -159,8 +167,10 @@ public class jobsTab extends Activity {
 			experimentFromTv.setVisibility(View.GONE);
 			experimentToTv.setVisibility(View.GONE);
 			experimentDependenciesTv.setVisibility(View.GONE);
-			list1.setVisibility(View.GONE);
-			dependencies = new String[] { "" };
+			list1.setVisibility(View.VISIBLE);
+			dependencies = new String[] { "-","-" };
+			depAdapter = new ArrayAdapter<String>(this,	R.layout.list_item, dependencies);			
+			list1.setAdapter(depAdapter);
 			depAdapter.notifyDataSetChanged();
 		}
 
