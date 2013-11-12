@@ -36,7 +36,6 @@ import android.widget.TabHost;
 import android.widget.TabHost.TabSpec;
 import android.widget.Toast;
 import eu.smartsantander.androidExperimentation.tabs.jobsTab;
-import eu.smartsantander.androidExperimentation.tabs.profileTab;
 import eu.smartsantander.androidExperimentation.tabs.reportTab;
 import eu.smartsantander.androidExperimentation.tabs.securityTab;
 import eu.smartsantander.androidExperimentation.tabs.statsTab;
@@ -226,8 +225,8 @@ public class BaseActivity extends TabActivity {
 		TabHost tabHost = getTabHost();
 
 		// profile tab
-		Intent intentProfile = new Intent().setClass(this, profileTab.class);
-		TabSpec tabSpecProfile = tabHost.newTabSpec("profile").setIndicator("",	ressources.getDrawable(R.drawable.ic_tab_profile)).setContent(intentProfile);
+		//Intent intentProfile = new Intent().setClass(this, profileTab.class);
+		//TabSpec tabSpecProfile = tabHost.newTabSpec("profile").setIndicator("",	ressources.getDrawable(R.drawable.ic_tab_profile)).setContent(intentProfile);
 
 		// security tab
 		Intent intentSecurity = new Intent().setClass(this, securityTab.class);

@@ -2248,7 +2248,7 @@ public final class DynamixService extends Service {
 				}
 				onDynamixStarting();
 				// Update UI
-				launchProgressDialog("Enabling Dynamix", "Starting plug-ins. Please wait...");
+				launchProgressDialog("Enabling Experimentation", "Starting Sensors. Please wait...");
 				// Set a BroadcastReceiver to startContextDetection on ACTION_SCREEN_ON events
 				wakeReceiver = new BroadcastReceiver() {
 					@Override

@@ -75,7 +75,7 @@
 	</string>
 	<string name="expIsEnabled">Experimentation is enabled</string>
 	<string name="expIsDisabled">Experimentation is disabled</string>
-    <string name="noAuthApps">No authorized applications</string>
+    <string name="noAuthApps"></string>
     <string name="no_context_plugins">No context Sensors</string>
     <string name="installed_context_plugins">Installed Sensors</string>
     <string name="available_context_plugins">Available Sensors</string>
