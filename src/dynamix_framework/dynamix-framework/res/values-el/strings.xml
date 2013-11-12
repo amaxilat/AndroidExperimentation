@@ -51,8 +51,8 @@
     <string name="plug_stats_label">Πρόσφατες καταγραφές</string>
     <string name="plug_stats_summary_label">Στατιστικά στοιχεία Plugin</string>
     <string name="btn_see_plugin_stats">Στατιστικά στοιχεία</string>
-    <string name="btn_find_plugs">Εύρεση plugin</string>
-    <string name="btn_install_plugs">Εγκατάσταση plugin</string>
+    <string name="btn_find_plugs">Εύρεση Αισθητήρων</string>
+    <string name="btn_install_plugs">Εγκατάσταση Αισθητήρων</string>
     <string name="btn_see_plugin_details">Λεπτομέρειες plugin</string>
     <string name="update_description_label">Ανανέωση περιγραφής</string>
     <string name="update_priority_label">Προτεραιότητα update</string>
@@ -76,11 +76,11 @@
     <string name="expIsEnabled">Πειραματισμός ενεργός</string>
 	<string name="expIsDisabled">Πειραματισμός ανενεργός</string>
 	<string name="noAuthApps">Δεν υπάρχουν εφαρμογές</string>
-	<string name="no_context_plugins">Δεν υπάρχουν context plug-ins</string>
-    <string name="installed_context_plugins">Εγκατεστημένα context plug-ins</string>
-    <string name="available_context_plugins">Διαθέσιμα context plug-ins</string>
-    <string name="no_available_context_plugins">Δεν υπάρχουν διαθέσιμα context plug-ins</string>
-    <string name="tap_find_plugins">"Πατήστε 'Εύρεση Plug-ins' για να βρείτε plug-ins."</string>
+	<string name="no_context_plugins">Δεν υπάρχουν eγκατεστημένoi Αισθητήρες</string>
+    <string name="installed_context_plugins">Εγκατεστημένοι Αισθητήρες</string>
+    <string name="available_context_plugins">Διαθέσιμοι Αισθητήρες</string>
+    <string name="no_available_context_plugins">Δεν υπάρχουν διαθέσιμοι Αισθητήρες</string>
+    <string name="tap_find_plugins">"Πατήστε 'Εύρεση Αισθητήρων' για να βρείτε Αισθητήρες"</string>
     <string name="sensor_rules">Κανόνες για τους αισθητήρες</string>
     <string name="executed_experiment">Πείραμα που εκτελείται</string>
     <string name="install_pending">Αναμονή εγκατάστασης&#8230;</string>

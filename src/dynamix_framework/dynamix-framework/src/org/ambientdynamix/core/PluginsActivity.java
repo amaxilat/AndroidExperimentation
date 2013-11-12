@@ -65,14 +65,15 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 /**
- * User interface that provides an overview of the ContextPlugins installed in the framework. Provides facilities for
- * enabling/disabling plugins as well as uninstalling plugins.
+ * User interface that provides an overview of the ContextPlugins installed in
+ * the framework. Provides facilities for enabling/disabling plugins as well as
+ * uninstalling plugins.
  * 
  * @see ContextPlugin
  * @author Darren Carlson
  */
-public class PluginsActivity extends ListActivity implements IContextPluginInstallListener,
-		IContextPluginUpdateListener {
+public class PluginsActivity extends ListActivity implements
+		IContextPluginInstallListener, IContextPluginUpdateListener {
 	// Private data
 	private final String TAG = this.getClass().getSimpleName();
 	private static final int ACTIVITY_EDIT = 1;
@@ -83,8 +84,8 @@ public class PluginsActivity extends ListActivity implements IContextPluginInsta
 	private static final int CANCEL_ID = Menu.FIRST + 3;
 	private final Handler uiHandler = new Handler();
 	private static PluginsActivity activity;
-	//final String INSTALLED_PLUGS_SECTION = "Installed Context Plug-ins";
-	//final String NEW_PLUGS_SECTION = "Available Context Plug-ins";
+	// final String INSTALLED_PLUGS_SECTION = "Installed Context Plug-ins";
+	// final String NEW_PLUGS_SECTION = "Available Context Plug-ins";
 	private Map<PluginDiscoveryResult, Integer> installables = new Hashtable<PluginDiscoveryResult, Integer>();
 	private ProgressDialog updateProgress = null;
 	private InstalledContextPluginAdapter installedAdapter;
@@ -137,7 +138,8 @@ public class PluginsActivity extends ListActivity implements IContextPluginInsta
 	@Override
 	public void onInstallProgress(ContextPlugin plug, int percentComplete) {
 		Log.d(TAG, "installProgress " + percentComplete + " for " + plug);
-		// We only update the installable if it's still in the list (another event may have removed it i.e. completed)
+		// We only update the installable if it's still in the list (another
+		// event may have removed it i.e. completed)
 		PluginDiscoveryResult up = findUpdate(plug);
 		if (up != null) {
 			installables.put(up, percentComplete);
@@ -153,15 +155,18 @@ public class PluginsActivity extends ListActivity implements IContextPluginInsta
 	@Override
 	public boolean onContextItemSelected(final MenuItem item) {
 		// Log.e(TAG, "onContextItemSelected for: " + item.getItemId());
-		AdapterContextMenuInfo info = (AdapterContextMenuInfo) item.getMenuInfo();
+		AdapterContextMenuInfo info = (AdapterContextMenuInfo) item
+				.getMenuInfo();
 		AlertDialog.Builder builder = null;
 		Object test = plugList.getItemAtPosition(info.position);
-		if (test instanceof ContextPlugin || test instanceof PluginDiscoveryResult) {
+		if (test instanceof ContextPlugin
+				|| test instanceof PluginDiscoveryResult) {
 			ContextPlugin tmp = null;
 			if (test instanceof ContextPlugin) {
 				tmp = (ContextPlugin) plugList.getItemAtPosition(info.position);
 			} else {
-				PluginDiscoveryResult update = (PluginDiscoveryResult) plugList.getItemAtPosition(info.position);
+				PluginDiscoveryResult update = (PluginDiscoveryResult) plugList
+						.getItemAtPosition(info.position);
 				tmp = update.getDiscoveredPlugin().getContextPlugin();
 			}
 			final ContextPlugin plug = tmp;
@@ -170,48 +175,68 @@ public class PluginsActivity extends ListActivity implements IContextPluginInsta
 				// Present "Are You Sure" dialog box
 				builder = new AlertDialog.Builder(this);
 				builder.setMessage(
-						plug.isEnabled() ? "Disable " + plug.getName() + "?" : "Enable " + plug.getName() + "?")
-						.setCancelable(false).setPositiveButton("Yes", new DialogInterface.OnClickListener() {
-							public void onClick(DialogInterface dialog, int id) {
-								boolean toggleValue = !plug.isEnabled();
-								plug.setEnabled(toggleValue);
-								/*
-								 * This needs to re-init the plug-in before starting it because the plug-in had been
-								 * destroyed.
-								 */
-								if (toggleValue) {
-									// DynamixService.updateContextPluginValues(plug, true)
-									DynamixService.reInitializePlugin(plug);
-								} else
-									DynamixService.updateContextPluginValues(plug, true);
-								adapter.notifyDataSetChanged();
-							}
-						}).setNegativeButton("No", new DialogInterface.OnClickListener() {
-							public void onClick(DialogInterface dialog, int id) {
-								dialog.cancel();
-							}
-						});
+						plug.isEnabled() ? "Disable " + plug.getName() + "?"
+								: "Enable " + plug.getName() + "?")
+						.setCancelable(false)
+						.setPositiveButton("Yes",
+								new DialogInterface.OnClickListener() {
+									public void onClick(DialogInterface dialog,
+											int id) {
+										boolean toggleValue = !plug.isEnabled();
+										plug.setEnabled(toggleValue);
+										/*
+										 * This needs to re-init the plug-in
+										 * before starting it because the
+										 * plug-in had been destroyed.
+										 */
+										if (toggleValue) {
+											// DynamixService.updateContextPluginValues(plug,
+											// true)
+											DynamixService
+													.reInitializePlugin(plug);
+										} else
+											DynamixService
+													.updateContextPluginValues(
+															plug, true);
+										adapter.notifyDataSetChanged();
+									}
+								})
+						.setNegativeButton("No",
+								new DialogInterface.OnClickListener() {
+									public void onClick(DialogInterface dialog,
+											int id) {
+										dialog.cancel();
+									}
+								});
 				builder.create().show();
 				return true;
 			case DELETE_ID:
 				// Present "Are You Sure" dialog box
 				builder = new AlertDialog.Builder(this);
-				builder.setMessage("Remove " + plug.getName() + "?").setCancelable(false)
-						.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
-							public void onClick(DialogInterface dialog, int id) {
-								if (DynamixService.uninstallPlugin(plug, true)) {
-									Adapter a = adapter.getAdapterForSection(getString(R.string.installed_context_plugins));//INSTALLED_PLUGS_SECTION);
-									if (a instanceof ArrayAdapter) {
-										((ArrayAdapter) a).remove(plug);
+				builder.setMessage("Remove " + plug.getName() + "?")
+						.setCancelable(false)
+						.setPositiveButton("Yes",
+								new DialogInterface.OnClickListener() {
+									public void onClick(DialogInterface dialog,
+											int id) {
+										if (DynamixService.uninstallPlugin(
+												plug, true)) {
+											Adapter a = adapter
+													.getAdapterForSection(getString(R.string.installed_context_plugins));// INSTALLED_PLUGS_SECTION);
+											if (a instanceof ArrayAdapter) {
+												((ArrayAdapter) a).remove(plug);
+											}
+										}
+										createElements();
 									}
-								}
-								refresh();
-							}
-						}).setNegativeButton("No", new DialogInterface.OnClickListener() {
-							public void onClick(DialogInterface dialog, int id) {
-								dialog.cancel();
-							}
-						});
+								})
+						.setNegativeButton("No",
+								new DialogInterface.OnClickListener() {
+									public void onClick(DialogInterface dialog,
+											int id) {
+										dialog.cancel();
+									}
+								});
 				builder.create().show();
 				return true;
 			case CANCEL_ID:
@@ -220,7 +245,8 @@ public class PluginsActivity extends ListActivity implements IContextPluginInsta
 				return true;
 			}
 		}
-		Log.e(TAG, "Not caught by switch for: " + item.getItemId() + " | " + CANCEL_ID);
+		Log.e(TAG, "Not caught by switch for: " + item.getItemId() + " | "
+				+ CANCEL_ID);
 		return super.onContextItemSelected(item);
 	}
 
@@ -230,34 +256,47 @@ public class PluginsActivity extends ListActivity implements IContextPluginInsta
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.plugin_tab);
 		activity = this;
+		createElements();
+	}
+
+	private void createElements() {
 		plugList = getListView();
 		plugList.setClickable(true);
 		// create our list and custom adapter
 		adapter = new SeparatedListAdapter(this);
-		installedAdapter = new InstalledContextPluginAdapter(this, R.layout.icon_row, new ArrayList<ContextPlugin>(),
+		installedAdapter = new InstalledContextPluginAdapter(this,
+				R.layout.icon_row, new ArrayList<ContextPlugin>(),
 				getString(R.string.no_context_plugins), "");
 		installedAdapter.setNotifyOnChange(true);
-		adapter.addSection(getString(R.string.installed_context_plugins), installedAdapter);
-		newPlugsAdapter = new ContextPluginAdapter(this, R.layout.installable_row,
+		adapter.addSection(getString(R.string.installed_context_plugins),
+				installedAdapter);
+		newPlugsAdapter = new ContextPluginAdapter(
+				this,
+				R.layout.installable_row,
 				(LayoutInflater) getSystemService(Context.LAYOUT_INFLATER_SERVICE),
-				new ArrayList<PluginDiscoveryResult>(), installables, false, getString(R.string.no_available_context_plugins),
+				new ArrayList<PluginDiscoveryResult>(), installables, false,
+				getString(R.string.no_available_context_plugins),
 				getString(R.string.tap_find_plugins));
 		newPlugsAdapter.setNotifyOnChange(true);
-		adapter.addSection(getString(R.string.available_context_plugins), newPlugsAdapter);
+		adapter.addSection(getString(R.string.available_context_plugins),
+				newPlugsAdapter);
 		plugList.setAdapter(this.adapter);
 		/*
-		 * Setup the OnItemClickListener for the plugList ListView. When clicked, edit the plugin using the
-		 * PluginDetailsActivity.
+		 * Setup the OnItemClickListener for the plugList ListView. When
+		 * clicked, edit the plugin using the PluginDetailsActivity.
 		 */
 		plugList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-			public void onItemClick(AdapterView<?> arg0, View arg1, int position, long arg3) {
+			public void onItemClick(AdapterView<?> arg0, View arg1,
+					int position, long arg3) {
 				ContextPlugin plug = null;
 				Object item = plugList.getItemAtPosition(position);
 				if (item instanceof ContextPlugin)
 					plug = (ContextPlugin) item;
 				if (item instanceof PluginDiscoveryResult)
-					plug = ((PluginDiscoveryResult) item).getDiscoveredPlugin().getContextPlugin();
-				// Log.i(TAG, "onItemClick: " + item + " at position: " + installedAdapter.getPosition(item));
+					plug = ((PluginDiscoveryResult) item).getDiscoveredPlugin()
+							.getContextPlugin();
+				// Log.i(TAG, "onItemClick: " + item + " at position: " +
+				// installedAdapter.getPosition(item));
 				if (plug != null)
 					editPlugin(plug);
 			}
@@ -269,7 +308,7 @@ public class PluginsActivity extends ListActivity implements IContextPluginInsta
 		btnFindPlugs.setOnClickListener(new View.OnClickListener() {
 			public void onClick(View view) {
 				DynamixService.checkForNewContextPlugins(PluginsActivity.this);
-				//SmartSantander
+				// SmartSantander
 				updateSensorPermissionInfo();
 			}
 		});
@@ -283,43 +322,47 @@ public class PluginsActivity extends ListActivity implements IContextPluginInsta
 				List<ContextPlugin> plugs = new Vector<ContextPlugin>();
 				for (PluginDiscoveryResult ur : installables.keySet()) {
 					plugs.add(ur.getDiscoveredPlugin().getContextPlugin());
-					
-				}				
-				DynamixService.installPlugins(Utils.getSortedContextPluginList(plugs), PluginsActivity.this);
-				//SmartSantander
-				updateSensorPermissionInfo();			
+
+				}
+				DynamixService.installPlugins(
+						Utils.getSortedContextPluginList(plugs),
+						PluginsActivity.this);
+				// SmartSantander
+				updateSensorPermissionInfo();
 			}
 		});
 		registerForContextMenu(plugList);
 		refresh();
-	
+
 	}
 
-	//SmartSantander
-	private void updateSensorPermissionInfo(){
-		SharedPreferences pref = getApplicationContext().getSharedPreferences("sensors", 0); // 0 - for private mode
-        Editor editor = pref.edit();
-        
-        for (ContextPluginInformation pl : DynamixService.getAllContextPluginInfo()) {
-			if(pl.isEnabled()==true){
-				editor.putBoolean(pl.getPluginName(),true);
+	// SmartSantander
+	private void updateSensorPermissionInfo() {
+		SharedPreferences pref = getApplicationContext().getSharedPreferences(
+				"sensors", 0); // 0 - for private mode
+		Editor editor = pref.edit();
+
+		for (ContextPluginInformation pl : DynamixService
+				.getAllContextPluginInfo()) {
+			if (pl.isEnabled() == true) {
+				editor.putBoolean(pl.getPluginName(), true);
+			} else {
+				editor.putBoolean(pl.getPluginName(), false);
 			}
-			else{
-				editor.putBoolean(pl.getPluginName(),false);
-			}
-		}	      
+		}
 	}
-	
-	
-	
+
 	@Override
-	public void onCreateContextMenu(ContextMenu menu, View v, ContextMenuInfo menuInfo) {
+	public void onCreateContextMenu(ContextMenu menu, View v,
+			ContextMenuInfo menuInfo) {
 		super.onCreateContextMenu(menu, v, menuInfo);
 		/*
-		 * Make sure that we only show the context menu for installed context plug-ins.
+		 * Make sure that we only show the context menu for installed context
+		 * plug-ins.
 		 */
 		AdapterView.AdapterContextMenuInfo info = (AdapterView.AdapterContextMenuInfo) menuInfo;
-		int newPlugStart = adapter.getPositionForSection(getString(R.string.available_context_plugins));
+		int newPlugStart = adapter
+				.getPositionForSection(getString(R.string.available_context_plugins));
 		if (info.position < newPlugStart) {
 			menu.setHeaderTitle(R.string.plug_list_context_menu_title);
 			menu.add(0, ENABLE_ID, 0, R.string.enable_disable_label);
@@ -344,14 +387,16 @@ public class PluginsActivity extends ListActivity implements IContextPluginInsta
 		if (errors != null && errors.size() > 0) {
 			String messageBuilder = "";
 			for (IContextPluginConnector ps : errors.keySet()) {
-				messageBuilder = messageBuilder + ps + ": " + errors.get(ps) + " ";
+				messageBuilder = messageBuilder + ps + ": " + errors.get(ps)
+						+ " ";
 			}
 			final String finalMessage = messageBuilder;
 			uiHandler.post(new Runnable() {
 				@Override
 				public void run() {
 					// TODO Auto-generated method stub
-					AlertDialog.Builder builder = new AlertDialog.Builder(PluginsActivity.this);
+					AlertDialog.Builder builder = new AlertDialog.Builder(
+							PluginsActivity.this);
 					builder.setTitle("Update Problems");
 					builder.setMessage(finalMessage);
 					builder.setNeutralButton("Ok", null);
@@ -361,7 +406,8 @@ public class PluginsActivity extends ListActivity implements IContextPluginInsta
 		}
 		refresh();
 		if (!newPlugsAdapter.isEmpty()) {
-			scrollTo(PluginsActivity.this.adapter.getPositionForSection(getString(R.string.available_context_plugins)));
+			scrollTo(PluginsActivity.this.adapter
+					.getPositionForSection(getString(R.string.available_context_plugins)));
 		}
 	}
 
@@ -370,11 +416,13 @@ public class PluginsActivity extends ListActivity implements IContextPluginInsta
 		uiHandler.post(new Runnable() {
 			@Override
 			public void run() {
-				updateProgress = ProgressDialog.show(PluginsActivity.this, "Checking for new Context Plug-ins",
-						"Please wait...", false, true, new DialogInterface.OnCancelListener() {
+				updateProgress = ProgressDialog.show(PluginsActivity.this,
+						"Checking for new Context Plug-ins", "Please wait...",
+						false, true, new DialogInterface.OnCancelListener() {
 							@Override
 							public void onCancel(DialogInterface dialog) {
-								Log.w(TAG, "onCancel called for dialog: " + dialog);
+								Log.w(TAG, "onCancel called for dialog: "
+										+ dialog);
 								updateProgress.dismiss();
 								UpdateManager.cancelContextPluginUpdate();
 							}
@@ -390,26 +438,35 @@ public class PluginsActivity extends ListActivity implements IContextPluginInsta
 		MenuItem item1 = menu.add(1, Menu.FIRST, Menu.NONE, "Change Settings");
 		item1.setOnMenuItemClickListener(new OnMenuItemClickListener() {
 			public boolean onMenuItemClick(MenuItem item) {
-				startActivity(new Intent(PluginsActivity.this, DynamixPreferenceActivity.class));
+				startActivity(new Intent(PluginsActivity.this,
+						DynamixPreferenceActivity.class));
 				return true;
 			}
 		});
 		// Setup Change Settings
-		MenuItem item2 = menu.add(1, Menu.FIRST + 1, Menu.NONE, "Remove all Plug-ins");
+		MenuItem item2 = menu.add(1, Menu.FIRST + 1, Menu.NONE,
+				"Remove all Plug-ins");
 		item2.setOnMenuItemClickListener(new OnMenuItemClickListener() {
 			public boolean onMenuItemClick(MenuItem item) {
 				// Present "Are You Sure" dialog box
-				AlertDialog.Builder builder = new AlertDialog.Builder(PluginsActivity.this);
-				builder.setMessage("Remove all Context Plug-ins?").setCancelable(false)
-						.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
-							public void onClick(DialogInterface dialog, int id) {
-								removeAllPlugs();
-							}
-						}).setNegativeButton("No", new DialogInterface.OnClickListener() {
-							public void onClick(DialogInterface dialog, int id) {
-								dialog.cancel();
-							}
-						});
+				AlertDialog.Builder builder = new AlertDialog.Builder(
+						PluginsActivity.this);
+				builder.setMessage("Remove all Context Plug-ins?")
+						.setCancelable(false)
+						.setPositiveButton("Yes",
+								new DialogInterface.OnClickListener() {
+									public void onClick(DialogInterface dialog,
+											int id) {
+										removeAllPlugs();
+									}
+								})
+						.setNegativeButton("No",
+								new DialogInterface.OnClickListener() {
+									public void onClick(DialogInterface dialog,
+											int id) {
+										dialog.cancel();
+									}
+								});
 				builder.create().show();
 				return true;
 			}
@@ -418,7 +475,8 @@ public class PluginsActivity extends ListActivity implements IContextPluginInsta
 	}
 
 	@Override
-	protected void onActivityResult(int requestCode, int resultCode, Intent intent) {
+	protected void onActivityResult(int requestCode, int resultCode,
+			Intent intent) {
 		super.onActivityResult(requestCode, resultCode, intent);
 		if (resultCode == Activity.RESULT_OK) {
 			// Not handled at present
@@ -428,7 +486,7 @@ public class PluginsActivity extends ListActivity implements IContextPluginInsta
 	@Override
 	protected void onResume() {
 		super.onResume();
-		refresh();
+		createElements();
 	}
 
 	/*
@@ -458,15 +516,19 @@ public class PluginsActivity extends ListActivity implements IContextPluginInsta
 	private void refresh() {
 		if (newPlugsAdapter != null) {
 			newPlugsAdapter.clear();
-			for (PluginDiscoveryResult update : UpdateManager.getNewContextPlugins())
+			for (PluginDiscoveryResult update : UpdateManager
+					.getNewContextPlugins())
 				newPlugsAdapter.add(update);
 		}
 		if (installedAdapter != null) {
 			installedAdapter.clear();
-			for (ContextPlugin plug : DynamixService.SettingsManager.getInstalledContextPlugins()) {
-				if (plug.isInstalled()){
-					installedAdapter.add(plug);
-				}else {
+ 			for (ContextPlugin plug : DynamixService.SettingsManager
+					.getInstalledContextPlugins()) {
+				if (plug.isInstalled()) {
+					if (plug.getContextPluginInformation().getPluginId()
+							.toString().contains("Experiment") == false)
+						installedAdapter.add(plug);
+				} else {
 					// Plug-in is registered in the settings, but not installed
 					installedAdapter.add(plug);
 				}
@@ -498,7 +560,8 @@ public class PluginsActivity extends ListActivity implements IContextPluginInsta
 			@Override
 			public void run() {
 				int position = newPlugsAdapter.getPosition(update);
-				// Log.i(TAG, "Removing UpdateResult: " + update + " at position: " + position);
+				// Log.i(TAG, "Removing UpdateResult: " + update +
+				// " at position: " + position);
 				newPlugsAdapter.remove(update);
 				adapter.notifyDataSetChanged();
 			}
@@ -518,13 +581,16 @@ public class PluginsActivity extends ListActivity implements IContextPluginInsta
 	}
 
 	/**
-	 * Local class used as a data-source for ContextPlugins. This class extends a typed Generic ArrayAdapter and
-	 * overrides getView in order to update the UI state.
+	 * Local class used as a data-source for ContextPlugins. This class extends
+	 * a typed Generic ArrayAdapter and overrides getView in order to update the
+	 * UI state.
 	 * 
 	 * @author Darren Carlson
 	 */
-	private class InstalledContextPluginAdapter extends EmptyListSupportAdapter<ContextPlugin> {
-		public InstalledContextPluginAdapter(Context context, int textViewResourceId, List<ContextPlugin> plugs,
+	private class InstalledContextPluginAdapter extends
+			EmptyListSupportAdapter<ContextPlugin> {
+		public InstalledContextPluginAdapter(Context context,
+				int textViewResourceId, List<ContextPlugin> plugs,
 				String emptyTitle, String emptyMessage) {
 			super(context, textViewResourceId, plugs, emptyTitle, emptyMessage);
 		}
@@ -557,8 +623,12 @@ public class PluginsActivity extends ListActivity implements IContextPluginInsta
 						icon.setImageResource(di.getIconResId());
 					if (bt != null)
 						bt.setText(di.getStatusText());
+					if (plug.getContextPluginInformation().getPluginId()
+							.toString().contains("Experiment") == true) // SmartSantander
+						v.setVisibility(View.GONE);
 				} else
-					Log.e(TAG, "Could not get ContextPlugin for position: " + position);
+					Log.e(TAG, "Could not get ContextPlugin for position: "
+							+ position);
 				return v;
 			}
 		}

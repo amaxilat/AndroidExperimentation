@@ -226,32 +226,32 @@ public class HomeActivity extends ListActivity {
 		Log.i(TAG, "onResume");
 		refresh();
 		
-		//SmartSantander
-		if (DynamixService.isEnabled()==true){
-			if(DynamixService.isDeviceRegistered()==false){
-	    		DynamixService.getPhoneProfiler().register();
-	    		phoneIdTv.setText(String.valueOf("SmartSantander Device ID: Registering..."));
-	    	}else{
-	  		phoneIdTv.setText("SmartSantander Device ID:"+String.valueOf(DynamixService.getPhoneProfiler().getPhoneId()));
-	    	}
-		}else {
-			phoneIdTv.setText(String.valueOf("SmartSantander Device ID: Not Connected"));
-		}
-		
-		if (DynamixService.getExperiment()!=null){
-			phoneIdTv.setText("SmartSantander Device ID: "+String.valueOf(DynamixService.getPhoneProfiler().getPhoneId()));
-			expIdTv.setText("ID: "+String.valueOf(DynamixService.getExperiment().getId()));		 
-			expDescriptionTv.setText("Description: "+String.valueOf(DynamixService.getExperiment().getDescription()));			
-		}
-		
-		if (DynamixService.getConnectionStatus())
-			expDescriptionTv.setText("Connected with SmartSantander Server");	
-		else
-			expDescriptionTv.setText("Disconnected with SmartSantander Server");
-		this.appList.setVisibility(View.GONE);
 	}
-
-
+		private void setSmartSantanderInfo(){
+		//SmartSantander
+			if (DynamixService.isEnabled()==true){
+				if(DynamixService.isDeviceRegistered()==false){
+		    		DynamixService.getPhoneProfiler().register();
+		    		phoneIdTv.setText(String.valueOf("SmartSantander Device ID: Registering..."));
+		    	}else{
+		  		phoneIdTv.setText("SmartSantander Device ID:"+String.valueOf(DynamixService.getPhoneProfiler().getPhoneId()));
+		    	}
+			}else {
+				phoneIdTv.setText(String.valueOf("SmartSantander Device ID: Not Connected"));
+			}
+			
+			if (DynamixService.getExperiment()!=null){
+				phoneIdTv.setText("SmartSantander Device ID: "+String.valueOf(DynamixService.getPhoneProfiler().getPhoneId()));
+				expIdTv.setText("ID: "+String.valueOf(DynamixService.getExperiment().getId()));		 
+				expDescriptionTv.setText("Description: "+String.valueOf(DynamixService.getExperiment().getDescription()));			
+			}
+			
+			if (DynamixService.getConnectionStatus())
+				connectionStatus.setText("Connected with SmartSantander Server");	
+			else
+				connectionStatus.setText("Disconnected with SmartSantander Server");
+			this.appList.setVisibility(View.GONE);
+	}
 
 	/**
 	 * Edit the application by creating an intent to launch the ApplicationSettingsActivity, making sure to send along
@@ -285,5 +285,6 @@ public class HomeActivity extends ListActivity {
 				
 		}
 		appList.setVisibility(View.GONE);//smartsantander
+		setSmartSantanderInfo();
 	}
 }

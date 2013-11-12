@@ -154,9 +154,9 @@ containing a value of this type.
         public static final int btn_see_plugin_stats=0x7f0a002a;
         public static final int btn_update_scan=0x7f0a004a;
         public static final int checkedTextView=0x7f0a001b;
-        public static final int connection_status=0x7f0a0012;
+        public static final int connection_status=0x7f0a0013;
         public static final int deviceId_label=0x7f0a000f;
-        public static final int experiment_description=0x7f0a0013;
+        public static final int experiment_description=0x7f0a0012;
         public static final int experiment_id=0x7f0a0011;
         public static final int experiment_label=0x7f0a0010;
         public static final int experiment_list=0x7f0a001d;
