@@ -121,6 +121,7 @@ public class DynamixServiceListenerUtility {
 								//Toast.makeText(DynamixService.getAndroidContext(),readingMsg, 5000).show();
 								
 								noteManager.postNotification(readingMsg);
+								DynamixService.cacheExperimentalMessage(readingMsg);
 								
 								if (DynamixService.getExperiment() == null)
 									return;

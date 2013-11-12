@@ -52,19 +52,6 @@
         android:background="#7F7E85" />
 
     <TextView
-        android:id="@+id/experiment_description_JobTab"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:editable="false"
-        android:text="-"
-        android:textAppearance="?android:attr/textAppearanceMedium" />
-
-    <View
-        android:layout_width="fill_parent"
-        android:layout_height="1dp"
-        android:background="#7F7E85" />
-
-    <TextView
         android:id="@+id/experiment_status_JobTab"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
@@ -116,6 +103,27 @@
         android:layout_height="1dp"
         android:background="#7F7E85" />
 
+    <View
+        android:layout_width="fill_parent"
+        android:layout_height="1dp"
+        android:background="#7F7E85" />
+
+    <TextView
+        android:id="@+id/experiment_description_JobTab"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:editable="false"
+        android:text="-"
+        android:textAppearance="?android:attr/textAppearanceMedium" />
+
+    <ToggleButton
+        android:id="@+id/cachedMessages"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom"
+        android:textOff="Show Last Messages"
+        android:textOn="Show Sensor Dependencies" />
+
     <TextView
         android:id="@+id/experiment_dependencies_JobTab"
         android:layout_width="fill_parent"
@@ -124,18 +132,18 @@
         android:text="-"
         android:textAppearance="?android:attr/textAppearanceMedium" />
 
-    <LinearLayout       
+    <LinearLayout
         android:layout_width="fill_parent"
-        android:layout_height="fill_parent"
+        android:layout_height="wrap_content"
         android:background="#000000"
-        android:orientation="vertical" >
+        android:orientation="vertical"
+        android:scrollbars="vertical" >
 
-         <ListView
-        android:id="@+id/dependencies_list"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content" />
+        <ListView
+            android:id="@+id/dependencies_list"
+            android:layout_width="wrap_content"
+            android:layout_height="fill_parent"
+            android:scrollbars="vertical" />
     </LinearLayout>
-
-   
 
 </LinearLayout>

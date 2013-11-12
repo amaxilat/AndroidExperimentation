@@ -17,11 +17,13 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.SimpleAdapter;
 import android.widget.TextView;
 import android.widget.Toast;
+import android.widget.ToggleButton;
 
 import org.ambientdynamix.api.application.ContextPluginInformation;
 import org.ambientdynamix.api.application.AppConstants.PluginInstallStatus;
@@ -50,8 +52,9 @@ public class jobsTab extends Activity {
 	private static jobsTab activity;
 	private final Handler uiHandler = new Handler();
 	private ListView list1;
-	private String[] dependencies = new String[2];
+	private String[] listData = new String[2];
 	ArrayAdapter<String> depAdapter;
+	private ToggleButton button;
 
 	public static void refreshData() {
 		if (activity != null)
@@ -85,9 +88,9 @@ public class jobsTab extends Activity {
 				.findViewById(R.id.experiment_dependencies_JobTab);
 		
 		list1 = (ListView) findViewById(R.id.dependencies_list);
-		dependencies[0] = "-";
-		dependencies[1] = "-";
-		depAdapter = new ArrayAdapter<String>(this,	R.layout.list_item, dependencies);
+		listData[0] = "-";
+		listData[1] = "-";
+		depAdapter = new ArrayAdapter<String>(this,	R.layout.list_item, listData);
 		
 		list1.setAdapter(depAdapter);
 
@@ -99,6 +102,33 @@ public class jobsTab extends Activity {
 			}
 		};
 		refresher.scheduleAtFixedRate(t, 0, 1000);
+		
+		button = (ToggleButton) findViewById(R.id.cachedMessages);
+		button.setOnClickListener(new View.OnClickListener() {
+			public void onClick(View v) {
+				if (button.isChecked()) {
+					listData=DynamixService.getCachedExperimentalMessages();
+					depAdapter = new ArrayAdapter<String>(v.getContext(),R.layout.list_item, listData);			
+					list1.setAdapter(depAdapter);
+					depAdapter.notifyDataSetChanged();
+					experimentDependenciesTv.setText("Last Messages:");
+				} else {
+					if (DynamixService.getExperiment() != null) {					 
+						listData = DynamixService.getExperiment().getSensorDependencies().split(",");
+						int i=0;
+						for (String dep:listData){
+							listData[i]= dep.substring(dep.lastIndexOf(".")+1).replace("Plugin", "-Sensor");
+							i++;
+						}
+						depAdapter = new ArrayAdapter<String>(v.getContext(),R.layout.list_item, listData);			
+						list1.setAdapter(depAdapter);
+						depAdapter.notifyDataSetChanged();
+						experimentDependenciesTv.setText("Sensor Dependencies:");
+					}								
+				}
+				 
+			}
+		});
 	}
 
 	@Override
@@ -139,16 +169,28 @@ public class jobsTab extends Activity {
 				experimentToTv.setText("Submitted: " + d.toLocaleString());
 			}
 
-			experimentDependenciesTv.setText("Sensor Dependencies:");
-			dependencies = DynamixService.getExperiment().getSensorDependencies().split(",");
-			int i=0;
-			for (String dep:dependencies){
-				dependencies[i]= dep.substring(dep.lastIndexOf(".")).replace("Plugin", "-Sensor");
-				i++;
+			
+			
+			
+			
+			if (button.isChecked()) {								 
+					listData=DynamixService.getCachedExperimentalMessages();
+					depAdapter = new ArrayAdapter<String>(this,R.layout.list_item, listData);			
+					list1.setAdapter(depAdapter);
+					depAdapter.notifyDataSetChanged();
+					experimentDependenciesTv.setText("Last Messages:");
+			} else {
+				listData = DynamixService.getExperiment().getSensorDependencies().split(",");
+				int i=0;
+				for (String dep:listData){
+					listData[i]= dep.substring(dep.lastIndexOf(".")+1).replace("Plugin", "-Sensor");
+					i++;
+				}
+				depAdapter = new ArrayAdapter<String>(this,R.layout.list_item, listData);			
+				list1.setAdapter(depAdapter);
+				depAdapter.notifyDataSetChanged();
+				experimentDependenciesTv.setText("Sensor Dependencies:");
 			}
-			depAdapter = new ArrayAdapter<String>(this,	R.layout.list_item, dependencies);			
-			list1.setAdapter(depAdapter);
-			depAdapter.notifyDataSetChanged();
 
 			expNameTv.setVisibility(View.VISIBLE);
 			expDescriptionTv.setVisibility(View.VISIBLE);
@@ -158,6 +200,7 @@ public class jobsTab extends Activity {
 			experimentToTv.setVisibility(View.VISIBLE);
 			experimentDependenciesTv.setVisibility(View.VISIBLE);
 			list1.setVisibility(View.VISIBLE);
+			button.setVisibility(View.VISIBLE);
 		} else {
 			expIdTv.setText("No Currently Installed Experiment");
 			expNameTv.setVisibility(View.GONE);
@@ -167,11 +210,12 @@ public class jobsTab extends Activity {
 			experimentFromTv.setVisibility(View.GONE);
 			experimentToTv.setVisibility(View.GONE);
 			experimentDependenciesTv.setVisibility(View.GONE);
-			list1.setVisibility(View.VISIBLE);
-			dependencies = new String[] { "-","-" };
-			depAdapter = new ArrayAdapter<String>(this,	R.layout.list_item, dependencies);			
+			list1.setVisibility(View.GONE);
+			listData = new String[] { "-","-" };
+			depAdapter = new ArrayAdapter<String>(this,	R.layout.list_item, listData);			
 			list1.setAdapter(depAdapter);
 			depAdapter.notifyDataSetChanged();
+			button.setVisibility(View.GONE);
 		}
 
 	}

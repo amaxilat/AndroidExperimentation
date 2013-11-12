@@ -62,7 +62,7 @@ public class NotificationHQManager {
 		if (listSize < lsize)
 			notifications.subList(0, lsize - listSize - 1).clear();
 		
-		return notifications.toArray(new String[0]);
+		return notifications.toArray(new String[0]);  
 	}
 	
 }
