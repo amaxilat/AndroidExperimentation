@@ -5,10 +5,12 @@ import java.util.HashMap;
 import java.util.List;
 
 import android.app.Activity;
+import android.app.ListActivity;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.SharedPreferences.Editor;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.ArrayAdapter;
@@ -35,17 +37,22 @@ import eu.smartsantander.androidExperimentation.operations.NotificationHQManager
  *
  */
 
-
-
 public class securityTab extends Activity {
 
 	//List<HashMap<String,String>> sensorOptionsL=new ArrayList<HashMap<String,String>>();	
 	//HashMap<String, String> sensorOptions = new HashMap<String, String>();
 	//SimpleAdapter simpleAdptl;
-	NotificationHQManager notesManager;
-	String[] notes;
 	
-	ArrayAdapter<String> noteAdapter;
+	NotificationHQManager notesManager;
+	//String[] notes = new String[0];
+	//ArrayList<String> notes;
+	ArrayList<DebugMsg> notes;
+	
+	private final String TAG = "DEBUG TAB";
+	
+	//ArrayAdapter<String> noteAdapter;
+	DebugMsgArrayAdapter noteAdapter;
+	ListView list1;
 	
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
@@ -56,12 +63,15 @@ public class securityTab extends Activity {
 		
 		notes = notesManager.getNotifications();
 		
-		// find listview in the tab for debug messages
-		ListView list1 = (ListView) findViewById(R.id.notification_messages_list);
+		
 		
 		//simpleAdptl = new SimpleAdapter(this, sensorOptionsL, android.R.layout.simple_list_item_1, new String[] {"sensor"}, new int[] {android.R.id.text1});
 		
-		noteAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, notes);
+		//noteAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, notes);
+		noteAdapter = new DebugMsgArrayAdapter(this, android.R.layout.simple_list_item_1, notes);
+		
+		// find listview in the tab for debug messages
+		list1 = (ListView) findViewById(R.id.notification_messages_list);
 		
 		list1.setAdapter(noteAdapter);
 		
@@ -70,23 +80,25 @@ public class securityTab extends Activity {
 	@Override
 	public void onResume() {
 		super.onResume();
-//		sensorOptionsL.clear();
-//		for (ContextPluginInformation plugin : DynamixService.getAllContextPluginInfo()) {
-//			sensorOptions=new HashMap<String,String>();
-//			if (plugin.getInstallStatus() == PluginInstallStatus.INSTALLED) {
-//				sensorOptions.put("sensor",plugin.getPluginName() + ":INSTALLED");
-//			} else {
-//				sensorOptions.put("sensor",plugin.getPluginName() + ":DISABLED");				
-//				
-//			}
-//			sensorOptionsL.add(sensorOptions);	
-//			sensorOptions= new HashMap<String, String>();				
-//		}
+
+		//notes = notesManager.getNotifications();
 		
-		//simpleAdptl.notifyDataSetChanged();
+//		for (DebugMsg m : notes)
+//			Log.w(TAG, "Timestamp: " + m.getDate());
 		
+		//Log.w(TAG, "size of notes in debug is " + notes.length);
+		
+		//for (int i=0; i<notes.length; i++)
+		//	Log.w(TAG, "notes[" +i + "]="+ notes[i]);
 		notes = notesManager.getNotifications();
-		noteAdapter.notifyDataSetChanged();
+		noteAdapter = new DebugMsgArrayAdapter(this, android.R.layout.simple_list_item_1, notes);
+		list1.setAdapter(noteAdapter);
+		
+       	for (DebugMsg m : notes)
+                		Log.w(TAG, "Timestamp: " + m.getDate());
+                	//noteAdapter.notifyDataSetChanged();
+		
+		
  	}
 	
 	

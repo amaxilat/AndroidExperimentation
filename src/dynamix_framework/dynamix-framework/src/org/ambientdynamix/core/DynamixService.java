@@ -29,6 +29,7 @@ import java.security.cert.CertificateException;
 import java.security.cert.X509Certificate;
 import java.util.ArrayList;
 import java.util.Enumeration;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
@@ -203,13 +204,25 @@ public final class DynamixService extends Service {
 	
 	//SmartSantanter	
 	private static PhoneProfiler phoneProfiler=new PhoneProfiler();
-
 	private static Boolean isInitialized=false;
-	private static Communication communication= new Communication();
-	
-	private static Experiment experiment;
-	
+	private static Communication communication= new Communication();	
+	private static Experiment experiment;	
 	private static Boolean connectionStatus=false;
+	private static LinkedList<String> experimentMessageQueue=new LinkedList<String>();
+	
+	
+	public static void cacheExperimentalMessage(String message){
+		experimentMessageQueue.addLast(message);
+		if(experimentMessageQueue.size()>10)
+			experimentMessageQueue.poll();
+	}
+	
+	public static String[] getCachedExperimentalMessages(){
+		if(experimentMessageQueue.size()==0){ 
+			return new String[]{""};
+		}
+		else return experimentMessageQueue.toArray(new String[experimentMessageQueue.size()]);
+	}
 	
 	public static void setExperiment(Experiment exp){
 		if (exp!=null)
@@ -2248,7 +2261,7 @@ public final class DynamixService extends Service {
 				}
 				onDynamixStarting();
 				// Update UI
-				launchProgressDialog("Enabling Dynamix", "Starting plug-ins. Please wait...");
+				launchProgressDialog("Enabling Experimentation", "Starting Sensors. Please wait...");
 				// Set a BroadcastReceiver to startContextDetection on ACTION_SCREEN_ON events
 				wakeReceiver = new BroadcastReceiver() {
 					@Override

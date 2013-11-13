@@ -75,7 +75,7 @@
 	</string>
 	<string name="expIsEnabled">La experimentación está habilitado</string>
 	<string name="expIsDisabled">La experimentación está desactivado</string>
-	<string name="noAuthApps">No hay aplicaciones</string>   
+	<string name="noAuthApps"></string>   
 	<string name="no_context_plugins">No hay context Sensorers</string>
     <string name="installed_context_plugins">Context Sensorers</string>
     <string name="available_context_plugins">Context Sensorers disponiblos</string>

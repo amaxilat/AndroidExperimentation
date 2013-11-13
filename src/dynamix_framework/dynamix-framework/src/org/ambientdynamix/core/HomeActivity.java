@@ -57,7 +57,7 @@ public class HomeActivity extends ListActivity {
 	private DynamixApplicationAdapter adapter;
 	private ListView appList = null;
 	private Timer refresher;
-	private final Handler uiHandler = new Handler();
+	public final Handler uiHandler = new Handler();
 	private ToggleButton togglebutton = null;
 	
 	
@@ -227,7 +227,7 @@ public class HomeActivity extends ListActivity {
 		refresh();
 		
 	}
-		private void setSmartSantanderInfo(){
+		public void setSmartSantanderInfo(){
 		//SmartSantander
 			if (DynamixService.isEnabled()==true){
 				if(DynamixService.isDeviceRegistered()==false){
@@ -242,11 +242,11 @@ public class HomeActivity extends ListActivity {
 			
 			if (DynamixService.getExperiment()!=null){
 				phoneIdTv.setText("SmartSantander Device ID: "+String.valueOf(DynamixService.getPhoneProfiler().getPhoneId()));
-				expIdTv.setText("ID: "+String.valueOf(DynamixService.getExperiment().getId()));		 
-				expDescriptionTv.setText("Description: "+String.valueOf(DynamixService.getExperiment().getDescription()));			
+				expIdTv.setText("Id: "+String.valueOf(DynamixService.getExperiment().getId())+ " Name: ");		 
+				expDescriptionTv.setText(String.valueOf(DynamixService.getExperiment().getName()));			
 			}
 			
-			if (DynamixService.getConnectionStatus())
+			if (DynamixService.getConnectionStatus() && DynamixService.isEnabled())
 				connectionStatus.setText("Connected with SmartSantander Server");	
 			else
 				connectionStatus.setText("Disconnected with SmartSantander Server");
