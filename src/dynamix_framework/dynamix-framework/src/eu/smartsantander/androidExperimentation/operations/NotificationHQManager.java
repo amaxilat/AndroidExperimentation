@@ -80,10 +80,14 @@ public class NotificationHQManager {
 			
 		Log.w(TAG, "Contents of trimmed notifications list: " + notifications.toString());
 		
+<<<<<<< HEAD
 		//return notifications.toArray(new String[0]);
 		tempList = new ArrayList<DebugMsg>(notifications);
 		return tempList;
 
+=======
+		return notifications.toArray(new String[0]);  
+>>>>>>> dcd4f9cb116d3b3ad179074b964b69df1f8bc80f
 	}
 	
 }

@@ -13,3 +13,5 @@ src/dynamix_framework/dynamix_framework/gen/org/
 src/dynamix_framework/dynamix-framework/gen/org/
 src/dynamix_framework/dynamix-framework/gen/org/ambientdynamix
 src/dynamix_framework/dynamix-framework/gen/org/ambientdynamix/api/application/IDataInputStream.java src/dynamix_framework/dynamix-framework/gen/org/ambientdynamix/api/application/IDynamixFacade.java src/dynamix_framework/dynamix-framework/gen/org/ambientdynamix/api/application/IDynamixListener.java
+
+src/dynamix_framework/dynamix-framework/gen/org/ambientdynamix/core/R.java
