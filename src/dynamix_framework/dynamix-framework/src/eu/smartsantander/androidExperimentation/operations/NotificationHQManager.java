@@ -62,6 +62,12 @@ public class NotificationHQManager {
 		DebugMsg msg = new DebugMsg(note, d);
 		
 		notifications.add(msg);
+		
+		int lsize = notifications.size();
+		
+		// 40 is a reasonably large number, just for the sake of not trimming the list so often
+		if (listSize < 40)
+			notifications.subList(0, lsize - listSize - 1).clear();
 	}
 	
 	public DebugMsg getLatestNotification() {
