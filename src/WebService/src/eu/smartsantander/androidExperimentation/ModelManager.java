@@ -213,4 +213,50 @@ public class ModelManager {
         return (sb.toString());
 
     }
+	
+	// returns the total number of messages produced by a single device during a specific day
+	// Used for displaying stats for each device over the web
+
+    public static String getDailyStats(Long timestamp, int deviceID) {
+		
+		Query q = getCurrentSession().createQuery("from Result where deviceId= :devId AND timestamp>= :t");
+
+        q.setParameter("devId", Integer.valueOf(deviceID));
+        q.setParameter("t", Long.valueOf(timestamp));
+        List<Result> results=(List<Result>) q.list();
+
+        String msgTotal = String.valueOf(results.size());
+
+        return msgTotal;
+	
+	}
+
+
+    // returns the total number of messages produced by a single device during a specific week as an array
+    // with a number per day per array position
+    // Used for displaying stats for each device over the web
+
+    public static String[] getWeeklyStats(Long timestamp, int deviceID) {
+
+        Query q = getCurrentSession().createQuery("from Result where deviceId= :devId AND timestamp>= :t1 AND timestamp<= :t2");
+
+        q.setParameter("devId", Integer.valueOf(deviceID));
+        q.setParameter("t1", Long.valueOf(timestamp));
+        q.setParameter("t2", Long.valueOf(timestamp));
+
+        List<Result> results=(List<Result>) q.list();
+
+        if (results.size()==0) return null;
+
+        // dummy initialisation in case of no actual readings available
+
+        String msgTotal[] = {"Monday, 0","Tuesday, 0","Wednesday, 0","Thursday, 0","Friday, 0","Saturday, 0","Sunday, 0"};
+
+        for (int i =0; i <= 6; i++) {
+
+
+        }
+        return msgTotal;
+
+    }
 }
