@@ -21,6 +21,8 @@ import java.util.TimerTask;
 
 import org.ambientdynamix.data.DynamixPreferences;
 
+import eu.smartsantander.androidExperimentation.DataStorage;
+
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.ListActivity;
@@ -191,6 +193,8 @@ public class HomeActivity extends ListActivity {
 		 expDescriptionTv = (TextView) this.findViewById(R.id.experiment_description);
 		 connectionStatus = (TextView) this.findViewById(R.id.connection_status);
 		 appList.setVisibility(View.GONE);
+		 
+		 DynamixService.initDataStorage(this);
 		 	
 	};
 

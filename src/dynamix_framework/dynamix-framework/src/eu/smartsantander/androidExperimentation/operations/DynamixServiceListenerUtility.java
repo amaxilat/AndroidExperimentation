@@ -130,7 +130,7 @@ public class DynamixServiceListenerUtility {
 								List<String> mlist = new ArrayList<String>();
 								mlist.add(reading.getValue());
 								rObject.setResults(mlist);
-								DynamixService.getCommunication().sendReportResults(rObject.toJson());
+								DynamixService.getCommunication().sendReportResults(rObject.toJson());//
 							}
 						} else {
 							String readingMsg = plugInfo.getPayload();
