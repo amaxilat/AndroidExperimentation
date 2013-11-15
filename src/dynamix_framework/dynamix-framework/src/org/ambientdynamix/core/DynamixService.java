@@ -85,6 +85,7 @@ import org.ambientdynamix.util.Utils;
 import org.osgi.framework.ServiceEvent;
 
 import eu.smartsantander.androidExperimentation.Constants;
+import eu.smartsantander.androidExperimentation.DataStorage;
 import eu.smartsantander.androidExperimentation.jsonEntities.Experiment;
 import eu.smartsantander.androidExperimentation.jsonEntities.Plugin;
 import eu.smartsantander.androidExperimentation.jsonEntities.ReadingStorage;
@@ -92,8 +93,6 @@ import eu.smartsantander.androidExperimentation.operations.Communication;
 import eu.smartsantander.androidExperimentation.operations.Demon;
 import eu.smartsantander.androidExperimentation.operations.DynamixServiceListenerUtility;
 import eu.smartsantander.androidExperimentation.operations.PhoneProfiler;
-import eu.smartsantander.androidExperimentation.operations.Reporter;
-
 import android.app.Activity;
 import android.app.AlarmManager;
 import android.app.Notification;
@@ -119,6 +118,7 @@ import android.os.IBinder;
 import android.os.Looper;
 import android.os.RemoteException;
 import android.util.Log;
+import android.util.Pair;
 
 /**
  * The DynamixService is the primary implementation of the Dynamix Framework on the Android platform. Broadly, Dynamix
@@ -209,13 +209,36 @@ public final class DynamixService extends Service {
 	private static Experiment experiment;	
 	private static Boolean connectionStatus=false;
 	private static LinkedList<String> experimentMessageQueue=new LinkedList<String>();
+	private static DataStorage dataStorage=null;
 	
+	public static void initDataStorage(Context cnt){
+		dataStorage=new DataStorage(cnt,null,null,1);
+	}
 	
-	public static void cacheExperimentalMessage(String message){
-		experimentMessageQueue.addLast(message);
+	public static DataStorage getDataStorage(){
+		return dataStorage;
+	}
+	
+	public static Long getDataStorageSize(){
+		return dataStorage.size();
+	}
+	
+	public static synchronized Pair<Long,String> getOldestExperimentalMessage(){		
+		return dataStorage.getMessage();
+	}
+	
+	public static synchronized void deleteExperimentalMessage(Long id){
+		dataStorage.deleteProduct(id);		
+	}
+	
+	public static void cacheExperimentalMessage(String message){		 
+		dataStorage.addMessage(message);	 
+		experimentMessageQueue.addLast(message);		
 		if(experimentMessageQueue.size()>10)
 			experimentMessageQueue.poll();
 	}
+	
+	
 	
 	public static String[] getCachedExperimentalMessages(){
 		if(experimentMessageQueue.size()==0){ 
@@ -287,8 +310,6 @@ public final class DynamixService extends Service {
 	static public Demon getDemon(){
 		return demon;
 	}
-    private Reporter reporter;
-	
 	
     static public Boolean isEnabled(){
     	if(androidContext==null)return false;
