@@ -17,5 +17,5 @@
     } catch (Exception e) {
         out.print("oops");
     }
-    out.print( (new Gson()).toJson(ModelManager.getDailyStats(timestamp, devId)));
+    out.print( (new Gson()).toJson(ModelManager.getWeeklyStats(timestamp, devId)));
 %>
