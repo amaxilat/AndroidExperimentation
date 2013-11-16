@@ -14,9 +14,13 @@ public class AndroidExperimentationWS {
 
     @WebMethod
     public String reportResults(String reportJson) {
-        Report report = Report.fromJson(reportJson);
-        ModelManager.reportResults(report);
-        System.out.println(report.getDeviceId());
+        try{
+            Report report = Report.fromJson(reportJson);
+            ModelManager.reportResults(report);
+            System.out.println(report.getDeviceId());
+        }catch (Exception e){
+            System.out.println(e.getMessage());
+        }
         return "1";
     }
 
