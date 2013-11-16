@@ -13,6 +13,7 @@ import org.hibernate.Session;
 import org.hibernate.Transaction;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
 
@@ -211,6 +212,52 @@ public class ModelManager {
         sb.append(" Seconds");
 
         return (sb.toString());
+
+    }
+	
+	// returns the total number of messages produced by a single device during a specific day
+	// Used for displaying stats for each device over the web
+    // timestamp1 is midnight for the beginning of a day, for 5/11/2013 we take into account readings after 00:00 hours
+
+    public static String getDailyStats(Long timestamp1, int deviceID) {
+
+        // create and additional timestamp for the end of same day, 24 hours minus 1 millisecond
+        Long timestamp2 = timestamp1 + (24 * 60 * 60 * 1000) - 1;
+		
+		Query q = getCurrentSession().createQuery("from Result where deviceId= :devId and timestamp>= :t1 and timestamp<= :t2");
+
+        q.setParameter("devId", Integer.valueOf(deviceID));
+        q.setParameter("t1", Long.valueOf(timestamp1));
+        q.setParameter("t2", Long.valueOf(timestamp2));
+        List<Result> results=(List<Result>) q.list();
+
+        String msgTotal = String.valueOf(results.size());
+
+        return msgTotal;
+	
+	}
+
+
+    // returns the total number of messages produced by a single device during a specific week as an array
+    // with a number per day per array position. It takes as input a timestamp pointing to 00:00 of that day.
+    // Used for displaying stats for each device over the web, it utilizes getDailyStats to get stats for each day.
+
+    public static String[] getWeeklyStats(Long timestamp, int deviceID) {
+
+        // dummy initialisation in case of no actual readings available
+        String[] resultStats = new String[14];
+        int t =6;
+
+        for (int i =0; i <= 12; i+=2) {
+
+            Long tt = timestamp - t * (24 * 60 * 60 * 1000);
+            String day = new Date(tt).toString();
+            resultStats[i] = day;
+            resultStats[i+1] = getDailyStats(tt, deviceID);
+            t-=1;
+        }
+
+        return resultStats;
 
     }
 }
