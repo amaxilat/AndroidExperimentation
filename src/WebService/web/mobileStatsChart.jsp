@@ -13,62 +13,73 @@
 
 <script type="text/javascript">
 
-    function httpGet(tstamp, devId) {
-        
-		// call dataStatsRaw to get the data for a specific device after the given timestamp
-		// example link: http://blanco.cti.gr:8080/dataStatsRaw.jsp?tstamp=0&devId=53
-		var theUrl = "http://blanco.cti.gr:8080/dataStatsRaw.jsp?&tstamp=" + tstamp + "&devId=" + devId;
-        
-		var xmlHttp = null;
-        xmlHttp = new XMLHttpRequest();
-        xmlHttp.open("GET", theUrl, false);
-        xmlHttp.send(null);
-        return xmlHttp.responseText;
-    }
 
 	$(function () {
 
 
 	<%
-		String deviceID = request.getParameter("devId");
+
 		String time = request.getParameter("tstamp");
+		String deviceID = request.getParameter("devId");
 
 		Integer dId = null;
-		Integer tS = null;
+		Long tS = null;
 	
 	// deviceID and timeStamp variables
 	
 		try {
 			dId = Integer.valueOf(deviceID);
-			tS = Integer.valueOf(time);
+			tS = Long.valueOf(time);
 			out.print("var dId=" + dId.toString()+";");
 			out.print("var tS=" + tS.toString()+";");
 		} catch (Exception e) {
-        
+              out.print("alert(\"PROBLEMM \") ");
 
 		}
 	%>
 	
 		var now = new Date();
 		var startOfDay = new Date(now.getFullYear(), now.getMonth(), now.getDate());
-		var timestamp = startOfDay / 1000;
+		var timestamp = startOfDay.getTime();
 
         var plotStatsData;
 
+        function httpGet(tstamp, devId) {
+
+
+                    // call dataStatsRaw to get the data for a specific device after the given timestamp
+                    // example link: http://blanco.cti.gr:8080/dataStatsRaw.jsp?tstamp=0&devId=53
+                    var theUrl = "http://localhost:8080/dataStatsRaw.jsp?&tstamp=" + tstamp + "&devId=" + devId;
+
+
+                    var xmlHttp = null;
+                    xmlHttp = new XMLHttpRequest();
+
+                    xmlHttp.open("GET", theUrl, false);
+                    xmlHttp.send();
+
+                    return xmlHttp.responseText;
+                }
 
 		function getData() {
 
-                        var jsonDataArray = httpGet(timestamp, dId);
+            var jsonDataArray = httpGet(timestamp, dId);
 
-                        var labelsArray = [];
-                        var datasetsArray = [];
+            var labelsArray = [];
+            var datasetsArray = [];
 
-                        for (var i=0; i<=12; i+2) {
-                            labelsArray[i] = jsonDataArray[i];
-                            datasetsArray[i] = jsonDataArray[i+1];
-                        }
+            var dataArray = JSON.parse(jsonDataArray);
 
-                        plotStatsData= {
+
+            var tc = 0;
+
+            for (var i=0; i<=12; i+=2) {
+                labelsArray[tc] = dataArray[i];
+                datasetsArray[tc] = dataArray[i+1];
+                tc++;
+            }
+
+            plotStatsData= {
                             labels : labelsArray,
 
                             datasets : [
@@ -78,17 +89,20 @@
                             data : datasetsArray
                             }
                             ]
-                        }
+            }
                         
-						
+
         }	
 
     	function update() {
-		
+
+
+            getData();
 			var ctx = document.getElementById("statsChart").getContext("2d");
-			var myNewChart = new Chart(ctx).Bar(data);
+			var myNewChart = new Chart(ctx).Bar(plotStatsData);
                    
         }
+
 
         update();
     }
