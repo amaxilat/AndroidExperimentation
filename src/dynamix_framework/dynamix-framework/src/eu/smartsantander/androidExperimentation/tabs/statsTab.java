@@ -68,7 +68,7 @@ public class statsTab extends Activity implements OnSharedPreferenceChangeListen
 		
 		prefs.registerOnSharedPreferenceChangeListener(listener);
 		
-		new DownloadWebStatsTask().execute("http://blanco.cti.gr:8080/chart.jsp?id=4&devId=54");
+		new DownloadWebStatsTask().execute("http://localhost:8080/mobileStatsChart.jsp?tstamp=00000000&devId=146");
 		
 		fillStatsFields();	
 						
