@@ -7,25 +7,16 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="4ccbb714-201c-482b-a93f-dd4890c10bc1" name="Default" comment="experiment plugin plugin installation">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/web/dynamixRepository/org.ambientdynamix.contextplugins.ExperimentPluginNoiseLevel_0.9.54.jar" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/web/style/chart.css" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/web/chart.jsp" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/web/dataRaw.jsp" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/web/js/excanvas.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/web/js/jquery.flot.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../sensorPlugins/NoiseLevelPlugin/bin/NoiseLevelPlugin.apk" afterPath="$PROJECT_DIR$/../sensorPlugins/NoiseLevelPlugin/bin/NoiseLevelPlugin.apk" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../sensorPlugins/NoiseLevelPlugin/bin/classes/org/ambientdynamix/contextplugins/NoiseLevelPlugin/NoiseLevelPluginRuntime.class" afterPath="$PROJECT_DIR$/../sensorPlugins/NoiseLevelPlugin/bin/classes/org/ambientdynamix/contextplugins/NoiseLevelPlugin/NoiseLevelPluginRuntime.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../sensorPlugins/NoiseLevelPlugin/bin/classes.dex" afterPath="$PROJECT_DIR$/../sensorPlugins/NoiseLevelPlugin/bin/classes.dex" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/web/dynamixRepository/org.ambientdynamix.contextplugins.NoiseLevelPlugin_0.9.54.jar" afterPath="$PROJECT_DIR$/web/dynamixRepository/org.ambientdynamix.contextplugins.NoiseLevelPlugin_0.9.54.jar" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../sensorPlugins/ExperimentPlugin/.project" afterPath="$PROJECT_DIR$/../sensorPlugins/ExperimentPlugin/.project" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/eu/smartsantander/androidExperimentation/AndroidExperimentationWS.java" afterPath="$PROJECT_DIR$/src/eu/smartsantander/androidExperimentation/AndroidExperimentationWS.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../dynamix_framework/dynamix-framework/src/eu/smartsantander/androidExperimentation/operations/AsyncExperimentTask.java" afterPath="$PROJECT_DIR$/../dynamix_framework/dynamix-framework/src/eu/smartsantander/androidExperimentation/operations/AsyncExperimentTask.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../dynamix_framework/dynamix-framework/src/eu/smartsantander/androidExperimentation/operations/DynamixServiceListenerUtility.java" afterPath="$PROJECT_DIR$/../dynamix_framework/dynamix-framework/src/eu/smartsantander/androidExperimentation/operations/DynamixServiceListenerUtility.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../sensorPlugins/ExperimentPluginWifiScan/META-INF/MANIFEST.MF" afterPath="$PROJECT_DIR$/../sensorPlugins/ExperimentPluginWifiScan/META-INF/MANIFEST.MF" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../sensorPlugins/ExperimentPlugin/META-INF/MANIFEST.MF" afterPath="$PROJECT_DIR$/../sensorPlugins/ExperimentPlugin/META-INF/MANIFEST.MF" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/web/style/background.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/eu/smartsantander/androidExperimentation/entities/Reading.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/web/js/jquery.flot.time.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/web/lastResults.jsp" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/web/lastResultsChart.jsp" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/web/resultsChart.jsp" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/eu/smartsantander/androidExperimentation/ModelManager.java" afterPath="$PROJECT_DIR$/src/eu/smartsantander/androidExperimentation/ModelManager.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../sensorPlugins/NoiseLevelPlugin/src/org/ambientdynamix/contextplugins/NoiseLevelPlugin/NoiseLevelPluginRuntime.java" afterPath="$PROJECT_DIR$/../sensorPlugins/NoiseLevelPlugin/src/org/ambientdynamix/contextplugins/NoiseLevelPlugin/NoiseLevelPluginRuntime.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/eu/smartsantander/androidExperimentation/entities/ResultsEntity.hbm.xml" afterPath="$PROJECT_DIR$/src/eu/smartsantander/androidExperimentation/entities/ResultsEntity.hbm.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/web/experiment.jsp" afterPath="$PROJECT_DIR$/web/experiment.jsp" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/eu/smartsantander/androidExperimentation/log4j.properties" afterPath="$PROJECT_DIR$/src/eu/smartsantander/androidExperimentation/log4j.properties" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/web/results.jsp" afterPath="$PROJECT_DIR$/web/results.jsp" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <list id="ffed928d-c9fc-443c-9d9a-a806dbe1581e" name="Hibernate altered  Demon registration altered" comment="" />
@@ -41,7 +32,7 @@
     <file path="/sun-jaxws.xml" changelist="4ccbb714-201c-482b-a93f-dd4890c10bc1" time="1378283351282" ignored="false" />
     <file path="$PROJECT_DIR$/../untitled/web/WEB-INF/web.xml" changelist="4ccbb714-201c-482b-a93f-dd4890c10bc1" time="1370580348898" ignored="false" />
     <file path="$PROJECT_DIR$/../untitled/web/WEB-INF/sun-jaxws.xml" changelist="4ccbb714-201c-482b-a93f-dd4890c10bc1" time="1370580376889" ignored="false" />
-    <file path="/a.sql" changelist="4ccbb714-201c-482b-a93f-dd4890c10bc1" time="1378296441594" ignored="false" />
+    <file path="/a.sql" changelist="4ccbb714-201c-482b-a93f-dd4890c10bc1" time="1384624153298" ignored="false" />
     <file path="/dummy.sql" changelist="4ccbb714-201c-482b-a93f-dd4890c10bc1" time="1378296441594" ignored="false" />
     <file path="/hibernate.cfg.xml" changelist="4ccbb714-201c-482b-a93f-dd4890c10bc1" time="1379067140138" ignored="false" />
     <file path="/PIng.java" changelist="4ccbb714-201c-482b-a93f-dd4890c10bc1" time="1371344258430" ignored="false" />
@@ -54,8 +45,8 @@
     <file path="$PROJECT_DIR$/../TestService/.idea/misc.xml" changelist="4ccbb714-201c-482b-a93f-dd4890c10bc1" time="1372057527318" ignored="false" />
     <file path="$PROJECT_DIR$/../TestService/.idea/workspace.xml" changelist="4ccbb714-201c-482b-a93f-dd4890c10bc1" time="1372058103023" ignored="false" />
     <file path="/SmartphonesEntity.java" changelist="4ccbb714-201c-482b-a93f-dd4890c10bc1" time="1372160703885" ignored="false" />
-    <file path="/ModelManager.java" changelist="4ccbb714-201c-482b-a93f-dd4890c10bc1" time="1383656176788" ignored="false" />
-    <file path="/AndroidExperimentationWS.java" changelist="4ccbb714-201c-482b-a93f-dd4890c10bc1" time="1383661326839" ignored="false" />
+    <file path="/ModelManager.java" changelist="4ccbb714-201c-482b-a93f-dd4890c10bc1" time="1384678228132" ignored="false" />
+    <file path="/AndroidExperimentationWS.java" changelist="4ccbb714-201c-482b-a93f-dd4890c10bc1" time="1384674295650" ignored="false" />
     <file path="/PluginList.java" changelist="4ccbb714-201c-482b-a93f-dd4890c10bc1" time="1378283964835" ignored="false" />
     <file path="/header.html" changelist="4ccbb714-201c-482b-a93f-dd4890c10bc1" time="1378901240806" ignored="false" />
     <file path="/WSManager.java" changelist="4ccbb714-201c-482b-a93f-dd4890c10bc1" time="1378290946633" ignored="false" />
@@ -64,7 +55,7 @@
     <file path="/Experiment.java" changelist="4ccbb714-201c-482b-a93f-dd4890c10bc1" time="1379067057111" ignored="false" />
     <file path="/plugins.jsp" changelist="4ccbb714-201c-482b-a93f-dd4890c10bc1" time="1378298865977" ignored="false" />
     <file path="/style.css" changelist="4ccbb714-201c-482b-a93f-dd4890c10bc1" time="1378898225573" ignored="false" />
-    <file path="/experiment.jsp" changelist="4ccbb714-201c-482b-a93f-dd4890c10bc1" time="1378299265802" ignored="false" />
+    <file path="/experiment.jsp" changelist="4ccbb714-201c-482b-a93f-dd4890c10bc1" time="1384678437627" ignored="false" />
     <file path="/upload.jsp" changelist="4ccbb714-201c-482b-a93f-dd4890c10bc1" time="1378299429547" ignored="false" />
     <file path="/experiments.jsp" changelist="4ccbb714-201c-482b-a93f-dd4890c10bc1" time="1378894032268" ignored="false" />
     <file path="/newExperiment.jsp" changelist="4ccbb714-201c-482b-a93f-dd4890c10bc1" time="1378728997070" ignored="false" />
@@ -76,8 +67,7 @@
     <file path="/footer.html" changelist="4ccbb714-201c-482b-a93f-dd4890c10bc1" time="1378900644332" ignored="false" />
     <file path="/about.jsp" changelist="4ccbb714-201c-482b-a93f-dd4890c10bc1" time="1378979844071" ignored="false" />
     <file path="/experiments-overall.jsp" changelist="4ccbb714-201c-482b-a93f-dd4890c10bc1" time="1378989486240" ignored="false" />
-    <file path="$PROJECT_DIR$/META-INF/persistence.xml" changelist="4ccbb714-201c-482b-a93f-dd4890c10bc1" time="1378990148183" ignored="false" />
-    <file path="/Dummy.txt" changelist="4ccbb714-201c-482b-a93f-dd4890c10bc1" time="1383653910517" ignored="false" />
+    <file path="/Dummy.txt" changelist="4ccbb714-201c-482b-a93f-dd4890c10bc1" time="1384675621639" ignored="false" />
     <file path="/plugs.xml" changelist="4ccbb714-201c-482b-a93f-dd4890c10bc1" time="1380010819153" ignored="false" />
     <file path="$PROJECT_DIR$/web/dynamixRepository/org.ambientdynamix.contextplugins.GpsPlugin_0.9.54.jar!/bin/AndroidManifest.xml" changelist="4ccbb714-201c-482b-a93f-dd4890c10bc1" time="1382447789068" ignored="false" />
     <file path="/a.txt" changelist="4ccbb714-201c-482b-a93f-dd4890c10bc1" time="1380713889783" ignored="false" />
@@ -105,6 +95,12 @@
     <file path="/ResultsEntity.hbm.xml" changelist="4ccbb714-201c-482b-a93f-dd4890c10bc1" time="1383651742136" ignored="false" />
     <file path="/chart.jsp" changelist="4ccbb714-201c-482b-a93f-dd4890c10bc1" time="1383662928512" ignored="false" />
     <file path="/dataRaw.jsp" changelist="4ccbb714-201c-482b-a93f-dd4890c10bc1" time="1383661972268" ignored="false" />
+    <file path="/Data Source" changelist="4ccbb714-201c-482b-a93f-dd4890c10bc1" time="1384686399060" ignored="false" />
+    <file path="/lastResults.jsp" changelist="4ccbb714-201c-482b-a93f-dd4890c10bc1" time="1384691078490" ignored="false" />
+    <file path="/Reading.java" changelist="4ccbb714-201c-482b-a93f-dd4890c10bc1" time="1384686788848" ignored="false" />
+    <file path="/lastChart.jsp" changelist="4ccbb714-201c-482b-a93f-dd4890c10bc1" time="1384690284763" ignored="false" />
+    <file path="/lastResultsChart.jsp" changelist="4ccbb714-201c-482b-a93f-dd4890c10bc1" time="1384691994600" ignored="false" />
+    <file path="/results.jsp" changelist="4ccbb714-201c-482b-a93f-dd4890c10bc1" time="1384692643417" ignored="false" />
     <option name="TRACKING_ENABLED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -124,9 +120,53 @@
     <sortChildren value="false" />
   </component>
   <component name="DebuggerManager">
-    <ui_properties default_suspend_policy="SuspendAll" default_condition_enabled="true" />
     <line_breakpoints default_suspend_policy="SuspendAll" default_condition_enabled="true">
-      <breakpoint url="file://$PROJECT_DIR$/src/eu/smartsantander/androidExperimentation/ModelManager.java" line="128" class="eu.smartsantander.androidExperimentation.ModelManager" package="eu.smartsantander.androidExperimentation">
+      <breakpoint url="file://$PROJECT_DIR$/src/eu/smartsantander/androidExperimentation/ModelManager.java" line="129" class="eu.smartsantander.androidExperimentation.ModelManager" package="eu.smartsantander.androidExperimentation">
+        <option name="ENABLED" value="true" />
+        <option name="LOG_ENABLED" value="false" />
+        <option name="LOG_EXPRESSION_ENABLED" value="false" />
+        <option name="REMOVE_AFTER_HIT" value="false" />
+        <option name="SUSPEND_POLICY" value="SuspendAll" />
+        <option name="SUSPEND" value="true" />
+        <option name="COUNT_FILTER_ENABLED" value="false" />
+        <option name="COUNT_FILTER" value="0" />
+        <option name="CONDITION_ENABLED" value="true" />
+        <option name="CLASS_FILTERS_ENABLED" value="false" />
+        <option name="INSTANCE_FILTERS_ENABLED" value="false" />
+        <option name="CONDITION" value="" />
+        <option name="LOG_MESSAGE" value="" />
+      </breakpoint>
+      <breakpoint url="file://$PROJECT_DIR$/src/eu/smartsantander/androidExperimentation/AndroidExperimentationWS.java" line="68" class="eu.smartsantander.androidExperimentation.AndroidExperimentationWS" package="eu.smartsantander.androidExperimentation">
+        <option name="ENABLED" value="true" />
+        <option name="LOG_ENABLED" value="false" />
+        <option name="LOG_EXPRESSION_ENABLED" value="false" />
+        <option name="REMOVE_AFTER_HIT" value="false" />
+        <option name="SUSPEND_POLICY" value="SuspendAll" />
+        <option name="SUSPEND" value="true" />
+        <option name="COUNT_FILTER_ENABLED" value="false" />
+        <option name="COUNT_FILTER" value="0" />
+        <option name="CONDITION_ENABLED" value="true" />
+        <option name="CLASS_FILTERS_ENABLED" value="false" />
+        <option name="INSTANCE_FILTERS_ENABLED" value="false" />
+        <option name="CONDITION" value="" />
+        <option name="LOG_MESSAGE" value="" />
+      </breakpoint>
+      <breakpoint url="file://$PROJECT_DIR$/src/eu/smartsantander/androidExperimentation/AndroidExperimentationWS.java" line="76" class="eu.smartsantander.androidExperimentation.AndroidExperimentationWS" package="eu.smartsantander.androidExperimentation">
+        <option name="ENABLED" value="true" />
+        <option name="LOG_ENABLED" value="false" />
+        <option name="LOG_EXPRESSION_ENABLED" value="false" />
+        <option name="REMOVE_AFTER_HIT" value="false" />
+        <option name="SUSPEND_POLICY" value="SuspendAll" />
+        <option name="SUSPEND" value="true" />
+        <option name="COUNT_FILTER_ENABLED" value="false" />
+        <option name="COUNT_FILTER" value="0" />
+        <option name="CONDITION_ENABLED" value="true" />
+        <option name="CLASS_FILTERS_ENABLED" value="false" />
+        <option name="INSTANCE_FILTERS_ENABLED" value="false" />
+        <option name="CONDITION" value="" />
+        <option name="LOG_MESSAGE" value="" />
+      </breakpoint>
+      <breakpoint url="file://$PROJECT_DIR$/web/lastResults.jsp" line="38" class="lastResults.jsp" package="C:\Users\theodori\Desktop\AndroidExperimentation\src\WebService\web">
         <option name="ENABLED" value="true" />
         <option name="LOG_ENABLED" value="false" />
         <option name="LOG_EXPRESSION_ENABLED" value="false" />
@@ -178,6 +218,7 @@
         <option name="LOG_MESSAGE" value="" />
       </breakpoint>
     </breakpoint_any>
+    <ui_properties default_suspend_policy="SuspendAll" default_condition_enabled="true" />
     <breakpoint_rules />
     <ui_properties />
   </component>
@@ -187,37 +228,40 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="HibernateUtil.java" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/eu/smartsantander/androidExperimentation/HibernateUtil.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="31" column="46" selection-start="1093" selection-end="1093" vertical-scroll-proportion="0.0">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="AndroidExperimentationWS.java" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/eu/smartsantander/androidExperimentation/AndroidExperimentationWS.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="18" column="47" selection-start="684" selection-end="684" vertical-scroll-proportion="0.0">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
       <file leaf-file-name="ModelManager.java" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/eu/smartsantander/androidExperimentation/ModelManager.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="178" column="127" selection-start="6753" selection-end="6753" vertical-scroll-proportion="0.0">
+            <state line="181" column="59" selection-start="6763" selection-end="6763" vertical-scroll-proportion="0.0">
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="chart.jsp" pinned="false" current="true" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/web/chart.jsp">
+      <file leaf-file-name="results.jsp" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/web/results.jsp">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="47" column="49" selection-start="1625" selection-end="1631" vertical-scroll-proportion="0.52">
+            <state line="71" column="47" selection-start="2504" selection-end="2504" vertical-scroll-proportion="-15.038462">
+              <folding>
+                <element signature="e#933#950#0" expanded="true" />
+                <element signature="e#1012#1029#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="resultsChart.jsp" pinned="false" current="true" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/web/resultsChart.jsp">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="41" column="88" selection-start="2054" selection-end="2054" vertical-scroll-proportion="0.8095238">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="lastResultsChart.jsp" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/web/lastResultsChart.jsp">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="42" column="12" selection-start="2018" selection-end="2090" vertical-scroll-proportion="-7.230769">
               <folding />
             </state>
           </provider>
@@ -242,22 +286,22 @@
   <component name="IdeDocumentHistory">
     <option name="changedFiles">
       <list>
-        <option value="dbtable:/adf69c6a/ec19ba82-120f-43e6-96c5-26912937ccef/androidExperimentation..results" />
-        <option value="$PROJECT_DIR$/web/dynamixRepository/plugs.xml" />
-        <option value="dbtable:/4a56989/ec19ba82-120f-43e6-96c5-26912937ccef/androidExperimentation..plugins" />
-        <option value="$PROJECT_DIR$/web/WEB-INF/web.xml" />
-        <option value="dbtable:/4a56989/ec19ba82-120f-43e6-96c5-26912937ccef/androidExperimentation..experiments" />
-        <option value="dbtable:/4a56989/ec19ba82-120f-43e6-96c5-26912937ccef/androidexperimentation..results" />
-        <option value="$PROJECT_DIR$/src/eu/smartsantander/androidExperimentation/jsonEntities/Report.java" />
-        <option value="dbtable:/4a56989/ec19ba82-120f-43e6-96c5-26912937ccef/androidexperimentation..plugins" />
-        <option value="dbtable:/4a56989/ec19ba82-120f-43e6-96c5-26912937ccef/androidexperimentation..experiments" />
-        <option value="$PROJECT_DIR$/src/eu/smartsantander/androidExperimentation/entities/ResultsEntity.hbm.xml" />
-        <option value="$PROJECT_DIR$/web/style/chart.css.jsp" />
-        <option value="$PROJECT_DIR$/web/style/chart.css" />
-        <option value="$PROJECT_DIR$/src/eu/smartsantander/androidExperimentation/AndroidExperimentationWS.java" />
-        <option value="$PROJECT_DIR$/src/eu/smartsantander/androidExperimentation/ModelManager.java" />
-        <option value="$PROJECT_DIR$/web/dataRaw.jsp" />
         <option value="$PROJECT_DIR$/web/chart.jsp" />
+        <option value="dbtable:/4a56989/ec19ba82-120f-43e6-96c5-26912937ccef/androidexperimentation..experiments" />
+        <option value="$PROJECT_DIR$/src/log4j.properties" />
+        <option value="$PROJECT_DIR$/src/eu/smartsantander/androidExperimentation/AndroidExperimentationWS.java" />
+        <option value="dbtable:/4a56989/ec19ba82-120f-43e6-96c5-26912937ccef/androidexperimentation..results" />
+        <option value="$PROJECT_DIR$/src/eu/smartsantander/androidExperimentation/log4j.properties" />
+        <option value="$PROJECT_DIR$/src/eu/smartsantander/androidExperimentation/ModelManager.java" />
+        <option value="$PROJECT_DIR$/web/experiment.jsp" />
+        <option value="db-console:/4a56989/ec19ba82-120f-43e6-96c5-26912937ccef/" />
+        <option value="$PROJECT_DIR$/src/eu/smartsantander/androidExperimentation/entities/Reading.java" />
+        <option value="$PROJECT_DIR$/web/lastChart.jsp" />
+        <option value="$PROJECT_DIR$/web/lastResults.jsp" />
+        <option value="$PROJECT_DIR$/src/eu/smartsantander/androidExperimentation/entities/Result.java" />
+        <option value="$PROJECT_DIR$/web/results.jsp" />
+        <option value="$PROJECT_DIR$/web/lastResultsChart.jsp" />
+        <option value="$PROJECT_DIR$/web/resultsChart.jsp" />
       </list>
     </option>
   </component>
@@ -269,10 +313,10 @@
     <option name="CUSTOM_FILTER" />
   </component>
   <component name="ProjectFrameBounds">
-    <option name="x" value="1" />
-    <option name="y" value="1" />
-    <option name="width" value="1364" />
-    <option name="height" value="726" />
+    <option name="x" value="-8" />
+    <option name="y" value="-8" />
+    <option name="width" value="1936" />
+    <option name="height" value="1056" />
   </component>
   <component name="ProjectInspectionProfilesVisibleTreeState">
     <entry key="Project Default">
@@ -398,96 +442,6 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="AndroidExperimentation" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="WebService" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="web" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="style" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="AndroidExperimentation" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="WebService" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="web" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="images" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="AndroidExperimentation" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="WebService" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="src" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="AndroidExperimentation" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="WebService" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="src" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="androidExperimentation" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="AndroidExperimentation" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="WebService" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="src" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="androidExperimentation" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="entities" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
         </subPane>
       </pane>
       <pane id="Scope">
@@ -497,7 +451,7 @@
   </component>
   <component name="PropertiesComponent">
     <property name="GenerateAntBuildDialog.generateIdeaHomeProperty" value="false" />
-    <property name="project.structure.last.edited" value="Project" />
+    <property name="project.structure.last.edited" value="Modules" />
     <property name="project.structure.proportion" value="0.15" />
     <property name="options.splitter.main.proportions" value="0.3" />
     <property name="Repository.Attach.JavaDocs" value="false" />
@@ -533,11 +487,11 @@
       <recent name="eu.smartsantander.androidExperimentation" />
     </key>
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\theodori\Desktop\AndroidExperimentation\src\WebService\web\style" />
       <recent name="C:\Users\theodori\Desktop\AndroidExperimentation\src\WebService\web" />
+      <recent name="C:\Users\theodori\Desktop\AndroidExperimentation\src\WebService\web\js" />
+      <recent name="C:\Users\theodori\Desktop\AndroidExperimentation\src\WebService\src\eu\smartsantander\androidExperimentation\entities" />
       <recent name="C:\Users\theodori\Desktop\AndroidExperimentation\src\WebService\web\dynamixRepository" />
-      <recent name="$PROJECT_DIR$/web/experimentRepository" />
-      <recent name="$PROJECT_DIR$/web/dynamixRepository" />
-      <recent name="$PROJECT_DIR$/web" />
     </key>
     <key name="CreateClassDialog.RecentsKey">
       <recent name="helloworld" />
@@ -547,11 +501,11 @@
       <recent name="helloworld" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\theodori\Desktop\AndroidExperimentation\src\WebService\src\eu\smartsantander\androidExperimentation" />
       <recent name="C:\Users\theodori\Desktop\AndroidExperimentation\src\WebService\web\js" />
       <recent name="$PROJECT_DIR$/AndroidExperimentationWeb/web" />
       <recent name="$PROJECT_DIR$/src" />
       <recent name="$PROJECT_DIR$/src/eu/smartsantander/androidExperimentation/entities" />
-      <recent name="$PROJECT_DIR$/lib" />
     </key>
   </component>
   <component name="RunManager" selected="Tomcat Server.Tomcat 7.0">
@@ -784,7 +738,7 @@
     </configuration>
     <configuration default="false" name="Tomcat 7.0" type="#com.intellij.j2ee.web.tomcat.TomcatRunConfigurationFactory" factoryName="Local" APPLICATION_SERVER_NAME="Tomcat 7.0">
       <option name="OPEN_IN_BROWSER_URL" value="http://blanco.cti.gr:8080/" />
-      <option name="COMMON_VM_ARGUMENTS" value="-Xmx25m -XX:MaxPermSize=128m" />
+      <option name="COMMON_VM_ARGUMENTS" value="-Xmx256m -XX:MaxPermSize=256m" />
       <option name="UPDATING_POLICY" value="restart-server" />
       <deployment>
         <artifact name="AndroidExperimentationWS:Web exploded">
@@ -861,8 +815,8 @@
       </method>
     </configuration>
     <list size="2">
-      <item index="0" class="java.lang.String" itemvalue="Tomcat Server.Tomcat 7.0" />
-      <item index="1" class="java.lang.String" itemvalue="Application.Main" />
+      <item index="0" class="java.lang.String" itemvalue="Application.Main" />
+      <item index="1" class="java.lang.String" itemvalue="Tomcat Server.Tomcat 7.0" />
     </list>
     <recent_temporary>
       <list size="2">
@@ -940,30 +894,31 @@
     </todo-panel>
   </component>
   <component name="ToolWindowManager">
-    <frame x="1" y="1" width="1364" height="726" extended-state="0" />
-    <editor active="false" />
+    <frame x="-8" y="-8" width="1936" height="1056" extended-state="7" />
+    <editor active="true" />
     <layout>
+      <window_info id="Database Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32924107" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
       <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.6177474" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="JetGradle" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="Persistence" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.29868075" sideWeight="0.27531284" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
-      <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.17204301" sideWeight="0.29151943" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.17182498" sideWeight="0.57366073" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.70848054" sideWeight="0.8863287" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.4263393" sideWeight="0.8858058" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="IDEtalk Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="15" side_tool="false" content_ui="tabs" />
-      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.70848054" sideWeight="0.11367127" order="8" side_tool="true" content_ui="tabs" />
+      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.4263393" sideWeight="0.11419424" order="8" side_tool="true" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.24878444" sideWeight="0.67190224" order="4" side_tool="true" content_ui="tabs" />
       <window_info id="IDEtalk" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4334471" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
-      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.2536974" sideWeight="0.5" order="11" side_tool="false" content_ui="tabs" />
+      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4296875" sideWeight="0.5" order="11" side_tool="false" content_ui="tabs" />
       <window_info id="CDI" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
-      <window_info id="Web" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.24878444" sideWeight="0.67190224" order="3" side_tool="true" content_ui="tabs" />
+      <window_info id="Web" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.2801494" sideWeight="0.20982143" order="3" side_tool="true" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32687926" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.24865447" sideWeight="0.5263761" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="SLIDING" type="SLIDING" visible="false" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Application Servers" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32460135" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.28033793" sideWeight="0.29151943" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.2801494" sideWeight="0.3627232" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32589287" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="SVN Repositories" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32992035" sideWeight="0.5" order="16" side_tool="false" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
@@ -1095,113 +1050,120 @@
     <option name="FILTER_TARGETS" value="false" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="jar://$PROJECT_DIR$/lib/gson-1.1.jar!/com/google/gson/Gson.class">
+    <entry file="file://$PROJECT_DIR$/web/experiment.jsp">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="19" column="11" selection-start="1050" selection-end="1050" vertical-scroll-proportion="0.8056872" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/eu/smartsantander/androidExperimentation/jsonEntities/Report.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="57" column="0" selection-start="1016" selection-end="1016" vertical-scroll-proportion="1.4899598">
-          <folding>
-            <element signature="imports" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="dbDummy://dbtable:/4a56989/ec19ba82-120f-43e6-96c5-26912937ccef/androidexperimentation..experiments">
-      <provider selected="true" editor-type-id="com.intellij.persistence.database.editor.DatabaseTableFileEditorProvider">
-        <state />
-      </provider>
-      <provider editor-type-id="text-editor">
-        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/eu/smartsantander/androidExperimentation/entities/ExperimentsEntity.hbm.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0">
+        <state line="96" column="99" selection-start="2496" selection-end="2496" vertical-scroll-proportion="-21.307692">
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/hibernate.cfg.xml">
+    <entry file="file://$PROJECT_DIR$/web/style/style.css">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="15" column="81" selection-start="1048" selection-end="1048" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/eu/smartsantander/androidExperimentation/entities/ResultsEntity.hbm.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="10" column="42" selection-start="500" selection-end="500" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/web/about.jsp">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="36" column="0" selection-start="2743" selection-end="2816" vertical-scroll-proportion="-12.346154">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/web/style/chart.css">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="96" column="1" selection-start="1891" selection-end="1891" vertical-scroll-proportion="0.9307536" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/web/results.jsp">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="0" column="0" selection-start="0" selection-end="75" vertical-scroll-proportion="-0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://$APPLICATION_HOME_DIR$/plugins/JavaScriptLanguage/lib/JavascriptLanguage.jar!/com/intellij/lang/javascript/index/predefined/EcmaScript.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="137" column="16" selection-start="2168" selection-end="2168" vertical-scroll-proportion="0.3328467">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/log4j.properties">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/eu/smartsantander/androidExperimentation/HibernateUtil.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="31" column="46" selection-start="1093" selection-end="1093" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/eu/smartsantander/androidExperimentation/AndroidExperimentationWS.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="18" column="47" selection-start="684" selection-end="684" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/eu/smartsantander/androidExperimentation/ModelManager.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="178" column="127" selection-start="6753" selection-end="6753" vertical-scroll-proportion="0.0">
+        <state line="19" column="0" selection-start="313" selection-end="313" vertical-scroll-proportion="-0.66341466">
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/web/dataRaw.jsp">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="17" column="35" selection-start="651" selection-end="651" vertical-scroll-proportion="0.5586854">
+        <state line="21" column="54" selection-start="760" selection-end="760" vertical-scroll-proportion="-13.730769">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$PROJECT_DIR$/web/dynamixRepository/org.ambientdynamix.contextplugins.GpsPlugin_0.9.54.jar!/bin/classes/eu/smartsantander/androidExperimentation/jsonEntities/Reading.class">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="6" column="13" selection-start="196" selection-end="196" vertical-scroll-proportion="0.12142857">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/eu/smartsantander/androidExperimentation/entities/ResultsEntity.hbm.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="6" column="4" selection-start="218" selection-end="218" vertical-scroll-proportion="0.20731707">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="dbDummy://db-console:/4a56989/ec19ba82-120f-43e6-96c5-26912937ccef/">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="0" column="38" selection-start="0" selection-end="37" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="dbDummy://dbtable:/4a56989/ec19ba82-120f-43e6-96c5-26912937ccef/androidexperimentation..results">
+      <provider selected="true" editor-type-id="com.intellij.persistence.database.editor.DatabaseTableFileEditorProvider">
+        <state />
+      </provider>
+      <provider editor-type-id="text-editor">
+        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/eu/smartsantander/androidExperimentation/entities/Reading.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="18" column="8" selection-start="411" selection-end="411" vertical-scroll-proportion="0.5302144">
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/web/chart.jsp">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="47" column="49" selection-start="1625" selection-end="1631" vertical-scroll-proportion="0.52">
+        <state line="10" column="0" selection-start="287" selection-end="355" vertical-scroll-proportion="-5.8846154">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/web/js/jquery.flot.time.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/eu/smartsantander/androidExperimentation/entities/Result.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="52" column="0" selection-start="995" selection-end="1019" vertical-scroll-proportion="0.600271">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/web/lastResults.jsp">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="11" column="0" selection-start="419" selection-end="2406" vertical-scroll-proportion="-0.5969101">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/eu/smartsantander/androidExperimentation/ModelManager.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="181" column="59" selection-start="6763" selection-end="6763" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/web/lastResultsChart.jsp">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="42" column="12" selection-start="2018" selection-end="2090" vertical-scroll-proportion="-7.230769">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/web/results.jsp">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="71" column="47" selection-start="2504" selection-end="2504" vertical-scroll-proportion="-15.038462">
+          <folding>
+            <element signature="e#933#950#0" expanded="true" />
+            <element signature="e#1012#1029#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/web/resultsChart.jsp">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="41" column="88" selection-start="2054" selection-end="2054" vertical-scroll-proportion="0.8095238">
           <folding />
         </state>
       </provider>

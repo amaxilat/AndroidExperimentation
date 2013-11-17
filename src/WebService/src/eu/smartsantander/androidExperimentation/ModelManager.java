@@ -176,6 +176,27 @@ public class ModelManager {
         return (List<Result>) q.list();
     }
 
+    public static List<Result> getLastResults(Integer experimentId) {
+        if (experimentId == null)
+            return new ArrayList<Result>();
+        Query q = getCurrentSession().createQuery("from Result where experimentId = :expId order by timestamp desc");
+        q.setFirstResult(0);
+        q.setMaxResults(50);
+        q.setParameter("expId", Integer.valueOf(experimentId));
+        return (List<Result>) q.list();
+    }
+
+    public static Long getResultSize(Integer experimentId) {
+        if (experimentId == null)
+            return 0L;
+        Query q = getCurrentSession().createQuery("Select count(*) from Result where experimentId = :expId ");
+        q.setParameter("expId", Integer.valueOf(experimentId));
+        Object x=q.list().get(0);
+        String xval=String.valueOf(x);
+        return Long.valueOf(xval);
+    }
+
+
     public static String [] getResults(Integer experimentId, Long timestamp, int deviceID) {
         Query q = getCurrentSession().createQuery("from Result where experimentId = :expId AND deviceId= :devId AND timestamp>= :t");
         q.setParameter("expId", Integer.valueOf(experimentId));
