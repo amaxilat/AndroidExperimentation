@@ -136,7 +136,8 @@ public class AsyncExperimentTask extends AsyncTask<String, Void, String> {
 						oldExpId=DynamixService.getExperiment().getId();
 					}
 					boolean flag=DynamixService.isExperimentInstalled(experiment.getContextType());
-					if (experiment.getId()==oldExpId && flag==true){						
+					if (experiment.getId()==oldExpId && flag==true){		
+						DynamixService.addTotalTimeConnectedOnline(Constants.EXPERIMENT_POLL_INTERVAL);
 						Log.i(TAG, "Experiment still the same");
 						throw new Exception("Experiment still the same");						
 					}

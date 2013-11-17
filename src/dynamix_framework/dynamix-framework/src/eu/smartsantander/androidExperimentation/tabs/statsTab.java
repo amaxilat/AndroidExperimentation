@@ -4,6 +4,7 @@ import java.io.BufferedReader;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.util.Date;
+import java.util.concurrent.TimeUnit;
 
 import org.ambientdynamix.core.DynamixService;
 import org.ambientdynamix.core.R;
@@ -37,6 +38,8 @@ public class statsTab extends Activity implements OnSharedPreferenceChangeListen
 	OnSharedPreferenceChangeListener listener;
 	PhoneProfiler pProfil;
 	SharedPreferences prefs;
+	WebView myWebView;
+	WebSettings webSettings;
 	
 	@Override
     public void onCreate(Bundle savedInstanceState) {
@@ -47,7 +50,11 @@ public class statsTab extends Activity implements OnSharedPreferenceChangeListen
 		
 		pProfil = DynamixService.getPhoneProfiler();
 		
+	    myWebView = (WebView) findViewById(R.id.statswebview);
 		
+		webSettings = myWebView.getSettings();
+		webSettings.setJavaScriptEnabled(true);		 
+		webSettings.setSupportZoom(true);
 		
 		
 		prefs = getSharedPreferences("phoneId", Context.MODE_PRIVATE);
@@ -68,7 +75,7 @@ public class statsTab extends Activity implements OnSharedPreferenceChangeListen
 		
 		prefs.registerOnSharedPreferenceChangeListener(listener);
 		
-		new DownloadWebStatsTask().execute("http://localhost:8080/mobileStatsChart.jsp?tstamp=00000000&devId=146");
+		new DownloadWebStatsTask().execute("http://blanco.cti.gr:8080/mobileStatsChart.jsp?tstamp=00000000&devId=146");
 		
 		fillStatsFields();	
 						
@@ -85,7 +92,7 @@ public class statsTab extends Activity implements OnSharedPreferenceChangeListen
 	@Override
 	public void onResume() {
 		super.onResume();
-		new DownloadWebStatsTask().execute("http://blanco.cti.gr:8080/chart.jsp?id=4&devId=54");
+		new DownloadWebStatsTask().execute("http://blanco.cti.gr:8080/mobileStatsChart.jsp?tstamp=00000000&devId=146");
 
 	}
 	
@@ -97,22 +104,20 @@ public class statsTab extends Activity implements OnSharedPreferenceChangeListen
 		TextView statsTextView4 = (TextView) findViewById(R.id.stats_number_exp_value);
 		TextView statsTextView5 = (TextView) findViewById(R.id.stats_number_readings_title);
 		TextView statsTextView6 = (TextView) findViewById(R.id.stats_number_readings_value);
-		TextView statsTextView7 = (TextView) findViewById(R.id.stats_comparison_title);
-		TextView statsTextView8 = (TextView) findViewById(R.id.stats_comparison_value);
 		TextView statsTextView9 = (TextView) findViewById(R.id.stats_graph_title);
 		
 		//String totalMinutes = pProfil.getLastOnlineLogin().toString();
 		
 		//String totalMinutes = new Date().toString();
 		
-		statsTextView1.setText("Total time online");
-		statsTextView2.setText("Not available");
+		statsTextView1.setText("Total time online (Hours)");
+		
+     	statsTextView2.setText(String.format("%.3g%n",(float) TimeUnit.MILLISECONDS.toSeconds(DynamixService.getTotalTimeConnectedOnline())/3600));
+     	int experiments=DynamixService.getPhoneProfiler().getExperiments().size();
 		statsTextView3.setText("Number of experiments run");
-		statsTextView4.setText("Not available");
+		statsTextView4.setText(String.valueOf(experiments));
 		statsTextView5.setText("Number of readings produced");
 		statsTextView6.setText("Not available");
-		statsTextView7.setText("Comparison with other users");
-		statsTextView8.setText("Not available");
 		statsTextView9.setText("Statistics for previous 7 days");
 		
 		
@@ -149,11 +154,10 @@ public class statsTab extends Activity implements OnSharedPreferenceChangeListen
 	    protected void onPostExecute(String result) {
 	      
 	    	fillStatsFields();
-	    	WebView myWebView = (WebView) findViewById(R.id.statswebview);
+	    	myWebView = (WebView) findViewById(R.id.statswebview);
 			
-			//WebSettings webSettings = myWebView.getSettings();
-			//webSettings.setJavaScriptEnabled(true);
-			
+			webSettings = myWebView.getSettings();
+			webSettings.setJavaScriptEnabled(true);			
 			myWebView.loadData(result, "text/html", "utf-8");
 	    	
 	    }
