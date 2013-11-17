@@ -12,6 +12,8 @@ import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -176,6 +178,27 @@ public class ModelManager {
         return (List<Result>) q.list();
     }
 
+    public static List<Result> getLastResults(Integer experimentId) {
+        if (experimentId == null)
+            return new ArrayList<Result>();
+        Query q = getCurrentSession().createQuery("from Result where experimentId = :expId order by timestamp desc");
+        q.setFirstResult(0);
+        q.setMaxResults(50);
+        q.setParameter("expId", Integer.valueOf(experimentId));
+        return (List<Result>) q.list();
+    }
+
+    public static Long getResultSize(Integer experimentId) {
+        if (experimentId == null)
+            return 0L;
+        Query q = getCurrentSession().createQuery("Select count(*) from Result where experimentId = :expId ");
+        q.setParameter("expId", Integer.valueOf(experimentId));
+        Object x=q.list().get(0);
+        String xval=String.valueOf(x);
+        return Long.valueOf(xval);
+    }
+
+
     public static String [] getResults(Integer experimentId, Long timestamp, int deviceID) {
         Query q = getCurrentSession().createQuery("from Result where experimentId = :expId AND deviceId= :devId AND timestamp>= :t");
         q.setParameter("expId", Integer.valueOf(experimentId));
@@ -251,7 +274,8 @@ public class ModelManager {
         for (int i =0; i <= 12; i+=2) {
 
             Long tt = timestamp - t * (24 * 60 * 60 * 1000);
-            String day = new Date(tt).toString();
+            DateFormat df = new SimpleDateFormat("dd/MM/yy");
+            String day = df.format(new Date(tt));
             resultStats[i] = day;
             resultStats[i+1] = getDailyStats(tt, deviceID);
             t-=1;

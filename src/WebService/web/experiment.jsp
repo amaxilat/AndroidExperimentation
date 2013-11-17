@@ -34,7 +34,7 @@
         </tr>
         <tr>
             <th>Number of Reported Readings</th>
-            <td><%= ModelManager.getResults(experiment.getId()).size()%>
+            <td><%= ModelManager.getResultSize(experiment.getId())%>
             </td>
         </tr>
         </thead>
@@ -92,6 +92,10 @@
 
         </thead>
     </table>
+    <%
+        out.print("<h3> <a href='lastResults.jsp?id="+experiment.getId() + "'>Get Latest 50 Results</a>" + "</h3>");
+        out.print("<h3> <a href='results.jsp?id="+experiment.getId() + "'>Get  Results</a>" + "</h3>");
+    %>
 </div>
 <%
 } else{
