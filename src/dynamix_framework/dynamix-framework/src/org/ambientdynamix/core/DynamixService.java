@@ -231,8 +231,11 @@ public final class DynamixService extends Service {
 		dataStorage.deleteProduct(id);		
 	}
 	
-	public static void cacheExperimentalMessage(String message){		 
-		dataStorage.addMessage(message);	 
+	public static synchronized void addExperimentalMessage(String message){
+		dataStorage.addMessage(message);		
+	}
+	
+	public static void cacheExperimentalMessage(String message){		 			
 		experimentMessageQueue.addLast(message);		
 		if(experimentMessageQueue.size()>10)
 			experimentMessageQueue.poll();

@@ -36,6 +36,8 @@ public class AsyncReportOnServerTask extends AsyncTask<String, Void, String> {
 			}			
 		}catch(Exception e){
 			//no communication do nothing
+			Log.i("AsyncReportOnServerTask", "Experiment Reporting Exception:"+e.getMessage());
+			
 		}		
 		return "AsyncReportOnServerTask Executed";
 	}

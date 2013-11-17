@@ -7,10 +7,10 @@
     <application android:icon="@drawable/smartsantander_logo" >
         <activity
             android:name="org.ambientdynamix.core.BaseActivity"
-            android:screenOrientation="portrait"
             android:configChanges="orientation|keyboardHidden"
             android:label="@string/app_name"
-            android:launchMode="singleTop" >
+            android:launchMode="singleTop"
+            android:screenOrientation="portrait" >
 
             <!-- android:theme="@android:style/Theme.NoTitleBar"> -->
             <intent-filter>
@@ -92,11 +92,13 @@
                 <action android:name="org.ambientdynamix.api.application.IDynamixFacade" />
             </intent-filter>
         </service>
+        
+        
         <!--
       <service android:enabled="true" android:exported="false" android:label="Dynamix 
       Context Plugin Host" android:name="ContextPluginHost" android:process=":ContextPluginHost"> 
       <intent-filter> <action android:name="org.ambientdynamix.api.application.IDynamixFacade"/> 
-      </intent-filter> </service>
+      </intent-filter> </service>
         -->
 
         <receiver
@@ -124,57 +126,52 @@
             android:label="@string/title_activity_test"
             android:theme="@android:style/Theme.Dialog" >
         </activity>
-        
-        
-        
-        <!-- SmartSantander Android Experimentation -->                       
+
+        <!-- SmartSantander Android Experimentation -->
         <activity
-            android:label="profileTab"
-            android:name="eu.smartsantander.androidExperimentation.tabs.profileTab" >
-        </activity> 
-        
+            android:name="eu.smartsantander.androidExperimentation.tabs.profileTab"
+            android:label="profileTab" >
+        </activity>
         <activity
-            android:label="dynamixTab"
-            android:name="eu.smartsantander.androidExperimentation.tabs.dynamixTab" >
-        </activity> 
-        
+            android:name="eu.smartsantander.androidExperimentation.tabs.dynamixTab"
+            android:label="dynamixTab" >
+        </activity>
         <activity
-            android:label="jobsTab"
-            android:name="eu.smartsantander.androidExperimentation.tabs.jobsTab" >
-        </activity> 
-        
+            android:name="eu.smartsantander.androidExperimentation.tabs.jobsTab"
+            android:label="jobsTab" >
+        </activity>
         <activity
-            android:label="reportTab"
-            android:name="eu.smartsantander.androidExperimentation.tabs.reportTab" >
-        </activity> 
-        
+            android:name="eu.smartsantander.androidExperimentation.tabs.reportTab"
+            android:label="reportTab" >
+        </activity>
         <activity
-            android:label="securityTab"
-            android:name="eu.smartsantander.androidExperimentation.tabs.securityTab" >
-        </activity> 
-        
+            android:name="eu.smartsantander.androidExperimentation.tabs.securityTab"
+            android:label="securityTab" >
+        </activity>
         <activity
-            android:label="statsTab"
-            android:name="eu.smartsantander.androidExperimentation.tabs.statsTab" >
-        </activity> 
-        		   
-		<service android:name="eu.smartsantander.androidExperimentation.AndroidExperimentationService">
-    		<intent-filter>
-        		<action android:name="eu.smartsantander.androidExperimentation.AndroidExperimentationService"/>
-    		</intent-filter>
-    	</service>  
-    	
-		<receiver
-  			android:name=".NetworkChangeReceiver"
-  			android:label="NetworkChangeReceiver">
-		  <intent-filter>
-		    <action android:name="android.net.conn.CONNECTIVITY_CHANGE" />
-		    <action android:name="android.net.wifi.WIFI_STATE_CHANGED" />
-		  </intent-filter>
-		</receiver>
+            android:name="eu.smartsantander.androidExperimentation.tabs.statsTab"
+            android:label="statsTab" >
+        </activity>
+
+        <service android:name="eu.smartsantander.androidExperimentation.AndroidExperimentationService" >
+            <intent-filter>
+                <action android:name="eu.smartsantander.androidExperimentation.AndroidExperimentationService" />
+            </intent-filter>
+        </service>
+
+        <receiver
+            android:name="eu.smartsantander.androidExperimentation.operations.NetworkChangeReceiver"
+            android:label="NetworkChangeReceiver" 
+            android:enabled="true">
+            <intent-filter>
+                <action android:name="android.net.conn.CONNECTIVITY_CHANGE" />
+                <action android:name="android.net.wifi.WIFI_STATE_CHANGED" />
+            </intent-filter>
+        </receiver>        
     </application>
 
     <uses-sdk android:minSdkVersion="5" />
+
     <uses-permission android:name="android.permission.BLUETOOTH" />
     <uses-permission android:name="android.permission.BLUETOOTH_ADMIN" />
     <uses-permission android:name="android.permission.INTERNET" />
@@ -202,12 +199,12 @@
     <uses-permission android:name="android.permission.READ_SMS" />
     <uses-permission android:name="android.permission.READ_SOCIAL_STREAM" />
     <uses-permission android:name="com.android.browser.permission.READ_HISTORY_BOOKMARKS" />
-    <uses-permission android:name="android.permission.GET_TASKS" /> 
+    <uses-permission android:name="android.permission.GET_TASKS" />
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
-    <uses-permission android:name="android.permission.READ_PHONE_STATE" /> 
+    <uses-permission android:name="android.permission.READ_PHONE_STATE" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
-    <uses-permission android:name="android.permission.INTERNET"/>
-    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
-     <uses-permission android:name="android.permission.ACCESS_MOCK_LOCATION" /> 
-    
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.ACCESS_MOCK_LOCATION" />
+
 </manifest>

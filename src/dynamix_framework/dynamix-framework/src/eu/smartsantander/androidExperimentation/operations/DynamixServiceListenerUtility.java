@@ -130,7 +130,11 @@ public class DynamixServiceListenerUtility {
 								List<String> mlist = new ArrayList<String>();
 								mlist.add(reading.getValue());
 								rObject.setResults(mlist);
-								DynamixService.getCommunication().sendReportResults(rObject.toJson());//
+								try{ //try to send to server, on fail save it in SQLite
+									DynamixService.getCommunication().sendReportResults(rObject.toJson());//
+								}catch(Exception e){
+									DynamixService.addExperimentalMessage(rObject.toJson());
+								}
 							}
 						} else {
 							String readingMsg = plugInfo.getPayload();
