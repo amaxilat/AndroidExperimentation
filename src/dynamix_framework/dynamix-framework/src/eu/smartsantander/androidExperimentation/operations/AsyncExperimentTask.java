@@ -1,6 +1,7 @@
 package eu.smartsantander.androidExperimentation.operations;
 
 import org.ambientdynamix.api.application.IdResult;
+import org.ambientdynamix.core.BaseActivity;
 import org.ambientdynamix.core.DynamixService;
  
 
@@ -148,10 +149,14 @@ public class AsyncExperimentTask extends AsyncTask<String, Void, String> {
 						DynamixService.setExperiment(experiment);
 						DynamixService.startExperiment();
 						DynamixService.stopFramework();
+						DynamixService.setRestarting(true);
+						DynamixService.setTitleBarRestarting(true);
 						Thread.sleep(5000);
 						DynamixService.startFramework();
 						Thread.sleep(10000);
 						DynamixServiceListenerUtility.start();
+						DynamixService.setRestarting(false);
+						DynamixService.setTitleBarRestarting(false);
 					} catch (Exception e) {
 						e.printStackTrace();
 						if (DynamixService.isNetworkAvailable()==false){

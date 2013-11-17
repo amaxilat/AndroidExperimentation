@@ -133,6 +133,13 @@ public class BaseActivity extends TabActivity {
 					//+ " is enabled");
 	}
 
+	protected static void setTitlebarRestarting() {//smartsantander
+		if (baseActivity != null)
+			baseActivity.changeTitlebarState(Color.rgb(255, 153, 0), myRes.getString(R.string.dynamix_restarting) );//"Experimentation"
+					//+ DynamixService.getFrameworkVersion()
+					//+ " is enabled");
+	}
+	
 	public static boolean isActivityVisible() {
 		return activityVisible;
 	}
@@ -372,8 +379,12 @@ public class BaseActivity extends TabActivity {
 			setTitlebarEnabled();
 			
 		}
-		else
-			setTitlebarDisabled();
+		else{
+			if(DynamixService.getRestarting()==true)
+				setTitlebarRestarting();
+			else
+				setTitlebarDisabled();
+		}
 
 	 
 	}

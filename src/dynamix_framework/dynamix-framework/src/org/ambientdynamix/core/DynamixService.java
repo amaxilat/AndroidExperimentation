@@ -210,6 +210,17 @@ public final class DynamixService extends Service {
 	private static Boolean connectionStatus=false;
 	private static LinkedList<String> experimentMessageQueue=new LinkedList<String>();
 	private static DataStorage dataStorage=null;
+	private static Demon demon=new Demon();
+	public static boolean sessionStarted;
+	private static boolean restarting=false;
+	
+	public static boolean getRestarting(){
+		return restarting;
+	}
+	
+	public static void setRestarting(boolean state){
+		restarting=state;
+	}
 	
 	public static void initDataStorage(Context cnt){
 		dataStorage=new DataStorage(cnt,null,null,1);
@@ -306,9 +317,6 @@ public final class DynamixService extends Service {
 		return communication;
 	}
 	
-	private static Demon demon=new Demon();
-	
-	public static boolean sessionStarted;
 	
 	static public Demon getDemon(){
 		return demon;
@@ -2913,4 +2921,24 @@ public final class DynamixService extends Service {
 	public static void setConnectionStatus(Boolean status) {
 		connectionStatus=status;
 	}
+
+	public static void setTitleBarRestarting(boolean flag) {
+
+		if (flag==true){
+			uiHandle.post(new Runnable() {
+				public void run() {
+					BaseActivity.setTitlebarRestarting();
+				}
+			});
+		}else{
+			uiHandle.post(new Runnable() {
+				public void run() {
+					BaseActivity.setTitlebarEnabled();
+				}
+			});
+		}
+		
+	}
+
+ 
 }

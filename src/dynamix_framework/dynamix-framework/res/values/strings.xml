@@ -20,6 +20,7 @@
     <string name="plug_fidelity_label">Supported Context Information</string>
     <string name="dynamix_enable_toggle_on">Experimentation is Enabled</string>
     <string name="dynamix_enable_toggle_off">Experimentation is Disabled</string>
+    <string name="dynamix_restarting">Experimentation is Restarting</string>
     <string name="plugin_enable_toggle_on">Plugin Enabled</string>
     <string name="plugin_enable_toggle_off">Plugin Disabled</string>
     <string name="btn_plugin_uninstall">Uninstall Plugin</string>
