@@ -213,6 +213,15 @@ public final class DynamixService extends Service {
 	private static Demon demon=new Demon();
 	public static boolean sessionStarted;
 	private static boolean restarting=false;
+	private static long totalTimeConnectedOnline=0;
+	
+	public static long getTotalTimeConnectedOnline(){
+		return totalTimeConnectedOnline;
+	}
+	
+	public static void addTotalTimeConnectedOnline(long time){
+		totalTimeConnectedOnline+=time;
+	}
 	
 	public static boolean getRestarting(){
 		return restarting;

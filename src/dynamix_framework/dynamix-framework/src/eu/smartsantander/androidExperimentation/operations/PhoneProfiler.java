@@ -31,7 +31,7 @@ public class PhoneProfiler extends Thread implements Runnable {
 	private Editor editor;	
 	private Boolean started=false;
 	private int PHONE_ID=Constants.PHONE_ID_UNITIALIZED;
-	private List<Experiment> experiments;
+	private List<Experiment> experiments =new ArrayList<Experiment>();
 
 	private final String TAG = this.getClass().getSimpleName();
 
@@ -39,6 +39,8 @@ public class PhoneProfiler extends Thread implements Runnable {
 		this.PHONE_ID = Constants.PHONE_ID_UNITIALIZED;
 	}
 
+ 
+	
 	public Boolean getStarted(){
 		return started;
 	}
@@ -51,7 +53,7 @@ public class PhoneProfiler extends Thread implements Runnable {
 		try {
 			Log.d(TAG, "running");
 			Thread.sleep(5000);  
-			pref = DynamixService.getAndroidContext().getApplicationContext().getSharedPreferences("phoneId",0);
+			pref = DynamixService.getAndroidContext().getApplicationContext().getSharedPreferences("SmartSantanderConfigurations",0);
 			editor = pref.edit();
 			if ((pref.contains("phoneId"))) {
 				this.PHONE_ID = pref.getInt("phoneId", 0);
@@ -94,7 +96,7 @@ public class PhoneProfiler extends Thread implements Runnable {
 	public void setPhoneId(int PHONE_ID) {
 		this.PHONE_ID = PHONE_ID;
 		if (editor==null){
-			pref = DynamixService.getAndroidContext().getApplicationContext().getSharedPreferences("phoneId",0);
+			pref = DynamixService.getAndroidContext().getApplicationContext().getSharedPreferences("SmartSantanderConfigurations",0);
 			editor = pref.edit();	
 		}
 		
@@ -120,7 +122,7 @@ public class PhoneProfiler extends Thread implements Runnable {
 	
 	public void experimentPush(Experiment exp){
 		if (editor==null){
-			pref = DynamixService.getAndroidContext().getApplicationContext().getSharedPreferences("phoneId",0);
+			pref = DynamixService.getAndroidContext().getApplicationContext().getSharedPreferences("SmartSantanderConfigurations",0);
 			editor = pref.edit();	
 		}
 		String experimentsJson=pref.getString("experiments","");
@@ -131,10 +133,9 @@ public class PhoneProfiler extends Thread implements Runnable {
 		if (experiments==null){
 			experiments=new ArrayList<Experiment>();
 		}
-		experiments.add(exp);		
-		editor.putInt("phoneId", this.PHONE_ID);
+		experiments.add(exp);			
 		experimentsJson= (new Gson()).toJson(experiments);
-		editor.putString("experiment", experimentsJson);
+		editor.putString("experiments", experimentsJson);
 		editor.commit();
 	}
 	
@@ -149,7 +150,7 @@ public class PhoneProfiler extends Thread implements Runnable {
 		Date dat = new Date();
 		
 		if (editor==null){
-			pref = DynamixService.getAndroidContext().getApplicationContext().getSharedPreferences("phoneId",0);
+			pref = DynamixService.getAndroidContext().getApplicationContext().getSharedPreferences("SmartSantanderConfigurations",0);
 			editor = pref.edit();	
 		}
 		
@@ -163,7 +164,7 @@ public class PhoneProfiler extends Thread implements Runnable {
 		Date lastLoginDate;
 		
 		if (editor==null){
-			pref = DynamixService.getAndroidContext().getApplicationContext().getSharedPreferences("phoneId",0);
+			pref = DynamixService.getAndroidContext().getApplicationContext().getSharedPreferences("SmartSantanderConfigurations",0);
 		}
 		
 		lastLoginDate = new Date(pref.getLong("lastOnlineLoginDate", 0));

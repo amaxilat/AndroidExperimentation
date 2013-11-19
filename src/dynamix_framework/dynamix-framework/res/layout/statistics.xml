@@ -47,20 +47,7 @@
         android:layout_height="wrap_content"
         android:background="@drawable/customcatborder"
         android:textAppearance="?android:attr/textAppearanceSmall" />
-    
-        <TextView
-        android:id="@+id/stats_comparison_title"
-        android:layout_width="fill_parent"
-        android:layout_height="20dip"
-        android:background="@drawable/customsubcatborder"
-        android:textAppearance="?android:attr/textAppearanceSmall" />
-
-    <TextView
-        android:id="@+id/stats_comparison_value"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:background="@drawable/customcatborder"
-        android:textAppearance="?android:attr/textAppearanceSmall" />
+ 
     
     <TextView
         android:id="@+id/stats_graph_title"
