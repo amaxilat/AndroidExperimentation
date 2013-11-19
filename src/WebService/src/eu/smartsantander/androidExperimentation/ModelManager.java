@@ -193,25 +193,25 @@ public class ModelManager {
             return 0L;
         Query q = getCurrentSession().createQuery("Select count(*) from Result where experimentId = :expId ");
         q.setParameter("expId", Integer.valueOf(experimentId));
-        Object x=q.list().get(0);
-        String xval=String.valueOf(x);
+        Object x = q.list().get(0);
+        String xval = String.valueOf(x);
         return Long.valueOf(xval);
     }
 
 
-    public static String [] getResults(Integer experimentId, Long timestamp, int deviceID) {
+    public static String[] getResults(Integer experimentId, Long timestamp, int deviceID) {
         Query q = getCurrentSession().createQuery("from Result where experimentId = :expId AND deviceId= :devId AND timestamp>= :t");
         q.setParameter("expId", Integer.valueOf(experimentId));
         q.setParameter("devId", Integer.valueOf(deviceID));
         q.setParameter("t", Long.valueOf(timestamp));
-        List<Result> results=(List<Result>) q.list();
-        if (results.size()==0) return null;
-        String [] messages=new String[results.size()];
-        int i=0;
+        List<Result> results = (List<Result>) q.list();
+        if (results.size() == 0) return null;
+        String[] messages = new String[results.size()];
+        int i = 0;
         for (Result result : results) {
-            messages[i++]=result.getMessage();
+            messages[i++] = result.getMessage();
         }
-        return  messages;
+        return messages;
     }
 
 
@@ -237,28 +237,30 @@ public class ModelManager {
         return (sb.toString());
 
     }
-	
-	// returns the total number of messages produced by a single device during a specific day
-	// Used for displaying stats for each device over the web
+
+    // returns the total number of messages produced by a single device during a specific day
+    // Used for displaying stats for each device over the web
     // timestamp1 is midnight for the beginning of a day, for 5/11/2013 we take into account readings after 00:00 hours
 
     public static String getDailyStats(Long timestamp1, int deviceID) {
 
         // create and additional timestamp for the end of same day, 24 hours minus 1 millisecond
         Long timestamp2 = timestamp1 + (24 * 60 * 60 * 1000) - 1;
-		
-		Query q = getCurrentSession().createQuery("from Result where deviceId= :devId and timestamp>= :t1 and timestamp<= :t2");
+
+        Query q = getCurrentSession().createQuery("select count(*) from Result where deviceId= :devId and timestamp>= :t1 and timestamp<= :t2");
 
         q.setParameter("devId", Integer.valueOf(deviceID));
         q.setParameter("t1", Long.valueOf(timestamp1));
         q.setParameter("t2", Long.valueOf(timestamp2));
-        List<Result> results=(List<Result>) q.list();
+        if (q.list().size() > 0)
+            return String.valueOf(q.list().get(0));
+        else
+            return "0";
+        //String msgTotal = String.valueOf(results.size());
 
-        String msgTotal = String.valueOf(results.size());
+        //return msgTotal;
 
-        return msgTotal;
-	
-	}
+    }
 
 
     // returns the total number of messages produced by a single device during a specific week as an array
@@ -269,16 +271,16 @@ public class ModelManager {
 
         // dummy initialisation in case of no actual readings available
         String[] resultStats = new String[14];
-        int t =6;
+        int t = 6;
 
-        for (int i =0; i <= 12; i+=2) {
+        for (int i = 0; i <= 12; i += 2) {
 
             Long tt = timestamp - t * (24 * 60 * 60 * 1000);
             DateFormat df = new SimpleDateFormat("dd/MM/yy");
             String day = df.format(new Date(tt));
             resultStats[i] = day;
-            resultStats[i+1] = getDailyStats(tt, deviceID);
-            t-=1;
+            resultStats[i + 1] = getDailyStats(tt, deviceID);
+            t -= 1;
         }
 
         return resultStats;
