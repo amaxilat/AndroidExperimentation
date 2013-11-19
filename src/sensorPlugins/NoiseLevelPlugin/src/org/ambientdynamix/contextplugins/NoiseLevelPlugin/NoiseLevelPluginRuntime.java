@@ -57,17 +57,21 @@ public class NoiseLevelPluginRuntime extends AutoReactiveContextPluginRuntime {
 	        mRecorder.setOutputFile("/dev/null"); 
 	        mRecorder.prepare();
 	        mRecorder.start();
+	        double sum=0;
 	        double ma=mRecorder.getMaxAmplitude();
-	        Thread.sleep(250);
-	        ma=mRecorder.getMaxAmplitude();	        
-	        Thread.sleep(250);
-	        ma+=mRecorder.getMaxAmplitude();	        
-	        Thread.sleep(250);
-	        ma+=mRecorder.getMaxAmplitude();
-	        ma=ma/4;
-	        double value=(ma/2700.0);
-	        Log.w(TAG,"NoiseLevel Max Anplitute:"+ ma);
-	        mEMA = EMA_FILTER * value + (1.0 - EMA_FILTER) * mEMA;
+	        double value;
+	        for (int i=0;i<10;i++){
+	        	Thread.sleep(100);
+	        	sum+=mRecorder.getMaxAmplitude();
+	        	Log.w(TAG,"NoiseLevel Max Anplitute Sum:"+ sum);
+	        	ma=sum/i;
+	        	value=(ma/2700.0);
+		        Log.w(TAG,"NoiseLevel Max Anplitute:"+ ma);		        
+		        mEMA = EMA_FILTER * value + (1.0 - EMA_FILTER) * mEMA;
+		        Log.w(TAG,"NoiseLevel mEMA:"+ mEMA);
+	        }	        
+	        
+	        
 	        this.reading=String.valueOf(mEMA);
 	        mRecorder.stop();
 	        mRecorder.release();
@@ -81,7 +85,7 @@ public class NoiseLevelPluginRuntime extends AutoReactiveContextPluginRuntime {
 		PluginInfo info = new PluginInfo();
 		info.setState(this.status);
 		List<Reading> r=new ArrayList<Reading>();
-		r.add(new Reading(Reading.Datatype.String, this.reading, PluginInfo.CONTEXT_TYPE));
+		r.add(new Reading(Reading.Datatype.Float, this.reading, PluginInfo.CONTEXT_TYPE));
 		info.setPayload(r);		
 		Log.w(TAG, "NoiseLevel Plugin:"+ info.getPayload());
 		if (requestId!=null){
