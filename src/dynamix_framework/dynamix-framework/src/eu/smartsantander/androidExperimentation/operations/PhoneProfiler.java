@@ -32,6 +32,7 @@ public class PhoneProfiler extends Thread implements Runnable {
 	private Boolean started=false;
 	private int PHONE_ID=Constants.PHONE_ID_UNITIALIZED;
 	private List<Experiment> experiments =new ArrayList<Experiment>();
+	private long totalReadingsProducedCounter;
 
 	private final String TAG = this.getClass().getSimpleName();
 
@@ -63,6 +64,16 @@ public class PhoneProfiler extends Thread implements Runnable {
 			} else {
 				setPhoneId(Constants.PHONE_ID_UNITIALIZED);
 			}
+			
+			if (pref.contains("totalReadingsProducedCounter")) {
+				this.totalReadingsProducedCounter = pref.getLong("totalReadingsProducedCounter", 0);
+				if (this.totalReadingsProducedCounter < 0)
+					this.totalReadingsProducedCounter =0;
+			} else {
+				this.totalReadingsProducedCounter =0;
+			}
+			editor.commit();
+			
 		} catch (InterruptedException e) {
 			e.printStackTrace();
 		}	
@@ -170,5 +181,13 @@ public class PhoneProfiler extends Thread implements Runnable {
 		lastLoginDate = new Date(pref.getLong("lastOnlineLoginDate", 0));
 			
 		return lastLoginDate;
+	}
+	
+	public void incMsgCounter() {
+		this.totalReadingsProducedCounter++;
+	}
+	
+	public Long getTotalReadingsProduced() {
+		return this.totalReadingsProducedCounter;
 	}
 }

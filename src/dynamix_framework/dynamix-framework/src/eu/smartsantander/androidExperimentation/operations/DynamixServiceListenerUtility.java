@@ -146,6 +146,7 @@ public class DynamixServiceListenerUtility {
 
 								Log.w(TAG, "Plugin Reading: " + reading);
 								DynamixService.getReadingStorage().pushReading(	reading);
+								DynamixService.getPhoneProfiler().incMsgCounter();
 							}
 							
 						}
