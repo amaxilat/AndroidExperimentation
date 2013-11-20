@@ -35,6 +35,7 @@ import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
 import android.widget.TextView;
+import eu.smartsantander.androidExperimentation.Constants;
 
 
 /**
@@ -168,7 +169,9 @@ public class statsTab extends Activity implements OnSharedPreferenceChangeListen
 	private String loadTheStatsJPG() {
 		byte[] imageRaw = null;
 		  try {
-		     URL url = new URL("http://150.140.5.92:8080/statsBarChart.jsp?tstamp=1384380000000&devId=146&file.png");
+			  
+			 String statsURL = Constants.WEB_STATS_URL + "?tstamp=00000000&devId=146";
+		     URL url = new URL(statsURL);
 		     HttpURLConnection urlConnection = (HttpURLConnection) url.openConnection();
 
 		     InputStream in = new BufferedInputStream(urlConnection.getInputStream());
