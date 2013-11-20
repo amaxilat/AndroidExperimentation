@@ -2,6 +2,8 @@
 <%@ page import="eu.smartsantander.androidExperimentation.entities.Reading" %>
 
 <%@ page import="eu.smartsantander.androidExperimentation.entities.Result" %>
+<%@ page import="java.util.Arrays" %>
+<%@ page import="java.util.HashMap" %>
 <%@ page import="java.util.List" %>
 
 
@@ -15,6 +17,7 @@
     <script language="javascript" type="text/javascript" src="./js/jquery.js"></script>
     <script language="javascript" type="text/javascript" src="./js/jquery.flot.js"></script>
     <script language="javascript" type="text/javascript" src="./js/jquery.flot.time.js"></script>
+    <script language="javascript" type="text/javascript" src="./js/jquery.flot.selection.js"></script>
     <script type="text/javascript">
         <%
             String expId = request.getParameter("id");
@@ -29,6 +32,8 @@
                 eId = null;  dId=null;
             }
             List<Result> results = ModelManager.getResults(eId);
+             HashMap<Long,String> readings=new HashMap<Long,String>();
+
             out.print("var d=[]; \n");
             out.print("$(function() {");
                 for (Result result : results) {
@@ -40,16 +45,24 @@
                         continue;
                      }
                     if (r.getContext().equals(sensor) && result.getDeviceId()==dId)
-                        out.print("d.push(["+ r.getTimestamp()+","+r.getValue() + "]); \n");
+                        readings.put(r.getTimestamp(),r.getValue());
                 }
+                Object[] rt  =  readings.keySet().toArray();
+                Arrays.sort(rt);
+                for(Object tst:rt  ){
+                  out.print("d.push(["+ tst+","+readings.get(tst) + "]); \n");
+                }
+                %>
 
-                String data="$.plot(\"#placeholder\", [";
-                data+="{data: d, lines: { show: true, fill: true }	}";
-                    data+="],{xaxis: {mode:'time',timeformat: '%y/%m/%d %H:%M:%S'}} );";
-                out.print(data);
-            out.print("});");
-      %>
-    </script>
+
+        <%
+             String data="var plot=$.plot(\"#placeholder\", [";
+             data+="{data: d, lines: { show: true, fill: true }	}";
+                 data+="],{xaxis: {mode:'time',timeformat: '%y/%m/%d %H:%M:%S'}});";
+             out.print(data);
+         out.print("});");
+       %>
+     </script>
 </head>
 <body>
 <jsp:include page="./includes/header.html" flush="true"/>
