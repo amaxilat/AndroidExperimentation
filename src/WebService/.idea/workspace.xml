@@ -7,16 +7,15 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="4ccbb714-201c-482b-a93f-dd4890c10bc1" name="Default" comment="experiment plugin plugin installation">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/web/style/background.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/eu/smartsantander/androidExperimentation/entities/Reading.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/web/js/jquery.flot.time.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/web/lastResults.jsp" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/web/lastResultsChart.jsp" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/web/resultsChart.jsp" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../sensorPlugins/NoiseLevelPlugin/bin/NoiseLevelPlugin.apk" afterPath="$PROJECT_DIR$/../sensorPlugins/NoiseLevelPlugin/bin/NoiseLevelPlugin.apk" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../sensorPlugins/NoiseLevelPlugin/bin/classes/org/ambientdynamix/contextplugins/NoiseLevelPlugin/NoiseLevelPluginRuntime$1.class" afterPath="$PROJECT_DIR$/../sensorPlugins/NoiseLevelPlugin/bin/classes/org/ambientdynamix/contextplugins/NoiseLevelPlugin/NoiseLevelPluginRuntime$1.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../sensorPlugins/NoiseLevelPlugin/bin/classes/org/ambientdynamix/contextplugins/NoiseLevelPlugin/NoiseLevelPluginRuntime.class" afterPath="$PROJECT_DIR$/../sensorPlugins/NoiseLevelPlugin/bin/classes/org/ambientdynamix/contextplugins/NoiseLevelPlugin/NoiseLevelPluginRuntime.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../sensorPlugins/NoiseLevelPlugin/bin/classes.dex" afterPath="$PROJECT_DIR$/../sensorPlugins/NoiseLevelPlugin/bin/classes.dex" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/web/dynamixRepository/org.ambientdynamix.contextplugins.NoiseLevelPlugin_0.9.54.jar" afterPath="$PROJECT_DIR$/web/dynamixRepository/org.ambientdynamix.contextplugins.NoiseLevelPlugin_0.9.54.jar" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/eu/smartsantander/androidExperimentation/ModelManager.java" afterPath="$PROJECT_DIR$/src/eu/smartsantander/androidExperimentation/ModelManager.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/web/experiment.jsp" afterPath="$PROJECT_DIR$/web/experiment.jsp" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/eu/smartsantander/androidExperimentation/log4j.properties" afterPath="$PROJECT_DIR$/src/eu/smartsantander/androidExperimentation/log4j.properties" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/web/results.jsp" afterPath="$PROJECT_DIR$/web/results.jsp" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../sensorPlugins/NoiseLevelPlugin/src/org/ambientdynamix/contextplugins/NoiseLevelPlugin/NoiseLevelPluginRuntime.java" afterPath="$PROJECT_DIR$/../sensorPlugins/NoiseLevelPlugin/src/org/ambientdynamix/contextplugins/NoiseLevelPlugin/NoiseLevelPluginRuntime.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/web/chart.jsp" afterPath="$PROJECT_DIR$/web/chart.jsp" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/hibernate.cfg.xml" afterPath="$PROJECT_DIR$/src/hibernate.cfg.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <list id="ffed928d-c9fc-443c-9d9a-a806dbe1581e" name="Hibernate altered  Demon registration altered" comment="" />
@@ -34,7 +33,7 @@
     <file path="$PROJECT_DIR$/../untitled/web/WEB-INF/sun-jaxws.xml" changelist="4ccbb714-201c-482b-a93f-dd4890c10bc1" time="1370580376889" ignored="false" />
     <file path="/a.sql" changelist="4ccbb714-201c-482b-a93f-dd4890c10bc1" time="1384624153298" ignored="false" />
     <file path="/dummy.sql" changelist="4ccbb714-201c-482b-a93f-dd4890c10bc1" time="1378296441594" ignored="false" />
-    <file path="/hibernate.cfg.xml" changelist="4ccbb714-201c-482b-a93f-dd4890c10bc1" time="1379067140138" ignored="false" />
+    <file path="/hibernate.cfg.xml" changelist="4ccbb714-201c-482b-a93f-dd4890c10bc1" time="1384858493182" ignored="false" />
     <file path="/PIng.java" changelist="4ccbb714-201c-482b-a93f-dd4890c10bc1" time="1371344258430" ignored="false" />
     <file path="/Smartphone.java" changelist="4ccbb714-201c-482b-a93f-dd4890c10bc1" time="1377698604481" ignored="false" />
     <file path="/Report.java" changelist="4ccbb714-201c-482b-a93f-dd4890c10bc1" time="1378289273275" ignored="false" />
@@ -45,7 +44,7 @@
     <file path="$PROJECT_DIR$/../TestService/.idea/misc.xml" changelist="4ccbb714-201c-482b-a93f-dd4890c10bc1" time="1372057527318" ignored="false" />
     <file path="$PROJECT_DIR$/../TestService/.idea/workspace.xml" changelist="4ccbb714-201c-482b-a93f-dd4890c10bc1" time="1372058103023" ignored="false" />
     <file path="/SmartphonesEntity.java" changelist="4ccbb714-201c-482b-a93f-dd4890c10bc1" time="1372160703885" ignored="false" />
-    <file path="/ModelManager.java" changelist="4ccbb714-201c-482b-a93f-dd4890c10bc1" time="1384678228132" ignored="false" />
+    <file path="/ModelManager.java" changelist="4ccbb714-201c-482b-a93f-dd4890c10bc1" time="1384858774048" ignored="false" />
     <file path="/AndroidExperimentationWS.java" changelist="4ccbb714-201c-482b-a93f-dd4890c10bc1" time="1384674295650" ignored="false" />
     <file path="/PluginList.java" changelist="4ccbb714-201c-482b-a93f-dd4890c10bc1" time="1378283964835" ignored="false" />
     <file path="/header.html" changelist="4ccbb714-201c-482b-a93f-dd4890c10bc1" time="1378901240806" ignored="false" />
@@ -91,16 +90,17 @@
     <file path="/WicketApplication.java" changelist="4ccbb714-201c-482b-a93f-dd4890c10bc1" time="1380715648789" ignored="false" />
     <file path="$PROJECT_DIR$/../../../html5wicket/html5wicket/src/com/mycompany/HomePage.html" changelist="4ccbb714-201c-482b-a93f-dd4890c10bc1" time="1380716192737" ignored="false" />
     <file path="$PROJECT_DIR$/../../../html5wicket/html5wicket/ear/META-INF/application.xml" changelist="4ccbb714-201c-482b-a93f-dd4890c10bc1" time="1380716807986" ignored="false" />
-    <file path="/a.dummy" changelist="4ccbb714-201c-482b-a93f-dd4890c10bc1" time="1381828127364" ignored="false" />
+    <file path="/a.dummy" changelist="4ccbb714-201c-482b-a93f-dd4890c10bc1" time="1384870497295" ignored="false" />
     <file path="/ResultsEntity.hbm.xml" changelist="4ccbb714-201c-482b-a93f-dd4890c10bc1" time="1383651742136" ignored="false" />
-    <file path="/chart.jsp" changelist="4ccbb714-201c-482b-a93f-dd4890c10bc1" time="1383662928512" ignored="false" />
+    <file path="/chart.jsp" changelist="4ccbb714-201c-482b-a93f-dd4890c10bc1" time="1384873405244" ignored="false" />
     <file path="/dataRaw.jsp" changelist="4ccbb714-201c-482b-a93f-dd4890c10bc1" time="1383661972268" ignored="false" />
     <file path="/Data Source" changelist="4ccbb714-201c-482b-a93f-dd4890c10bc1" time="1384686399060" ignored="false" />
     <file path="/lastResults.jsp" changelist="4ccbb714-201c-482b-a93f-dd4890c10bc1" time="1384691078490" ignored="false" />
     <file path="/Reading.java" changelist="4ccbb714-201c-482b-a93f-dd4890c10bc1" time="1384686788848" ignored="false" />
     <file path="/lastChart.jsp" changelist="4ccbb714-201c-482b-a93f-dd4890c10bc1" time="1384690284763" ignored="false" />
-    <file path="/lastResultsChart.jsp" changelist="4ccbb714-201c-482b-a93f-dd4890c10bc1" time="1384691994600" ignored="false" />
+    <file path="/lastResultsChart.jsp" changelist="4ccbb714-201c-482b-a93f-dd4890c10bc1" time="1384699193924" ignored="false" />
     <file path="/results.jsp" changelist="4ccbb714-201c-482b-a93f-dd4890c10bc1" time="1384692643417" ignored="false" />
+    <file path="/mobileStatsChart.jsp" changelist="4ccbb714-201c-482b-a93f-dd4890c10bc1" time="1384713638493" ignored="false" />
     <option name="TRACKING_ENABLED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -121,51 +121,6 @@
   </component>
   <component name="DebuggerManager">
     <line_breakpoints default_suspend_policy="SuspendAll" default_condition_enabled="true">
-      <breakpoint url="file://$PROJECT_DIR$/src/eu/smartsantander/androidExperimentation/ModelManager.java" line="129" class="eu.smartsantander.androidExperimentation.ModelManager" package="eu.smartsantander.androidExperimentation">
-        <option name="ENABLED" value="true" />
-        <option name="LOG_ENABLED" value="false" />
-        <option name="LOG_EXPRESSION_ENABLED" value="false" />
-        <option name="REMOVE_AFTER_HIT" value="false" />
-        <option name="SUSPEND_POLICY" value="SuspendAll" />
-        <option name="SUSPEND" value="true" />
-        <option name="COUNT_FILTER_ENABLED" value="false" />
-        <option name="COUNT_FILTER" value="0" />
-        <option name="CONDITION_ENABLED" value="true" />
-        <option name="CLASS_FILTERS_ENABLED" value="false" />
-        <option name="INSTANCE_FILTERS_ENABLED" value="false" />
-        <option name="CONDITION" value="" />
-        <option name="LOG_MESSAGE" value="" />
-      </breakpoint>
-      <breakpoint url="file://$PROJECT_DIR$/src/eu/smartsantander/androidExperimentation/AndroidExperimentationWS.java" line="68" class="eu.smartsantander.androidExperimentation.AndroidExperimentationWS" package="eu.smartsantander.androidExperimentation">
-        <option name="ENABLED" value="true" />
-        <option name="LOG_ENABLED" value="false" />
-        <option name="LOG_EXPRESSION_ENABLED" value="false" />
-        <option name="REMOVE_AFTER_HIT" value="false" />
-        <option name="SUSPEND_POLICY" value="SuspendAll" />
-        <option name="SUSPEND" value="true" />
-        <option name="COUNT_FILTER_ENABLED" value="false" />
-        <option name="COUNT_FILTER" value="0" />
-        <option name="CONDITION_ENABLED" value="true" />
-        <option name="CLASS_FILTERS_ENABLED" value="false" />
-        <option name="INSTANCE_FILTERS_ENABLED" value="false" />
-        <option name="CONDITION" value="" />
-        <option name="LOG_MESSAGE" value="" />
-      </breakpoint>
-      <breakpoint url="file://$PROJECT_DIR$/src/eu/smartsantander/androidExperimentation/AndroidExperimentationWS.java" line="76" class="eu.smartsantander.androidExperimentation.AndroidExperimentationWS" package="eu.smartsantander.androidExperimentation">
-        <option name="ENABLED" value="true" />
-        <option name="LOG_ENABLED" value="false" />
-        <option name="LOG_EXPRESSION_ENABLED" value="false" />
-        <option name="REMOVE_AFTER_HIT" value="false" />
-        <option name="SUSPEND_POLICY" value="SuspendAll" />
-        <option name="SUSPEND" value="true" />
-        <option name="COUNT_FILTER_ENABLED" value="false" />
-        <option name="COUNT_FILTER" value="0" />
-        <option name="CONDITION_ENABLED" value="true" />
-        <option name="CLASS_FILTERS_ENABLED" value="false" />
-        <option name="INSTANCE_FILTERS_ENABLED" value="false" />
-        <option name="CONDITION" value="" />
-        <option name="LOG_MESSAGE" value="" />
-      </breakpoint>
       <breakpoint url="file://$PROJECT_DIR$/web/lastResults.jsp" line="38" class="lastResults.jsp" package="C:\Users\theodori\Desktop\AndroidExperimentation\src\WebService\web">
         <option name="ENABLED" value="true" />
         <option name="LOG_ENABLED" value="false" />
@@ -228,40 +183,30 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="ModelManager.java" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/eu/smartsantander/androidExperimentation/ModelManager.java">
+      <file leaf-file-name="HibernateUtil.java" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/eu/smartsantander/androidExperimentation/HibernateUtil.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="181" column="59" selection-start="6763" selection-end="6763" vertical-scroll-proportion="0.0">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="results.jsp" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/web/results.jsp">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="71" column="47" selection-start="2504" selection-end="2504" vertical-scroll-proportion="-15.038462">
+            <state line="40" column="26" selection-start="1419" selection-end="1419" vertical-scroll-proportion="0.0">
               <folding>
-                <element signature="e#933#950#0" expanded="true" />
-                <element signature="e#1012#1029#0" expanded="true" />
+                <element signature="imports" expanded="false" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="resultsChart.jsp" pinned="false" current="true" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/web/resultsChart.jsp">
+      <file leaf-file-name="ModelManager.java" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/eu/smartsantander/androidExperimentation/ModelManager.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="41" column="88" selection-start="2054" selection-end="2054" vertical-scroll-proportion="0.8095238">
+            <state line="260" column="45" selection-start="9996" selection-end="9996" vertical-scroll-proportion="0.0">
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="lastResultsChart.jsp" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/web/lastResultsChart.jsp">
+      <file leaf-file-name="chart.jsp" pinned="false" current="true" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/web/chart.jsp">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="42" column="12" selection-start="2018" selection-end="2090" vertical-scroll-proportion="-7.230769">
+            <state line="83" column="23" selection-start="3517" selection-end="3517" vertical-scroll-proportion="0.35902256">
               <folding />
             </state>
           </provider>
@@ -286,13 +231,9 @@
   <component name="IdeDocumentHistory">
     <option name="changedFiles">
       <list>
-        <option value="$PROJECT_DIR$/web/chart.jsp" />
-        <option value="dbtable:/4a56989/ec19ba82-120f-43e6-96c5-26912937ccef/androidexperimentation..experiments" />
-        <option value="$PROJECT_DIR$/src/log4j.properties" />
         <option value="$PROJECT_DIR$/src/eu/smartsantander/androidExperimentation/AndroidExperimentationWS.java" />
         <option value="dbtable:/4a56989/ec19ba82-120f-43e6-96c5-26912937ccef/androidexperimentation..results" />
         <option value="$PROJECT_DIR$/src/eu/smartsantander/androidExperimentation/log4j.properties" />
-        <option value="$PROJECT_DIR$/src/eu/smartsantander/androidExperimentation/ModelManager.java" />
         <option value="$PROJECT_DIR$/web/experiment.jsp" />
         <option value="db-console:/4a56989/ec19ba82-120f-43e6-96c5-26912937ccef/" />
         <option value="$PROJECT_DIR$/src/eu/smartsantander/androidExperimentation/entities/Reading.java" />
@@ -300,8 +241,12 @@
         <option value="$PROJECT_DIR$/web/lastResults.jsp" />
         <option value="$PROJECT_DIR$/src/eu/smartsantander/androidExperimentation/entities/Result.java" />
         <option value="$PROJECT_DIR$/web/results.jsp" />
-        <option value="$PROJECT_DIR$/web/lastResultsChart.jsp" />
         <option value="$PROJECT_DIR$/web/resultsChart.jsp" />
+        <option value="$PROJECT_DIR$/web/mobileStatsChart.jsp" />
+        <option value="$PROJECT_DIR$/src/hibernate.cfg.xml" />
+        <option value="$PROJECT_DIR$/src/eu/smartsantander/androidExperimentation/ModelManager.java" />
+        <option value="$PROJECT_DIR$/web/lastResultsChart.jsp" />
+        <option value="$PROJECT_DIR$/web/chart.jsp" />
       </list>
     </option>
   </component>
@@ -353,7 +298,7 @@
     <ConfirmationsSetting value="0" id="Remove" />
   </component>
   <component name="ProjectReloadState">
-    <option name="STATE" value="0" />
+    <option name="STATE" value="1" />
   </component>
   <component name="ProjectView">
     <navigator currentView="ProjectPane" proportions="" version="1" splitterProportion="0.5">
@@ -442,6 +387,38 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="AndroidExperimentation" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="WebService" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="web" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="dynamixRepository" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="AndroidExperimentation" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="WebService" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
         </subPane>
       </pane>
       <pane id="Scope">
@@ -487,11 +464,11 @@
       <recent name="eu.smartsantander.androidExperimentation" />
     </key>
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\theodori\Desktop\AndroidExperimentation\src\WebService\web\dynamixRepository" />
       <recent name="C:\Users\theodori\Desktop\AndroidExperimentation\src\WebService\web\style" />
       <recent name="C:\Users\theodori\Desktop\AndroidExperimentation\src\WebService\web" />
       <recent name="C:\Users\theodori\Desktop\AndroidExperimentation\src\WebService\web\js" />
       <recent name="C:\Users\theodori\Desktop\AndroidExperimentation\src\WebService\src\eu\smartsantander\androidExperimentation\entities" />
-      <recent name="C:\Users\theodori\Desktop\AndroidExperimentation\src\WebService\web\dynamixRepository" />
     </key>
     <key name="CreateClassDialog.RecentsKey">
       <recent name="helloworld" />
@@ -738,7 +715,7 @@
     </configuration>
     <configuration default="false" name="Tomcat 7.0" type="#com.intellij.j2ee.web.tomcat.TomcatRunConfigurationFactory" factoryName="Local" APPLICATION_SERVER_NAME="Tomcat 7.0">
       <option name="OPEN_IN_BROWSER_URL" value="http://blanco.cti.gr:8080/" />
-      <option name="COMMON_VM_ARGUMENTS" value="-Xmx256m -XX:MaxPermSize=256m" />
+      <option name="COMMON_VM_ARGUMENTS" value="-Xmx512m -XX:MaxPermSize=256m" />
       <option name="UPDATING_POLICY" value="restart-server" />
       <deployment>
         <artifact name="AndroidExperimentationWS:Web exploded">
@@ -894,7 +871,7 @@
     </todo-panel>
   </component>
   <component name="ToolWindowManager">
-    <frame x="-8" y="-8" width="1936" height="1056" extended-state="7" />
+    <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
     <editor active="true" />
     <layout>
       <window_info id="Database Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32924107" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
@@ -902,30 +879,30 @@
       <window_info id="JetGradle" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="Persistence" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.29868075" sideWeight="0.27531284" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
-      <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.17182498" sideWeight="0.57366073" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.34933037" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.17182498" sideWeight="0.65290177" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.4263393" sideWeight="0.8858058" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.3482143" sideWeight="0.8858058" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="IDEtalk Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="15" side_tool="false" content_ui="tabs" />
-      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.4263393" sideWeight="0.11419424" order="8" side_tool="true" content_ui="tabs" />
+      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3470982" sideWeight="0.11419424" order="8" side_tool="true" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.24878444" sideWeight="0.67190224" order="4" side_tool="true" content_ui="tabs" />
       <window_info id="IDEtalk" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4334471" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
       <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4296875" sideWeight="0.5" order="11" side_tool="false" content_ui="tabs" />
       <window_info id="CDI" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
-      <window_info id="Web" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.2801494" sideWeight="0.20982143" order="3" side_tool="true" content_ui="tabs" />
+      <window_info id="Web" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.2801494" sideWeight="0.24776785" order="3" side_tool="true" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32687926" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.24865447" sideWeight="0.5263761" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="SLIDING" type="SLIDING" visible="false" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Application Servers" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32460135" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.2801494" sideWeight="0.3627232" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.19797225" sideWeight="0.65178573" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32589287" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="SVN Repositories" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32992035" sideWeight="0.5" order="16" side_tool="false" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
       <window_info id="soapUI Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32984293" sideWeight="0.5" order="12" side_tool="false" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
-      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.4977221" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Hibernate Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3287827" sideWeight="0.5" order="13" side_tool="false" content_ui="tabs" />
       <window_info id="Dependency Viewer" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.8807018" sideWeight="0.5" order="14" side_tool="false" content_ui="tabs" />
       <window_info id="soapUI Navigator" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
@@ -1050,68 +1027,12 @@
     <option name="FILTER_TARGETS" value="false" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/web/experiment.jsp">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="96" column="99" selection-start="2496" selection-end="2496" vertical-scroll-proportion="-21.307692">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/web/style/style.css">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="19" column="0" selection-start="313" selection-end="313" vertical-scroll-proportion="-0.66341466">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/web/dataRaw.jsp">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="21" column="54" selection-start="760" selection-end="760" vertical-scroll-proportion="-13.730769">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://$PROJECT_DIR$/web/dynamixRepository/org.ambientdynamix.contextplugins.GpsPlugin_0.9.54.jar!/bin/classes/eu/smartsantander/androidExperimentation/jsonEntities/Reading.class">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="6" column="13" selection-start="196" selection-end="196" vertical-scroll-proportion="0.12142857">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/eu/smartsantander/androidExperimentation/entities/ResultsEntity.hbm.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="6" column="4" selection-start="218" selection-end="218" vertical-scroll-proportion="0.20731707">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="dbDummy://db-console:/4a56989/ec19ba82-120f-43e6-96c5-26912937ccef/">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="0" column="38" selection-start="0" selection-end="37" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="dbDummy://dbtable:/4a56989/ec19ba82-120f-43e6-96c5-26912937ccef/androidexperimentation..results">
       <provider selected="true" editor-type-id="com.intellij.persistence.database.editor.DatabaseTableFileEditorProvider">
         <state />
       </provider>
       <provider editor-type-id="text-editor">
         <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/eu/smartsantander/androidExperimentation/entities/Reading.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="18" column="8" selection-start="411" selection-end="411" vertical-scroll-proportion="0.5302144">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/web/chart.jsp">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="10" column="0" selection-start="287" selection-end="355" vertical-scroll-proportion="-5.8846154">
           <folding />
         </state>
       </provider>
@@ -1137,20 +1058,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/eu/smartsantander/androidExperimentation/ModelManager.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="181" column="59" selection-start="6763" selection-end="6763" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/web/lastResultsChart.jsp">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="42" column="12" selection-start="2018" selection-end="2090" vertical-scroll-proportion="-7.230769">
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/web/results.jsp">
       <provider selected="true" editor-type-id="text-editor">
         <state line="71" column="47" selection-start="2504" selection-end="2504" vertical-scroll-proportion="-15.038462">
@@ -1161,9 +1068,97 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/eu/smartsantander/androidExperimentation/entities/Reading.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="6" column="13" selection-start="133" selection-end="133" vertical-scroll-proportion="0.0">
+          <folding>
+            <element signature="imports" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/web/resultsChart.jsp">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="41" column="88" selection-start="2054" selection-end="2054" vertical-scroll-proportion="0.8095238">
+        <state line="34" column="0" selection-start="1570" selection-end="1570" vertical-scroll-proportion="-9.384615">
+          <folding>
+            <marker date="1384699214241" expanded="true" signature="-1:-1" placeholder="..." />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/web/mobileStatsChart.jsp">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="68" column="40" selection-start="2015" selection-end="2015" vertical-scroll-proportion="-12.730769">
+          <folding>
+            <marker date="1384713896422" expanded="true" signature="-1:-1" placeholder="{...}" />
+            <marker date="1384713896422" expanded="true" signature="-1:-1" placeholder="{...}" />
+            <marker date="1384713896422" expanded="true" signature="-1:-1" placeholder="//..." />
+            <marker date="1384713896422" expanded="true" signature="-1:-1" placeholder="{...}" />
+            <marker date="1384713896422" expanded="true" signature="-1:-1" placeholder="{...}" />
+            <marker date="1384713896422" expanded="true" signature="-1:-1" placeholder="{...}" />
+            <marker date="1384713896422" expanded="true" signature="-1:-1" placeholder="[...]" />
+            <marker date="1384713896422" expanded="true" signature="-1:-1" placeholder="{&quot;fillColor&quot;: &quot;rgba(220,220,220,0.5)&quot;...}" />
+            <marker date="1384713896422" expanded="true" signature="-1:-1" placeholder="{...}" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/web/dataStatsRaw.jsp">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="19" column="53" selection-start="658" selection-end="658" vertical-scroll-proportion="-10.115385">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/eu/smartsantander/androidExperimentation/AndroidExperimentationWS.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="105" column="76" selection-start="3762" selection-end="3762" vertical-scroll-proportion="0.0">
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$PROJECT_DIR$/lib/mysql-connector-java-5.1.26-bin.jar!/com/mysql/jdbc/NonRegisteringDriver.class">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="91" column="1" selection-start="5143" selection-end="5143" vertical-scroll-proportion="0.8034682">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/eu/smartsantander/androidExperimentation/HibernateUtil.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="40" column="26" selection-start="1419" selection-end="1419" vertical-scroll-proportion="0.0">
+          <folding>
+            <element signature="imports" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/hibernate.cfg.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="13" column="74" selection-start="837" selection-end="837" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/eu/smartsantander/androidExperimentation/ModelManager.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="260" column="45" selection-start="9996" selection-end="9996" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/web/lastResultsChart.jsp">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="47" column="79" selection-start="2245" selection-end="2245" vertical-scroll-proportion="0.6256">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/web/chart.jsp">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="83" column="23" selection-start="3517" selection-end="3517" vertical-scroll-proportion="0.35902256">
           <folding />
         </state>
       </provider>

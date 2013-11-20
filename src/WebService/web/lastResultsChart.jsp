@@ -2,7 +2,6 @@
 <%@ page import="eu.smartsantander.androidExperimentation.entities.Reading" %>
 
 <%@ page import="eu.smartsantander.androidExperimentation.entities.Result" %>
-<%@ page import="java.util.Date" %>
 <%@ page import="java.util.List" %>
 
 
@@ -33,7 +32,13 @@
             out.print("var d=[]; \n");
             out.print("$(function() {");
                 for (Result result : results) {
-                    Reading r = Reading.fromJson(result.getMessage());
+                    Reading r;
+                    try{
+                        r = Reading.fromJson(result.getMessage());
+                     }catch(Exception e){
+                        e.printStackTrace();
+                        continue;
+                     }
                     if (r.getContext().equals(sensor) && result.getDeviceId()==dId)
                         out.print("d.push(["+ r.getTimestamp()+","+r.getValue() + "]); \n");
                 }
@@ -62,7 +67,7 @@
         </thead>
         <%
             out.print("<tr>");
-            out.print("<td>" +eId + "</td>");
+            out.print("<td>" + eId + "</td>");
             out.print("<td>" + dId + "</td>");
             out.print("<td>" + sensor + "</td>");
             out.print("</tr>");

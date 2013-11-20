@@ -13,7 +13,7 @@
     <script language="javascript" type="text/javascript" src="./js/excanvas.min.js"></script><![endif]-->
     <script language="javascript" type="text/javascript" src="./js/jquery.js"></script>
     <script language="javascript" type="text/javascript" src="./js/jquery.flot.js"></script>
-
+    <script language="javascript" type="text/javascript" src="./js/jquery.flot.time.js"></script>
 
     <script type="text/javascript">
 
@@ -29,52 +29,47 @@
 
         $(function () {
 
-                    var data = [], totalPoints = 1000, tt = 0;
+                    var data = [],time=[], totalPoints = 1000, tt = 0;
+                    var datapoints=0;
+                    var res=[];
 
+                    <%
+                     String expId = request.getParameter("id");
+                     String dev = request.getParameter("devId");
 
-   <%
-    String expId = request.getParameter("id");
-    String dev = request.getParameter("devId");
+                     Integer eId = null;
+                     Integer devId = null;
+                     try {
+                         eId = Integer.valueOf(expId);
+                         devId=Integer.valueOf(dev);
+                         out.print("var eId="+eId.toString()+";");
+                         out.print("var devId="+devId.toString()+";");
+                     } catch (Exception e) {
+                         eId = null;
+                     }
 
-    Integer eId = null;
-    Integer devId = null;
-    try {
-        eId = Integer.valueOf(expId);
-        devId=Integer.valueOf(dev);
-        out.print("var eId="+eId.toString()+";");
-        out.print("var devId="+devId.toString()+";");
-    } catch (Exception e) {
-        eId = null;
-    }
-
-%>
+                 %>
 
                     function getData() {
-                        if (data.length > 0)
-                            data = data.slice(1);
-
-
                         var jsonDataArray = httpGet(eId, tt, devId);
-                        if (jsonDataArray.length==0) return;
+                        if (jsonDataArray.length == 0) {
+                            return res;
+                        }
                         var dataArray = JSON.parse(jsonDataArray);
-                        alert(dataArray.length);
-                        for (var i = 0; i < dataArray.length; i++) {
-                            var object = JSON.parse(dataArray[i]);
-                            data.push(object.value);
-                        }
-                        // Zip the generated y values with the x values
-                        var res = [];
-                        for (var i = 0; i < data.length; ++i) {
-                            res.push([i, data[i]])
-                        }
+                        if (dataArray.length==res.length) return res;
 
-                        tt = (new Date()).getTime();
+                        data=[]; time=[]; res = [];
+                        for (var i = 0; i < dataArray.length; i++) {
+                           if (dataArray[i].length==0) continue;
+                            var object = JSON.parse(dataArray[i]);
+                            res.push([object.timestamp, object.value])
+                        }
                         return res;
                     }
 
                     // Set up the control widget
 
-                    var updateInterval = 30;
+                    var updateInterval = 1000;
                     $("#updateInterval").val(updateInterval).change(function () {
                         var v = $(this).val();
                         if (v && !isNaN(+v)) {
@@ -90,20 +85,21 @@
 
                     var plot = $.plot("#placeholder", [ getData() ], {
                         series: {
-                            shadowSize: 0	// Drawing is faster without shadows
+                            shadowSize: 0
                         },
                         yaxis: {
                             min: 0,
-                            max: 2
+                            max: 120
                         },
                         xaxis: {
-                            show: false
+                            mode:'time',
+                            timeformat: '%y/%m/%d %H:%M:%S'
                         }
                     });
 
                     function update() {
                         plot.setData([getData()]);
-                        // Since the axes don't change, we don't need to call plot.setupGrid()
+                        plot.setupGrid()
                         plot.draw();
                         setTimeout(update, updateInterval);
                     }
@@ -121,15 +117,9 @@
 <body>
 <jsp:include page="./includes/header.html" flush="true"/>
 <div id="content">
-
     <div class="demo-container">
         <div id="placeholder" class="demo-placeholder"></div>
     </div>
-    <p>You can update a chart periodically to get a real-time effect by using a timer to insert the new data in the plot
-        and redraw it.</p>
-
-    <p>Time between updates: <input id="updateInterval" type="text" value="" style="text-align: right; width:5em">
-        milliseconds</p>
 </div>
 <br>
 <br>

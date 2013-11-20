@@ -1,6 +1,7 @@
 package org.ambientdynamix.contextplugins.NoiseLevelPlugin;
 
 import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.UUID;
 
@@ -24,31 +25,23 @@ public class NoiseLevelPluginRuntime extends AutoReactiveContextPluginRuntime {
 	
     private final String TAG = this.getClass().getSimpleName();
 	private Context context;
-
-	private String status;
-	 static final private double EMA_FILTER = 0.6;
-     private MediaRecorder mRecorder = null;
-     private double mEMA = 0.0;    
+	public static double REFERENCE = 0.00002;
+    private MediaRecorder mRecorder = null;   
     private Handler handler;
-	private String reading = "unknown";
+    private LinkedList<Double> queue=new LinkedList<Double>();
     
-    
-    private long SENSOR_POLL_INTERVAL=5000;
+    private long SENSOR_POLL_INTERVAL=1000;
     
     private Runnable runnable = new Runnable() {
 		@Override
 		public void run() {	
-			  broadcastNoiseLevel(null);
+			  captureNoiseLevel();
 		      handler.postDelayed(this, SENSOR_POLL_INTERVAL);
 		}
 	};
     
     
-	public void broadcastNoiseLevel(UUID requestId) {
-		if (requestId!=null)
-			Log.w(TAG, "NoiseLevel Broadcast:"+requestId);
-		else
-			Log.w(TAG, "NoiseLevel Broadcast Timer!");
+	double captureNoiseLevel(){
 		try {
 		    mRecorder = new MediaRecorder();
             mRecorder.setAudioSource(MediaRecorder.AudioSource.MIC);
@@ -57,33 +50,49 @@ public class NoiseLevelPluginRuntime extends AutoReactiveContextPluginRuntime {
 	        mRecorder.setOutputFile("/dev/null"); 
 	        mRecorder.prepare();
 	        mRecorder.start();
+	        double sum=0;
 	        double ma=mRecorder.getMaxAmplitude();
-	        Thread.sleep(250);
-	        ma=mRecorder.getMaxAmplitude();	        
-	        Thread.sleep(250);
-	        ma+=mRecorder.getMaxAmplitude();	        
-	        Thread.sleep(250);
-	        ma+=mRecorder.getMaxAmplitude();
-	        ma=ma/4;
-	        double value=(ma/2700.0);
-	        Log.w(TAG,"NoiseLevel Max Anplitute:"+ ma);
-	        mEMA = EMA_FILTER * value + (1.0 - EMA_FILTER) * mEMA;
-	        this.reading=String.valueOf(mEMA);
+	        double value;
+	        for (int i=1;i<=10;i++){
+	        	Thread.sleep(100);
+	        	sum+=mRecorder.getMaxAmplitude();	        	
+	        	ma=sum/i;
+	        	
+	        }	        
+	        Log.w(TAG,"NoiseLevel Max Anplitute AVG:"+ ma);
+        	value=(ma/51805.5336);       		        
+	        double db = 20*Math.log10(value/REFERENCE);
+	        Log.w(TAG,"NoiseLevel db:"+ db);
+	        this.queue.addLast(db);
+	        if(this.queue.size()>10) this.queue.removeFirst();	        
 	        mRecorder.stop();
 	        mRecorder.release();
+	        return db;
 		} catch (Exception e) {
 			Log.w("NoiseLevel Plugin Error", e.toString());
-			this.reading = "EXCEPTION";
-			this.status="invalid";
-		}
-	        
-		Log.w(TAG,"NoiseLevel Plugin:"+ this.reading);
-		PluginInfo info = new PluginInfo();
-		info.setState(this.status);
+			return -1;
+		}		
+	}
+	
+	
+	
+	public void broadcastNoiseLevel(UUID requestId) {
+		if (requestId!=null)
+			Log.w(TAG, "NoiseLevel Broadcast:"+requestId);
+		else
+			Log.w(TAG, "NoiseLevel Broadcast Timer!");
 		List<Reading> r=new ArrayList<Reading>();
-		r.add(new Reading(Reading.Datatype.String, this.reading, PluginInfo.CONTEXT_TYPE));
+		PluginInfo info = new PluginInfo();		
+		if(this.queue.size()==0){
+			double db=captureNoiseLevel();
+			Log.w(TAG,"NoiseLevel Plugin:"+ db);
+		}else{
+			for(Double dbM:this.queue){
+				r.add(new Reading(Reading.Datatype.Float, String.valueOf(dbM), PluginInfo.CONTEXT_TYPE));
+			}
+		}
 		info.setPayload(r);		
-		Log.w(TAG, "NoiseLevel Plugin:"+ info.getPayload());
+		info.setState("OK");	
 		if (requestId!=null){
 			sendContextEvent(requestId, new SecuredContextInfo(info,	PrivacyRiskLevel.LOW), 60000);
 			Log.w(TAG,"NoiseLevel Plugin from Request:"+ info.getPayload());
@@ -97,8 +106,8 @@ public class NoiseLevelPluginRuntime extends AutoReactiveContextPluginRuntime {
 	public void init(PowerScheme powerScheme, ContextPluginSettings settings) throws Exception {
 		this.setPowerScheme(powerScheme);
 		this.context = this.getSecuredContext();
-		reading = "";
 		handler = new Handler();
+		runnable.run();
 		Log.w(TAG, "NoiseLevel Inited!");
 	}
 

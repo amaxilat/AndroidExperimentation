@@ -11,6 +11,7 @@
       <property name="connection.autocommit">true</property>
       <property name="dialect">org.hibernate.dialect.MySQLDialect</property>
       <property name="c3p0.testConnectionOnCheckout">true</property>
+      <property name="hibernate.connection.release_mode">after_transaction</property>
       <mapping resource="eu/smartsantander/androidExperimentation/entities/ExperimentsEntity.hbm.xml"/>
       <mapping resource="eu/smartsantander/androidExperimentation/entities/PluginsEntity.hbm.xml"/>
       <mapping resource="eu/smartsantander/androidExperimentation/entities/ResultsEntity.hbm.xml"/>

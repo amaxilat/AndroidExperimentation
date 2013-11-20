@@ -1,10 +1,12 @@
+<%@ page import="com.google.gson.Gson" %>
+<%@ page import="eu.smartsantander.androidExperimentation.ModelManager" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
     <title>AndroidExperimentation - SmartSantander</title>
 </head>
 <body>
-<jsp:include page="./includes/header.html" flush="true"/>
+
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 <title>Flot Examples: Real-time updates</title>
 <link href="./style/chart.css" rel="stylesheet" type="text/css">
@@ -24,6 +26,7 @@
 
 		Integer dId = null;
 		Long tS = null;
+		Long timestamp=System.currentTimeMillis();
 	
 	// deviceID and timeStamp variables
 	
@@ -49,7 +52,7 @@
 
                     // call dataStatsRaw to get the data for a specific device after the given timestamp
                     // example link: http://blanco.cti.gr:8080/dataStatsRaw.jsp?tstamp=0&devId=53
-                    var theUrl = "http://localhost:8080/dataStatsRaw.jsp?&tstamp=" + tstamp + "&devId=" + devId;
+                    var theUrl = "http://blanco.cti.gr:8080/dataStatsRaw.jsp?&tstamp=" + tstamp + "&devId=" + devId;
 
 
                     var xmlHttp = null;
@@ -63,7 +66,7 @@
 
 		function getData() {
 
-            var jsonDataArray = httpGet(timestamp, dId);
+            var jsonDataArray = <%= "'"+ (new Gson()).toJson(ModelManager.getWeeklyStats(timestamp, dId))+"';"%> ;
 
             var labelsArray = [];
             var datasetsArray = [];
@@ -112,6 +115,6 @@
 </script>
 <canvas id="statsChart" width="450" height="450"></canvas>
 
-<jsp:include page="./includes/footer.html" flush="true"/>
+
 </body>
 </html>

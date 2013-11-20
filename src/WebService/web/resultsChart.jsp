@@ -32,7 +32,13 @@
             out.print("var d=[]; \n");
             out.print("$(function() {");
                 for (Result result : results) {
-                    Reading r = Reading.fromJson(result.getMessage());
+                     Reading r;
+                    try{
+                        r = Reading.fromJson(result.getMessage());
+                     }catch(Exception e){
+                        e.printStackTrace();
+                        continue;
+                     }
                     if (r.getContext().equals(sensor) && result.getDeviceId()==dId)
                         out.print("d.push(["+ r.getTimestamp()+","+r.getValue() + "]); \n");
                 }
