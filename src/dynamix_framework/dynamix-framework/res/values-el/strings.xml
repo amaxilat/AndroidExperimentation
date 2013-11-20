@@ -20,6 +20,7 @@
     <string name="plug_fidelity_label">Supported Context Information</string>
     <string name="dynamix_enable_toggle_on">Ενεργοποιημένη λειτουργία</string>
     <string name="dynamix_enable_toggle_off">Απενεργοποιημένη λειτουργία</string>
+    <string name="dynamix_restarting">Το σύστημα αρχικοποιείται</string>
     <string name="plugin_enable_toggle_on">Plugin Ενεργό</string>
     <string name="plugin_enable_toggle_off">Plugin Ανενεργό</string>
     <string name="btn_plugin_uninstall">Απεγκατάσταση Plugin</string>

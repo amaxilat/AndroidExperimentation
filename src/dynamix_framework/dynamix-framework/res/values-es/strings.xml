@@ -18,8 +18,9 @@
     <string name="plug_details_label">Context Plugin Details</string>
     <string name="plug_description_label">Descripción</string>
     <string name="plug_fidelity_label">Supported Context Information</string>
-    <string name="dynamix_enable_toggle_on">Experimentation Enabled</string>
-    <string name="dynamix_enable_toggle_off">Experimentation Disabled</string>
+    <string name="dynamix_enable_toggle_on">Experimentación Activado</string>
+    <string name="dynamix_enable_toggle_off">Experimentación Desactivado</string>
+    <string name="dynamix_restarting">Experimentación está reiniciando</string>
     <string name="plugin_enable_toggle_on">Plugin Enabled</string>
     <string name="plugin_enable_toggle_off">Plugin Disabled</string>
     <string name="btn_plugin_uninstall">Uninstall Plugin</string>

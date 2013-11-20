@@ -1,8 +1,14 @@
 package eu.smartsantander.androidExperimentation.tabs;
 
+import java.io.BufferedInputStream;
 import java.io.BufferedReader;
+import java.io.ByteArrayOutputStream;
+import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.net.HttpURLConnection;
+import java.net.MalformedURLException;
+import java.net.URL;
 import java.util.Date;
 import java.util.concurrent.TimeUnit;
 
@@ -14,14 +20,20 @@ import org.apache.http.impl.client.DefaultHttpClient;
 
 import eu.smartsantander.androidExperimentation.operations.PhoneProfiler;
 
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.content.SharedPreferences.OnSharedPreferenceChangeListener;
 import android.os.AsyncTask;
+import android.os.Build;
 import android.os.Bundle;
+import android.util.Base64;
+import android.view.View;
+import android.webkit.WebChromeClient;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
+import android.webkit.WebViewClient;
 import android.widget.TextView;
 
 
@@ -32,6 +44,7 @@ import android.widget.TextView;
 
 
 
+@SuppressLint("SetJavaScriptEnabled")
 public class statsTab extends Activity implements OnSharedPreferenceChangeListener {
 	
 	
@@ -40,9 +53,12 @@ public class statsTab extends Activity implements OnSharedPreferenceChangeListen
 	SharedPreferences prefs;
 	WebView myWebView;
 	WebSettings webSettings;
+	String html;
 	
 	@Override
     public void onCreate(Bundle savedInstanceState) {
+		
+		 
 		
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.statistics);
@@ -51,12 +67,10 @@ public class statsTab extends Activity implements OnSharedPreferenceChangeListen
 		pProfil = DynamixService.getPhoneProfiler();
 		
 	    myWebView = (WebView) findViewById(R.id.statswebview);
-		
-		webSettings = myWebView.getSettings();
-		webSettings.setJavaScriptEnabled(true);		 
-		webSettings.setSupportZoom(true);
-		
-		
+	    myWebView.setWebViewClient(new myWebClient()); 
+	    myWebView.getSettings().setJavaScriptEnabled(true);
+	    myWebView.requestFocus(View.FOCUS_DOWN);
+	  	    		 
 		prefs = getSharedPreferences("phoneId", Context.MODE_PRIVATE);
 		
 		// update the field dynamically when changed
@@ -75,7 +89,9 @@ public class statsTab extends Activity implements OnSharedPreferenceChangeListen
 		
 		prefs.registerOnSharedPreferenceChangeListener(listener);
 		
-		new DownloadWebStatsTask().execute("http://blanco.cti.gr:8080/mobileStatsChart.jsp?tstamp=00000000&devId=146");
+		String theJPGData = loadTheStatsJPG();
+		
+		myWebView.loadDataWithBaseURL(null, theJPGData, "text/html", null, null);
 		
 		fillStatsFields();	
 						
@@ -89,10 +105,37 @@ public class statsTab extends Activity implements OnSharedPreferenceChangeListen
 		
 	}
 	
+	 public class myWebClient extends WebViewClient  
+     {  
+
+		 @Override
+		    public boolean shouldOverrideUrlLoading(WebView view, String url) {
+		        view.loadUrl(url);
+		        return true;
+		    }
+
+
+		    @Override
+		    public void onPageFinished(WebView view, String url) {
+		        super.onPageFinished(view, url);
+		        
+
+		        }
+
+
+     } 
+	
+	
 	@Override
 	public void onResume() {
+		
+		fillStatsFields();
+
+		String thePNGData = loadTheStatsJPG();
+		
+		myWebView.loadDataWithBaseURL(null, thePNGData, "text/html", null, null);
 		super.onResume();
-		new DownloadWebStatsTask().execute("http://blanco.cti.gr:8080/mobileStatsChart.jsp?tstamp=00000000&devId=146");
+
 
 	}
 	
@@ -120,47 +163,37 @@ public class statsTab extends Activity implements OnSharedPreferenceChangeListen
 		statsTextView6.setText("Not available");
 		statsTextView9.setText("Statistics for previous 7 days");
 		
-		
-		
 	}
 	
-	private class DownloadWebStatsTask extends AsyncTask<String, Void, String> {
-	    
-		@Override
-	    protected String doInBackground(String... urls) {
-	      String response = "";
-	      for (String url : urls) {
-	        DefaultHttpClient client = new DefaultHttpClient();
-	        HttpGet httpGet = new HttpGet(url);
-	        try {
-	          HttpResponse execute = client.execute(httpGet);
-	          InputStream content = execute.getEntity().getContent();
+	private String loadTheStatsJPG() {
+		byte[] imageRaw = null;
+		  try {
+		     URL url = new URL("http://150.140.5.92:8080/statsBarChart.jsp?tstamp=1384380000000&devId=146&file.png");
+		     HttpURLConnection urlConnection = (HttpURLConnection) url.openConnection();
 
-	          BufferedReader buffer = new BufferedReader(new InputStreamReader(content));
-	          String s = "";
-	          while ((s = buffer.readLine()) != null) {
-	            response += s;
-	          }
+		     InputStream in = new BufferedInputStream(urlConnection.getInputStream());
+		     ByteArrayOutputStream out = new ByteArrayOutputStream();
 
-	        } catch (Exception e) {
-	          e.printStackTrace();
-	        }
-	      }
-	      return response;
-	    }
+		     int c;
+		     while ((c = in.read()) != -1) {
+		         out.write(c);
+		     }
+		     out.flush();
 
-	
-	    @Override
-	    protected void onPostExecute(String result) {
-	      
-	    	fillStatsFields();
-	    	myWebView = (WebView) findViewById(R.id.statswebview);
-			
-			webSettings = myWebView.getSettings();
-			webSettings.setJavaScriptEnabled(true);			
-			myWebView.loadData(result, "text/html", "utf-8");
-	    	
-	    }
-	  }
+		     imageRaw = out.toByteArray();
+
+		     urlConnection.disconnect();
+		     in.close();
+		     out.close();
+		  } catch (IOException e) {
+		     e.printStackTrace();
+		  }
+
+		  String image64 = Base64.encodeToString(imageRaw, Base64.DEFAULT);
+
+		  String pageData = "<img src=\"data:image/jpeg;base64," + image64 + "\" width=400px/>";
+		  
+		  return pageData;
+	}
 
 }
