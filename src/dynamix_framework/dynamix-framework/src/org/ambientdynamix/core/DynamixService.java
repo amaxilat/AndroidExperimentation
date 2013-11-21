@@ -307,7 +307,7 @@ public final class DynamixService extends Service {
 		if (exp!=null)
 			uninstallPlugin(exp,true);
 		DynamixService.setExperiment(null);
-F	}		
+		}		
 	
 	
 	public static Experiment getExperiment(){

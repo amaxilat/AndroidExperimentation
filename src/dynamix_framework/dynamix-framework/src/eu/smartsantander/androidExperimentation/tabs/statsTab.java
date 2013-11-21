@@ -214,7 +214,7 @@ public class statsTab extends Activity implements OnSharedPreferenceChangeListen
 
 		  String image64 = Base64.encodeToString(imageRaw, Base64.DEFAULT);
 
-		  String pageData = "<meta name=\"viewport\" content=\"width=400\" /><img src=\"data:image/jpeg;base64," + image64 + "\" width=\"100%\" />";
+		  String pageData = "<meta name=\"viewport\" content=\"width=device-width, user-scalable=no\" /><img src=\"data:image/jpeg;base64," + image64 + "\" width=\"100%\" />";
 		  
 		  return pageData;
 	}
