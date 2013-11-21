@@ -240,7 +240,10 @@ public final class DynamixService extends Service {
 	}
 	
 	public static Long getDataStorageSize(){
-		return dataStorage.size();
+		if (dataStorage!=null)
+			return dataStorage.size();
+		else
+			return 0L;
 	}
 	
 	public static synchronized Pair<Long,String> getOldestExperimentalMessage(){		
@@ -307,7 +310,7 @@ public final class DynamixService extends Service {
 		if (exp!=null)
 			uninstallPlugin(exp,true);
 		DynamixService.setExperiment(null);
-F	}		
+	}		
 	
 	
 	public static Experiment getExperiment(){

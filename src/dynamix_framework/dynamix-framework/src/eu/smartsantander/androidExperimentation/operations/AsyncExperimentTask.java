@@ -179,7 +179,6 @@ public class AsyncExperimentTask extends AsyncTask<String, Void, String> {
 					throw new Exception("Experiment violates Sensor Rules");
 				}
 			} catch (Exception e) {
-				e.printStackTrace();
 				Log.i(TAG, "Exception in consuming experiment" + e.getMessage());
 				throw new Exception( "Exception in consuming experiment");
 			}

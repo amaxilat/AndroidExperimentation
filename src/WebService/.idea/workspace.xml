@@ -7,15 +7,6 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="4ccbb714-201c-482b-a93f-dd4890c10bc1" name="Default" comment="experiment plugin plugin installation">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/web/map.jsp" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/web/dynamixRepository/org.ambientdynamix.contextplugins.ExperimentPluginWifiScan_0.9.54.jar" afterPath="$PROJECT_DIR$/web/dynamixRepository/org.ambientdynamix.contextplugins.ExperimentPluginWifiScan_0.9.54.jar" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/AndroidExperimentationWS.iml" afterPath="$PROJECT_DIR$/AndroidExperimentationWS.iml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/artifacts/AndroidExperimentationWS_Web_exploded.xml" afterPath="$PROJECT_DIR$/.idea/artifacts/AndroidExperimentationWS_Web_exploded.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../dynamix_framework/dynamix-framework/src/eu/smartsantander/androidExperimentation/operations/AsyncExperimentTask.java" afterPath="$PROJECT_DIR$/../dynamix_framework/dynamix-framework/src/eu/smartsantander/androidExperimentation/operations/AsyncExperimentTask.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/eu/smartsantander/androidExperimentation/ModelManager.java" afterPath="$PROJECT_DIR$/src/eu/smartsantander/androidExperimentation/ModelManager.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../sensorPlugins/ExperimentPluginWifiScan/src/org/ambientdynamix/contextplugins/ExperimentPlugin/PluginInfo.java" afterPath="$PROJECT_DIR$/../sensorPlugins/ExperimentPluginWifiScan/src/org/ambientdynamix/contextplugins/ExperimentPlugin/PluginInfo.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/eu/smartsantander/androidExperimentation/entities/Reading.java" afterPath="$PROJECT_DIR$/src/eu/smartsantander/androidExperimentation/entities/Reading.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/web/lastResults.jsp" afterPath="$PROJECT_DIR$/web/lastResults.jsp" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <list id="ffed928d-c9fc-443c-9d9a-a806dbe1581e" name="Hibernate altered  Demon registration altered" comment="" />
@@ -213,10 +204,22 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="map.jsp" pinned="false" current="true" current-in-tab="true">
+      <file leaf-file-name="map.jsp" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/web/map.jsp">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="46" column="45" selection-start="1683" selection-end="1683" vertical-scroll-proportion="0.46869984">
+            <state line="46" column="45" selection-start="1683" selection-end="1683" vertical-scroll-proportion="-11.230769">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="androidexperimentation.experiments" pinned="false" current="false" current-in-tab="true">
+        <entry file="dbDummy://dbtable:/4a56989/ec19ba82-120f-43e6-96c5-26912937ccef/androidexperimentation..experiments">
+          <provider selected="true" editor-type-id="com.intellij.persistence.database.editor.DatabaseTableFileEditorProvider">
+            <state />
+          </provider>
+          <provider editor-type-id="text-editor">
+            <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0">
               <folding />
             </state>
           </provider>
@@ -252,11 +255,11 @@
         <option value="$PROJECT_DIR$/web/chart.jsp" />
         <option value="$PROJECT_DIR$/web/lastResultsChart.jsp" />
         <option value="$PROJECT_DIR$/web/resultsChart.jsp" />
-        <option value="dbtable:/4a56989/ec19ba82-120f-43e6-96c5-26912937ccef/androidexperimentation..experiments" />
         <option value="$PROJECT_DIR$/web/lastResults.jsp" />
         <option value="$PROJECT_DIR$/src/eu/smartsantander/androidExperimentation/entities/Reading.java" />
         <option value="$PROJECT_DIR$/src/eu/smartsantander/androidExperimentation/ModelManager.java" />
         <option value="$PROJECT_DIR$/web/map.jsp" />
+        <option value="dbtable:/4a56989/ec19ba82-120f-43e6-96c5-26912937ccef/androidexperimentation..experiments" />
       </list>
     </option>
   </component>
@@ -864,16 +867,16 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1936" height="1056" extended-state="7" />
-    <editor active="true" />
+    <editor active="false" />
     <layout>
       <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.6177474" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="JetGradle" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="Persistence" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.29868075" sideWeight="0.27531284" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.17522322" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.17182498" sideWeight="0.75334823" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.17182498" sideWeight="0.4486607" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.24665178" sideWeight="0.8858058" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Debug" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.55133927" sideWeight="0.8858058" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="IDEtalk Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="15" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3470982" sideWeight="0.11419424" order="8" side_tool="true" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.24878444" sideWeight="0.67190224" order="4" side_tool="true" content_ui="tabs" />
@@ -887,7 +890,7 @@
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="SLIDING" type="SLIDING" visible="false" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Application Servers" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32460135" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.15101388" sideWeight="0.75334823" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.15101388" sideWeight="0.4486607" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32589287" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="SVN Repositories" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32992035" sideWeight="0.5" order="16" side_tool="false" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
@@ -1054,14 +1057,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="dbDummy://dbtable:/4a56989/ec19ba82-120f-43e6-96c5-26912937ccef/androidexperimentation..experiments">
-      <provider selected="true" editor-type-id="com.intellij.persistence.database.editor.DatabaseTableFileEditorProvider">
-        <state />
-      </provider>
-      <provider editor-type-id="text-editor">
-        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" />
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/web/statsBarChart.jsp">
       <provider selected="true" editor-type-id="text-editor">
         <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="-0.4894434">
@@ -1128,7 +1123,17 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/web/map.jsp">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="46" column="45" selection-start="1683" selection-end="1683" vertical-scroll-proportion="0.46869984">
+        <state line="46" column="45" selection-start="1683" selection-end="1683" vertical-scroll-proportion="-11.230769">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="dbDummy://dbtable:/4a56989/ec19ba82-120f-43e6-96c5-26912937ccef/androidexperimentation..experiments">
+      <provider selected="true" editor-type-id="com.intellij.persistence.database.editor.DatabaseTableFileEditorProvider">
+        <state />
+      </provider>
+      <provider editor-type-id="text-editor">
+        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0">
           <folding />
         </state>
       </provider>

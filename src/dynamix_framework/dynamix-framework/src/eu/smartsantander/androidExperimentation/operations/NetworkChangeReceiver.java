@@ -11,17 +11,22 @@ import android.util.Log;
 import eu.smartsantander.androidExperimentation.Constants;
 
 public class NetworkChangeReceiver extends BroadcastReceiver {
-
+	private final String TAG = this.getClass().getSimpleName();
 	  @Override
 	  public void onReceive(final Context context, final Intent intent) {
-	    final ConnectivityManager connMgr = (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);
+		try{
+			final ConnectivityManager connMgr = (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);
 
-	    final android.net.NetworkInfo wifi =  connMgr.getNetworkInfo(ConnectivityManager.TYPE_WIFI);
+			final android.net.NetworkInfo wifi =  connMgr.getNetworkInfo(ConnectivityManager.TYPE_WIFI);
     
-	    if (wifi.isAvailable()) {
-	    	AsyncReportOnServerTask reportT = new AsyncReportOnServerTask();
-	    	reportT.execute();
-	    }
+		    if (wifi.isAvailable()) {
+		    	AsyncReportOnServerTask reportT = new AsyncReportOnServerTask();
+		    	reportT.execute();
+		    }
+		}catch(Exception e){
+			e.printStackTrace();
+			Log.i(TAG, "NetworkChangeReceiver" + e.getMessage());			
+		}
 
 	}
 
