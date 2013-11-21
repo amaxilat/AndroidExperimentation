@@ -1,8 +1,12 @@
 package eu.smartsantander.androidExperimentation.entities;
 
 import java.io.Serializable;
+import java.lang.reflect.Type;
+import java.util.ArrayList;
+import java.util.List;
 
 import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 
 public class Reading implements Serializable {
 	public static enum Datatype {Integer,Float,String};
@@ -57,4 +61,11 @@ public class Reading implements Serializable {
     public static Reading fromJson(String json){
 		return (new Gson()).fromJson(json, Reading.class);
 	}
+
+    public static Reading[] arrayFromJson(String json){
+        Type listType = new TypeToken<ArrayList<Reading>>() {}.getType();
+        List<Reading> readings = (new Gson()).fromJson(json, listType);
+        if (readings.size()==0) return new Reading[0];
+        else return (Reading[]) readings.toArray();
+    }
 }

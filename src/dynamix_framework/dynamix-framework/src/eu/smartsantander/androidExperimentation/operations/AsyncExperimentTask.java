@@ -154,7 +154,7 @@ public class AsyncExperimentTask extends AsyncTask<String, Void, String> {
 						DynamixService.setTitleBarRestarting(true);
 						Thread.sleep(5000);
 						DynamixService.startFramework();
-						Thread.sleep(10000);
+						Thread.sleep(5000);
 						DynamixServiceListenerUtility.start();
 						DynamixService.setRestarting(false);
 						DynamixService.setTitleBarRestarting(false);

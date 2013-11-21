@@ -18,6 +18,8 @@
           <element id="library" level="project" name="commons-fileupload:commons-fileupload:1.2" />
           <element id="library" level="project" name="log4j-1.2.17" />
           <element id="library" level="project" name="dynamixRepository" />
+          <element id="library" level="project" name="jfreechart-1.0.16" />
+          <element id="library" level="project" name="jcommon-1.0.20" />
         </element>
       </element>
       <element id="module-output" name="AndroidExperimentationWS" />

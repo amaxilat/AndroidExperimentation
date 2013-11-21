@@ -42,7 +42,22 @@
             }
 
       %>
+        function openLiveChart()
+        {
+            var e = document.getElementById("device");
+            var device = e.options[e.selectedIndex].value;
+            var url='http://blanco.cti.gr:8080/chart.jsp?id='+ <%=expId%>+'&devId='+device;
+            window.open(url,'_blank');
+        }
 
+
+        function openMap()
+        {
+            var e = document.getElementById("device");
+            var device = e.options[e.selectedIndex].value;
+            var url='http://blanco.cti.gr:8080/map.jsp?id='+ <%=expId%>+'&devId='+device;
+            window.open(url,'_blank');
+        }
 
     </script>
 </head>
@@ -56,7 +71,7 @@
 <form action="lastResultsChart.jsp">
     <input name=id value="<%=expId%>" hidden="true">
     Device Id:
-    <select name="device">
+    <select name="device" id="device">
         <%
             for (String d : devices.keySet())
                 out.print("<option value='" + d + "'>" + d + "</option>");
@@ -64,13 +79,15 @@
     </select>
 
     Sensor:
-    <select name="sensor">
+    <select name="sensor"  id="sensor">
         <%
             for (String d : sensors.keySet())
                 out.print("<option value='" + d + "'>" + d + "</option>");
         %>
     </select>
     <input type="submit" value="Draw">
+    <input type="button" value="Live Chart" onclick="openLiveChart();"/>
+    <input type="button" value="Map" onclick="openMap();"/>
 </form>
 
 <div class="datagrid">

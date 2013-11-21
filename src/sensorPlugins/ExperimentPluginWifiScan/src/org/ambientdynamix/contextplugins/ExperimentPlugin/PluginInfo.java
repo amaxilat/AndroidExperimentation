@@ -22,8 +22,19 @@ class PluginInfo implements IContextInfo,IPluginInfo  {
 	public static String CONTEXT_TYPE = "org.ambientdynamix.contextplugins.ExperimentPlugin";
 	private String state;
 	private String payload = "";
+	private String context;
 	
-	public PluginInfo() {}
+	public String getContext() {
+		return context;
+	}
+
+	public void setContext(String context) {
+		this.context = context;
+	}
+	
+	public PluginInfo() {
+		this.context=CONTEXT_TYPE;
+	}
 
 	@Override
 	public Set<String> getStringRepresentationFormats() {

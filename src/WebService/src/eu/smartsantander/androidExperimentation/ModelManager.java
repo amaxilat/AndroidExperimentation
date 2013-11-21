@@ -17,6 +17,7 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.Random;
 import java.util.concurrent.TimeUnit;
 
 /**
@@ -285,5 +286,17 @@ public class ModelManager {
 
         return resultStats;
 
+    }
+
+
+    public static float pert(){
+        Random r=new Random();
+        int x=r.nextInt(3);
+        float y =(float)x/1000;
+        return y;
+    }
+
+    public static String formatDouble(Float d){
+        return String.format("%.6f", d+pert()).replace(',','.');
     }
 }
