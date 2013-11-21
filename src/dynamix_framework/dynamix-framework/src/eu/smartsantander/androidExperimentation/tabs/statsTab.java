@@ -25,6 +25,8 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.content.SharedPreferences.OnSharedPreferenceChangeListener;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
@@ -45,16 +47,16 @@ import eu.smartsantander.androidExperimentation.Constants;
 
 
 
-@SuppressLint("SetJavaScriptEnabled")
+
 public class statsTab extends Activity implements OnSharedPreferenceChangeListener {
 	
 	
-	OnSharedPreferenceChangeListener listener;
-	PhoneProfiler pProfil;
-	SharedPreferences prefs;
-	WebView myWebView;
-	WebSettings webSettings;
-	String html;
+	private OnSharedPreferenceChangeListener listener;
+	private PhoneProfiler pProfil;
+	private SharedPreferences prefs;
+	private WebView myWebView;
+	private WebSettings webSettings;
+	private String html;
 	
 	@Override
     public void onCreate(Bundle savedInstanceState) {
@@ -72,7 +74,7 @@ public class statsTab extends Activity implements OnSharedPreferenceChangeListen
 	    myWebView.getSettings().setJavaScriptEnabled(true);
 	    myWebView.requestFocus(View.FOCUS_DOWN);
 	  	    		 
-		prefs = getSharedPreferences("phoneId", Context.MODE_PRIVATE);
+		prefs = getSharedPreferences("SmartSantanderConfigurations", Context.MODE_PRIVATE);
 		
 		// update the field dynamically when changed
 		
@@ -90,7 +92,21 @@ public class statsTab extends Activity implements OnSharedPreferenceChangeListen
 		
 		prefs.registerOnSharedPreferenceChangeListener(listener);
 		
-		String theJPGData = loadTheStatsJPG();
+		// check connectivity
+		
+		String theJPGData;
+		
+		if (checkNetworkIsAvailable()) {
+
+			theJPGData = loadTheStatsJPG();
+			SharedPreferences.Editor editor = prefs.edit();
+			editor.putString("pictureStatsData", theJPGData);
+			editor.commit();
+	
+		}
+		else {
+			theJPGData = prefs.getString("pictureStatsData", "Not available");
+		}
 		
 		myWebView.loadDataWithBaseURL(null, theJPGData, "text/html", null, null);
 		
@@ -132,9 +148,11 @@ public class statsTab extends Activity implements OnSharedPreferenceChangeListen
 		
 		fillStatsFields();
 
-		String thePNGData = loadTheStatsJPG();
+		//String thePNGData = loadTheStatsJPG();
 		
-		myWebView.loadDataWithBaseURL(null, thePNGData, "text/html", null, null);
+		String theJPGData = prefs.getString("pictureStatsData", "Not available");
+		
+		myWebView.loadDataWithBaseURL(null, theJPGData, "text/html", null, null);
 		super.onResume();
 
 
@@ -161,7 +179,8 @@ public class statsTab extends Activity implements OnSharedPreferenceChangeListen
 		statsTextView3.setText("Number of experiments run");
 		statsTextView4.setText(String.valueOf(experiments));
 		statsTextView5.setText("Number of readings produced");
-		statsTextView6.setText("Not available");
+		long totalMsg = DynamixService.getPhoneProfiler().getTotalReadingsProduced();
+		statsTextView6.setText(Long.toString(totalMsg));
 		statsTextView9.setText("Statistics for previous 7 days");
 		
 	}
@@ -169,8 +188,9 @@ public class statsTab extends Activity implements OnSharedPreferenceChangeListen
 	private String loadTheStatsJPG() {
 		byte[] imageRaw = null;
 		  try {
-			  
-			 String statsURL = Constants.WEB_STATS_URL + "?tstamp=00000000&devId=146";
+			 
+			 long time = new Date().getTime(); 
+			 String statsURL = Constants.WEB_STATS_URL + "?tstamp=" + time + "&devId=" + DynamixService.getPhoneProfiler().getPhoneId();
 		     URL url = new URL(statsURL);
 		     HttpURLConnection urlConnection = (HttpURLConnection) url.openConnection();
 
@@ -194,9 +214,17 @@ public class statsTab extends Activity implements OnSharedPreferenceChangeListen
 
 		  String image64 = Base64.encodeToString(imageRaw, Base64.DEFAULT);
 
-		  String pageData = "<img src=\"data:image/jpeg;base64," + image64 + "\" width=400px/>";
+		  String pageData = "<meta name=\"viewport\" content=\"width=400\" /><img src=\"data:image/jpeg;base64," + image64 + "\" width=\"100%\" />";
 		  
 		  return pageData;
+	}
+	
+	public boolean checkNetworkIsAvailable() {
+		ConnectivityManager cm = (ConnectivityManager) this.getSystemService(Context.CONNECTIVITY_SERVICE);
+		 
+		NetworkInfo activeNetwork = cm.getActiveNetworkInfo();
+		boolean isConnected = activeNetwork != null && activeNetwork.isConnectedOrConnecting();
+		return isConnected;
 	}
 
 }

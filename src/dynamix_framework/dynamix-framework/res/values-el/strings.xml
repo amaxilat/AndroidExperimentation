@@ -77,7 +77,7 @@
     <string name="expIsEnabled">Πειραματισμός ενεργός</string>
 	<string name="expIsDisabled">Πειραματισμός ανενεργός</string>
 	<string name="noAuthApps">Δεν υπάρχουν εφαρμογές</string>
-	<string name="no_context_plugins">Δεν υπάρχουν eγκατεστημένoi Αισθητήρες</string>
+	<string name="no_context_plugins">Δεν υπάρχουν εγκατεστημένοι Αισθητήρες</string>
     <string name="installed_context_plugins">Εγκατεστημένοι Αισθητήρες</string>
     <string name="available_context_plugins">Διαθέσιμοι Αισθητήρες</string>
     <string name="no_available_context_plugins">Δεν υπάρχουν διαθέσιμοι Αισθητήρες</string>

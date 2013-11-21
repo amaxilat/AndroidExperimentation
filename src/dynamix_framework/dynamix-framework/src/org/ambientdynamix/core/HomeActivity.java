@@ -253,7 +253,7 @@ public class HomeActivity extends ListActivity {
 			if (DynamixService.getConnectionStatus() && DynamixService.isEnabled())
 				connectionStatus.setText("Connected with SmartSantander Server");	
 			else
-				connectionStatus.setText("Disconnected with SmartSantander Server");
+				connectionStatus.setText("Disconnected from SmartSantander Server");
 			this.appList.setVisibility(View.GONE);
 	}
 
