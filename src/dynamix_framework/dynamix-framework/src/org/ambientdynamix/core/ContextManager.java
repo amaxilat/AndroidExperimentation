@@ -1347,7 +1347,9 @@ class ContextManager implements IPluginContextListener, IPluginFacade {
 													+ wrapper.getState());
 									return true;
 								} else if (wrapper.getState() == PluginState.INITIALIZED
-										|| wrapper.getState() == PluginState.ERROR) {
+										|| wrapper.getState() == PluginState.ERROR
+										//|| wrapper.getState() == PluginState.NEW //smartsantander
+										) {
 									Log.d(TAG, "Starting: " + runtime);
 									// Set STARTING state
 									wrapper.setState(PluginState.STARTING);

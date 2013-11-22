@@ -53,7 +53,7 @@ public class PhoneProfiler extends Thread implements Runnable {
 	public void startJob(){
 		try {
 			Log.d(TAG, "running");
-			Thread.sleep(5000);  
+			Thread.sleep(2000);  
 			pref = DynamixService.getAndroidContext().getApplicationContext().getSharedPreferences("SmartSantanderConfigurations",0);
 			editor = pref.edit();
 			if ((pref.contains("phoneId"))) {
@@ -106,16 +106,30 @@ public class PhoneProfiler extends Thread implements Runnable {
 
 	public void setPhoneId(int PHONE_ID) {
 		this.PHONE_ID = PHONE_ID;
-		if (editor==null){
+		if (editor==null || pref==null){
 			pref = DynamixService.getAndroidContext().getApplicationContext().getSharedPreferences("SmartSantanderConfigurations",0);
 			editor = pref.edit();	
-		}
-		
+		}	
 		editor.putInt("phoneId", this.PHONE_ID);
 		editor.putString("experiment", "");
+		editor.putLong("lastOnlineLoginDate", (new Date()).getTime());
+		editor.putLong("totalReadingsProducedCounter", 0);		
 		editor.commit();
 	}
 
+	public void savePrefs(){
+		if (editor==null || pref==null){
+			pref = DynamixService.getAndroidContext().getApplicationContext().getSharedPreferences("SmartSantanderConfigurations",0);
+			editor = pref.edit();	
+		}	
+		//editor.putInt("phoneId", this.PHONE_ID);
+		String experimentsJson= (new Gson()).toJson(experiments);
+		editor.putString("experiments", experimentsJson);
+		editor.putLong("lastOnlineLoginDate", (new Date()).getTime());
+		editor.putLong("totalReadingsProducedCounter", totalReadingsProducedCounter);		
+		editor.commit();
+	}
+	
 	
 	public String getSensorRules(){
 		String sensorRules="";

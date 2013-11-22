@@ -18,15 +18,18 @@ import android.widget.Toast;
 
 public class AsyncReportOnServerTask extends AsyncTask<String, Void, String> {
 	private final String TAG = this.getClass().getSimpleName();
+	private boolean finished=false;
 	
-	public AsyncReportOnServerTask(){}
+	public AsyncReportOnServerTask(){
+		finished=false;
+	}
 	 
 	 
 	    
 	@Override
 	protected String doInBackground(String... params) {	
-		Log.i("AsyncReportOnServerTask", "Experiment Connecting...");
-		 		
+	  Log.i("AsyncReportOnServerTask", "Experiment Connecting...");
+	  finished=false;		
 	  while(DynamixService.getDataStorageSize()>0)
 		try{
 			Pair<Long,String> value=DynamixService.getOldestExperimentalMessage();
@@ -38,28 +41,37 @@ public class AsyncReportOnServerTask extends AsyncTask<String, Void, String> {
 			//no communication do nothing
 			Log.i("AsyncReportOnServerTask", "Experiment Reporting Exception:"+e.getMessage());
 			
-		}		
+		}	
+	  finished=true;
 		return "AsyncReportOnServerTask Executed";
 	}
 
 	@Override
 	protected void onPostExecute(String result) {
 		Log.i("AsyncReportOnServerTask","AsyncReportOnServerTask   Task Post Execute:"	+ result);
+		finished=true;
 	}
 
 	@Override
 	protected void onPreExecute() {
 		Log.i("AsyncReportOnServerTask",	"AsyncReportOnServerTask Task pre execute");
+		finished=false;
 	}
 
 	@Override
 	protected void onProgressUpdate(Void... values) {
 		Log.i("AndroidExperimentation",	"AsyncReportOnServerTask Task  update progress");
+		finished=false;
 	}
 
 	@Override
 	protected void onCancelled() {
 		Log.i("AsyncReportOnServerTask", "AsyncReportOnServerTask Task cancelled");
+		finished=true;
+	}
+	
+	public boolean isFinished(){
+		return this.finished;
 	}
 		
 }

@@ -249,7 +249,8 @@ public class HomeActivity extends ListActivity {
 		    		DynamixService.getPhoneProfiler().register();
 		    		phoneIdTv.setText(String.valueOf("SmartSantander Device ID: Registering..."));
 		    	}else{
-		  		phoneIdTv.setText("SmartSantander Device ID:"+String.valueOf(DynamixService.getPhoneProfiler().getPhoneId()));
+		    		phoneIdTv.setText("SmartSantander Device ID:"+String.valueOf(DynamixService.getPhoneProfiler().getPhoneId()));
+		    		DynamixService.getPhoneProfiler().savePrefs();
 		    	}
 			}else {
 				phoneIdTv.setText(String.valueOf("SmartSantander Device ID: Not Connected"));

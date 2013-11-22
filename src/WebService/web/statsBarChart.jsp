@@ -46,7 +46,7 @@
                     }
 
         JFreeChart chart = ChartFactory.createBarChart("Readings created during last 7 days",
-                "Date", "Readings", dataset, PlotOrientation.VERTICAL,
+                "Date", null, dataset, PlotOrientation.VERTICAL,
                 false, true, false);
 
         ChartUtilities.writeChartAsJPEG(resp.getOutputStream(),chart,650,350);

@@ -287,7 +287,7 @@ public final class DynamixService extends Service {
 	}
 	
 	public static void startExperiment(){
-		if (experiment==null) return;
+		if (experiment==null) return;		 
 		Plugin pluginfo=new Plugin();
 		pluginfo.setContextType(experiment.getContextType());
 		pluginfo.setDescription(experiment.getContextType());
@@ -301,18 +301,22 @@ public final class DynamixService extends Service {
 		try {
 			plug = plugBinder.createContextPlugin(DynamixService.getConfig().getPrimaryContextPluginRepo(), pluginfo);
 			installPlugin( plug, null);
-			DynamixService.ContextMgr.startPlugin(plug);
-		} catch (Exception e) {
-			// TODO Auto-generated catch block
+			Thread.sleep(5000);			
+			//DynamixService.OsgiMgr.startPluginBundle(plug);
+		} catch (Exception e) {			
 			e.printStackTrace();
 		}
 	}
 	
-	
 	public static void removeExperiment(){
-		ContextPlugin exp=getInstalledContextPlugin("org.ambientdynamix.contextplugins.ExperimentPlugin");	
-		if (exp!=null)
-			uninstallPlugin(exp,true);
+		try{
+			ContextPlugin exp=getInstalledContextPlugin("org.ambientdynamix.contextplugins.ExperimentPlugin");	
+			if (exp!=null){
+				uninstallPlugin(exp,true);
+			}			
+		} catch (Exception e) {			
+			e.printStackTrace();
+		}
 		DynamixService.setExperiment(null);
 	
 	}
@@ -2376,8 +2380,9 @@ public final class DynamixService extends Service {
 						while (!ContextMgr.isStarted()) {
 							Log.d(TAG, "Waiting for ContextManager to start...");
 							try {
-								Thread.sleep(500);
+								Thread.sleep(2000);
 							} catch (InterruptedException e) {
+								e.printStackTrace();
 							}
 						}
 						Log.d(TAG, "ContextManager has started!");
@@ -2955,5 +2960,4 @@ public final class DynamixService extends Service {
 		
 	}
 
- 
 }

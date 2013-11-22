@@ -27,7 +27,7 @@
              } catch (Exception e) {
              eId = null;
              }
-             List<Result> results = ModelManager.getLastResults(eId);
+             List<Result> results = ModelManager.getResults(eId);
              /*out.print("var s="+results.size() +"; \n");
              out.print("var d=[]; \n");*/
              int i=1;
@@ -39,6 +39,7 @@
              for (Result result : results) {
                 Reading r;
                  try{
+                  if(result.getMessage()==null || result.getMessage().length()==0) continue;
                  r = Reading.fromJson(result.getMessage());
                  String [] gps=new String[2];
                  if (r.getContext().contains("Gps")){
@@ -60,6 +61,7 @@
 
              if(gpsCenter!=null){
                 for (Result result : results) {
+                    if(result.getMessage()==null || result.getMessage().length()==0) continue;
                     Reading r;
                     try{
                         r = Reading.fromJson(result.getMessage());

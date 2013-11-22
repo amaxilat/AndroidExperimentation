@@ -151,6 +151,18 @@ public class statsTab extends Activity implements OnSharedPreferenceChangeListen
 		//String thePNGData = loadTheStatsJPG();
 		
 		String theJPGData = prefs.getString("pictureStatsData", "Not available");
+			
+		if (checkNetworkIsAvailable()) {
+
+			theJPGData = loadTheStatsJPG();
+			SharedPreferences.Editor editor = prefs.edit();
+			editor.putString("pictureStatsData", theJPGData);
+			editor.commit();
+	
+		}
+		else {
+			theJPGData = prefs.getString("pictureStatsData", "Not available");
+		}
 		
 		myWebView.loadDataWithBaseURL(null, theJPGData, "text/html", null, null);
 		super.onResume();

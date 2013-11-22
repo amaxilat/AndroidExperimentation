@@ -3,7 +3,6 @@ package eu.smartsantander.androidExperimentation.operations;
 import org.ambientdynamix.api.application.IdResult;
 import org.ambientdynamix.core.BaseActivity;
 import org.ambientdynamix.core.DynamixService;
- 
 
 import com.google.gson.Gson;
 
@@ -18,99 +17,106 @@ import android.widget.Toast;
 
 public class AsyncExperimentTask extends AsyncTask<String, Void, String> {
 	private final String TAG = this.getClass().getSimpleName();
-	private boolean stateActive=false;
-	
+	private boolean stateActive = false;
+
 	private NotificationHQManager noteManager;
-	
-	public AsyncExperimentTask(){}
-	 
-	public boolean isStateActive(){
+
+	public AsyncExperimentTask() {
+	}
+
+	public boolean isStateActive() {
 		return stateActive;
 	}
-	    
+
 	@Override
 	protected String doInBackground(String... params) {
-		this.stateActive=true;
+		this.stateActive = true;
 		Log.i("AsyncExperimentTask", "Experiment Connecting...");
-		if (DynamixService.isEnabled()==false){
+		if (DynamixService.isEnabled() == false) {
 			return "AndroidExperimentation Async Experiment Task Executed Dynamix Disabled";
 		}
-		
-		if (DynamixService.sessionStarted==false){
+
+		if (DynamixService.sessionStarted == false) {
 			DynamixServiceListenerUtility.start();
-	    }else{
+		} else {
 			try {
 
-				
-				
 				IdResult r;
-				
-				//do it for all plugins....
-				r=DynamixService.dynamix.contextRequest(DynamixService.dynamixCallback,"org.ambientdynamix.contextplugins.GpsPlugin", "org.ambientdynamix.contextplugins.GpsPlugin");
-				r=DynamixService.dynamix.contextRequest(DynamixService.dynamixCallback,"org.ambientdynamix.contextplugins.WifiScanPlugin", "org.ambientdynamix.contextplugins.WifiScanPlugin");
-				r=DynamixService.dynamix.contextRequest(DynamixService.dynamixCallback,"org.ambientdynamix.contextplugins.NoiseLevelPlugin", "org.ambientdynamix.contextplugins.NoiseLevelPlugin");
-				
-				if(DynamixService.getExperiment()!=null){
-					boolean flag=DynamixService.isExperimentInstalled("org.ambientdynamix.contextplugins.ExperimentPlugin");
-					if(flag==false)
+
+				// do it for all plugins....
+				r = DynamixService.dynamix.contextRequest(DynamixService.dynamixCallback,"org.ambientdynamix.contextplugins.GpsPlugin",	"org.ambientdynamix.contextplugins.GpsPlugin");
+				r = DynamixService.dynamix.contextRequest(DynamixService.dynamixCallback,"org.ambientdynamix.contextplugins.WifiScanPlugin","org.ambientdynamix.contextplugins.WifiScanPlugin");
+				r = DynamixService.dynamix.contextRequest(DynamixService.dynamixCallback,"org.ambientdynamix.contextplugins.NoiseLevelPlugin","org.ambientdynamix.contextplugins.NoiseLevelPlugin");
+
+				if (DynamixService.getExperiment() != null) {
+					boolean flag = DynamixService
+							.isExperimentInstalled("org.ambientdynamix.contextplugins.ExperimentPlugin");
+					if (flag == false)
 						DynamixService.startExperiment();
-					
+
 				}
-				//ping experiment....
-				r=DynamixService.dynamix.configuredContextRequest(DynamixService.dynamixCallback,"org.ambientdynamix.contextplugins.ExperimentPlugin", "org.ambientdynamix.contextplugins.ExperimentPlugin",DynamixService.getReadingStorage().getBundle() );
+				// ping experiment....
+				r = DynamixService.dynamix.configuredContextRequest(DynamixService.dynamixCallback,"org.ambientdynamix.contextplugins.ExperimentPlugin","org.ambientdynamix.contextplugins.ExperimentPlugin",DynamixService.getReadingStorage().getBundle());
 				Log.i("contextRequest", r.getMessage());
-			
-				try{
+
+				try {
 					manageExperiment();
-				}catch(Exception e){
-					this.stateActive=false;
+				} catch (Exception e) {
+					this.stateActive = false;
 					return e.getMessage();
 				}
-				
-				this.stateActive=false;
+
+				this.stateActive = false;
 			} catch (RemoteException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
-	    }
-		this.stateActive=false;
+		}
+		this.stateActive = false;
 		return "AndroidExperimentation Async Experiment Task Executed";
 	}
 
 	@Override
 	protected void onPostExecute(String result) {
-		Log.i("AndroidExperimentation","AndroidExperimentation Async Experiment Task Post Execute:"	+ result);
-		this.stateActive=false;
+		Log.i("AndroidExperimentation",
+				"AndroidExperimentation Async Experiment Task Post Execute:"
+						+ result);
+		this.stateActive = false;
 	}
 
 	@Override
 	protected void onPreExecute() {
-		Log.i("AndroidExperimentation",	"AndroidExperimentation Async Experiment Task pre execute");
-		this.stateActive=true;
+		Log.i("AndroidExperimentation",
+				"AndroidExperimentation Async Experiment Task pre execute");
+		this.stateActive = true;
 	}
 
 	@Override
 	protected void onProgressUpdate(Void... values) {
-		Log.i("AndroidExperimentation",	"AndroidExperimentation Async Experiment Task  update progress");
-		this.stateActive=true;
+		Log.i("AndroidExperimentation",
+				"AndroidExperimentation Async Experiment Task  update progress");
+		this.stateActive = true;
 	}
 
 	@Override
 	protected void onCancelled() {
-		Log.i("AndroidExperimentation",	"AndroidExperimentation Async Experiment Task cancelled");
-		this.stateActive=false;
+		Log.i("AndroidExperimentation",
+				"AndroidExperimentation Async Experiment Task cancelled");
+		this.stateActive = false;
 	}
-	
-	public String manageExperiment() throws Exception{
-		if (DynamixService.getExperiment()!=null){
-			if(DynamixService.getExperiment().getToTime()!=null && DynamixService.getExperiment().getToTime()<System.currentTimeMillis()){
-				//DynamixService.removeExperiment();
+
+	public String manageExperiment() throws Exception {
+		if (DynamixService.getExperiment() != null) {
+			if (DynamixService.getExperiment().getToTime() != null
+					&& DynamixService.getExperiment().getToTime() < System
+							.currentTimeMillis()) {
+				// DynamixService.removeExperiment();
 			}
 		}
 		String jsonExperiment = "0";
-		
+
 		noteManager = NotificationHQManager.getInstance();
-		
+
 		try {
 			jsonExperiment = DynamixService.getCommunication().getExperiment(
 					DynamixService.getPhoneProfiler().getPhoneId(),
@@ -123,68 +129,83 @@ public class AsyncExperimentTask extends AsyncTask<String, Void, String> {
 		if (jsonExperiment.equals("0")) {
 			Log.i(TAG, "No experiment Fetched");
 			DynamixService.removeExperiment();
-			throw new Exception( "No experiment Fetched");	
+			throw new Exception("No experiment Fetched");
 		} else {
 			try {
 				Gson gson = new Gson();
-				Experiment experiment = (Experiment) gson.fromJson(jsonExperiment, Experiment.class);
-				String[] smarDeps = DynamixService.getPhoneProfiler().getSensorRules().split(",");
-				String[] expDeps = experiment.getSensorDependencies().split(",");			
+				Experiment experiment = (Experiment) gson.fromJson(
+						jsonExperiment, Experiment.class);
+				String[] smarDeps = DynamixService.getPhoneProfiler()
+						.getSensorRules().split(",");
+				String[] expDeps = experiment.getSensorDependencies()
+						.split(",");
 				if (Constants.match(smarDeps, expDeps) == true) {
-					int oldExpId=-1;	
-					if (DynamixService.getExperiment()!=null){
-						oldExpId=DynamixService.getExperiment().getId();
+					int oldExpId = -1;
+					if (DynamixService.getExperiment() != null) {
+						oldExpId = DynamixService.getExperiment().getId();
 					}
-					boolean flag=DynamixService.isExperimentInstalled(experiment.getContextType());
-					if (experiment.getId()==oldExpId && flag==true){		
-						DynamixService.addTotalTimeConnectedOnline(Constants.EXPERIMENT_POLL_INTERVAL);
+					boolean flag = DynamixService
+							.isExperimentInstalled(experiment.getContextType());
+					if (experiment.getId() == oldExpId && flag == true) {
+						DynamixService
+								.addTotalTimeConnectedOnline(Constants.EXPERIMENT_POLL_INTERVAL);
 						Log.i(TAG, "Experiment still the same");
-						throw new Exception("Experiment still the same");						
+						throw new Exception("Experiment still the same");
 					}
 					String url = experiment.getUrl();
 					Downloader downloader = new Downloader();
 					try {
-						downloader.DownloadFromUrl(url,experiment.getFilename());
+						downloader.DownloadFromUrl(url,
+								experiment.getFilename());
+						
+						IdResult r = DynamixService.dynamix.configuredContextRequest(DynamixService.dynamixCallback,"org.ambientdynamix.contextplugins.ExperimentPlugin","org.ambientdynamix.contextplugins.ExperimentPlugin",
+										DynamixService.getReadingStorage()
+												.getBundle());
 						DynamixService.removeExperiment();
-						IdResult r = DynamixService.dynamix.configuredContextRequest(DynamixService.dynamixCallback,"org.ambientdynamix.contextplugins.ExperimentPlugin", "org.ambientdynamix.contextplugins.ExperimentPlugin",DynamixService.getReadingStorage().getBundle() );
 						DynamixService.setExperiment(experiment);
+						Thread.sleep(5000);	
 						DynamixService.startExperiment();
 						DynamixService.stopFramework();
 						DynamixService.setRestarting(true);
 						DynamixService.setTitleBarRestarting(true);
 						Thread.sleep(5000);
 						DynamixService.startFramework();
-						Thread.sleep(5000);
+						Thread.sleep(7000);
 						DynamixServiceListenerUtility.start();
 						DynamixService.setRestarting(false);
 						DynamixService.setTitleBarRestarting(false);
 					} catch (Exception e) {
 						e.printStackTrace();
-						if (DynamixService.isNetworkAvailable()==false){
-							//Toast.makeText(DynamixService.getAndroidContext(), "Please Check Internet Connection!",	10000).show();
-							noteManager.postNotification("Please Check Internet Connection!");
-						}else{
-							//Toast.makeText(DynamixService.getAndroidContext(), "Please Check Internet Connection!",	10000).show();
-							noteManager.postNotification("Please Check Internet Connection!");
+						if (DynamixService.isNetworkAvailable() == false) {
+							// Toast.makeText(DynamixService.getAndroidContext(),
+							// "Please Check Internet Connection!",
+							// 10000).show();
+							noteManager	.postNotification("Please Check Internet Connection!");
+						} else {
+							// Toast.makeText(DynamixService.getAndroidContext(),
+							// "Please Check Internet Connection!",
+							// 10000).show();
+							noteManager
+									.postNotification("Please Check Internet Connection!");
 						}
 						throw new Exception("Failed to Download Experiment");
 					}
-					
-					//Toast.makeText(DynamixService.getAndroidContext(), "Experiment Pushed",	8000).show();
+
+					// Toast.makeText(DynamixService.getAndroidContext(),
+					// "Experiment Pushed", 8000).show();
 					noteManager.postNotification("Experiment Pushed");
-					
 					return "Experiment Commited";
 				} else {
-					Log.i(TAG, "Experiment violates Sensor Rules");
+					// Log.i(TAG, "Experiment violates Sensor Rules");
 					throw new Exception("Experiment violates Sensor Rules");
 				}
 			} catch (Exception e) {
-				Log.i(TAG, "Exception in consuming experiment" + e.getMessage());
-				throw new Exception( "Exception in consuming experiment");
+				// Log.i(TAG, "Exception in consuming experiment" +
+				// e.getMessage());
+				throw new Exception("Exception in consuming experiment:"
+						+ e.getMessage());
 			}
 		}
 
 	}
 }
-
- 
