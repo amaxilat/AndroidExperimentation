@@ -43,7 +43,22 @@
             }
 
       %>
+        function openLiveChart()
+        {
+            var e = document.getElementById("device");
+            var device = e.options[e.selectedIndex].value;
+            var url='http://blanco.cti.gr:8080/chart.jsp?id='+ <%=expId%>+'&devId='+device;
+            window.open(url,'_blank');
+        }
 
+
+        function openMap()
+        {
+            var e = document.getElementById("device");
+            var device = e.options[e.selectedIndex].value;
+            var url='http://blanco.cti.gr:8080/map.jsp?id='+ <%=expId%>+'&devId='+device;
+            window.open(url,'_blank');
+        }
 
     </script>
 </head>
@@ -57,7 +72,7 @@
 <form action="resultsChart.jsp">
     <input name=id value="<%=expId%>" hidden="true">
     Device Id:
-    <select name="device">
+    <select name="device" id="device">
         <%
             Object t[]=  devices.keySet().toArray();
             Arrays.sort(t);
@@ -74,6 +89,8 @@
         %>
     </select>
     <input type="submit" value="Draw">
+    <input type="button" value="Live Chart" onclick="openLiveChart();"/>  Num. Values Required
+    <input type="button" value="Map" onclick="openMap();"/>   Gps Required
 </form>
 <div class="datagrid">
     <table border="1">

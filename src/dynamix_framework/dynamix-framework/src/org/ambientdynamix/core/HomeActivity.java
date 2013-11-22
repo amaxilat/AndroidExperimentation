@@ -22,6 +22,7 @@ import java.util.TimerTask;
 import org.ambientdynamix.data.DynamixPreferences;
 
 import eu.smartsantander.androidExperimentation.DataStorage;
+import eu.smartsantander.androidExperimentation.tabs.jobsTab;
 
 import android.app.Activity;
 import android.app.AlertDialog;
@@ -155,6 +156,11 @@ public class HomeActivity extends ListActivity {
 		setContentView(R.layout.home_tab);
 		appList = getListView();
 		appList.setClickable(true);
+		
+		
+		//SmartSantander
+		DynamixService.initDataStorage(this);
+		
 		// Set an OnItemClickListener on the appList to support editing the
 		// applications
 		appList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -182,9 +188,10 @@ public class HomeActivity extends ListActivity {
 			@Override
 			public void run() {
 				uiHandler.post(updateList);
+				((HomeActivity) activity).refreshData();
 			}
 		};
-		refresher.scheduleAtFixedRate(t, 0, 1000);
+		refresher.scheduleAtFixedRate(t, 0, 5000);
 		registerForContextMenu(appList);
 		
 		//SmartSantander
@@ -194,7 +201,7 @@ public class HomeActivity extends ListActivity {
 		 connectionStatus = (TextView) this.findViewById(R.id.connection_status);
 		 appList.setVisibility(View.GONE);
 		 
-		 DynamixService.initDataStorage(this);
+		 
 		 	
 	};
 
@@ -228,7 +235,11 @@ public class HomeActivity extends ListActivity {
 	protected void onResume() {
 		super.onResume();
 		Log.i(TAG, "onResume");
-		refresh();
+		try{
+			refresh();
+		}catch(Exception e){
+			e.printStackTrace();
+		}
 		
 	}
 		public void setSmartSantanderInfo(){

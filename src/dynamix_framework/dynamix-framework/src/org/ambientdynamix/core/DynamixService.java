@@ -119,6 +119,7 @@ import android.os.Looper;
 import android.os.RemoteException;
 import android.util.Log;
 import android.util.Pair;
+import android.widget.Toast;
 
 /**
  * The DynamixService is the primary implementation of the Dynamix Framework on the Android platform. Broadly, Dynamix
@@ -251,11 +252,14 @@ public final class DynamixService extends Service {
 	}
 	
 	public static synchronized void deleteExperimentalMessage(Long id){
-		dataStorage.deleteProduct(id);		
+		dataStorage.deleteMessage(id);		
 	}
 	
 	public static synchronized void addExperimentalMessage(String message){
-		dataStorage.addMessage(message);		
+		if (dataStorage!=null)
+			dataStorage.addMessage(message);
+		else
+			Toast.makeText(context, "Fail to Send of Storage Message:" +message, 2000);
 	}
 	
 	public static void cacheExperimentalMessage(String message){		 			

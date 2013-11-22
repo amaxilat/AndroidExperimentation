@@ -86,8 +86,8 @@
         %>
     </select>
     <input type="submit" value="Draw">
-    <input type="button" value="Live Chart" onclick="openLiveChart();"/>
-    <input type="button" value="Map" onclick="openMap();"/>
+    <input type="button" value="Live Chart" onclick="openLiveChart();"/>  Num. Values Required
+    <input type="button" value="Map" onclick="openMap();"/>   Gps Required
 </form>
 
 <div class="datagrid">

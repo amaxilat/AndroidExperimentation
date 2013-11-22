@@ -44,7 +44,7 @@ public class DataStorage extends SQLiteOpenHelper {
 		db.close();
 	}
 
-	public void deleteProduct(long id) {
+	public void deleteMessage(long id) {
 		SQLiteDatabase db = this.getWritableDatabase();
 		db.delete(TABLE_MESSAGES, COLUMN_ID + " = ?", new String[] { String.valueOf(id) });		
         db.close();
