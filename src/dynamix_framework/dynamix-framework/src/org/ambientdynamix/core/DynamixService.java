@@ -259,7 +259,7 @@ public final class DynamixService extends Service {
 		if (dataStorage!=null)
 			dataStorage.addMessage(message);
 		else
-			Toast.makeText(context, "Fail to Send of Storage Message:" +message, 2000);
+			Toast.makeText(context, "Fail to Send of Storage Message:" +message, 5000).show();
 	}
 	
 	public static void cacheExperimentalMessage(String message){		 			

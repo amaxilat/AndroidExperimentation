@@ -17,7 +17,7 @@ public class DataStorage extends SQLiteOpenHelper {
 	public static final String COLUMN_ID = "_id";
 	public static final String COLUMN_MESSAGE = "message";
 
-	public DataStorage(Context context, String name, CursorFactory factory,	int version) {
+	public DataStorage(Context context, String name, CursorFactory factory,int version) {
 		super(context, DATABASE_NAME, factory, DATABASE_VERSION);
 	}
 
@@ -36,7 +36,7 @@ public class DataStorage extends SQLiteOpenHelper {
 
 	}
 
-	public  synchronized void addMessage(String message) {
+	public synchronized void addMessage(String message) {
 		ContentValues values = new ContentValues();
 		values.put(COLUMN_MESSAGE, message);
 		SQLiteDatabase db = this.getWritableDatabase();
@@ -44,41 +44,43 @@ public class DataStorage extends SQLiteOpenHelper {
 		db.close();
 	}
 
-	public void deleteMessage(long id) {
+	public synchronized void deleteMessage(long id) {
 		SQLiteDatabase db = this.getWritableDatabase();
-		db.delete(TABLE_MESSAGES, COLUMN_ID + " = ?", new String[] { String.valueOf(id) });		
-        db.close();
+		db.delete(TABLE_MESSAGES, COLUMN_ID + " = ?",new String[] { String.valueOf(id) });
+		db.close();
 	}
-	
-	public Pair<Long,String>  getMessage() {
-		String query = "Select * FROM " + TABLE_MESSAGES + " WHERE rowid= (SELECT MIN(rowid) FROM " + TABLE_MESSAGES + ")";
-		SQLiteDatabase db = this.getWritableDatabase();		
+
+	public synchronized Pair<Long, String> getMessage() {
+		String query = "Select * FROM " + TABLE_MESSAGES
+				+ " WHERE rowid= (SELECT MIN(rowid) FROM " + TABLE_MESSAGES
+				+ ")";
+		SQLiteDatabase db = this.getWritableDatabase();
 		Cursor cursor = db.rawQuery(query, null);
-		Pair<Long,String> idMessage=new Pair<Long,String>(0L, "");
+		Pair<Long, String> idMessage = new Pair<Long, String>(0L, "");
 		if (cursor.moveToFirst()) {
 			cursor.moveToFirst();
-			idMessage=new Pair<Long,String>(Long.parseLong(cursor.getString(0)), cursor.getString(1));		
+			idMessage = new Pair<Long, String>(Long.parseLong(cursor
+					.getString(0)), cursor.getString(1));
 			cursor.close();
 		} else {
-			idMessage=new Pair<Long,String>(0L, "");	
+			idMessage = new Pair<Long, String>(0L, "");
 		}
-	    db.close();		
-	    return idMessage;
+		db.close();
+		return idMessage;
 	}
-	
-	public Long  size() {
-		String query = "Select COUNT(*) FROM " + TABLE_MESSAGES +"";
-		SQLiteDatabase db = this.getWritableDatabase();		
+
+	public synchronized Long size() {
+		String query = "Select COUNT(*) FROM " + TABLE_MESSAGES + "";
+		SQLiteDatabase db = this.getWritableDatabase();
 		Cursor cursor = db.rawQuery(query, null);
-		Long size=0L;
+		Long size = 0L;
 		if (cursor.moveToFirst()) {
 			cursor.moveToFirst();
-			size=Long.parseLong(cursor.getString(0));		
+			size = Long.parseLong(cursor.getString(0));
 			cursor.close();
-		} 
-	    db.close();		
-	    return size;
+		}
+		db.close();
+		return size;
 	}
-	
-	
+
 }
