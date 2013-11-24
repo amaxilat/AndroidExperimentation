@@ -2,23 +2,25 @@
 <%@ page import="eu.smartsantander.androidExperimentation.entities.Reading" %>
 <%@ page import="eu.smartsantander.androidExperimentation.entities.Result" %>
 <%@ page import="java.util.List" %>
-<%@ page import="java.util.Random" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <html>
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
     <title>Android Experimentation - SmartSantander</title>
-    <script src="https://maps.googleapis.com/maps/api/js?v=3.exp&sensor=false"></script>
+    <script src="https://maps.googleapis.com/maps/api/js?sensor=false"></script>
+    <script type="text/javascript" src="./js/heatmap.js"></script>
+    <script type="text/javascript" src="./js/heatmap-gmaps.js"></script>
     <style>
-        html, body, #map-canvas {
+        html, body, #heatmapArea {
             height: 100%;
             margin: 0px;
             padding: 0px
         }
     </style>
-    <script type="text/javascript">
 
+    <script type="text/javascript">
+        window.onload = function(){
         <%
              String expId = request.getParameter("id");
              Integer eId = null;
@@ -60,12 +62,16 @@
              }
 
              if(gpsCenter!=null){
+
+
+                String data="var data={max: 46,  data:[ ";
+                String [] gps=new String[2];
                 for (Result result : results) {
                     if(result.getMessage()==null || result.getMessage().length()==0) continue;
                     Reading r;
                     try{
                         r = Reading.fromJson(result.getMessage());
-                        String [] gps=new String[2];
+
 
                          if (r.getContext().contains("Gps")){
                           if(r.getValue()!=null && r.getValue().length()>0){
@@ -73,7 +79,7 @@
                               gps[1]=ModelManager.formatDouble(Float.valueOf(r.getValue().split(",")[1]));
                               latlng= "var myLatlng" + i +"= new google.maps.LatLng("+gps[0]+", "+gps[1]+");\n";
                               //out.print(latlng);
-                              finalPrint+=latlng;
+                              //finalPrint+=latlng;
                               if (gpsCenter==null){
                                   gpsCenter=new String[2];
                                   gpsCenter[0]=gps[0];
@@ -90,8 +96,12 @@
                             }
 
                             if (latlng.length()>0)      {
-                              finalPrint+="var marker"+i +" = new google.maps.Marker({ position: myLatlng"+index+", map: map,title: '"+val +"'});\n";
+                                if (val.length()>0){
+                                    data+="{lat:"+ gps[0]+", lng:"+gps[1]+", count:"+ 10+"},";
+                                }
+                              //finalPrint+="var marker"+i +" = new google.maps.Marker({ position: myLatlng"+index+", map: map,title: '"+val +"'});\n";
                               //out.print("var marker"+i +" = new google.maps.Marker({ position: myLatlng"+index+", map: map,title: '"+val +"'});\n");
+
                              }
                          }
                          i++;
@@ -100,6 +110,10 @@
                         continue;
                      }
                  }
+                 if(data.length()>20)
+                    data=data.substring(0,data.length()-1);
+                 data+="]};";
+                 finalPrint=data;
                 }else{
                     out.print("alert('No Gps Measurements Found');");
                     gpsCenter=new String[2];
@@ -109,37 +123,46 @@
                 }
 
              %>
-        function openHeatmap()
-        {
-            var url='http://blanco.cti.gr:8080/heatmap.jsp?id='+ <%=expId%>;
-            window.open(url,'_blank');
-        }
 
-        function initialize() {
             var myLatlng = new google.maps.LatLng(<%=gpsCenter[0]%>, <%=gpsCenter[1]%>);
 
             var mapOptions = {
                 zoom: <%=zoomLevel%>,
-                center: myLatlng
-            }
+                center: myLatlng,
+                mapTypeId: google.maps.MapTypeId.ROADMAP,
+                disableDefaultUI: false,
+                scrollwheel: true,
+                draggable: true,
+                navigationControl: true,
+                mapTypeControl: false,
+                scaleControl: true,
+                disableDoubleClickZoom: false
+            };
 
-            var map = new google.maps.Map(document.getElementById('map-canvas'), mapOptions);
+
+            var map = new google.maps.Map(document.getElementById('heatmapArea') , mapOptions);
+
+            var heatmap = new HeatmapOverlay(map, {
+                "radius":20,
+                "visible":true,
+                "opacity":60
+            });
 
             <%=finalPrint%>
-        }
 
 
-        google.maps.event.addDomListener(window, 'load', initialize);
-
-
+            google.maps.event.addListenerOnce(map, "idle", function(){
+                // this is important, because if you set the data set too early, the latlng/pixel projection doesn't work
+                heatmap.setDataSet(data);
+            });
+        };
     </script>
 </head>
 
 <body>
 <jsp:include page="./includes/header.html" flush="true"/>
-<input type="button" value="View Heatmap" onclick="openHeatmap();"/>
 <div id="content">
-    <div id="map-canvas"></div>
+    <div id="heatmapArea" />
 </div>
 <br>
 <br>
