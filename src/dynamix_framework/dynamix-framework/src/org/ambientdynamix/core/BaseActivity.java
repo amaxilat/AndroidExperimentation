@@ -17,6 +17,9 @@ package org.ambientdynamix.core;
 
 import org.ambientdynamix.util.AndroidNotification;
 
+import com.bugsense.trace.BugSenseHandler;
+import com.bugsense.trace.ExceptionCallback;
+
 import android.app.AlertDialog;
 import android.app.TabActivity;
 import android.content.Context;
@@ -50,7 +53,7 @@ import eu.smartsantander.androidExperimentation.tabs.statsTab;
  * @see DynamixService
  * @author Darren Carlson
  */
-public class BaseActivity extends TabActivity {
+public class BaseActivity extends TabActivity implements ExceptionCallback {
 	private final static String TAG = BaseActivity.class.getSimpleName();
 	/*
 	 * Useful Links: Fancy ListViews:
@@ -161,6 +164,10 @@ public class BaseActivity extends TabActivity {
 		Log.v(TAG, "Activity State: onCreate()");
 		super.onCreate(savedInstanceState);
 		context = this;
+		
+		BugSenseHandler.initAndStartSession(this, "91ce9553" );
+		BugSenseHandler.setExceptionCallback(this);
+	
 		// Set the Dynamix base activity so it can use our context
 		DynamixService.setBaseActivity(this);
 		// Request for the progress bar to be shown in the title
@@ -395,6 +402,18 @@ public class BaseActivity extends TabActivity {
 		// Update visibility
 		activityPaused();
 		// this.finish();
+		
+	}
+
+	@Override
+	public void lastBreath(Exception e) {
+		 e.printStackTrace(); 
+		 BugSenseHandler.sendException(e);
+		 Toast.makeText(context, e.getMessage(), 5000).show();
+		 try{
+			 Thread.sleep(5000);
+		 }catch(Exception w){			 
+		 }
 		
 	}
 
