@@ -31,6 +31,7 @@
              HashMap<Integer,String> deviceColors=new HashMap<Integer,String>();
              int i=1;
              String latlng="";
+             Integer latLongOfDevice=null;
              String finalPrint="";
              int index=1;
              String [] gpsCenter=null;
@@ -73,8 +74,9 @@
                               gps[0]=ModelManager.formatDouble(Float.valueOf(r.getValue().split(",")[0]));
                               gps[1]=ModelManager.formatDouble(Float.valueOf(r.getValue().split(",")[1]));
                               latlng= "var myLatlng" + i +"= new google.maps.LatLng("+gps[0]+", "+gps[1]+");\n";
+                              latLongOfDevice=result.getDeviceId();
                               //out.print(latlng);
-                              finalPrint+=latlng;
+                              //finalPrint+=latlng;
                               if (gpsCenter==null){
                                   gpsCenter=new String[2];
                                   gpsCenter[0]=gps[0];
@@ -84,14 +86,16 @@
                            }  else{
                               latlng="";
                            }
-                         } else{
+                         } else{   //not GPS
                             String val="";
                             if(r.getValue()!=null && r.getValue().length()>0){
                                 val=r.getValue();
                             }
+                            if (val.equals("null"))val="";
                             val=result.getDeviceId()+":::"+val;
-                            if (latlng.length()>0)      {
+                            if (latlng.length()>0 && latLongOfDevice==result.getDeviceId())      {
                               String color=deviceColors.get(result.getDeviceId());
+                              finalPrint+=latlng;
                               finalPrint+="var marker"+i +" = new google.maps.Marker({ position: myLatlng"+index+", map: map,title: '"+val +"',icon: '"+ color+ "'});\n";
                               //out.print("var marker"+i +" = new google.maps.Marker({ position: myLatlng"+index+", map: map,title: '"+val +"'});\n");
                              }
