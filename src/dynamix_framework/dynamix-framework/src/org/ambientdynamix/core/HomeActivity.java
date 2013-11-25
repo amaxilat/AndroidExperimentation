@@ -157,10 +157,6 @@ public class HomeActivity extends ListActivity {
 		appList = getListView();
 		appList.setClickable(true);
 		
-		
-		//SmartSantander
-		DynamixService.initDataStorage(this);
-		
 		// Set an OnItemClickListener on the appList to support editing the
 		// applications
 		appList.setOnItemClickListener(new AdapterView.OnItemClickListener() {

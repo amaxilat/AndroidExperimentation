@@ -286,7 +286,8 @@ public class BaseActivity extends TabActivity implements ExceptionCallback {
 		tabHost.addTab(tabSpecSecurity);		
 		//
 
-	    
+		//SmartSantander
+		DynamixService.initDataStorage();
 	}
 
 	/**
@@ -409,6 +410,7 @@ public class BaseActivity extends TabActivity implements ExceptionCallback {
 	public void lastBreath(Exception e) {
 		 e.printStackTrace(); 
 		 BugSenseHandler.sendException(e);
+		 DynamixService.getPhoneProfiler().savePrefs();
 		 Toast.makeText(context, e.getMessage(), 5000).show();
 		 try{
 			 Thread.sleep(5000);

@@ -16,8 +16,18 @@ public class DataStorage extends SQLiteOpenHelper {
 
 	public static final String COLUMN_ID = "_id";
 	public static final String COLUMN_MESSAGE = "message";
+	private static DataStorage sInstance;
+	
 
-	public DataStorage(Context context, String name, CursorFactory factory,int version) {
+	 public static DataStorage getInstance(Context context) {	 
+		 if (sInstance == null) {
+		      sInstance = new DataStorage(context,null,null,1);
+		    }
+		 return sInstance;	  
+	 }
+	
+	
+	private DataStorage(Context context, String name, CursorFactory factory,int version) {
 		super(context, DATABASE_NAME, factory, DATABASE_VERSION);
 	}
 
@@ -33,7 +43,6 @@ public class DataStorage extends SQLiteOpenHelper {
 	@Override
 	public void onUpgrade(SQLiteDatabase arg0, int arg1, int arg2) {
 		// TODO Auto-generated method stub
-
 	}
 
 	public synchronized void addMessage(String message) {
@@ -41,20 +50,18 @@ public class DataStorage extends SQLiteOpenHelper {
 		values.put(COLUMN_MESSAGE, message);
 		SQLiteDatabase db = this.getWritableDatabase();
 		db.insert(TABLE_MESSAGES, null, values);
-		db.close();
 	}
 
 	public synchronized void deleteMessage(long id) {
 		SQLiteDatabase db = this.getWritableDatabase();
 		db.delete(TABLE_MESSAGES, COLUMN_ID + " = ?",new String[] { String.valueOf(id) });
-		db.close();
 	}
 
 	public synchronized Pair<Long, String> getMessage() {
 		String query = "Select * FROM " + TABLE_MESSAGES
 				+ " WHERE rowid= (SELECT MIN(rowid) FROM " + TABLE_MESSAGES
 				+ ")";
-		SQLiteDatabase db = this.getWritableDatabase();
+		SQLiteDatabase db = this.getReadableDatabase();
 		Cursor cursor = db.rawQuery(query, null);
 		Pair<Long, String> idMessage = new Pair<Long, String>(0L, "");
 		if (cursor.moveToFirst()) {
@@ -65,13 +72,12 @@ public class DataStorage extends SQLiteOpenHelper {
 		} else {
 			idMessage = new Pair<Long, String>(0L, "");
 		}
-		db.close();
 		return idMessage;
 	}
 
 	public synchronized Long size() {
 		String query = "Select COUNT(*) FROM " + TABLE_MESSAGES + "";
-		SQLiteDatabase db = this.getWritableDatabase();
+		SQLiteDatabase db = this.getReadableDatabase();
 		Cursor cursor = db.rawQuery(query, null);
 		Long size = 0L;
 		if (cursor.moveToFirst()) {
@@ -79,7 +85,6 @@ public class DataStorage extends SQLiteOpenHelper {
 			size = Long.parseLong(cursor.getString(0));
 			cursor.close();
 		}
-		db.close();
 		return size;
 	}
 

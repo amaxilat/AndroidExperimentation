@@ -192,8 +192,8 @@ public final class DynamixService extends Service {
 	private static DynamixNotificationManager notificationMgr;
 	private static PendingIntent RESTART_INTENT;
 	private static String keyStorePath;
-	public static Context context;
-	//private MyReceiver myReceiver;
+	//public static Context context;
+	 
 	
 	
 	public static IDynamixListener dynamixCallback;
@@ -232,8 +232,8 @@ public final class DynamixService extends Service {
 		restarting=state;
 	}
 	
-	public static void initDataStorage(Context cnt){
-		dataStorage=new DataStorage(cnt,null,null,1);
+	public static void initDataStorage(){
+		dataStorage=DataStorage.getInstance(androidContext);
 	}
 	
 	public static DataStorage getDataStorage(){
@@ -259,7 +259,7 @@ public final class DynamixService extends Service {
 		if (dataStorage!=null)
 			dataStorage.addMessage(message);
 		else
-			Toast.makeText(context, "Fail to Send of Storage Message:" +message, 5000).show();
+			Toast.makeText(androidContext, "Fail to Send of Storage Message:" +message, 5000).show();
 	}
 	
 	public static void cacheExperimentalMessage(String message){		 			

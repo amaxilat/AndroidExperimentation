@@ -27,10 +27,10 @@
         out.print("oops");
     }
     String[] data = ModelManager.getWeeklyStats(timestamp, devId);
-
     System.out.println(data.toString());
-
-
+    for(int i=0;i<data.length;i+=2 ){
+        data[i]=data[i].substring(0,data[i].length()-3);
+    }
     displayGraphI(response, data);
 
 %>
@@ -57,7 +57,7 @@
         chart.getTitle().setPaint(Color.white);
         chart.setBackgroundPaint(Color.black);
 
-        Font f = new Font("Diagram", Font.BOLD, 12);
+        Font f = new Font("Diagram", Font.BOLD, 22);
         chart.getCategoryPlot().getDomainAxis().setTickLabelFont(f);
         chart.getCategoryPlot().getRangeAxis().setTickLabelFont(f);
         chart.getCategoryPlot().getRangeAxis().setTickLabelPaint(Color.white);
