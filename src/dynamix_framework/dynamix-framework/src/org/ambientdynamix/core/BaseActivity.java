@@ -285,7 +285,7 @@ public class BaseActivity extends TabActivity implements ExceptionCallback {
 		tabHost.addTab(tabSpecReports);
 		tabHost.addTab(tabSpecSecurity);		
 		//
-
+		DynamixService.ConfigureLog4J();
 	}
 
 	/**
@@ -407,6 +407,7 @@ public class BaseActivity extends TabActivity implements ExceptionCallback {
 	@Override
 	public void lastBreath(Exception e) {
 		 e.printStackTrace(); 
+		 DynamixService.logToFile(e.getMessage());
 		 BugSenseHandler.sendException(e);
 		 DynamixService.getPhoneProfiler().savePrefs();
 		 Toast.makeText(context, e.getMessage(), 5000).show();

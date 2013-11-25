@@ -15,11 +15,13 @@
  */
 package org.ambientdynamix.core;
 
+import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.io.OutputStream;
 import java.nio.channels.FileChannel;
 import java.security.KeyStore;
@@ -27,7 +29,9 @@ import java.security.KeyStoreException;
 import java.security.NoSuchAlgorithmException;
 import java.security.cert.CertificateException;
 import java.security.cert.X509Certificate;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.Enumeration;
 import java.util.LinkedList;
 import java.util.List;
@@ -37,6 +41,8 @@ import java.util.Timer;
 import java.util.TimerTask;
 import java.util.UUID;
 import java.util.Vector;
+import java.util.logging.Level;
+ 
 
 import org.ambientdynamix.api.application.AppConstants.ContextPluginType;
 import org.ambientdynamix.api.application.AppConstants.PluginInstallStatus;
@@ -82,7 +88,10 @@ import org.ambientdynamix.util.AndroidForeground;
 import org.ambientdynamix.util.AndroidNotification;
 import org.ambientdynamix.util.ContextPluginRuntimeWrapper;
 import org.ambientdynamix.util.Utils;
+import org.apache.log4j.Logger;
 import org.osgi.framework.ServiceEvent;
+
+import de.mindpipe.android.logging.log4j.LogConfigurator;
 
 import eu.smartsantander.androidExperimentation.Constants;
 import eu.smartsantander.androidExperimentation.DataStorage;
@@ -214,6 +223,20 @@ public final class DynamixService extends Service {
 	public static boolean sessionStarted;
 	private static boolean restarting=false;
 	private static long totalTimeConnectedOnline=0;
+	private final static  Logger log =  Logger.getLogger(DynamixService.class);
+ 
+	public static void ConfigureLog4J() {
+	        final LogConfigurator logConfigurator = new LogConfigurator();
+	        Date d=new Date(System.currentTimeMillis());
+	        SimpleDateFormat dt1 = new SimpleDateFormat("yyyyy_mm_dd_hh_mm_ss");
+	        logConfigurator.setFileName(Environment.getExternalStorageDirectory() + File.separator + "dynamix"+File.separator+"log"+dt1.format(d)+".txt");
+	        logConfigurator.configure();
+	        log.debug("Log Started -------------------------------");
+    }
+ 
+	public static void logToFile(String message){
+		log.debug(message);
+	}
 	
 	public static long getTotalTimeConnectedOnline(){
 		return totalTimeConnectedOnline;
@@ -258,17 +281,19 @@ public final class DynamixService extends Service {
 		}
 	}
 	
-	public static synchronized void addExperimentalMessage(String message){
-     	try{
+	public static synchronized void addExperimentalMessage(String message){		
+		try{
+			log.debug("SQLITE>>"+message);
      		DataStorage.getInstance(androidContext).addMessage(message);
 		}catch(Exception e){
 		 	e.printStackTrace();
+		 	log.debug(e.getMessage());
 			Toast.makeText(androidContext, "Fail to Send of Storage Message:" +message, 5000).show();
-		}
-			
+		}  
+     	
 	}
 	
-	public static void cacheExperimentalMessage(String message){		 			
+	public static void cacheExperimentalMessage(String message){
 		experimentMessageQueue.addLast(message);		
 		if(experimentMessageQueue.size()>10)
 			experimentMessageQueue.poll();

@@ -118,11 +118,9 @@ public class DynamixServiceListenerUtility {
 							List<Reading> readings = (new Gson()).fromJson(readingMsg, listType);
 							for (Reading reading : readings) {
 								Log.w(TAG, "Received Reading: " + reading);
-								//Toast.makeText(DynamixService.getAndroidContext(),readingMsg, 5000).show();
-								
+								//Toast.makeText(DynamixService.getAndroidContext(),readingMsg, 5000).show();								
 								noteManager.postNotification(readingMsg);
-								DynamixService.cacheExperimentalMessage(readingMsg);
-								
+								DynamixService.cacheExperimentalMessage(readingMsg);								
 								if (DynamixService.getExperiment() == null)
 									return;
 								Report rObject = new Report(DynamixService.getExperiment().getId().toString());

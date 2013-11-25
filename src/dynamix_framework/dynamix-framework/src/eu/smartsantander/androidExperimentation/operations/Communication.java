@@ -172,7 +172,7 @@ public class Communication extends Thread implements Runnable {
 	}
 	
 	public int sendReportResults(String jsonReport) throws Exception
-	{
+	{	DynamixService.logToFile(jsonReport);
 		Log.i("AndroidExperimentation", "Report Call");
 		
 		final String METHOD_NAME = "reportResults";		
