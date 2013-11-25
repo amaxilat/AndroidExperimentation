@@ -171,7 +171,7 @@ public class ModelManager {
     public static List<Result> getResults(Integer experimentId) {
         if (experimentId == null)
             return new ArrayList<Result>();
-        Query q = getCurrentSession().createQuery("from Result where experimentId = :expId ");
+        Query q = getCurrentSession().createQuery("from Result where experimentId = :expId order by timestamp desc, deviceId asc ");
         q.setParameter("expId", Integer.valueOf(experimentId));
         return (List<Result>) q.list();
     }
