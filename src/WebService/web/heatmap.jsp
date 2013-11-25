@@ -3,8 +3,8 @@
 <%@ page import="eu.smartsantander.androidExperimentation.entities.Result" %>
 
 
-<%@ page import="java.util.List" %>
 <%@ page import="org.apache.commons.lang3.StringUtils" %>
+<%@ page import="java.util.List" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <html>
@@ -33,15 +33,12 @@
                  eId = null;
                  }
                  List<Result> results = ModelManager.getResults(eId);
-                 /*out.print("var s="+results.size() +"; \n");
-                 out.print("var d=[]; \n");*/
                  int i=1;
                  String latlng="";
                  String finalPrint="";
                  Integer latLongOfDevice=null;
-                 int index=1;
                  String [] gpsCenter=null;
-                 String zoomLevel="14";
+                 String zoomLevel="12";
                  for (Result result : results) {
                     Reading r;
                      try{
@@ -68,28 +65,24 @@
                  if(gpsCenter!=null){
 
 
-                    String data="var data={max: 20,  data:[ ";
+                    String data="var data={max: 30,  data:[ ";
                     String [] gps=new String[2];
                     for (Result result : results) {
                         if(result.getMessage()==null || result.getMessage().length()==0) continue;
                         Reading r;
                         try{
                             r = Reading.fromJson(result.getMessage());
-
-
                              if (r.getContext().contains("Gps")){
                               if(r.getValue()!=null && r.getValue().length()>0){
                                   gps[0]=ModelManager.formatDouble(Float.valueOf(r.getValue().split(",")[0]));
                                   gps[1]=ModelManager.formatDouble(Float.valueOf(r.getValue().split(",")[1]));
                                   latlng= "var myLatlng" + i +"= new google.maps.LatLng("+gps[0]+", "+gps[1]+");\n";
-                                  //out.print(latlng);
-                                  //finalPrint+=latlng;
+                                  latLongOfDevice=result.getDeviceId();
                                   if (gpsCenter==null){
                                       gpsCenter=new String[2];
                                       gpsCenter[0]=gps[0];
                                       gpsCenter[1]=gps[1];
                                   }
-                                  index=i;
                                }  else{
                                   latlng="";
                                }
@@ -98,18 +91,15 @@
                                 if(r.getValue()!=null && r.getValue().length()>0){
                                     val=r.getValue();
                                 }
-
+                                if (val.equals("null"))val="";
                                 if (latlng.length()>0)      {
                                     if (val.length()>0 && latLongOfDevice==result.getDeviceId()){
                                         int grade= StringUtils.countMatches(val,"\"SSID\":");
-                                        grade++;
+                                        grade=grade+1;
                                         data+="{lat:"+ gps[0]+", lng:"+gps[1]+", count:"+ grade+"},";
                                     }   else{
                                         data+="{lat:"+ gps[0]+", lng:"+gps[1]+", count:"+ 1+"},";
                                     }
-                                  //finalPrint+="var marker"+i +" = new google.maps.Marker({ position: myLatlng"+index+", map: map,title: '"+val +"'});\n";
-                                  //out.print("var marker"+i +" = new google.maps.Marker({ position: myLatlng"+index+", map: map,title: '"+val +"'});\n");
-
                                  }
                              }
                              i++;
@@ -133,7 +123,6 @@
                  %>
 
             var myLatlng = new google.maps.LatLng(<%=gpsCenter[0]%>, <%=gpsCenter[1]%>);
-
             var mapOptions = {
                 zoom: <%=zoomLevel%>,
                 center: myLatlng,
@@ -147,9 +136,7 @@
                 disableDoubleClickZoom: false
             };
 
-
             var map = new google.maps.Map(document.getElementById('heatmapArea'), mapOptions);
-
             var heatmap = new HeatmapOverlay(map, {
                 "radius": 20,
                 "visible": true,
@@ -160,7 +147,6 @@
 
 
             google.maps.event.addListenerOnce(map, "idle", function () {
-                // this is important, because if you set the data set too early, the latlng/pixel projection doesn't work
                 heatmap.setDataSet(data);
             });
         };
