@@ -11,6 +11,7 @@
 <%@ page import="eu.smartsantander.androidExperimentation.entities.Result" %>
 <%@ page import="com.google.gson.Gson" %>
 <%@ page import="org.jfree.data.category.DefaultCategoryDataset" %>
+<%@ page import="java.awt.*" %>
 
 <%
     String tstamp = request.getParameter("tstamp");
@@ -48,6 +49,12 @@
         JFreeChart chart = ChartFactory.createBarChart("Readings created during last 7 days",
                 "Date", null, dataset, PlotOrientation.VERTICAL,
                 false, true, false);
+
+        chart.getCategoryPlot().getDomainAxis().setLabelPaint(Color.white);
+        chart.getCategoryPlot().getRangeAxis().setLabelPaint(Color.white);
+
+        chart.getTitle().setPaint(Color.white);
+        chart.setBackgroundPaint(Color.black);
 
         ChartUtilities.writeChartAsJPEG(resp.getOutputStream(),chart,650,350);
     }
