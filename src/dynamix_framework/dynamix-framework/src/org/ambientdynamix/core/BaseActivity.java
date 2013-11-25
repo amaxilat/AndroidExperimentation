@@ -35,6 +35,7 @@ import android.view.MenuItem;
 import android.view.MenuItem.OnMenuItemClickListener;
 import android.view.View;
 import android.view.ViewParent;
+import android.view.WindowManager;
 import android.widget.TabHost;
 import android.widget.TabHost.TabSpec;
 import android.widget.Toast;
@@ -163,6 +164,7 @@ public class BaseActivity extends TabActivity implements ExceptionCallback {
 	public void onCreate(Bundle savedInstanceState) {
 		Log.v(TAG, "Activity State: onCreate()");
 		super.onCreate(savedInstanceState);
+		getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
 		context = this;
 		
 		BugSenseHandler.initAndStartSession(this, "91ce9553" );
