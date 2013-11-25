@@ -9,6 +9,7 @@ import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.concurrent.TimeUnit;
 
@@ -200,8 +201,16 @@ public class statsTab extends Activity implements OnSharedPreferenceChangeListen
 	private String loadTheStatsJPG() {
 		byte[] imageRaw = null;
 		  try {
+			 // set time request parameter as today's 00:00 hours
+			 Date d = new Date(); 
+			 Calendar cal = Calendar.getInstance();
+			 cal.setTimeInMillis(d.getTime());
+			 cal.set(Calendar.HOUR_OF_DAY, 0); //set hours to zero
+			 cal.set(Calendar.MINUTE, 0); // set minutes to zero
+			 cal.set(Calendar.SECOND, 0); //set seconds to zero
 			 
-			 long time = new Date().getTime(); 
+			 long time = cal.getTimeInMillis();  
+			 
 			 String statsURL = Constants.WEB_STATS_URL + "?tstamp=" + time + "&devId=" + DynamixService.getPhoneProfiler().getPhoneId();
 		     URL url = new URL(statsURL);
 		     HttpURLConnection urlConnection = (HttpURLConnection) url.openConnection();
