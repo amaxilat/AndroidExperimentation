@@ -53,9 +53,9 @@
 
         function openMap()
         {
-            var e = document.getElementById("device");
-            var device = e.options[e.selectedIndex].value;
-            var url='http://blanco.cti.gr:8080/map.jsp?id='+ <%=expId%>+'&devId='+device;
+            /*var e = document.getElementById("device");
+            var device = e.options[e.selectedIndex].value;*/
+            var url='http://blanco.cti.gr:8080/map.jsp?id='+ <%=expId%>;
             window.open(url,'_blank');
         }
 
