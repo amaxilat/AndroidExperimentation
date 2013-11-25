@@ -1,8 +1,8 @@
 <%@ page import="eu.smartsantander.androidExperimentation.ModelManager" %>
 <%@ page import="eu.smartsantander.androidExperimentation.entities.Reading" %>
 <%@ page import="eu.smartsantander.androidExperimentation.entities.Result" %>
+<%@ page import="java.util.HashMap" %>
 <%@ page import="java.util.List" %>
-<%@ page import="java.util.Random" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <html>
@@ -28,18 +28,19 @@
              eId = null;
              }
              List<Result> results = ModelManager.getResults(eId);
-             /*out.print("var s="+results.size() +"; \n");
-             out.print("var d=[]; \n");*/
+             HashMap<Integer,String> deviceColors=new HashMap<Integer,String>();
              int i=1;
              String latlng="";
              String finalPrint="";
              int index=1;
              String [] gpsCenter=null;
              String zoomLevel="14";
+
              for (Result result : results) {
-                Reading r;
+                 Reading r;
+                 ModelManager.assignColor(deviceColors,result.getDeviceId());
                  try{
-                  if(result.getMessage()==null || result.getMessage().length()==0) continue;
+                 if(result.getMessage()==null || result.getMessage().length()==0) continue;
                  r = Reading.fromJson(result.getMessage());
                  String [] gps=new String[2];
                  if (r.getContext().contains("Gps")){
@@ -88,9 +89,10 @@
                             if(r.getValue()!=null && r.getValue().length()>0){
                                 val=r.getValue();
                             }
-
+                            val=result.getDeviceId()+":::"+val;
                             if (latlng.length()>0)      {
-                              finalPrint+="var marker"+i +" = new google.maps.Marker({ position: myLatlng"+index+", map: map,title: '"+val +"'});\n";
+                              String color=deviceColors.get(result.getDeviceId());
+                              finalPrint+="var marker"+i +" = new google.maps.Marker({ position: myLatlng"+index+", map: map,title: '"+val +"',icon: '"+ color+ "'});\n";
                               //out.print("var marker"+i +" = new google.maps.Marker({ position: myLatlng"+index+", map: map,title: '"+val +"'});\n");
                              }
                          }
@@ -109,10 +111,9 @@
                 }
 
              %>
-        function openHeatmap()
-        {
-            var url='http://blanco.cti.gr:8080/heatmap.jsp?id='+ <%=expId%>;
-            window.open(url,'_blank');
+        function openHeatmap() {
+            var url = 'http://blanco.cti.gr:8080/heatmap.jsp?id=' + <%=expId%>;
+            window.open(url, '_blank');
         }
 
         function initialize() {
@@ -138,6 +139,7 @@
 <body>
 <jsp:include page="./includes/header.html" flush="true"/>
 <input type="button" value="View Heatmap" onclick="openHeatmap();"/>
+
 <div id="content">
     <div id="map-canvas"></div>
 </div>

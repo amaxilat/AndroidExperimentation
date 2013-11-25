@@ -14,10 +14,7 @@ import org.hibernate.Transaction;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
-import java.util.Random;
+import java.util.*;
 import java.util.concurrent.TimeUnit;
 
 /**
@@ -299,4 +296,24 @@ public class ModelManager {
     public static String formatDouble(Float d){
         return String.format("%.6f", d+pert()).replace(',','.');
     }
+
+
+    public static String assignColor(HashMap<Integer, String> deviceColors, Integer deviceID){
+        String color="http://maps.google.com/mapfiles/ms/icons/blue-dot.png";
+
+        if (deviceColors.containsKey(deviceID)){
+            color=deviceColors.get(deviceID);
+            return color;
+        }
+        int numOfDev=deviceColors.keySet().size();
+        if (numOfDev%6==0) color="http://maps.google.com/mapfiles/ms/icons/blue-dot.png";
+        else if (numOfDev%6==1) color="http://maps.google.com/mapfiles/ms/icons/red-dot.png";
+        else if (numOfDev%6==2) color="http://maps.google.com/mapfiles/ms/icons/green-dot.png";
+        else if (numOfDev%6==3) color="http://maps.google.com/mapfiles/ms/icons/yellow-dot.png";
+        else if (numOfDev%6==4) color="http://maps.google.com/mapfiles/ms/icons/purple-dot.png";
+        else if (numOfDev%6==5) color="http://maps.google.com/mapfiles/ms/icons/pink-dot.png";
+        deviceColors.put(deviceID,color);
+        return color;
+    }
+
 }
