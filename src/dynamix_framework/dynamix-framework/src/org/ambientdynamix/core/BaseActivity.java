@@ -286,8 +286,6 @@ public class BaseActivity extends TabActivity implements ExceptionCallback {
 		tabHost.addTab(tabSpecSecurity);		
 		//
 
-		//SmartSantander
-		DynamixService.initDataStorage();
 	}
 
 	/**

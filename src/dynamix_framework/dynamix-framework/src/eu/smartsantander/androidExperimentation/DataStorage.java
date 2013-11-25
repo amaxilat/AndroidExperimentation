@@ -16,19 +16,19 @@ public class DataStorage extends SQLiteOpenHelper {
 
 	public static final String COLUMN_ID = "_id";
 	public static final String COLUMN_MESSAGE = "message";
-	private static DataStorage sInstance;
+	private static DataStorage sInstance=null;
 	
 
 	 public static DataStorage getInstance(Context context) {	 
 		 if (sInstance == null) {
-		      sInstance = new DataStorage(context,null,null,1);
+		      sInstance = new DataStorage(context);
 		    }
 		 return sInstance;	  
 	 }
 	
 	
-	private DataStorage(Context context, String name, CursorFactory factory,int version) {
-		super(context, DATABASE_NAME, factory, DATABASE_VERSION);
+	private DataStorage(Context context) {
+		super(context, DATABASE_NAME, null, DATABASE_VERSION);
 	}
 
 	@Override
@@ -48,12 +48,12 @@ public class DataStorage extends SQLiteOpenHelper {
 	public synchronized void addMessage(String message) {
 		ContentValues values = new ContentValues();
 		values.put(COLUMN_MESSAGE, message);
-		SQLiteDatabase db = this.getWritableDatabase();
+		SQLiteDatabase db = sInstance.getWritableDatabase();
 		db.insert(TABLE_MESSAGES, null, values);
 	}
 
 	public synchronized void deleteMessage(long id) {
-		SQLiteDatabase db = this.getWritableDatabase();
+		SQLiteDatabase db = sInstance.getWritableDatabase();
 		db.delete(TABLE_MESSAGES, COLUMN_ID + " = ?",new String[] { String.valueOf(id) });
 	}
 
@@ -61,7 +61,7 @@ public class DataStorage extends SQLiteOpenHelper {
 		String query = "Select * FROM " + TABLE_MESSAGES
 				+ " WHERE rowid= (SELECT MIN(rowid) FROM " + TABLE_MESSAGES
 				+ ")";
-		SQLiteDatabase db = this.getReadableDatabase();
+		SQLiteDatabase db = sInstance.getReadableDatabase();
 		Cursor cursor = db.rawQuery(query, null);
 		Pair<Long, String> idMessage = new Pair<Long, String>(0L, "");
 		if (cursor.moveToFirst()) {
@@ -76,15 +76,15 @@ public class DataStorage extends SQLiteOpenHelper {
 	}
 
 	public synchronized Long size() {
-		String query = "Select COUNT(*) FROM " + TABLE_MESSAGES + "";
-		SQLiteDatabase db = this.getReadableDatabase();
-		Cursor cursor = db.rawQuery(query, null);
 		Long size = 0L;
-		if (cursor.moveToFirst()) {
-			cursor.moveToFirst();
-			size = Long.parseLong(cursor.getString(0));
-			cursor.close();
-		}
+			String query = "Select COUNT(*) FROM " + TABLE_MESSAGES + "";
+			SQLiteDatabase db = sInstance.getReadableDatabase();
+			Cursor cursor = db.rawQuery(query, null);	
+			if (cursor.moveToFirst()) {
+				cursor.moveToFirst();
+				size = Long.parseLong(cursor.getString(0));
+				cursor.close();
+			}	
 		return size;
 	}
 

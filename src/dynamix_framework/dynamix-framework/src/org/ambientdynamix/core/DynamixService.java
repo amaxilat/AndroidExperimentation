@@ -210,7 +210,6 @@ public final class DynamixService extends Service {
 	private static Experiment experiment;	
 	private static Boolean connectionStatus=false;
 	private static LinkedList<String> experimentMessageQueue=new LinkedList<String>();
-	private static DataStorage dataStorage=null;
 	private static Demon demon=new Demon();
 	public static boolean sessionStarted;
 	private static boolean restarting=false;
@@ -232,34 +231,41 @@ public final class DynamixService extends Service {
 		restarting=state;
 	}
 	
-	public static void initDataStorage(){
-		dataStorage=DataStorage.getInstance(androidContext);
-	}
-	
-	public static DataStorage getDataStorage(){
-		return dataStorage;
-	}
-	
 	public static Long getDataStorageSize(){
-		if (dataStorage!=null)
-			return dataStorage.size();
-		else
-			return 0L;
+			try{
+				return DataStorage.getInstance(androidContext).size();	
+			}
+			catch(Exception e){
+				e.printStackTrace();
+			}
+    	return 0L;
 	}
 	
-	public static synchronized Pair<Long,String> getOldestExperimentalMessage(){		
-		return dataStorage.getMessage();
+	public static synchronized Pair<Long,String> getOldestExperimentalMessage(){	
+		try{
+			return DataStorage.getInstance(androidContext).getMessage();
+		}catch(Exception e){
+			e.printStackTrace();
+		}
+		return null;
 	}
 	
 	public static synchronized void deleteExperimentalMessage(Long id){
-		dataStorage.deleteMessage(id);		
+		try{
+			DataStorage.getInstance(androidContext).deleteMessage(id);	
+		}catch(Exception e){
+			e.printStackTrace();
+		}
 	}
 	
 	public static synchronized void addExperimentalMessage(String message){
-		if (dataStorage!=null)
-			dataStorage.addMessage(message);
-		else
+     	try{
+     		DataStorage.getInstance(androidContext).addMessage(message);
+		}catch(Exception e){
+		 	e.printStackTrace();
 			Toast.makeText(androidContext, "Fail to Send of Storage Message:" +message, 5000).show();
+		}
+			
 	}
 	
 	public static void cacheExperimentalMessage(String message){		 			
