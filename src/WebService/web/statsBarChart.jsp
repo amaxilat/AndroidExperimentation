@@ -51,10 +51,19 @@
                 false, true, false);
 
         chart.getCategoryPlot().getDomainAxis().setLabelPaint(Color.white);
+
         chart.getCategoryPlot().getRangeAxis().setLabelPaint(Color.white);
 
         chart.getTitle().setPaint(Color.white);
         chart.setBackgroundPaint(Color.black);
+
+        Font f = new Font("Diagram", Font.BOLD, 12);
+        chart.getCategoryPlot().getDomainAxis().setTickLabelFont(f);
+        chart.getCategoryPlot().getRangeAxis().setTickLabelFont(f);
+        chart.getCategoryPlot().getRangeAxis().setTickLabelPaint(Color.white);
+        chart.getCategoryPlot().getDomainAxis().setTickLabelPaint(Color.white);
+
+
 
         ChartUtilities.writeChartAsJPEG(resp.getOutputStream(),chart,650,350);
     }
