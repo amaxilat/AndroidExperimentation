@@ -1,9 +1,6 @@
 package eu.smartsantander.androidExperimentation;
 
-import eu.smartsantander.androidExperimentation.entities.Experiment;
-import eu.smartsantander.androidExperimentation.entities.Plugin;
-import eu.smartsantander.androidExperimentation.entities.Result;
-import eu.smartsantander.androidExperimentation.entities.Smartphone;
+import eu.smartsantander.androidExperimentation.entities.*;
 import eu.smartsantander.androidExperimentation.jsonEntities.PluginList;
 import eu.smartsantander.androidExperimentation.jsonEntities.Report;
 import org.apache.commons.logging.Log;
@@ -171,7 +168,7 @@ public class ModelManager {
     public static List<Result> getResults(Integer experimentId) {
         if (experimentId == null)
             return new ArrayList<Result>();
-        Query q = getCurrentSession().createQuery("from Result where experimentId = :expId order by timestamp desc, deviceId asc ");
+        Query q = getCurrentSession().createQuery("from Result where experimentId = :expId order by id asc");
         q.setParameter("expId", Integer.valueOf(experimentId));
         return (List<Result>) q.list();
     }
@@ -204,10 +201,24 @@ public class ModelManager {
         q.setParameter("t", Long.valueOf(timestamp));
         List<Result> results = (List<Result>) q.list();
         if (results.size() == 0) return null;
-        String[] messages = new String[results.size()];
-        int i = 0;
+
+        HashMap<Long, Result> resultMap = new HashMap<Long, Result>();
         for (Result result : results) {
-            messages[i++] = result.getMessage();
+            Reading r;
+            try {
+                r = Reading.fromJson(result.getMessage());
+            } catch (Exception e) {
+                e.printStackTrace();
+                continue;
+            }
+            resultMap.put(r.getTimestamp(), result);
+        }
+        Object[] times = resultMap.keySet().toArray();
+        Arrays.sort(times);
+        String[] messages = new String[resultMap.keySet().size()];
+        int i = 0;
+        for (Object time : times) {
+            messages[i++]=resultMap.get(time).getMessage();
         }
         return messages;
     }
@@ -286,33 +297,33 @@ public class ModelManager {
     }
 
 
-    public static float pert(){
-        Random r=new Random();
-        int x=r.nextInt(3);
-        float y =(float)x/1000;
+    public static float pert() {
+        Random r = new Random();
+        int x = r.nextInt(3);
+        float y = (float) x / 1000;
         return y;
     }
 
-    public static String formatDouble(Float d){
-        return String.format("%.6f", d+pert()).replace(',','.');
+    public static String formatDouble(Float d) {
+        return String.format("%.6f", d + pert()).replace(',', '.');
     }
 
 
-    public static String assignColor(HashMap<Integer, String> deviceColors, Integer deviceID){
-        String color="http://maps.google.com/mapfiles/ms/icons/blue-dot.png";
+    public static String assignColor(HashMap<Integer, String> deviceColors, Integer deviceID) {
+        String color = "http://maps.google.com/mapfiles/ms/icons/blue-dot.png";
 
-        if (deviceColors.containsKey(deviceID)){
-            color=deviceColors.get(deviceID);
+        if (deviceColors.containsKey(deviceID)) {
+            color = deviceColors.get(deviceID);
             return color;
         }
-        int numOfDev=deviceColors.keySet().size();
-        if (numOfDev%6==0) color="http://maps.google.com/mapfiles/ms/icons/blue-dot.png";
-        else if (numOfDev%6==1) color="http://maps.google.com/mapfiles/ms/icons/red-dot.png";
-        else if (numOfDev%6==2) color="http://maps.google.com/mapfiles/ms/icons/green-dot.png";
-        else if (numOfDev%6==3) color="http://maps.google.com/mapfiles/ms/icons/yellow-dot.png";
-        else if (numOfDev%6==4) color="http://maps.google.com/mapfiles/ms/icons/purple-dot.png";
-        else if (numOfDev%6==5) color="http://maps.google.com/mapfiles/ms/icons/pink-dot.png";
-        deviceColors.put(deviceID,color);
+        int numOfDev = deviceColors.keySet().size();
+        if (numOfDev % 6 == 0) color = "http://maps.google.com/mapfiles/ms/icons/blue-dot.png";
+        else if (numOfDev % 6 == 1) color = "http://maps.google.com/mapfiles/ms/icons/red-dot.png";
+        else if (numOfDev % 6 == 2) color = "http://maps.google.com/mapfiles/ms/icons/green-dot.png";
+        else if (numOfDev % 6 == 3) color = "http://maps.google.com/mapfiles/ms/icons/yellow-dot.png";
+        else if (numOfDev % 6 == 4) color = "http://maps.google.com/mapfiles/ms/icons/purple-dot.png";
+        else if (numOfDev % 6 == 5) color = "http://maps.google.com/mapfiles/ms/icons/pink-dot.png";
+        deviceColors.put(deviceID, color);
         return color;
     }
 
