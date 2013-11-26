@@ -35,6 +35,8 @@ public class PhoneProfiler extends Thread implements Runnable {
 	private long totalReadingsProducedCounter;
 
 	private final String TAG = this.getClass().getSimpleName();
+	
+	private boolean isInitialised = false;
 
 	public PhoneProfiler() {
 		this.PHONE_ID = Constants.PHONE_ID_UNITIALIZED;
@@ -73,13 +75,18 @@ public class PhoneProfiler extends Thread implements Runnable {
 				this.totalReadingsProducedCounter =0;
 			}
 			editor.commit();
+			isInitialised = true;
 			
 		} catch (InterruptedException e) {
 			e.printStackTrace();
 		}	
 	}
 	
-	public void register() {	
+	public void register() {
+		
+		if (!isInitialised)
+			return;
+		
 		if ( DynamixService.isDeviceRegistered()==true)
 			return;
 		int phoneId = Constants.PHONE_ID_UNITIALIZED;
