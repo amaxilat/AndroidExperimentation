@@ -84,8 +84,9 @@ public class PhoneProfiler extends Thread implements Runnable {
 	
 	public void register() {
 		
-		if (!isInitialised)
-			return;
+		if (isInitialised==false){
+			startJob();
+		}
 		
 		if ( DynamixService.isDeviceRegistered()==true)
 			return;
