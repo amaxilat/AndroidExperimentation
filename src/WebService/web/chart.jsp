@@ -29,13 +29,13 @@
 
         $(function () {
 
-                    var data = [],time=[], totalPoints = 1000, tt = 0;
-                    var datapoints=0;
-                    var res=[];
+                    var tt = 0;
+                    var res = [];
 
                     <%
                      String expId = request.getParameter("id");
                      String dev = request.getParameter("devId");
+                     String sensor = request.getParameter("sensor");
 
                      Integer eId = null;
                      Integer devId = null;
@@ -49,6 +49,7 @@
                      }
 
                  %>
+                    var sensor ='<%=sensor%>';
 
                     function getData() {
                         var jsonDataArray = httpGet(eId, tt, devId);
@@ -56,33 +57,20 @@
                             return res;
                         }
                         var dataArray = JSON.parse(jsonDataArray);
-                        if (dataArray.length==res.length) return res;
+                        if (dataArray.length == res.length) return res;
 
-                        data=[]; time=[]; res = [];
+                        res = [];
                         for (var i = 0; i < dataArray.length; i++) {
-                           if (dataArray[i].length==0) continue;
+                            if (dataArray[i].length == 0) continue;
                             var object = JSON.parse(dataArray[i]);
+                            if (object.context!=sensor)continue;
+                            if (object.type=='String')continue;
                             res.push([object.timestamp, object.value])
                         }
                         return res;
                     }
 
-                    // Set up the control widget
-
-                    var updateInterval = 1000;
-                    $("#updateInterval").val(updateInterval).change(function () {
-                        var v = $(this).val();
-                        if (v && !isNaN(+v)) {
-                            updateInterval = +v;
-                            if (updateInterval < 1) {
-                                updateInterval = 1;
-                            } else if (updateInterval > 5000) {
-                                updateInterval = 5000;
-                            }
-                            $(this).val("" + updateInterval);
-                        }
-                    });
-
+                    var updateInterval = 15000;
                     var plot = $.plot("#placeholder", [ getData() ], {
                         series: {
                             shadowSize: 0
@@ -92,7 +80,7 @@
                             max: 120
                         },
                         xaxis: {
-                            mode:'time',
+                            mode: 'time',
                             timeformat: '%y/%m/%d %H:%M:%S'
                         }
                     });
@@ -105,12 +93,9 @@
                     }
 
                     update();
-                    // Add the Flot version string to the footer
-                    $("#footer").prepend("Flot " + $.plot.version + " &ndash; ");
                 }
 
-        )
-        ;
+        );
     </script>
 </head>
 

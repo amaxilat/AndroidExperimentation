@@ -19,5 +19,6 @@
     } catch (Exception e) {
         eId = null;
     }
-    out.print( (new Gson()).toJson(ModelManager.getResults(eId, timestamp, devId)));
+    String readingArrayJson=(new Gson()).toJson(ModelManager.getResults(eId, timestamp, devId));
+    out.print(readingArrayJson );
 %>

@@ -38,7 +38,7 @@
                  String finalPrint="";
                  Integer latLongOfDevice=null;
                  String [] gpsCenter=null;
-                 String zoomLevel="12";
+                 String zoomLevel="04";
                  for (Result result : results) {
                     Reading r;
                      try{
@@ -65,7 +65,8 @@
                  if(gpsCenter!=null){
 
 
-                    String data="var data={max: 30,  data:[ ";
+                    String type="";
+                    String data="";
                     String [] gps=new String[2];
                     for (Result result : results) {
                         if(result.getMessage()==null || result.getMessage().length()==0) continue;
@@ -86,7 +87,7 @@
                                }  else{
                                   latlng="";
                                }
-                             } else{
+                              } else  if (r.getContext().contains("Wifi")){   //not GPS
                                 String val="";
                                 if(r.getValue()!=null && r.getValue().length()>0){
                                     val=r.getValue();
@@ -101,6 +102,23 @@
                                         data+="{lat:"+ gps[0]+", lng:"+gps[1]+", count:"+ 1+"},";
                                     }
                                  }
+                                 type="wifi";
+                              } else  if (r.getContext().contains("Noise")){   //not GPS
+                                String val="";
+                                if(r.getValue()!=null && r.getValue().length()>0){
+                                    val=r.getValue();
+                                }
+                                if (val.equals("null"))val="";
+                                if (latlng.length()>0)      {
+                                    if (val.length()>0 && latLongOfDevice==result.getDeviceId()){
+                                        Float grade= Float.parseFloat(val);
+                                        grade=grade+1;
+                                        data+="{lat:"+ gps[0]+", lng:"+gps[1]+", count:"+ grade+"},";
+                                    }   else{
+                                        data+="{lat:"+ gps[0]+", lng:"+gps[1]+", count:"+ 1+"},";
+                                    }
+                                 }
+                                 type="noise";
                              }
                              i++;
                          }catch(Exception e){
@@ -111,7 +129,12 @@
                      if(data.length()>20)
                         data=data.substring(0,data.length()-1);
                      data+="]};";
-                     finalPrint=data;
+
+                     if (type.equals("wifi")) type="30";
+                     else type="100";
+
+                     String datas="var data={max: "+type+",  data:[ ";
+                     finalPrint=datas+data;
                     }else{
                         out.print("alert('No Gps Measurements Found');");
                         gpsCenter=new String[2];

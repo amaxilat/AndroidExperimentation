@@ -3,6 +3,9 @@
 <%@ page import="eu.smartsantander.androidExperimentation.entities.Result" %>
 <%@ page import="java.util.HashMap" %>
 <%@ page import="java.util.List" %>
+<%@ page import="java.util.Date" %>
+<%@ page import="java.text.DateFormat" %>
+<%@ page import="java.text.SimpleDateFormat" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <html>
@@ -86,7 +89,7 @@
                            }  else{
                               latlng="";
                            }
-                         } else{   //not GPS
+                         } else  if (r.getContext().contains("Wifi")){  //not GPS
                             String val="";
                             if(r.getValue()!=null && r.getValue().length()>0){
                                 val=r.getValue();
@@ -97,10 +100,25 @@
                               String color=deviceColors.get(result.getDeviceId());
                               finalPrint+=latlng;
                               finalPrint+="var marker"+i +" = new google.maps.Marker({ position: myLatlng"+index+", map: map,title: '"+val +"',icon: '"+ color+ "'});\n";
-                              //out.print("var marker"+i +" = new google.maps.Marker({ position: myLatlng"+index+", map: map,title: '"+val +"'});\n");
+                             }
+                         }  else  if (r.getContext().contains("Noise")){   //not GPS
+                            String val="";
+                            if(r.getValue()!=null && r.getValue().length()>0){
+                                val=r.getValue();
+                            }
+                            if (val.equals("null"))val="";
+
+
+                            Date d=new Date(result.getTimestamp());
+                            DateFormat df= new SimpleDateFormat("dd/MM/yy kk:mm:ss");
+                            val=result.getDeviceId()+":::"+df.format(d)+":::"+val;
+                            if (latlng.length()>0 && latLongOfDevice==result.getDeviceId())      {
+                              String color=deviceColors.get(result.getDeviceId());
+                              finalPrint+=latlng;
+                              finalPrint+="var marker"+i +" = new google.maps.Marker({ position: myLatlng"+index+", map: map,title: '"+val +"',icon: '"+ color+ "'});\n";
                              }
                          }
-                         i++;
+                        i++;
                      }catch(Exception e){
                         e.printStackTrace();
                         continue;

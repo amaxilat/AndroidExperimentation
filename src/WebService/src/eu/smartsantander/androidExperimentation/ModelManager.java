@@ -204,18 +204,19 @@ public class ModelManager {
 
         HashMap<Long, Result> resultMap = new HashMap<Long, Result>();
         for (Result result : results) {
+            if (result.getMessage()==null || result.getMessage().equals("")) continue;
             Reading r;
             try {
                 r = Reading.fromJson(result.getMessage());
             } catch (Exception e) {
-                e.printStackTrace();
+                //e.printStackTrace();
                 continue;
             }
             resultMap.put(r.getTimestamp(), result);
         }
         Object[] times = resultMap.keySet().toArray();
         Arrays.sort(times);
-        String[] messages = new String[resultMap.keySet().size()];
+        String[] messages = new String[times.length];
         int i = 0;
         for (Object time : times) {
             messages[i++]=resultMap.get(time).getMessage();
