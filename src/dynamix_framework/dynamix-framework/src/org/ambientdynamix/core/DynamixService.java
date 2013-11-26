@@ -234,7 +234,7 @@ public final class DynamixService extends Service {
 	        log.debug("Log Started -------------------------------");
     }
  
-	public static void logToFile(String message){
+	public static synchronized void logToFile(String message){
 		log.debug(message);
 	}
 	
@@ -254,7 +254,7 @@ public final class DynamixService extends Service {
 		restarting=state;
 	}
 	
-	public static Long getDataStorageSize(){
+	public static synchronized Long getDataStorageSize(){
 			try{
 				return DataStorage.getInstance(androidContext).size();	
 			}

@@ -24,6 +24,7 @@ public class AsyncReportOnServerTask extends AsyncTask<String, Void, String> {
 				if (value.first != 0 && value.second != null&& value.second.length() > 0) {
 					DynamixService.getCommunication().sendReportResults(value.second);//
 					DynamixService.deleteExperimentalMessage(value.first);
+					DynamixService.logToFile("SQLITE OFFLOAT:"+value.second);
 				}
 			} catch (Exception e) {
 				// no communication do nothing

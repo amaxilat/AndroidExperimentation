@@ -128,10 +128,13 @@ public class DynamixServiceListenerUtility {
 								List<String> mlist = new ArrayList<String>();
 								mlist.add(reading.getValue());
 								rObject.setResults(mlist);
+								String message=rObject.toJson();
 								try{ //try to send to server, on fail save it in SQLite
-									DynamixService.getCommunication().sendReportResults(rObject.toJson());//
+									DynamixService.getCommunication().sendReportResults(message);//
+									Log.i(TAG, "Experiment  Reading Network: " + message);
 								}catch(Exception e){
-									DynamixService.addExperimentalMessage(rObject.toJson());
+									DynamixService.addExperimentalMessage(message);
+									Log.i(TAG, "Experiment  Reading SQL: " + message);
 								}
 							}
 						} else {
@@ -141,7 +144,6 @@ public class DynamixServiceListenerUtility {
 							for (Reading reading : readings) {
 								//Toast.makeText(DynamixService.getAndroidContext(),reading.getContext(), 500).show();
 								noteManager.postNotification(reading.getContext());							
-
 								Log.w(TAG, "Plugin Reading: " + reading);
 								DynamixService.getReadingStorage().pushReading(	reading);
 								DynamixService.getPhoneProfiler().incMsgCounter();

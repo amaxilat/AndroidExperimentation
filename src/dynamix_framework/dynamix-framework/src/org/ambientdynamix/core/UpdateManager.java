@@ -364,6 +364,7 @@ class UpdateManager {
 	static List<PluginDiscoveryResult> getFilteredContextPluginUpdates() {
 		List<PluginDiscoveryResult> results = new Vector<PluginDiscoveryResult>();
 		List<PluginDiscoveryResult> updates = UpdateManager.filterDiscoveredPlugins();
+		if (updates==null) return new ArrayList<PluginDiscoveryResult>(); //smartsantander
 		for (PluginDiscoveryResult update : updates) {
 			if (update.hasUpdateTarget())
 				results.add(update);
@@ -377,6 +378,7 @@ class UpdateManager {
 	static List<PluginDiscoveryResult> getNewContextPlugins() {
 		List<PluginDiscoveryResult> results = new Vector<PluginDiscoveryResult>();
 		List<PluginDiscoveryResult> updates = UpdateManager.filterDiscoveredPlugins();
+		if (updates==null) return new ArrayList<PluginDiscoveryResult>(); //smartsantander
 		for (PluginDiscoveryResult update : updates) {
 			if (!update.hasUpdateTarget())
 				results.add(update);

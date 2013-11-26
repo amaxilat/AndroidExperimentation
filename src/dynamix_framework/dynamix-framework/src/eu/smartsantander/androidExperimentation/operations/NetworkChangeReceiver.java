@@ -25,6 +25,9 @@ public class NetworkChangeReceiver extends BroadcastReceiver {
 			if (wifi.isAvailable()) {
 				Log.i(TAG, "NetworkChangeReceiver: WIFI available");
 				if (reportT == null || reportT.isFinished()) {
+					if (reportT!=null) {
+						reportT.cancel(true);
+					}
 					reportT = new AsyncReportOnServerTask();
 					reportT.execute();
 				}

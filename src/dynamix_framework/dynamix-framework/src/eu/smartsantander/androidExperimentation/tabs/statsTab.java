@@ -40,139 +40,127 @@ import android.webkit.WebViewClient;
 import android.widget.TextView;
 import eu.smartsantander.androidExperimentation.Constants;
 
-
 /**
- * This tab displays overall stats about the activity of this specific device 
- *
+ * This tab displays overall stats about the activity of this specific device
+ * 
  */
 
+public class statsTab extends Activity implements
+		OnSharedPreferenceChangeListener {
 
-
-
-public class statsTab extends Activity implements OnSharedPreferenceChangeListener {
-	
-	
 	private OnSharedPreferenceChangeListener listener;
 	private PhoneProfiler pProfil;
 	private SharedPreferences prefs;
 	private WebView myWebView;
 	private WebSettings webSettings;
 	private String html;
-	
+
 	@Override
-    public void onCreate(Bundle savedInstanceState) {
-		
-		 
-		
+	public void onCreate(Bundle savedInstanceState) {
+
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.statistics);
-		
-		
+
 		pProfil = DynamixService.getPhoneProfiler();
-		
-	    myWebView = (WebView) findViewById(R.id.statswebview);
-	    myWebView.setWebViewClient(new myWebClient()); 
-	    myWebView.getSettings().setJavaScriptEnabled(true);
-	    myWebView.requestFocus(View.FOCUS_DOWN);
-	  	    		 
-		prefs = getSharedPreferences("SmartSantanderConfigurations", Context.MODE_PRIVATE);
-		
+
+		myWebView = (WebView) findViewById(R.id.statswebview);
+		myWebView.setWebViewClient(new myWebClient());
+		myWebView.getSettings().setJavaScriptEnabled(true);
+		myWebView.requestFocus(View.FOCUS_DOWN);
+
+		prefs = getSharedPreferences("SmartSantanderConfigurations",
+				Context.MODE_PRIVATE);
+
 		// update the field dynamically when changed
-		
+
 		listener = new OnSharedPreferenceChangeListener() {
-			
+
 			@Override
-			public void onSharedPreferenceChanged(SharedPreferences sharedPreferences,
-					String key) {
+			public void onSharedPreferenceChanged(
+					SharedPreferences sharedPreferences, String key) {
 				// TODO Auto-generated method stub
-				
-				System.out.println("A CHANGE HAS COME!!!!!! " + key );
-				
+
+				System.out.println("A CHANGE HAS COME!!!!!! " + key);
+
 			}
 		};
-		
+
 		prefs.registerOnSharedPreferenceChangeListener(listener);
-		
+
 		// check connectivity
-		
+
 		String theJPGData;
-		
+
 		if (checkNetworkIsAvailable()) {
 
 			theJPGData = loadTheStatsJPG();
 			SharedPreferences.Editor editor = prefs.edit();
 			editor.putString("pictureStatsData", theJPGData);
 			editor.commit();
-	
-		}
-		else {
+
+		} else {
 			theJPGData = prefs.getString("pictureStatsData", "Not available");
 		}
-		
-		myWebView.loadDataWithBaseURL(null, theJPGData, "text/html", null, null);
-		
-		fillStatsFields();	
-						
+
+		myWebView
+				.loadDataWithBaseURL(null, theJPGData, "text/html", null, null);
+
+		fillStatsFields();
+
 	}
-	
 
 	@Override
 	public void onSharedPreferenceChanged(SharedPreferences sharedPreferences,
 			String key) {
 		// TODO Auto-generated method stub
-		
+
 	}
-	
-	 public class myWebClient extends WebViewClient  
-     {  
 
-		 @Override
-		    public boolean shouldOverrideUrlLoading(WebView view, String url) {
-		        view.loadUrl(url);
-		        return true;
-		    }
+	public class myWebClient extends WebViewClient {
 
+		@Override
+		public boolean shouldOverrideUrlLoading(WebView view, String url) {
+			view.loadUrl(url);
+			return true;
+		}
 
-		    @Override
-		    public void onPageFinished(WebView view, String url) {
-		        super.onPageFinished(view, url);
-		        
+		@Override
+		public void onPageFinished(WebView view, String url) {
+			super.onPageFinished(view, url);
 
-		        }
+		}
 
+	}
 
-     } 
-	
-	
 	@Override
 	public void onResume() {
-		
+
 		fillStatsFields();
 
-		//String thePNGData = loadTheStatsJPG();
-		
-		String theJPGData = prefs.getString("pictureStatsData", "Not available");
-			
+		// String thePNGData = loadTheStatsJPG();
+
+		String theJPGData = prefs
+				.getString("pictureStatsData", "Not available");
+
 		if (checkNetworkIsAvailable()) {
 
 			theJPGData = loadTheStatsJPG();
 			SharedPreferences.Editor editor = prefs.edit();
 			editor.putString("pictureStatsData", theJPGData);
 			editor.commit();
-	
-		}
-		else {
+
+		} else {
 			theJPGData = prefs.getString("pictureStatsData", "Not available");
 		}
-		
-		myWebView.loadDataWithBaseURL(null, theJPGData, "text/html", null, null);
+
+		myWebView
+				.loadDataWithBaseURL(null, theJPGData, "text/html", null, null);
 		super.onResume();
 
-
 	}
-	
+
 	public void fillStatsFields() {
-		
+
 		TextView statsTextView1 = (TextView) findViewById(R.id.stats_time_title);
 		TextView statsTextView2 = (TextView) findViewById(R.id.stats_time_value);
 		TextView statsTextView3 = (TextView) findViewById(R.id.stats_number_exp_title);
@@ -180,73 +168,84 @@ public class statsTab extends Activity implements OnSharedPreferenceChangeListen
 		TextView statsTextView5 = (TextView) findViewById(R.id.stats_number_readings_title);
 		TextView statsTextView6 = (TextView) findViewById(R.id.stats_number_readings_value);
 		TextView statsTextView9 = (TextView) findViewById(R.id.stats_graph_title);
-		
-		//String totalMinutes = pProfil.getLastOnlineLogin().toString();
-		
-		//String totalMinutes = new Date().toString();
-		
+
+		// String totalMinutes = pProfil.getLastOnlineLogin().toString();
+
+		// String totalMinutes = new Date().toString();
+
 		statsTextView1.setText("Total time online (Hours)");
-		
-     	statsTextView2.setText(String.format("%.3g%n",(float) TimeUnit.MILLISECONDS.toSeconds(DynamixService.getTotalTimeConnectedOnline())/3600));
-     	int experiments=DynamixService.getPhoneProfiler().getExperiments().size();
+
+		statsTextView2.setText(String.format("%.3g%n",
+				(float) TimeUnit.MILLISECONDS.toSeconds(DynamixService
+						.getTotalTimeConnectedOnline()) / 3600));
+		int experiments = DynamixService.getPhoneProfiler().getExperiments()
+				.size();
 		statsTextView3.setText("Number of experiments run");
 		statsTextView4.setText(String.valueOf(experiments));
 		statsTextView5.setText("Number of readings produced");
-		long totalMsg = DynamixService.getPhoneProfiler().getTotalReadingsProduced();
+		long totalMsg = DynamixService.getPhoneProfiler()
+				.getTotalReadingsProduced();
 		statsTextView6.setText(Long.toString(totalMsg));
 		statsTextView9.setText("Statistics for previous 7 days");
-		
+
 	}
-	
+
 	private String loadTheStatsJPG() {
 		byte[] imageRaw = null;
-		  try {
-			 // set time request parameter as today's 00:00 hours
-			 Date d = new Date(); 
-			 Calendar cal = Calendar.getInstance();
-			 cal.setTimeInMillis(d.getTime());
-			 cal.set(Calendar.HOUR_OF_DAY, 0); //set hours to zero
-			 cal.set(Calendar.MINUTE, 0); // set minutes to zero
-			 cal.set(Calendar.SECOND, 0); //set seconds to zero
-			 
-			 long time = cal.getTimeInMillis();  
-			 
-			 String statsURL = Constants.WEB_STATS_URL + "?tstamp=" + time + "&devId=" + DynamixService.getPhoneProfiler().getPhoneId();
-		     URL url = new URL(statsURL);
-		     HttpURLConnection urlConnection = (HttpURLConnection) url.openConnection();
+		try {
+			// set time request parameter as today's 00:00 hours
+			Date d = new Date();
+			Calendar cal = Calendar.getInstance();
+			cal.setTimeInMillis(d.getTime());
+			cal.set(Calendar.HOUR_OF_DAY, 0); // set hours to zero
+			cal.set(Calendar.MINUTE, 0); // set minutes to zero
+			cal.set(Calendar.SECOND, 0); // set seconds to zero
 
-		     InputStream in = new BufferedInputStream(urlConnection.getInputStream());
-		     ByteArrayOutputStream out = new ByteArrayOutputStream();
+			long time = cal.getTimeInMillis();
 
-		     int c;
-		     while ((c = in.read()) != -1) {
-		         out.write(c);
-		     }
-		     out.flush();
+			String statsURL = Constants.WEB_STATS_URL + "?tstamp=" + time
+					+ "&devId="
+					+ DynamixService.getPhoneProfiler().getPhoneId();
+			URL url = new URL(statsURL);
+			HttpURLConnection urlConnection = (HttpURLConnection) url
+					.openConnection();
 
-		     imageRaw = out.toByteArray();
+			InputStream in = new BufferedInputStream(
+					urlConnection.getInputStream());
+			ByteArrayOutputStream out = new ByteArrayOutputStream();
 
-		     urlConnection.disconnect();
-		     in.close();
-		     out.close();
-		  } catch (IOException e) {
-		     e.printStackTrace();
-		  }
+			int c;
+			while ((c = in.read()) != -1) {
+				out.write(c);
+			}
+			out.flush();
 
-		  String image64 ="";
-		  if (imageRaw!=null && imageRaw.length>0)
-			  image64=Base64.encodeToString(imageRaw, Base64.DEFAULT);
+			imageRaw = out.toByteArray();
 
-		  String pageData = "<meta name=\"viewport\" content=\"width=device-width, user-scalable=no\" /><body bgcolor=black><img src=\"data:image/jpeg;base64," + image64 + "\" width=\"100%\" /></body>";
-		  
-		  return pageData;
+			urlConnection.disconnect();
+			in.close();
+			out.close();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+
+		String image64 = "";
+		if (imageRaw != null && imageRaw.length > 0)
+			image64 = Base64.encodeToString(imageRaw, Base64.DEFAULT);
+
+		String pageData = "<meta name=\"viewport\" content=\"width=device-width, user-scalable=no\" /><body bgcolor=black><img src=\"data:image/jpeg;base64,"
+				+ image64 + "\" width=\"100%\" /></body>";
+
+		return pageData;
 	}
-	
+
 	public boolean checkNetworkIsAvailable() {
-		ConnectivityManager cm = (ConnectivityManager) this.getSystemService(Context.CONNECTIVITY_SERVICE);
-		 
+		ConnectivityManager cm = (ConnectivityManager) this
+				.getSystemService(Context.CONNECTIVITY_SERVICE);
+
 		NetworkInfo activeNetwork = cm.getActiveNetworkInfo();
-		boolean isConnected = activeNetwork != null && activeNetwork.isConnectedOrConnecting();
+		boolean isConnected = activeNetwork != null
+				&& activeNetwork.isConnectedOrConnecting();
 		return isConnected;
 	}
 
