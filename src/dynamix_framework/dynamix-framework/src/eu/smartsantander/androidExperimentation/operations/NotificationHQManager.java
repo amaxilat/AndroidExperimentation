@@ -29,7 +29,7 @@ public class NotificationHQManager {
 	private ArrayList<DebugMsg> notifications = new ArrayList<DebugMsg>();
 	private ArrayList<DebugMsg> tempList = new ArrayList<DebugMsg>();
 	private final String TAG = "NOTIFICATION MANAGER";
-	private static int listSize = 8;
+	private static int listSize = 16;
 	
 	private NotificationHQManager() {
 		
@@ -66,7 +66,7 @@ public class NotificationHQManager {
 		int lsize = notifications.size();
 		
 		// 40 is a reasonably large number, just for the sake of not trimming the list so often
-		if (listSize < 40)
+		if (lsize> 40)
 			notifications.subList(0, lsize - listSize - 1).clear();
 	}
 	

@@ -152,7 +152,10 @@
             android:name="eu.smartsantander.androidExperimentation.tabs.statsTab"
             android:label="statsTab" >
         </activity>
-
+ 		<activity
+            android:label="gps"
+            android:name="eu.smartsantander.androidExperimentation.tabs.gpsActivity" >
+        </activity>
         <service android:name="eu.smartsantander.androidExperimentation.AndroidExperimentationService" >
             <intent-filter>
                 <action android:name="eu.smartsantander.androidExperimentation.AndroidExperimentationService" />
