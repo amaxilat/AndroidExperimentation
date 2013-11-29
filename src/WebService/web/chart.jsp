@@ -51,6 +51,8 @@
                  %>
                     var sensor ='<%=sensor%>';
 
+                    var maxValue=120;
+
                     function getData() {
                         var jsonDataArray = httpGet(eId, tt, devId);
                         if (jsonDataArray.length == 0) {
@@ -66,9 +68,14 @@
                             if (object.context!=sensor)continue;
                             if (object.type=='String')continue;
                             res.push([object.timestamp, object.value])
+                            if (maxValue<object.value){
+                                maxValue=object.value;
+                            }
                         }
                         return res;
                     }
+                    maxValue=maxValue+50;
+
 
                     var updateInterval = 15000;
                     var plot = $.plot("#placeholder", [ getData() ], {
@@ -77,7 +84,7 @@
                         },
                         yaxis: {
                             min: 0,
-                            max: 120
+                            max: maxValue
                         },
                         xaxis: {
                             mode: 'time',

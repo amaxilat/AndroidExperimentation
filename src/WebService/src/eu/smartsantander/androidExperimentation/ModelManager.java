@@ -306,7 +306,7 @@ public class ModelManager {
     }
 
     public static String formatDouble(Float d) {
-        return String.format("%.6f", d + pert()).replace(',', '.');
+        return String.format("%.6f", d ).replace(',', '.');
     }
 
 

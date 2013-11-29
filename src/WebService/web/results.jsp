@@ -47,7 +47,9 @@
         {
             var e = document.getElementById("device");
             var device = e.options[e.selectedIndex].value;
-            var url='http://blanco.cti.gr:8080/chart.jsp?id='+ <%=expId%>+'&devId='+device;
+            var e2 = document.getElementById("sensor");
+            var sensor = e2.options[e2.selectedIndex].value;
+            var url='http://blanco.cti.gr:8080/chart.jsp?id='+ <%=expId%>+'&devId='+device+'&sensor='+sensor;
             window.open(url,'_blank');
         }
 
@@ -82,7 +84,7 @@
     </select>
 
     Sensor:
-    <select name="sensor">
+    <select name="sensor" id="sensor">
         <%
             for (String d : sensors.keySet())
                 out.print("<option value='" + d + "'>" + d + "</option>");
