@@ -27,6 +27,9 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.res.Resources;
 import android.graphics.Color;
+import android.location.Location;
+import android.location.LocationListener;
+import android.location.LocationManager;
 import android.os.Bundle;
 import android.os.Handler;
 import android.util.Log;
@@ -39,10 +42,12 @@ import android.view.WindowManager;
 import android.widget.TabHost;
 import android.widget.TabHost.TabSpec;
 import android.widget.Toast;
+import eu.smartsantander.androidExperimentation.operations.NotificationHQManager;
 import eu.smartsantander.androidExperimentation.tabs.jobsTab;
 import eu.smartsantander.androidExperimentation.tabs.reportTab;
 import eu.smartsantander.androidExperimentation.tabs.securityTab;
 import eu.smartsantander.androidExperimentation.tabs.statsTab;
+ 
 
 /**
  * Base Activity for the Dynamix Framework UI. Responsible for hosting Tabs and
@@ -91,10 +96,16 @@ public class BaseActivity extends TabActivity implements ExceptionCallback {
 	// Android Experimentation Members
 	private Boolean tabIntentListenerIsRegistered = false;
 	private Boolean serviceIntentListenerIsRegistered = false;
-	
+
+	private static final long MINIMUM_DISTANCE_CHANGE_FOR_UPDATES = 1; // in
+	// Meters
+	private static final long MINIMUM_TIME_BETWEEN_UPDATES = 1000; // in
+	// Milliseconds
+	protected LocationManager locationManager;
+	NotificationHQManager noteManager = NotificationHQManager.getInstance();
+
 	public static Resources myRes;
- 
-	
+
 	public static void close() {
 		if (baseActivity != null)
 			baseActivity.finish();
@@ -125,25 +136,29 @@ public class BaseActivity extends TabActivity implements ExceptionCallback {
 
 	protected static void setTitlebarDisabled() {
 		if (baseActivity != null)
-			baseActivity.changeTitlebarState(Color.RED, myRes.getString(R.string.dynamix_enable_toggle_off) );//"Experimentation is disabled" );//"Experimentation"
-					//+ DynamixService.getFrameworkVersion()
-					//+ " is disabled");
+			baseActivity.changeTitlebarState(Color.RED,
+					myRes.getString(R.string.dynamix_enable_toggle_off));// "Experimentation is disabled"
+																			// );//"Experimentation"
+		// + DynamixService.getFrameworkVersion()
+		// + " is disabled");
 	}
 
 	protected static void setTitlebarEnabled() {
 		if (baseActivity != null)
-			baseActivity.changeTitlebarState(Color.rgb(0, 225, 50), myRes.getString(R.string.dynamix_enable_toggle_on) );//"Experimentation"
-					//+ DynamixService.getFrameworkVersion()
-					//+ " is enabled");
+			baseActivity.changeTitlebarState(Color.rgb(0, 225, 50),
+					myRes.getString(R.string.dynamix_enable_toggle_on));// "Experimentation"
+		// + DynamixService.getFrameworkVersion()
+		// + " is enabled");
 	}
 
-	protected static void setTitlebarRestarting() {//smartsantander
+	protected static void setTitlebarRestarting() {// smartsantander
 		if (baseActivity != null)
-			baseActivity.changeTitlebarState(Color.rgb(255, 153, 0), myRes.getString(R.string.dynamix_restarting) );//"Experimentation"
-					//+ DynamixService.getFrameworkVersion()
-					//+ " is enabled");
+			baseActivity.changeTitlebarState(Color.rgb(255, 153, 0),
+					myRes.getString(R.string.dynamix_restarting));// "Experimentation"
+		// + DynamixService.getFrameworkVersion()
+		// + " is enabled");
 	}
-	
+
 	public static boolean isActivityVisible() {
 		return activityVisible;
 	}
@@ -156,8 +171,6 @@ public class BaseActivity extends TabActivity implements ExceptionCallback {
 		activityVisible = false;
 	}
 
- 
-
 	// ----------------------------------------------
 
 	@Override
@@ -166,10 +179,10 @@ public class BaseActivity extends TabActivity implements ExceptionCallback {
 		super.onCreate(savedInstanceState);
 		getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
 		context = this;
-		
-		BugSenseHandler.initAndStartSession(this, "91ce9553" );
+
+		BugSenseHandler.initAndStartSession(this, "91ce9553");
 		BugSenseHandler.setExceptionCallback(this);
-	
+
 		// Set the Dynamix base activity so it can use our context
 		DynamixService.setBaseActivity(this);
 		// Request for the progress bar to be shown in the title
@@ -184,7 +197,7 @@ public class BaseActivity extends TabActivity implements ExceptionCallback {
 		 * http://developer.android.com/resources/tutorials
 		 * /views/hello-tabwidget.html
 		 */
-		myRes = getResources(); 
+		myRes = getResources();
 		Resources res = getResources(); // Resource object to get Drawables
 		tabHost = getTabHost(); // The activity TabHost
 		TabHost.TabSpec spec; // Resusable TabSpec for each tab
@@ -205,25 +218,22 @@ public class BaseActivity extends TabActivity implements ExceptionCallback {
 				.setIndicator("Pending",
 						res.getDrawable(R.drawable.tab_pending))
 				.setContent(intent);
-		//tabHost.addTab(spec);
+		// tabHost.addTab(spec);
 		intent = new Intent().setClass(this, PrivacyActivity.class);
 		intent.putExtras(b);
-				
+
 		spec = tabHost
 				.newTabSpec("privacy")
 				.setIndicator("Privacy",
 						res.getDrawable(R.drawable.tab_profiles))
 				.setContent(intent);
-				
-		//tabHost.addTab(spec);
-		
-		
+
+		// tabHost.addTab(spec);
+
 		intent = new Intent().setClass(this, PluginsActivity.class);
 		intent.putExtras(b);
-		spec = tabHost
-				.newTabSpec("plugins")
-				.setIndicator("",
-						res.getDrawable(R.drawable.tab_plugins))
+		spec = tabHost.newTabSpec("plugins")
+				.setIndicator("", res.getDrawable(R.drawable.tab_plugins))
 				.setContent(intent);
 		tabHost.addTab(spec);
 		intent = new Intent().setClass(this, UpdatesActivity.class);
@@ -233,7 +243,7 @@ public class BaseActivity extends TabActivity implements ExceptionCallback {
 				.setIndicator("Updates",
 						res.getDrawable(R.drawable.tab_updates))
 				.setContent(intent);
-		//tabHost.addTab(spec);
+		// tabHost.addTab(spec);
 		// Boot Dynamix
 		DynamixService.boot(this, true, false, false);
 
@@ -241,8 +251,10 @@ public class BaseActivity extends TabActivity implements ExceptionCallback {
 		TabHost tabHost = getTabHost();
 
 		// profile tab
-		//Intent intentProfile = new Intent().setClass(this, profileTab.class);
-		//TabSpec tabSpecProfile = tabHost.newTabSpec("profile").setIndicator("",	ressources.getDrawable(R.drawable.ic_tab_profile)).setContent(intentProfile);
+		// Intent intentProfile = new Intent().setClass(this, profileTab.class);
+		// TabSpec tabSpecProfile =
+		// tabHost.newTabSpec("profile").setIndicator("",
+		// ressources.getDrawable(R.drawable.ic_tab_profile)).setContent(intentProfile);
 
 		// security tab
 		Intent intentSecurity = new Intent().setClass(this, securityTab.class);
@@ -252,8 +264,6 @@ public class BaseActivity extends TabActivity implements ExceptionCallback {
 						ressources.getDrawable(R.drawable.ic_tab_security))
 				.setContent(intentSecurity);
 
- 
-		
 		// jobs tab
 		Intent intentJobs = new Intent().setClass(this, jobsTab.class);
 		TabSpec tabSpecJobs = tabHost
@@ -262,7 +272,6 @@ public class BaseActivity extends TabActivity implements ExceptionCallback {
 						ressources.getDrawable(R.drawable.ic_tab_jobs))
 				.setContent(intentJobs);
 
-		
 		// report tab
 		Intent intentReports = new Intent().setClass(this, reportTab.class);
 		TabSpec tabSpecReports = tabHost
@@ -270,24 +279,30 @@ public class BaseActivity extends TabActivity implements ExceptionCallback {
 				.setIndicator("",
 						ressources.getDrawable(R.drawable.ic_tab_reports))
 				.setContent(intentReports);
-		
+
 		// stats tab
 		// TODO: create new content for statistics
 		Intent intentStats = new Intent().setClass(this, statsTab.class);
-		 
+
 		TabSpec tabSpecStats = tabHost
 				.newTabSpec("stats")
 				.setIndicator("",
 						ressources.getDrawable(R.drawable.ic_tab_stats))
 				.setContent(intentStats);
 
-			
 		tabHost.addTab(tabSpecJobs);
 		tabHost.addTab(tabSpecStats);
 		tabHost.addTab(tabSpecReports);
-		tabHost.addTab(tabSpecSecurity);		
+		tabHost.addTab(tabSpecSecurity);
 		//
 		DynamixService.ConfigureLog4J();
+
+		locationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
+
+		locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER,
+				MINIMUM_TIME_BETWEEN_UPDATES,
+				MINIMUM_DISTANCE_CHANGE_FOR_UPDATES, new MyLocationListener());
+
 	}
 
 	/**
@@ -385,16 +400,14 @@ public class BaseActivity extends TabActivity implements ExceptionCallback {
 		 */
 		if (DynamixService.isFrameworkStarted()) {
 			setTitlebarEnabled();
-			
-		}
-		else{
-			if(DynamixService.getRestarting()==true)
+
+		} else {
+			if (DynamixService.getRestarting() == true)
 				setTitlebarRestarting();
 			else
 				setTitlebarDisabled();
 		}
 
-	 
 	}
 
 	@Override
@@ -403,21 +416,44 @@ public class BaseActivity extends TabActivity implements ExceptionCallback {
 		// Update visibility
 		activityPaused();
 		// this.finish();
-		
+
 	}
 
 	@Override
 	public void lastBreath(Exception e) {
-		 e.printStackTrace(); 
-		 DynamixService.logToFile(e.getMessage());
-		 BugSenseHandler.sendException(e);
-		 DynamixService.getPhoneProfiler().savePrefs();
-		 Toast.makeText(context, e.getMessage(), 5000).show();
-		 try{
-			 Thread.sleep(5000);
-		 }catch(Exception w){			 
-		 }
-		
+		e.printStackTrace();
+		DynamixService.logToFile(e.getMessage());
+		BugSenseHandler.sendException(e);
+		DynamixService.getPhoneProfiler().savePrefs();
+		Toast.makeText(context, e.getMessage(), 5000).show();
+		try {
+			Thread.sleep(5000);
+		} catch (Exception w) {
+		}
+
+	}
+	
+	private class MyLocationListener implements LocationListener {
+
+		public void onLocationChanged(Location location) {
+			String message = String.format(
+					"Lon %1$s Lat: %2$s",
+					location.getLongitude(), location.getLatitude());
+			noteManager.postNotification(message);	
+		}
+
+		public void onStatusChanged(String s, int i, Bundle b) {
+
+		}
+
+		public void onProviderDisabled(String s) {
+
+		}
+
+		public void onProviderEnabled(String s) {
+
+		}
+
 	}
 
 }

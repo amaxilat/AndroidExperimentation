@@ -143,7 +143,11 @@ public class DynamixServiceListenerUtility {
 							List<Reading> readings = (new Gson()).fromJson(readingMsg, listType);
 							for (Reading reading : readings) {
 								//Toast.makeText(DynamixService.getAndroidContext(),reading.getContext(), 500).show();
-								noteManager.postNotification(reading.getContext());							
+								String notification=reading.getContext();
+								if (notification.contains("Gps")){
+									notification+=":"+reading.getValue();
+								}
+								noteManager.postNotification(notification);							
 								Log.w(TAG, "Plugin Reading: " + reading);
 								DynamixService.getReadingStorage().pushReading(	reading);
 								DynamixService.getPhoneProfiler().incMsgCounter();

@@ -6,16 +6,7 @@ import android.app.Activity;
 import android.os.Bundle;
 import android.webkit.WebView;
 
-
-/**
- * This tab displays info about the SmartSantander project using a WebView, mainly because of styling, i.e., couldn't
- * find a simpler way to display fully aligned text :)
- *
- * Charset is set to utf-8 due to using greek and spanish translation for the app
- * 
- * TODO: rename to info, report name is misleading
- * 
- */
+ 
 
 
 public class reportTab extends Activity
