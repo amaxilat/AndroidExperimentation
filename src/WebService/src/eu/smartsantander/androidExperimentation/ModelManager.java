@@ -119,6 +119,11 @@ public class ModelManager {
 
     public static void saveExperiment(Experiment experiment) {
         Transaction tx = getCurrentSession().beginTransaction();
+        Experiment current = getExperiment();
+        if (current != null) {
+            current.setStatus("");
+            getCurrentSession().saveOrUpdate(current);
+        }
         getCurrentSession().saveOrUpdate(experiment);
         tx.commit();
         log.info("saveExperiment Called");
@@ -204,7 +209,7 @@ public class ModelManager {
 
         HashMap<Long, Result> resultMap = new HashMap<Long, Result>();
         for (Result result : results) {
-            if (result.getMessage()==null || result.getMessage().equals("")) continue;
+            if (result.getMessage() == null || result.getMessage().equals("")) continue;
             Reading r;
             try {
                 r = Reading.fromJson(result.getMessage());
@@ -219,7 +224,7 @@ public class ModelManager {
         String[] messages = new String[times.length];
         int i = 0;
         for (Object time : times) {
-            messages[i++]=resultMap.get(time).getMessage();
+            messages[i++] = resultMap.get(time).getMessage();
         }
         return messages;
     }
@@ -306,7 +311,7 @@ public class ModelManager {
     }
 
     public static String formatDouble(Float d) {
-        return String.format("%.6f", d ).replace(',', '.');
+        return String.format("%.6f", d).replace(',', '.');
     }
 
 

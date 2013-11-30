@@ -4,11 +4,10 @@
 <%@ page import="org.apache.commons.fileupload.FileItem" %>
 <%@ page import="org.apache.commons.fileupload.disk.DiskFileItemFactory" %>
 <%@ page import="org.apache.commons.fileupload.servlet.ServletFileUpload" %>
-<%@ page import="org.hibernate.HibernateException" %>
 <%@ page import="java.io.File" %>
-<%@ page import="java.util.Iterator" %>
-<%@ page import="java.util.List" %>
-<%@ page import="java.util.UUID" %>
+<%@ page import="java.text.DateFormat" %>
+<%@ page import="java.util.*" %>
+<%@ page import="java.text.SimpleDateFormat" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 
 <html>
@@ -27,9 +26,10 @@
     String path = jspFilePath.substring(0, jspFilePath.lastIndexOf("/")) + "/experimentRepository/" + uuid + "/";
     String url = context.getInitParameter("urlBase") + "/experimentRepository/" + uuid + "/";
     String contentType = request.getContentType();
-    String description="-";
+    String description = "-";
+    String startDate = "";
+    String endDate = "";
 
-    Boolean parameterCheckOK = true;
     String name = "";
     String contextType = "";
     String dependencies = "";
@@ -52,19 +52,21 @@
                 else if (fieldName.equals("contextType")) contextType = fieldValue;
                 else if (fieldName.equals("sensorDependencies")) dependencies = fieldValue;
                 else if (fieldName.equals("experimentDescription")) description = fieldValue;
-                else if (fieldName.equals("dependencies")){
-                    dependencies +=","+ fieldValue;
+                else if (fieldName.equals("startingTime")) startDate = fieldValue;
+                else if (fieldName.equals("endingTime")) endDate = fieldValue;
+                else if (fieldName.equals("dependencies")) {
+                    dependencies += "," + fieldValue;
                 }
             } else {
                 hasFile = true;
             }
         }
 
-        if(dependencies.length()>1){
-            dependencies=dependencies.substring(1);
+        if (dependencies.length() > 1) {
+            dependencies = dependencies.substring(1);
         }
 
-        if (Utilities.isNullOrEmpty(name) == true    || hasFile == false) {
+        if (Utilities.isNullOrEmpty(name) == true || hasFile == false) {
             out.println("<p>Name and jar-experiment are required!</p>");
         } else {
             if ((contentType.indexOf("multipart/form-data") >= 0)) {
@@ -77,12 +79,7 @@
                         continue;
                     }
                     FileItem fi = item;
-                    // Get the uploaded file parameters
-                    String fieldName = fi.getFieldName();
                     String fileName = fi.getName();
-                    boolean isInMemory = fi.isInMemory();
-                    long sizeInBytes = fi.getSize();
-                    // Write the file
                     if (fileName.lastIndexOf("\\") >= 0) {
                         file = new File(path + fileName.substring(fileName.lastIndexOf("\\")));
                     } else {
@@ -97,22 +94,32 @@
                     experiment.setSensorDependencies(dependencies);
                     experiment.setFilename(fileName);
                     experiment.setUrl(url + fileName);
-                    experiment.setFromTime(null);
-                    experiment.setToTime(null);
+
+                    DateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm");
+                    Date from = null;
+                    Date to = null;
+                    try {
+                        from = df.parse(startDate.replace("T"," "));
+                        to = df.parse(endDate.replace("T"," "));
+                    } catch (Exception e) {
+                        from = new Date(System.currentTimeMillis());
+                        to = new Date(System.currentTimeMillis());
+                    }
+                    experiment.setFromTime( from.getTime());
+                    experiment.setToTime(to.getTime());
                     experiment.setStatus("active");
                     experiment.setDescription(description);
                     experiment.setTimestamp(System.currentTimeMillis());
                     ModelManager.saveExperiment(experiment);
-                    out.println("Uploaded Filename: " + fileName + "<br>");
-
+                    out.println("Experiment Uploaded: " + experiment.getName() + "<a href='" + experiment.getUrl() + "'>" + experiment.getUrl() + "</a><br>");
+                    out.println("<script>window.location.href='./experiment.jsp'; </script>");
                 }
             }
         }
     } catch (Exception ex) {
         System.out.println(ex);
         File directory = new File(path);
-        directory.delete()
-        ;
+        directory.delete();
         out.println("Error: " + ex.getMessage() + "<br>");
     }
 %>

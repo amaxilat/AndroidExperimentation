@@ -29,7 +29,8 @@
         <tr>
             <td>Context Type</td>
             <td>
-                <select name="contextType">
+                org.ambientdynamix.contextplugins.ExperimentPlugin
+                <select name="contextType" hidden="true">
                     <option value="org.ambientdynamix.contextplugins.ExperimentPlugin">
                         org.ambientdynamix.contextplugins.ExperimentPlugin
                     </option>
@@ -55,7 +56,7 @@
                             PluginList pList = ModelManager.getPlugins();
                             for (Plugin p : pList.getPluginList()) {
                                 if (p.getName().equals("plugs.xml") == false)
-                                    out.println("<option value=\"" + p.getName() + "\" >" + p.getName() + "</option>");
+                                    out.println("<option value=\"" + p.getContextType() + "\" >" + p.getName() + "</option>");
                                 //out.println("<li><option type=\"checkbox\" name=\"sensorD\">" + p.getName() + "</input></li>");
                             }
 

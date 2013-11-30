@@ -20,10 +20,10 @@
             <column name="sensorDependencies" sql-type="text" length="65535" not-null="true"/>
         </property>
         <property name="fromTime">
-            <column name="fromTime" sql-type="timestamp" length="19" not-null="false"/>
+            <column name="fromTime" sql-type="bigint" length="19" not-null="false"/>
         </property>
         <property name="toTime">
-            <column name="toTime" sql-type="timestamp" length="19" not-null="false"/>
+            <column name="toTime" sql-type="bigint" length="19" not-null="false"/>
         </property>
         <property name="status">
             <column name="status" sql-type="varchar" length="256" not-null="false"/>

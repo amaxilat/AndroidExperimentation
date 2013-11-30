@@ -22,8 +22,8 @@
       <column name="name" sqlType="VARCHAR" length="256" precision="0" nullable="false" jdbcType="12"/>
       <column name="contextType" sqlType="VARCHAR" length="256" precision="0" nullable="false" jdbcType="12"/>
       <column name="sensorDependencies" sqlType="TEXT" length="65535" precision="0" nullable="false" jdbcType="-1"/>
-      <column name="fromTime" sqlType="DATETIME" length="19" precision="0" nullable="true" jdbcType="93"/>
-      <column name="toTime" sqlType="DATETIME" length="19" precision="0" nullable="true" jdbcType="93"/>
+      <column name="fromTime" sqlType="BIGINT" length="19" precision="0" nullable="true" jdbcType="-5"/>
+      <column name="toTime" sqlType="BIGINT" length="19" precision="0" nullable="true" jdbcType="-5"/>
       <column name="status" sqlType="VARCHAR" length="256" precision="0" nullable="false" jdbcType="12"/>
       <column name="userID" sqlType="INT" length="10" precision="0" nullable="true" jdbcType="4"/>
       <column name="url" sqlType="VARCHAR" length="256" precision="0" nullable="false" jdbcType="12"/>
@@ -49,6 +49,10 @@
       <column name="message" sqlType="TEXT" length="65535" precision="0" nullable="false" jdbcType="-1"/>
       <column name="timestamp" sqlType="BIGINT" length="19" precision="0" nullable="false" jdbcType="-5"/>
       <primary-key name="PRIMARY" columns="id"/>
+      <index name="complex" unique="false" columns="experimentID,deviceID,timestamp"/>
+      <index name="deviceIdindex" unique="false" columns="deviceID"/>
+      <index name="experIdIndex" unique="false" columns="experimentID"/>
+      <index name="timestamp" unique="false" columns="timestamp"/>
     </table>
     <table name="smartphones" schema="" catalog="androidexperimentation" type="TABLE">
       <column name="id" sqlType="INT" length="10" precision="0" nullable="false" jdbcType="4" autoIncrement="true"/>
