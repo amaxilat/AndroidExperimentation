@@ -175,6 +175,7 @@ public class Communication extends Thread implements Runnable {
 	{	DynamixService.logToFile(jsonReport);
 		Log.i("AndroidExperimentation", "Report Call");
 		
+		//jsonReport=jsonReport.replace("\\\\\\", "\\");
 		final String METHOD_NAME = "reportResults";		
 		final String SOAP_ACTION = "\""+"http://AndroidExperimentationWS/reportResults"+"\"";
 		
@@ -204,6 +205,7 @@ public class Communication extends Thread implements Runnable {
 		}
 		catch (Exception e)
 		{
+			
 			DynamixService.setConnectionStatus(false);
 			throw e;
 		}			

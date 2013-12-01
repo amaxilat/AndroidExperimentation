@@ -129,6 +129,7 @@ public class DynamixServiceListenerUtility {
 								mlist.add(reading.getValue());
 								rObject.setResults(mlist);
 								String message=rObject.toJson();
+ 
 								try{ //try to send to server, on fail save it in SQLite
 									DynamixService.getCommunication().sendReportResults(message);//
 									Log.i(TAG, "Experiment  Reading Network: " + message);
