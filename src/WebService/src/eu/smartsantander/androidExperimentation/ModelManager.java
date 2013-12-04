@@ -35,6 +35,14 @@ public class ModelManager {
         }
     }
 
+    protected static void closeCurrentSession() {
+        try {
+              HibernateUtil.closeSession();
+        } catch (Exception e) {
+            throw new IllegalStateException("Could not get current session");
+        }
+    }
+
 
     public static List<Plugin> getPluginList() throws Exception {
         log.info("getPlugins Called");
@@ -57,6 +65,7 @@ public class ModelManager {
             tx.commit();
         } catch (Exception e) {
             getCurrentSession().getTransaction().commit();
+            closeCurrentSession();
         }
         List<Smartphone> recordList = getCurrentSession().createQuery("from Smartphone where phoneId=?").setInteger(0, smartphone.getPhoneId()).list();
         if (recordList.size() > 0) {

@@ -36,8 +36,10 @@
                 else
                     sensors.put(r.getContext(), counter++);
                 }catch(Exception e){
+
                     e.printStackTrace();
                     System.out.println(e.getMessage());
+                    System.out.println(result.getId());
                 }
             }
 
