@@ -35,6 +35,8 @@ CREATE TABLE `experiments` (
   `userID` int(11) DEFAULT NULL,
   `url` varchar(256) NOT NULL,
   `filename` varchar(256) NOT NULL,
+  `description` text NOT NULL,
+  `timestamp` bigint(20) NOT NULL
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
