@@ -54,6 +54,7 @@ public class AndroidExperimentationWS {
             smartphone = ModelManager.registerSmartphone(smartphone);
             log.debug("register Smartphone: Device:" + smartphone.getId());
             log.debug("register Smartphone: Device Sensor Rules:" + smartphone.getSensorsRules());
+            log.debug("register Smartphone: Device Type:" + smartphone.getDeviceType());
             log.debug("-----------------------------------");
             return Integer.toString(smartphone.getPhoneId());
         } catch (Exception e) {

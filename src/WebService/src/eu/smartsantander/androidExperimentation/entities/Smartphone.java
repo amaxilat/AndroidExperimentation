@@ -9,6 +9,15 @@ package eu.smartsantander.androidExperimentation.entities;
  */
 public class Smartphone {
     private Integer id;
+    private String deviceType;
+
+    public String getDeviceType() {
+        return deviceType;
+    }
+
+    public void setDeviceType(String deviceType) {
+        this.deviceType = deviceType;
+    }
 
     public Integer getId() {
         return id;
@@ -16,7 +25,7 @@ public class Smartphone {
 
     public void setId(Integer id) {
         this.id = id;
-        this.phoneId=this.id;
+        this.phoneId = this.id;
     }
 
     private Integer phoneId;

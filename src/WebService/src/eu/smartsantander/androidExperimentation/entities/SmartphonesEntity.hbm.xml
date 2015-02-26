@@ -16,5 +16,8 @@
         <property name="sensorsRules">
             <column name="sensorsRules" sql-type="text" length="65535" />
         </property>
+        <property name="deviceType">
+            <column name="deviceType" sql-type="text" length="254" />
+        </property>
     </class>
 </hibernate-mapping>

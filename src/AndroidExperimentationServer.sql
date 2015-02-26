@@ -36,7 +36,7 @@ CREATE TABLE `experiments` (
   `url` varchar(256) NOT NULL,
   `filename` varchar(256) NOT NULL,
   `description` text NOT NULL,
-  `timestamp` bigint(20) NOT NULL
+  `timestamp` bigint(20) NOT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -47,7 +47,7 @@ CREATE TABLE `experiments` (
 
 LOCK TABLES `experiments` WRITE;
 /*!40000 ALTER TABLE `experiments` DISABLE KEYS */;
-INSERT INTO `experiments` VALUES (1,'Experiment1','org.ambientdynamix.contextplugins.ExperimentPlugin','org.ambientdynamix.contextplugins.GpsPlugin','2000-12-01 00:00:00','2000-12-01 00:00:00','',0,'http://83.212.110.88:8080/dynamixRepository/org.ambientdynamix.contextplugins.ExperimentPlugin_0.9.54.jar','org.ambientdynamix.contextplugins.ExperimentPlugin_0.9.54.jar');
+INSERT INTO `experiments` VALUES (1,'Experiment1','org.ambientdynamix.contextplugins.ExperimentPlugin','org.ambientdynamix.contextplugins.GpsPlugin','2000-12-01 00:00:00','2000-12-01 00:00:00','',0,'http://83.212.110.88:8080/dynamixRepository/org.ambientdynamix.contextplugins.ExperimentPlugin_0.9.54.jar','org.ambientdynamix.contextplugins.ExperimentPlugin_0.9.54.jar', 'just a sample experiment', 0);
 /*!40000 ALTER TABLE `experiments` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -115,6 +115,7 @@ DROP TABLE IF EXISTS `smartphones`;
 CREATE TABLE `smartphones` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `phoneID` int(11) NOT NULL,
+  `deviceType` varchar(256) NOT NULL DEFAULT `Generic Android Device`,
   `sensorsRules` text,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=42 DEFAULT CHARSET=utf8;
