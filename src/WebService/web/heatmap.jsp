@@ -1,6 +1,6 @@
-<%@ page import="eu.smartsantander.androidExperimentation.ModelManager" %>
+<%@ page import="eu.smartsantander.androidExperimentation.service.ModelManager" %>
 <%@ page import="eu.smartsantander.androidExperimentation.entities.Reading" %>
-<%@ page import="eu.smartsantander.androidExperimentation.entities.Result" %>
+<%@ page import="eu.smartsantander.androidExperimentation.model.Result" %>
 
 
 <%@ page import="org.apache.commons.lang3.StringUtils" %>

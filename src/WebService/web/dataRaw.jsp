@@ -1,6 +1,6 @@
 <%@ page import="java.util.List" %>
-<%@ page import="eu.smartsantander.androidExperimentation.ModelManager" %>
-<%@ page import="eu.smartsantander.androidExperimentation.entities.Result" %>
+<%@ page import="eu.smartsantander.androidExperimentation.service.ModelManager" %>
+<%@ page import="eu.smartsantander.androidExperimentation.model.Result" %>
 <%@ page import="com.google.gson.Gson" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 

@@ -4,6 +4,6 @@
 
     <endpoint
             name='AndroidExperimentation'
-            implementation='eu.smartsantander.androidExperimentation.AndroidExperimentationWS'
+            implementation='eu.smartsantander.androidExperimentation.controller.AndroidExperimentationWS'
             url-pattern='/services/AndroidExperimentationWS'/>
 </endpoints>

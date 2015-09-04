@@ -1,6 +1,6 @@
-package eu.smartsantander.androidExperimentation.jsonEntities;
+package eu.smartsantander.androidExperimentation.entities;
 
-import eu.smartsantander.androidExperimentation.entities.Plugin;
+import eu.smartsantander.androidExperimentation.model.Plugin;
 
 import java.util.ArrayList;
 import java.util.List;

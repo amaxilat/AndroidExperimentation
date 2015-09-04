@@ -1,7 +1,7 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<%@ page import="eu.smartsantander.androidExperimentation.ModelManager" %>
-<%@ page import="eu.smartsantander.androidExperimentation.entities.Plugin" %>
-<%@ page import="eu.smartsantander.androidExperimentation.jsonEntities.PluginList" %>
+<%@ page import="eu.smartsantander.androidExperimentation.service.ModelManager" %>
+<%@ page import="eu.smartsantander.androidExperimentation.model.Plugin" %>
+<%@ page import="eu.smartsantander.androidExperimentation.entities.PluginList" %>
 <html>
 <head>
     <title>AndroidExperimentation - SmartSantander</title>

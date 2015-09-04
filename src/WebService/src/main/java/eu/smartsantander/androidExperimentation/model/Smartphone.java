@@ -1,4 +1,8 @@
-package eu.smartsantander.androidExperimentation.entities;
+package eu.smartsantander.androidExperimentation.model;
+
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
 
 /**
  * Created with IntelliJ IDEA.
@@ -7,7 +11,10 @@ package eu.smartsantander.androidExperimentation.entities;
  * Time: 11:06 AM
  * To change this template use File | Settings | File Templates.
  */
+@Entity
 public class Smartphone {
+    @Id
+    @GeneratedValue
     private Integer id;
     private String deviceType;
 

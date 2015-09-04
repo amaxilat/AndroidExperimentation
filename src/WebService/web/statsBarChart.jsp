@@ -7,8 +7,8 @@
 <%@ page import="org.jfree.data.xy.XYSeriesCollection"%>
 <%@ page import="org.jfree.chart.ChartUtilities"      %>
 <%@ page import="java.util.List" %>
-<%@ page import="eu.smartsantander.androidExperimentation.ModelManager" %>
-<%@ page import="eu.smartsantander.androidExperimentation.entities.Result" %>
+<%@ page import="eu.smartsantander.androidExperimentation.service.ModelManager" %>
+<%@ page import="eu.smartsantander.androidExperimentation.model.Result" %>
 <%@ page import="com.google.gson.Gson" %>
 <%@ page import="org.jfree.data.category.DefaultCategoryDataset" %>
 <%@ page import="java.awt.*" %>

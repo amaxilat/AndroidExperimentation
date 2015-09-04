@@ -1,5 +1,5 @@
 <%@ page import="com.google.gson.Gson" %>
-<%@ page import="eu.smartsantander.androidExperimentation.ModelManager" %>
+<%@ page import="eu.smartsantander.androidExperimentation.service.ModelManager" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>

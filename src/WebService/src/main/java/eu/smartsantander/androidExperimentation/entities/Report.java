@@ -1,4 +1,4 @@
-package eu.smartsantander.androidExperimentation.jsonEntities;
+package eu.smartsantander.androidExperimentation.entities;
 
 import java.util.List;
 

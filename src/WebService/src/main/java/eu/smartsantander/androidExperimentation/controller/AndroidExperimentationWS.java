@@ -1,13 +1,15 @@
-package eu.smartsantander.androidExperimentation;
+package eu.smartsantander.androidExperimentation.controller;
 
 import com.google.gson.Gson;
-import eu.smartsantander.androidExperimentation.entities.Experiment;
-import eu.smartsantander.androidExperimentation.entities.Smartphone;
-import eu.smartsantander.androidExperimentation.jsonEntities.PluginList;
-import eu.smartsantander.androidExperimentation.jsonEntities.Report;
+import eu.smartsantander.androidExperimentation.service.ModelManager;
+import eu.smartsantander.androidExperimentation.entities.PluginList;
+import eu.smartsantander.androidExperimentation.entities.Report;
+import eu.smartsantander.androidExperimentation.model.Experiment;
+import eu.smartsantander.androidExperimentation.model.Smartphone;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.apache.log4j.PropertyConfigurator;
+import org.springframework.beans.factory.annotation.Autowired;
 
 import javax.jws.WebMethod;
 import javax.jws.WebService;
@@ -18,6 +20,8 @@ import java.util.Properties;
 public class AndroidExperimentationWS {
     private static final Log log = LogFactory.getLog(ModelManager.class);
 
+    @Autowired
+    ModelManager modelManager;
 
     public AndroidExperimentationWS() {
         Properties props = new Properties();
@@ -34,7 +38,7 @@ public class AndroidExperimentationWS {
     public String reportResults(String reportJson) {
         try {
             Report report = Report.fromJson(reportJson);
-            ModelManager.reportResults(report);
+            modelManager.reportResults(report);
             log.debug("Report Stored: Device:" + report.getDeviceId());
             log.debug("Report Stored:" + reportJson);
             log.debug("-----------------------------------");
@@ -51,7 +55,7 @@ public class AndroidExperimentationWS {
         try {
             Gson gson = new Gson();
             Smartphone smartphone = gson.fromJson(smartphoneJson, Smartphone.class);
-            smartphone = ModelManager.registerSmartphone(smartphone);
+            smartphone = modelManager.registerSmartphone(smartphone);
             log.debug("register Smartphone: Device:" + smartphone.getId());
             log.debug("register Smartphone: Device Sensor Rules:" + smartphone.getSensorsRules());
             log.debug("register Smartphone: Device Type:" + smartphone.getDeviceType());
@@ -68,7 +72,7 @@ public class AndroidExperimentationWS {
     public String getPluginList() throws Exception {
         try {
             Gson gson = new Gson();
-            PluginList pluginList = ModelManager.getPlugins();
+            PluginList pluginList = modelManager.getPlugins();
             String jsonPluginList = "";
             jsonPluginList = gson.toJson(pluginList);
             log.debug("getPluginList:" + jsonPluginList);
@@ -87,7 +91,7 @@ public class AndroidExperimentationWS {
         try {
             Gson gson = new Gson();
             Smartphone smartphone = gson.fromJson(smartphoneJson, Smartphone.class);
-            Experiment exp = ModelManager.getExperiment(smartphone);
+            Experiment exp = modelManager.getExperiment(smartphone);
             log.debug("getExperiment: Device:" + smartphoneJson);
             String experiment = "";
             if (exp == null) {
@@ -111,7 +115,7 @@ public class AndroidExperimentationWS {
         Experiment experiment = gson.fromJson(experimentJson, Experiment.class);
         log.debug("saveExperiment:" + experimentJson);
         try {
-            ModelManager.saveExperiment(experiment);
+            modelManager.saveExperiment(experiment);
             log.debug("saveExperiment: OK");
             log.debug("-----------------------------------");
             return true;
