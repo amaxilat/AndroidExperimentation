@@ -1,9 +1,0 @@
-<component name="libraryTable">
-  <library name="dynamixRepository">
-    <CLASSES>
-      <root url="jar://$PROJECT_DIR$/web/dynamixRepository/org.ambientdynamix.contextplugins.GpsPlugin_0.9.54.jar!/" />
-    </CLASSES>
-    <JAVADOC />
-    <SOURCES />
-  </library>
-</component>
