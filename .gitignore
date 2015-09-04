@@ -21,3 +21,5 @@ src/dynamix_framework/dynamix-framework/gen/org/ambientdynamix/api/application/I
 src/dynamix_framework/dynamix-framework/gen/org/ambientdynamix/api/application/IDynamixFacade.java
 
 src/dynamix_framework/dynamix-framework/gen/org/ambientdynamix/api/application/IDynamixListener.java
+
+**/.idea/*
