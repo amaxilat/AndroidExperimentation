@@ -1,7 +1,6 @@
 package eu.smartsantander.androidExperimentation.service;
 
 import eu.smartsantander.androidExperimentation.Application;
-import eu.smartsantander.androidExperimentation.entities.PluginList;
 import eu.smartsantander.androidExperimentation.entities.Report;
 import eu.smartsantander.androidExperimentation.model.Experiment;
 import eu.smartsantander.androidExperimentation.model.Plugin;
@@ -44,42 +43,28 @@ public class ModelManager {
     @Autowired
     ResultRepository resultRepository;
 
-    public Set<Plugin> getPluginList() throws Exception {
+    public Set<Plugin> getPlugins() {
         log.info("getPlugins Called");
         return pluginRepository.findAll();
     }
 
-    public PluginList getPlugins() throws Exception {
-        Set<Plugin> pluginsList = pluginRepository.findAll();
-        PluginList pluginList = new PluginList();
-        pluginList.setPluginList(new ArrayList<Plugin>(pluginsList));
-        log.info("getPlugins Called");
-        return pluginList;
-    }
 
+    public Experiment getExperiment(final Smartphone smartphone) {
 
-    public Experiment getExperiment(Smartphone smartphone) {
-        smartphoneRepository.save(smartphone);
+        Smartphone device = smartphoneRepository.findByPhoneId(smartphone.getPhoneId());
+        device.setSensorsRules(smartphone.getSensorsRules());
+        String[] smartphoneDependencies = smartphone.getSensorsRules().split(",");
 
-        List<Smartphone> recordList = smartphoneRepository.findByPhoneId(smartphone.getPhoneId());
-        if (recordList.size() > 0) {
-            Smartphone device = recordList.get(0);
-            device.setSensorsRules(smartphone.getSensorsRules());
-            String[] smartphoneDependencies = smartphone.getSensorsRules().split(",");
-
-            if (recordList.size() == 1) {
-                Iterator<Experiment> experimentsListIterator = experimentRepository.findAll().iterator();
-                Experiment experiment = null;
-                do {
-                    experiment = experimentsListIterator.next();
-                } while ((experimentsListIterator.hasNext()));
-                if (experiment != null) {
-                    String[] experimentDependencies = experiment.getSensorDependencies().split(",");
-                    if (experiment.getStatus().equals("finished") == false
-                            && match(smartphoneDependencies, experimentDependencies) == true) {
-                        return experiment;
-                    }
-                }
+        Iterator<Experiment> experimentsListIterator = experimentRepository.findAll().iterator();
+        Experiment experiment = null;
+        do {
+            experiment = experimentsListIterator.next();
+        } while ((experimentsListIterator.hasNext()));
+        if (experiment != null) {
+            String[] experimentDependencies = experiment.getSensorDependencies().split(",");
+            if (experiment.getStatus().equals("finished") == false
+                    && match(smartphoneDependencies, experimentDependencies) == true) {
+                return experiment;
             }
         }
         log.info("getExperiment Called");
@@ -117,7 +102,7 @@ public class ModelManager {
                     break;
                 }
             }
-            if (found == false) {
+            if (!found) {
                 return false;
             }
         }
