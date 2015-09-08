@@ -42,9 +42,9 @@ import android.util.Log;
 
 /**
  * Implementation of the IDynamixListener interface for web clients.
- * 
+ *
  * @author Darren Carlson
- * 
+ *
  */
 public class WebListener implements IDynamixListener {
 	// Private data
@@ -58,7 +58,7 @@ public class WebListener implements IDynamixListener {
 
 	/**
 	 * Creates a WebListener for the specified web app.
-	 * 
+	 *
 	 * @param webAppUrl
 	 *            The web app's url.
 	 * @param token
@@ -163,7 +163,7 @@ public class WebListener implements IDynamixListener {
 	@Override
 	public void onContextEvent(ContextEvent event) throws RemoteException {
 		//String pojoBuilder = "";
-		
+
 		try {
 			// Setup a SimpleDateFormat for UTC-based ISO 8601 date/time formatting
 			SimpleDateFormat timeFormatter = new SimpleDateFormat("yyyy-MM-dd'T'HH:mmZ");
@@ -178,7 +178,7 @@ public class WebListener implements IDynamixListener {
 			jNode.put("timeStamp", timeFormatter.format(event.getTimeStamp()));
 			jNode.put("expires", event.expires());
 			jNode.put("expireTime", timeFormatter.format(event.getExpireTime()));
-			
+
 			/*
 			 * Now add the properties from the IContextInfo. First, handle automatic web encoding, if requested. If the
 			 * IContextInfo uses JavaBean standards, it can be automatically encoded into JSON. If no automatic web
@@ -207,7 +207,7 @@ public class WebListener implements IDynamixListener {
 				String field = itr.next();
 				jNode.put(field, encodedNode.get(field));
 			}
-			
+
 			String tmp = jNode.toString();//.textValue();
 			// Send the event
 			try {
@@ -462,9 +462,9 @@ public class WebListener implements IDynamixListener {
 	/**
 	 * IBinder implementation that enables the WebListener to be properly identified as a IDynamixListener by the
 	 * Dynamix Framework.
-	 * 
+	 *
 	 * @author Darren Carlson
-	 * 
+	 *
 	 */
 	private class WebBinder implements IBinder {
 		// Private data
@@ -505,6 +505,14 @@ public class WebListener implements IDynamixListener {
 		 */
 		@Override
 		public void dump(FileDescriptor arg0, String[] arg1) throws RemoteException {
+			// TODO Auto-generated method stub
+		}
+
+        /**
+         * {@inheritDoc}
+         */
+		@Override
+		public void dumpAsync(FileDescriptor fd, String[] args) throws RemoteException {
 			// TODO Auto-generated method stub
 		}
 

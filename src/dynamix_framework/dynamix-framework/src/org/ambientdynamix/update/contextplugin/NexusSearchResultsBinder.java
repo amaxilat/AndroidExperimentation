@@ -15,27 +15,28 @@
  */
 package org.ambientdynamix.update.contextplugin;
 
-import java.util.List;
-
 import org.simpleframework.xml.Element;
 import org.simpleframework.xml.ElementList;
+
+import java.util.List;
+
 /**
  * Simple Framework binder class for XML parsing.
- * @author Darren Carlson
  *
+ * @author Darren Carlson
  */
 @Element(name = "search-results")
 class NexusSearchResultsBinder {
-	@Element
-	int totalCount;
-	@Element
-	int from;
-	@Element
-	int count;
-	@Element
-	boolean tooManyResults;
+    @Element
+    int totalCount;
+    @Element
+    int from;
+    @Element
+    int count;
+    @Element
+    boolean tooManyResults;
 
-	@ElementList(required = false)
-	public List<NexusArtifactBinder> data;
+    @ElementList(required = false)
+    public List<NexusArtifactBinder> data;
 
 }

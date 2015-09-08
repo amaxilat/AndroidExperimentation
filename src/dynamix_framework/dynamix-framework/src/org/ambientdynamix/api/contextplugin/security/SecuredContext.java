@@ -42,6 +42,7 @@ import android.content.pm.PackageManager.NameNotFoundException;
 import android.content.res.AssetManager;
 import android.content.res.Resources;
 import android.content.res.Resources.Theme;
+import android.database.DatabaseErrorHandler;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteDatabase.CursorFactory;
 import android.graphics.Bitmap;
@@ -415,6 +416,11 @@ public class SecuredContext extends Context {
 	}
 
 	@Override
+	public SQLiteDatabase openOrCreateDatabase(String name, int mode, CursorFactory factory, DatabaseErrorHandler errorHandler) {
+		return null;
+	}
+
+	@Override
 	public Drawable peekWallpaper() {
 		// return c.peekWallpaper();
 		return null;
@@ -544,6 +550,21 @@ public class SecuredContext extends Context {
 	}
 
 	@Override
+	public void startActivity(Intent intent, Bundle options) {
+
+	}
+
+	@Override
+	public void startActivities(Intent[] intents) {
+
+	}
+
+	@Override
+	public void startActivities(Intent[] intents, Bundle options) {
+
+	}
+
+	@Override
 	public boolean startInstrumentation(ComponentName className, String profileFile, Bundle arguments) {
 		// Not allowed in SecuredContext
 		return false;
@@ -553,6 +574,11 @@ public class SecuredContext extends Context {
 	public void startIntentSender(IntentSender intent, Intent fillInIntent, int flagsMask, int flagsValues,
 			int extraFlags) throws SendIntentException {
 		// Not allowed in SecuredContext
+	}
+
+	@Override
+	public void startIntentSender(IntentSender intent, Intent fillInIntent, int flagsMask, int flagsValues, int extraFlags, Bundle options) throws SendIntentException {
+
 	}
 
 	@Override
@@ -608,6 +634,11 @@ public class SecuredContext extends Context {
 	@Override
 	public File getExternalFilesDir(String type) {
 		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public File getObbDir() {
 		return null;
 	}
 

@@ -47,7 +47,7 @@ import eu.smartsantander.androidExperimentation.tabs.jobsTab;
 import eu.smartsantander.androidExperimentation.tabs.reportTab;
 import eu.smartsantander.androidExperimentation.tabs.securityTab;
 import eu.smartsantander.androidExperimentation.tabs.statsTab;
- 
+
 
 /**
  * Base Activity for the Dynamix Framework UI. Responsible for hosting Tabs and
@@ -55,7 +55,7 @@ import eu.smartsantander.androidExperimentation.tabs.statsTab;
  * <p>
  * Note: This Activity is registered as the 'application' in the
  * AndroidManifest.xml, so it's started first.
- * 
+ *
  * @see DynamixService
  * @author Darren Carlson
  */
@@ -78,7 +78,7 @@ public class BaseActivity extends TabActivity implements ExceptionCallback {
 	 */
 	/**
 	 * Allows external callers to activate the specified Tab.
-	 * 
+	 *
 	 * @param tabID
 	 */
 	private static BaseActivity baseActivity;
@@ -425,21 +425,21 @@ public class BaseActivity extends TabActivity implements ExceptionCallback {
 		DynamixService.logToFile(e.getMessage());
 		BugSenseHandler.sendException(e);
 		DynamixService.getPhoneProfiler().savePrefs();
-		Toast.makeText(context, e.getMessage(), 5000).show();
+		Toast.makeText(context, e.getMessage(), Toast.LENGTH_SHORT).show();
 		try {
 			Thread.sleep(5000);
 		} catch (Exception w) {
 		}
 
 	}
-	
+
 	private class MyLocationListener implements LocationListener {
 
 		public void onLocationChanged(Location location) {
 			String message = String.format(
 					"Lon %1$s Lat: %2$s",
 					location.getLongitude(), location.getLatitude());
-			noteManager.postNotification(message);	
+			noteManager.postNotification(message);
 		}
 
 		public void onStatusChanged(String s, int i, Bundle b) {
