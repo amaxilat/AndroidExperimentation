@@ -24,3 +24,7 @@ src/dynamix_framework/dynamix-framework/gen/org/ambientdynamix/api/application/I
 
 src/**/.idea/
 src/**/target/
+*.apk
+src/dynamix_framework/out/production/dynamix-framework/eu/smartsantander/androidExperimentation/Constants.class
+*.class
+*.aidl

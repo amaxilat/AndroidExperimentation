@@ -4,6 +4,7 @@
     android:background="#000000"
     android:gravity="right"
     android:orientation="vertical"
+    android:fontFamily="sans-serif-light"
      >
 
     <TextView
@@ -11,42 +12,48 @@
         android:layout_width="fill_parent"
         android:layout_height="20dip"
         android:background="@drawable/customsubcatborder"
-        android:textAppearance="?android:attr/textAppearanceSmall" />
+        android:textAppearance="?android:attr/textAppearanceSmall"
+        android:fontFamily="sans-serif-light"/>
 
     <TextView
         android:id="@+id/stats_time_value"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:background="@drawable/customcatborder"
-        android:textAppearance="?android:attr/textAppearanceSmall" />
+        android:textAppearance="?android:attr/textAppearanceSmall"
+        android:fontFamily="sans-serif-light"/>
 
         <TextView
         android:id="@+id/stats_number_exp_title"
         android:layout_width="fill_parent"
         android:layout_height="20dip"
         android:background="@drawable/customsubcatborder"
-        android:textAppearance="?android:attr/textAppearanceSmall" />
+        android:textAppearance="?android:attr/textAppearanceSmall"
+            android:fontFamily="sans-serif-light"/>
 
     <TextView
         android:id="@+id/stats_number_exp_value"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:background="@drawable/customcatborder"
-        android:textAppearance="?android:attr/textAppearanceSmall" />
+        android:textAppearance="?android:attr/textAppearanceSmall"
+        android:fontFamily="sans-serif-light"/>
     
         <TextView
         android:id="@+id/stats_number_readings_title"
         android:layout_width="fill_parent"
         android:layout_height="20dip"
         android:background="@drawable/customsubcatborder"
-        android:textAppearance="?android:attr/textAppearanceSmall" />
+        android:textAppearance="?android:attr/textAppearanceSmall"
+            android:fontFamily="sans-serif-light"/>
 
     <TextView
         android:id="@+id/stats_number_readings_value"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:background="@drawable/customcatborder"
-        android:textAppearance="?android:attr/textAppearanceSmall" />
+        android:textAppearance="?android:attr/textAppearanceSmall"
+        android:fontFamily="sans-serif-light"/>
  
     
     <TextView
@@ -54,11 +61,13 @@
         android:layout_width="fill_parent"
         android:layout_height="20dip"
         android:background="@drawable/customsubcatborder"
-        android:textAppearance="?android:attr/textAppearanceSmall" />
+        android:textAppearance="?android:attr/textAppearanceSmall"
+        android:fontFamily="sans-serif-light"/>
     
     <WebView  
     android:id="@+id/statswebview"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
+        android:fontFamily="sans-serif-light"
 />
 </LinearLayout>

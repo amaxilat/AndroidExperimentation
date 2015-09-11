@@ -4,7 +4,7 @@
     android:versionCode="1"
     android:versionName="1.0" >
 
-    <application android:icon="@drawable/smartsantander_logo" >
+    <application android:icon="@drawable/organicity_small_pink" >
         <activity
             android:name="org.ambientdynamix.core.BaseActivity"
             android:configChanges="orientation|keyboardHidden"
@@ -98,7 +98,7 @@
       <service android:enabled="true" android:exported="false" android:label="Dynamix 
       Context Plugin Host" android:name="ContextPluginHost" android:process=":ContextPluginHost"> 
       <intent-filter> <action android:name="org.ambientdynamix.api.application.IDynamixFacade"/> 
-      </intent-filter> </service>
+      </intent-filter> </service>
         -->
 
         <receiver
