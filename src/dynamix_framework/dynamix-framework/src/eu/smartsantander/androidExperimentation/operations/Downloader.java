@@ -26,7 +26,7 @@ public class Downloader
 			File root = android.os.Environment.getExternalStorageDirectory();               
 
 		    File dir = new File (root.getAbsolutePath() + "/dynamix");
-		    if(dir.exists()==false)
+		    if(!dir.exists())
 		    {
 		    	dir.mkdirs();
 		    }
@@ -69,6 +69,7 @@ public class Downloader
 		catch (IOException e)
 		{
 		       Log.d("DownloadManager", "Error: " + e);
+			e.printStackTrace();
 		       throw (Exception) e;
 		}
 	}

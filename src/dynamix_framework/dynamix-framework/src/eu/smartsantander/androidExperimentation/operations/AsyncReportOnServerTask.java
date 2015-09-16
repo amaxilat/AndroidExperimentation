@@ -22,6 +22,7 @@ public class AsyncReportOnServerTask extends AsyncTask<String, Void, String> {
 		while (DynamixService.getDataStorageSize() > 0){
 			try {
 				Pair<Long, String> value = DynamixService.getOldestExperimentalMessage();
+
 				if (value.first != 0 && value.second != null&& value.second.length() > 0) {
 					DynamixService.getCommunication().sendReportResults(value.second);//
 					DynamixService.deleteExperimentalMessage(value.first);

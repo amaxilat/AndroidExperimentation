@@ -83,7 +83,7 @@ public class SimpleSourceBase {
 	Boolean isEnabled(Plugin plugInfo) {
 		for (ContextPluginInformation plugin : DynamixService
 				.getAllContextPluginInfo()) {
-			if (plugin.getPluginName().equals(plugInfo.getName()) == true) {
+			if (plugin.getPluginName().equals(plugInfo.getName())) {
 				return true;
 			}
 		}
@@ -93,7 +93,7 @@ public class SimpleSourceBase {
 	public PluginList getPluginList() throws Exception {
 		File root = android.os.Environment.getExternalStorageDirectory();
 		File dir = new File(root.getAbsolutePath() + "/dynamix");
-		if (dir.exists() == false) {
+		if (!dir.exists()) {
 			dir.mkdirs();
 		}
 		Communication communication = new Communication();
