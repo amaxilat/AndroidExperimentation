@@ -13,5 +13,7 @@ public interface SmartphoneRepository extends CrudRepository<Smartphone, Long> {
 
     Page<Smartphone> findAll(Pageable pageable);
 
+    Smartphone findById(int id);
+
     Smartphone findByPhoneId(int phoneId);
 }

@@ -31,8 +31,16 @@ public class Report{
     {
         this.jobResults = jobResults;
     }
+    public void setJobResults(List<String> jobResults)
+    {
+        this.jobResults = jobResults;
+    }
 
     public List<String> getResults()
+    {
+        return this.jobResults;
+    }
+    public List<String> getJobResults()
     {
         return this.jobResults;
     }

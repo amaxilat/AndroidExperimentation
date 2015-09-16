@@ -1,69 +1,85 @@
 package eu.smartsantander.androidExperimentation.controller;
 
-import com.google.gson.Gson;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import eu.smartsantander.androidExperimentation.entities.Reading;
 import eu.smartsantander.androidExperimentation.entities.Report;
 import eu.smartsantander.androidExperimentation.model.Experiment;
 import eu.smartsantander.androidExperimentation.model.Plugin;
+import eu.smartsantander.androidExperimentation.model.Result;
 import eu.smartsantander.androidExperimentation.model.Smartphone;
+import eu.smartsantander.androidExperimentation.repository.ExperimentRepository;
+import eu.smartsantander.androidExperimentation.repository.ResultRepository;
 import eu.smartsantander.androidExperimentation.repository.SmartphoneRepository;
 import eu.smartsantander.androidExperimentation.service.ModelManager;
 import org.apache.log4j.Logger;
+import org.json.JSONException;
+import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpServletResponse;
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Set;
 
 @Controller
 @RequestMapping(value = "/api/v1")
-public class AndroidExperimentationWS {
+public class AndroidExperimentationWS extends BaseController {
 
     /**
      * a log4j logger to print messages.
      */
-    private static final Logger log = Logger.getLogger(AndroidExperimentationWS.class);
+    private static final Logger LOGGER = Logger.getLogger(AndroidExperimentationWS.class);
 
 
     @Autowired
     ModelManager modelManager;
     @Autowired
     SmartphoneRepository smartphoneRepository;
+    @Autowired
+    ExperimentRepository experimentRepository;
+    @Autowired
+    ResultRepository resultRepository;
 
-    //@ResponseBody
-    //@RequestMapping(value = "/report")
-    public String reportResults(String reportJson) {
-        try {
-            Report report = Report.fromJson(reportJson);
-            modelManager.reportResults(report);
-            log.debug("Report Stored: Device:" + report.getDeviceId());
-            log.debug("Report Stored:" + reportJson);
-            log.debug("-----------------------------------");
-        } catch (Exception e) {
-            e.printStackTrace();
-            log.debug(e.getMessage());
-        }
-        return "1";
-    }
+
+//    //@ResponseBody
+//    //@RequestMapping(value = "/report")
+//    public String reportResults(String reportJson) {
+//        try {
+//            Report report = Report.fromJson(reportJson);
+//            modelManager.reportResults(report);
+//            LOGGER.debug("Report Stored: Device:" + report.getDeviceId());
+//            LOGGER.debug("Report Stored:" + reportJson);
+//            LOGGER.debug("-----------------------------------");
+//        } catch (Exception e) {
+//            e.printStackTrace();
+//            LOGGER.debug(e.getMessage());
+//        }
+//        return "1";
+//    }
 
     /**
      * Registers a {@see Smartphone} to the service.
      *
-     * @param smartphone the {@see Smartphone} object to register.
      * @return the phoneId generated or -1 if there was a error.
      */
     @ResponseBody
-    @RequestMapping(value = "/smartphone", method = RequestMethod.POST, produces = "text/plain")
-    public Integer registerSmartphone(@ModelAttribute("smartphone") Smartphone smartphone) {
+    @RequestMapping(value = "/smartphone", method = RequestMethod.POST)
+    public Integer registerSmartphone(@RequestBody String smartphoneString) {
         try {
+            LOGGER.info(smartphoneString);
+            Smartphone smartphone = new ObjectMapper().readValue(smartphoneString, Smartphone.class);
             smartphone = modelManager.registerSmartphone(smartphone);
-            log.debug("register Smartphone: Device:" + smartphone.getId());
-            log.debug("register Smartphone: Device Sensor Rules:" + smartphone.getSensorsRules());
-            log.debug("register Smartphone: Device Type:" + smartphone.getDeviceType());
-            log.debug("-----------------------------------");
-            return smartphone.getPhoneId();
+            LOGGER.info("register Smartphone: Device:" + smartphone.getId());
+            LOGGER.info("register Smartphone: Device Sensor Rules:" + smartphone.getSensorsRules());
+            LOGGER.info("register Smartphone: Device Type:" + smartphone.getDeviceType());
+            LOGGER.info("----------------------.-------------");
+            return smartphone.getId();
         } catch (Exception e) {
-            log.error(e, e);
-            log.debug(e.getMessage());
+            LOGGER.error(e, e);
+            LOGGER.debug(e.getMessage());
         }
         return -1;
     }
@@ -77,51 +93,77 @@ public class AndroidExperimentationWS {
     @RequestMapping(value = "/plugin", method = RequestMethod.GET, produces = "application/json")
     public Set<Plugin> getPluginList() {
         Set<Plugin> plugins = modelManager.getPlugins();
-        log.info("getPlugins Called: " + plugins);
+        LOGGER.info("getPlugins Called: " + plugins);
         return plugins;
     }
 
     @ResponseBody
     @RequestMapping(value = "/experiment", method = RequestMethod.GET, produces = "application/json")
-    public Experiment getExperiment(@RequestParam("phoneId") final int phoneId) {
+    public List<Experiment> getExperiment(@RequestParam(value = "phoneId", required = false, defaultValue = "0") final int phoneId) {
         try {
-            Smartphone smartphone = smartphoneRepository.findByPhoneId(phoneId);
-            Experiment experiment = modelManager.getExperiment(smartphone);
-            log.debug("getExperiment: Device:" + phoneId);
-            log.debug("getExperiment:" + experiment);
-            log.debug("-----------------------------------");
-            return experiment;
+            if (phoneId == 0) {
+                return modelManager.getExperiments();
+            } else {
+                final Smartphone smartphone = smartphoneRepository.findByPhoneId(phoneId);
+                final Experiment experiment = modelManager.getExperiment(smartphone);
+                LOGGER.debug("getExperiment: Device:" + phoneId);
+                LOGGER.debug("getExperiment:" + experiment);
+                LOGGER.debug("-----------------------------------");
+                final ArrayList<Experiment> list = new ArrayList<Experiment>();
+                list.add(experiment);
+                return list;
+            }
         } catch (Exception e) {
             e.printStackTrace();
-            log.debug(e.getMessage());
+            LOGGER.debug(e.getMessage());
         }
         return null;
     }
 
-    //@ResponseBody
-    //@RequestMapping(value = "/experiment", method = RequestMethod.POST, produces = "application/json")
-    public boolean saveExperiment(String experimentJson) {
-        Gson gson = new Gson();
-        Experiment experiment = gson.fromJson(experimentJson, Experiment.class);
-        log.debug("saveExperiment:" + experimentJson);
-        try {
-            modelManager.saveExperiment(experiment);
-            log.debug("saveExperiment: OK");
-            log.debug("-----------------------------------");
-            return true;
-        } catch (Exception e) {
-            e.printStackTrace();
-            log.debug("saveExperiment: FAILEd" + e.getMessage());
-            log.debug("-----------------------------------");
-            return false;
+    @ResponseBody
+    @RequestMapping(value = "/experiment", method = RequestMethod.POST, produces = "application/json")
+    public JSONObject saveExperiment(@RequestBody final String body, final HttpServletResponse response) throws JSONException, IOException {
+
+        LOGGER.info("saveExperiment Called");
+        Report result = new ObjectMapper().readValue(body, Report.class);
+        LOGGER.info("saving for deviceId:" + result.getDeviceId() + " jobName:" + result.getJobName());
+        final Smartphone phone = smartphoneRepository.findById(result.getDeviceId());
+        final Experiment experiment = experimentRepository.findById(Integer.parseInt(result.getJobName()));
+        LOGGER.info("saving for PhoneId:" + phone.getPhoneId() + " ExperimentName:" + experiment.getName());
+
+        final List<Result> results = new ArrayList<Result>();
+        for (final String jobResult : result.getJobResults()) {
+            LOGGER.info(jobResult);
+            Reading readingObj = new ObjectMapper().readValue(jobResult, Reading.class);
+            final String value = readingObj.getValue();
+            final long readingTime = readingObj.getTimestamp();
+            final Result newResult = new Result();
+            newResult.setDeviceId(phone.getId());
+            newResult.setExperimentId(experiment.getId());
+            newResult.setMessage(value);
+            newResult.setTimestamp(readingTime);
+            results.add(newResult);
         }
+
+        LOGGER.info("saving " + results.size() + " results");
+        try {
+            resultRepository.save(results);
+            LOGGER.info("saveExperiment: OK");
+            LOGGER.info("-----------------------------------");
+            return ok(response);
+        } catch (Exception e) {
+            LOGGER.info("saveExperiment: FAILEd" + e.getMessage(), e);
+            LOGGER.info("-----------------------------------");
+            return internalServerError(response);
+        }
+
     }
 
     @ResponseBody
     @RequestMapping(value = "/ping", method = RequestMethod.GET, produces = "text/plain")
-    public String Ping(String pingJson) {
-        log.debug("Ping:" + pingJson);
-        log.debug("-----------------------------------");
-        return "1";
+    public JSONObject ping(final String pingJson, final HttpServletResponse response) throws JSONException {
+        LOGGER.debug("Ping:" + pingJson);
+        LOGGER.debug("-----------------------------------");
+        return ok(response);
     }
 }
