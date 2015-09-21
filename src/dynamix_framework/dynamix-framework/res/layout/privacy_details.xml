@@ -3,15 +3,7 @@
               android:orientation="vertical"
               android:layout_width="fill_parent"
               android:layout_height="fill_parent">
-    <!--
-    <TextView android:text="@string/privacy_details_label"
-                android:id="@+id/plug_details_label"
-                android:layout_width="fill_parent"
-                android:layout_height="wrap_content"
-                android:editable="false"
-                android:gravity="center_horizontal"
-                android:textStyle="bold"/>
-    -->
+
     <LinearLayout
             android:layout_width="fill_parent"
             android:layout_height="?android:attr/listPreferredItemHeight"
@@ -55,19 +47,17 @@
             android:text="@string/privacy_policy_description_label"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
-            android:editable="false"
             android:textStyle="bold"/>
 
     <ScrollView
             android:id="@+id/scrollview"
             android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="0dp"
             android:layout_weight="1">
 
         <TextView
                 android:id="@+id/privacy_policy_description"
                 android:layout_width="fill_parent"
-                android:layout_height="wrap_content"
-                android:editable="false"/>
+                android:layout_height="wrap_content"/>
     </ScrollView>
 </LinearLayout>

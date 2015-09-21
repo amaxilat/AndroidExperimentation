@@ -93,5 +93,20 @@
     <string name="plugin_not_conf">Not configured. Tap to configure.</string>
     <string name="plugin_enabled">Enabled. Tap and hold to disable or uninstall.</string>
     <string name="plugin_disabled">Disabled. Tap and hold to enable.</string>
-    
+	<string name="placeholder_empty">-</string>
+	<string name="empty"/>
+	<string name="no_plugins_installed">No plug-ins installed.</string>
+	<string name="no_updates_found">No updates found.</string>
+	<string name="dynamix_framework">Dynamix Framework</string>
+	<string name="placeholder_from_empty">From: -</string>
+	<string name="placeholder_to_empty">To: -</string>
+	<string name="placeholder_item_name">Item name here...</string>
+	<string name="no_pending_applications">No pending applications</string>
+	<string name="low">LOW</string>
+	<string name="no_events_yet">No events yet...</string>
+	<string name="status">Status</string>
+	<string name="phone_id">PhoneId:</string>
+	<string name="time_reported">time reported</string>
+	<string name="expires">expires</string>
+
 </resources>

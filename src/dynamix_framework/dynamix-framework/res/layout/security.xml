@@ -1,14 +1,14 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="fill_parent"
-    android:layout_height="fill_parent"
-    android:background="#000000"
-    android:orientation="vertical" >
+              android:layout_width="fill_parent"
+              android:layout_height="fill_parent"
+              android:background="#000000"
+              android:orientation="vertical">
 
     <ListView
-        android:id="@+id/notification_messages_list"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:clickable="false" 
-        android:longClickable="false" />
-    
- </LinearLayout>
+            android:id="@+id/notification_messages_list"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:clickable="false"
+            android:longClickable="false"/>
+
+</LinearLayout>

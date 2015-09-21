@@ -7,7 +7,7 @@
               android:paddingRight="?android:attr/scrollbarSize">
 
     <RelativeLayout
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginLeft="2dip"
             android:layout_marginTop="6dip"

@@ -1,149 +1,141 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="fill_parent"
-    android:layout_height="fill_parent"
-    android:background="#000000"
-    android:orientation="vertical" >
+              android:layout_width="fill_parent"
+              android:layout_height="fill_parent"
+              android:background="#000000"
+              android:orientation="vertical">
 
     <View
-        android:layout_width="fill_parent"
-        android:layout_height="1dp"
-        android:background="#7F7E85" />
+            android:layout_width="fill_parent"
+            android:layout_height="1dp"
+            android:background="#7F7E85"/>
 
     <TextView
-        android:id="@+id/textView14"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:layout_weight="0.15"
-        android:text="@string/executed_experiment"
-        android:textColor="#36ACF5"
-        android:textSize="15dp" />
+            android:id="@+id/textView14"
+            android:layout_width="wrap_content"
+            android:layout_height="0dp"
+            android:layout_gravity="center"
+            android:layout_weight="0.15"
+            android:text="@string/executed_experiment"
+            android:textColor="#36ACF5"
+            android:textSize="15sp"/>
 
     <View
-        android:layout_width="fill_parent"
-        android:layout_height="1dp"
-        android:background="#7F7E85" />
+            android:layout_width="fill_parent"
+            android:layout_height="1dp"
+            android:background="#7F7E85"/>
 
     <TextView
-        android:id="@+id/experiment_id_JobTab"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:background="@drawable/customsubcatborder"
-        android:editable="false"
-        android:text="-"
-        android:textAppearance="?android:attr/textAppearanceMedium" />
+            android:id="@+id/experiment_id_JobTab"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/customsubcatborder"
+            android:text="@string/placeholder_empty"
+            android:textAppearance="?android:attr/textAppearanceMedium"/>
 
     <View
-        android:layout_width="fill_parent"
-        android:layout_height="1dp"
-        android:background="#7F7E85" />
+            android:layout_width="fill_parent"
+            android:layout_height="1dp"
+            android:background="#7F7E85"/>
 
     <TextView
-        android:id="@+id/experiment_name_JobTab"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:editable="false"
-        android:text="-"
-        android:textAppearance="?android:attr/textAppearanceMedium" />
+            android:id="@+id/experiment_name_JobTab"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/placeholder_empty"
+            android:textAppearance="?android:attr/textAppearanceMedium"/>
 
     <View
-        android:layout_width="fill_parent"
-        android:layout_height="1dp"
-        android:background="#7F7E85" />
+            android:layout_width="fill_parent"
+            android:layout_height="1dp"
+            android:background="#7F7E85"/>
 
     <TextView
-        android:id="@+id/experiment_status_JobTab"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:editable="false"
-        android:text="-"
-        android:textAppearance="?android:attr/textAppearanceMedium" />
+            android:id="@+id/experiment_status_JobTab"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/placeholder_empty"
+            android:textAppearance="?android:attr/textAppearanceMedium"/>
 
     <View
-        android:layout_width="fill_parent"
-        android:layout_height="1dp"
-        android:background="#7F7E85" />
+            android:layout_width="fill_parent"
+            android:layout_height="1dp"
+            android:background="#7F7E85"/>
 
     <TextView
-        android:id="@+id/experiment_submitted_JobTab"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:editable="false"
-        android:text="-"
-        android:textAppearance="?android:attr/textAppearanceMedium" />
+            android:id="@+id/experiment_submitted_JobTab"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/placeholder_empty"
+            android:textAppearance="?android:attr/textAppearanceMedium"/>
 
     <View
-        android:layout_width="fill_parent"
-        android:layout_height="1dp"
-        android:background="#7F7E85" />
+            android:layout_width="fill_parent"
+            android:layout_height="1dp"
+            android:background="#7F7E85"/>
 
     <TextView
-        android:id="@+id/experiment_from_JobTab"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:editable="false"
-        android:text="From: -"
-        android:textAppearance="?android:attr/textAppearanceMedium" />
+            android:id="@+id/experiment_from_JobTab"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/placeholder_from_empty"
+            android:textAppearance="?android:attr/textAppearanceMedium"/>
 
     <View
-        android:layout_width="fill_parent"
-        android:layout_height="1dp"
-        android:background="#7F7E85" />
+            android:layout_width="fill_parent"
+            android:layout_height="1dp"
+            android:background="#7F7E85"/>
 
     <TextView
-        android:id="@+id/experiment_to_JobTab"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:editable="false"
-        android:text="To: -"
-        android:textAppearance="?android:attr/textAppearanceMedium" />
+            android:id="@+id/experiment_to_JobTab"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/placeholder_to_empty"
+            android:textAppearance="?android:attr/textAppearanceMedium"/>
 
     <View
-        android:layout_width="fill_parent"
-        android:layout_height="1dp"
-        android:background="#7F7E85" />
+            android:layout_width="fill_parent"
+            android:layout_height="1dp"
+            android:background="#7F7E85"/>
 
     <View
-        android:layout_width="fill_parent"
-        android:layout_height="1dp"
-        android:background="#7F7E85" />
+            android:layout_width="fill_parent"
+            android:layout_height="1dp"
+            android:background="#7F7E85"/>
 
     <TextView
-        android:id="@+id/experiment_description_JobTab"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:editable="false"
-        android:text="-"
-        android:textAppearance="?android:attr/textAppearanceMedium" />
+            android:id="@+id/experiment_description_JobTab"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/placeholder_empty"
+            android:textAppearance="?android:attr/textAppearanceMedium"/>
 
     <ToggleButton
-        android:id="@+id/cachedMessages"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:layout_gravity="bottom"
-        android:textOff="Show Last Messages"
-        android:textOn="Show Sensor Dependencies" />
+            android:id="@+id/cachedMessages"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom"
+            android:textOff="Show Last Messages"
+            android:textOn="Show Sensor Dependencies"/>
 
     <TextView
-        android:id="@+id/experiment_dependencies_JobTab"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:editable="false"
-        android:text="-"
-        android:textAppearance="?android:attr/textAppearanceMedium" />
+            android:id="@+id/experiment_dependencies_JobTab"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/placeholder_empty"
+            android:textAppearance="?android:attr/textAppearanceMedium"/>
 
     <LinearLayout
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:background="#000000"
-        android:orientation="vertical"
-        android:scrollbars="vertical" >
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:background="#000000"
+            android:orientation="vertical"
+            android:scrollbars="vertical">
 
         <ListView
-            android:id="@+id/dependencies_list"
-            android:layout_width="wrap_content"
-            android:layout_height="fill_parent"
-            android:scrollbars="vertical" />
+                android:id="@+id/dependencies_list"
+                android:layout_width="wrap_content"
+                android:layout_height="fill_parent"
+                android:scrollbars="vertical"/>
     </LinearLayout>
 
 </LinearLayout>

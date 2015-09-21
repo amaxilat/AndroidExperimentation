@@ -30,8 +30,7 @@
                     android:layout_height="0dip"
                     android:layout_weight="1"
                     android:gravity="center_vertical"
-                    android:textAppearance="?android:attr/textAppearanceMedium"
-            />
+                    android:textAppearance="?android:attr/textAppearanceMedium"/>
 
             <TextView
                     android:layout_width="fill_parent"
@@ -39,48 +38,40 @@
                     android:layout_weight="1"
                     android:id="@+id/plug_status"
                     android:singleLine="false"
-                    android:ellipsize="marquee"
-            />
+                    android:ellipsize="marquee"/>
         </LinearLayout>
     </LinearLayout>
 
     <RelativeLayout
             android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="0dp"
             android:layout_marginLeft="6dip"
             android:layout_marginRight="6dip"
             android:layout_marginTop="6dip"
             android:layout_marginBottom="6dip"
-            android:layout_weight="1"
-    >
+            android:layout_weight="1">
 
         <TextView
                 android:id="@+id/update_target_label"
                 android:text="@string/update_target_label"
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
-                android:editable="false"
-                android:textAppearance="?android:attr/textAppearanceMedium"
-        />
+                android:textAppearance="?android:attr/textAppearanceMedium"/>
 
         <TextView
                 android:id="@+id/update_target_description"
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
-                android:editable="false"
                 android:layout_below="@+id/update_target_label"
-                android:layout_marginBottom="6dip"
-        />
+                android:layout_marginBottom="6dip"/>
 
         <TextView
                 android:id="@+id/update_priority_label"
                 android:text="@string/update_priority_label"
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
-                android:editable="false"
                 android:textAppearance="?android:attr/textAppearanceMedium"
-                android:layout_below="@+id/update_target_description"
-        />
+                android:layout_below="@+id/update_target_description"/>
 
         <TextView
                 android:id="@+id/update_priority_description"
@@ -88,35 +79,27 @@
                 android:layout_height="wrap_content"
                 android:editable="false"
                 android:layout_below="@+id/update_priority_label"
-                android:layout_marginBottom="6dip"
-        />
+                android:layout_marginBottom="6dip"/>
 
         <TextView
                 android:id="@+id/update_description_label"
                 android:text="@string/update_description_label"
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
-                android:editable="false"
                 android:textAppearance="?android:attr/textAppearanceMedium"
-                android:layout_below="@+id/update_priority_description"
-        />
+                android:layout_below="@+id/update_priority_description"/>
 
         <ScrollView
                 android:id="@+id/scrollview"
                 android:layout_width="fill_parent"
                 android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:layout_below="@+id/update_description_label"
-        >
+                android:layout_below="@+id/update_description_label">
 
             <WebView
                     android:id="@+id/update_description"
                     android:layout_width="fill_parent"
                     android:layout_height="wrap_content"
-                    android:editable="false"
-                    android:scrollbars="vertical"
-                    android:layout_weight="1"
-            />
+                    android:scrollbars="vertical"/>
         </ScrollView>
 
 
@@ -124,17 +107,15 @@
 
     <LinearLayout
             android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-    >
+            android:layout_height="wrap_content">
 
         <Button
-                android:layout_width="fill_parent"
+                android:layout_width="0dp"
                 android:text="@string/btn_see_plugin_details"
                 android:layout_height="wrap_content"
                 android:id="@+id/btn_see_plugin_details"
                 android:layout_gravity="bottom"
-                android:layout_weight="1"
-        />
+                android:layout_weight="1"/>
 
     </LinearLayout>
 </LinearLayout>
