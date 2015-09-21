@@ -102,6 +102,8 @@
     <orderEntry type="library" exported="" name="ksoap2-android-assembly-3.0.0-jar-with-dependencies" level="project" />
     <orderEntry type="library" exported="" name="jackson-annotations-2.2.0" level="project" />
     <orderEntry type="library" exported="" name="db4o-7.12.156.14667-core-java5" level="project" />
+    <orderEntry type="library" exported="" name="bolts-android-1.2.1" level="project" />
     <orderEntry type="library" exported="" name="simple-xml-2.6.2" level="project" />
+    <orderEntry type="library" exported="" name="parse-android-1.10.2" level="project" />
   </component>
 </module>

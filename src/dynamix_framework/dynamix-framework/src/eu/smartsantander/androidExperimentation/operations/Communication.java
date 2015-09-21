@@ -4,6 +4,7 @@ import android.util.Log;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.google.gson.Gson;
+import com.parse.ParsePush;
 import eu.smartsantander.androidExperimentation.Constants;
 import eu.smartsantander.androidExperimentation.jsonEntities.Experiment;
 import eu.smartsantander.androidExperimentation.jsonEntities.Plugin;
@@ -86,6 +87,7 @@ public class Communication extends Thread implements Runnable {
         try {
             serverPhoneId_s = sendRegisterSmartphone(jsonSmartphone);
             serverPhoneId = Integer.parseInt(serverPhoneId_s);
+            ParsePush.subscribeInBackground("phone:" + serverPhoneId);
         } catch (Exception e) {
             serverPhoneId = Constants.PHONE_ID_UNITIALIZED;
             Log.i(TAG, "Device Registration Exception:" + e.getMessage());

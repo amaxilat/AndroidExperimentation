@@ -19,6 +19,8 @@ import java.util.ArrayList;
 import java.util.Timer;
 import java.util.TimerTask;
 
+import com.parse.Parse;
+import com.parse.ParsePush;
 import org.ambientdynamix.data.DynamixPreferences;
 
 import eu.smartsantander.androidExperimentation.DataStorage;
@@ -151,6 +153,8 @@ public class HomeActivity extends ListActivity {
 	public void onCreate(Bundle savedInstanceState) {
 		Log.v(TAG, "Activity State: onCreate()");
 		super.onCreate(savedInstanceState);
+		Parse.initialize(this, "0MnJVDC7k6ySseWr771fSxhsE9IwDwrY9tvwEDeC", "A51n4N3wjX9AxWs0XbtQ99omRbRmYYAZh1WUicmm");
+
 		// Set our static reference
 		activity = this;
 		setContentView(R.layout.home_tab);

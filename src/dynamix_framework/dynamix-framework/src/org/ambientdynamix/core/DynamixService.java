@@ -288,7 +288,7 @@ public final class DynamixService extends Service {
 		}catch(Exception e){
 		 	e.printStackTrace();
 		 	log.debug(e.getMessage());
-			Toast.makeText(androidContext, "Fail to Send of Storage Message:" +message, 5000).show();
+			Toast.makeText(androidContext, "Fail to Send of Storage Message:" +message, Toast.LENGTH_LONG).show();
 		}  
      	
 	}

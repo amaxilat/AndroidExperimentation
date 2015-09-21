@@ -7,6 +7,7 @@ import android.telephony.TelephonyManager;
 import android.util.Log;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
+import com.parse.ParsePush;
 import eu.smartsantander.androidExperimentation.Constants;
 import eu.smartsantander.androidExperimentation.jsonEntities.Experiment;
 import org.ambientdynamix.api.application.AppConstants.PluginInstallStatus;
@@ -82,8 +83,11 @@ public class PhoneProfiler extends Thread implements Runnable {
             startJob();
         }
 
-        if (DynamixService.isDeviceRegistered())
+        if (DynamixService.isDeviceRegistered()) {
+            int phoneId = Constants.PHONE_ID_UNITIALIZED;
+            ParsePush.subscribeInBackground("phone:" + phoneId);
             return;
+        }
         int phoneId = Constants.PHONE_ID_UNITIALIZED;
         int serverPhoneId;
 
