@@ -15,11 +15,6 @@
  */
 package org.ambientdynamix.core;
 
-import org.ambientdynamix.util.AndroidNotification;
-
-import com.bugsense.trace.BugSenseHandler;
-import com.bugsense.trace.ExceptionCallback;
-
 import android.app.AlertDialog;
 import android.app.TabActivity;
 import android.content.Context;
@@ -33,29 +28,25 @@ import android.location.LocationManager;
 import android.os.Bundle;
 import android.os.Handler;
 import android.util.Log;
-import android.view.Menu;
-import android.view.MenuItem;
+import android.view.*;
 import android.view.MenuItem.OnMenuItemClickListener;
-import android.view.View;
-import android.view.ViewParent;
-import android.view.WindowManager;
 import android.widget.TabHost;
 import android.widget.TabHost.TabSpec;
 import android.widget.Toast;
-
-import eu.smartsantander.androidExperimentation.jsonEntities.Experiment;
+import com.bugsense.trace.BugSenseHandler;
+import com.bugsense.trace.ExceptionCallback;
 import eu.smartsantander.androidExperimentation.operations.NotificationHQManager;
-import eu.smartsantander.androidExperimentation.tabs.ExperimentsTab;
 import eu.smartsantander.androidExperimentation.tabs.jobsTab;
 import eu.smartsantander.androidExperimentation.tabs.reportTab;
 import eu.smartsantander.androidExperimentation.tabs.securityTab;
 import eu.smartsantander.androidExperimentation.tabs.statsTab;
+import org.ambientdynamix.util.AndroidNotification;
 
 
 /**
  * Base Activity for the Dynamix Framework UI. Responsible for hosting Tabs and
  * booting Dynamix, which launches the Dynamix background service.
- * <p>
+ * <p/>
  * Note: This Activity is registered as the 'application' in the
  * AndroidManifest.xml, so it's started first.
  *
@@ -65,7 +56,7 @@ import eu.smartsantander.androidExperimentation.tabs.statsTab;
 public class BaseActivity extends TabActivity implements ExceptionCallback {
     private final static String TAG = BaseActivity.class.getSimpleName();
     /*
-	 * Useful Links: Fancy ListViews:
+     * Useful Links: Fancy ListViews:
 	 * http://www.androidguys.com/tag/android-listview/ Custom ListView
 	 * Adapters:
 	 * http://www.softwarepassion.com/android-series-custom-listview-items
@@ -92,7 +83,6 @@ public class BaseActivity extends TabActivity implements ExceptionCallback {
     public static int PRIVACY_TAB_ID = 2;
     public static int PLUGINS_TAB_ID = 3;
     public static int UPDATES_TAB_ID = 4;
-    public static int EXPERIMENTS_TAB_ID = 5;
     private TabHost tabHost = null;
     private final Handler uiHandler = new Handler();
     private static boolean activityVisible;
@@ -196,8 +186,8 @@ public class BaseActivity extends TabActivity implements ExceptionCallback {
         // Set our static reference
         baseActivity = this;
         // setContentView(R.layout.main);
-		/*
-		 * Setup the Tab UI Reference:
+        /*
+         * Setup the Tab UI Reference:
 		 * http://developer.android.com/resources/tutorials
 		 * /views/hello-tabwidget.html
 		 */
@@ -294,18 +284,11 @@ public class BaseActivity extends TabActivity implements ExceptionCallback {
                         ressources.getDrawable(R.drawable.ic_tab_stats))
                 .setContent(intentStats);
 
-        Intent intentExperiments = new Intent().setClass(this, ExperimentsTab.class);
-        TabSpec tabExperiments = tabHost
-                .newTabSpec("experiments")
-                .setIndicator("",
-                        ressources.getDrawable(R.drawable.ic_tab_jobs))
-                .setContent(intentExperiments);
 
         tabHost.addTab(tabSpecJobs);
         tabHost.addTab(tabSpecStats);
         tabHost.addTab(tabSpecReports);
         tabHost.addTab(tabSpecSecurity);
-        tabHost.addTab(tabExperiments);
         //
         DynamixService.ConfigureLog4J();
 

@@ -15,69 +15,34 @@
  */
 package org.ambientdynamix.core;
 
-import java.io.BufferedReader;
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
-import java.io.OutputStream;
-import java.nio.channels.FileChannel;
-import java.security.KeyStore;
-import java.security.KeyStoreException;
-import java.security.NoSuchAlgorithmException;
-import java.security.cert.CertificateException;
-import java.security.cert.X509Certificate;
-import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.Enumeration;
-import java.util.LinkedList;
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
-import java.util.Timer;
-import java.util.TimerTask;
-import java.util.UUID;
-import java.util.Vector;
-import java.util.logging.Level;
- 
-
-import org.ambientdynamix.api.application.AppConstants.ContextPluginType;
+import android.app.*;
+import android.content.*;
+import android.content.res.Resources.NotFoundException;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
+import android.os.*;
+import android.util.Log;
+import android.util.Pair;
+import android.widget.Toast;
+import de.mindpipe.android.logging.log4j.LogConfigurator;
+import eu.smartsantander.androidExperimentation.Constants;
+import eu.smartsantander.androidExperimentation.DataStorage;
+import eu.smartsantander.androidExperimentation.jsonEntities.Experiment;
+import eu.smartsantander.androidExperimentation.jsonEntities.Plugin;
+import eu.smartsantander.androidExperimentation.jsonEntities.ReadingStorage;
+import eu.smartsantander.androidExperimentation.operations.Communication;
+import eu.smartsantander.androidExperimentation.operations.Demon;
+import eu.smartsantander.androidExperimentation.operations.PhoneProfiler;
 import org.ambientdynamix.api.application.AppConstants.PluginInstallStatus;
-import org.ambientdynamix.api.application.ContextPluginInformation;
-import org.ambientdynamix.api.application.ErrorCodes;
-import org.ambientdynamix.api.application.IDynamixFacade;
-import org.ambientdynamix.api.application.IDynamixListener;
-import org.ambientdynamix.api.application.IdResult;
-import org.ambientdynamix.api.application.Result;
-import org.ambientdynamix.api.application.VersionInfo;
-import org.ambientdynamix.api.contextplugin.AutoReactiveInteractiveContextPluginRuntime;
-import org.ambientdynamix.api.contextplugin.ContextPlugin;
-import org.ambientdynamix.api.contextplugin.ContextPluginRuntime;
-import org.ambientdynamix.api.contextplugin.ContextPluginSettings;
-import org.ambientdynamix.api.contextplugin.InteractiveContextPluginRuntime;
-import org.ambientdynamix.api.contextplugin.PluginConstants;
-import org.ambientdynamix.api.contextplugin.PowerScheme;
-import org.ambientdynamix.api.contextplugin.ReactiveContextPluginRuntime;
+import org.ambientdynamix.api.application.*;
+import org.ambientdynamix.api.contextplugin.*;
 import org.ambientdynamix.core.ContextPluginRuntimeMethodRunners.HandleContextRequest;
 import org.ambientdynamix.core.FrameworkConstants.StartState;
 import org.ambientdynamix.core.UpdateManager.IContextPluginUpdateListener;
 import org.ambientdynamix.core.UpdateManager.IDynamixUpdateListener;
-import org.ambientdynamix.data.ContextEventCache;
-import org.ambientdynamix.data.DB4oSettingsManager;
-import org.ambientdynamix.data.DynamixPreferences;
-import org.ambientdynamix.data.FrameworkConfiguration;
-import org.ambientdynamix.data.ISettingsManager;
+import org.ambientdynamix.data.*;
 import org.ambientdynamix.event.PluginDiscoveryResult;
-import org.ambientdynamix.security.BlockedPrivacyPolicy;
-import org.ambientdynamix.security.HighTrustPrivacyPolicy;
-import org.ambientdynamix.security.HighestTrustPrivacyPolicy;
-import org.ambientdynamix.security.LowTrustPrivacyPolicy;
-import org.ambientdynamix.security.MediumTrustPrivacyPolicy;
-import org.ambientdynamix.security.PrivacyPolicy;
-import org.ambientdynamix.security.TrustedCert;
+import org.ambientdynamix.security.*;
 import org.ambientdynamix.update.DynamixUpdates;
 import org.ambientdynamix.update.TrustedCertBinder;
 import org.ambientdynamix.update.contextplugin.ContextPluginBinder;
@@ -88,47 +53,17 @@ import org.ambientdynamix.util.AndroidForeground;
 import org.ambientdynamix.util.AndroidNotification;
 import org.ambientdynamix.util.ContextPluginRuntimeWrapper;
 import org.ambientdynamix.util.Utils;
-import org.apache.log4j.Logger;
 import org.osgi.framework.ServiceEvent;
 
-import de.mindpipe.android.logging.log4j.LogConfigurator;
-
-import eu.smartsantander.androidExperimentation.Constants;
-import eu.smartsantander.androidExperimentation.DataStorage;
-import eu.smartsantander.androidExperimentation.jsonEntities.Experiment;
-import eu.smartsantander.androidExperimentation.jsonEntities.Plugin;
-import eu.smartsantander.androidExperimentation.jsonEntities.ReadingStorage;
-import eu.smartsantander.androidExperimentation.operations.Communication;
-import eu.smartsantander.androidExperimentation.operations.Demon;
-import eu.smartsantander.androidExperimentation.operations.DynamixServiceListenerUtility;
-import eu.smartsantander.androidExperimentation.operations.PhoneProfiler;
-import android.app.Activity;
-import android.app.AlarmManager;
-import android.app.Notification;
-import android.app.NotificationManager;
-import android.app.PendingIntent;
-import android.app.ProgressDialog;
-import android.app.Service;
-import android.content.BroadcastReceiver;
-import android.content.ComponentName;
-import android.content.Context;
-import android.content.Intent;
-import android.content.IntentFilter;
-import android.content.ServiceConnection;
-import android.content.res.Resources.NotFoundException;
-import android.net.ConnectivityManager;
-import android.net.NetworkInfo;
-import android.os.Binder;
-import android.os.Bundle;
-import android.os.CountDownTimer;
-import android.os.Environment;
-import android.os.Handler;
-import android.os.IBinder;
-import android.os.Looper;
-import android.os.RemoteException;
-import android.util.Log;
-import android.util.Pair;
-import android.widget.Toast;
+import java.io.*;
+import java.nio.channels.FileChannel;
+import java.security.KeyStore;
+import java.security.KeyStoreException;
+import java.security.NoSuchAlgorithmException;
+import java.security.cert.CertificateException;
+import java.security.cert.X509Certificate;
+import java.text.SimpleDateFormat;
+import java.util.*;
 
 /**
  * The DynamixService is the primary implementation of the Dynamix Framework on the Android platform. Broadly, Dynamix
@@ -155,7 +90,7 @@ import android.widget.Toast;
  * the Dynamix Service and AndroidNotification objects. The SettingsManager provides high-performance, coordinated
  * access to Dynamix Framework settings. The SettingsManager uses Dynamix's persistence layer, which provides support
  * for a variety of underlying database technologies through the ISettingsManager interface.
- * 
+ *
  * @see OSGIManager
  * @see ContextManager
  * @see ISettingsManager
@@ -202,69 +137,68 @@ public final class DynamixService extends Service {
 	private static PendingIntent RESTART_INTENT;
 	private static String keyStorePath;
 	//public static Context context;
-	 
-	
-	
+
+
+
 	public static IDynamixListener dynamixCallback;
-	public static IDynamixFacade dynamix;	
-	public static ServiceConnection sConnection; 
+	public static IDynamixFacade dynamix;
+	public static ServiceConnection sConnection;
 	public static ReadingStorage contextReadings=new ReadingStorage();
-	
-	
-	
-	//SmartSantanter	
+
+
+
+	//SmartSantanter
 	private static PhoneProfiler phoneProfiler=new PhoneProfiler();
 	private static Boolean isInitialized=false;
-	private static Communication communication= new Communication();	
-	private static Experiment experiment;	
+	private static Communication communication= new Communication();
+	private static Experiment experiment;
 	private static Boolean connectionStatus=false;
 	private static LinkedList<String> experimentMessageQueue=new LinkedList<String>();
 	private static Demon demon=new Demon();
 	public static boolean sessionStarted;
 	private static boolean restarting=false;
 	private static long totalTimeConnectedOnline=0;
-	private final static  Logger log =  Logger.getLogger(DynamixService.class);
- 
+
 	public static void ConfigureLog4J() {
 	        final LogConfigurator logConfigurator = new LogConfigurator();
 	        Date d=new Date(System.currentTimeMillis());
 	        SimpleDateFormat dt1 = new SimpleDateFormat("yyyyy_mm_dd_hh_mm_ss");
 	        logConfigurator.setFileName(Environment.getExternalStorageDirectory() + File.separator + "dynamix"+File.separator+"log"+dt1.format(d)+".txt");
 	        logConfigurator.configure();
-	        log.debug("Log Started -------------------------------");
+	        Log.d(TAG,"Log Started -------------------------------");
     }
- 
+
 	public static synchronized void logToFile(String message){
-		log.debug(message);
+		Log.d(TAG,message);
 	}
-	
+
 	public static long getTotalTimeConnectedOnline(){
 		return totalTimeConnectedOnline;
 	}
-	
+
 	public static void addTotalTimeConnectedOnline(long time){
 		totalTimeConnectedOnline+=time;
 	}
-	
+
 	public static boolean getRestarting(){
 		return restarting;
 	}
-	
+
 	public static void setRestarting(boolean state){
 		restarting=state;
 	}
-	
+
 	public static synchronized Long getDataStorageSize(){
 			try{
-				return DataStorage.getInstance(androidContext).size();	
+				return DataStorage.getInstance(androidContext).size();
 			}
 			catch(Exception e){
 				e.printStackTrace();
 			}
     	return 0L;
 	}
-	
-	public static synchronized Pair<Long,String> getOldestExperimentalMessage(){	
+
+	public static synchronized Pair<Long,String> getOldestExperimentalMessage(){
 		try{
 			return DataStorage.getInstance(androidContext).getMessage();
 		}catch(Exception e){
@@ -272,53 +206,53 @@ public final class DynamixService extends Service {
 		}
 		return null;
 	}
-	
+
 	public static synchronized void deleteExperimentalMessage(Long id){
 		try{
-			DataStorage.getInstance(androidContext).deleteMessage(id);	
+			DataStorage.getInstance(androidContext).deleteMessage(id);
 		}catch(Exception e){
 			e.printStackTrace();
 		}
 	}
-	
-	public static synchronized void addExperimentalMessage(String message){		
+
+	public static synchronized void addExperimentalMessage(String message){
 		try{
-			log.debug("SQLITE>>"+message);
+			Log.d(TAG,"SQLITE>>"+message);
      		DataStorage.getInstance(androidContext).addMessage(message);
 		}catch(Exception e){
 		 	e.printStackTrace();
-		 	log.debug(e.getMessage());
+            Log.d(TAG,e.getMessage());
 			Toast.makeText(androidContext, "Fail to Send of Storage Message:" +message, Toast.LENGTH_LONG).show();
-		}  
-     	
+		}
+
 	}
-	
+
 	public static void cacheExperimentalMessage(String message){
-		experimentMessageQueue.addLast(message);		
+		experimentMessageQueue.addLast(message);
 		if(experimentMessageQueue.size()>10)
 			experimentMessageQueue.poll();
 	}
-	
-	
-	
+
+
+
 	public static String[] getCachedExperimentalMessages(){
-		if(experimentMessageQueue.size()==0){ 
+		if(experimentMessageQueue.size()==0){
 			return new String[]{""};
 		}
 		else return experimentMessageQueue.toArray(new String[experimentMessageQueue.size()]);
 	}
-	
+
 	public static void setExperiment(Experiment exp){
 		if (exp!=null)
 			phoneProfiler.experimentPush(exp);
 		else
 			return;
-		
-		experiment=exp;	
+
+		experiment=exp;
 	}
-	
+
 	public static void startExperiment(){
-		if (experiment==null) return;		 
+		if (experiment==null) return;
 		Plugin pluginfo=new Plugin();
 		pluginfo.setContextType(experiment.getContextType());
 		pluginfo.setDescription(experiment.getContextType());
@@ -332,59 +266,59 @@ public final class DynamixService extends Service {
 		try {
 			plug = plugBinder.createContextPlugin(DynamixService.getConfig().getPrimaryContextPluginRepo(), pluginfo);
 			installPlugin( plug, null);
-			Thread.sleep(5000);			
+			Thread.sleep(5000);
 			//DynamixService.OsgiMgr.startPluginBundle(plug);
-		} catch (Exception e) {			
+		} catch (Exception e) {
 			e.printStackTrace();
 		}
 	}
-	
+
 	public static void removeExperiment(){
 		try{
-			ContextPlugin exp=getInstalledContextPlugin("org.ambientdynamix.contextplugins.ExperimentPlugin");	
+			ContextPlugin exp=getInstalledContextPlugin("org.ambientdynamix.contextplugins.ExperimentPlugin");
 			if (exp!=null){
 				uninstallPlugin(exp,true);
-			}			
-		} catch (Exception e) {			
+			}
+		} catch (Exception e) {
 			e.printStackTrace();
 		}
 		DynamixService.setExperiment(null);
-	
+
 	}
 	public static Experiment getExperiment(){
 		return experiment;
 	}
-	
- 
+
+
 	static public ReadingStorage getReadingStorage(){
 		return contextReadings;
 	}
-	
+
 	static public PhoneProfiler getPhoneProfiler(){
 		return phoneProfiler;
 	}
 	static public Communication getCommunication(){
 		return communication;
 	}
-	
-	
+
+
 	static public Demon getDemon(){
 		return demon;
 	}
-	
+
     static public Boolean isEnabled(){
     	if(androidContext==null)return false;
     	return DynamixPreferences.isDynamixEnabled(androidContext);
     }
-    
+
 	static public Boolean isDeviceRegistered(){
 		if (phoneProfiler.getPhoneId()!=Constants.PHONE_ID_UNITIALIZED){
 			return true;
 		}else{
 			return false;
-		}			
+		}
 	}
-	
+
 	static public Boolean isInitialized() {
 		if (phoneProfiler.getPhoneId()!=Constants.PHONE_ID_UNITIALIZED && numberOfInstalledPlugins()>0){
 			isInitialized=true;
@@ -394,18 +328,18 @@ public final class DynamixService extends Service {
 		return isInitialized;
 	}
 
-	
+
 	static public int numberOfInstalledPlugins(){
 		int counter=0;
 		for (ContextPluginInformation plugin :DynamixService.getAllContextPluginInfo()){
 			if (plugin.getInstallStatus()==PluginInstallStatus.INSTALLED)
 				counter++;
 		}
-		
+
 		return counter;
 	}
 
-	
+
 	static public boolean isExperimentInstalled(String contexttype){
 		for (ContextPluginInformation info:DynamixService.getAllContextPluginInfo()){
 			if(info.getPluginId().equals(contexttype)){
@@ -414,22 +348,22 @@ public final class DynamixService extends Service {
 		}
 		return false;
 	}
- 
+
 	/////////////////////////////////
-	
-	
+
+
 	static public Handler getUIHandler(){
 		return uiHandler;
 	}
-	
-	
-	
-	// stop bundle 
+
+
+
+	// stop bundle
 	public static void stopPlugin(ContextPlugin contextPlugin)
 	{
 		OsgiMgr.stopPluginBundle(contextPlugin);
 	}
-	
+
 	/**
 	 * Adds a Dynamix Framework listener.
 	 */
@@ -440,7 +374,7 @@ public final class DynamixService extends Service {
 
 	/**
 	 * Removes a previously registered Dynamix Framework listener.
-	 * 
+	 *
 	 * @param listener
 	 */
 	public static void removeDynamixFrameworkListener(IDynamixFrameworkListener listener) {
@@ -457,7 +391,7 @@ public final class DynamixService extends Service {
 
 	/**
 	 * Returns true if Dynamix is running in embedded mode; false otherwise.
-	 * 
+	 *
 	 * @return
 	 */
 	public static boolean isEmbedded() {
@@ -523,7 +457,7 @@ public final class DynamixService extends Service {
 
 	/**
 	 * Boots Dynamix in Embedded mode.
-	 * 
+	 *
 	 * @param context
 	 *            The Android context of the embedding application.
 	 * @param embeddedHostClassLoader
@@ -552,7 +486,7 @@ public final class DynamixService extends Service {
 
 	/**
 	 * Update's the Dynamix FrameworkConfiguration when running in embedded mode.
-	 * 
+	 *
 	 * @param config
 	 *            The new configuration to use
 	 * @return True if the config was updated; false otherwise.
@@ -684,7 +618,7 @@ public final class DynamixService extends Service {
 
 	/**
 	 * Stores the certificate to the Dynamix KeyStore. Updates the WebConnector.
-	 * 
+	 *
 	 * @param alias
 	 *            The alias to store the cert under.
 	 * @param cert
@@ -718,7 +652,7 @@ public final class DynamixService extends Service {
 
 	/**
 	 * Removes the certificate from the Dynamix KeyStore. Updates the WebConnector.
-	 * 
+	 *
 	 * @param alias
 	 * @throws Exception
 	 */
@@ -747,7 +681,7 @@ public final class DynamixService extends Service {
 	/**
 	 * Exports the certificate keystore to the root of the device's SD card. This method is used internally for
 	 * gathering authorized certificates from browsers.
-	 * 
+	 *
 	 * @throws Exception
 	 */
 	protected static void exportKeyStoreToSDCARD() throws Exception {
@@ -797,7 +731,7 @@ public final class DynamixService extends Service {
 
 	/**
 	 * Cancels a previously started Bundle installation for the specified ContextPlugin.
-	 * 
+	 *
 	 * @return True if the installation was cancelled; false otherwise.
 	 */
 	public static boolean cancelInstallation(ContextPlugin plug) {
@@ -806,7 +740,7 @@ public final class DynamixService extends Service {
 
 	/**
 	 * Updates the enabled status of the application, notifying the application of the change.
-	 * 
+	 *
 	 * @param app
 	 *            The application to enable or disable.
 	 * @param enabled
@@ -851,7 +785,7 @@ public final class DynamixService extends Service {
 
 	/**
 	 * Clears the specified ContextPlugin's statistics.
-	 * 
+	 *
 	 * @param plug
 	 *            The Plugin to clear.
 	 * @return True if the stats were cleared; false otherwise.
@@ -901,7 +835,7 @@ public final class DynamixService extends Service {
 
 	/**
 	 * Installs the specified context plug-in update, notifying the listener of the progress (if provided).
-	 * 
+	 *
 	 * @param update
 	 *            The UpdateResult to install.
 	 * @param listener
@@ -926,7 +860,7 @@ public final class DynamixService extends Service {
 
 	/**
 	 * Installs the specified context plug-in updates, notifying the listener of the progress (if provided).
-	 * 
+	 *
 	 * @param update
 	 *            The Set of UpdateResults to install.
 	 * @param listener
@@ -939,7 +873,7 @@ public final class DynamixService extends Service {
 
 	/**
 	 * Installs a new plug-in.
-	 * 
+	 *
 	 * @param plug
 	 *            The ContextPlugin to install.
 	 * @param listener
@@ -953,7 +887,7 @@ public final class DynamixService extends Service {
 
 	/**
 	 * Installs a List of new plug-ins.
-	 * 
+	 *
 	 * @param contextPlugin
 	 *            The ContextPlugins to install.
 	 * @param listener
@@ -975,7 +909,7 @@ public final class DynamixService extends Service {
 					 * ContextManager without its runtime factory. The runtime will be added to the context manager once
 					 * the bundle is installed - see 'handleBundleInstalled'
 					 */
-					ContextMgr.addNewContextPlugin(plug);  
+					ContextMgr.addNewContextPlugin(plug);
 				}
 			} else
 				Log.w(TAG, "installPlugins called for previously installed plug-in: " + plug);
@@ -1015,7 +949,7 @@ public final class DynamixService extends Service {
 
 	/**
 	 * Enables the plug-in described by the ContextPluginInformation.
-	 * 
+	 *
 	 * @param plugInfo
 	 *            The ContextPluginInformation for the plug-in to enable.
 	 * @return True if the request was accepted; false otherwise.
@@ -1034,7 +968,7 @@ public final class DynamixService extends Service {
 
 	/**
 	 * Disables the plug-in described by the ContextPluginInformation.
-	 * 
+	 *
 	 * @param plugInfo
 	 *            The ContextPluginInformation for the plug-in to disable.
 	 * @return True if the request was accepted; false otherwise.
@@ -1053,7 +987,7 @@ public final class DynamixService extends Service {
 
 	/**
 	 * Indicates that the Dynamix plugin status update process has failed.
-	 * 
+	 *
 	 * @param message
 	 *            A message describing the failure reasons
 	 */
@@ -1096,7 +1030,7 @@ public final class DynamixService extends Service {
 
 	/**
 	 * Dispatches the incoming NFC Intent to registered plug-ins.
-	 * 
+	 *
 	 * @param i
 	 *            The NFC Intent.
 	 */
@@ -1245,7 +1179,7 @@ public final class DynamixService extends Service {
 	/**
 	 * Asynchronously checks for context plugin UPDATES using the UpdateManager, notifying the specified
 	 * IUpdateStatusListener with results (or errors). Typically used by Dynamix UI for displaying results.
-	 * 
+	 *
 	 * @param handler
 	 *            The IUpdateStatusListener to notify with results (or errors).
 	 */
@@ -1261,7 +1195,7 @@ public final class DynamixService extends Service {
 	/**
 	 * Asynchronously checks for NEW context plugins using the UpdateManager, notifying the specified
 	 * IUpdateStatusListener with results (or errors). Typically used by Dynamix UI for displaying results.
-	 * 
+	 *
 	 * @param handler
 	 *            The IUpdateStatusListener to notify with results (or errors)
 	 */
@@ -1345,7 +1279,7 @@ public final class DynamixService extends Service {
 	 * from the incoming Android Context. The configuration file must adhere to the Dynamix Framework configuration
 	 * specification outlined in the Dynamix developer documentation. Note that if the config file does not exist, the
 	 * default config file will be copied from Dynamix's res/raw directory.
-	 * 
+	 *
 	 * @param context
 	 *            The Android Context of the Dynamix Framework
 	 * @return A DynamixConfiguration
@@ -1380,7 +1314,7 @@ public final class DynamixService extends Service {
 
 	/**
 	 * Extracts the Dynamix KeyFile to disk.
-	 * 
+	 *
 	 * @param context
 	 * @throws Exception
 	 */
@@ -1449,7 +1383,7 @@ public final class DynamixService extends Service {
 
 	/**
 	 * Callback for bundle installed events from the OSGIManager. This method handles dynamically installed plugins.
-	 * 
+	 *
 	 * @param plug
 	 *            The ContextPlugin whoes bundle was installed
 	 */
@@ -1494,12 +1428,12 @@ public final class DynamixService extends Service {
 				Log.w(TAG, "Could not addContextPlugin for: " + plug);
 		} else
 			Log.e(TAG, "handleBundleInstalled received null or uninstalled plug-in: " + plug);
-		
+
 	}
 
 	/**
 	 * Callback for bundle installed failed events from the OSGIManager.
-	 * 
+	 *
 	 * @param plug
 	 *            The ContextPlugin that failed to be installed.
 	 */
@@ -1510,7 +1444,7 @@ public final class DynamixService extends Service {
 
 	/**
 	 * Callback that is called when a ContextPlugin's OSGi Bundle has been updated.
-	 * 
+	 *
 	 * @param originalPlug
 	 *            The original ContextPlugin
 	 * @param originalSettings
@@ -1597,7 +1531,7 @@ public final class DynamixService extends Service {
 	/**
 	 * Registers the specified Activity as belonging to the ContextPluginRuntime. Used to programmatically close the
 	 * Activity later.
-	 * 
+	 *
 	 * @param runtime
 	 *            The ContextPluginRuntime.
 	 * @param activity
@@ -1612,7 +1546,7 @@ public final class DynamixService extends Service {
 	/**
 	 * Registers the specified Activity as belonging to the ContextPluginRuntime. Used to programmatically close the
 	 * Activity later.
-	 * 
+	 *
 	 * @param runtime
 	 *            The ContextPluginRuntime.
 	 * @param activity
@@ -1626,7 +1560,7 @@ public final class DynamixService extends Service {
 
 	/**
 	 * Registers a new request UUID for the specified application and listener.
-	 * 
+	 *
 	 * @param app
 	 *            the application to register
 	 */
@@ -1656,7 +1590,7 @@ public final class DynamixService extends Service {
 	/**
 	 * Requests a context interaction for a particular listener using a particular ContextPlugin and contextDataType.
 	 * Note that this method can only be called for ContextPluginRuntimes of type IReactiveContextPluginRuntime.
-	 * 
+	 *
 	 * @param app
 	 *            The app requesting the scan.
 	 * @param listener
@@ -1680,7 +1614,7 @@ public final class DynamixService extends Service {
 				if (plug.isEnabled()) {
 					// Get the plug-in's runtime
 					//ContextMgr.getContextPluginRuntime(pluginId).setExecuting(true); //smartsantander change
-					
+
 					ContextPluginRuntime runtime = ContextMgr.getContextPluginRuntime(pluginId).getContextPluginRuntime();
 					if (runtime != null) {
 						// Ensure the app has a context support registration
@@ -1759,7 +1693,7 @@ public final class DynamixService extends Service {
 
 	/**
 	 * Launches the user interface for the incoming ContextPlugins that have been verified as having an interface.
-	 * 
+	 *
 	 * @param plug
 	 *            The plug-in with the interface to launch
 	 * @param app
@@ -1795,7 +1729,7 @@ public final class DynamixService extends Service {
 
 	/**
 	 * Opens the specified plug-in's configuration view (if it has one) on behalf of a DynamixApplication.
-	 * 
+	 *
 	 * @param app
 	 *            The app requesting the configuation view.
 	 * @param pluginId
@@ -1808,7 +1742,7 @@ public final class DynamixService extends Service {
 
 	/**
 	 * Opens the specified plug-in's configuration view (if it has one) on behalf of the Dynamix Framework.
-	 * 
+	 *
 	 * @param pluginId
 	 *            The plug-in to configure.
 	 * @return Result indicating success or failure.
@@ -1819,12 +1753,12 @@ public final class DynamixService extends Service {
 
 	/**
 	 * Opens the specified plug-in's configuration view (if it has one). Handles both app and framework calls.
-	 * 
+	 *
 	 * @param app
 	 *            The app requesting the configuation view (may be null if frameworkCall == true).
 	 * @param pluginId
 	 *            The plug-in to configure.
-	 * 
+	 *
 	 * @param frameworkCall
 	 *            True if this call originates from Dynamix; false otherwise.
 	 * @return
@@ -1909,7 +1843,7 @@ public final class DynamixService extends Service {
 
 	/**
 	 * Unregisteres a previoully registered plug-in configuration activity.
-	 * 
+	 *
 	 * @param runtime
 	 *            The ContextPluginRuntime wishing to unregister its configuration activity.
 	 */
@@ -1921,7 +1855,7 @@ public final class DynamixService extends Service {
 
 	/**
 	 * Unregisteres a previoully registered context acquisition activity.
-	 * 
+	 *
 	 * @param runtime
 	 *            The ContextPluginRuntime wishing to unregister its context acquisition activity.
 	 */
@@ -1952,7 +1886,7 @@ public final class DynamixService extends Service {
 
 	/**
 	 * Updates the context plug-in update timer with a new check interval.
-	 * 
+	 *
 	 * @param interval
 	 *            How often to check for updates (in milliseconds).
 	 */
@@ -2010,7 +1944,7 @@ public final class DynamixService extends Service {
 					 * does this here: http://code.google.com/p/android-smspopup/
 					 */
 					// Here's another popup technique: http://www.piwai.info/chatheads-basics/
-					
+
 					// Popup code
 					//Intent popup = new Intent(DynamixService.getAndroidContext(), PermissionPopupActivity.class);
 			        //popup.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_EXCLUDE_FROM_RECENTS);
@@ -2082,13 +2016,13 @@ public final class DynamixService extends Service {
 					HomeActivity.refreshData();
 				}
 				Log.i(TAG, "Dynamix has finished booting!");
-				
-		        
+
+
 				//SmartSantander
 				//Intent i = new Intent();
-		        //i.setAction("com.example.androiddistributed.MainService");        
+		        //i.setAction("com.example.androiddistributed.MainService");
 		        //context.sendBroadcast(i);
-				
+
 			} else
 				Log.w(TAG, "completeBoot called when not booting");
 		}
@@ -2251,8 +2185,8 @@ public final class DynamixService extends Service {
 			}
 		}
 	}
-	
-   
+
+
 
 	@Override
 	public void onDestroy() {
@@ -2312,7 +2246,7 @@ public final class DynamixService extends Service {
 
 	/**
 	 * Unregisters a previously registered request UUID
-	 * 
+	 *
 	 * @param requestId
 	 *            The original request UUID
 	 * @return True if the requestId was removed; false otherwise.
@@ -2431,20 +2365,20 @@ public final class DynamixService extends Service {
 						UpdateManager.checkForDynamixUpdates(getAndroidContext(), DynamixService.getConfig()
 								.getPrimaryDynamixServer().getUrl(), new DynamixUpdatesCallbackHandler());
 						Log.i(TAG, "Dynamix Service Started!");
-	
+
 
 						//SmartSantander
 						if (DynamixService.getPhoneProfiler().getStarted()==false)
 							DynamixService.getPhoneProfiler().start();
 						else
 							DynamixService.getPhoneProfiler().startJob();
-						
+
 						if (DynamixService.getDemon().getStarted()==false)
 							DynamixService.getDemon().start();
 						else
 							DynamixService.getDemon().startJob();
-						
-						
+
+
 
 						if (!embeddedMode)
 							uiHandle.post(new Runnable() {
@@ -2511,7 +2445,7 @@ public final class DynamixService extends Service {
 
 	/**
 	 * Stops the Dynamix Framework, releasing its acquired resources and killing the service, if requested.
-	 * 
+	 *
 	 * @param removeListeners
 	 *            True if context manager listeners should be removed; false if listeners should be retained.
 	 * @param destroy
@@ -2607,7 +2541,7 @@ public final class DynamixService extends Service {
 
 	/**
 	 * Completes the framework destroy process
-	 * 
+	 *
 	 * @param killProcess
 	 * @param restartProcess
 	 */
@@ -2677,7 +2611,7 @@ public final class DynamixService extends Service {
 
 	/**
 	 * Launches a progress dialog that is shown to the user.
-	 * 
+	 *
 	 * @param title
 	 *            The title of the dialog box.
 	 * @param message
@@ -2699,7 +2633,7 @@ public final class DynamixService extends Service {
 	/**
 	 * Starts a threaded background timer that periodically calls 'checkAppLiveliness' on the ContextManager to
 	 * determine if DynamixApplicaitons are still alive.
-	 * 
+	 *
 	 * @param checkPeriodMills
 	 *            How often to check for livelyness (in Milleseconds).
 	 */
@@ -2958,7 +2892,7 @@ public final class DynamixService extends Service {
 
 		void onDynamixError(String message);
 	}
-	
+
 	public static boolean isNetworkAvailable() {
 	        ConnectivityManager connectivityManager = (ConnectivityManager) DynamixService.getAndroidContext().getSystemService(Context.CONNECTIVITY_SERVICE);
 	        NetworkInfo activeNetworkInfo = connectivityManager.getActiveNetworkInfo();
@@ -2968,7 +2902,7 @@ public final class DynamixService extends Service {
 	public static boolean getConnectionStatus() {
 		return connectionStatus;
 	}
-	
+
 	public static void setConnectionStatus(Boolean status) {
 		connectionStatus=status;
 	}
@@ -2988,7 +2922,7 @@ public final class DynamixService extends Service {
 				}
 			});
 		}
-		
+
 	}
 
 }
