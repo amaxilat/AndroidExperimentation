@@ -35,6 +35,7 @@ import android.widget.TabHost.TabSpec;
 import android.widget.Toast;
 import com.bugsense.trace.BugSenseHandler;
 import com.bugsense.trace.ExceptionCallback;
+import com.newrelic.agent.android.NewRelic;
 import eu.smartsantander.androidExperimentation.operations.NotificationHQManager;
 import eu.smartsantander.androidExperimentation.tabs.jobsTab;
 import eu.smartsantander.androidExperimentation.tabs.reportTab;
@@ -176,6 +177,10 @@ public class BaseActivity extends TabActivity implements ExceptionCallback {
 
         BugSenseHandler.initAndStartSession(this, "91ce9553");
         BugSenseHandler.setExceptionCallback(this);
+
+        NewRelic.withApplicationToken(
+                "AA0fe9525a8553b77ed9ab623937bcd1bf403c6775"
+        ).start(this.getApplication());
 
         // Set the Dynamix base activity so it can use our context
         DynamixService.setBaseActivity(this);

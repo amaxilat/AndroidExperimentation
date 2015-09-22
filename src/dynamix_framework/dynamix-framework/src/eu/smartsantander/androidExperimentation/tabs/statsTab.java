@@ -15,6 +15,7 @@ import java.util.concurrent.TimeUnit;
 
 import org.ambientdynamix.core.DynamixService;
 import org.ambientdynamix.core.R;
+import org.ambientdynamix.util.Log;
 import org.apache.http.HttpResponse;
 import org.apache.http.client.methods.HttpGet;
 import org.apache.http.impl.client.DefaultHttpClient;
@@ -39,6 +40,8 @@ import android.webkit.WebView;
 import android.webkit.WebViewClient;
 import android.widget.TextView;
 import eu.smartsantander.androidExperimentation.Constants;
+import org.eazegraph.lib.charts.BarChart;
+import org.eazegraph.lib.models.BarModel;
 
 /**
  * This tab displays overall stats about the activity of this specific device
@@ -55,10 +58,11 @@ import eu.smartsantander.androidExperimentation.Constants;
 public class statsTab extends Activity implements
 		OnSharedPreferenceChangeListener {
 
+	private static final String TAG = "StatsTab";
 	private OnSharedPreferenceChangeListener listener;
 	private PhoneProfiler pProfil;
 	private SharedPreferences prefs;
-	private WebView myWebView;
+//	private WebView myWebView;
 	private WebSettings webSettings;
 	private String html;
 	private loadJPGstatsTask jpgTask;
@@ -71,10 +75,10 @@ public class statsTab extends Activity implements
 
 		pProfil = DynamixService.getPhoneProfiler();
 
-		myWebView = (WebView) findViewById(R.id.statswebview);
-		myWebView.setWebViewClient(new myWebClient());
-		myWebView.getSettings().setJavaScriptEnabled(true);
-		myWebView.requestFocus(View.FOCUS_DOWN);
+//		myWebView = (WebView) findViewById(R.id.statswebview);
+//		myWebView.setWebViewClient(new myWebClient());
+//		myWebView.getSettings().setJavaScriptEnabled(true);
+//		myWebView.requestFocus(View.FOCUS_DOWN);
 
 		prefs = getSharedPreferences("SmartSantanderConfigurations",
 				Context.MODE_PRIVATE);
@@ -104,7 +108,18 @@ public class statsTab extends Activity implements
 		jpgTask = new loadJPGstatsTask();
 		jpgTask.execute();
 
+		BarChart mBarChart = (BarChart) findViewById(R.id.barchart);
 
+		mBarChart.addBar(new BarModel(2.3f, 0xFF123456));
+		mBarChart.addBar(new BarModel(2.f,  0xFF343456));
+		mBarChart.addBar(new BarModel(3.3f, 0xFF563456));
+		mBarChart.addBar(new BarModel(1.1f, 0xFF873F56));
+		mBarChart.addBar(new BarModel(2.7f, 0xFF56B7F1));
+		mBarChart.addBar(new BarModel(2.f,  0xFF343456));
+		mBarChart.addBar(new BarModel(0.4f, 0xFF1FF4AC));
+		mBarChart.addBar(new BarModel(4.f,  0xFF1BA4E6));
+
+		mBarChart.startAnimation();
 		/*String theJPGData;
 
 		if (checkNetworkIsAvailable()) {
@@ -148,14 +163,14 @@ public class statsTab extends Activity implements
 
 		@Override
 		protected void onPostExecute(String j){
-			myWebView.loadDataWithBaseURL(null, j, "text/html", null, null);
+//			myWebView.loadDataWithBaseURL(null, j, "text/html", null, null);
 		}
 
 
 		@Override
 		protected String doInBackground(String... params) {
 
-			if (checkNetworkIsAvailable()) {
+			if (false && checkNetworkIsAvailable()) {
 
 				theJPGData = loadTheStatsJPG();
 				SharedPreferences.Editor editor = prefs.edit();
@@ -213,7 +228,11 @@ public class statsTab extends Activity implements
 
 		myWebView
 				.loadDataWithBaseURL(null, theJPGData, "text/html", null, null);*/
-		jpgTask.execute();
+		try {
+			jpgTask.execute();
+		}catch (Exception e){
+			Log.e(TAG,e.getMessage());
+		}
 		super.onResume();
 
 	}
