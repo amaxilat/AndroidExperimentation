@@ -18,7 +18,6 @@ import org.springframework.scheduling.annotation.EnableScheduling;
 @Configuration
 @ComponentScan(basePackages = "eu.smartsantander.androidExperimentation")
 @PropertySource("classpath:application.properties")
-//@ImportResource("classpath:application.context")
 @EnableAsync
 @EnableScheduling
 @EnableJpaRepositories

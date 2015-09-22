@@ -82,9 +82,9 @@ public class DynamixServiceListenerUtility {
 			@Override
 			public void onContextEvent(ContextEvent event)
 					throws RemoteException {
-								
-				NotificationHQManager noteManager = NotificationHQManager.getInstance();				
-				
+
+				NotificationHQManager noteManager = NotificationHQManager.getInstance();
+
 				Log.w(TAG, "Event timestamp "
 						+ event.getTimeStamp().toLocaleString());
 				if (event.expires())
@@ -105,7 +105,7 @@ public class DynamixServiceListenerUtility {
 				}
 				// Check for native IContextInfo
 				if (event.hasIContextInfo()) {
-					
+
 					Log.w(TAG,"Event contains native IContextInfo: "+ event.getIContextInfo());
 					IContextInfo nativeInfo = event.getIContextInfo();
 					String msg = nativeInfo.getStringRepresentation("");
@@ -118,9 +118,9 @@ public class DynamixServiceListenerUtility {
 							List<Reading> readings = (new Gson()).fromJson(readingMsg, listType);
 							for (Reading reading : readings) {
 								Log.w(TAG, "Received Reading: " + reading);
-								//Toast.makeText(DynamixService.getAndroidContext(),readingMsg, 5000).show();								
+								//Toast.makeText(DynamixService.getAndroidContext(),readingMsg, 5000).show();
 								noteManager.postNotification(readingMsg);
-								DynamixService.cacheExperimentalMessage(readingMsg);								
+								DynamixService.cacheExperimentalMessage(readingMsg);
 								if (DynamixService.getExperiment() == null)
 									return;
 								Report rObject = new Report(DynamixService.getExperiment().getId().toString());
@@ -129,8 +129,8 @@ public class DynamixServiceListenerUtility {
 								mlist.add(reading.getValue());
 								rObject.setResults(mlist);
 								String message=rObject.toJson();
- 
 								try{ //try to send to server, on fail save it in SQLite
+									Log.d(TAG,"Offloading results:"+message);
 									DynamixService.getCommunication().sendReportResults(message);//
 									Log.i(TAG, "Experiment  Reading Network: " + message);
 								}catch(Exception e){
@@ -148,12 +148,12 @@ public class DynamixServiceListenerUtility {
 								if (notification.contains("Gps")){
 									notification+=":"+reading.getValue();
 								}
-								noteManager.postNotification(notification);							
+								noteManager.postNotification(notification);
 								Log.w(TAG, "Plugin Reading: " + reading);
 								DynamixService.getReadingStorage().pushReading(	reading);
 								DynamixService.getPhoneProfiler().incMsgCounter();
 							}
-							
+
 						}
 					} catch (Exception e) {
 						Log.w(TAG, "Bad Formed Reading" + msg);

@@ -1452,6 +1452,7 @@ class OSGIManager implements FrameworkListener, ServiceListener, BundleListener 
 										try {
 											if (listener != null)
 												listener.onInstallFailed(newPlug, e1.toString());
+											e1.printStackTrace();
 										} catch (Exception e) {
 											Log.w(TAG, "Error updating listener: " + listener);
 										}
@@ -1476,6 +1477,7 @@ class OSGIManager implements FrameworkListener, ServiceListener, BundleListener 
 						if (listener != null)
 							listener.onInstallFailed(newPlug, "Bundle Install Error: " + e.toString());
 					} catch (Exception e2) {
+						e2.printStackTrace();
 						Log.w(TAG, "Error updating listener: " + listener);
 					}
 					// If we actually got a Bundle, uninstall it...

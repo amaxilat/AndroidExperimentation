@@ -59,7 +59,7 @@ import android.widget.Toast;
  * ContextPlugin XML descriptions must adhere to the specification as described in the Dynamix developer documentation.
  * The class will automatically use a backup server (if provided) if access to the primary update server is fails
  * (automatic failover).
- * 
+ *
  * @author Darren Carlson
  */
 class UpdateManager {
@@ -83,9 +83,12 @@ class UpdateManager {
 		 */
 		if (!DynamixService.isEmbedded() && (DynamixPreferences.useWifiNetworkOnly(c) && !Utils.isWifiConnected(c))) {
 			Log.w(TAG, "Update not allowed since WIFI is not connected");
+            Log.w(TAG, "DynamixService.isEmbedded():"+DynamixService.isEmbedded());
+            Log.w(TAG, "DynamixPreferences.useWifiNetworkOnly(c):"+DynamixPreferences.useWifiNetworkOnly(c));
+            Log.w(TAG, "Utils.isWifiConnected(c):"+Utils.isWifiConnected(c));
 			updateAllowed = false;
 		}
-		
+
 		if (updateAllowed) {
 			Utils.dispatch(new Runnable() {
 				@Override
@@ -139,7 +142,7 @@ class UpdateManager {
 	/**
 	 * Asynchronously checks for context plugin updates using the incoming server(s), notifying the specified
 	 * IUpdateStatusListener with results (or errors).
-	 * 
+	 *
 	 * @param plugSources
 	 *            The List of IContextPluginConnector entities to check for updates
 	 * @param platform
@@ -162,6 +165,9 @@ class UpdateManager {
 		boolean networkUpdateAllowed = true;
 		if (!DynamixService.isEmbedded() && (DynamixPreferences.useWifiNetworkOnly(c) && !Utils.isWifiConnected(c))) {
 			Log.w(TAG, "Update not allowed since WIFI is not connected");
+			Log.w(TAG, "DynamixService.isEmbedded():"+DynamixService.isEmbedded());
+			Log.w(TAG, "DynamixPreferences.useWifiNetworkOnly(c):"+DynamixPreferences.useWifiNetworkOnly(c));
+			Log.w(TAG, "Utils.isWifiConnected(c):"+Utils.isWifiConnected(c));
 			networkUpdateAllowed = false;
 		}
 		if (!processingContextPluginUpdates) {
@@ -266,7 +272,7 @@ class UpdateManager {
 					Log.d(TAG, "Completed checking for context plug-in updates");
 					// Restart the update timer, if necessary
 					DynamixService.startContextPluginUpdateTimer();
-					
+
 					DynamixService.updateNotifications();
 					processingContextPluginUpdates = false;
 				}
@@ -433,7 +439,7 @@ class UpdateManager {
 
 	/**
 	 * Base interface for update listeners
-	 * 
+	 *
 	 * @author Darren Carlson
 	 */
 	interface IBaseUpdateListener {
@@ -455,7 +461,7 @@ class UpdateManager {
 
 	/**
 	 * Interface for listeners interested in receiving updates about plug-in updates.
-	 * 
+	 *
 	 * @author Darren Carlson
 	 */
 	interface IContextPluginUpdateListener extends IBaseUpdateListener {
@@ -468,7 +474,7 @@ class UpdateManager {
 
 	/**
 	 * Interface for listeners interested in receiving updates about Dynamix updates.
-	 * 
+	 *
 	 * @author Darren Carlson
 	 */
 	interface IDynamixUpdateListener extends IBaseUpdateListener {

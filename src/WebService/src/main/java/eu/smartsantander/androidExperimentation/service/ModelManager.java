@@ -62,8 +62,8 @@ public class ModelManager {
         } while ((experimentsListIterator.hasNext()));
         if (experiment != null) {
             String[] experimentDependencies = experiment.getSensorDependencies().split(",");
-            if (experiment.getStatus().equals("finished") == false
-                    && match(smartphoneDependencies, experimentDependencies) == true) {
+            if (!experiment.getStatus().equals("finished")
+                    && match(smartphoneDependencies, experimentDependencies)) {
                 return experiment;
             }
         }
@@ -120,7 +120,13 @@ public class ModelManager {
             smartphone.setId(null);
         }
 
-        return smartphoneRepository.save(smartphone);
+        Smartphone phone = smartphoneRepository.findByPhoneId(smartphone.getPhoneId());
+        if (phone == null) {
+            return smartphoneRepository.save(smartphone);
+        } else {
+            return phone;
+        }
+
     }
 
     public void reportResults(Report report) {
@@ -128,7 +134,7 @@ public class ModelManager {
         List<String> experimentResults = report.getResults();
         System.out.println("experiment Id: " + expId);
 
-        Experiment experiment = experimentRepository.findById(expId);
+        Experiment experiment = experimentRepository.findById(Integer.parseInt(expId));
 
         for (final String result : experimentResults) {
             Result resultsEntity = new Result();

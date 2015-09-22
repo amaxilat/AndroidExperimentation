@@ -92,13 +92,14 @@
                 <action android:name="org.ambientdynamix.api.application.IDynamixFacade" />
             </intent-filter>
         </service>
-        
-        
+
+
         <!--
       <service android:enabled="true" android:exported="false" android:label="Dynamix 
       Context Plugin Host" android:name="ContextPluginHost" android:process=":ContextPluginHost"> 
       <intent-filter> <action android:name="org.ambientdynamix.api.application.IDynamixFacade"/> 
       </intent-filter> </service>
+
         -->
 
         <receiver
@@ -127,7 +128,7 @@
             android:theme="@android:style/Theme.Dialog" >
         </activity>
 
-        <!-- SmartSantander Android Experimentation -->
+        <!-- Organicity Android Experimentation -->
         <activity
             android:name="eu.smartsantander.androidExperimentation.tabs.profileTab"
             android:label="profileTab" >
@@ -152,6 +153,10 @@
             android:name="eu.smartsantander.androidExperimentation.tabs.statsTab"
             android:label="statsTab" >
         </activity>
+        <activity
+            android:name="eu.smartsantander.androidExperimentation.tabs.ExperimentsTab"
+            android:label="statsTab" >
+        </activity>
  		<activity
             android:label="gps"
             android:name="eu.smartsantander.androidExperimentation.tabs.gpsActivity" >
@@ -164,13 +169,13 @@
 
         <receiver
             android:name="eu.smartsantander.androidExperimentation.operations.NetworkChangeReceiver"
-            android:label="NetworkChangeReceiver" 
+            android:label="NetworkChangeReceiver"
             android:enabled="true">
             <intent-filter>
                 <action android:name="android.net.conn.CONNECTIVITY_CHANGE" />
                 <action android:name="android.net.wifi.WIFI_STATE_CHANGED" />
             </intent-filter>
-        </receiver>        
+        </receiver>
     </application>
 
     <uses-sdk android:minSdkVersion="5" />
@@ -203,11 +208,5 @@
     <uses-permission android:name="android.permission.READ_SOCIAL_STREAM" />
     <uses-permission android:name="com.android.browser.permission.READ_HISTORY_BOOKMARKS" />
     <uses-permission android:name="android.permission.GET_TASKS" />
-    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
-    <uses-permission android:name="android.permission.READ_PHONE_STATE" />
-    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
-    <uses-permission android:name="android.permission.INTERNET" />
-    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
-    <uses-permission android:name="android.permission.ACCESS_MOCK_LOCATION" />
 
 </manifest>
