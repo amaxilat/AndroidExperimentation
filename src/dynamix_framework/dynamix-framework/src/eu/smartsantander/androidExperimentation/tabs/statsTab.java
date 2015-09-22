@@ -42,7 +42,14 @@ import eu.smartsantander.androidExperimentation.Constants;
 
 /**
  * This tab displays overall stats about the activity of this specific device
- * 
+ *
+ * Uses several textviews to display info regarding statistics of the current user, if any,
+ * and a webview to display a graph retrieved as an image from the experimentation server.
+ * The image is created at the server using jfreechart and some obscure JSP...
+ *
+ *  TODO: CHANGE THE WAY WE HANDLE THE SERVER AND JSP URLs
+ *
+ *
  */
 
 public class statsTab extends Activity implements
@@ -54,6 +61,7 @@ public class statsTab extends Activity implements
 	private WebView myWebView;
 	private WebSettings webSettings;
 	private String html;
+	private loadJPGstatsTask jpgTask;
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
@@ -87,9 +95,17 @@ public class statsTab extends Activity implements
 
 		prefs.registerOnSharedPreferenceChangeListener(listener);
 
-		// check connectivity
+		// fill textViews with device data
 
-		String theJPGData;
+		fillStatsFields();
+
+		// call the AsyncTask to get the stats picture
+
+		jpgTask = new loadJPGstatsTask();
+		jpgTask.execute();
+
+
+		/*String theJPGData;
 
 		if (checkNetworkIsAvailable()) {
 
@@ -102,10 +118,8 @@ public class statsTab extends Activity implements
 			theJPGData = prefs.getString("pictureStatsData", "Not available");
 		}
 
-		myWebView
-				.loadDataWithBaseURL(null, theJPGData, "text/html", null, null);
+		myWebView.loadDataWithBaseURL(null, theJPGData, "text/html", null, null);*/
 
-		fillStatsFields();
 
 	}
 
@@ -115,6 +129,51 @@ public class statsTab extends Activity implements
 		// TODO Auto-generated method stub
 
 	}
+
+
+
+	// handle the downloading of the statistics JPG from the server as an asyncTask
+	// otherwise, the UI blocks in case of network connectivity issues
+
+	private class loadJPGstatsTask extends AsyncTask<String, Integer, String> {
+
+		String theJPGData;
+
+
+		@Override
+		protected void onPreExecute(){
+			System.out.println("ENTERING ASYNC TASK");
+		}
+
+
+		@Override
+		protected void onPostExecute(String j){
+			myWebView.loadDataWithBaseURL(null, j, "text/html", null, null);
+		}
+
+
+		@Override
+		protected String doInBackground(String... params) {
+
+			if (checkNetworkIsAvailable()) {
+
+				theJPGData = loadTheStatsJPG();
+				SharedPreferences.Editor editor = prefs.edit();
+				editor.putString("pictureStatsData", theJPGData);
+				editor.commit();
+
+			} else {
+				theJPGData = prefs.getString("pictureStatsData", "Not available");
+			}
+
+			return theJPGData;
+		}
+
+
+	}
+
+
+
 
 	public class myWebClient extends WebViewClient {
 
@@ -139,8 +198,7 @@ public class statsTab extends Activity implements
 
 		// String thePNGData = loadTheStatsJPG();
 
-		String theJPGData = prefs
-				.getString("pictureStatsData", "Not available");
+		/*String theJPGData = prefs.getString("pictureStatsData", "Not available");
 
 		if (checkNetworkIsAvailable()) {
 
@@ -154,7 +212,8 @@ public class statsTab extends Activity implements
 		}
 
 		myWebView
-				.loadDataWithBaseURL(null, theJPGData, "text/html", null, null);
+				.loadDataWithBaseURL(null, theJPGData, "text/html", null, null);*/
+		jpgTask.execute();
 		super.onResume();
 
 	}

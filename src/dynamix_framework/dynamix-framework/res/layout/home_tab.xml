@@ -5,59 +5,80 @@
               android:orientation="vertical">
 
     <TextView
-            android:id="@+id/deviceId_label"
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:text="@string/deviceId_label"
-            android:textAppearance="?android:attr/textAppearanceMedium"
-            android:background="@drawable/customcatborder"/>
+        android:id="@+id/deviceId_label"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:editable="false" 
+        android:text="@string/deviceId_label"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:background="@drawable/customcatborder"
+        android:fontFamily="sans-serif-light"
+        />
+     
+    <TextView
+        android:id="@android:id/empty"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="top"
+        android:layout_weight="1"
+        android:text=""
+        android:fontFamily="sans-serif-light"
+    />
 
     <TextView
-            android:id="@android:id/empty"
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:layout_gravity="top"
-            android:layout_weight="1"
-            android:text=""/>
-
+        android:id="@+id/experiment_label"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:editable="false" 
+        android:text="@string/experiment_label"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:background="@drawable/customcatborder"
+        android:fontFamily="sans-serif-light"
+        />
+    
+    
     <TextView
-            android:id="@+id/experiment_label"
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:text="@string/experiment_label"
-            android:textAppearance="?android:attr/textAppearanceMedium"
-            android:background="@drawable/customcatborder"/>
-
+        android:id="@+id/experiment_id"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:editable="false" 
+        android:text="-"
+        android:textAppearance="?android:attr/textAppearanceMedium" 
+        android:background="@drawable/customsubcatborder"
+    android:fontFamily="sans-serif-light"
+        />
+    
     <TextView
-            android:id="@+id/experiment_id"
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:text="@string/placeholder_empty"
-            android:textAppearance="?android:attr/textAppearanceMedium"
-            android:background="@drawable/customsubcatborder"/>
+        android:id="@+id/experiment_description"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:editable="false" 
+        android:text="-"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:fontFamily="sans-serif-light"/>
 
-    <TextView
-            android:id="@+id/experiment_description"
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:text="@string/placeholder_empty"
-            android:textAppearance="?android:attr/textAppearanceMedium"/>
+     <TextView
+        android:id="@android:id/empty"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="top"
+        android:layout_weight="1"
+        android:text=""
+        android:fontFamily="sans-serif-light"
+    />
 
-    <TextView
-            android:id="@android:id/empty"
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:layout_gravity="top"
-            android:layout_weight="1"
-            android:text="@string/empty"/>
+ <TextView
+        android:id="@+id/connection_status"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:editable="false"
+        android:text="-"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:background="@drawable/customsubcatborder"
+     android:fontFamily="sans-serif-light"
+        />
+ 
 
-    <TextView
-            android:id="@+id/connection_status"
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:text="@string/placeholder_empty"
-            android:textAppearance="?android:attr/textAppearanceMedium"
-            android:background="@drawable/customsubcatborder"/>
 
     <ListView
             android:id="@android:id/list"
@@ -67,12 +88,14 @@
             android:visibility="gone"/>
 
     <TextView
-            android:id="@android:id/empty"
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:layout_gravity="top"
-            android:layout_weight="1"
-            android:text="@string/noAuthApps"/>
+        android:id="@android:id/empty"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="top"
+        android:layout_weight="1"
+        android:text="@string/noAuthApps"
+        android:fontFamily="sans-serif-light"
+        />
 
     <LinearLayout
             android:id="@+id/TableLayout01"
