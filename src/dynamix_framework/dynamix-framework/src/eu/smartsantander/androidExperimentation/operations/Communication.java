@@ -17,6 +17,7 @@ import org.ksoap2.serialization.SoapPrimitive;
 import org.ksoap2.serialization.SoapSerializationEnvelope;
 import org.ksoap2.transport.HttpTransportSE;
 import org.springframework.http.converter.StringHttpMessageConverter;
+import org.springframework.web.client.HttpClientErrorException;
 import org.springframework.web.client.RestTemplate;
 
 import java.io.IOException;
@@ -145,8 +146,7 @@ public class Communication extends Thread implements Runnable {
             Log.i(TAG, jsonReport);
             post("/experiment", jsonReport);
             return 0;
-        } catch (Exception e) {
-            e.printStackTrace();
+        } catch (HttpClientErrorException e) {
             return 1;
         }
     }

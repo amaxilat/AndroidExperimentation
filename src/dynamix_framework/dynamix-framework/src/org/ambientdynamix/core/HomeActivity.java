@@ -15,17 +15,6 @@
  */
 package org.ambientdynamix.core;
 
-import java.util.ArrayList;
-import java.util.Timer;
-import java.util.TimerTask;
-
-import com.parse.Parse;
-import com.parse.ParsePush;
-import org.ambientdynamix.data.DynamixPreferences;
-
-import eu.smartsantander.androidExperimentation.DataStorage;
-import eu.smartsantander.androidExperimentation.tabs.jobsTab;
-
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.ListActivity;
@@ -44,263 +33,273 @@ import android.widget.AdapterView.AdapterContextMenuInfo;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.ToggleButton;
+import com.parse.Parse;
+import org.ambientdynamix.data.DynamixPreferences;
+
+import java.util.ArrayList;
 
 /**
  * Home user interface, which shows the current authorized Dynamix applications along with their status. This UI also
  * provides a toggle button for activating/deactivating the Dynamix Framework.
- * 
+ *
  * @author Darren Carlson
  */
 public class HomeActivity extends ListActivity {
-	// Private data
-	private final String TAG = this.getClass().getSimpleName();
-	private static final int ENABLE_ID = Menu.FIRST + 1;
-	private static final int DELETE_ID = Menu.FIRST + 2;
-	private static final int ACTIVITY_EDIT = 1;
-	private static HomeActivity activity;
-	//private static HomeActivity me;
-	private DynamixApplicationAdapter adapter;
-	private ListView appList = null;
-	private Timer refresher;
-	public final Handler uiHandler = new Handler();
-	private ToggleButton togglebutton = null;
-	
-	
-	//SmartSantander
-	private TextView phoneIdTv;		 
-	private TextView expIdTv;
-	private TextView expDescriptionTv;
-	private TextView connectionStatus;
-	
-	
-	
-	// Create runnable for updating the UI
-	final Runnable updateList = new Runnable() {
-		public void run() {
-			if (adapter != null)
-				adapter.notifyDataSetChanged();
-		}
-	};
+    private static final long DELAY_TIME = 5000;
+    // Private data
+    private final String TAG = this.getClass().getSimpleName();
+    private static final int ENABLE_ID = Menu.FIRST + 1;
+    private static final int DELETE_ID = Menu.FIRST + 2;
+    private static final int ACTIVITY_EDIT = 1;
+    private static HomeActivity activity;
+    //private static HomeActivity me;
+    private DynamixApplicationAdapter adapter;
+    private ListView appList = null;
+    private ToggleButton togglebutton = null;
 
-	// Refreshes the UI
-	public static void refreshData() {
-		if (activity != null)
-			activity.uiHandler.post(new Runnable() {
-				@Override
-				public void run() {
-					activity.refresh();
-				}
-			});
-	}
 
-	/**
-	 * Static method that allows callers to change the enabled state of the Dynamix Enable/Disable button. Note that
-	 * this method is only cosmetic, meaning that it does not actually call methods on the DynamixService.
-	 * 
-	 * @param active
-	 */
-	public static void setActiveState(boolean active) {
-		if (activity != null) {
-			if (activity.togglebutton != null)
-				activity.togglebutton.setChecked(active);
-		}
-	}
+    //SmartSantander
+    private TextView phoneIdTv;
+    private TextView expIdTv;
+    private TextView expDescriptionTv;
+    private TextView connectionStatus;
 
-	@Override
-	public boolean onContextItemSelected(final MenuItem item) {
-		AdapterContextMenuInfo info = (AdapterContextMenuInfo) item.getMenuInfo();
-		AlertDialog.Builder builder = null;
-		final DynamixApplication app = (DynamixApplication) appList.getItemAtPosition(info.position);
-		switch (item.getItemId()) {
-		case ENABLE_ID:
-			// Present "Are You Sure" dialog box
-			builder = new AlertDialog.Builder(this);
-			builder.setMessage(app.isEnabled() ? "Block " + app.getName() + "?" : "Unblock " + app.getName() + "?")
-					.setCancelable(false).setPositiveButton("Yes", new DialogInterface.OnClickListener() {
-						public void onClick(DialogInterface dialog, int id) {
-							app.setEnabled(!app.isEnabled());
-							adapter.notifyDataSetChanged();
-							DynamixService.changeApplicationEnabled(app, app.isEnabled());
-						}
-					}).setNegativeButton("No", new DialogInterface.OnClickListener() {
-						public void onClick(DialogInterface dialog, int id) {
-							dialog.cancel();
-						}
-					});
-			builder.create().show();
-			return true;
-		case DELETE_ID:
-			// Present "Are You Sure" dialog box
-			builder = new AlertDialog.Builder(this);
-			builder.setMessage("Remove " + app.getName() + "?").setCancelable(false)
-					.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
-						public void onClick(DialogInterface dialog, int id) {
-							adapter.remove(app);
-							DynamixService.revokeSecurityAuthorization(app);
-						}
-					}).setNegativeButton("No", new DialogInterface.OnClickListener() {
-						public void onClick(DialogInterface dialog, int id) {
-							dialog.cancel();
-						}
-					});
-			builder.create().show();
-			return true;
-		}
-		return super.onContextItemSelected(item);
-	}
 
-	@Override
-	public void onCreate(Bundle savedInstanceState) {
-		Log.v(TAG, "Activity State: onCreate()");
-		super.onCreate(savedInstanceState);
-		Parse.initialize(this, "0MnJVDC7k6ySseWr771fSxhsE9IwDwrY9tvwEDeC", "A51n4N3wjX9AxWs0XbtQ99omRbRmYYAZh1WUicmm");
+    private Handler mUiHandler = new Handler();
 
-		// Set our static reference
-		activity = this;
-		setContentView(R.layout.home_tab);
-		appList = getListView();
-		appList.setClickable(true);
-		
-		// Set an OnItemClickListener on the appList to support editing the
-		// applications
-		appList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-			public void onItemClick(AdapterView<?> arg0, View arg1, int position, long arg3) {
-				editApplication((DynamixApplication) appList.getItemAtPosition(position));
-			}
-		});
+    // Setup an state refresh timer, which periodically updates application
+    // state in the appList
+    final Runnable dataRefresher = new Runnable() {
+        @Override
+        public void run() {
+            mUiHandler.post(updateList);
+            refreshData();
+            mUiHandler.postDelayed(dataRefresher, DELAY_TIME);
+        }
+    };
 
-		// Setup the Dynamix Enable/Disable button
-		togglebutton = (ToggleButton) findViewById(R.id.DynamixActiveToggle);
-		togglebutton.setOnClickListener(new View.OnClickListener() {
-			public void onClick(View v) {
-				if (togglebutton.isChecked()) {
-					DynamixService.startFramework();
-				} else {
-					
-					DynamixService.stopFramework();
-				}
-			}
-		});
-		// Setup an state refresh timer, which periodically updates application
-		// state in the appList
-		refresher = new Timer(true);
-		TimerTask t = new TimerTask() {
-			@Override
-			public void run() {
-				uiHandler.post(updateList);
-				((HomeActivity) activity).refreshData();
-			}
-		};
-		refresher.scheduleAtFixedRate(t, 0, 5000);
-		registerForContextMenu(appList);
-		
-		//SmartSantander
-		 phoneIdTv = (TextView) this.findViewById(R.id.deviceId_label);
-		 expIdTv = (TextView) this.findViewById(R.id.experiment_id);		 
-		 expDescriptionTv = (TextView) this.findViewById(R.id.experiment_description);
-		 connectionStatus = (TextView) this.findViewById(R.id.connection_status);
-		 appList.setVisibility(View.GONE);
-		 
-		 
-		 	
-	};
+    // Create runnable for updating the UI
+    final Runnable updateList = new Runnable() {
+        public void run() {
+            if (adapter != null)
+                adapter.notifyDataSetChanged();
+        }
+    };
 
-	@Override
-	public void onCreateContextMenu(ContextMenu menu, View v, ContextMenuInfo menuInfo) {
-		super.onCreateContextMenu(menu, v, menuInfo);
-		menu.setHeaderTitle(R.string.app_list_contextmenu_title);
-		menu.add(0, ENABLE_ID, 0, R.string.app_contextmenu_block);
-		menu.add(0, DELETE_ID, 0, R.string.app_contextmenu_remove);
-	}
 
-	@Override
-	protected void onActivityResult(int requestCode, int resultCode, Intent intent) {
-		super.onActivityResult(requestCode, resultCode, intent);
-		if (resultCode == Activity.RESULT_OK) {
-			Bundle extras = intent.getExtras();
-			switch (requestCode) {
-			case ACTIVITY_EDIT:
-				// Access the serialized app coming in from the Intent's Bundle
-				// extra
-				DynamixApplication app = (DynamixApplication) extras.getSerializable("app");
-				// Update the DynamixService with the updated application
-				DynamixService.updateApplication(app);
-				refresh();
-				break;
-			}
-		}
-	}
+    // Refreshes the UI
+    public static void refreshData() {
+        if (activity != null)
+            activity.mUiHandler.post(new Runnable() {
+                @Override
+                public void run() {
+                    activity.refresh();
+                }
+            });
+    }
 
-	@Override
-	protected void onResume() {
-		super.onResume();
-		Log.i(TAG, "onResume");
-		try{
-			refresh();
-		}catch(Exception e){
-			e.printStackTrace();
-		}
-		
-	}
-		public void setSmartSantanderInfo(){
-		//SmartSantander
-			if (DynamixService.isEnabled()==true){
-				if(DynamixService.isDeviceRegistered()==false){
-		    		DynamixService.getPhoneProfiler().register();
-		    		phoneIdTv.setText(String.valueOf("SmartSantander Device ID: Registering..."));
-		    	}else{
-		    		phoneIdTv.setText("SmartSantander Device ID:"+String.valueOf(DynamixService.getPhoneProfiler().getPhoneId()));
-		    		DynamixService.getPhoneProfiler().savePrefs();
-		    	}
-			}else {
-				phoneIdTv.setText(String.valueOf("SmartSantander Device ID: Not Connected"));
-			}
-			
-			if (DynamixService.getExperiment()!=null){
-				phoneIdTv.setText("SmartSantander Device ID: "+String.valueOf(DynamixService.getPhoneProfiler().getPhoneId()));
-				expIdTv.setText("Id: "+String.valueOf(DynamixService.getExperiment().getId())+ " Name: ");		 
-				expDescriptionTv.setText(String.valueOf(DynamixService.getExperiment().getName()));			
-			}
-			
-			if (DynamixService.getConnectionStatus() && DynamixService.isEnabled())
-				connectionStatus.setText("Connected with SmartSantander Server");	
-			else
-				connectionStatus.setText("Disconnected from SmartSantander Server");
-			this.appList.setVisibility(View.GONE);
-	}
+    /**
+     * Static method that allows callers to change the enabled state of the Dynamix Enable/Disable button. Note that
+     * this method is only cosmetic, meaning that it does not actually call methods on the DynamixService.
+     *
+     * @param active
+     */
+    public static void setActiveState(boolean active) {
+        if (activity != null) {
+            if (activity.togglebutton != null)
+                activity.togglebutton.setChecked(active);
+        }
+    }
 
-	/**
-	 * Edit the application by creating an intent to launch the ApplicationSettingsActivity, making sure to send along
-	 * the application as a Bundle extra.
-	 * 
-	 * @param app
-	 */
-	private void editApplication(DynamixApplication app) {
-		Bundle bundle = new Bundle();
-		bundle.putBoolean("pending", false);
-		bundle.putSerializable("app", app);
-		Intent i = new Intent(this, ContextFirewallActivity.class);
-		i.putExtras(bundle);
-		startActivityForResult(i, ACTIVITY_EDIT);
-	}
+    @Override
+    public boolean onContextItemSelected(final MenuItem item) {
+        AdapterContextMenuInfo info = (AdapterContextMenuInfo) item.getMenuInfo();
+        AlertDialog.Builder builder = null;
+        final DynamixApplication app = (DynamixApplication) appList.getItemAtPosition(info.position);
+        switch (item.getItemId()) {
+            case ENABLE_ID:
+                // Present "Are You Sure" dialog box
+                builder = new AlertDialog.Builder(this);
+                builder.setMessage(app.isEnabled() ? "Block " + app.getName() + "?" : "Unblock " + app.getName() + "?")
+                        .setCancelable(false).setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int id) {
+                        app.setEnabled(!app.isEnabled());
+                        adapter.notifyDataSetChanged();
+                        DynamixService.changeApplicationEnabled(app, app.isEnabled());
+                    }
+                }).setNegativeButton("No", new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int id) {
+                        dialog.cancel();
+                    }
+                });
+                builder.create().show();
+                return true;
+            case DELETE_ID:
+                // Present "Are You Sure" dialog box
+                builder = new AlertDialog.Builder(this);
+                builder.setMessage("Remove " + app.getName() + "?").setCancelable(false)
+                        .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog, int id) {
+                                adapter.remove(app);
+                                DynamixService.revokeSecurityAuthorization(app);
+                            }
+                        }).setNegativeButton("No", new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int id) {
+                        dialog.cancel();
+                    }
+                });
+                builder.create().show();
+                return true;
+        }
+        return super.onContextItemSelected(item);
+    }
 
-	private void refresh() {
-		if (DynamixService.isFrameworkInitialized()) {
-			// Setup toggle button with proper state
-			boolean dynamixEnabled = DynamixPreferences.isDynamixEnabled(this);
-			togglebutton.setChecked(dynamixEnabled);
-			// If Dynamix is enabled, but the DynamixService is not running, then call startFramework
-			if (dynamixEnabled && !DynamixService.isFrameworkStarted()) {
-				DynamixService.startFramework();
-			}
-			// Load the registered application List box
-			this.adapter = new DynamixApplicationAdapter(this, R.layout.icon_row, new ArrayList<DynamixApplication>(
-					DynamixService.SettingsManager.getAuthorizedApplications()), false);
-			this.adapter.setNotifyOnChange(true);
-			appList.setAdapter(this.adapter);
-				
-		}
-		appList.setVisibility(View.GONE);//smartsantander
-		setSmartSantanderInfo();
-	}
+    @Override
+    public void onCreate(Bundle savedInstanceState) {
+        Log.v(TAG, "Activity State: onCreate()");
+        super.onCreate(savedInstanceState);
+        Parse.initialize(this, "0MnJVDC7k6ySseWr771fSxhsE9IwDwrY9tvwEDeC", "A51n4N3wjX9AxWs0XbtQ99omRbRmYYAZh1WUicmm");
+
+        // Set our static reference
+        activity = this;
+        setContentView(R.layout.home_tab);
+        appList = getListView();
+        appList.setClickable(true);
+
+        // Set an OnItemClickListener on the appList to support editing the
+        // applications
+        appList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            public void onItemClick(AdapterView<?> arg0, View arg1, int position, long arg3) {
+                editApplication((DynamixApplication) appList.getItemAtPosition(position));
+            }
+        });
+
+        // Setup the Dynamix Enable/Disable button
+        togglebutton = (ToggleButton) findViewById(R.id.DynamixActiveToggle);
+        togglebutton.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                if (togglebutton.isChecked()) {
+                    DynamixService.startFramework();
+                } else {
+
+                    DynamixService.stopFramework();
+                }
+            }
+        });
+
+
+        // Schedule the first execution
+        mUiHandler.postDelayed(dataRefresher, DELAY_TIME);
+
+        //SmartSantander
+        phoneIdTv = (TextView) this.findViewById(R.id.deviceId_label);
+        expIdTv = (TextView) this.findViewById(R.id.experiment_id);
+        expDescriptionTv = (TextView) this.findViewById(R.id.experiment_description);
+        connectionStatus = (TextView) this.findViewById(R.id.connection_status);
+        appList.setVisibility(View.GONE);
+
+
+    }
+
+    ;
+
+    @Override
+    public void onCreateContextMenu(ContextMenu menu, View v, ContextMenuInfo menuInfo) {
+        super.onCreateContextMenu(menu, v, menuInfo);
+        menu.setHeaderTitle(R.string.app_list_contextmenu_title);
+        menu.add(0, ENABLE_ID, 0, R.string.app_contextmenu_block);
+        menu.add(0, DELETE_ID, 0, R.string.app_contextmenu_remove);
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent intent) {
+        super.onActivityResult(requestCode, resultCode, intent);
+        if (resultCode == Activity.RESULT_OK) {
+            Bundle extras = intent.getExtras();
+            switch (requestCode) {
+                case ACTIVITY_EDIT:
+                    // Access the serialized app coming in from the Intent's Bundle
+                    // extra
+                    DynamixApplication app = (DynamixApplication) extras.getSerializable("app");
+                    // Update the DynamixService with the updated application
+                    DynamixService.updateApplication(app);
+                    refresh();
+                    break;
+            }
+        }
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        Log.i(TAG, "onResume");
+        try {
+            refresh();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+    }
+
+    public void setSmartSantanderInfo() {
+        //SmartSantander
+        if (DynamixService.isEnabled()) {
+            if (!DynamixService.isDeviceRegistered()) {
+                DynamixService.getPhoneProfiler().register();
+                phoneIdTv.setText(String.valueOf("Device ID: Registering..."));
+            } else {
+                phoneIdTv.setText("Device ID:" + String.valueOf(DynamixService.getPhoneProfiler().getPhoneId()));
+                DynamixService.getPhoneProfiler().savePrefs();
+            }
+        } else {
+            phoneIdTv.setText(String.valueOf("Device ID: Not Connected"));
+        }
+
+        if (DynamixService.getExperiment() != null) {
+            phoneIdTv.setText("Device ID: " + String.valueOf(DynamixService.getPhoneProfiler().getPhoneId()));
+            expIdTv.setText("Id: " + String.valueOf(DynamixService.getExperiment().getId()) + " Name: ");
+            expDescriptionTv.setText(String.valueOf(DynamixService.getExperiment().getName()));
+        }
+
+        if (DynamixService.getConnectionStatus() && DynamixService.isEnabled())
+            connectionStatus.setText("Connected with Experimentation Server");
+        else
+            connectionStatus.setText("Disconnected from Experimentation Server");
+        this.appList.setVisibility(View.GONE);
+    }
+
+    /**
+     * Edit the application by creating an intent to launch the ApplicationSettingsActivity, making sure to send along
+     * the application as a Bundle extra.
+     *
+     * @param app
+     */
+    private void editApplication(DynamixApplication app) {
+        Bundle bundle = new Bundle();
+        bundle.putBoolean("pending", false);
+        bundle.putSerializable("app", app);
+        Intent i = new Intent(this, ContextFirewallActivity.class);
+        i.putExtras(bundle);
+        startActivityForResult(i, ACTIVITY_EDIT);
+    }
+
+    private void refresh() {
+        if (DynamixService.isFrameworkInitialized()) {
+            // Setup toggle button with proper state
+            boolean dynamixEnabled = DynamixPreferences.isDynamixEnabled(this);
+            togglebutton.setChecked(dynamixEnabled);
+            // If Dynamix is enabled, but the DynamixService is not running, then call startFramework
+            if (dynamixEnabled && !DynamixService.isFrameworkStarted()) {
+                DynamixService.startFramework();
+            }
+            // Load the registered application List box
+            this.adapter = new DynamixApplicationAdapter(this, R.layout.icon_row, new ArrayList<DynamixApplication>(
+                    DynamixService.SettingsManager.getAuthorizedApplications()), false);
+            this.adapter.setNotifyOnChange(true);
+            appList.setAdapter(this.adapter);
+
+        }
+        appList.setVisibility(View.GONE);//smartsantander
+        setSmartSantanderInfo();
+    }
 }

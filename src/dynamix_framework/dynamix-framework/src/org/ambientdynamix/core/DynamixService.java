@@ -24,7 +24,6 @@ import android.os.*;
 import android.util.Log;
 import android.util.Pair;
 import android.widget.Toast;
-import de.mindpipe.android.logging.log4j.LogConfigurator;
 import eu.smartsantander.androidExperimentation.Constants;
 import eu.smartsantander.androidExperimentation.DataStorage;
 import eu.smartsantander.androidExperimentation.jsonEntities.Experiment;
@@ -101,6 +100,7 @@ import java.util.*;
 public final class DynamixService extends Service {
 	// Private static data
 	private final static String TAG = DynamixService.class.getSimpleName();
+	private static final String DATE_FORMAT = "yyyyy_mm_dd_hh_mm_ss";
 	private static FrameworkConfiguration config;
 	private static OSGIManager OsgiMgr;
 	private static ContextManager ContextMgr;
@@ -160,11 +160,11 @@ public final class DynamixService extends Service {
 	private static long totalTimeConnectedOnline=0;
 
 	public static void ConfigureLog4J() {
-	        final LogConfigurator logConfigurator = new LogConfigurator();
+//	        final LogConfigurator logConfigurator = new LogConfigurator();
 	        Date d=new Date(System.currentTimeMillis());
-	        SimpleDateFormat dt1 = new SimpleDateFormat("yyyyy_mm_dd_hh_mm_ss");
-	        logConfigurator.setFileName(Environment.getExternalStorageDirectory() + File.separator + "dynamix"+File.separator+"log"+dt1.format(d)+".txt");
-	        logConfigurator.configure();
+	        SimpleDateFormat dt1 = new SimpleDateFormat(DATE_FORMAT);
+//	        logConfigurator.setFileName(Environment.getExternalStorageDirectory() + File.separator + "dynamix"+File.separator+"log"+dt1.format(d)+".txt");
+//	        logConfigurator.configure();
 	        Log.d(TAG,"Log Started -------------------------------");
     }
 

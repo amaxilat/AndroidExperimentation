@@ -18,6 +18,7 @@ package org.ambientdynamix.core;
 import java.lang.Thread.UncaughtExceptionHandler;
 import java.util.UUID;
 
+import android.content.pm.ActivityInfo;
 import org.ambientdynamix.api.application.ErrorCodes;
 import org.ambientdynamix.api.application.IDynamixListener;
 import org.ambientdynamix.api.contextplugin.ContextPlugin;
@@ -183,7 +184,7 @@ public class ContextInteractionHostActivity extends Activity {
 																.getSecuredContext(runtime.getSessionId()), runtime,
 																responseId, contextType, getTitleBarHeight());
 														// Set the screen orientation
-														setRequestedOrientation(runtime.getScreenOrientation());
+														setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
 														// Inject the plugin's View into the host Activity to show it
 														setContentView(v, new ViewGroup.LayoutParams(
 																LayoutParams.FILL_PARENT, LayoutParams.FILL_PARENT));
