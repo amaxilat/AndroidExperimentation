@@ -130,9 +130,9 @@ public class BaseActivity extends TabActivity implements ExceptionCallback {
     }
 
     protected static void setTitlebarDisabled() {
-        if (baseActivity != null)
-            baseActivity.changeTitlebarState(Color.RED,
-                    myRes.getString(R.string.dynamix_enable_toggle_off));// "Experimentation is disabled"
+        //if (baseActivity != null)
+        //    baseActivity.changeTitlebarState(Color.RED,
+        //            myRes.getString(R.string.dynamix_enable_toggle_off));// "Experimentation is disabled"
         // );//"Experimentation"
         // + DynamixService.getFrameworkVersion()
         // + " is disabled");
@@ -148,7 +148,7 @@ public class BaseActivity extends TabActivity implements ExceptionCallback {
 
     protected static void setTitlebarRestarting() {// smartsantander
         if (baseActivity != null)
-            baseActivity.changeTitlebarState(Color.rgb(255, 153, 0),
+            baseActivity.changeTitlebarState(Color.rgb(100, 153, 0),
                     myRes.getString(R.string.dynamix_restarting));// "Experimentation"
         // + DynamixService.getFrameworkVersion()
         // + " is enabled");
@@ -212,20 +212,20 @@ public class BaseActivity extends TabActivity implements ExceptionCallback {
         tabHost.addTab(spec);
         intent = new Intent().setClass(this, PendingApplicationActivity.class);
         intent.putExtras(b);
-        spec = tabHost
-                .newTabSpec("pending")
-                .setIndicator("Pending",
-                        res.getDrawable(R.drawable.tab_pending))
-                .setContent(intent);
-        // tabHost.addTab(spec);
-        intent = new Intent().setClass(this, PrivacyActivity.class);
-        intent.putExtras(b);
-
-        spec = tabHost
-                .newTabSpec("privacy")
-                .setIndicator("Privacy",
-                        res.getDrawable(R.drawable.tab_profiles))
-                .setContent(intent);
+//        spec = tabHost
+//                .newTabSpec("pending")
+//                .setIndicator("Pending",
+//                        res.getDrawable(R.drawable.tab_pending))
+//                .setContent(intent);
+//        // tabHost.addTab(spec);
+//        intent = new Intent().setClass(this, PrivacyActivity.class);
+//        intent.putExtras(b);
+//
+//        spec = tabHost
+//                .newTabSpec("privacy")
+//                .setIndicator("Privacy",
+//                        res.getDrawable(R.drawable.tab_profiles))
+//                .setContent(intent);
 
         // tabHost.addTab(spec);
 
@@ -235,13 +235,13 @@ public class BaseActivity extends TabActivity implements ExceptionCallback {
                 .setIndicator("", res.getDrawable(R.drawable.tab_plugins))
                 .setContent(intent);
         tabHost.addTab(spec);
-        intent = new Intent().setClass(this, UpdatesActivity.class);
-        intent.putExtras(b);
-        spec = tabHost
-                .newTabSpec("updates")
-                .setIndicator("Updates",
-                        res.getDrawable(R.drawable.tab_updates))
-                .setContent(intent);
+//        intent = new Intent().setClass(this, UpdatesActivity.class);
+//        intent.putExtras(b);
+//        spec = tabHost
+//                .newTabSpec("updates")
+//                .setIndicator("Updates",
+//                        res.getDrawable(R.drawable.tab_updates))
+//                .setContent(intent);
         // tabHost.addTab(spec);
         // Boot Dynamix
         DynamixService.boot(this, true, false, false);

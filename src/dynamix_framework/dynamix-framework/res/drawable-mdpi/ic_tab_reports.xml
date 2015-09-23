@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <selector xmlns:android="http://schemas.android.com/apk/res/android">
     <!-- When selected, use grey -->
-    <item android:drawable="@drawable/about_icon_on"
+    <item android:drawable="@drawable/organicity_small_pink"
           android:state_selected="true" />
     <!-- When not selected, use white-->
-    <item android:drawable="@drawable/about_icon" />
+    <item android:drawable="@drawable/organicity_small_pink_grey" />
 </selector>

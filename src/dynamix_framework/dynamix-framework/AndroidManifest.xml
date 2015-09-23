@@ -135,7 +135,7 @@
         </activity>
         <activity
                 android:name="eu.smartsantander.androidExperimentation.tabs.reportTab"
-                android:label="reportTab">
+                android:label="reportsTab">
         </activity>
         <activity
                 android:name="eu.smartsantander.androidExperimentation.tabs.securityTab"
