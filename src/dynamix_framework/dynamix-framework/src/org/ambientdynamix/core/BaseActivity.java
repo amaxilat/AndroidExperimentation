@@ -276,7 +276,7 @@ public class BaseActivity extends TabActivity implements ExceptionCallback {
         TabSpec tabSpecReports = tabHost
                 .newTabSpec("reports")
                 .setIndicator("",
-                        ressources.getDrawable(R.drawable.organicity_small_pink))
+                        ressources.getDrawable(R.drawable.ic_tab_reports))
                 .setContent(intentReports);
 
         // stats tab

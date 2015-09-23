@@ -4,7 +4,8 @@
     android:versionCode="1"
     android:versionName="1.0" >
 
-    <application android:icon="@drawable/organicity_small_pink" >
+    <application android:icon="@drawable/organicity_small_pink"
+        android:label="@string/app_name" >
         <activity
             android:name="org.ambientdynamix.core.BaseActivity"
             android:configChanges="orientation|keyboardHidden"
