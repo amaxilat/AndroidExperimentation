@@ -55,7 +55,7 @@ public final class Permission implements Serializable {
 	 * creates a Permission using the underlying value of the constant String, which is extracted from the target class
 	 * using Java reflection. Permission objects are always created initially as 'not granted', meaning that they will
 	 * not allow access to the resource they are protecting by default.
-	 * 
+	 *
 	 * @param permissionString
 	 *            A properly formatted string representing a protected Android resource or permission
 	 * @return Permission A default Permission, or null if the Permission cannot be created from the String.
@@ -86,11 +86,11 @@ public final class Permission implements Serializable {
 			}
 			Log.w(TAG, "Could not find class for: " + objectString);
 		} catch (Exception e) {
-			Log.w(TAG, e.getMessage());
+			Log.w(TAG, "Error:"+e.getMessage());
 		}
 		return null;
 	}
-	
+
 	/**
 	 * Creates a Dynamix Permission from the incoming permissionString. The permissionString must describe an existing
 	 * Android or Dynamix permission. This method takes a 'permissionString' that is formatted to match a static
@@ -99,17 +99,17 @@ public final class Permission implements Serializable {
 	 * creates a Permission using the underlying value of the constant String, which is extracted from the target class
 	 * using Java reflection. Permission objects are always created initially as 'not granted', meaning that they will
 	 * not allow access to the resource they are protecting by default.
-	 * 
+	 *
 	 * @param permissionString
 	 *            A properly formatted string representing a protected Android resource or permission
 	 * @return Permission A default Permission, or null if the Permission cannot be created from the String.
-	 * 
+	 *
 	 * @author Peter Aufner
 	 */
 	public static Permission createPermissionFromAndroidPermission(String permissionString) {
-		
+
 		Log.v(TAG, "createPermissionFromAndroidPermission for permissionString: " + permissionString);
-		
+
 		permissionString = permissionString.trim();
 		String shortName = permissionString.substring(permissionString.lastIndexOf('.')+1);
 		try {
@@ -127,7 +127,7 @@ public final class Permission implements Serializable {
 
 	/**
 	 * Utility method used to convert strings to Class objects.
-	 * 
+	 *
 	 * @param clazz
 	 * @return
 	 */

@@ -8,15 +8,18 @@ package eu.smartsantander.androidExperimentation.jsonEntities;
  * To change this template use File | Settings | File Templates.
  */
 public class Smartphone {
-	
-	
-	
+
+
+
     private int id;
 
+    public Smartphone( ){
+
+	}
     public Smartphone(int id){
 		this.id=id;
 	}
-    
+
     public int getId() {
         return id;
     }

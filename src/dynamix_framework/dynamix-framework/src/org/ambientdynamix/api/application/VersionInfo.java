@@ -87,7 +87,7 @@ public final class VersionInfo implements Parcelable, Comparable<VersionInfo>, S
 				micro = Integer.parseInt(values[2]);
 			return new VersionInfo(major, minor, micro);
 		} catch (NumberFormatException e) {
-			Log.w(TAG, e.getMessage());
+			Log.w(TAG, "Error: "+e.getMessage());
 		}
 		return null;
 	}

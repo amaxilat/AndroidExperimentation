@@ -28,14 +28,16 @@ import android.location.LocationManager;
 import android.os.Bundle;
 import android.os.Handler;
 import android.util.Log;
-import android.view.*;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.MenuItem.OnMenuItemClickListener;
+import android.view.View;
+import android.view.ViewParent;
 import android.widget.TabHost;
 import android.widget.TabHost.TabSpec;
 import android.widget.Toast;
 import com.bugsense.trace.BugSenseHandler;
 import com.bugsense.trace.ExceptionCallback;
-import com.newrelic.agent.android.NewRelic;
 import eu.smartsantander.androidExperimentation.operations.NotificationHQManager;
 import eu.smartsantander.androidExperimentation.tabs.jobsTab;
 import eu.smartsantander.androidExperimentation.tabs.reportTab;
@@ -170,27 +172,27 @@ public class BaseActivity extends TabActivity implements ExceptionCallback {
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
-        Log.v(TAG, "Activity State: onCreate()");
         super.onCreate(savedInstanceState);
-        getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
-        context = this;
-
-        BugSenseHandler.initAndStartSession(this, "91ce9553");
-        BugSenseHandler.setExceptionCallback(this);
-
-        NewRelic.withApplicationToken(
-                "AA0fe9525a8553b77ed9ab623937bcd1bf403c6775"
-        ).start(this.getApplication());
-
-        // Set the Dynamix base activity so it can use our context
-        DynamixService.setBaseActivity(this);
-        // Request for the progress bar to be shown in the title
-        // requestWindowFeature(Window.FEATURE_INDETERMINATE_PROGRESS);
+        Log.v(TAG, "Activity State: onCreate()");
         setContentView(R.layout.main);
-        // setProgressBarVisibility(true);
         // Set our static reference
         baseActivity = this;
-        // setContentView(R.layout.main);
+
+        BugSenseHandler.initAndStartSession(baseActivity, "91ce9553");
+        BugSenseHandler.setExceptionCallback(baseActivity);
+
+//        NewRelic.withApplicationToken(
+//                "AA0fe9525a8553b77ed9ab623937bcd1bf403c6775"
+//        ).start(this.getApplication());
+
+
+        // Set the Dynamix base activity so it can use our context
+        DynamixService.setBaseActivity(baseActivity);
+
+        // Boot Dynamix
+        Log.i(TAG, "Calling DynamixService.boot");
+        DynamixService.boot(baseActivity, true, false, false);
+
         /*
          * Setup the Tab UI Reference:
 		 * http://developer.android.com/resources/tutorials
@@ -199,55 +201,16 @@ public class BaseActivity extends TabActivity implements ExceptionCallback {
         myRes = getResources();
         Resources res = getResources(); // Resource object to get Drawables
         tabHost = getTabHost(); // The activity TabHost
-        TabHost.TabSpec spec; // Resusable TabSpec for each tab
-        Intent intent; // Reusable Intent for each tab
         // Create an Intent to launch an Activity for the tab (to be reused)
-        intent = new Intent().setClass(this, HomeActivity.class);
         Bundle b = new Bundle();
         b.putBoolean("fromTab", true);
-        // Initialize a TabSpec for each tab and add it to the TabHost
-        spec = tabHost.newTabSpec("home")
-                .setIndicator("", res.getDrawable(R.drawable.tab_home))
-                .setContent(intent);
-        tabHost.addTab(spec);
-        intent = new Intent().setClass(this, PendingApplicationActivity.class);
-        intent.putExtras(b);
-        spec = tabHost
-                .newTabSpec("pending")
-                .setIndicator("Pending",
-                        res.getDrawable(R.drawable.tab_pending))
-                .setContent(intent);
-        // tabHost.addTab(spec);
-        intent = new Intent().setClass(this, PrivacyActivity.class);
-        intent.putExtras(b);
 
-        spec = tabHost
-                .newTabSpec("privacy")
-                .setIndicator("Privacy",
-                        res.getDrawable(R.drawable.tab_profiles))
-                .setContent(intent);
+        addHomeTab(res);
+//        addPendingApplicationTab(b, res);
+//        addPrivacyTab(b, res);
+        addPluginsTab(b, res);
+//        addUpdatesTab(b, res);
 
-        // tabHost.addTab(spec);
-
-        intent = new Intent().setClass(this, PluginsActivity.class);
-        intent.putExtras(b);
-        spec = tabHost.newTabSpec("plugins")
-                .setIndicator("", res.getDrawable(R.drawable.tab_plugins))
-                .setContent(intent);
-        tabHost.addTab(spec);
-        intent = new Intent().setClass(this, UpdatesActivity.class);
-        intent.putExtras(b);
-        spec = tabHost
-                .newTabSpec("updates")
-                .setIndicator("Updates",
-                        res.getDrawable(R.drawable.tab_updates))
-                .setContent(intent);
-        // tabHost.addTab(spec);
-        // Boot Dynamix
-        DynamixService.boot(this, true, false, false);
-
-        Resources ressources = getResources();
-        TabHost tabHost = getTabHost();
 
         // profile tab
         // Intent intentProfile = new Intent().setClass(this, profileTab.class);
@@ -256,44 +219,11 @@ public class BaseActivity extends TabActivity implements ExceptionCallback {
         // ressources.getDrawable(R.drawable.ic_tab_profile)).setContent(intentProfile);
 
         // security tab
-        Intent intentSecurity = new Intent().setClass(this, securityTab.class);
-        TabSpec tabSpecSecurity = tabHost
-                .newTabSpec("security")
-                .setIndicator("",
-                        ressources.getDrawable(R.drawable.ic_tab_security))
-                .setContent(intentSecurity);
+        addSecurityTab();
+        addJobsTab();
+        addStatisticsTab();
+        addReportTab();
 
-        // jobs tab
-        Intent intentJobs = new Intent().setClass(this, jobsTab.class);
-        TabSpec tabSpecJobs = tabHost
-                .newTabSpec("jobs")
-                .setIndicator("",
-                        ressources.getDrawable(R.drawable.ic_tab_jobs))
-                .setContent(intentJobs);
-
-        // report tab
-        Intent intentReports = new Intent().setClass(this, reportTab.class);
-        TabSpec tabSpecReports = tabHost
-                .newTabSpec("reports")
-                .setIndicator("",
-                        ressources.getDrawable(R.drawable.organicity_small_pink))
-                .setContent(intentReports);
-
-        // stats tab
-        // TODO: create new content for statistics
-        Intent intentStats = new Intent().setClass(this, statsTab.class);
-
-        TabSpec tabSpecStats = tabHost
-                .newTabSpec("stats")
-                .setIndicator("",
-                        ressources.getDrawable(R.drawable.ic_tab_stats))
-                .setContent(intentStats);
-
-
-        tabHost.addTab(tabSpecJobs);
-        tabHost.addTab(tabSpecStats);
-        tabHost.addTab(tabSpecReports);
-        tabHost.addTab(tabSpecSecurity);
         //
         DynamixService.ConfigureLog4J();
 
@@ -303,6 +233,57 @@ public class BaseActivity extends TabActivity implements ExceptionCallback {
                 MINIMUM_TIME_BETWEEN_UPDATES,
                 MINIMUM_DISTANCE_CHANGE_FOR_UPDATES, new MyLocationListener());
 
+    }
+
+    private void addStatisticsTab() {
+        Intent intentStats = new Intent().setClass(baseActivity, statsTab.class);
+        TabSpec tabSpecStats = tabHost
+                .newTabSpec("stats")
+                .setIndicator("",
+                        myRes.getDrawable(R.drawable.ic_tab_stats))
+                .setContent(intentStats);
+        tabHost.addTab(tabSpecStats);
+    }
+
+    private void addReportTab() {
+        // report tab
+        Intent intentReports = new Intent().setClass(baseActivity, reportTab.class);
+        TabSpec tabSpecReports = tabHost
+                .newTabSpec("reports")
+                .setIndicator("",
+                        myRes.getDrawable(R.drawable.organicity_small_pink))
+                .setContent(intentReports);
+        tabHost.addTab(tabSpecReports);
+    }
+
+    private void addJobsTab() {
+        // jobs tab
+        Intent intentJobs = new Intent().setClass(baseActivity, jobsTab.class);
+        TabSpec tabSpecJobs = tabHost
+                .newTabSpec("jobs")
+                .setIndicator("",
+                        myRes.getDrawable(R.drawable.ic_tab_jobs))
+                .setContent(intentJobs);
+        tabHost.addTab(tabSpecJobs);
+    }
+
+    private void addSecurityTab() {
+        Intent intentSecurity = new Intent().setClass(baseActivity, securityTab.class);
+        TabSpec tabSpecSecurity = tabHost
+                .newTabSpec("security")
+                .setIndicator("",
+                        myRes.getDrawable(R.drawable.ic_tab_security))
+                .setContent(intentSecurity);
+        tabHost.addTab(tabSpecSecurity);
+    }
+
+    private void addHomeTab(Resources res) {
+        Intent intent = new Intent().setClass(baseActivity, HomeActivity.class);
+        // Initialize a TabSpec for each tab and add it to the TabHost
+        TabSpec spec = tabHost.newTabSpec("home")
+                .setIndicator("", res.getDrawable(R.drawable.tab_home))
+                .setContent(intent);
+        tabHost.addTab(spec);
     }
 
     /**
@@ -316,7 +297,7 @@ public class BaseActivity extends TabActivity implements ExceptionCallback {
         MenuItem item1 = menu.add(1, Menu.FIRST, Menu.NONE, "Change Settings");
         item1.setOnMenuItemClickListener(new OnMenuItemClickListener() {
             public boolean onMenuItemClick(MenuItem item) {
-                startActivity(new Intent(BaseActivity.this,
+                startActivity(new Intent(baseActivity,
                         DynamixPreferenceActivity.class));
                 return true;
             }
@@ -327,7 +308,7 @@ public class BaseActivity extends TabActivity implements ExceptionCallback {
             public boolean onMenuItemClick(MenuItem item) {
                 // Present "Are You Sure" dialog box
                 AlertDialog.Builder builder = new AlertDialog.Builder(
-                        BaseActivity.this);
+                        baseActivity);
                 builder.setMessage("Shut Down Dynamix?")
                         .setCancelable(false)
                         .setPositiveButton("Yes",
@@ -387,8 +368,9 @@ public class BaseActivity extends TabActivity implements ExceptionCallback {
         if (notification != null) {
             Log.i(TAG, "Opening tab: " + notification.getTabID());
             tabHost.setCurrentTab(notification.getTabID());
-        } else
+        } else {
             tabHost.setCurrentTab(0);
+        }
     }
 
     @Override
@@ -396,18 +378,19 @@ public class BaseActivity extends TabActivity implements ExceptionCallback {
         super.onResume();
         // Update visibility
         activityResumed();
-		/*
-		 * Reset the titlebar state onResume, since our Activity's state will be
+        /*
+         * Reset the titlebar state onResume, since our Activity's state will be
 		 * lost if the app is paused.
 		 */
         if (DynamixService.isFrameworkStarted()) {
             setTitlebarEnabled();
 
         } else {
-            if (DynamixService.getRestarting() == true)
+            if (DynamixService.getRestarting()) {
                 setTitlebarRestarting();
-            else
+            } else {
                 setTitlebarDisabled();
+            }
         }
 
     }
@@ -456,6 +439,48 @@ public class BaseActivity extends TabActivity implements ExceptionCallback {
 
         }
 
+    }
+
+    private void addPrivacyTab(final Bundle b, final Resources res) {
+        Intent intent = new Intent().setClass(baseActivity, PrivacyActivity.class);
+        intent.putExtras(b);
+        TabHost.TabSpec spec = tabHost
+                .newTabSpec("privacy")
+                .setIndicator("Privacy",
+                        res.getDrawable(R.drawable.tab_profiles))
+                .setContent(intent);
+        tabHost.addTab(spec);
+    }
+
+    private void addPendingApplicationTab(final Bundle b, final Resources res) {
+        Intent intent = new Intent().setClass(baseActivity, PendingApplicationActivity.class);
+        intent.putExtras(b);
+        TabSpec spec = tabHost
+                .newTabSpec("pending")
+                .setIndicator("Pending",
+                        res.getDrawable(R.drawable.tab_pending))
+                .setContent(intent);
+        tabHost.addTab(spec);
+    }
+
+    private void addUpdatesTab(final Bundle b, final Resources res) {
+        Intent intent = new Intent().setClass(baseActivity, UpdatesActivity.class);
+        intent.putExtras(b);
+        TabSpec spec = tabHost
+                .newTabSpec("updates")
+                .setIndicator("Updates",
+                        res.getDrawable(R.drawable.tab_updates))
+                .setContent(intent);
+        tabHost.addTab(spec);
+    }
+
+    private void addPluginsTab(final Bundle b, final Resources res) {
+        Intent intent = new Intent().setClass(baseActivity, PluginsActivity.class);
+        intent.putExtras(b);
+        TabSpec spec = tabHost.newTabSpec("plugins")
+                .setIndicator("", res.getDrawable(R.drawable.tab_plugins))
+                .setContent(intent);
+        tabHost.addTab(spec);
     }
 
 }
