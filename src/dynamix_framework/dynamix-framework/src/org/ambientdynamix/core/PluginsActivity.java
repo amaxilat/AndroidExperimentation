@@ -119,9 +119,9 @@ public class PluginsActivity extends ListActivity implements
         installables.remove(r);
         removeUpdate(r);
         refreshList();
-        if (newPlugsAdapter.getInstallableCount() == 0) {
-            scrollTo(0);
-        }
+//        if (newPlugsAdapter.getInstallableCount() == 0) {
+//            scrollTo(0);
+//        }
     }
 
     @Override
@@ -554,7 +554,7 @@ public class PluginsActivity extends ListActivity implements
             DynamixService.uninstallPlugin(plug, true);
         }
         refresh();
-        scrollTo(0);
+//        scrollTo(0);
     }
 
     private void removeUpdate(final PluginDiscoveryResult update) {

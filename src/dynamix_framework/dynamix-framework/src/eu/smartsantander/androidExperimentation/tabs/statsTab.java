@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.content.SharedPreferences.OnSharedPreferenceChangeListener;
+import android.graphics.Color;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.AsyncTask;
@@ -13,12 +14,17 @@ import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
 import android.widget.TextView;
+
+
 import eu.smartsantander.androidExperimentation.Constants;
 import eu.smartsantander.androidExperimentation.operations.Communication;
 import eu.smartsantander.androidExperimentation.operations.PhoneProfiler;
+
 import org.ambientdynamix.core.DynamixService;
 import org.ambientdynamix.core.R;
 import org.ambientdynamix.util.Log;
+import org.eazegraph.lib.charts.BarChart;
+import org.eazegraph.lib.models.BarModel;
 
 import java.io.BufferedInputStream;
 import java.io.ByteArrayOutputStream;
@@ -26,6 +32,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.SortedMap;
@@ -54,7 +61,7 @@ public class statsTab extends Activity implements
     private loadJPGstatsTask jpgTask;
 
     private Communication communication;
-//    private BarChart mBarChart;
+    private BarChart mBarChart;
     private statsTab thisActivity;
 
     @Override
@@ -97,7 +104,7 @@ public class statsTab extends Activity implements
         fillStatsFields();
 
         // call the AsyncTask to get the stats picture
-//        mBarChart = (BarChart) findViewById(R.id.barchart);
+        mBarChart = (BarChart) findViewById(R.id.barchart);
         jpgTask = new loadJPGstatsTask();
         jpgTask.execute();
 
@@ -165,11 +172,11 @@ public class statsTab extends Activity implements
             thisActivity.runOnUiThread(new Runnable() {
                 @Override
                 public void run() {
-//                    mBarChart.clearChart();
-//                    for (Integer integer : sortedMap.keySet()) {
-//                        mBarChart.addBar(new BarModel(integer.toString(), sortedMap.get(integer).floatValue(), 0xFF1FF4AC));
-//                    }
-//                    mBarChart.startAnimation();
+                    mBarChart.clearChart();
+                    for (Integer integer : sortedMap.keySet()) {
+                        mBarChart.addBar(new BarModel(integer.toString(), sortedMap.get(integer).floatValue(), 0xFF1FF4AC));
+                    }
+                    mBarChart.startAnimation();
                 }
             });
 

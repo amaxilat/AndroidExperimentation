@@ -48,81 +48,86 @@ import android.util.Log;
 import android.widget.Toast;
 
 public class SimpleSourceBase {
-	private final String TAG = this.getClass().getSimpleName();
-	private final String URLS = Constants.URL;
+    private final String TAG = this.getClass().getSimpleName();
+    private final String URLS = Constants.URL;
 
-	protected List<DiscoveredContextPlugin> createDiscoveredPlugins(
-			RepositoryInfo repo, InputStream input, PLATFORM platform,
-			VersionInfo platformVersion, VersionInfo frameworkVersion,
-			boolean processSingle) throws Exception {
+    protected List<DiscoveredContextPlugin> createDiscoveredPlugins(
+            RepositoryInfo repo, InputStream input, PLATFORM platform,
+            VersionInfo platformVersion, VersionInfo frameworkVersion,
+            boolean processSingle) throws Exception {
 
-		// SmartSantander Modifications
-		Log.i("AndroidExperimentation", "Start Plugin Discovery");
-		String jsonPluginList = "";
-		List<DiscoveredContextPlugin> plugs = new ArrayList<DiscoveredContextPlugin>();
-		try {
-			PluginList pluginList = getPluginList();
-			Log.i(TAG, "Plugin List setted");
-			List<Plugin> plugList = pluginList.getPluginList();
-			for (Plugin plugInfo : plugList) {
-				if (isEnabled(plugInfo) == true)
-					continue;
-				ContextPluginBinder plugBinder = new ContextPluginBinder();
-				DiscoveredContextPlugin plug = plugBinder
-						.createDiscoveredPlugin(repo, plugInfo);
-				plugs.add(plug);
-			}
-			return plugs;
-		} catch (Exception e) {
-			Log.w(TAG, "Exception Installin plugins: " + e.getMessage());
-			BaseActivity.toast("uException Installin plugins:"+e.getMessage(), Toast.LENGTH_LONG);
-			return plugs;
-		}
-	}
+        // SmartSantander Modifications
+        Log.i("AndroidExperimentation", "Start Plugin Discovery");
+        String jsonPluginList = "";
+        final List<DiscoveredContextPlugin> plugs = new ArrayList<DiscoveredContextPlugin>();
+        try {
+            PluginList pluginList = getPluginList();
+            Log.i(TAG, "Plugin List set");
+            final List<Plugin> plugList = pluginList.getPluginList();
+            for (Plugin plugInfo : plugList) {
+                if (isEnabled(plugInfo)) {
+                    continue;
+                }
+                Log.i(TAG, "Found Plugin:" + plugInfo.getName());
+                ContextPluginBinder plugBinder = new ContextPluginBinder();
+                DiscoveredContextPlugin plug = plugBinder
+                        .createDiscoveredPlugin(repo, plugInfo);
+                plugs.add(plug);
+            }
+            return plugs;
+        } catch (Exception e) {
+            Log.w(TAG, "Exception creating discovered plugins: " + e.getMessage());
+            BaseActivity.toast("Exception creating discovered plugins:" + e.getMessage(), Toast.LENGTH_LONG);
+            return plugs;
+        }
+    }
 
-	Boolean isEnabled(Plugin plugInfo) {
-		for (ContextPluginInformation plugin : DynamixService
-				.getAllContextPluginInfo()) {
-			if (plugin.getPluginName().equals(plugInfo.getName())) {
-				return true;
-			}
-		}
-		return false;
-	}
+    Boolean isEnabled(Plugin plugInfo) {
+        for (ContextPluginInformation plugin : DynamixService
+                .getAllContextPluginInfo()) {
+            if (plugin.getPluginName().equals(plugInfo.getName())) {
+                return true;
+            }
+        }
+        return false;
+    }
 
-	public PluginList getPluginList() throws Exception {
-		File root = android.os.Environment.getExternalStorageDirectory();
-		File dir = new File(root.getAbsolutePath() + "/dynamix");
-		if (!dir.exists()) {
-			dir.mkdirs();
-		}
-		Communication communication = new Communication();
-		List<Plugin> pluginList = communication.sendGetPluginList();
-		Plugin pluginXML = null;
-		for (Plugin plug : pluginList) {
-			Constants.checkFile(plug.getFilename(), plug.getInstallUrl());
-			if (plug.getName().equals("plugs.xml")) {
-				pluginXML = plug;
-			}
-		}
-		pluginList.remove(pluginXML);
-		PluginList plist = new PluginList();
-		plist.setPluginList(pluginList);
+    public PluginList getPluginList() throws Exception {
+        File root = android.os.Environment.getExternalStorageDirectory();
+        File dir = new File(root.getAbsolutePath() + "/dynamix");
+        if (!dir.exists()) {
+            dir.mkdirs();
+        }
+        Communication communication = new Communication();
+        List<Plugin> pluginList = communication.sendGetPluginList();
+        Plugin pluginXML = null;
+        for (Plugin plugin : pluginList) {
+            Log.i(TAG, "Found Plugin1:" + plugin.getName());
+            Constants.checkFile(plugin.getFilename(), plugin.getInstallUrl());
+            if (plugin.getName().equals("plugs.xml")) {
+                pluginXML = plugin;
+            }
+        }
+        pluginList.remove(pluginXML);
+        PluginList plist = new PluginList();
+        plist.setPluginList(pluginList);
+        Log.i(TAG, "Found Plugins:" + pluginList.size());
 
-		SharedPreferences pref = DynamixService.getAndroidContext()
-				.getApplicationContext().getSharedPreferences("runningJob", 0); // 0
-																				// -
-																				// for
-																				// private
-																				// mode
-		Editor editor = pref.edit();
-		editor = (DynamixService.getAndroidContext().getSharedPreferences(
-				"pluginObjects", 0)).edit();
-		String plistString = (new Gson()).toJson(plist, PluginList.class);
-		editor.putString("pluginObjects", plistString);
-		editor.commit();
 
-		return plist;
+        SharedPreferences pref = DynamixService.getAndroidContext()
+                .getApplicationContext().getSharedPreferences("runningJob", 0); // 0
+        // -
+        // for
+        // private
+        // mode
+        Editor editor = pref.edit();
+        editor = (DynamixService.getAndroidContext().getSharedPreferences(
+                "pluginObjects", 0)).edit();
+        String plistString = (new Gson()).toJson(plist, PluginList.class);
+        editor.putString("pluginObjects", plistString);
+        editor.commit();
 
-	}
+        return plist;
+
+    }
 }
