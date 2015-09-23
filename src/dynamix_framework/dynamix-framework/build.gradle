@@ -20,8 +20,8 @@ dependencies {
     compile 'com.parse.bolts:bolts-android:1.2.1'
     compile 'com.parse:parse-android:1.10.2'
     compile 'com.newrelic.agent.android:android-agent:5.+'
-    compile 'com.github.blackfizz:eazegraph:1.2.5l@aar'
-    compile 'com.nineoldandroids:library:2.4.0'
+//    compile 'com.github.blackfizz:eazegraph:1.2.5l@aar'
+//    compile 'com.nineoldandroids:library:2.4.0'
 }
 
 android {

@@ -84,8 +84,6 @@ public class PhoneProfiler extends Thread implements Runnable {
         }
 
         if (DynamixService.isDeviceRegistered()) {
-            int phoneId = Constants.PHONE_ID_UNITIALIZED;
-            ParsePush.subscribeInBackground("phone:" + phoneId);
             return;
         }
         int phoneId = Constants.PHONE_ID_UNITIALIZED;

@@ -21,8 +21,7 @@ import org.springframework.web.client.HttpClientErrorException;
 import org.springframework.web.client.RestTemplate;
 
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
 
 public class Communication extends Thread implements Runnable {
 
@@ -80,7 +79,7 @@ public class Communication extends Thread implements Runnable {
     public int registerSmartphone(int phoneId, String sensorsRules) throws Exception {
         int serverPhoneId = 0;
 
-        Smartphone smartphone = new Smartphone(phoneId);
+        Smartphone smartphone = new Smartphone();
         smartphone.setPhoneId(phoneId);
         smartphone.setSensorsRules(sensorsRules);
         String jsonSmartphone = (new Gson()).toJson(smartphone);
@@ -88,13 +87,39 @@ public class Communication extends Thread implements Runnable {
         try {
             serverPhoneId_s = sendRegisterSmartphone(jsonSmartphone);
             serverPhoneId = Integer.parseInt(serverPhoneId_s);
-            ParsePush.subscribeInBackground("phone:" + serverPhoneId);
+            //ParsePush.subscribeInBackground("phone:" + serverPhoneId);
         } catch (Exception e) {
+            e.printStackTrace();
             serverPhoneId = Constants.PHONE_ID_UNITIALIZED;
             Log.i(TAG, "Device Registration Exception:" + e.getMessage());
         }
         return serverPhoneId;
     }
+
+
+    public SortedMap<Integer, Double> getLastStatistics(final int phoneId) {
+
+        try {
+            String stats = get("/statistics/" + phoneId);
+            Log.i(TAG, stats);
+            Map values = (new Gson()).fromJson(stats, Map.class);
+            SortedMap<Integer, Double> sortedMap = new TreeMap<Integer, Double>(new Comparator<Integer>() {
+                @Override
+                public int compare(Integer lhs, Integer rhs) {
+                    return rhs - lhs;
+                }
+            });
+            for (Object key : values.keySet()) {
+                sortedMap.put(Integer.valueOf(((String) key)), (Double) values.get(key));
+            }
+            return sortedMap;
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        return null;
+    }
+
 
     private String sendRegisterSmartphone(String jsonSmartphone) throws Exception {
         Log.i(TAG, "send register smartphone: " + jsonSmartphone);
@@ -105,38 +130,6 @@ public class Communication extends Thread implements Runnable {
         String experimentsString = get("/experiment");
         return new ObjectMapper().readValue(experimentsString, new TypeReference<List<Experiment>>() {
         });
-    }
-
-    private String sendGetExperiment(String jsonSmartphone) throws Exception {
-        final String METHOD_NAME = "getExperiment";
-        final String SOAP_ACTION = "\"" + "http://AndroidExperimentationWS/getExperiment" + "\"";
-
-        SoapObject request = new SoapObject(NAMESPACE, METHOD_NAME);
-
-        PropertyInfo propInfo = new PropertyInfo();
-        propInfo.name = "arg0";
-        propInfo.type = PropertyInfo.STRING_CLASS;
-        propInfo.setValue(jsonSmartphone);
-
-        request.addProperty(propInfo);
-
-        SoapSerializationEnvelope envelope = new SoapSerializationEnvelope(SoapEnvelope.VER11);
-        envelope.setOutputSoapObject(request);
-
-        HttpTransportSE androidHttpTransport = new HttpTransportSE(URL);
-
-        String response = "0";
-
-        try {
-            androidHttpTransport.call(SOAP_ACTION, envelope);
-            SoapPrimitive resultsRequestSOAP = (SoapPrimitive) envelope.getResponse();
-            response = resultsRequestSOAP.toString();
-            DynamixService.setConnectionStatus(true);
-        } catch (Exception e) {
-            DynamixService.setConnectionStatus(false);
-            throw e;
-        }
-        return response;
     }
 
     public int sendReportResults(String jsonReport) throws Exception {
@@ -157,4 +150,6 @@ public class Communication extends Thread implements Runnable {
         return new ObjectMapper().readValue(pluginListStr, new TypeReference<List<Plugin>>() {
         });
     }
+
+
 }
