@@ -138,7 +138,8 @@ public class Communication extends Thread implements Runnable {
             Log.i(TAG, jsonReport);
             post("/experiment", jsonReport);
             return 0;
-        } catch (HttpClientErrorException e) {
+        } catch (Exception e) {
+            e.printStackTrace();
             return 1;
         }
     }

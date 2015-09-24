@@ -51,6 +51,7 @@ public class DynamixServiceListenerUtility {
                 r = DynamixService.dynamix.addContextSupport(DynamixService.dynamixCallback, "org.ambientdynamix.contextplugins.GpsPlugin");
                 r = DynamixService.dynamix.addContextSupport(DynamixService.dynamixCallback, "org.ambientdynamix.contextplugins.WifiScanPlugin");
                 r = DynamixService.dynamix.addContextSupport(DynamixService.dynamixCallback, "org.ambientdynamix.contextplugins.NoiseLevelPlugin");
+                r = DynamixService.dynamix.addContextSupport(DynamixService.dynamixCallback, "org.ambientdynamix.contextplugins.TemperaturePlugin");
                 DynamixService.sessionStarted = true;
                 Log.w(TAG, "SESSION STATUS" + r.getMessage());
             }
@@ -130,14 +131,7 @@ public class DynamixServiceListenerUtility {
                                 mlist.add(reading.getValue());
                                 rObject.setResults(mlist);
                                 String message = rObject.toJson();
-                                try { //try to send to server, on fail save it in SQLite
-                                    Log.d(TAG, "Offloading results:" + message);
-                                    DynamixService.getCommunication().sendReportResults(message);//
-                                    Log.i(TAG, "Experiment  Reading Network: " + message);
-                                } catch (Exception e) {
-                                    DynamixService.addExperimentalMessage(message);
-                                    Log.i(TAG, "Experiment  Reading SQL: " + message);
-                                }
+                                new AsyncReportNowTask().execute(message);
                             }
                         } else {
                             String readingMsg = plugInfo.getPayload();
@@ -304,11 +298,11 @@ public class DynamixServiceListenerUtility {
                 DynamixService.sConnection, Context.BIND_AUTO_CREATE);
     }
 
-	public static void start() {
-		DynamixService.dynamixCallback = DynamixServiceListenerUtility.getListerner();
-		DynamixService.sConnection = DynamixServiceListenerUtility.createServiceConnection();
-		DynamixService.getAndroidContext().bindService(	new Intent(DynamixService.getAndroidContext(),DynamixService.class),DynamixService.sConnection, Context.BIND_AUTO_CREATE);
-	}
+    public static void start() {
+        DynamixService.dynamixCallback = DynamixServiceListenerUtility.getListerner();
+        DynamixService.sConnection = DynamixServiceListenerUtility.createServiceConnection();
+        DynamixService.getAndroidContext().bindService(new Intent(DynamixService.getAndroidContext(), DynamixService.class), DynamixService.sConnection, Context.BIND_AUTO_CREATE);
+    }
 
     public static void stop() {
         try {

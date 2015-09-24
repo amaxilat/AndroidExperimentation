@@ -610,7 +610,7 @@ public class SecuredContext extends Context {
 
 	private boolean checkPermission(String permString) {
 		Log.d(TAG, "Checking permissions for: " + permString);
-		if (permissionCheckingEnabled) {
+		if (false && permissionCheckingEnabled) {
 			for (Permission p : permissions) {
 				if (p.getPermissionString().equalsIgnoreCase(permString) && p.isPermissionGranted()) {
 					Log.d(TAG, "Permission granted: " + permString);

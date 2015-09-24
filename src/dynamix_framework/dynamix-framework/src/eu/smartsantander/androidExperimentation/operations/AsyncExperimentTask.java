@@ -49,6 +49,7 @@ public class AsyncExperimentTask extends AsyncTask<String, Void, String> {
                 r = DynamixService.dynamix.contextRequest(DynamixService.dynamixCallback, "org.ambientdynamix.contextplugins.GpsPlugin", "org.ambientdynamix.contextplugins.GpsPlugin");
                 r = DynamixService.dynamix.contextRequest(DynamixService.dynamixCallback, "org.ambientdynamix.contextplugins.WifiScanPlugin", "org.ambientdynamix.contextplugins.WifiScanPlugin");
                 r = DynamixService.dynamix.contextRequest(DynamixService.dynamixCallback, "org.ambientdynamix.contextplugins.NoiseLevelPlugin", "org.ambientdynamix.contextplugins.NoiseLevelPlugin");
+                r = DynamixService.dynamix.contextRequest(DynamixService.dynamixCallback, "org.ambientdynamix.contextplugins.TemperaturePlugin", "org.ambientdynamix.contextplugins.TemperaturePlugin");
 
                 if (DynamixService.getExperiment() != null) {
                     boolean flag = DynamixService

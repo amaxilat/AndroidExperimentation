@@ -297,6 +297,10 @@ class ContextManager implements IPluginContextListener, IPluginFacade {
 							{
 								sc = new SecuredContext(context, uiHandler, plt.getLooper(),
 										DynamixService.getContextPluginClassLoader(plug), false);
+							} else if (plugId.equals("org.ambientdynamix.contextplugins.TemperatureWPlugin"))
+                            {
+								sc = new SecuredContext(context, uiHandler, plt.getLooper(),
+										DynamixService.getContextPluginClassLoader(plug), false);
 							}
 							else
 							{
