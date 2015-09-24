@@ -108,5 +108,12 @@
 	<string name="phone_id">PhoneId:</string>
 	<string name="time_reported">time reported</string>
 	<string name="expires">expires</string>
-
+    <string name="getOrgDevID">Getting Organicity Device ID</string>
+    <string name="orgDevID">Organicity Device ID</string>
+    <string name="conWith">Connected with Organicity Server</string>
+    <string name="disConWith">Disconnected from Organicity Server</string>
+    <string name="statsTotalTime">Total time online (Hours)</string>
+    <string name="statsNumOfExp">Number of experiments run</string>
+    <string name="statsNumOfReadings">Number of readings produced</string>
+    <string name="stats7Days">Statistics for previous 7 days</string>
 </resources>

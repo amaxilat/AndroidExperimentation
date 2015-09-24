@@ -144,17 +144,17 @@ public class BaseActivity extends TabActivity {
     }
 
     protected static void setTitlebarEnabled() {
-        if (baseActivity != null)
-            baseActivity.changeTitlebarState(Color.rgb(0, 225, 50),
-                    myRes.getString(R.string.dynamix_enable_toggle_on));// "Experimentation"
+        //if (baseActivity != null)
+        //    baseActivity.changeTitlebarState(Color.rgb(0, 225, 50),
+         //           myRes.getString(R.string.dynamix_enable_toggle_on));// "Experimentation"
         // + DynamixService.getFrameworkVersion()
         // + " is enabled");
     }
 
     protected static void setTitlebarRestarting() {// smartsantander
-        if (baseActivity != null)
-            baseActivity.changeTitlebarState(Color.rgb(100, 153, 0),
-                    myRes.getString(R.string.dynamix_restarting));// "Experimentation"
+        //if (baseActivity != null)
+        //    baseActivity.changeTitlebarState(Color.rgb(100, 153, 0),
+        //            myRes.getString(R.string.dynamix_restarting));// "Experimentation"
         // + DynamixService.getFrameworkVersion()
         // + " is enabled");
     }
