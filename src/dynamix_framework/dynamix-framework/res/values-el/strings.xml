@@ -88,5 +88,13 @@
     <string name="plugin_not_conf">Πιέστε για ρύθμιση.</string>
     <string name="plugin_enabled">Ενεργοποιημένο. Πιέστε παρατεταμένα για αλλαγή.</string>
     <string name="plugin_disabled">Απενεργοποιημένο. Πιέστε παρατεταμένα για αλλαγή.</string>
+    <string name="getOrgDevID">Ανάκτηση ταυτότητας συσκευής</string>
+    <string name="orgrgDevID">Ταυτότητα συσκευής</string>
+    <string name="conWith">Σύνδεση με Organicity Ενεργή</string>
+    <string name="disConWith">Σύνδεση με Organicity Απενεργοποιημένη</string>
+    <string name="statsTotalTime">Συνολικός χρόνος (ώρες)</string>
+    <string name="statsNumOfExp">Πλήθος πειραμάτων που έχουν τρέξει</string>
+    <string name="statsNumOfReadings">Πλήθος μετρήσεων</string>
+    <string name="stats7Days">Στοιχεία για τις προηγούμενες 7 ημέρες</string>
     
  </resources>

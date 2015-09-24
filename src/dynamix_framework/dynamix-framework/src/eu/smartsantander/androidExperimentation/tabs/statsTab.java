@@ -248,20 +248,20 @@ public class statsTab extends Activity implements
 
         // String totalMinutes = new Date().toString();
 
-        statsTextView1.setText("Total time online (Hours)");
+        statsTextView1.setText(getString(R.string.statsTotalTime));
 
         statsTextView2.setText(String.format("%.3g%n",
                 (float) TimeUnit.MILLISECONDS.toSeconds(DynamixService
                         .getTotalTimeConnectedOnline()) / 3600));
         int experiments = DynamixService.getPhoneProfiler().getExperiments()
                 .size();
-        statsTextView3.setText("Number of experiments run");
+        statsTextView3.setText(getString(R.string.statsNumOfExp));
         statsTextView4.setText(String.valueOf(experiments));
-        statsTextView5.setText("Number of readings produced");
+        statsTextView5.setText(getString(R.string.statsNumOfReadings));
         long totalMsg = DynamixService.getPhoneProfiler()
                 .getTotalReadingsProduced();
         statsTextView6.setText(Long.toString(totalMsg));
-        statsTextView9.setText("Statistics for previous 7 days");
+        statsTextView9.setText(getString(R.string.stats7Days));
 
     }
 
