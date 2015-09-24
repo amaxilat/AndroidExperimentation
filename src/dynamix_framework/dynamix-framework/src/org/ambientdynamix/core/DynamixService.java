@@ -121,7 +121,7 @@ public final class DynamixService extends Service {
     private static AppFacadeBinder facadeBinder = null;
     private static WebFacadeBinder webFacade = null;
     // Protected static data
-    protected static ISettingsManager SettingsManager;
+    public static ISettingsManager SettingsManager;
     // Private instance data
     private BroadcastReceiver sleepReceiver;
     private BroadcastReceiver wakeReceiver;

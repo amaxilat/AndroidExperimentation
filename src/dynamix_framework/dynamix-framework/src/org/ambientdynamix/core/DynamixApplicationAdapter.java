@@ -36,7 +36,7 @@ import android.widget.TextView;
  * 
  * @author Darren Carlson
  */
-class DynamixApplicationAdapter extends ArrayAdapter<DynamixApplication> {
+public class DynamixApplicationAdapter extends ArrayAdapter<DynamixApplication> {
 	private ArrayList<DynamixApplication> apps;
 	private boolean pending;
 
