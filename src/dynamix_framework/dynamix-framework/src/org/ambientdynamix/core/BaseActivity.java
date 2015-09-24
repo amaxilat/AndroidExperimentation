@@ -33,14 +33,19 @@ import android.view.MenuItem.OnMenuItemClickListener;
 import android.widget.TabHost;
 import android.widget.TabHost.TabSpec;
 import android.widget.Toast;
+
 import com.bugsense.trace.BugSenseHandler;
 import com.bugsense.trace.ExceptionCallback;
 import com.newrelic.agent.android.NewRelic;
+import com.parse.Parse;
+
+import eu.smartsantander.androidExperimentation.operations.AsyncConstantsTask;
 import eu.smartsantander.androidExperimentation.operations.NotificationHQManager;
 import eu.smartsantander.androidExperimentation.tabs.jobsTab;
 import eu.smartsantander.androidExperimentation.tabs.reportTab;
 import eu.smartsantander.androidExperimentation.tabs.securityTab;
 import eu.smartsantander.androidExperimentation.tabs.statsTab;
+
 import org.ambientdynamix.util.AndroidNotification;
 
 
@@ -54,7 +59,7 @@ import org.ambientdynamix.util.AndroidNotification;
  * @author Darren Carlson
  * @see DynamixService
  */
-public class BaseActivity extends TabActivity implements ExceptionCallback {
+public class BaseActivity extends TabActivity {
     private final static String TAG = BaseActivity.class.getSimpleName();
     /*
      * Useful Links: Fancy ListViews:
@@ -175,12 +180,6 @@ public class BaseActivity extends TabActivity implements ExceptionCallback {
         getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
         context = this;
 
-        BugSenseHandler.initAndStartSession(this, "91ce9553");
-        BugSenseHandler.setExceptionCallback(this);
-
-        NewRelic.withApplicationToken(
-                "AA0fe9525a8553b77ed9ab623937bcd1bf403c6775"
-        ).start(this.getApplication());
 
         // Set the Dynamix base activity so it can use our context
         DynamixService.setBaseActivity(this);
@@ -396,8 +395,8 @@ public class BaseActivity extends TabActivity implements ExceptionCallback {
         super.onResume();
         // Update visibility
         activityResumed();
-		/*
-		 * Reset the titlebar state onResume, since our Activity's state will be
+        /*
+         * Reset the titlebar state onResume, since our Activity's state will be
 		 * lost if the app is paused.
 		 */
         if (DynamixService.isFrameworkStarted()) {
@@ -421,19 +420,6 @@ public class BaseActivity extends TabActivity implements ExceptionCallback {
 
     }
 
-    @Override
-    public void lastBreath(Exception e) {
-        e.printStackTrace();
-        DynamixService.logToFile(e.getMessage());
-        BugSenseHandler.sendException(e);
-        DynamixService.getPhoneProfiler().savePrefs();
-        Toast.makeText(context, e.getMessage(), Toast.LENGTH_SHORT).show();
-        try {
-            Thread.sleep(5000);
-        } catch (Exception w) {
-        }
-
-    }
 
     private class MyLocationListener implements LocationListener {
 
