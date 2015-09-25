@@ -3,6 +3,7 @@ package eu.smartsantander.androidExperimentation.model;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import java.io.Serializable;
 
 /**
  * Created with IntelliJ IDEA.
@@ -12,7 +13,7 @@ import javax.persistence.Id;
  * To change this template use File | Settings | File Templates.
  */
 @Entity
-public class Result {
+public class Result  implements Serializable {
     @Id
     @GeneratedValue
     private int id;

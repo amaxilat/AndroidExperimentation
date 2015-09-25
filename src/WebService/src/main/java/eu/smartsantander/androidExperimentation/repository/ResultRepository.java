@@ -4,7 +4,6 @@ import eu.smartsantander.androidExperimentation.model.Result;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.repository.CrudRepository;
-import org.springframework.data.repository.Repository;
 
 import java.util.Set;
 
@@ -15,5 +14,18 @@ public interface ResultRepository extends CrudRepository<Result, Long> {
 
     Page<Result> findAll(Pageable pageable);
 
-    Set<Result> findByExperimentId(long experimentId);
+    Set<Result> findByExperimentId(int experimentId);
+
+    Set<Result> findByExperimentIdAndDeviceId(int experimentId, int deviceId);
+
+    Set<Result> findByExperimentIdAndTimestampAfter(int experimentId, long start);
+
+    Set<Result> findByExperimentIdAndDeviceIdAndTimestampAfter(int experimentId, int deviceId, long start);
+
+    Set<Result> findByDeviceIdAndTimestampBetween(int deviceId, long start, long end);
+
+    Set<Result> findByDeviceIdAndTimestampAfter(int deviceId, long start);
+
+    Set<Result> findByDeviceIdAndTimestampIsBetween(int deviceId, long start, long end);
+
 }

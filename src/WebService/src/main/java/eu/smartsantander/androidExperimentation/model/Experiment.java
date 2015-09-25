@@ -1,8 +1,11 @@
 package eu.smartsantander.androidExperimentation.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import java.io.Serializable;
 
 /**
  * Created with IntelliJ IDEA.
@@ -12,7 +15,8 @@ import javax.persistence.Id;
  * To change this template use File | Settings | File Templates.
  */
 @Entity
-public class Experiment {
+public class Experiment implements Serializable {
+
     @Id
     @GeneratedValue
     private Integer id;
@@ -131,6 +135,17 @@ public class Experiment {
 
     public void setFilename(String filename) {
         this.filename = filename;
+    }
+
+    @JsonIgnore
+    private Boolean enabled;
+
+    public Boolean getEnabled() {
+        return enabled;
+    }
+
+    public void setEnabled(Boolean enabled) {
+        this.enabled = enabled;
     }
 
     @Override

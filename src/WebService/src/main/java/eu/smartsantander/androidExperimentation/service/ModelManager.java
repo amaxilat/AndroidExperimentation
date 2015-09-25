@@ -92,6 +92,20 @@ public class ModelManager {
         return experimentsList;
     }
 
+    public List<Experiment> getEnabledExperiments() {
+
+        Iterator<Experiment> experimentsListIterator = experimentRepository.findAll().iterator();
+        List<Experiment> experimentsList = new ArrayList<Experiment>();
+        while (experimentsListIterator.hasNext()) {
+            Experiment experiment = experimentsListIterator.next();
+            if (experiment.getEnabled()) {
+                experimentsList.add(experiment);
+            }
+        }
+        log.info("getExperiment Called");
+        return experimentsList;
+    }
+
 
     private static boolean match(String[] smartphoneDependencies, String[] experimentDependencies) {
         for (String expDependency : experimentDependencies) {
@@ -119,8 +133,9 @@ public class ModelManager {
         if (smartphone.getId() == -1) {
             smartphone.setId(null);
         }
-
+        log.info("registerSmartphone: id:" + smartphone.getId() + " phoneId:" + smartphone.getPhoneId());
         Smartphone phone = smartphoneRepository.findByPhoneId(smartphone.getPhoneId());
+        log.info("registerSmartphone: phone:" + phone);
         if (phone == null) {
             return smartphoneRepository.save(smartphone);
         } else {
