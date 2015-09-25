@@ -13,6 +13,7 @@ import java.util.Set;
 public interface PluginRepository extends CrudRepository<Plugin, Long> {
 
     Set<Plugin> findAll();
+    Set<Plugin> findByContextTypeIsIn(Set<String> contextType);
 
     Page<Plugin> findAll(Pageable pageable);
 

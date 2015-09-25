@@ -48,6 +48,10 @@ public class ModelManager {
         return pluginRepository.findAll();
     }
 
+    public Set<Plugin> getPlugins(Set<String> dependencies) {
+        return pluginRepository.findByContextTypeIsIn(dependencies);
+    }
+
 
     public Experiment getExperiment(final Smartphone smartphone) {
 
@@ -331,5 +335,6 @@ public class ModelManager {
         deviceColors.put(deviceID, color);
         return color;
     }
+
 
 }

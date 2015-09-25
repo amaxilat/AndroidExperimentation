@@ -94,7 +94,12 @@ public class AndroidExperimentationWS extends BaseController {
     @ResponseBody
     @RequestMapping(value = "/plugin", method = RequestMethod.GET, produces = "application/json")
     public Set<Plugin> getPluginList() {
-        Set<Plugin> plugins = modelManager.getPlugins();
+        Experiment experiemnt = modelManager.getEnabledExperiments().get(0);
+        Set<String> dependencies = new HashSet<String>();
+        for (String dependency : experiemnt.getSensorDependencies().split(",")) {
+            dependencies.add(dependency);
+        }
+        Set<Plugin> plugins = modelManager.getPlugins(dependencies);
         LOGGER.info("getPlugins Called: " + plugins);
         return plugins;
     }
