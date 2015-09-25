@@ -311,8 +311,22 @@ public class BaseActivity extends TabActivity {
     public boolean onPrepareOptionsMenu(Menu menu) {
         super.onCreateOptionsMenu(menu);
         menu.clear();
+
+        MenuItem itemPow = menu.add(0, Menu.FIRST, Menu.NONE, "Power");
+
+        itemPow.setShowAsAction(MenuItem.SHOW_AS_ACTION_ALWAYS);
+        itemPow.setIcon(R.drawable.power_icon);
+        itemPow.setOnMenuItemClickListener(new OnMenuItemClickListener() {
+            public boolean onMenuItemClick(MenuItem item) {
+                startActivity(new Intent(BaseActivity.this,
+                        DynamixPreferenceActivity.class));
+                return true;
+            }
+        });
+
+
         // Setup Change Settings
-        MenuItem item1 = menu.add(1, Menu.FIRST, Menu.NONE, "Change Settings");
+        MenuItem item1 = menu.add(1, Menu.FIRST+1, Menu.NONE, "Change Settings");
         item1.setOnMenuItemClickListener(new OnMenuItemClickListener() {
             public boolean onMenuItemClick(MenuItem item) {
                 startActivity(new Intent(BaseActivity.this,
@@ -322,7 +336,7 @@ public class BaseActivity extends TabActivity {
         });
 
         // Setup Help Settings
-        MenuItem item2 = menu.add(2, Menu.FIRST, Menu.NONE, "Help");
+        MenuItem item2 = menu.add(2, Menu.FIRST + 2 , Menu.NONE, "Help");
         item1.setOnMenuItemClickListener(new OnMenuItemClickListener() {
             public boolean onMenuItemClick(MenuItem item) {
                 startActivity(new Intent(BaseActivity.this,
@@ -332,7 +346,7 @@ public class BaseActivity extends TabActivity {
         });
 
         // Setup Default Settings
-        MenuItem item3 = menu.add(3, Menu.FIRST + 1, Menu.NONE, "Shut Down");
+        MenuItem item3 = menu.add(3, Menu.FIRST + 3, Menu.NONE, "Shut Down");
         item3.setOnMenuItemClickListener(new OnMenuItemClickListener() {
             public boolean onMenuItemClick(MenuItem item) {
                 // Present "Are You Sure" dialog box
