@@ -320,6 +320,17 @@ public class BaseActivity extends TabActivity {
                 return true;
             }
         });
+
+        // Setup Help Settings
+        MenuItem item2 = menu.add(2, Menu.FIRST, Menu.NONE, "Help");
+        item1.setOnMenuItemClickListener(new OnMenuItemClickListener() {
+            public boolean onMenuItemClick(MenuItem item) {
+                startActivity(new Intent(BaseActivity.this,
+                        DynamixPreferenceActivity.class));
+                return true;
+            }
+        });
+
         // Setup Default Settings
         MenuItem item3 = menu.add(3, Menu.FIRST + 1, Menu.NONE, "Shut Down");
         item3.setOnMenuItemClickListener(new OnMenuItemClickListener() {

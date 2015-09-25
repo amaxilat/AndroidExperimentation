@@ -67,11 +67,15 @@
     <string name="hello_world">Χαίρε κόσμε!</string>
     <string name="menu_settings">Ρυθμίσεις</string>
     <string name="title_activity_test">TestActivity</string>
-    <string name="about1">Η εφαρμογή Android Experimentation αποτελεί μέρος του ερευνητικού έργου SmartSantander και στοχεύει στον εμπλουτισμό της λειτουργίας της Future Internet υποδομής που είναι εγκατεστημένη στο Santander.
-			&lt;p&gt;Η εφαρμογή βοηθά στο διαμοιρασμό και την εγκατάσταση εκτελέσιμου κώδικα σε Android smartphone ενός δικτύου εθελοντών. Ο κώδικας είναι σε μορφή Ambient Dynamix plugins, παίρνει μετρήσεις από τους αισθητήρες του smartphone και εκτελεί υπολογισμούς, στέλνοντας τα αντίστοιχα αποτελέσματα σε έναν κεντρικό server.
-			&lt;p&gt;Για περισσότερες πληροφορίες σχετικά με το SmartSantander μπορείτε να επισκεφθείτε το 
-		&lt;a href=&quot;http://smartsantander.eu&quot;&gt;http://smartsantander.eu&lt;a&gt;
-		&lt;p&gt;Για περισσότερες πληροφορίες σχετικά με το Ambient Dynamix μπορείτε να επισκεφθείτε το 
+    <string name="about1">Το ερευνητικό έργο OrganiCity τοποθετεί τους πολίτες στο κέντρο της ανάπτυξης της πόλης του μέλλοντος. Το έργο σμίγει 3 πόλεις και συνολικά 15 φορείς.
+
+        Το OrganiCity είναι μια συνεργασία μετάξυ των πόλεων του Aarhus, του Λονδίνου και του Santander – 3 πόλεων με εκτενή εμπειρία στις εφαρμογές και τις τεχνολογίες των λεγόμενων έξυπνων πόλεων. Αυτές οι τεχνολογίες περιλάμβανουν τρόπους για τη βελτίωση των υπηρεσιών των πόλεων προς τους πολίτες και παράλληλα εξοικονομούν πόρους.
+
+        Το τρέχον λογισμικό είναι μια Android εφαρμογή για την επέκταση της λειτουργικότητας της υποδομής του Organicity.
+        &lt;p&gt;To λογισμικό σε Android διαμοιράζει εκτελέσιμο κώδικα στις συσκευές ενός δικτύου από εθελοντές. Ο κώδικας αυτός είναι σε μορφή Ambient Dynamix plugin, παράγει μετρήσεις από τους ενσωματωμένους αισθητήρες που αποστέλλονται στους server του Organicity.
+    	&lt;p&gt;Για περισσότερες πληροφορίες σχετικά με το Organicity, μπορείτε να επισκεφθείτε το
+		&lt;a href=&quot;http://organicity.eu&quot;&gt;http://organicity.eu&lt;a&gt;
+		&lt;p&gt;:Για περισσότερες πληροφορίες σχετικά με το λογισμικό Ambient Dynamix, μπορείτε να επισκεφθείτε το
 		&lt;a href=&quot;http://ambientdynamix.org&quot;&gt;http://ambientdynamix.org&lt;a&gt;
 	</string>
     <string name="expIsEnabled">Πειραματισμός ενεργός</string>
