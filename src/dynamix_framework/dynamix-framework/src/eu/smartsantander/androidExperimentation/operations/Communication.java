@@ -134,14 +134,11 @@ public class Communication extends Thread implements Runnable {
     public int sendReportResults(String jsonReport) throws Exception {
         DynamixService.logToFile(jsonReport);
         Log.i(TAG, "Report Call");
-        try {
+
             Log.i(TAG, jsonReport);
             post("/experiment", jsonReport);
             return 0;
-        } catch (Exception e) {
-            e.printStackTrace();
-            return 1;
-        }
+
     }
 
 

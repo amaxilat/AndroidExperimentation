@@ -20,9 +20,11 @@ public class NetworkChangeReceiver extends BroadcastReceiver {
 
 	public static synchronized void process(Context context) {
 		try {
+
 			final ConnectivityManager connMgr = (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);
 			final android.net.NetworkInfo wifi = connMgr.getNetworkInfo(ConnectivityManager.TYPE_WIFI);
-			if (wifi.isAvailable()) {
+
+			if (wifi.isConnected()) {
 				Log.i(TAG, "NetworkChangeReceiver: WIFI available");
 				if (reportT == null || reportT.isFinished()) {
 					if (reportT!=null) {
