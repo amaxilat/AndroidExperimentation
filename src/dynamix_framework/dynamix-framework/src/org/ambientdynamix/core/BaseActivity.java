@@ -46,6 +46,7 @@ import eu.smartsantander.androidExperimentation.tabs.reportTab;
 import eu.smartsantander.androidExperimentation.tabs.securityTab;
 import eu.smartsantander.androidExperimentation.tabs.statsTab;
 
+import org.ambientdynamix.data.DynamixPreferences;
 import org.ambientdynamix.util.AndroidNotification;
 
 
@@ -315,11 +316,29 @@ public class BaseActivity extends TabActivity {
         MenuItem itemPow = menu.add(0, Menu.FIRST, Menu.NONE, "Power");
 
         itemPow.setShowAsAction(MenuItem.SHOW_AS_ACTION_ALWAYS);
-        itemPow.setIcon(R.drawable.power_icon);
+
+        boolean dynamixEnabled = DynamixPreferences.isDynamixEnabled(this);
+
+        if (dynamixEnabled && !DynamixService.isFrameworkStarted())
+            itemPow.setIcon(R.drawable.power_icon);
+
+        else
+            itemPow.setIcon(R.drawable.power_icon_off);
+
         itemPow.setOnMenuItemClickListener(new OnMenuItemClickListener() {
             public boolean onMenuItemClick(MenuItem item) {
-                startActivity(new Intent(BaseActivity.this,
-                        DynamixPreferenceActivity.class));
+
+                if (!askDynamixIsEnabled()) {
+                    item.setIcon(R.drawable.power_icon);
+                    DynamixService.startFramework();
+                }
+
+                else {
+                    item.setIcon(R.drawable.power_icon_off);
+                    DynamixService.stopFramework();
+                }
+
+
                 return true;
             }
         });
@@ -467,6 +486,13 @@ public class BaseActivity extends TabActivity {
 
         }
 
+    }
+
+    private boolean askDynamixIsEnabled() {
+
+        boolean dynamixEnabled = DynamixPreferences.isDynamixEnabled(this);
+
+        return dynamixEnabled;
     }
 
 }
