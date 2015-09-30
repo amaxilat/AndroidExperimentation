@@ -1,5 +1,7 @@
 package eu.smartsantander.androidExperimentation.operations;
 
+import org.ambientdynamix.api.application.ContextPluginInformation;
+import org.ambientdynamix.api.application.ContextPluginInformationResult;
 import org.ambientdynamix.api.application.IdResult;
 import org.ambientdynamix.core.BaseActivity;
 import org.ambientdynamix.core.DynamixService;
@@ -43,23 +45,23 @@ public class AsyncExperimentTask extends AsyncTask<String, Void, String> {
         } else {
             try {
 
-                IdResult r;
-
-                // do it for all plugins....
-                r = DynamixService.dynamix.contextRequest(DynamixService.dynamixCallback, "org.ambientdynamix.contextplugins.GpsPlugin", "org.ambientdynamix.contextplugins.GpsPlugin");
-                r = DynamixService.dynamix.contextRequest(DynamixService.dynamixCallback, "org.ambientdynamix.contextplugins.WifiScanPlugin", "org.ambientdynamix.contextplugins.WifiScanPlugin");
-                r = DynamixService.dynamix.contextRequest(DynamixService.dynamixCallback, "org.ambientdynamix.contextplugins.NoiseLevelPlugin", "org.ambientdynamix.contextplugins.NoiseLevelPlugin");
-                r = DynamixService.dynamix.contextRequest(DynamixService.dynamixCallback, "org.ambientdynamix.contextplugins.TemperaturePlugin", "org.ambientdynamix.contextplugins.TemperaturePlugin");
+                List<ContextPluginInformation> information = DynamixService.dynamix.getAllContextPluginInformation().getContextPluginInformation();
+                for (ContextPluginInformation contextPluginInformation : information) {
+                    Log.i(TAG, contextPluginInformation.getPluginName() + " status:" + contextPluginInformation.getInstallStatus() + " id:" + contextPluginInformation.getPluginId() + " context:" + contextPluginInformation.getContextPluginType().name());
+                    if (contextPluginInformation.isEnabled()) {
+                        DynamixService.dynamix.contextRequest(DynamixService.dynamixCallback, contextPluginInformation.getPluginId(), contextPluginInformation.getPluginId());
+                    }
+                }
 
                 if (DynamixService.getExperiment() != null) {
-                    boolean flag = DynamixService
-                            .isExperimentInstalled("org.ambientdynamix.contextplugins.ExperimentPlugin");
-                    if (!flag)
+
+                    if (!DynamixService.isExperimentInstalled("org.ambientdynamix.contextplugins.ExperimentPlugin")) {
                         DynamixService.startExperiment();
+                    }
 
                 }
                 // ping experiment....
-                r = DynamixService.dynamix.configuredContextRequest(DynamixService.dynamixCallback, "org.ambientdynamix.contextplugins.ExperimentPlugin", "org.ambientdynamix.contextplugins.ExperimentPlugin", DynamixService.getReadingStorage().getBundle());
+                final IdResult r = DynamixService.dynamix.configuredContextRequest(DynamixService.dynamixCallback, "org.ambientdynamix.contextplugins.ExperimentPlugin", "org.ambientdynamix.contextplugins.ExperimentPlugin", DynamixService.getReadingStorage().getBundle());
                 Log.i("contextRequest", r.getMessage());
 
                 try {
@@ -147,11 +149,9 @@ public class AsyncExperimentTask extends AsyncTask<String, Void, String> {
                     if (DynamixService.getExperiment() != null) {
                         oldExpId = DynamixService.getExperiment().getId();
                     }
-                    boolean flag = DynamixService
-                            .isExperimentInstalled(experiment.getContextType());
-                    if (experiment.getId() == oldExpId && flag) {
-                        DynamixService
-                                .addTotalTimeConnectedOnline(Constants.EXPERIMENT_POLL_INTERVAL);
+                    if (experiment.getId() == oldExpId
+                            && DynamixService.isExperimentInstalled(experiment.getContextType())) {
+                        DynamixService                                .addTotalTimeConnectedOnline(Constants.EXPERIMENT_POLL_INTERVAL);
                         Log.i(TAG, "Experiment still the same");
                         throw new Exception("Experiment still the same");
                     }
@@ -205,8 +205,7 @@ public class AsyncExperimentTask extends AsyncTask<String, Void, String> {
             } catch (Exception e) {
                 // Log.i(TAG, "Exception in consuming experiment" +
                 // e.getMessage());
-                throw new Exception("Exception in consuming experiment:"
-                        + e.getMessage());
+                throw new Exception("Exception in consuming experiment:" + e.getMessage());
             }
         }
 

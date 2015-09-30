@@ -1,13 +1,18 @@
 package eu.smartsantander.androidExperimentation.operations;
 
 import android.util.Log;
+
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.google.common.cache.Cache;
+import com.google.common.cache.CacheBuilder;
 import com.google.gson.Gson;
+
 import eu.smartsantander.androidExperimentation.Constants;
 import eu.smartsantander.androidExperimentation.jsonEntities.Experiment;
 import eu.smartsantander.androidExperimentation.jsonEntities.Plugin;
 import eu.smartsantander.androidExperimentation.jsonEntities.Smartphone;
+
 import org.ambientdynamix.core.DynamixService;
 import org.ksoap2.SoapEnvelope;
 import org.ksoap2.serialization.PropertyInfo;
@@ -21,6 +26,7 @@ import org.springframework.web.client.RestTemplate;
 
 import java.io.IOException;
 import java.util.*;
+import java.util.concurrent.TimeUnit;
 
 public class Communication extends Thread implements Runnable {
 
@@ -31,8 +37,13 @@ public class Communication extends Thread implements Runnable {
     private final String TAG = this.getClass().getSimpleName();
 
     final RestTemplate restTemplate;
+    Cache<String, String> alreadySent;
 
     public Communication() {
+        alreadySent = CacheBuilder.newBuilder()
+                .expireAfterWrite(30, TimeUnit.SECONDS)
+                .build();
+
         // Create a new RestTemplate instance
         restTemplate = new RestTemplate();
 
@@ -132,21 +143,28 @@ public class Communication extends Thread implements Runnable {
     }
 
     public int sendReportResults(String jsonReport) throws Exception {
+        if (alreadySent.getIfPresent(jsonReport) != null) {
+            return 0;
+        }
         DynamixService.logToFile(jsonReport);
-        Log.i(TAG, "Report Call");
-
+        Log.i(TAG, "Report Call " + jsonReport);
+        try {
             Log.i(TAG, jsonReport);
+            alreadySent.put(jsonReport, "1");
             post("/experiment", jsonReport);
+
+            return 0;
+        } catch (HttpClientErrorException e) {
+            //ignore
             return 0;
 
+        }
     }
-
 
     public List<Plugin> sendGetPluginList() throws Exception {
         final String pluginListStr = get("/plugin");
         return new ObjectMapper().readValue(pluginListStr, new TypeReference<List<Plugin>>() {
         });
     }
-
 
 }

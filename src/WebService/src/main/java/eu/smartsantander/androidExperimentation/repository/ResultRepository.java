@@ -1,5 +1,6 @@
 package eu.smartsantander.androidExperimentation.repository;
 
+import eu.smartsantander.androidExperimentation.controller.AndroidExperimentationWS;
 import eu.smartsantander.androidExperimentation.model.Result;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -27,5 +28,7 @@ public interface ResultRepository extends CrudRepository<Result, Long> {
     Set<Result> findByDeviceIdAndTimestampAfter(int deviceId, long start);
 
     Set<Result> findByDeviceIdAndTimestampIsBetween(int deviceId, long start, long end);
+
+    Set<Result> findByExperimentIdAndDeviceIdAndTimestampAndMessage(int experimentId, int deviceId,long timestamp ,String message);
 
 }

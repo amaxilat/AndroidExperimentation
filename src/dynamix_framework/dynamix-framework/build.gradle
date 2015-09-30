@@ -23,6 +23,8 @@ dependencies {
     compile 'com.newrelic.agent.android:android-agent:5.+'
     compile 'com.github.blackfizz:eazegraph:1.2.5l@aar'
     compile 'com.nineoldandroids:library:2.4.0'
+    compile group: 'com.google.guava', name: 'guava', version: '12.0'
+
 }
 
 android {

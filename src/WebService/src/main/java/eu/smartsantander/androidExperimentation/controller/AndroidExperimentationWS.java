@@ -128,7 +128,7 @@ public class AndroidExperimentationWS extends BaseController {
     }
 
     @ResponseBody
-    @RequestMapping(value = "/experiment", method = RequestMethod.POST, produces = "application/json")
+    @RequestMapping(value = "/experiment", method = RequestMethod.POST, produces = "text/plain", consumes = "text/plain")
     public JSONObject saveExperiment(@RequestBody final String body, final HttpServletResponse response) throws JSONException, IOException {
         System.out.println("saveExperiment Called");
         LOGGER.info("saveExperiment Called");
@@ -140,11 +140,17 @@ public class AndroidExperimentationWS extends BaseController {
 
         final List<Result> results = new ArrayList<Result>();
         for (final String jobResult : result.getJobResults()) {
-            LOGGER.info(jobResult);
-            Reading readingObj = new ObjectMapper().readValue(jobResult, Reading.class);
+
+            final Reading readingObj = new ObjectMapper().readValue(jobResult, Reading.class);
             final String value = readingObj.getValue();
             final long readingTime = readingObj.getTimestamp();
             final Result newResult = new Result();
+            final Set<Result> res =
+                    resultRepository.findByExperimentIdAndDeviceIdAndTimestampAndMessage(experiment.getId(), phone.getId(), readingTime, value);
+            if (!res.isEmpty()) {
+                continue;
+            }
+            LOGGER.info(jobResult);
             newResult.setDeviceId(phone.getId());
             newResult.setExperimentId(experiment.getId());
             newResult.setMessage(value);
@@ -158,8 +164,12 @@ public class AndroidExperimentationWS extends BaseController {
 
         LOGGER.info("saving " + results.size() + " results");
         try {
-            resultRepository.save(results);
+            if (!results.isEmpty()) {
+                resultRepository.save(results);
+            }
+            response.setStatus(HttpServletResponse.SC_OK);
             LOGGER.info("saveExperiment: OK");
+            LOGGER.info("saveExperiment: Stored:" + results.size());
             LOGGER.info("-----------------------------------");
             return ok(response);
         } catch (Exception e) {

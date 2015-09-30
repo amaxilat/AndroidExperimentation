@@ -47,11 +47,12 @@ public class DynamixServiceListenerUtility {
 
             @Override
             public void onSessionOpened(String sessionId) throws RemoteException {
-                Result r = DynamixService.dynamix.addContextSupport(DynamixService.dynamixCallback, "org.ambientdynamix.contextplugins.ExperimentPlugin");
-                r = DynamixService.dynamix.addContextSupport(DynamixService.dynamixCallback, "org.ambientdynamix.contextplugins.GpsPlugin");
-                r = DynamixService.dynamix.addContextSupport(DynamixService.dynamixCallback, "org.ambientdynamix.contextplugins.WifiScanPlugin");
-                r = DynamixService.dynamix.addContextSupport(DynamixService.dynamixCallback, "org.ambientdynamix.contextplugins.NoiseLevelPlugin");
-                r = DynamixService.dynamix.addContextSupport(DynamixService.dynamixCallback, "org.ambientdynamix.contextplugins.TemperaturePlugin");
+                final Result r = DynamixService.dynamix.addContextSupport(DynamixService.dynamixCallback, "org.ambientdynamix.contextplugins.ExperimentPlugin");
+                for (final ContextPluginInformation pluginInformation : DynamixService.dynamix.getAllContextPluginInformation().getContextPluginInformation()) {
+                    if (pluginInformation.isEnabled()) {
+                        DynamixService.dynamix.addContextSupport(DynamixService.dynamixCallback, pluginInformation.getPluginId());
+                    }
+                }
                 DynamixService.sessionStarted = true;
                 Log.w(TAG, "SESSION STATUS" + r.getMessage());
             }
