@@ -68,7 +68,7 @@ public class HomeActivity extends ListActivity {
     public TextView expIdTv;
     public TextView expDescriptionTv;
     public TextView connectionStatus;
-
+    private TextView pendingTextView;
 
     // Create runnable for updating the UI
     final Runnable updateList = new Runnable() {
@@ -77,6 +77,7 @@ public class HomeActivity extends ListActivity {
                 adapter.notifyDataSetChanged();
         }
     };
+
 
     // Refreshes the UI
     public static void refreshData() {
@@ -164,6 +165,7 @@ public class HomeActivity extends ListActivity {
         });
 
         // Setup the Dynamix Enable/Disable button
+        pendingTextView = (TextView) findViewById(R.id.pending);
         togglebutton = (ToggleButton) findViewById(R.id.DynamixActiveToggle);
         togglebutton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
@@ -230,6 +232,7 @@ public class HomeActivity extends ListActivity {
     protected void onResume() {
         super.onResume();
         Log.i(TAG, "onResume");
+
         try {
             refresh();
         } catch (Exception e) {
@@ -267,6 +270,14 @@ public class HomeActivity extends ListActivity {
                     DynamixService.SettingsManager.getAuthorizedApplications()), false);
             adapter.setNotifyOnChange(true);
             appList.setAdapter(adapter);
+
+            Long storageSize = DynamixService.getDataStorageSize();
+            if (storageSize > 0) {
+                pendingTextView.setText(String.format(getString(R.string.pending_messages_template), storageSize));
+            }else{
+                pendingTextView.setText("");
+            }
+
         }
         appList.setVisibility(View.GONE);//smartsantander
         AsyncStatusRefreshTask task = new AsyncStatusRefreshTask();
