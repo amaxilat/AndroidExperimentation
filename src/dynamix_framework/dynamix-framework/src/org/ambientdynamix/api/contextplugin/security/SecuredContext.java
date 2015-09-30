@@ -26,6 +26,7 @@ import java.util.List;
 import java.util.Set;
 
 import android.app.Service;
+import android.bluetooth.BluetoothManager;
 import android.content.BroadcastReceiver;
 import android.content.ComponentName;
 import android.content.ContentResolver;
@@ -40,6 +41,7 @@ import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageManager;
 import android.content.pm.PackageManager.NameNotFoundException;
 import android.content.res.AssetManager;
+import android.content.res.Configuration;
 import android.content.res.Resources;
 import android.content.res.Resources.Theme;
 import android.database.DatabaseErrorHandler;
@@ -51,8 +53,11 @@ import android.hardware.SensorManager;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
+import android.os.IBinder;
 import android.os.Looper;
+import android.os.UserHandle;
 import android.util.Log;
+import android.view.Display;
 
 /**
  * Secured version of an Android Context, which is provided to ContextPlugins during runtime. A SecuredContext is
@@ -72,6 +77,7 @@ public class SecuredContext extends Context {
     private SecuredSensorManager ssm;
     private Handler mainThreadHandler;
     private List<BroadcastReceiver> receivers = new ArrayList<BroadcastReceiver>();
+    private BluetoothManager sbm;
 
     /**
      * Creates a SecuredContext that allows all permissions. Caution: This allows access to all Android services!
@@ -173,6 +179,16 @@ public class SecuredContext extends Context {
     @Override
     public Context createPackageContext(String packageName, int flags) throws NameNotFoundException {
         // Not allowed in SecuredContext
+        return null;
+    }
+
+    @Override
+    public Context createConfigurationContext(Configuration overrideConfiguration) {
+        return null;
+    }
+
+    @Override
+    public Context createDisplayContext(Display display) {
         return null;
     }
 
@@ -345,6 +361,13 @@ public class SecuredContext extends Context {
                     ssm = new SecuredSensorManager((SensorManager) c.getSystemService(serviceName), plugLooper);
                 }
                 return ssm;
+            } else if (serviceName.equalsIgnoreCase(Service.BLUETOOTH_SERVICE)) {
+                // Only create a SecuredSensorManager once!
+                if (sbm == null) {
+                    sbm = (BluetoothManager) c.getSystemService(Service.BLUETOOTH_SERVICE);
+                }
+                Log.i(TAG, "sbm=" + sbm);
+                return sbm;
             } else if (serviceName.equalsIgnoreCase("android.speech.SpeechRecognizer")) {
                 Log.v(TAG, "Trying to get SpeechRecognizer");
                 synchronized (speechRecognizerLock) {
@@ -452,7 +475,7 @@ public class SecuredContext extends Context {
     @Override
     public void unregisterReceiver(BroadcastReceiver receiver) {
         /*
-		 * We need to always allow unregisterReceiver, since some plug-ins may need to unregister receivers in order to
+         * We need to always allow unregisterReceiver, since some plug-ins may need to unregister receivers in order to
 		 * clean up state when shutting down. If a user remove permission for this method, plug-ins would never be able
 		 * to shut down properly. In terms of security, the caller needs a reference to a valid BroadcastReceiver, so
 		 * it's probably not dangerous to allow.
@@ -485,6 +508,21 @@ public class SecuredContext extends Context {
     }
 
     @Override
+    public void sendStickyBroadcastAsUser(Intent intent, UserHandle user) {
+
+    }
+
+    @Override
+    public void sendStickyOrderedBroadcastAsUser(Intent intent, UserHandle user, BroadcastReceiver resultReceiver, Handler scheduler, int initialCode, String initialData, Bundle initialExtras) {
+
+    }
+
+    @Override
+    public void removeStickyBroadcastAsUser(Intent intent, UserHandle user) {
+
+    }
+
+    @Override
     public void revokeUriPermission(Uri uri, int modeFlags) {
         // Not allowed in SecuredContext
     }
@@ -508,6 +546,21 @@ public class SecuredContext extends Context {
     public void sendOrderedBroadcast(Intent intent, String receiverPermission, BroadcastReceiver resultReceiver,
                                      Handler scheduler, int initialCode, String initialData, Bundle initialExtras) {
         // Not allowed in SecuredContext
+    }
+
+    @Override
+    public void sendBroadcastAsUser(Intent intent, UserHandle user) {
+
+    }
+
+    @Override
+    public void sendBroadcastAsUser(Intent intent, UserHandle user, String receiverPermission) {
+
+    }
+
+    @Override
+    public void sendOrderedBroadcastAsUser(Intent intent, UserHandle user, String receiverPermission, BroadcastReceiver resultReceiver, Handler scheduler, int initialCode, String initialData, Bundle initialExtras) {
+
     }
 
     @Override
@@ -601,7 +654,7 @@ public class SecuredContext extends Context {
 
     private boolean checkPermission(String permString) {
         Log.d(TAG, "Checking permissions for: " + permString);
-        if (permissionCheckingEnabled) {
+        if (false && permissionCheckingEnabled) {
             for (Permission p : permissions) {
                 if (p.getPermissionString().equalsIgnoreCase(permString) && p.isPermissionGranted()) {
                     Log.d(TAG, "Permission granted: " + permString);

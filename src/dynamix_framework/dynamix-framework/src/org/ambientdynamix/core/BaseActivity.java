@@ -36,7 +36,6 @@ import android.widget.Toast;
 
 import com.bugsense.trace.BugSenseHandler;
 import com.bugsense.trace.ExceptionCallback;
-import com.newrelic.agent.android.NewRelic;
 import com.parse.Parse;
 
 import eu.smartsantander.androidExperimentation.operations.AsyncConstantsTask;
