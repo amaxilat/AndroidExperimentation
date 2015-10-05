@@ -36,6 +36,10 @@ import android.widget.Toast;
 
 import com.bugsense.trace.BugSenseHandler;
 import com.bugsense.trace.ExceptionCallback;
+import com.google.android.gms.common.ConnectionResult;
+import com.google.android.gms.common.api.GoogleApiClient;
+import com.google.android.gms.location.ActivityRecognition;
+import com.google.android.gms.location.LocationServices;
 import com.parse.Parse;
 
 import eu.smartsantander.androidExperimentation.operations.AsyncConstantsTask;
@@ -104,6 +108,7 @@ public class BaseActivity extends TabActivity {
     protected LocationManager locationManager;
     NotificationHQManager noteManager = NotificationHQManager.getInstance();
 
+
     public static Resources myRes;
 
     public static void close() {
@@ -146,7 +151,7 @@ public class BaseActivity extends TabActivity {
     protected static void setTitlebarEnabled() {
         //if (baseActivity != null)
         //    baseActivity.changeTitlebarState(Color.rgb(0, 225, 50),
-         //           myRes.getString(R.string.dynamix_enable_toggle_on));// "Experimentation"
+        //           myRes.getString(R.string.dynamix_enable_toggle_on));// "Experimentation"
         // + DynamixService.getFrameworkVersion()
         // + " is enabled");
     }
@@ -330,9 +335,7 @@ public class BaseActivity extends TabActivity {
                 if (!askDynamixIsEnabled()) {
                     item.setIcon(R.drawable.power_icon);
                     DynamixService.startFramework();
-                }
-
-                else {
+                } else {
                     item.setIcon(R.drawable.power_icon_off);
                     DynamixService.stopFramework();
                 }
@@ -344,7 +347,7 @@ public class BaseActivity extends TabActivity {
 
 
         // Setup Change Settings
-        MenuItem item1 = menu.add(1, Menu.FIRST+1, Menu.NONE, "Change Settings");
+        MenuItem item1 = menu.add(1, Menu.FIRST + 1, Menu.NONE, "Change Settings");
         item1.setOnMenuItemClickListener(new OnMenuItemClickListener() {
             public boolean onMenuItemClick(MenuItem item) {
                 startActivity(new Intent(BaseActivity.this,
@@ -354,7 +357,7 @@ public class BaseActivity extends TabActivity {
         });
 
         // Setup Help Settings
-        MenuItem item2 = menu.add(2, Menu.FIRST + 2 , Menu.NONE, "Help");
+        MenuItem item2 = menu.add(2, Menu.FIRST + 2, Menu.NONE, "Help");
         item1.setOnMenuItemClickListener(new OnMenuItemClickListener() {
             public boolean onMenuItemClick(MenuItem item) {
                 startActivity(new Intent(BaseActivity.this,

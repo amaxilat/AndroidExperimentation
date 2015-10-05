@@ -100,7 +100,8 @@ public class DynamixNotificationManager {
 	}
 
 	/**
-	 * Handles setting notifications in the Android status bar. Reference Link:
+	 * Handles setting no
+	 * tifications in the Android status bar. Reference Link:
 	 * http://androidgps.blogspot.com/2008/10/icon-in-status-bar.html
 	 */
 	private void showNotification(final AndroidNotification notification) {
@@ -120,7 +121,7 @@ public class DynamixNotificationManager {
 		futureIntent.putExtras(bundle);
 		// Create a PendingIntent using the futureIntent
 		PendingIntent pendingIntent = PendingIntent.getActivity(androidContext, (int) System.currentTimeMillis(),
-				futureIntent, Intent.FLAG_ACTIVITY_CLEAR_TOP); 
+				futureIntent, Intent.FLAG_ACTIVITY_CLEAR_TOP);
 		// Update the Notification with the notification title, description and pendingIntent
 		n.setLatestEventInfo(androidContext, androidContext.getText(R.string.dynamix_notification_title),
 				notification.getDescription(), pendingIntent);

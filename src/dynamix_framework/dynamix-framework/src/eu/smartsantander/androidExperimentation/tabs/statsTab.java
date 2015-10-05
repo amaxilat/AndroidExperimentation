@@ -4,37 +4,37 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.content.SharedPreferences.OnSharedPreferenceChangeListener;
-import android.graphics.Color;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.util.Base64;
+import android.util.Log;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
 import android.widget.TextView;
 
 
-import eu.smartsantander.androidExperimentation.Constants;
+import com.google.android.gms.maps.MapFragment;
+import com.google.android.gms.maps.MapView;
+import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.TileOverlay;
+import com.google.android.gms.maps.model.TileOverlayOptions;
+import com.google.maps.android.heatmaps.HeatmapTileProvider;
+import com.google.maps.android.heatmaps.WeightedLatLng;
+
 import eu.smartsantander.androidExperimentation.operations.Communication;
 import eu.smartsantander.androidExperimentation.operations.PhoneProfiler;
 
 import org.ambientdynamix.core.DynamixService;
 import org.ambientdynamix.core.R;
-import org.ambientdynamix.util.Log;
 import org.eazegraph.lib.charts.BarChart;
 import org.eazegraph.lib.models.BarModel;
+import org.json.JSONArray;
+import org.json.JSONException;
 
-import java.io.BufferedInputStream;
-import java.io.ByteArrayOutputStream;
-import java.io.IOException;
-import java.io.InputStream;
-import java.net.HttpURLConnection;
-import java.net.URL;
 import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.Date;
+import java.util.List;
 import java.util.SortedMap;
 import java.util.concurrent.TimeUnit;
 
@@ -63,6 +63,10 @@ public class statsTab extends Activity implements
     private Communication communication;
     private BarChart mBarChart;
     private statsTab thisActivity;
+    private MapFragment mMap;
+    private HeatmapTileProvider mProvider;
+    private TileOverlay mOverlay;
+    private List<LatLng> heatMapItems;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -105,8 +109,28 @@ public class statsTab extends Activity implements
 
         // call the AsyncTask to get the stats picture
         mBarChart = (BarChart) findViewById(R.id.barchart);
+        mMap = ((MapFragment) getFragmentManager().findFragmentById(R.id.map));
+
         jpgTask = new loadJPGstatsTask();
         jpgTask.execute();
+
+
+        mMap.getMap().setMyLocationEnabled(true);
+
+        heatMapItems = new ArrayList<LatLng>();
+        heatMapItems.add(new LatLng(0, 0));
+
+
+        mProvider = new HeatmapTileProvider.Builder().data(heatMapItems).build();
+        mOverlay = mMap.getMap().addTileOverlay(new TileOverlayOptions().tileProvider(mProvider));
+
+
+//        // Create a heat map tile provider, passing it the latlngs of the police stations.
+//        mProvider = new HeatmapTileProvider.Builder()
+//                .data(heatMapItems)
+//                .build();
+//        // Add a tile overlay to the map, using the heat map tile provider.
+//        mOverlay = mMap.addTileOverlay(new TileOverlayOptions().tileProvider(mProvider));
 
 
 //        for (Integer integer : sortedMap.keySet()) {
@@ -157,7 +181,12 @@ public class statsTab extends Activity implements
         @Override
         protected void onPostExecute(String j) {
 //			myWebView.loadDataWithBaseURL(null, j, "text/html", null, null);
-
+            runOnUiThread(new Runnable() {
+                @Override
+                public void run() {
+                    mOverlay.clearTileCache();
+                }
+            });
         }
 
 
@@ -180,27 +209,41 @@ public class statsTab extends Activity implements
                 }
             });
 
+
+            updateExperimentDeviceHeatMap();
+
             return theJPGData;
         }
 
 
     }
 
-
-    public class myWebClient extends WebViewClient {
-
-        @Override
-        public boolean shouldOverrideUrlLoading(WebView view, String url) {
-            view.loadUrl(url);
-            return true;
+    private void updateExperimentDeviceHeatMap() {
+        final JSONArray mapStats = communication.getLastPoints(DynamixService.getPhoneProfiler().getPhoneId());
+        if (mapStats != null) {
+            double max = 0.0;
+            for (int i = 0; i < mapStats.length(); i++) {
+                try {
+                    JSONArray elem = mapStats.getJSONArray(i);
+                    double val = Double.parseDouble(elem.getString(2));
+                    if (val > max) {
+                        max = val;
+                    }
+                } catch (JSONException e) {
+                    Log.e(TAG, e.getMessage());
+                }
+            }
+            for (int i = 0; i < mapStats.length(); i++) {
+                try {
+                    JSONArray elem = mapStats.getJSONArray(i);
+//                    heatMapItems.add(new WeightedLatLng(new LatLng(elem.getDouble(0), elem.getDouble(1)), Double.parseDouble(elem.getString(2)) / max));
+                    heatMapItems.add(new LatLng(elem.getDouble(0), elem.getDouble(1)));
+                } catch (JSONException e) {
+                    Log.e(TAG, e.getMessage());
+                }
+            }
+            mProvider.setData(heatMapItems);
         }
-
-        @Override
-        public void onPageFinished(WebView view, String url) {
-            super.onPageFinished(view, url);
-
-        }
-
     }
 
     @Override

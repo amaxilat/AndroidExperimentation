@@ -4,8 +4,8 @@ import android.util.Log;
 
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.google.common.cache.Cache;
-import com.google.common.cache.CacheBuilder;
+//import com.google.common.cache.Cache;
+//import com.google.common.cache.CacheBuilder;
 import com.google.gson.Gson;
 
 import eu.smartsantander.androidExperimentation.Constants;
@@ -14,6 +14,8 @@ import eu.smartsantander.androidExperimentation.jsonEntities.Plugin;
 import eu.smartsantander.androidExperimentation.jsonEntities.Smartphone;
 
 import org.ambientdynamix.core.DynamixService;
+import org.json.JSONArray;
+import org.json.JSONException;
 import org.ksoap2.SoapEnvelope;
 import org.ksoap2.serialization.PropertyInfo;
 import org.ksoap2.serialization.SoapObject;
@@ -37,12 +39,12 @@ public class Communication extends Thread implements Runnable {
     private final String TAG = this.getClass().getSimpleName();
 
     final RestTemplate restTemplate;
-    Cache<String, String> alreadySent;
+//    Cache<String, String> alreadySent;
 
     public Communication() {
-        alreadySent = CacheBuilder.newBuilder()
-                .expireAfterWrite(30, TimeUnit.SECONDS)
-                .build();
+//        alreadySent = CacheBuilder.newBuilder()
+//                .expireAfterWrite(30, TimeUnit.SECONDS)
+//                .build();
 
         // Create a new RestTemplate instance
         restTemplate = new RestTemplate();
@@ -130,6 +132,28 @@ public class Communication extends Thread implements Runnable {
         return null;
     }
 
+    public JSONArray getLastPoints(int phoneId) {
+        if (DynamixService.getExperiment() == null || DynamixService.getExperiment().getId() == null) {
+            Log.e(TAG, "No Experiment");
+            return null;
+        }
+        final String path = "/experiment/" + DynamixService.getExperiment().getId() + "?deviceId=" + phoneId + "&after=today";
+        try {
+            final String stats = get(path);
+            Log.i(TAG, stats);
+            try {
+                return new JSONArray(stats);
+            } catch (JSONException e) {
+                Log.e(TAG, e.getMessage());
+                return null;
+            }
+        } catch (IOException e) {
+            Log.e(TAG, e.getMessage());
+            return null;
+        }
+
+    }
+
 
     private String sendRegisterSmartphone(String jsonSmartphone) throws Exception {
         Log.i(TAG, "send register smartphone: " + jsonSmartphone);
@@ -143,14 +167,14 @@ public class Communication extends Thread implements Runnable {
     }
 
     public int sendReportResults(String jsonReport) throws Exception {
-        if (alreadySent.getIfPresent(jsonReport) != null) {
-            return 0;
-        }
+//        if (alreadySent.getIfPresent(jsonReport) != null) {
+//            return 0;
+//        }
         DynamixService.logToFile(jsonReport);
         Log.i(TAG, "Report Call " + jsonReport);
         try {
             Log.i(TAG, jsonReport);
-            alreadySent.put(jsonReport, "1");
+//            alreadySent.put(jsonReport, "1");
             post("/experiment", jsonReport);
 
             return 0;
@@ -166,5 +190,6 @@ public class Communication extends Thread implements Runnable {
         return new ObjectMapper().readValue(pluginListStr, new TypeReference<List<Plugin>>() {
         });
     }
+
 
 }
