@@ -21,6 +21,7 @@ import java.util.TimerTask;
 
 import org.ambientdynamix.data.DynamixPreferences;
 
+import eu.smartsantander.androidExperimentation.operations.AsyncReportOnServerTask;
 import eu.smartsantander.androidExperimentation.operations.AsyncStatusRefreshTask;
 
 import android.app.Activity;
@@ -38,6 +39,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.AdapterView.AdapterContextMenuInfo;
+import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.ToggleButton;
@@ -68,8 +70,9 @@ public class HomeActivity extends ListActivity {
     public TextView expIdTv;
     public TextView expDescriptionTv;
     public TextView connectionStatus;
-    private TextView pendingTextView;
+    private Button pendingSendButton;
 
+    private TextView pendingTextView;
     // Create runnable for updating the UI
     final Runnable updateList = new Runnable() {
         public void run() {
@@ -155,6 +158,15 @@ public class HomeActivity extends ListActivity {
         setContentView(R.layout.home_tab);
         appList = getListView();
         appList.setClickable(true);
+
+        pendingSendButton = (Button) findViewById(R.id.send_pending_now);
+        pendingSendButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                new AsyncReportOnServerTask().execute();
+                refresh();
+            }
+        });
 
         // Set an OnItemClickListener on the appList to support editing the
         // applications
@@ -274,7 +286,7 @@ public class HomeActivity extends ListActivity {
             Long storageSize = DynamixService.getDataStorageSize();
             if (storageSize > 0) {
                 pendingTextView.setText(String.format(getString(R.string.pending_messages_template), storageSize));
-            }else{
+            } else {
                 pendingTextView.setText("");
             }
 

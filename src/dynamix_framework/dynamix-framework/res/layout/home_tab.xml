@@ -76,6 +76,14 @@
         android:fontFamily="sans-serif-light"
         android:text="@string/noAuthApps" />
 
+    <Button
+        android:id="@+id/send_pending_now"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/send_data_now">
+
+    </Button>
+
     <LinearLayout
         android:id="@+id/TableLayout01"
         android:layout_width="fill_parent"
