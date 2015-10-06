@@ -21,6 +21,7 @@ import java.util.TimerTask;
 
 import org.ambientdynamix.data.DynamixPreferences;
 
+import eu.smartsantander.androidExperimentation.Constants;
 import eu.smartsantander.androidExperimentation.operations.AsyncReportOnServerTask;
 import eu.smartsantander.androidExperimentation.operations.AsyncStatusRefreshTask;
 
@@ -73,6 +74,7 @@ public class HomeActivity extends ListActivity {
     private Button pendingSendButton;
 
     private TextView pendingTextView;
+    private TextView activityStatusTextView;
     // Create runnable for updating the UI
     final Runnable updateList = new Runnable() {
         public void run() {
@@ -178,6 +180,7 @@ public class HomeActivity extends ListActivity {
 
         // Setup the Dynamix Enable/Disable button
         pendingTextView = (TextView) findViewById(R.id.pending);
+        activityStatusTextView= (TextView) findViewById(R.id.activity_status);
         togglebutton = (ToggleButton) findViewById(R.id.DynamixActiveToggle);
         togglebutton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
@@ -290,6 +293,7 @@ public class HomeActivity extends ListActivity {
                 pendingTextView.setText("");
             }
 
+            activityStatusTextView.setText(Constants.activityStatus);
         }
         appList.setVisibility(View.GONE);//smartsantander
         AsyncStatusRefreshTask task = new AsyncStatusRefreshTask();

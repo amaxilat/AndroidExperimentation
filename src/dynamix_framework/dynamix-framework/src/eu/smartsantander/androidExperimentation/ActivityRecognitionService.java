@@ -26,6 +26,15 @@ public class ActivityRecognitionService extends IntentService {
      *
      * @param name Used to name the worker thread, important only for debugging.
      */
+    public ActivityRecognitionService() {
+        super("ActivityRecognitionService");
+    }
+
+    /**
+     * Creates an IntentService.  Invoked by your subclass's constructor.
+     *
+     * @param name Used to name the worker thread, important only for debugging.
+     */
     public ActivityRecognitionService(String name) {
         super(name);
     }
@@ -41,7 +50,7 @@ public class ActivityRecognitionService extends IntentService {
 
             activityConfidence = result.getMostProbableActivity().getConfidence();
             activityCode = result.getMostProbableActivity().getType();
-
+            Constants.activityStatus = getType(result.getMostProbableActivity().getType());
             Log.d("o3nWatcherLog", " ACTIVITY CODE : " + activityCode + " ACTIVITY CONFIDENCE : " + activityConfidence);
 
             // Evaluate the avtivity recognition result
@@ -50,7 +59,6 @@ public class ActivityRecognitionService extends IntentService {
     }
 
     private void evaluateActivityResult() {
-
     }
 
     // This method is only used in a log line to have readable status in logs

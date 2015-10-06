@@ -16,6 +16,7 @@
 package org.ambientdynamix.core;
 
 import android.app.AlertDialog;
+import android.app.PendingIntent;
 import android.app.TabActivity;
 import android.content.Context;
 import android.content.DialogInterface;
@@ -27,6 +28,7 @@ import android.location.LocationListener;
 import android.location.LocationManager;
 import android.os.Bundle;
 import android.os.Handler;
+import android.support.multidex.MultiDex;
 import android.util.Log;
 import android.view.*;
 import android.view.MenuItem.OnMenuItemClickListener;
@@ -42,6 +44,7 @@ import com.google.android.gms.location.ActivityRecognition;
 import com.google.android.gms.location.LocationServices;
 import com.parse.Parse;
 
+import eu.smartsantander.androidExperimentation.ActivityRecognitionService;
 import eu.smartsantander.androidExperimentation.operations.AsyncConstantsTask;
 import eu.smartsantander.androidExperimentation.operations.NotificationHQManager;
 import eu.smartsantander.androidExperimentation.tabs.jobsTab;
@@ -63,7 +66,7 @@ import org.ambientdynamix.util.AndroidNotification;
  * @author Darren Carlson
  * @see DynamixService
  */
-public class BaseActivity extends TabActivity {
+public class BaseActivity extends TabActivity implements GoogleApiClient.ConnectionCallbacks, GoogleApiClient.OnConnectionFailedListener {
     private final static String TAG = BaseActivity.class.getSimpleName();
     /*
      * Useful Links: Fancy ListViews:
@@ -108,6 +111,9 @@ public class BaseActivity extends TabActivity {
     protected LocationManager locationManager;
     NotificationHQManager noteManager = NotificationHQManager.getInstance();
 
+
+    private GoogleApiClient mGoogleApiClient;
+    private PendingIntent pIntent;
 
     public static Resources myRes;
 
@@ -185,6 +191,14 @@ public class BaseActivity extends TabActivity {
         getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
         context = this;
 
+
+        mGoogleApiClient = new GoogleApiClient.Builder(this)
+                .addApi(ActivityRecognition.API)
+                .addConnectionCallbacks(this)
+                .addOnConnectionFailedListener(this)
+                .build();
+        org.ambientdynamix.util.Log.i(TAG, "Connecting Google APIS...");
+        mGoogleApiClient.connect();
 
         // Set the Dynamix base activity so it can use our context
         DynamixService.setBaseActivity(this);
@@ -497,4 +511,28 @@ public class BaseActivity extends TabActivity {
         return dynamixEnabled;
     }
 
+
+    @Override
+    protected void attachBaseContext(Context base) {
+        super.attachBaseContext(base);
+        MultiDex.install(this);
+    }
+
+    @Override
+    public void onConnected(Bundle bundle) {
+        org.ambientdynamix.util.Log.d(TAG, "Google activity recognition services connected");
+        Intent intent = new Intent(this, ActivityRecognitionService.class);
+        pIntent = PendingIntent.getService(getApplicationContext(), 0, intent, PendingIntent.FLAG_UPDATE_CURRENT);
+        ActivityRecognition.ActivityRecognitionApi.requestActivityUpdates(mGoogleApiClient, 10000, pIntent);
+    }
+
+    @Override
+    public void onConnectionSuspended(int i) {
+        org.ambientdynamix.util.Log.d(TAG, "Google activity recognition services connection suspended");
+    }
+
+    @Override
+    public void onConnectionFailed(ConnectionResult connectionResult) {
+        org.ambientdynamix.util.Log.d(TAG, "Google activity recognition services disconnected");
+    }
 }

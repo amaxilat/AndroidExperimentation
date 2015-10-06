@@ -51,6 +51,13 @@
         android:textAppearance="?android:attr/textAppearanceMedium" />
 
     <TextView
+        android:id="@+id/activity_status"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/customsubcatborder"
+        android:fontFamily="sans-serif-light"
+        android:textAppearance="?android:attr/textAppearanceMedium" />
+    <TextView
         android:id="@+id/connection_status"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
