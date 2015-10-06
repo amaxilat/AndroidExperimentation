@@ -2,6 +2,7 @@ package eu.smartsantander.androidExperimentation.controller;
 
 import eu.smartsantander.androidExperimentation.model.Result;
 import eu.smartsantander.androidExperimentation.repository.ResultRepository;
+import org.apache.commons.math3.stat.descriptive.DescriptiveStatistics;
 import org.apache.log4j.Logger;
 import org.joda.time.DateTime;
 import org.json.JSONArray;
@@ -20,18 +21,18 @@ import java.util.Set;
  * @author Dimitrios Amaxilatis.
  */
 @Controller
-public class RestController {
+public class RestDataController {
     /**
      * a log4j logger to print messages.
      */
-    private static final Logger LOGGER = Logger.getLogger(RestController.class);
+    private static final Logger LOGGER = Logger.getLogger(RestDataController.class);
 
 
     @Autowired
     ResultRepository resultRepository;
 
 
-    @RequestMapping(value = "/experiment/{experimentId}", method = RequestMethod.GET)
+    @RequestMapping(value = "/experiment/data/{experimentId}", method = RequestMethod.GET)
     public String experimentView(final Map<String, Object> model, @PathVariable("experimentId") final String experiment, @RequestParam(value = "deviceId", defaultValue = "0", required = false) final int deviceId, @RequestParam(value = "after", defaultValue = "0", required = false) final String after) throws JSONException {
         LOGGER.debug("experiment:" + experiment);
         if (deviceId == 0) {
@@ -45,7 +46,7 @@ public class RestController {
     }
 
     @ResponseBody
-    @RequestMapping(value = "/api/v1/experiment/{experimentId}", method = RequestMethod.GET, produces = "application/json")
+    @RequestMapping(value = "/api/v1/experiment/data/{experimentId}", method = RequestMethod.GET, produces = "application/json")
     public String experimentViewApi(@PathVariable("experimentId") final String experiment, @RequestParam(value = "deviceId", defaultValue = "0", required = false) final int deviceId, @RequestParam(value = "after", defaultValue = "0", required = false) final String after) throws JSONException {
         return getExperimentData(experiment, deviceId, after).toString();
     }
@@ -71,29 +72,45 @@ public class RestController {
             results = resultRepository.findByExperimentIdAndDeviceIdAndTimestampAfter(Integer.parseInt(experiment), deviceId, start);
         }
 
-        Map<String, Map<String, Long>> locationsHeatMap = new HashMap<String, Map<String, Long>>();
+        Map<String, Map<String, DescriptiveStatistics>> locationsHeatMap = new HashMap<String, Map<String, DescriptiveStatistics>>();
+        String longitude = null;
+        String latitude = null;
+        DescriptiveStatistics wholeDataStatistics = new DescriptiveStatistics();
         for (Result result : results) {
             try {
                 final JSONObject message = new JSONObject(result.getMessage());
 
                 if (message.has("org.ambientdynamix.contextplugins.Latitude")
                         && message.has("org.ambientdynamix.contextplugins.Longitude")) {
-                    String longitude = df.format(message.getDouble("org.ambientdynamix.contextplugins.Longitude"));
-                    String latitude = df.format(message.getDouble("org.ambientdynamix.contextplugins.Latitude"));
+                    longitude = df.format(message.getDouble("org.ambientdynamix.contextplugins.Longitude"));
+                    latitude = df.format(message.getDouble("org.ambientdynamix.contextplugins.Latitude"));
                     if (!locationsHeatMap.containsKey(longitude)) {
-                        locationsHeatMap.put(longitude, new HashMap<String, Long>());
+                        locationsHeatMap.put(longitude, new HashMap<String, DescriptiveStatistics>());
                     }
                     if (!locationsHeatMap.get(longitude).containsKey(latitude)) {
-                        locationsHeatMap.get(longitude).put(latitude, 0L);
+                        locationsHeatMap.get(longitude).put(latitude, new DescriptiveStatistics());
                     }
-                    Long val = locationsHeatMap.get(longitude).get(latitude);
-                    locationsHeatMap.get(longitude).put(latitude, val + 1);
+//                    Long val = locationsHeatMap.get(longitude).get(latitude);
+//                    locationsHeatMap.get(longitude).put(latitude, val + 1);
+                } else {
+                    if (longitude != null && latitude != null) {
+                        try {
+                            locationsHeatMap.get(longitude).get(latitude).addValue(
+                                    message.getDouble("org.ambientdynamix.contextplugins.NoiseLevel")
+
+                            );
+                            wholeDataStatistics.addValue(message.getDouble("org.ambientdynamix.contextplugins.NoiseLevel"));
+                        } catch (Exception e) {
+                            LOGGER.error(e, e);
+                        }
+                    }
                 }
             } catch (Exception e) {
                 LOGGER.error(e, e);
             }
         }
         final JSONArray addressPoints = new JSONArray();
+        double max = wholeDataStatistics.getMax();
         for (String longit : locationsHeatMap.keySet()) {
             for (String latit : locationsHeatMap.get(longit).keySet()) {
                 LOGGER.info("{" + longit + ":" + latit + "}");
@@ -102,7 +119,7 @@ public class RestController {
                     measurement.put(Double.parseDouble(latit));
                     measurement.put(Double.parseDouble(longit));
                     //measurement.put(String.valueOf(locationsHeatMap.get(longit).get(latit)));
-                    measurement.put("1");
+                    measurement.put(locationsHeatMap.get(longit).get(latit).getMean() / max);
                     addressPoints.put(measurement);
                 } catch (JSONException e) {
                     LOGGER.error(e, e);

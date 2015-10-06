@@ -182,22 +182,26 @@ public class AndroidExperimentationWS extends BaseController {
 
     @ResponseBody
     @RequestMapping(value = "/statistics/{phoneId}", method = RequestMethod.GET, produces = "application/json")
-    public Map<Integer, Long> statisticsByPhone(@PathVariable("phoneId") final String phoneId, final HttpServletResponse response) throws JSONException, IOException {
+    public Map<Long, Long> statisticsByPhone(@PathVariable("phoneId") final String phoneId, final HttpServletResponse response) throws JSONException, IOException {
 
-        LOGGER.info("saveExperiment Called");
-        Map<Integer, Long> counters = new HashMap<Integer, Long>();
+        final Map<Long, Long> counters = new HashMap<Long, Long>();
+        for (long i = 0; i <= 7; i++) {
+            counters.put(i, 0L);
+        }
 
-        DateTime date = new DateTime();
-        final Set<Result> results = resultRepository.findByDeviceIdAndTimestampAfter(Integer.parseInt(phoneId), date.withMillisOfDay(0).getMillis());
-        long prev = results.size();
-        long totalPrev = results.size();
-        counters.put(0, prev);
+        final DateTime date = new DateTime().withMillisOfDay(0);
+        final Set<Result> results = resultRepository.findByDeviceIdAndTimestampAfter(Integer.parseInt(phoneId), date.minusDays(7).getMillis());
+        final Map<DateTime, Long> datecounters = new HashMap<DateTime, Long>();
+        for (final Result result : results) {
+            final DateTime index = new DateTime(result.getTimestamp()).withMillisOfDay(0);
+            if (!datecounters.containsKey(index)) {
+                datecounters.put(index, 0L);
+            }
+            datecounters.put(index, datecounters.get(index) + 1);
+        }
 
-        for (int i = 1; i < 7; i++) {
-            long now = date.minusDays(i).withMillisOfDay(0).getMillis();
-            final Set<Result> results1 = resultRepository.findByDeviceIdAndTimestampAfter(Integer.parseInt(phoneId), now);
-            counters.put(i, results1.size() - totalPrev);
-            totalPrev += results1.size();
+        for (final DateTime dateTime : datecounters.keySet()) {
+            counters.put((date.getMillis() - dateTime.getMillis()) / 86400000, datecounters.get(dateTime));
         }
         return counters;
     }
