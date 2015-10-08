@@ -55,9 +55,6 @@ public class statsTab extends Activity implements
     private OnSharedPreferenceChangeListener listener;
     private PhoneProfiler pProfil;
     private SharedPreferences prefs;
-    //	private WebView myWebView;
-    private WebSettings webSettings;
-    private String html;
     private loadJPGstatsTask jpgTask;
 
     private Communication communication;
@@ -75,24 +72,17 @@ public class statsTab extends Activity implements
 
         pProfil = DynamixService.getPhoneProfiler();
 
-//		myWebView = (WebView) findViewById(R.id.statswebview);
-//		myWebView.setWebViewClient(new myWebClient());
-//		myWebView.getSettings().setJavaScriptEnabled(true);
-//		myWebView.requestFocus(View.FOCUS_DOWN);
-
         prefs = getSharedPreferences("SmartSantanderConfigurations",
                 Context.MODE_PRIVATE);
 
         // update the field dynamically when changed
-
         listener = new OnSharedPreferenceChangeListener() {
 
             @Override
             public void onSharedPreferenceChanged(
                     SharedPreferences sharedPreferences, String key) {
                 // TODO Auto-generated method stub
-
-                System.out.println("A CHANGE HAS COME!!!!!! " + key);
+                Log.v(TAG, "A CHANGE HAS COME!!!!!! " + key);
 
             }
         };
@@ -124,36 +114,6 @@ public class statsTab extends Activity implements
         mProvider = new HeatmapTileProvider.Builder().data(heatMapItems).build();
         mOverlay = mMap.getMap().addTileOverlay(new TileOverlayOptions().tileProvider(mProvider));
 
-
-//        // Create a heat map tile provider, passing it the latlngs of the police stations.
-//        mProvider = new HeatmapTileProvider.Builder()
-//                .data(heatMapItems)
-//                .build();
-//        // Add a tile overlay to the map, using the heat map tile provider.
-//        mOverlay = mMap.addTileOverlay(new TileOverlayOptions().tileProvider(mProvider));
-
-
-//        for (Integer integer : sortedMap.keySet()) {
-//            mBarChart.addBar(new BarModel(sortedMap.get(integer), 0xFF123456));
-//        }
-//        mBarChart.startAnimation();
-
-        /*String theJPGData;
-
-		if (checkNetworkIsAvailable()) {
-
-			theJPGData = loadTheStatsJPG();
-			SharedPreferences.Editor editor = prefs.edit();
-			editor.putString("pictureStatsData", theJPGData);
-			editor.commit();
-
-		} else {
-			theJPGData = prefs.getString("pictureStatsData", "Not available");
-		}
-
-		myWebView.loadDataWithBaseURL(null, theJPGData, "text/html", null, null);*/
-
-
     }
 
     @Override
@@ -180,7 +140,6 @@ public class statsTab extends Activity implements
 
         @Override
         protected void onPostExecute(String j) {
-//			myWebView.loadDataWithBaseURL(null, j, "text/html", null, null);
             runOnUiThread(new Runnable() {
                 @Override
                 public void run() {
@@ -236,7 +195,6 @@ public class statsTab extends Activity implements
             for (int i = 0; i < mapStats.length(); i++) {
                 try {
                     JSONArray elem = mapStats.getJSONArray(i);
-//                    heatMapItems.add(new WeightedLatLng(new LatLng(elem.getDouble(0), elem.getDouble(1)), Double.parseDouble(elem.getString(2)) / max));
                     heatMapItems.add(new LatLng(elem.getDouble(0), elem.getDouble(1)));
                 } catch (JSONException e) {
                     Log.e(TAG, e.getMessage());
@@ -251,23 +209,6 @@ public class statsTab extends Activity implements
 
         fillStatsFields();
 
-        // String thePNGData = loadTheStatsJPG();
-
-		/*String theJPGData = prefs.getString("pictureStatsData", "Not available");
-
-		if (checkNetworkIsAvailable()) {
-
-			theJPGData = loadTheStatsJPG();
-			SharedPreferences.Editor editor = prefs.edit();
-			editor.putString("pictureStatsData", theJPGData);
-			editor.commit();
-
-		} else {
-			theJPGData = prefs.getString("pictureStatsData", "Not available");
-		}
-
-		myWebView
-				.loadDataWithBaseURL(null, theJPGData, "text/html", null, null);*/
         try {
             jpgTask.execute();
         } catch (Exception e) {
@@ -286,10 +227,6 @@ public class statsTab extends Activity implements
         TextView statsTextView5 = (TextView) findViewById(R.id.stats_number_readings_title);
         TextView statsTextView6 = (TextView) findViewById(R.id.stats_number_readings_value);
         TextView statsTextView9 = (TextView) findViewById(R.id.stats_graph_title);
-
-        // String totalMinutes = pProfil.getLastOnlineLogin().toString();
-
-        // String totalMinutes = new Date().toString();
 
         statsTextView1.setText(getString(R.string.statsTotalTime));
 
