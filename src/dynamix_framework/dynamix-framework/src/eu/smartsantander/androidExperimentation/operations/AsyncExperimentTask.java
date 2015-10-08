@@ -1,23 +1,17 @@
 package eu.smartsantander.androidExperimentation.operations;
 
+import android.os.AsyncTask;
+import android.os.RemoteException;
+import android.util.Log;
+
 import org.ambientdynamix.api.application.ContextPluginInformation;
-import org.ambientdynamix.api.application.ContextPluginInformationResult;
 import org.ambientdynamix.api.application.IdResult;
-import org.ambientdynamix.core.BaseActivity;
 import org.ambientdynamix.core.DynamixService;
 
-import com.google.gson.Gson;
+import java.util.List;
 
 import eu.smartsantander.androidExperimentation.Constants;
 import eu.smartsantander.androidExperimentation.jsonEntities.Experiment;
-
-import android.os.AsyncTask;
-import android.os.Bundle;
-import android.os.RemoteException;
-import android.util.Log;
-import android.widget.Toast;
-
-import java.util.List;
 
 public class AsyncExperimentTask extends AsyncTask<String, Void, String> {
     private final String TAG = this.getClass().getSimpleName();
@@ -151,10 +145,11 @@ public class AsyncExperimentTask extends AsyncTask<String, Void, String> {
                     }
                     if (experiment.getId() == oldExpId
                             && DynamixService.isExperimentInstalled(experiment.getContextType())) {
-                        DynamixService                                .addTotalTimeConnectedOnline(Constants.EXPERIMENT_POLL_INTERVAL);
+                        DynamixService.addTotalTimeConnectedOnline(Constants.EXPERIMENT_POLL_INTERVAL);
                         Log.i(TAG, "Experiment still the same");
                         throw new Exception("Experiment still the same");
                     }
+
                     String url = experiment.getUrl();
                     Downloader downloader = new Downloader();
                     try {

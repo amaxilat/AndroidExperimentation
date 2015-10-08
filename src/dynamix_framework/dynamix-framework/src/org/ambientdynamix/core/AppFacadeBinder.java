@@ -122,14 +122,14 @@ class AppFacadeBinder extends IDynamixFacade.Stub implements IDynamixFrameworkLi
 						doAddContextSupport(app, listener, contextType, null);
 						return new Result();
 					} else
-						Log.w(TAG, "addContextSupport could not find open session for: " + app);
+						Log.v(TAG, "addContextSupport could not find open session for: " + app);
 					return new Result("Session Not Found", ErrorCodes.SESSION_NOT_FOUND);
 				} else {
-					Log.w(TAG, app + " is not authorized!");
+					Log.v(TAG, app + " is not authorized!");
 					return new Result("Not Authorized", ErrorCodes.NOT_AUTHORIZED);
 				}
 			} else {
-				Log.w(TAG, "Dynamix not started!");
+				Log.v(TAG, "Dynamix not started!");
 				return new Result("Dynamix not started!", ErrorCodes.NOT_READY);
 			}
 		} else
@@ -158,15 +158,15 @@ class AppFacadeBinder extends IDynamixFacade.Stub implements IDynamixFrameworkLi
 						doAddContextSupport(app, listener, contextType, pluginId);
 						return new Result();
 					} else {
-						Log.w(TAG, "could not find open session for: " + app);
+						Log.v(TAG, "could not find open session for: " + app);
 						return new Result("Session Not found", ErrorCodes.SESSION_NOT_FOUND);
 					}
 				} else {
-					Log.w(TAG, app + " is not authorized!");
+					Log.v(TAG, app + " is not authorized!");
 					return new Result("Not Authorized", ErrorCodes.NOT_AUTHORIZED);
 				}
 			} else {
-				Log.w(TAG, "Dynamix not started!");
+				Log.v(TAG, "Dynamix not started!");
 				return new Result("Dynamix not initialized!", ErrorCodes.NOT_READY);
 			}
 		} else {
@@ -185,7 +185,7 @@ class AppFacadeBinder extends IDynamixFacade.Stub implements IDynamixFrameworkLi
 			setupThreadLooper();
 			SessionManager.addDynamixListener(getCallerId(listener), listener);
 		} else
-			Log.w(TAG, "Listener was null in addDynamixListener");
+			Log.v(TAG, "Listener was null in addDynamixListener");
 	}
 
 	/**
@@ -219,7 +219,7 @@ class AppFacadeBinder extends IDynamixFacade.Stub implements IDynamixFrameworkLi
 		if (app != null)
 			return new ContextPluginInformationResult(DynamixService.getAllContextPluginInfo());
 		else {
-			Log.w(TAG, app + " is not authorized!");
+			Log.v(TAG, app + " is not authorized!");
 			return new ContextPluginInformationResult("Not Authorized", ErrorCodes.NOT_AUTHORIZED);
 		}
 	}
@@ -241,7 +241,7 @@ class AppFacadeBinder extends IDynamixFacade.Stub implements IDynamixFrameworkLi
 			}
 			return new ContextPluginInformationResult("Plug-in Not Found", ErrorCodes.PLUG_IN_NOT_FOUND);
 		} else {
-			Log.w(TAG, app + " is not authorized!");
+			Log.v(TAG, app + " is not authorized!");
 			return new ContextPluginInformationResult("Not Authorized", ErrorCodes.NOT_AUTHORIZED);
 		}
 	}
@@ -259,11 +259,11 @@ class AppFacadeBinder extends IDynamixFacade.Stub implements IDynamixFrameworkLi
 			if (session != null) {
 				return conMgr.getContextSupport(session.getApp(), listener);
 			} else {
-				Log.w(TAG, "could not find open session for: " + listener);
+				Log.v(TAG, "could not find open session for: " + listener);
 				return new ContextSupportResult("Session Not found", ErrorCodes.SESSION_NOT_FOUND);
 			}
 		} else {
-			Log.w(TAG, "Listener was null in getContextSupport");
+			Log.v(TAG, "Listener was null in getContextSupport");
 			return new ContextSupportResult("Listener was null in getContextSupport", ErrorCodes.MISSING_PARAMETERS);
 		}
 	}
@@ -280,11 +280,11 @@ class AppFacadeBinder extends IDynamixFacade.Stub implements IDynamixFrameworkLi
 			if (session != null) {
 				return new IdResult(session.getDynamixListenerId(listener));
 			} else {
-				Log.w(TAG, "could not find open session for: " + listener);
+				Log.v(TAG, "could not find open session for: " + listener);
 				return new IdResult("Session Not found", ErrorCodes.SESSION_NOT_FOUND);
 			}
 		} else {
-			Log.w(TAG, "Listener was null in getListenerId");
+			Log.v(TAG, "Listener was null in getListenerId");
 			return new IdResult("Listener was null in getListenerId", ErrorCodes.MISSING_PARAMETERS);
 		}
 	}
@@ -305,11 +305,11 @@ class AppFacadeBinder extends IDynamixFacade.Stub implements IDynamixFrameworkLi
 			if (session != null && session.isSessionOpen()) {
 				return new IdResult(session.getSessionId().toString());
 			} else {
-				Log.w(TAG, "could not find open session for: " + app);
+				Log.v(TAG, "could not find open session for: " + app);
 				return new IdResult("Session Not found", ErrorCodes.SESSION_NOT_FOUND);
 			}
 		} else {
-			Log.w(TAG, app + " is not authorized!");
+			Log.v(TAG, app + " is not authorized!");
 			return new IdResult("Not Authorized", ErrorCodes.NOT_AUTHORIZED);
 		}
 	}
@@ -336,7 +336,7 @@ class AppFacadeBinder extends IDynamixFacade.Stub implements IDynamixFrameworkLi
 		if (DynamixService.isFrameworkInitialized()) {
 			doOpenSession(userId);
 		} else {
-			Log.w(TAG, "DynamixService not initialized during openSession... caching request for: " + userId);
+			Log.v(TAG, "DynamixService not initialized during openSession... caching request for: " + userId);
 			addCachedUserId(userId);
 		}
 	}
@@ -355,7 +355,7 @@ class AppFacadeBinder extends IDynamixFacade.Stub implements IDynamixFrameworkLi
 			conMgr.removeAllContextSupport(app);
 			return SessionManager.closeSession(app, true);
 		} else {
-			Log.w(TAG, app + " is not authorized!");
+			Log.v(TAG, app + " is not authorized!");
 			return new ContextPluginInformationResult("Not Authorized", ErrorCodes.NOT_AUTHORIZED);
 		}
 	}
@@ -374,7 +374,7 @@ class AppFacadeBinder extends IDynamixFacade.Stub implements IDynamixFrameworkLi
 			// App is authorized
 			return conMgr.removeAllContextSupport(app);
 		} else {
-			Log.w(TAG, app + " is not authorized!");
+			Log.v(TAG, app + " is not authorized!");
 			return new Result("Not Authorized", ErrorCodes.NOT_AUTHORIZED);
 		}
 	}
@@ -395,11 +395,11 @@ class AppFacadeBinder extends IDynamixFacade.Stub implements IDynamixFrameworkLi
 				// App is authorized
 				return conMgr.removeContextSupport(app, listener, supportInfo);
 			} else {
-				Log.w(TAG, app + " is not authorized!");
+				Log.v(TAG, app + " is not authorized!");
 				return new Result("Not Authorized", ErrorCodes.NOT_AUTHORIZED);
 			}
 		} else {
-			Log.w(TAG, "Missing parameters in removeContextSupport");
+			Log.v(TAG, "Missing parameters in removeContextSupport");
 			return new Result("Missing parameters in removeContextSupport", ErrorCodes.MISSING_PARAMETERS);
 		}
 	}
@@ -420,11 +420,11 @@ class AppFacadeBinder extends IDynamixFacade.Stub implements IDynamixFrameworkLi
 				// App is authorized
 				return conMgr.removeContextSupportForContextType(app, listener, contextType);
 			} else {
-				Log.w(TAG, app + " is not authorized!");
+				Log.v(TAG, app + " is not authorized!");
 				return new Result("Not Authorized", ErrorCodes.NOT_AUTHORIZED);
 			}
 		} else {
-			Log.w(TAG, "Missing parameters in removeContextSupportForContextType");
+			Log.v(TAG, "Missing parameters in removeContextSupportForContextType");
 			return new Result("Missing parameters in removeContextSupportForContextType", ErrorCodes.MISSING_PARAMETERS);
 		}
 	}
@@ -444,11 +444,11 @@ class AppFacadeBinder extends IDynamixFacade.Stub implements IDynamixFrameworkLi
 				// App is authorized
 				return conMgr.removeAllContextSupport(app, listener);
 			} else {
-				Log.w(TAG, app + " is not authorized!");
+				Log.v(TAG, app + " is not authorized!");
 				return new Result("Not Authorized", ErrorCodes.NOT_AUTHORIZED);
 			}
 		} else {
-			Log.w(TAG, "Null listener in removeAllContextSupportForListener");
+			Log.v(TAG, "Null listener in removeAllContextSupportForListener");
 			return new Result("Null listener in removeAllContextSupportForListener", ErrorCodes.MISSING_PARAMETERS);
 		}
 	}
@@ -473,14 +473,14 @@ class AppFacadeBinder extends IDynamixFacade.Stub implements IDynamixFrameworkLi
 					// Request the context scan and return the result
  					IdResult result = DynamixService.handleContextRequest(app, session, listener, pluginId,	contextType, scanConfig);
 					if (!result.wasSuccessful())
-						Log.w(TAG, "Request Context Scan Failed: " + result.getMessage());
+						Log.v(TAG, "Request Context Scan Failed: " + result.getMessage());
 					return result;
 				} else {
-					Log.w(TAG, "could not find open session for: " + app);
+					Log.v(TAG, "could not find open session for: " + app);
 					return new IdResult("Session Not found", ErrorCodes.SESSION_NOT_FOUND);
 				}
 			} else {
-				Log.w(TAG, app + " is not authorized!");
+				Log.v(TAG, app + " is not authorized!");
 				return new IdResult("Not Authorized", ErrorCodes.NOT_AUTHORIZED);
 			}
 		} else
@@ -508,11 +508,11 @@ class AppFacadeBinder extends IDynamixFacade.Stub implements IDynamixFrameworkLi
 				}
 				return new Result("Plug-in not found", ErrorCodes.PLUG_IN_NOT_FOUND);
 			} else {
-				Log.w(TAG, app + " is not authorized!");
+				Log.v(TAG, app + " is not authorized!");
 				return new Result("Not Authorized", ErrorCodes.NOT_AUTHORIZED);
 			}
 		} else {
-			Log.w(TAG, "Null plugInfo in requestContextPluginInstallation");
+			Log.v(TAG, "Null plugInfo in requestContextPluginInstallation");
 			return new Result("Null plugInfo in requestContextPluginInstallation", ErrorCodes.MISSING_PARAMETERS);
 		}
 	}
@@ -538,11 +538,11 @@ class AppFacadeBinder extends IDynamixFacade.Stub implements IDynamixFrameworkLi
 				}
 				return new Result("Plug-in not found", ErrorCodes.PLUG_IN_NOT_FOUND);
 			} else {
-				Log.w(TAG, app + " is not authorized!");
+				Log.v(TAG, app + " is not authorized!");
 				return new Result("Not Authorized", ErrorCodes.NOT_AUTHORIZED);
 			}
 		} else {
-			Log.w(TAG, "Null plugInfo in requestContextPluginUninstall");
+			Log.v(TAG, "Null plugInfo in requestContextPluginUninstall");
 			return new Result("Null plugInfo in requestContextPluginUninstall", ErrorCodes.MISSING_PARAMETERS);
 		}
 	}
@@ -574,15 +574,15 @@ class AppFacadeBinder extends IDynamixFacade.Stub implements IDynamixFrameworkLi
 					conMgr.resendCachedEvents(app, listener);
 					return new Result();
 				} else {
-					Log.w(TAG, "could not find open session for: " + app);
+					Log.v(TAG, "could not find open session for: " + app);
 					return new Result("Session Not found", ErrorCodes.SESSION_NOT_FOUND);
 				}
 			} else {
-				Log.w(TAG, app + " is not authorized!");
+				Log.v(TAG, app + " is not authorized!");
 				return new Result("Not Authorized", ErrorCodes.NOT_AUTHORIZED);
 			}
 		} else {
-			Log.w(TAG, "Null listener in resendAllCachedContextEvents");
+			Log.v(TAG, "Null listener in resendAllCachedContextEvents");
 			return new Result("Null listener in resendAllCachedContextEvents", ErrorCodes.MISSING_PARAMETERS);
 		}
 	}
@@ -606,15 +606,15 @@ class AppFacadeBinder extends IDynamixFacade.Stub implements IDynamixFrameworkLi
 					conMgr.resendCachedEvents(app, listener, contextType);
 					return new Result();
 				} else {
-					Log.w(TAG, "could not find open session for: " + app);
+					Log.v(TAG, "could not find open session for: " + app);
 					return new Result("Session Not found", ErrorCodes.SESSION_NOT_FOUND);
 				}
 			} else {
-				Log.w(TAG, app + " is not authorized!");
+				Log.v(TAG, app + " is not authorized!");
 				return new Result("Not Authorized", ErrorCodes.NOT_AUTHORIZED);
 			}
 		} else {
-			Log.w(TAG, "Missing parameters in resendAllCachedContextEvents");
+			Log.v(TAG, "Missing parameters in resendAllCachedContextEvents");
 			return new Result("Missing parameters in resendAllCachedContextEvents", ErrorCodes.MISSING_PARAMETERS);
 		}
 	}
@@ -637,15 +637,15 @@ class AppFacadeBinder extends IDynamixFacade.Stub implements IDynamixFrameworkLi
 					conMgr.resendCachedEvents(app, listener, pastMills);
 					return new Result();
 				} else {
-					Log.w(TAG, "could not find open session for: " + app);
+					Log.v(TAG, "could not find open session for: " + app);
 					return new Result("Session Not found", ErrorCodes.SESSION_NOT_FOUND);
 				}
 			} else {
-				Log.w(TAG, app + " is not authorized!");
+				Log.v(TAG, app + " is not authorized!");
 				return new Result("Not Authorized", ErrorCodes.NOT_AUTHORIZED);
 			}
 		} else {
-			Log.w(TAG, "Missing parameters in resendCachedContextEvents");
+			Log.v(TAG, "Missing parameters in resendCachedContextEvents");
 			return new Result("Missing parameters in resendCachedContextEvents", ErrorCodes.MISSING_PARAMETERS);
 		}
 	}
@@ -669,15 +669,15 @@ class AppFacadeBinder extends IDynamixFacade.Stub implements IDynamixFrameworkLi
 					conMgr.resendCachedEvents(app, listener, contextType, pastMills);
 					return new Result();
 				} else {
-					Log.w(TAG, "could not find open session for: " + app);
+					Log.v(TAG, "could not find open session for: " + app);
 					return new Result("Session Not found", ErrorCodes.SESSION_NOT_FOUND);
 				}
 			} else {
-				Log.w(TAG, app + " is not authorized!");
+				Log.v(TAG, app + " is not authorized!");
 				return new Result("Not Authorized", ErrorCodes.NOT_AUTHORIZED);
 			}
 		} else {
-			Log.w(TAG, "Missing parameters in resendTypedCachedContextEvents");
+			Log.v(TAG, "Missing parameters in resendTypedCachedContextEvents");
 			return new Result("Missing parameters in resendTypedCachedContextEvents", ErrorCodes.MISSING_PARAMETERS);
 		}
 	}
@@ -696,11 +696,11 @@ class AppFacadeBinder extends IDynamixFacade.Stub implements IDynamixFrameworkLi
 			if (app != null) {
 				return DynamixService.openContextPluginConfigurationForApp(app, pluginId);
 			} else {
-				Log.w(TAG, app + " is not authorized!");
+				Log.v(TAG, app + " is not authorized!");
 				return new Result("Not Authorized", ErrorCodes.NOT_AUTHORIZED);
 			}
 		} else {
-			Log.w(TAG, "Missing parameters in openContextPluginConfigurationView");
+			Log.v(TAG, "Missing parameters in openContextPluginConfigurationView");
 			return new Result("Missing parameters in openContextPluginConfigurationView", ErrorCodes.MISSING_PARAMETERS);
 		}
 	}
@@ -757,7 +757,7 @@ class AppFacadeBinder extends IDynamixFacade.Stub implements IDynamixFrameworkLi
 		// Access the application securely... returns null if the app is not authorized
 		DynamixApplication app = null;
 		if (userId == -1) {
-			Log.w(TAG, "Invalid user id: " + userId);
+			Log.v(TAG, "Invalid user id: " + userId);
 			return;
 		}
 		app = getAuthorizedApplication(userId);
@@ -826,7 +826,7 @@ class AppFacadeBinder extends IDynamixFacade.Stub implements IDynamixFrameworkLi
 					+ " getCallingUid is " + Binder.getCallingUid());
 		// Handle embedded mode, if necessary
 		//if (embeddedMode) { //smartsantander hack
-			Log.w(TAG, "Setting up Admin app for " + id);
+			Log.v(TAG, "Setting up Admin app for " + id);
 			if (!DynamixService.SettingsManager.checkApplicationAuthorized(getCallerId(null))) {
 				DynamixApplication app = createNewApplicationFromCaller(id, true);
 				DynamixService.SettingsManager.addPendingApplication(app);
@@ -861,7 +861,7 @@ class AppFacadeBinder extends IDynamixFacade.Stub implements IDynamixFrameworkLi
 				return android.os.Process.myUid();
 			else {
 				if (Binder.getCallingUid() == android.os.Process.myUid()) {
-					Log.w(TAG, "Caller was Dynamix when not running in embedded mode... invalid");
+					Log.v(TAG, "Caller was Dynamix when not running in embedded mode... invalid");
 					return Binder.getCallingUid(); //SmartSantander shortcut...
 				} else
 					return Binder.getCallingUid();
@@ -907,7 +907,7 @@ class AppFacadeBinder extends IDynamixFacade.Stub implements IDynamixFrameworkLi
 						switch (supportInfo.getContextPlugin().getInstallStatus()) {
 						case INSTALLED:
 							if (!supportInfo.getContextPlugin().isEnabled()) {
-								Log.w(TAG, "Support added for " + supportInfo + " but plugin is disabled!");
+								Log.v(TAG, "Support added for " + supportInfo + " but plugin is disabled!");
 							}
 							// Context support is available, so simply notify.
 							SessionManager.notifyContextSupportAdded(app, listener, supportInfo.getContextSupportInfo());

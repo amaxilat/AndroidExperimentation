@@ -22,14 +22,19 @@ import java.util.TimerTask;
 import org.ambientdynamix.data.DynamixPreferences;
 
 import eu.smartsantander.androidExperimentation.Constants;
+import eu.smartsantander.androidExperimentation.LocationUpdateService;
 import eu.smartsantander.androidExperimentation.operations.AsyncReportOnServerTask;
 import eu.smartsantander.androidExperimentation.operations.AsyncStatusRefreshTask;
+import eu.smartsantander.androidExperimentation.service.RegistrationIntentService;
 
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.ListActivity;
+import android.app.PendingIntent;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.location.LocationManager;
 import android.os.Bundle;
 import android.os.Handler;
 import android.util.Log;
@@ -44,6 +49,9 @@ import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.ToggleButton;
+
+import com.google.android.gms.common.ConnectionResult;
+import com.google.android.gms.common.GoogleApiAvailability;
 
 /**
  * Home user interface, which shows the current authorized Dynamix applications along with their status. This UI also
@@ -64,7 +72,7 @@ public class HomeActivity extends ListActivity {
     private Timer refresher;
     public final Handler uiHandler = new Handler();
     private ToggleButton togglebutton = null;
-
+    private boolean startedGcm = false;
 
     //SmartSantander
     public TextView phoneIdTv;
@@ -75,6 +83,12 @@ public class HomeActivity extends ListActivity {
 
     private TextView pendingTextView;
     private TextView activityStatusTextView;
+
+    private static final long MINIMUM_DISTANCE_CHANGE_FOR_UPDATES = 1; // in Meters
+    private static final long MINIMUM_TIME_BETWEEN_UPDATES = 1000; // in Milliseconds
+    private PendingIntent locationListener;
+
+    protected LocationManager locationManager;
     // Create runnable for updating the UI
     final Runnable updateList = new Runnable() {
         public void run() {
@@ -160,8 +174,12 @@ public class HomeActivity extends ListActivity {
         setContentView(R.layout.home_tab);
         appList = getListView();
         appList.setClickable(true);
-
+        locationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
         pendingSendButton = (Button) findViewById(R.id.send_pending_now);
+
+        final Intent intent = new Intent(this, LocationUpdateService.class);
+        locationListener = PendingIntent.getService(getApplicationContext(), 0, intent, PendingIntent.FLAG_UPDATE_CURRENT);
+
         pendingSendButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -180,14 +198,20 @@ public class HomeActivity extends ListActivity {
 
         // Setup the Dynamix Enable/Disable button
         pendingTextView = (TextView) findViewById(R.id.pending);
-        activityStatusTextView= (TextView) findViewById(R.id.activity_status);
+        activityStatusTextView = (TextView) findViewById(R.id.activity_status);
         togglebutton = (ToggleButton) findViewById(R.id.DynamixActiveToggle);
         togglebutton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 if (togglebutton.isChecked()) {
+                    Log.d(TAG, "Adding Location Listener");
+                    // PendingIntent
+                    locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER,
+                            MINIMUM_TIME_BETWEEN_UPDATES,
+                            MINIMUM_DISTANCE_CHANGE_FOR_UPDATES, locationListener);
                     DynamixService.startFramework();
                 } else {
-
+                    Log.d(TAG, "Removing Location Listener");
+                    locationManager.removeUpdates(locationListener);
                     DynamixService.stopFramework();
                 }
             }
@@ -294,9 +318,43 @@ public class HomeActivity extends ListActivity {
             }
 
             activityStatusTextView.setText(Constants.activityStatus);
+
+            if (!startedGcm
+                    && DynamixService.isFrameworkInitialized()
+                    && dynamixEnabled
+                    && DynamixService.isFrameworkStarted()
+                    && DynamixService.getPhoneProfiler().getPhoneId() != -1
+                    && DynamixService.getExperiment() != null) {
+
+                if (checkPlayServices()) {
+                    startedGcm = true;
+                    Intent intent = new Intent(this, RegistrationIntentService.class);
+                    startService(intent);
+                } else {
+                    Log.w(TAG, "PlayServices not available!");
+                }
+            }
         }
         appList.setVisibility(View.GONE);//smartsantander
         AsyncStatusRefreshTask task = new AsyncStatusRefreshTask();
         task.execute(this);
     }
+
+
+    private boolean checkPlayServices() {
+        GoogleApiAvailability apiAvailability = GoogleApiAvailability.getInstance();
+        int resultCode = apiAvailability.isGooglePlayServicesAvailable(this);
+        if (resultCode != ConnectionResult.SUCCESS) {
+//            if (apiAvailability.isUserResolvableError(resultCode)) {
+////                apiAvailability.getErrorDialog(this, resultCode, PLAY_SERVICES_RESOLUTION_REQUEST)
+////                        .show();
+//            } else {
+//                Log.i(TAG, "This device is not supported.");
+//                finish();
+//            }
+            return false;
+        }
+        return true;
+    }
+
 }

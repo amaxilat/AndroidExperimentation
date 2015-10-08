@@ -104,11 +104,7 @@ public class BaseActivity extends TabActivity implements GoogleApiClient.Connect
     private Boolean tabIntentListenerIsRegistered = false;
     private Boolean serviceIntentListenerIsRegistered = false;
 
-    private static final long MINIMUM_DISTANCE_CHANGE_FOR_UPDATES = 1; // in
-    // Meters
-    private static final long MINIMUM_TIME_BETWEEN_UPDATES = 1000; // in
-    // Milliseconds
-    protected LocationManager locationManager;
+
     NotificationHQManager noteManager = NotificationHQManager.getInstance();
 
 
@@ -191,6 +187,9 @@ public class BaseActivity extends TabActivity implements GoogleApiClient.Connect
         getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
         context = this;
 
+        final Intent activityRecognitionIntent = new Intent(this, ActivityRecognitionService.class);
+        pIntent = PendingIntent.getService(getApplicationContext(), 0, activityRecognitionIntent, PendingIntent.FLAG_UPDATE_CURRENT);
+
 
         mGoogleApiClient = new GoogleApiClient.Builder(this)
                 .addApi(ActivityRecognition.API)
@@ -199,6 +198,7 @@ public class BaseActivity extends TabActivity implements GoogleApiClient.Connect
                 .build();
         org.ambientdynamix.util.Log.i(TAG, "Connecting Google APIS...");
         mGoogleApiClient.connect();
+
 
         // Set the Dynamix base activity so it can use our context
         DynamixService.setBaseActivity(this);
@@ -315,11 +315,6 @@ public class BaseActivity extends TabActivity implements GoogleApiClient.Connect
         //
         DynamixService.ConfigureLog4J();
 
-        locationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
-
-        locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER,
-                MINIMUM_TIME_BETWEEN_UPDATES,
-                MINIMUM_DISTANCE_CHANGE_FOR_UPDATES, new MyLocationListener());
 
     }
 
@@ -480,30 +475,6 @@ public class BaseActivity extends TabActivity implements GoogleApiClient.Connect
 
     }
 
-
-    private class MyLocationListener implements LocationListener {
-
-        public void onLocationChanged(Location location) {
-            String message = String.format(
-                    "Lon %1$s Lat: %2$s",
-                    location.getLongitude(), location.getLatitude());
-            noteManager.postNotification(message);
-        }
-
-        public void onStatusChanged(String s, int i, Bundle b) {
-
-        }
-
-        public void onProviderDisabled(String s) {
-
-        }
-
-        public void onProviderEnabled(String s) {
-
-        }
-
-    }
-
     private boolean askDynamixIsEnabled() {
 
         boolean dynamixEnabled = DynamixPreferences.isDynamixEnabled(this);
@@ -521,8 +492,6 @@ public class BaseActivity extends TabActivity implements GoogleApiClient.Connect
     @Override
     public void onConnected(Bundle bundle) {
         org.ambientdynamix.util.Log.d(TAG, "Google activity recognition services connected");
-        Intent intent = new Intent(this, ActivityRecognitionService.class);
-        pIntent = PendingIntent.getService(getApplicationContext(), 0, intent, PendingIntent.FLAG_UPDATE_CURRENT);
         ActivityRecognition.ActivityRecognitionApi.requestActivityUpdates(mGoogleApiClient, 10000, pIntent);
     }
 
