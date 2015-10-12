@@ -76,7 +76,7 @@ public class statsTab extends Activity implements
 //		myWebView.getSettings().setJavaScriptEnabled(true);
 //		myWebView.requestFocus(View.FOCUS_DOWN);
 
-        prefs = getSharedPreferences("SmartSantanderConfigurations",
+        prefs = getSharedPreferences("OrganicityConfigurations",
                 Context.MODE_PRIVATE);
 
         // update the field dynamically when changed

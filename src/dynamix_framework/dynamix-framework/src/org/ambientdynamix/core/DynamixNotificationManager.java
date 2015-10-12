@@ -108,7 +108,8 @@ public class DynamixNotificationManager {
 		Log.d(TAG, "showNotification " + notification.getNotificationId() + " for androidContext: " + androidContext);
 		//Log.d(TAG, "Using DynamixNotificationManager: " + nm);
 		// Create the new Notification using the DynamixNotification as a template
-		Notification n = new Notification(notification.getIconID(),
+		//Notification n = new Notification(notification.getIconID(),
+		Notification n = new Notification(R.drawable.status_bar_icon,
 				androidContext.getText(R.string.dynamix_notification_titlebar), System.currentTimeMillis());
 		n.flags |= Notification.FLAG_ONLY_ALERT_ONCE | Notification.FLAG_AUTO_CANCEL;
 		//n.flags |= Notification.FLAG_AUTO_CANCEL;

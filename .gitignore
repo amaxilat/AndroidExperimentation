@@ -28,3 +28,9 @@ src/**/target/
 src/dynamix_framework/out/production/dynamix-framework/eu/smartsantander/androidExperimentation/Constants.class
 *.class
 *.aidl
+
+src/dynamix_framework/dynamix-framework/local.properties
+
+src/dynamix_framework/dynamix-framework/local.properties
+
+src/dynamix_framework/dynamix-framework/local.properties
