@@ -1,17 +1,10 @@
 package eu.smartsantander.androidExperimentation.operations;
 
 import android.os.AsyncTask;
-import android.os.RemoteException;
 import android.util.Log;
 
-import org.ambientdynamix.api.application.IdResult;
 import org.ambientdynamix.core.DynamixService;
 import org.springframework.web.client.HttpClientErrorException;
-
-import java.util.List;
-
-import eu.smartsantander.androidExperimentation.Constants;
-import eu.smartsantander.androidExperimentation.jsonEntities.Experiment;
 
 public class AsyncReportNowTask extends AsyncTask<String, Void, String> {
     private final String TAG = this.getClass().getSimpleName();

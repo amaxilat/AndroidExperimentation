@@ -24,7 +24,8 @@ import android.os.*;
 import android.util.Log;
 import android.util.Pair;
 import android.widget.Toast;
-import eu.smartsantander.androidExperimentation.Constants;
+
+import eu.smartsantander.androidExperimentation.util.Constants;
 import eu.smartsantander.androidExperimentation.DataStorage;
 import eu.smartsantander.androidExperimentation.jsonEntities.Experiment;
 import eu.smartsantander.androidExperimentation.jsonEntities.Plugin;
@@ -32,6 +33,7 @@ import eu.smartsantander.androidExperimentation.jsonEntities.ReadingStorage;
 import eu.smartsantander.androidExperimentation.operations.Communication;
 import eu.smartsantander.androidExperimentation.operations.Demon;
 import eu.smartsantander.androidExperimentation.operations.PhoneProfiler;
+
 import org.ambientdynamix.api.application.AppConstants.PluginInstallStatus;
 import org.ambientdynamix.api.application.*;
 import org.ambientdynamix.api.contextplugin.*;
@@ -97,7 +99,7 @@ import java.util.*;
  * @see AppFacadeBinder
  * @see ContextEventCache
  */
-public final class DynamixService extends Service {
+public final class DynamixService extends IntentService {
     // Private static data
     private final static String TAG = DynamixService.class.getSimpleName();
     private static final String DATE_FORMAT = "yyyyy_mm_dd_hh_mm_ss";
@@ -156,6 +158,25 @@ public final class DynamixService extends Service {
     public static boolean sessionStarted;
     private static boolean restarting = false;
     private static long totalTimeConnectedOnline = 0;
+
+
+    /**
+     * Creates an IntentService.  Invoked by your subclass's constructor.
+     *
+     * @param name Used to name the worker thread, important only for debugging.
+     */
+    public DynamixService() {
+        super(TAG);
+    }
+
+    /**
+     * Creates an IntentService.  Invoked by your subclass's constructor.
+     *
+     * @param name Used to name the worker thread, important only for debugging.
+     */
+    public DynamixService(String name) {
+        super(name);
+    }
 
     public static void ConfigureLog4J() {
 //	        final LogConfigurator logConfigurator = new LogConfigurator();
@@ -635,8 +656,8 @@ public final class DynamixService extends Service {
         // If the WebConnector is started, update it
         if (WebConnector.isStarted())
             WebConnector.addAuthorizedCert(new TrustedCert(alias, cert));
-		/*
-		 * NOTE: Store example
+        /*
+         * NOTE: Store example
 		 * https://github.com/k9mail/k-9/blob/master/src/com/fsck/k9/mail/store/TrustManagerFactory.java
 		 */
     }
@@ -1985,6 +2006,11 @@ public final class DynamixService extends Service {
     public IBinder onBind(Intent intent) {
         Log.v(TAG, "onBind is returning facadeBinder: " + facadeBinder);
         return facadeBinder;
+    }
+
+    @Override
+    protected void onHandleIntent(Intent intent) {
+        Log.i(TAG, intent.getAction());
     }
 
     /**

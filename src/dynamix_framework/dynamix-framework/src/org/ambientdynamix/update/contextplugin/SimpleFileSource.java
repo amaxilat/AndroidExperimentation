@@ -15,8 +15,6 @@
  */
 package org.ambientdynamix.update.contextplugin;
 
-import java.io.File;
-import java.io.FileInputStream;
 import java.io.Serializable;
 import java.util.List;
 import java.util.Vector;
@@ -25,12 +23,8 @@ import org.ambientdynamix.api.application.VersionInfo;
 import org.ambientdynamix.api.contextplugin.PluginConstants.PLATFORM;
 import org.ambientdynamix.util.RepositoryInfo;
 
-import com.google.gson.Gson;
+import eu.smartsantander.androidExperimentation.util.Constants;
 
-import eu.smartsantander.androidExperimentation.Constants;
-import eu.smartsantander.androidExperimentation.jsonEntities.PluginList;
-
-import android.os.Environment;
 import android.util.Log;
 
 /**

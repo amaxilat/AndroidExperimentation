@@ -22,10 +22,6 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.res.Resources;
-import android.graphics.Color;
-import android.location.Location;
-import android.location.LocationListener;
-import android.location.LocationManager;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.multidex.MultiDex;
@@ -36,16 +32,12 @@ import android.widget.TabHost;
 import android.widget.TabHost.TabSpec;
 import android.widget.Toast;
 
-import com.bugsense.trace.BugSenseHandler;
-import com.bugsense.trace.ExceptionCallback;
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.android.gms.location.ActivityRecognition;
-import com.google.android.gms.location.LocationServices;
-import com.parse.Parse;
 
 import eu.smartsantander.androidExperimentation.ActivityRecognitionService;
-import eu.smartsantander.androidExperimentation.operations.AsyncConstantsTask;
+import eu.smartsantander.androidExperimentation.activity.HelpActivity;
 import eu.smartsantander.androidExperimentation.operations.NotificationHQManager;
 import eu.smartsantander.androidExperimentation.tabs.jobsTab;
 import eu.smartsantander.androidExperimentation.tabs.reportTab;
@@ -367,10 +359,10 @@ public class BaseActivity extends TabActivity implements GoogleApiClient.Connect
 
         // Setup Help Settings
         MenuItem item2 = menu.add(2, Menu.FIRST + 2, Menu.NONE, "Help");
-        item1.setOnMenuItemClickListener(new OnMenuItemClickListener() {
+        item2.setOnMenuItemClickListener(new OnMenuItemClickListener() {
             public boolean onMenuItemClick(MenuItem item) {
                 startActivity(new Intent(BaseActivity.this,
-                        DynamixPreferenceActivity.class));
+                        HelpActivity.class));
                 return true;
             }
         });

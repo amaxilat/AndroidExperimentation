@@ -1,4 +1,4 @@
-package eu.smartsantander.androidExperimentation;
+package eu.smartsantander.androidExperimentation.service;
 
 import android.app.IntentService;
 import android.content.Context;

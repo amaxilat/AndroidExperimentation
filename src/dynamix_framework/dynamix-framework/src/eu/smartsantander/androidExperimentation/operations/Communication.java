@@ -8,7 +8,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 //import com.google.common.cache.CacheBuilder;
 import com.google.gson.Gson;
 
-import eu.smartsantander.androidExperimentation.Constants;
+import eu.smartsantander.androidExperimentation.util.Constants;
 import eu.smartsantander.androidExperimentation.jsonEntities.Experiment;
 import eu.smartsantander.androidExperimentation.jsonEntities.Plugin;
 import eu.smartsantander.androidExperimentation.jsonEntities.Smartphone;
@@ -16,19 +16,12 @@ import eu.smartsantander.androidExperimentation.jsonEntities.Smartphone;
 import org.ambientdynamix.core.DynamixService;
 import org.json.JSONArray;
 import org.json.JSONException;
-import org.ksoap2.SoapEnvelope;
-import org.ksoap2.serialization.PropertyInfo;
-import org.ksoap2.serialization.SoapObject;
-import org.ksoap2.serialization.SoapPrimitive;
-import org.ksoap2.serialization.SoapSerializationEnvelope;
-import org.ksoap2.transport.HttpTransportSE;
 import org.springframework.http.converter.StringHttpMessageConverter;
 import org.springframework.web.client.HttpClientErrorException;
 import org.springframework.web.client.RestTemplate;
 
 import java.io.IOException;
 import java.util.*;
-import java.util.concurrent.TimeUnit;
 
 public class Communication extends Thread implements Runnable {
 

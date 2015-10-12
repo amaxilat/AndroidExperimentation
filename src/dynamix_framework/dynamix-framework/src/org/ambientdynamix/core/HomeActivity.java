@@ -21,8 +21,8 @@ import java.util.TimerTask;
 
 import org.ambientdynamix.data.DynamixPreferences;
 
-import eu.smartsantander.androidExperimentation.Constants;
-import eu.smartsantander.androidExperimentation.LocationUpdateService;
+import eu.smartsantander.androidExperimentation.util.Constants;
+import eu.smartsantander.androidExperimentation.service.LocationUpdateService;
 import eu.smartsantander.androidExperimentation.operations.AsyncReportOnServerTask;
 import eu.smartsantander.androidExperimentation.operations.AsyncStatusRefreshTask;
 import eu.smartsantander.androidExperimentation.service.RegistrationIntentService;

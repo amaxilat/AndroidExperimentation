@@ -8,7 +8,7 @@ import com.parse.ParseQuery;
 
 import org.ambientdynamix.util.Log;
 
-import eu.smartsantander.androidExperimentation.Constants;
+import eu.smartsantander.androidExperimentation.util.Constants;
 
 public class AsyncConstantsTask extends AsyncTask<String, Void, Integer> {
     private static final String CONSTANTS_CLASS_NAME = "Constants";

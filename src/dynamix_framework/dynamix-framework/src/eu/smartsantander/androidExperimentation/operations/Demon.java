@@ -4,7 +4,7 @@ import org.ambientdynamix.core.DynamixService;
 
 import android.os.Handler;
 import android.util.Log;
-import eu.smartsantander.androidExperimentation.Constants;
+import eu.smartsantander.androidExperimentation.util.Constants;
 
 public class Demon extends Thread implements Runnable {
 	private AsyncExperimentTask pingExp = new AsyncExperimentTask();

@@ -10,7 +10,7 @@ import org.ambientdynamix.core.DynamixService;
 
 import java.util.List;
 
-import eu.smartsantander.androidExperimentation.Constants;
+import eu.smartsantander.androidExperimentation.util.Constants;
 import eu.smartsantander.androidExperimentation.jsonEntities.Experiment;
 
 public class AsyncExperimentTask extends AsyncTask<String, Void, String> {
@@ -39,9 +39,10 @@ public class AsyncExperimentTask extends AsyncTask<String, Void, String> {
         } else {
             try {
 
+
                 List<ContextPluginInformation> information = DynamixService.dynamix.getAllContextPluginInformation().getContextPluginInformation();
                 for (ContextPluginInformation contextPluginInformation : information) {
-                    Log.i(TAG, contextPluginInformation.getPluginName() + " status:" + contextPluginInformation.getInstallStatus() + " id:" + contextPluginInformation.getPluginId() + " context:" + contextPluginInformation.getContextPluginType().name());
+                    Log.d(TAG, contextPluginInformation.getPluginName() + " status:" + contextPluginInformation.getInstallStatus() + " id:" + contextPluginInformation.getPluginId() + " context:" + contextPluginInformation.getContextPluginType().name());
                     if (contextPluginInformation.isEnabled()) {
                         DynamixService.dynamix.contextRequest(DynamixService.dynamixCallback, contextPluginInformation.getPluginId(), contextPluginInformation.getPluginId());
                     }
@@ -147,12 +148,15 @@ public class AsyncExperimentTask extends AsyncTask<String, Void, String> {
                             && DynamixService.isExperimentInstalled(experiment.getContextType())) {
                         DynamixService.addTotalTimeConnectedOnline(Constants.EXPERIMENT_POLL_INTERVAL);
                         Log.i(TAG, "Experiment still the same");
-                        throw new Exception("Experiment still the same");
+                        return "Experiment still the same";
                     }
 
                     String url = experiment.getUrl();
                     Downloader downloader = new Downloader();
                     try {
+
+
+                        Log.i(TAG, "Downloading Experiment NOW");
                         downloader.DownloadFromUrl(url,
                                 experiment.getFilename());
 
@@ -161,14 +165,14 @@ public class AsyncExperimentTask extends AsyncTask<String, Void, String> {
                                         .getBundle());
                         DynamixService.removeExperiment();
                         DynamixService.setExperiment(experiment);
-                        Thread.sleep(5000);
+                        //Thread.sleep(5000);
                         DynamixService.startExperiment();
                         DynamixService.stopFramework();
                         DynamixService.setRestarting(true);
                         DynamixService.setTitleBarRestarting(true);
-                        Thread.sleep(5000);
+                        //Thread.sleep(5000);
                         DynamixService.startFramework();
-                        Thread.sleep(7000);
+                        //Thread.sleep(7000);
                         DynamixServiceListenerUtility.start();
                         DynamixService.setRestarting(false);
                         DynamixService.setTitleBarRestarting(false);

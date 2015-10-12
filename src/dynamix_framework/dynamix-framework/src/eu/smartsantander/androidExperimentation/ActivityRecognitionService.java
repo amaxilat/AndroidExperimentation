@@ -5,11 +5,10 @@ import android.content.Context;
 import android.content.Intent;
 import android.util.Log;
 
-import com.google.android.gms.common.ConnectionResult;
-import com.google.android.gms.common.GooglePlayServicesUtil;
-import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.android.gms.location.ActivityRecognitionResult;
 import com.google.android.gms.location.DetectedActivity;
+
+import eu.smartsantander.androidExperimentation.util.Constants;
 
 /**
  * Created by amaxilatis on 10/5/15.
@@ -23,8 +22,6 @@ public class ActivityRecognitionService extends IntentService {
 
     /**
      * Creates an IntentService.  Invoked by your subclass's constructor.
-     *
-     * @param name Used to name the worker thread, important only for debugging.
      */
     public ActivityRecognitionService() {
         super("ActivityRecognitionService");
@@ -52,9 +49,6 @@ public class ActivityRecognitionService extends IntentService {
             activityCode = result.getMostProbableActivity().getType();
             Constants.activityStatus = getType(result.getMostProbableActivity().getType());
             Log.d("o3nWatcherLog", " ACTIVITY CODE : " + activityCode + " ACTIVITY CONFIDENCE : " + activityConfidence);
-
-            // Evaluate the avtivity recognition result
-            evaluateActivityResult();
         }
     }
 
@@ -63,20 +57,29 @@ public class ActivityRecognitionService extends IntentService {
 
     // This method is only used in a log line to have readable status in logs
     private String getType(int type) {
-        if (type == DetectedActivity.UNKNOWN)
-            return "UNKNOWN";
-        else if (type == DetectedActivity.IN_VEHICLE)
-            return "IN_VEHICLE";
-        else if (type == DetectedActivity.ON_BICYCLE)
-            return "ON_BICYCLE";
-        else if (type == DetectedActivity.ON_FOOT)
-            return "ON_FOOT";
-        else if (type == DetectedActivity.STILL)
-            return "STILL";
-        else if (type == DetectedActivity.TILTING)
-            return "TILTING";
-        else
-            return "";
+        switch (type) {
+            case DetectedActivity.UNKNOWN: {
+                return "UNKNOWN";
+            }
+            case DetectedActivity.IN_VEHICLE: {
+                return "IN_VEHICLE";
+            }
+            case DetectedActivity.ON_BICYCLE: {
+                return "ON_BICYCLE";
+            }
+            case DetectedActivity.ON_FOOT: {
+                return "ON_FOOT";
+            }
+            case DetectedActivity.STILL: {
+                return "STILL";
+            }
+            case DetectedActivity.TILTING: {
+                return "TILTING";
+            }
+            default: {
+                return "";
+            }
+        }
     }
 
 }

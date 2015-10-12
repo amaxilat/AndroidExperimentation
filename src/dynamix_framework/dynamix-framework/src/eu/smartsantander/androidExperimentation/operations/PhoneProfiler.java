@@ -7,7 +7,7 @@ import android.telephony.TelephonyManager;
 import android.util.Log;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
-import eu.smartsantander.androidExperimentation.Constants;
+import eu.smartsantander.androidExperimentation.util.Constants;
 import eu.smartsantander.androidExperimentation.jsonEntities.Experiment;
 import org.ambientdynamix.api.application.AppConstants.PluginInstallStatus;
 import org.ambientdynamix.api.application.ContextPluginInformation;

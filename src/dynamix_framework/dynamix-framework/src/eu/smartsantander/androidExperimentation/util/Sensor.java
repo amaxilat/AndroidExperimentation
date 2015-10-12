@@ -1,4 +1,4 @@
-package eu.smartsantander.androidExperimentation;
+package eu.smartsantander.androidExperimentation.util;
 
 public class Sensor {
 	

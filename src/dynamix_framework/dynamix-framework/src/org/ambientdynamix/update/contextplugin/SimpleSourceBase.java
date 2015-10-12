@@ -17,8 +17,6 @@ package org.ambientdynamix.update.contextplugin;
 
 import java.io.File;
 import java.io.InputStream;
-import java.io.Reader;
-import java.io.StringReader;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -28,16 +26,10 @@ import org.ambientdynamix.api.contextplugin.PluginConstants.PLATFORM;
 import org.ambientdynamix.core.BaseActivity;
 import org.ambientdynamix.core.DynamixService;
 import org.ambientdynamix.util.RepositoryInfo;
-import org.ksoap2.SoapEnvelope;
-import org.ksoap2.serialization.PropertyInfo;
-import org.ksoap2.serialization.SoapObject;
-import org.ksoap2.serialization.SoapPrimitive;
-import org.ksoap2.serialization.SoapSerializationEnvelope;
-import org.ksoap2.transport.HttpTransportSE;
 
 import com.google.gson.Gson;
 
-import eu.smartsantander.androidExperimentation.Constants;
+import eu.smartsantander.androidExperimentation.util.Constants;
 import eu.smartsantander.androidExperimentation.jsonEntities.Plugin;
 import eu.smartsantander.androidExperimentation.jsonEntities.PluginList;
 import eu.smartsantander.androidExperimentation.operations.Communication;

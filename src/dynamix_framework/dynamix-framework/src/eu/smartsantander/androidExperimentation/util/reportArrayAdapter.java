@@ -1,4 +1,4 @@
-package eu.smartsantander.androidExperimentation;
+package eu.smartsantander.androidExperimentation.util;
 
 import java.util.ArrayList;
 import java.util.List;

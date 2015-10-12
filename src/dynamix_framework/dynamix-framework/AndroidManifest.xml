@@ -89,6 +89,7 @@
         <activity android:name="org.ambientdynamix.core.DynamixPreferenceActivity" />
         <activity android:name="org.ambientdynamix.core.PluginStatsActivity" />
         <activity android:name="org.ambientdynamix.core.UpdateDetailsActivity" />
+        <activity android:name="eu.smartsantander.androidExperimentation.activity.HelpActivity" />
 
         <service
             android:name="org.ambientdynamix.core.DynamixService"
@@ -97,6 +98,7 @@
             android:label="Dynamix Framework Service">
             <intent-filter>
                 <action android:name="org.ambientdynamix.api.application.IDynamixFacade" />
+                <action android:name="eu.smartsantander.androidExperimentation.activity" />
             </intent-filter>
         </service>
 
@@ -105,7 +107,7 @@
             android:enabled="true"
             android:exported="true" />
         <service
-            android:name="eu.smartsantander.androidExperimentation.LocationUpdateService"
+            android:name="eu.smartsantander.androidExperimentation.service.LocationUpdateService"
             android:enabled="true"
             android:exported="true" />
 
