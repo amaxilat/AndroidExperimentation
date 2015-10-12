@@ -2,17 +2,14 @@
 The Android Experimentation project
 ***********************************
 
-Android Experimentation is related to the SmartSantander research project, aiming to provide an Android smartphone
-application augmenting the functionality of an existing Future Internet infrastructure. 
+Based on previous software related to the SmartSantander research project, this system is being utilised in the Organicity research project. It aims to provide an Android smartphone application augmenting the functionality of an existing Future Internet infrastructure, acting as a generic IoT experimentation platform.
 
-The Android software component distributes executable code on smartphone devices of a network of volunteers. The code
-is deployed as Ambient Dynamix plugins, performs calculations and produces sensor results, that are uploaded to a central
-server. There is a central software component responsible for distributing the plugins and collecting the results.
+The Android software component distributes executable code on smartphone devices of a network of volunteers. The code is deployed as OSGi Ambient Dynamix plugins, performs calculations and produces sensor results, that are uploaded then to the Urban Data Observatory of Organicity for storage and further processing. There is an additional software component responsible for distributing the plugins, collecting the results and managing the execution of the experiments.
 
 
-For more information redarging SmartSantander you can visit:
+For more information regarding Organicity you can visit:
 
-http://smartsantander.eu
+http://organicity.eu
 
 For more information regarding the Ambient Dynamix framework you can visit:
 

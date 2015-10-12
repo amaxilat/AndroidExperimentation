@@ -72,7 +72,7 @@ public class statsTab extends Activity implements
 
         pProfil = DynamixService.getPhoneProfiler();
 
-        prefs = getSharedPreferences("SmartSantanderConfigurations",
+        prefs = getSharedPreferences("OrganicityConfigurations",
                 Context.MODE_PRIVATE);
 
         // update the field dynamically when changed

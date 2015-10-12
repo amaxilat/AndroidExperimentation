@@ -117,10 +117,6 @@
       Context Plugin Host" android:name="ContextPluginHost" android:process=":ContextPluginHost">
       <intent-filter> <action android:name="org.ambientdynamix.api.application.IDynamixFacade"/>
       </intent-filter> </service>
-
-
-
-
         -->
 
         <receiver

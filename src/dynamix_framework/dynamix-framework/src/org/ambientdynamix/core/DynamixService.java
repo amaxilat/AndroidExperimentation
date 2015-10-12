@@ -32,6 +32,7 @@ import eu.smartsantander.androidExperimentation.jsonEntities.Plugin;
 import eu.smartsantander.androidExperimentation.jsonEntities.ReadingStorage;
 import eu.smartsantander.androidExperimentation.operations.Communication;
 import eu.smartsantander.androidExperimentation.operations.Demon;
+import eu.smartsantander.androidExperimentation.operations.OrganicityNotificationManager;
 import eu.smartsantander.androidExperimentation.operations.PhoneProfiler;
 
 import org.ambientdynamix.api.application.AppConstants.PluginInstallStatus;
@@ -135,7 +136,8 @@ public final class DynamixService extends IntentService {
     private static boolean embeddedMode = false; //smartsantander false->true
     private static ClassLoader embeddedHostClassLoader;
     private static List<IDynamixFrameworkListener> frameworkListeners = new ArrayList<DynamixService.IDynamixFrameworkListener>();
-    private static DynamixNotificationManager notificationMgr;
+    //private static DynamixNotificationManager notificationMgr;
+    private static OrganicityNotificationManager notificationMgr;
     private static PendingIntent RESTART_INTENT;
     private static String keyStorePath;
     //public static Context context;
@@ -1879,7 +1881,7 @@ public final class DynamixService extends IntentService {
      * currently, we only show one notification per type.
      */
     static void updateNotifications() {
-        if (!embeddedMode && isFrameworkInitialized()) {
+        /*if (!embeddedMode && isFrameworkInitialized()) {
             uiHandler.post(new Runnable() {
                 @Override
                 public void run() {
@@ -1888,24 +1890,24 @@ public final class DynamixService extends IntentService {
                     // If we still have pending applications, add a single notification
                     if (SettingsManager.getPendingApplications().size() > 0) {
                         notificationMgr.addNotification(new AndroidNotification(PENDING_APP_TAB_ID,
-                                AndroidNotification.Type.PENDING_APP, R.drawable.alert, service.getText(
+                                AndroidNotification.Type.PENDING_APP, R.drawable.status_bar_icon, service.getText(
                                 R.string.pending_app_notification).toString()));
                     }
                     List<PluginDiscoveryResult> updates = UpdateManager.getFilteredContextPluginUpdates();
                     // If we still have pending applications, add a single notification
                     if (updates != null && updates.size() > 0) {
                         notificationMgr.addNotification(new AndroidNotification(UPDATES_TAB_ID,
-                                AndroidNotification.Type.PLUGIN_UPDATE, R.drawable.alert, service.getText(
+                                AndroidNotification.Type.PLUGIN_UPDATE, R.drawable.status_bar_icon, service.getText(
                                 R.string.context_plugin_updates_available).toString()));
                     }
                     notificationMgr.showAllNotifications();
 					
-					/*
+					*//*
 					 * TODO: In the future, we should add a pop-up dialog that asks the user about 
 					 * permissions exactly when an app wants to do something. I did a test, and pop-ups
 					 * are possible from services using the code below. There is also a project that
 					 * does this here: http://code.google.com/p/android-smspopup/
-					 */
+					 *//*
                     // Here's another popup technique: http://www.piwai.info/chatheads-basics/
 
                     // Popup code
@@ -1914,7 +1916,7 @@ public final class DynamixService extends IntentService {
                     //DynamixService.getAndroidContext().startActivity(popup);
                 }
             });
-        }
+        }*/
     }
 
     /**
@@ -2129,8 +2131,8 @@ public final class DynamixService extends IntentService {
                 RESTART_INTENT = PendingIntent.getBroadcast(androidContext, 0, broadcastReceiverIntent, 0);
                 // Create our notification manager
                 if (notificationMgr != null)
-                    notificationMgr.removeAllNotifications();
-                notificationMgr = new DynamixNotificationManager(service);
+                    notificationMgr.clearOrganicityNotifications();
+                notificationMgr = new OrganicityNotificationManager(service);
                 // Show boot progress ProgressDialog
                 if (getBaseActivity() != null)
                     bootProgress = ProgressDialog.show(getBaseActivity(), "Loading Dynamix",
@@ -2430,7 +2432,7 @@ public final class DynamixService extends IntentService {
             // Show progress
             launchProgressDialog("Disabling Dynamix", "Stopping plug-ins. Please wait...");
             // Clear all notifications
-            notificationMgr.removeAllNotifications();
+            //notificationMgr.removeAllNotifications();
             // Unregister our wakeReceiver
             if (wakeReceiver != null) {
                 unregisterReceiver(wakeReceiver);
