@@ -1,18 +1,15 @@
 package eu.smartsantander.androidExperimentation.controller;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
 import eu.smartsantander.androidExperimentation.model.Result;
 import eu.smartsantander.androidExperimentation.repository.ResultRepository;
 import org.apache.log4j.Logger;
 import org.joda.time.DateTime;
 import org.json.JSONArray;
 import org.json.JSONException;
+import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 
 import java.text.DecimalFormat;
 import java.util.HashMap;
@@ -35,9 +32,26 @@ public class RestController {
 
 
     @RequestMapping(value = "/experiment/{experimentId}", method = RequestMethod.GET)
-    public String ping(final Map<String, Object> model, @PathVariable("experimentId") final String experiment, @RequestParam(value = "deviceId", defaultValue = "0", required = false) final int deviceId, @RequestParam(value = "after", defaultValue = "0", required = false) final String after) throws JSONException, JsonProcessingException {
+    public String experimentView(final Map<String, Object> model, @PathVariable("experimentId") final String experiment, @RequestParam(value = "deviceId", defaultValue = "0", required = false) final int deviceId, @RequestParam(value = "after", defaultValue = "0", required = false) final String after) throws JSONException {
         LOGGER.debug("experiment:" + experiment);
-        DecimalFormat df = new DecimalFormat("#.0000000");
+        if (deviceId == 0) {
+            model.put("title", "Experiment " + experiment);
+        } else {
+            model.put("title", "Experiment " + experiment + " device:" + deviceId);
+        }
+        model.put("addressPoints", getExperimentData(experiment, deviceId, after).toString());
+        LOGGER.debug("-----------------------------------");
+        return "experiment";
+    }
+
+    @ResponseBody
+    @RequestMapping(value = "/api/v1/experiment/{experimentId}", method = RequestMethod.GET, produces = "application/json")
+    public String experimentViewApi(@PathVariable("experimentId") final String experiment, @RequestParam(value = "deviceId", defaultValue = "0", required = false) final int deviceId, @RequestParam(value = "after", defaultValue = "0", required = false) final String after) throws JSONException {
+        return getExperimentData(experiment, deviceId, after).toString();
+    }
+
+    private JSONArray getExperimentData(final String experiment, final int deviceId, final String after) {
+        DecimalFormat df = new DecimalFormat("#.000000");
         long start;
         try {
             start = Long.parseLong(after);
@@ -53,42 +67,49 @@ public class RestController {
         final Set<Result> results;
         if (deviceId == 0) {
             results = resultRepository.findByExperimentIdAndTimestampAfter(Integer.parseInt(experiment), start);
-            model.put("title", "Experiment " + experiment);
         } else {
             results = resultRepository.findByExperimentIdAndDeviceIdAndTimestampAfter(Integer.parseInt(experiment), deviceId, start);
-            model.put("title", "Experiment " + experiment + " device:" + deviceId);
         }
 
         Map<String, Map<String, Long>> locationsHeatMap = new HashMap<String, Map<String, Long>>();
         for (Result result : results) {
-            final String message = result.getMessage();
-            if (message.contains(",")) {
-                String longitude = df.format(Double.parseDouble(message.split(",")[0]));
-                String latitude = df.format(Double.parseDouble(message.split(",")[1]));
-                if (!locationsHeatMap.containsKey(longitude)) {
-                    locationsHeatMap.put(longitude, new HashMap<String, Long>());
+            try {
+                final JSONObject message = new JSONObject(result.getMessage());
+
+                if (message.has("org.ambientdynamix.contextplugins.Latitude")
+                        && message.has("org.ambientdynamix.contextplugins.Longitude")) {
+                    String longitude = df.format(message.getDouble("org.ambientdynamix.contextplugins.Longitude"));
+                    String latitude = df.format(message.getDouble("org.ambientdynamix.contextplugins.Latitude"));
+                    if (!locationsHeatMap.containsKey(longitude)) {
+                        locationsHeatMap.put(longitude, new HashMap<String, Long>());
+                    }
+                    if (!locationsHeatMap.get(longitude).containsKey(latitude)) {
+                        locationsHeatMap.get(longitude).put(latitude, 0L);
+                    }
+                    Long val = locationsHeatMap.get(longitude).get(latitude);
+                    locationsHeatMap.get(longitude).put(latitude, val + 1);
                 }
-                if (!locationsHeatMap.get(longitude).containsKey(latitude)) {
-                    locationsHeatMap.get(longitude).put(latitude, 0L);
-                }
-                Long val = locationsHeatMap.get(longitude).get(latitude);
-                locationsHeatMap.get(longitude).put(latitude, val + 1);
+            } catch (Exception e) {
+                LOGGER.error(e, e);
             }
         }
-        JSONArray addressPoints = new JSONArray();
+        final JSONArray addressPoints = new JSONArray();
         for (String longit : locationsHeatMap.keySet()) {
             for (String latit : locationsHeatMap.get(longit).keySet()) {
                 LOGGER.info("{" + longit + ":" + latit + "}");
                 JSONArray measurement = new JSONArray();
-                measurement.put(Double.parseDouble(longit));
-                measurement.put(Double.parseDouble(latit));
-                measurement.put(String.valueOf(locationsHeatMap.get(longit).get(latit)));
-                addressPoints.put(measurement);
+                try {
+                    measurement.put(Double.parseDouble(latit));
+                    measurement.put(Double.parseDouble(longit));
+                    //measurement.put(String.valueOf(locationsHeatMap.get(longit).get(latit)));
+                    measurement.put("1");
+                    addressPoints.put(measurement);
+                } catch (JSONException e) {
+                    LOGGER.error(e, e);
+                }
             }
         }
         LOGGER.info(addressPoints.toString());
-        model.put("addressPoints", addressPoints.toString());
-        LOGGER.debug("-----------------------------------");
-        return "experiment";
+        return addressPoints;
     }
 }

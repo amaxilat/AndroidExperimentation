@@ -14,7 +14,7 @@ public class NetworkChangeReceiver extends BroadcastReceiver {
 
 	@Override
 	public void onReceive(final Context context, final Intent intent) {
-		Log.i(TAG, "NetworkChangeReceiver Started");
+		Log.d(TAG, "Started");
 		process(context);
 	}
 
@@ -25,7 +25,7 @@ public class NetworkChangeReceiver extends BroadcastReceiver {
 			final android.net.NetworkInfo wifi = connMgr.getNetworkInfo(ConnectivityManager.TYPE_WIFI);
 
 			if (wifi.isConnected()) {
-				Log.i(TAG, "NetworkChangeReceiver: WIFI available");
+				Log.d(TAG, "WIFI is connected");
 				if (reportT == null || reportT.isFinished()) {
 					if (reportT!=null) {
 						reportT.cancel(true);
@@ -34,12 +34,11 @@ public class NetworkChangeReceiver extends BroadcastReceiver {
 					reportT.execute();
 				}
 			} else {
-				Log.i(TAG, "NetworkChangeReceiver: WIFI NOT available");
+				Log.d(TAG, "WIFI not connected");
 			}
 		} catch (Exception e) {
-			e.printStackTrace();
 			BugSenseHandler.sendException(e);
-			Log.i(TAG, "NetworkChangeReceiver" + e.getMessage());
+			Log.e(TAG, e.getMessage());
 		}
 	}
 

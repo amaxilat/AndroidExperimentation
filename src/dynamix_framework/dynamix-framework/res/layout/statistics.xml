@@ -1,82 +1,87 @@
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="fill_parent"
-    android:layout_height="fill_parent"
-    android:background="#000000"
-    android:gravity="right"
-    android:orientation="vertical"
-    android:fontFamily="sans-serif-light"
-     >
+    android:layout_height="fill_parent">
 
-    <TextView
-        android:id="@+id/stats_time_title"
-        android:layout_width="fill_parent"
-        android:layout_height="20dip"
-        android:background="@drawable/customsubcatborder"
-        android:textAppearance="?android:attr/textAppearanceSmall"
-        android:fontFamily="sans-serif-light"/>
-
-    <TextView
-        android:id="@+id/stats_time_value"
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:background="@drawable/customcatborder"
-        android:textAppearance="?android:attr/textAppearanceSmall"
-        android:fontFamily="sans-serif-light"/>
+        android:background="#000000"
+        android:fontFamily="sans-serif-light"
+        android:gravity="right"
+        android:orientation="vertical">
 
         <TextView
-        android:id="@+id/stats_number_exp_title"
-        android:layout_width="fill_parent"
-        android:layout_height="20dip"
-        android:background="@drawable/customsubcatborder"
-        android:textAppearance="?android:attr/textAppearanceSmall"
-            android:fontFamily="sans-serif-light"/>
-
-    <TextView
-        android:id="@+id/stats_number_exp_value"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:background="@drawable/customcatborder"
-        android:textAppearance="?android:attr/textAppearanceSmall"
-        android:fontFamily="sans-serif-light"/>
+            android:id="@+id/stats_time_title"
+            android:layout_width="fill_parent"
+            android:layout_height="20dip"
+            android:background="@drawable/customsubcatborder"
+            android:fontFamily="sans-serif-light"
+            android:textAppearance="?android:attr/textAppearanceSmall" />
 
         <TextView
-        android:id="@+id/stats_number_readings_title"
-        android:layout_width="fill_parent"
-        android:layout_height="20dip"
-        android:background="@drawable/customsubcatborder"
-        android:textAppearance="?android:attr/textAppearanceSmall"
-            android:fontFamily="sans-serif-light"/>
+            android:id="@+id/stats_time_value"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/customcatborder"
+            android:fontFamily="sans-serif-light"
+            android:textAppearance="?android:attr/textAppearanceSmall" />
 
-    <TextView
-        android:id="@+id/stats_number_readings_value"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:background="@drawable/customcatborder"
-        android:textAppearance="?android:attr/textAppearanceSmall"
-        android:fontFamily="sans-serif-light"/>
+        <TextView
+            android:id="@+id/stats_number_exp_title"
+            android:layout_width="fill_parent"
+            android:layout_height="20dip"
+            android:background="@drawable/customsubcatborder"
+            android:fontFamily="sans-serif-light"
+            android:textAppearance="?android:attr/textAppearanceSmall" />
+
+        <TextView
+            android:id="@+id/stats_number_exp_value"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/customcatborder"
+            android:fontFamily="sans-serif-light"
+            android:textAppearance="?android:attr/textAppearanceSmall" />
+
+        <TextView
+            android:id="@+id/stats_number_readings_title"
+            android:layout_width="fill_parent"
+            android:layout_height="20dip"
+            android:background="@drawable/customsubcatborder"
+            android:fontFamily="sans-serif-light"
+            android:textAppearance="?android:attr/textAppearanceSmall" />
+
+        <TextView
+            android:id="@+id/stats_number_readings_value"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/customcatborder"
+            android:fontFamily="sans-serif-light"
+            android:textAppearance="?android:attr/textAppearanceSmall" />
 
 
-    <TextView
-        android:id="@+id/stats_graph_title"
-        android:layout_width="fill_parent"
-        android:layout_height="20dip"
-        android:background="@drawable/customsubcatborder"
-        android:textAppearance="?android:attr/textAppearanceSmall"
-        android:fontFamily="sans-serif-light"/>
+        <TextView
+            android:id="@+id/stats_graph_title"
+            android:layout_width="fill_parent"
+            android:layout_height="20dip"
+            android:background="@drawable/customsubcatborder"
+            android:fontFamily="sans-serif-light"
+            android:textAppearance="?android:attr/textAppearanceSmall" />
 
-    <!--<WebView-->
-    <!--android:id="@+id/statswebview"-->
-    <!--android:layout_width="fill_parent"-->
-    <!--android:layout_height="fill_parent"-->
-        <!--android:fontFamily="sans-serif-light"/>-->
+        <fragment
+            android:id="@+id/map"
+            android:name="com.google.android.gms.maps.MapFragment"
+            android:layout_width="match_parent"
+            android:layout_height="256dp" />
 
-    <org.eazegraph.lib.charts.BarChart
-        xmlns:app="http://schemas.android.com/apk/res-auto"
-        android:id="@+id/barchart"
-        android:layout_width="match_parent"
-        android:layout_height="256dp"
-        android:padding="10dp"
-        app:egFixedBarWidth="true"
-        app:egBarWidth="20dp"
-        app:egLegendHeight="40dp"/>
-</LinearLayout>
+        <org.eazegraph.lib.charts.BarChart xmlns:app="http://schemas.android.com/apk/res-auto"
+            android:id="@+id/barchart"
+            android:layout_width="match_parent"
+            android:layout_height="256dp"
+            android:padding="10dp"
+            app:egBarWidth="20dp"
+            app:egFixedBarWidth="true"
+            app:egLegendHeight="40dp" />
+
+
+    </LinearLayout>
+</ScrollView>

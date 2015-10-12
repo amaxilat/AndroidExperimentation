@@ -1,24 +1,9 @@
 package eu.smartsantander.androidExperimentation.operations;
 
-import android.app.Activity;
 import android.os.AsyncTask;
-import android.view.View;
 
-import com.parse.ParseException;
-import com.parse.ParseObject;
-import com.parse.ParseQuery;
-
-import org.ambientdynamix.core.DynamixApplication;
-import org.ambientdynamix.core.DynamixApplicationAdapter;
 import org.ambientdynamix.core.DynamixService;
 import org.ambientdynamix.core.HomeActivity;
-import org.ambientdynamix.core.R;
-import org.ambientdynamix.data.DynamixPreferences;
-import org.ambientdynamix.util.Log;
-
-import java.util.ArrayList;
-
-import eu.smartsantander.androidExperimentation.Constants;
 
 public class AsyncStatusRefreshTask extends AsyncTask<HomeActivity, String, Integer> {
     private final String TAG = this.getClass().getSimpleName();

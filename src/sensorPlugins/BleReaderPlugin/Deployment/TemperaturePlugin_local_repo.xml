@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<contextPlugins version="9.47.1" xmlns:android="http://schemas.android.com/apk/res/android">
+	<contextPlugin
+		metadataVersion="9.47.1" 
+		repoType="simple-file"
+		id="org.ambientdynamix.contextplugins.TemperaturePlugin"
+		pluginVersion="9.47.1" 
+		pluginType="AUTO_REACTIVE"
+		provider="Ambient Dynamix"       
+		platform="android" 
+		minPlatformVersion="2.1" 
+		minFrameworkVersion="0.9.47" 
+		requiresConfiguration="false"
+		hasConfigurationView="true"
+		runtimeFactoryClass="org.ambientdynamix.contextplugins.TemperaturePlugin.PluginFactory">
+		<name>Temperature Plugin</name>
+		<description>gives Temperature</description>
+		<supportedPrivacyRiskLevels>			
+			<privacyRiskLevel name="LOW">gives Temperature</privacyRiskLevel>			
+		</supportedPrivacyRiskLevels>
+		<supportedContextTypes>
+			<contextType>org.ambientdynamix.contextplugins.TemperaturePlugin</contextType>
+		</supportedContextTypes>		
+		<featureDependencies/>			
+		<permissions/>				
+		<installUrl>dynamix/org.ambientdynamix.contextplugins.TemperaturePlugin_9.47.1.jar</installUrl>
+		<updateUrl></updateUrl>
+		<updateMessage priority="OPTIONAL"></updateMessage>
+	</contextPlugin>
+</contextPlugins>

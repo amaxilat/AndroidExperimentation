@@ -20,8 +20,9 @@ public class AsyncReportNowTask extends AsyncTask<String, Void, String> {
     protected String doInBackground(String... params) {
         String message = params[0];
         try { //try to send to server, on fail save it in SQLite
-            org.ambientdynamix.util.Log.d(TAG, "Offloading results:" + message);
+            Log.d(TAG, "Offloading results:" + message);
             DynamixService.getCommunication().sendReportResults(message);//
+
             org.ambientdynamix.util.Log.i(TAG, "Experiment  Reading Network: " + message);
         } catch (HttpClientErrorException e) {
             //ignore

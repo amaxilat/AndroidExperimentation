@@ -7,5 +7,6 @@
 	<classpathentry kind="src" path="gen"/>
 	<classpathentry exported="true" kind="con" path="com.android.ide.eclipse.adt.LIBRARIES"/>
 	<classpathentry kind="lib" path="C:/Users/theodori/Desktop/AndroidExperimentation/src/sensorPlugins/ExperimentPlugin/lib/gson-2.2.4.jar"/>
+	<classpathentry kind="lib" path="lib/org.ambientdynamix.contextplugin.api_v0.9.54.jar"/>
 	<classpathentry kind="output" path="bin/classes"/>
 </classpath>

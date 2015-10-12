@@ -7,6 +7,7 @@ import eu.smartsantander.androidExperimentation.operations.Downloader;
 public class Constants {
     public static String URL = "http://150.140.5.11:8080";
     public static int PHONE_ID_UNITIALIZED = -1;
+    public static String activityStatus = "unknown";
     public static final long EXPERIMENT_POLL_INTERVAL = 15000;
 
     //public enum Datatype {Integer,Float,String};

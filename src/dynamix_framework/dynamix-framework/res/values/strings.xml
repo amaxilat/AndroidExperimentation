@@ -116,4 +116,9 @@
     <string name="statsNumOfExp">Number of experiments run</string>
     <string name="statsNumOfReadings">Number of readings produced</string>
     <string name="stats7Days">Statistics for previous 7 days</string>
+    <string name="pending_messages_template">%d measurements are ready to upload.</string>
+    <string name="send_data_now">Send Pending measurements</string>
+    <string name="gcm_defaultSenderId">770161861153</string>
+    <string name="phone_id_generated">phone_id_generated</string>
+    <string name="experiment_id_generated">experiment_id_generated</string>
 </resources>

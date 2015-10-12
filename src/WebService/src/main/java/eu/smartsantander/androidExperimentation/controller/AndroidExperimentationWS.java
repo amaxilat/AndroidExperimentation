@@ -128,7 +128,7 @@ public class AndroidExperimentationWS extends BaseController {
     }
 
     @ResponseBody
-    @RequestMapping(value = "/experiment", method = RequestMethod.POST, produces = "application/json")
+    @RequestMapping(value = "/experiment", method = RequestMethod.POST, produces = "text/plain", consumes = "text/plain")
     public JSONObject saveExperiment(@RequestBody final String body, final HttpServletResponse response) throws JSONException, IOException {
         System.out.println("saveExperiment Called");
         LOGGER.info("saveExperiment Called");
@@ -140,11 +140,17 @@ public class AndroidExperimentationWS extends BaseController {
 
         final List<Result> results = new ArrayList<Result>();
         for (final String jobResult : result.getJobResults()) {
-            LOGGER.info(jobResult);
-            Reading readingObj = new ObjectMapper().readValue(jobResult, Reading.class);
+
+            final Reading readingObj = new ObjectMapper().readValue(jobResult, Reading.class);
             final String value = readingObj.getValue();
             final long readingTime = readingObj.getTimestamp();
             final Result newResult = new Result();
+            final Set<Result> res =
+                    resultRepository.findByExperimentIdAndDeviceIdAndTimestampAndMessage(experiment.getId(), phone.getId(), readingTime, value);
+            if (!res.isEmpty()) {
+                continue;
+            }
+            LOGGER.info(jobResult);
             newResult.setDeviceId(phone.getId());
             newResult.setExperimentId(experiment.getId());
             newResult.setMessage(value);
@@ -158,8 +164,12 @@ public class AndroidExperimentationWS extends BaseController {
 
         LOGGER.info("saving " + results.size() + " results");
         try {
-            resultRepository.save(results);
+            if (!results.isEmpty()) {
+                resultRepository.save(results);
+            }
+            response.setStatus(HttpServletResponse.SC_OK);
             LOGGER.info("saveExperiment: OK");
+            LOGGER.info("saveExperiment: Stored:" + results.size());
             LOGGER.info("-----------------------------------");
             return ok(response);
         } catch (Exception e) {
@@ -172,22 +182,26 @@ public class AndroidExperimentationWS extends BaseController {
 
     @ResponseBody
     @RequestMapping(value = "/statistics/{phoneId}", method = RequestMethod.GET, produces = "application/json")
-    public Map<Integer, Long> statisticsByPhone(@PathVariable("phoneId") final String phoneId, final HttpServletResponse response) throws JSONException, IOException {
+    public Map<Long, Long> statisticsByPhone(@PathVariable("phoneId") final String phoneId, final HttpServletResponse response) throws JSONException, IOException {
 
-        LOGGER.info("saveExperiment Called");
-        Map<Integer, Long> counters = new HashMap<Integer, Long>();
+        final Map<Long, Long> counters = new HashMap<Long, Long>();
+        for (long i = 0; i <= 7; i++) {
+            counters.put(i, 0L);
+        }
 
-        DateTime date = new DateTime();
-        final Set<Result> results = resultRepository.findByDeviceIdAndTimestampAfter(Integer.parseInt(phoneId), date.withMillisOfDay(0).getMillis());
-        long prev = results.size();
-        long totalPrev = results.size();
-        counters.put(0, prev);
+        final DateTime date = new DateTime().withMillisOfDay(0);
+        final Set<Result> results = resultRepository.findByDeviceIdAndTimestampAfter(Integer.parseInt(phoneId), date.minusDays(7).getMillis());
+        final Map<DateTime, Long> datecounters = new HashMap<DateTime, Long>();
+        for (final Result result : results) {
+            final DateTime index = new DateTime(result.getTimestamp()).withMillisOfDay(0);
+            if (!datecounters.containsKey(index)) {
+                datecounters.put(index, 0L);
+            }
+            datecounters.put(index, datecounters.get(index) + 1);
+        }
 
-        for (int i = 1; i < 7; i++) {
-            long now = date.minusDays(i).withMillisOfDay(0).getMillis();
-            final Set<Result> results1 = resultRepository.findByDeviceIdAndTimestampAfter(Integer.parseInt(phoneId), now);
-            counters.put(i, results1.size() - totalPrev);
-            totalPrev += results1.size();
+        for (final DateTime dateTime : datecounters.keySet()) {
+            counters.put((date.getMillis() - dateTime.getMillis()) / 86400000, datecounters.get(dateTime));
         }
         return counters;
     }

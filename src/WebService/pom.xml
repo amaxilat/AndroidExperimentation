@@ -87,6 +87,11 @@
             <version>influxdb-java-2.0</version>
         </dependency>
 
+        <dependency>
+            <groupId>org.apache.commons</groupId>
+            <artifactId>commons-math3</artifactId>
+            <version>3.5</version>
+        </dependency>
 
         <dependency>
             <groupId>com.google.guava</groupId>

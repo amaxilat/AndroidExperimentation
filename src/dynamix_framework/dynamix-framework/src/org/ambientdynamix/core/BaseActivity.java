@@ -16,6 +16,7 @@
 package org.ambientdynamix.core;
 
 import android.app.AlertDialog;
+import android.app.PendingIntent;
 import android.app.TabActivity;
 import android.content.Context;
 import android.content.DialogInterface;
@@ -27,6 +28,7 @@ import android.location.LocationListener;
 import android.location.LocationManager;
 import android.os.Bundle;
 import android.os.Handler;
+import android.support.multidex.MultiDex;
 import android.util.Log;
 import android.view.*;
 import android.view.MenuItem.OnMenuItemClickListener;
@@ -36,9 +38,13 @@ import android.widget.Toast;
 
 import com.bugsense.trace.BugSenseHandler;
 import com.bugsense.trace.ExceptionCallback;
-import com.newrelic.agent.android.NewRelic;
+import com.google.android.gms.common.ConnectionResult;
+import com.google.android.gms.common.api.GoogleApiClient;
+import com.google.android.gms.location.ActivityRecognition;
+import com.google.android.gms.location.LocationServices;
 import com.parse.Parse;
 
+import eu.smartsantander.androidExperimentation.ActivityRecognitionService;
 import eu.smartsantander.androidExperimentation.operations.AsyncConstantsTask;
 import eu.smartsantander.androidExperimentation.operations.NotificationHQManager;
 import eu.smartsantander.androidExperimentation.tabs.jobsTab;
@@ -60,7 +66,7 @@ import org.ambientdynamix.util.AndroidNotification;
  * @author Darren Carlson
  * @see DynamixService
  */
-public class BaseActivity extends TabActivity {
+public class BaseActivity extends TabActivity implements GoogleApiClient.ConnectionCallbacks, GoogleApiClient.OnConnectionFailedListener {
     private final static String TAG = BaseActivity.class.getSimpleName();
     /*
      * Useful Links: Fancy ListViews:
@@ -98,12 +104,12 @@ public class BaseActivity extends TabActivity {
     private Boolean tabIntentListenerIsRegistered = false;
     private Boolean serviceIntentListenerIsRegistered = false;
 
-    private static final long MINIMUM_DISTANCE_CHANGE_FOR_UPDATES = 1; // in
-    // Meters
-    private static final long MINIMUM_TIME_BETWEEN_UPDATES = 1000; // in
-    // Milliseconds
-    protected LocationManager locationManager;
+
     NotificationHQManager noteManager = NotificationHQManager.getInstance();
+
+
+    private GoogleApiClient mGoogleApiClient;
+    private PendingIntent pIntent;
 
     public static Resources myRes;
 
@@ -147,7 +153,7 @@ public class BaseActivity extends TabActivity {
     protected static void setTitlebarEnabled() {
         //if (baseActivity != null)
         //    baseActivity.changeTitlebarState(Color.rgb(0, 225, 50),
-         //           myRes.getString(R.string.dynamix_enable_toggle_on));// "Experimentation"
+        //           myRes.getString(R.string.dynamix_enable_toggle_on));// "Experimentation"
         // + DynamixService.getFrameworkVersion()
         // + " is enabled");
     }
@@ -180,6 +186,18 @@ public class BaseActivity extends TabActivity {
         super.onCreate(savedInstanceState);
         getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
         context = this;
+
+        final Intent activityRecognitionIntent = new Intent(this, ActivityRecognitionService.class);
+        pIntent = PendingIntent.getService(getApplicationContext(), 0, activityRecognitionIntent, PendingIntent.FLAG_UPDATE_CURRENT);
+
+
+        mGoogleApiClient = new GoogleApiClient.Builder(this)
+                .addApi(ActivityRecognition.API)
+                .addConnectionCallbacks(this)
+                .addOnConnectionFailedListener(this)
+                .build();
+        org.ambientdynamix.util.Log.i(TAG, "Connecting Google APIS...");
+        mGoogleApiClient.connect();
 
 
         // Set the Dynamix base activity so it can use our context
@@ -297,11 +315,6 @@ public class BaseActivity extends TabActivity {
         //
         DynamixService.ConfigureLog4J();
 
-        locationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
-
-        locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER,
-                MINIMUM_TIME_BETWEEN_UPDATES,
-                MINIMUM_DISTANCE_CHANGE_FOR_UPDATES, new MyLocationListener());
 
     }
 
@@ -331,9 +344,7 @@ public class BaseActivity extends TabActivity {
                 if (!askDynamixIsEnabled()) {
                     item.setIcon(R.drawable.power_icon);
                     DynamixService.startFramework();
-                }
-
-                else {
+                } else {
                     item.setIcon(R.drawable.power_icon_off);
                     DynamixService.stopFramework();
                 }
@@ -345,7 +356,7 @@ public class BaseActivity extends TabActivity {
 
 
         // Setup Change Settings
-        MenuItem item1 = menu.add(1, Menu.FIRST+1, Menu.NONE, "Change Settings");
+        MenuItem item1 = menu.add(1, Menu.FIRST + 1, Menu.NONE, "Change Settings");
         item1.setOnMenuItemClickListener(new OnMenuItemClickListener() {
             public boolean onMenuItemClick(MenuItem item) {
                 startActivity(new Intent(BaseActivity.this,
@@ -355,7 +366,7 @@ public class BaseActivity extends TabActivity {
         });
 
         // Setup Help Settings
-        MenuItem item2 = menu.add(2, Menu.FIRST + 2 , Menu.NONE, "Help");
+        MenuItem item2 = menu.add(2, Menu.FIRST + 2, Menu.NONE, "Help");
         item1.setOnMenuItemClickListener(new OnMenuItemClickListener() {
             public boolean onMenuItemClick(MenuItem item) {
                 startActivity(new Intent(BaseActivity.this,
@@ -464,30 +475,6 @@ public class BaseActivity extends TabActivity {
 
     }
 
-
-    private class MyLocationListener implements LocationListener {
-
-        public void onLocationChanged(Location location) {
-            String message = String.format(
-                    "Lon %1$s Lat: %2$s",
-                    location.getLongitude(), location.getLatitude());
-            noteManager.postNotification(message);
-        }
-
-        public void onStatusChanged(String s, int i, Bundle b) {
-
-        }
-
-        public void onProviderDisabled(String s) {
-
-        }
-
-        public void onProviderEnabled(String s) {
-
-        }
-
-    }
-
     private boolean askDynamixIsEnabled() {
 
         boolean dynamixEnabled = DynamixPreferences.isDynamixEnabled(this);
@@ -495,4 +482,26 @@ public class BaseActivity extends TabActivity {
         return dynamixEnabled;
     }
 
+
+    @Override
+    protected void attachBaseContext(Context base) {
+        super.attachBaseContext(base);
+        MultiDex.install(this);
+    }
+
+    @Override
+    public void onConnected(Bundle bundle) {
+        org.ambientdynamix.util.Log.d(TAG, "Google activity recognition services connected");
+        ActivityRecognition.ActivityRecognitionApi.requestActivityUpdates(mGoogleApiClient, 10000, pIntent);
+    }
+
+    @Override
+    public void onConnectionSuspended(int i) {
+        org.ambientdynamix.util.Log.d(TAG, "Google activity recognition services connection suspended");
+    }
+
+    @Override
+    public void onConnectionFailed(ConnectionResult connectionResult) {
+        org.ambientdynamix.util.Log.d(TAG, "Google activity recognition services disconnected");
+    }
 }

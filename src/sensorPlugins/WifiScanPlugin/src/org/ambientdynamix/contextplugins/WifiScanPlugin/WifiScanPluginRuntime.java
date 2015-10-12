@@ -9,7 +9,7 @@ import org.ambientdynamix.api.contextplugin.ContextPluginSettings;
 import org.ambientdynamix.api.contextplugin.PowerScheme;
 import org.ambientdynamix.api.contextplugin.security.PrivacyRiskLevel;
 import org.ambientdynamix.api.contextplugin.security.SecuredContextInfo;
-
+import org.json.JSONObject;
 
 import com.google.gson.Gson;
 
@@ -32,66 +32,66 @@ public class WifiScanPluginRuntime extends AutoReactiveContextPluginRuntime {
 	private final String TAG = this.getClass().getSimpleName();
 	// Our secure context
 	private Context context;
-	
-	
+
 	WifiManager mainWifi;
 	List<ScanResult> wifiList;
 	private String scanJson = "-1";
 	private boolean running = false;
 	private Handler handler;
+	private JSONObject wifisJson = new JSONObject();
 
-	private Runnable runnable = new Runnable()
-	{
+	private Runnable runnable = new Runnable() {
 		@Override
-		public void run()
-		{
-			if(running)
-			{	
-				broadcastWifiScan(null);
+		public void run() {
+			broadcastWifiScan(null);
+			if (running) {
 				handler.postDelayed(this, 20000);
 			}
 		}
 	};
-	
-	
-	
+
 	public void broadcastWifiScan(UUID requestId) {
-		if (requestId!=null)
-			Log.w(TAG, "WifiScan Broadcast:"+requestId);
-		else
+		if (requestId != null) {
+			Log.w(TAG, "WifiScan Broadcast:" + requestId);
+		} else {
 			Log.w(TAG, "WifiScan Broadcast Timer!");
-		
+		}
+
 		wifiList = new ArrayList<ScanResult>();
 		mainWifi = (WifiManager) context.getSystemService(Context.WIFI_SERVICE);
 		mainWifi.startScan();
 		try {
 			Thread.sleep(5000);
 		} catch (InterruptedException e) {
- 			e.printStackTrace();
+			e.printStackTrace();
 		}
-		wifiList=mainWifi.getScanResults();	
-	
+		wifiList = mainWifi.getScanResults();
+
 		Gson gson = new Gson();
 		scanJson = gson.toJson(wifiList);
-		
+
 		Log.i("scan wifi scan plugin", this.scanJson);
 		PluginInfo info = new PluginInfo();
 		info.setState("valid");
-		List<Reading> readings=new ArrayList<Reading>();
-		readings.add(new Reading(Reading.Datatype.String, scanJson, PluginInfo.CONTEXT_TYPE));
-		info.setPayload(readings);
-		Log.w(TAG, "WifiScan Plugin:"+ info.getPayload());
-		if (requestId!=null){
-			sendContextEvent(requestId, new SecuredContextInfo(info,	PrivacyRiskLevel.LOW), 60000);
-			Log.w(TAG,"WifiScan Plugin from Request:"+ info.getPayload());
-		}else{ 
-			sendBroadcastContextEvent(new SecuredContextInfo(info,	PrivacyRiskLevel.LOW), 60000);
-			Log.w(TAG,"WifiScan Plugin Broadcast:"+ info.getPayload());
+		try {
+			List<Reading> readings = new ArrayList<Reading>();
+			wifisJson.put("org.ambientdynamix.contextplugins.WifiList", scanJson);
+			readings.add(new Reading(Reading.Datatype.String, wifisJson.toString(), PluginInfo.CONTEXT_TYPE));
+			info.setPayload(readings);
+			Log.w(TAG, "WifiScan Plugin:" + info.getPayload());
+			if (requestId != null) {
+				sendContextEvent(requestId, new SecuredContextInfo(info, PrivacyRiskLevel.LOW), 60000);
+				Log.w(TAG, "WifiScan Plugin from Request:" + info.getPayload());
+			} else {
+				sendBroadcastContextEvent(new SecuredContextInfo(info, PrivacyRiskLevel.LOW), 60000);
+				Log.w(TAG, "WifiScan Plugin Broadcast:" + info.getPayload());
+			}
+			wifiList.clear();
+		} catch (Exception e) {
+			Log.e(TAG, e.getMessage());
 		}
-		wifiList.clear();
 	}
-	
- 
+
 	@Override
 	public void init(PowerScheme powerScheme, ContextPluginSettings settings) throws Exception {
 		this.setPowerScheme(powerScheme);
@@ -101,26 +101,26 @@ public class WifiScanPluginRuntime extends AutoReactiveContextPluginRuntime {
 
 	// handle incoming context request
 	@Override
-	public void handleContextRequest(UUID requestId, String contextType)
-	{
+	public void handleContextRequest(UUID requestId, String contextType) {
 		broadcastWifiScan(requestId);
 	}
 
 	@Override
-	public void handleConfiguredContextRequest(UUID requestId, String contextType, Bundle config)
-	{
-		handleContextRequest(requestId,contextType);
-	}	
-	
+	public void handleConfiguredContextRequest(UUID requestId, String contextType, Bundle config) {
+		handleContextRequest(requestId, contextType);
+	}
+
 	@Override
-	public void start()
-	{		
-		Log.d(TAG, "WifiScan Plugin Started!");			}
-	
+	public void start() {
+		Log.d(TAG, "WifiScan Plugin Started!");
+		running = true;
+		handler.postDelayed(runnable, 20000);
+	}
+
 	@Override
-	public void stop()
-	{
-		Log.d(TAG, "WifiScan Plugin Stoped!");			
+	public void stop() {
+		Log.d(TAG, "WifiScan Plugin Stoped!");
+		running = false;
 	}
 
 	@Override
@@ -143,7 +143,5 @@ public class WifiScanPluginRuntime extends AutoReactiveContextPluginRuntime {
 	public void doManualContextScan() {
 		// Not supported
 	}
-	
-	
 
 }
