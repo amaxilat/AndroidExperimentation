@@ -117,8 +117,8 @@ public class HomeActivity extends ListActivity {
      */
     public static void setActiveState(boolean active) {
         if (activity != null) {
-            if (activity.togglebutton != null)
-                activity.togglebutton.setChecked(active);
+           // if (activity.togglebutton != null)
+           //     activity.togglebutton.setChecked(active);
         }
     }
 
@@ -199,23 +199,23 @@ public class HomeActivity extends ListActivity {
         // Setup the Dynamix Enable/Disable button
         pendingTextView = (TextView) findViewById(R.id.pending);
         activityStatusTextView = (TextView) findViewById(R.id.activity_status);
-        togglebutton = (ToggleButton) findViewById(R.id.DynamixActiveToggle);
-        togglebutton.setOnClickListener(new View.OnClickListener() {
-            public void onClick(View v) {
-                if (togglebutton.isChecked()) {
-                    Log.d(TAG, "Adding Location Listener");
-                    // PendingIntent
-                    locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER,
-                            MINIMUM_TIME_BETWEEN_UPDATES,
-                            MINIMUM_DISTANCE_CHANGE_FOR_UPDATES, locationListener);
-                    DynamixService.startFramework();
-                } else {
-                    Log.d(TAG, "Removing Location Listener");
-                    locationManager.removeUpdates(locationListener);
-                    DynamixService.stopFramework();
-                }
-            }
-        });
+//        togglebutton = (ToggleButton) findViewById(R.id.DynamixActiveToggle);
+//        togglebutton.setOnClickListener(new View.OnClickListener() {
+//            public void onClick(View v) {
+//                if (togglebutton.isChecked()) {
+//                    Log.d(TAG, "Adding Location Listener");
+//                    // PendingIntent
+//                    locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER,
+//                            MINIMUM_TIME_BETWEEN_UPDATES,
+//                            MINIMUM_DISTANCE_CHANGE_FOR_UPDATES, locationListener);
+//                    DynamixService.startFramework();
+//                } else {
+//                    Log.d(TAG, "Removing Location Listener");
+//                    locationManager.removeUpdates(locationListener);
+//                    DynamixService.stopFramework();
+//                }
+//            }
+//        });
         // Setup an state refresh timer, which periodically updates application
         // state in the appList
         refresher = new Timer(true);
@@ -299,7 +299,7 @@ public class HomeActivity extends ListActivity {
         if (DynamixService.isFrameworkInitialized()) {
             // Setup toggle button with proper state
             boolean dynamixEnabled = DynamixPreferences.isDynamixEnabled(this);
-            togglebutton.setChecked(dynamixEnabled);
+            //togglebutton.setChecked(dynamixEnabled);
             // If Dynamix is enabled, but the DynamixService is not running, then call startFramework
             if (dynamixEnabled && !DynamixService.isFrameworkStarted()) {
                 DynamixService.startFramework();
