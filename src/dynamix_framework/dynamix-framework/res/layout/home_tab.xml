@@ -91,7 +91,7 @@
 
     </Button>
 
-    <LinearLayout
+    <!--<LinearLayout
         android:id="@+id/TableLayout01"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
@@ -104,6 +104,6 @@
             android:layout_gravity="bottom"
             android:textOff="@string/dynamix_enable_toggle_off"
             android:textOn="@string/dynamix_enable_toggle_on" />
-    </LinearLayout>
+    </LinearLayout>-->
 
 </LinearLayout>

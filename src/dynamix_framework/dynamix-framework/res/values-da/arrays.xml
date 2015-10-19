@@ -3,14 +3,14 @@
 <resources>
 
     <string-array name="updateInterval">
-        <item name="60000">Every Minute</item>
-        <item name="600000">Every 10 minutes</item>
-        <item name="3600000">Every Hour</item>
-        <item name="21600000">Every 6 Hours</item>
-        <item name="43200000">Every 12 Hours</item>
-        <item name="86400000">Once Per Day</item>
-        <item name="604800000">Once Per Week</item>
-        <item name="18144000000">Every 30 Days</item>
+      <item name="60000">Hvert minut</item>
+      <item name="600000">Hver 10. minut</item>
+      <item name="3600000">Hver time</item>
+      <item name="21600000">Hver 6. time</item>
+      <item name="43200000">Hver 12. time</item>
+      <item name="86400000">En om dagen</item>
+      <item name="604800000">En om ugen</item>
+      <item name="18144000000">En gang om måneden</item>
     </string-array>
     
     <string-array name="updateIntervalValues">
