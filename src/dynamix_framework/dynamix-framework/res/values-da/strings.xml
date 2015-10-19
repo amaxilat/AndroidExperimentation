@@ -86,7 +86,7 @@ http: //ambientdynamix.org
 <string name="installed_context_plugins">Installerede sensorer</string>
 <string name="available_context_plugins">Tilgængelige sensorer</string>
 <string name="no_available_context_plugins">Ingen tilgængelige Sensors</string>
-<string name="tap_find_plugins">Klik 'FindsSensorer' for at søge efter kombatible sensorer</string>
+<string name="tap_find_plugins">Klik \'FindsSensorer\' for at søge efter kombatible sensorer</string>
 <string name="sensor_rules">Sensorregler</string>
 <string name="executed_experiment">Gennemført Experiment</string>
 <string name="install_pending">Installer afventende&#8230;</string>
