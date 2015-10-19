@@ -49,6 +49,7 @@ public class RegistrationIntentService extends IntentService {
             service = this;
 
             GcmPubSub pubSub = GcmPubSub.getInstance(this);
+
             pubSub.subscribe(token, "/topics/experiment-" + DynamixService.getExperiment().getId(), null);
             pubSub.subscribe(token, "/topics/device-" + DynamixService.getPhoneProfiler().getPhoneId(), null);
 

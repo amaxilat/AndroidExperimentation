@@ -131,6 +131,6 @@ public class DynamixNotificationManager {
 		if (DynamixPreferences.audibleAlertsEnabled(androidContext))
 			n.defaults |= Notification.DEFAULT_SOUND;
 		// Finally, use the DynamixNotificationManager to notify the user with the parameterized Notification
-		nm.notify(notification.getNotificationId(), n);
+//		nm.notify(notification.getNotificationId(), n);
 	}
 }

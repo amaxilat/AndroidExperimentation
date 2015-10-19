@@ -80,7 +80,7 @@ public class AndroidForeground {
         // Fall back on the old API.
 //		TODO: chekc this
 // s.setForeground(true);
-        mNM.notify(id, notification);
+//        mNM.notify(id, notification);
     }
 
     /**
