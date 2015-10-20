@@ -5,6 +5,7 @@ import eu.smartsantander.androidExperimentation.model.Result;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.log4j.Logger;
 import org.influxdb.InfluxDB;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.PostConstruct;
@@ -34,7 +35,11 @@ public class InfluxDbService {
      */
     private static final Logger log = Logger.getLogger(Application.class);
     InfluxDB influxDB;
-    private static final String dbName = "http://150.140.5.11:8086/write?db=experiments";
+    private static final String dbUrl = "http://localhost:8086";
+    private static final String dbName = dbUrl + "/write?db=experiments";
+
+    @Value("${influxDBAuthorizationToken}")
+    String influxDBAuthorizationToken;
 
     @PostConstruct
     public void init() {
@@ -103,11 +108,11 @@ public class InfluxDbService {
     private Invocation.Builder getClientForPath(final String path) {
         Client client = ClientBuilder.newClient();
         log.debug("path: " + path);
-        return client.target("http://150.140.5.11:8086")
+        return client.target(dbUrl)
                 .path(path)
-                .queryParam("db","experiments")
+                .queryParam("db", "experiments")
                 .request()
-                .header("Authorization", "Basic YnVnczpidW5ueQ==");
+                .header("Authorization", "Basic " + influxDBAuthorizationToken);
     }
 
 }
