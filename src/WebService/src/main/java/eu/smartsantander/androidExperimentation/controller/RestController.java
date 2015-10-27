@@ -90,7 +90,8 @@ public class RestController {
                     locationsHeatMap.get(longitude).put(latitude, val + 1);
                 }
             } catch (Exception e) {
-                LOGGER.error(e, e);
+                //ignore
+                //LOGGER.error(e, e);
             }
         }
         final JSONArray addressPoints = new JSONArray();

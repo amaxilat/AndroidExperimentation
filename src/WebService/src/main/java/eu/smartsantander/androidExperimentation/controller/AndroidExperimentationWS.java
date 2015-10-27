@@ -12,6 +12,7 @@ import eu.smartsantander.androidExperimentation.repository.ResultRepository;
 import eu.smartsantander.androidExperimentation.repository.SmartphoneRepository;
 import eu.smartsantander.androidExperimentation.service.InfluxDbService;
 import eu.smartsantander.androidExperimentation.service.ModelManager;
+import eu.smartsantander.androidExperimentation.service.OrionService;
 import org.apache.log4j.Logger;
 import org.joda.time.DateTime;
 import org.json.JSONException;
@@ -20,6 +21,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
+import javax.annotation.PostConstruct;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.*;
@@ -44,23 +46,13 @@ public class AndroidExperimentationWS extends BaseController {
     ResultRepository resultRepository;
     @Autowired
     InfluxDbService influxDbService;
+    @Autowired
+    OrionService orionService;
 
 
-//    //@ResponseBody
-//    //@RequestMapping(value = "/report")
-//    public String reportResults(String reportJson) {
-//        try {
-//            Report report = Report.fromJson(reportJson);
-//            modelManager.reportResults(report);
-//            LOGGER.debug("Report Stored: Device:" + report.getDeviceId());
-//            LOGGER.debug("Report Stored:" + reportJson);
-//            LOGGER.debug("-----------------------------------");
-//        } catch (Exception e) {
-//            e.printStackTrace();
-//            LOGGER.debug(e.getMessage());
-//        }
-//        return "1";
-//    }
+    @PostConstruct
+    public void init() {
+    }
 
     /**
      * Registers a {@see Smartphone} to the service.
@@ -130,7 +122,6 @@ public class AndroidExperimentationWS extends BaseController {
     @ResponseBody
     @RequestMapping(value = "/experiment", method = RequestMethod.POST, produces = "text/plain", consumes = "text/plain")
     public JSONObject saveExperiment(@RequestBody final String body, final HttpServletResponse response) throws JSONException, IOException {
-        System.out.println("saveExperiment Called");
         LOGGER.info("saveExperiment Called");
         Report result = new ObjectMapper().readValue(body, Report.class);
         LOGGER.info("saving for deviceId:" + result.getDeviceId() + " jobName:" + result.getJobName());
@@ -156,6 +147,8 @@ public class AndroidExperimentationWS extends BaseController {
             newResult.setMessage(value);
             newResult.setTimestamp(readingTime);
             results.add(newResult);
+
+            orionService.storeOrion(String.valueOf(phone.getId()), newResult);
 
 //            boolean res = influxDbService.store(newResult);
 //            LOGGER.info(res);
