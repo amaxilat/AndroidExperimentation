@@ -1,0 +1,84 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html>
+<head>
+    <title th:text="${title}">Leaflet.heat demo</title>
+    <link rel="stylesheet" href="http://cdn.leafletjs.com/leaflet-0.7.3/leaflet.css"/>
+    <script src="http://cdn.leafletjs.com/leaflet-0.7.3/leaflet.js"></script>
+    <style type="text/css">* {
+        margin: 0;
+        padding: 0
+    }
+
+    html, body {
+        height: 100%;
+        width: 100%;
+        overflow: hidden
+    }
+
+    table {
+        height: 100%;
+        width: 100%;
+        table-layout: static;
+        border-collapse: collapse
+    }
+
+    #map {
+        height: 100%;
+        width: 100%
+    }
+
+    .content {
+        height: 100%
+    }</style>
+</head>
+<body>
+
+<div id="map"></div>
+
+<script src="http://leaflet.github.io/Leaflet.heat/dist/leaflet-heat.js"></script>
+
+<script src="http://leaflet.github.io/Leaflet.markercluster/example/realworld.10000.js"></script>
+
+<script th:inline="javascript">
+    /*<![CDATA[*/
+    var addressPointsStr = /*[[${addressPoints}]]*/ null;
+    var addressPoints = JSON.parse(addressPointsStr);
+    console.log(addressPoints);
+
+    var map = L.map('map').setView([38.2908379, 21.7961805], 12);
+
+
+    //Last in order to be the base layer
+    var mapquest = L.tileLayer('http://otile2.mqcdn.com/tiles/1.0.0/map/{z}/{x}/{y}.png', {
+        attribution: 'Map data &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors,Tiles Courtesy of <a href="http://www.mapquest.com/" target="_blank">MapQuest</a>',
+        maxZoom: 18,
+        opacity: 0.7
+    }).addTo(map);
+
+    var markersList = [];
+
+    addressPoints.forEach(function (e) {
+        var marker = L.marker([e[0], e[1]]).addTo(map);
+        marker.bindPopup("Value:" + e[2]);
+        markersList.push(marker);
+    });
+
+    var markersLayer = L.layerGroup(markersList);
+
+    var heat = L.heatLayer(addressPoints).addTo(map);
+
+
+    var baseMaps = {};
+
+    var overlayMaps = {
+        "markers": markersLayer,
+        "heatmap": heat
+    };
+
+
+    L.control.layers(baseMaps, overlayMaps).addTo(map);
+
+    /*]]>*/
+</script>
+</body>
+</html>
