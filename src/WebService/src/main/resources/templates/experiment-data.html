@@ -59,13 +59,17 @@
 
     addressPoints.forEach(function (e) {
         var marker = L.marker([e[0], e[1]]).addTo(map);
-        marker.bindPopup("Value:" + e[2]);
+        var message = "Values:<br/>" + JSON.stringify(e[3], null, 2);
+        marker.bindPopup(message);
         markersList.push(marker);
     });
 
     var markersLayer = L.layerGroup(markersList);
 
     var heat = L.heatLayer(addressPoints).addTo(map);
+
+    var group = new L.featureGroup(markersList);
+    map.fitBounds(group.getBounds());
 
 
     var baseMaps = {};
