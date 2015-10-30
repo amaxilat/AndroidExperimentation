@@ -15,9 +15,11 @@ import android.webkit.WebViewClient;
 import android.widget.TextView;
 
 
+import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.MapFragment;
 import com.google.android.gms.maps.MapView;
 import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.LatLngBounds;
 import com.google.android.gms.maps.model.TileOverlay;
 import com.google.android.gms.maps.model.TileOverlayOptions;
 import com.google.maps.android.heatmaps.HeatmapTileProvider;
@@ -169,7 +171,15 @@ public class statsTab extends Activity implements
             });
 
 
-            updateExperimentDeviceHeatMap();
+            final LatLngBounds bounds = updateExperimentDeviceHeatMap();
+            if (bounds != null) {
+                thisActivity.runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        mMap.getMap().moveCamera(CameraUpdateFactory.newLatLngZoom(bounds.getCenter(), 10));
+                    }
+                });
+            }
 
             return theJPGData;
         }
@@ -177,31 +187,25 @@ public class statsTab extends Activity implements
 
     }
 
-    private void updateExperimentDeviceHeatMap() {
+    private LatLngBounds updateExperimentDeviceHeatMap() {
         final JSONArray mapStats = communication.getLastPoints(DynamixService.getPhoneProfiler().getPhoneId());
         if (mapStats != null) {
-            double max = 0.0;
+            LatLngBounds.Builder boundsBuilder = LatLngBounds.builder();
             for (int i = 0; i < mapStats.length(); i++) {
                 try {
-                    JSONArray elem = mapStats.getJSONArray(i);
-                    double val = Double.parseDouble(elem.getString(2));
-                    if (val > max) {
-                        max = val;
-                    }
-                } catch (JSONException e) {
-                    Log.e(TAG, e.getMessage());
-                }
-            }
-            for (int i = 0; i < mapStats.length(); i++) {
-                try {
-                    JSONArray elem = mapStats.getJSONArray(i);
-                    heatMapItems.add(new LatLng(elem.getDouble(0), elem.getDouble(1)));
+                    final JSONArray elem = mapStats.getJSONArray(i);
+                    final LatLng latLng = new LatLng(elem.getDouble(0), elem.getDouble(1));
+                    heatMapItems.add(latLng);
+                    boundsBuilder.include(latLng);
                 } catch (JSONException e) {
                     Log.e(TAG, e.getMessage());
                 }
             }
             mProvider.setData(heatMapItems);
+            final LatLngBounds bounds = boundsBuilder.build();
+            return bounds;
         }
+        return null;
     }
 
     @Override
