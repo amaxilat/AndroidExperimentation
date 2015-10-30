@@ -42,6 +42,12 @@
         android:text="-"
         android:textAppearance="?android:attr/textAppearanceMedium" />
 
+    <fragment
+            android:id="@+id/map_main"
+            android:name="com.google.android.gms.maps.MapFragment"
+            android:layout_width="match_parent"
+            android:layout_height="180dp" />
+
     <TextView
         android:id="@+id/pending"
         android:layout_width="fill_parent"

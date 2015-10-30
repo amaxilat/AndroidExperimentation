@@ -51,7 +51,7 @@ public class RestController {
     }
 
     private JSONArray getExperimentData(final String experiment, final int deviceId, final String after) {
-        DecimalFormat df = new DecimalFormat("#.000000");
+        DecimalFormat df = new DecimalFormat("#.00000000");
         long start;
         try {
             start = Long.parseLong(after);
@@ -68,7 +68,7 @@ public class RestController {
         if (deviceId == 0) {
             results = resultRepository.findByExperimentIdAndTimestampAfter(Integer.parseInt(experiment), start);
         } else {
-            results = resultRepository.findByExperimentIdAndDeviceIdAndTimestampAfter(Integer.parseInt(experiment), deviceId, start);
+            results = resultRepository.findByExperimentIdAndDeviceIdAndTimestampAfterOrderByTimestampAsc(Integer.parseInt(experiment), deviceId, start);
         }
 
         Map<String, Map<String, Long>> locationsHeatMap = new HashMap<String, Map<String, Long>>();
@@ -102,8 +102,8 @@ public class RestController {
                 try {
                     measurement.put(Double.parseDouble(latit));
                     measurement.put(Double.parseDouble(longit));
-                    //measurement.put(String.valueOf(locationsHeatMap.get(longit).get(latit)));
-                    measurement.put("1");
+                    measurement.put(String.valueOf(locationsHeatMap.get(longit).get(latit)));
+//                    measurement.put("1");
                     addressPoints.put(measurement);
                 } catch (JSONException e) {
                     LOGGER.error(e, e);

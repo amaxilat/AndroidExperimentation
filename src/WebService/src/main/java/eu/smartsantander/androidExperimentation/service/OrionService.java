@@ -1,9 +1,11 @@
 package eu.smartsantander.androidExperimentation.service;
 
 import com.amaxilatis.orion.OrionClient;
-import com.amaxilatis.orion.model.OrionContextElement;
-import com.amaxilatis.orion.util.SensorMLTypes;
-import com.fasterxml.jackson.databind.ObjectMapper;
+import eu.organicity.entities.handler.attributes.Attribute;
+import eu.organicity.entities.handler.entities.SmartphoneDevice;
+import eu.organicity.entities.handler.metadata.Datatype;
+import eu.organicity.entities.namespace.OrganicityAttributeTypes;
+import eu.organicity.entities.namespace.OrganicityDatatypes;
 import eu.smartsantander.androidExperimentation.model.Result;
 import org.apache.log4j.Logger;
 import org.json.JSONException;
@@ -14,7 +16,9 @@ import org.springframework.stereotype.Service;
 
 import javax.annotation.PostConstruct;
 import java.text.SimpleDateFormat;
-import java.util.*;
+import java.util.Date;
+import java.util.Iterator;
+import java.util.TimeZone;
 
 
 /**
@@ -46,7 +50,7 @@ public class OrionService {
 
     @PostConstruct
     public void init() {
-        orionClient = new OrionClient("http://localhost:1026","");
+        orionClient = new OrionClient("http://localhost:1026", "");
 
         TimeZone tz = TimeZone.getTimeZone("UTC");
         df = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm'Z'");
@@ -60,41 +64,48 @@ public class OrionService {
 
         final String uri = String.format(ORION_SMARTPHONE_ID_FORMAT, siteName, id);
         LOGGER.info(uri);
-        OrionContextElement phoneEntity = new OrionContextElement();
-        phoneEntity.setId(uri);
-        phoneEntity.setIsPattern("false");
-        phoneEntity.setType(ORION_SMARTPHONE_TYPE);
 
-        phoneEntity.setAttributes(new ArrayList<Map<String, Object>>());
-        phoneEntity.getAttributes().add(OrionClient.createAttribute("TimeInstant", SensorMLTypes.ISO8601_TIME, df.format(new Date())));
+        final SmartphoneDevice phoneEntity = new SmartphoneDevice(uri);
 
-        JSONObject readingList = null;
+        phoneEntity.setTimestamp(new Date());
+
         try {
             LOGGER.info(newResult.getMessage());
-            readingList = new JSONObject(newResult.getMessage());
+            final JSONObject readingList = new JSONObject(newResult.getMessage());
 
-            Iterator<String> keys = readingList.keys();
-
+            final Iterator<String> keys = readingList.keys();
+            String latitude = null;
+            String longitude = null;
             while (keys.hasNext()) {
-                String key = keys.next();
+                final String key = keys.next();
                 if (key.contains("Latitude")) {
-                    phoneEntity.getAttributes().add(OrionClient.createAttribute("Latitud", SensorMLTypes.LATITUDE, String.valueOf(readingList.get(key))));
+                    latitude = String.valueOf(readingList.get(key));
                 } else if (key.contains("Longitude")) {
-                    phoneEntity.getAttributes().add(OrionClient.createAttribute("Longitud", SensorMLTypes.LONGITUDE, String.valueOf(readingList.get(key))));
+                    longitude = String.valueOf(readingList.get(key));
+                } else if (key.contains("NoiseLevel")) {
+                    Attribute a = new Attribute(OrganicityAttributeTypes.Types.SOUND_PRESSURE_LEVEL, String.valueOf(readingList.get(key)));
+                    Datatype dm = new Datatype(OrganicityDatatypes.DATATYPES.NUMERIC);
+                    a.addMetadata(dm);
+                    phoneEntity.addAttribute(a);
+                } else if (key.contains("AmbientTemperature")) {
+                    Attribute a = new Attribute(OrganicityAttributeTypes.Types.TEMPERATURE, String.valueOf(readingList.get(key)));
+                    Datatype dm = new Datatype(OrganicityDatatypes.DATATYPES.NUMERIC);
+                    a.addMetadata(dm);
+                    phoneEntity.addAttribute(a);
                 }
             }
             try {
-                LOGGER.info(phoneEntity);
-                LOGGER.info((new ObjectMapper()).writeValueAsString(phoneEntity));
-
-                final String res = orionClient.postContextEntity(uri, phoneEntity);
+                if (longitude != null && latitude != null) {
+                    phoneEntity.setPosition(Double.parseDouble(latitude), Double.parseDouble(longitude));
+                }
+                final String res = orionClient.postContextEntity(uri, phoneEntity.getContextElement());
                 LOGGER.info(res);
             } catch (Exception e) {
                 LOGGER.error(e, e);
             }
 
         } catch (JSONException e) {
-            e.printStackTrace();
+            LOGGER.warn(e.getMessage());
         }
 
     }

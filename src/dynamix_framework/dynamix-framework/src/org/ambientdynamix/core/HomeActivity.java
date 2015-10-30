@@ -15,25 +15,13 @@
  */
 package org.ambientdynamix.core;
 
-import java.util.ArrayList;
-import java.util.Timer;
-import java.util.TimerTask;
-
-import org.ambientdynamix.data.DynamixPreferences;
-
-import eu.smartsantander.androidExperimentation.util.Constants;
-import eu.smartsantander.androidExperimentation.service.LocationUpdateService;
-import eu.smartsantander.androidExperimentation.operations.AsyncReportOnServerTask;
-import eu.smartsantander.androidExperimentation.operations.AsyncStatusRefreshTask;
-import eu.smartsantander.androidExperimentation.service.RegistrationIntentService;
-
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.ListActivity;
-import android.app.PendingIntent;
-import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.location.Criteria;
+import android.location.Location;
 import android.location.LocationManager;
 import android.os.Bundle;
 import android.os.Handler;
@@ -43,15 +31,22 @@ import android.view.ContextMenu.ContextMenuInfo;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.AdapterView;
+import android.widget.*;
 import android.widget.AdapterView.AdapterContextMenuInfo;
-import android.widget.Button;
-import android.widget.ListView;
-import android.widget.TextView;
-import android.widget.ToggleButton;
-
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.GoogleApiAvailability;
+import com.google.android.gms.maps.CameraUpdateFactory;
+import com.google.android.gms.maps.MapFragment;
+import com.google.android.gms.maps.model.LatLng;
+import eu.smartsantander.androidExperimentation.operations.AsyncReportOnServerTask;
+import eu.smartsantander.androidExperimentation.operations.AsyncStatusRefreshTask;
+import eu.smartsantander.androidExperimentation.service.RegistrationIntentService;
+import eu.smartsantander.androidExperimentation.util.Constants;
+import org.ambientdynamix.data.DynamixPreferences;
+
+import java.util.ArrayList;
+import java.util.Timer;
+import java.util.TimerTask;
 
 /**
  * Home user interface, which shows the current authorized Dynamix applications along with their status. This UI also
@@ -80,15 +75,12 @@ public class HomeActivity extends ListActivity {
     public TextView expDescriptionTv;
     public TextView connectionStatus;
     private Button pendingSendButton;
+    private MapFragment mMap;
+
 
     private TextView pendingTextView;
     private TextView activityStatusTextView;
 
-    private static final long MINIMUM_DISTANCE_CHANGE_FOR_UPDATES = 1; // in Meters
-    private static final long MINIMUM_TIME_BETWEEN_UPDATES = 1000; // in Milliseconds
-    private PendingIntent locationListener;
-
-    protected LocationManager locationManager;
     // Create runnable for updating the UI
     final Runnable updateList = new Runnable() {
         public void run() {
@@ -117,8 +109,8 @@ public class HomeActivity extends ListActivity {
      */
     public static void setActiveState(boolean active) {
         if (activity != null) {
-           // if (activity.togglebutton != null)
-           //     activity.togglebutton.setChecked(active);
+            // if (activity.togglebutton != null)
+            //     activity.togglebutton.setChecked(active);
         }
     }
 
@@ -174,11 +166,8 @@ public class HomeActivity extends ListActivity {
         setContentView(R.layout.home_tab);
         appList = getListView();
         appList.setClickable(true);
-        locationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
         pendingSendButton = (Button) findViewById(R.id.send_pending_now);
 
-        final Intent intent = new Intent(this, LocationUpdateService.class);
-        locationListener = PendingIntent.getService(getApplicationContext(), 0, intent, PendingIntent.FLAG_UPDATE_CURRENT);
 
         pendingSendButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -203,15 +192,8 @@ public class HomeActivity extends ListActivity {
 //        togglebutton.setOnClickListener(new View.OnClickListener() {
 //            public void onClick(View v) {
 //                if (togglebutton.isChecked()) {
-//                    Log.d(TAG, "Adding Location Listener");
-//                    // PendingIntent
-//                    locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER,
-//                            MINIMUM_TIME_BETWEEN_UPDATES,
-//                            MINIMUM_DISTANCE_CHANGE_FOR_UPDATES, locationListener);
 //                    DynamixService.startFramework();
 //                } else {
-//                    Log.d(TAG, "Removing Location Listener");
-//                    locationManager.removeUpdates(locationListener);
 //                    DynamixService.stopFramework();
 //                }
 //            }
@@ -236,6 +218,39 @@ public class HomeActivity extends ListActivity {
         connectionStatus = (TextView) this.findViewById(R.id.connection_status);
         appList.setVisibility(View.GONE);
 
+
+        mMap = ((MapFragment) getFragmentManager().findFragmentById(R.id.map_main));
+        mMap.getMap().setMyLocationEnabled(true);
+
+
+        LocationManager locationManager = (LocationManager) getSystemService(LOCATION_SERVICE);
+
+        // Creating a criteria object to retrieve provider
+        Criteria criteria = new Criteria();
+
+        // Getting the name of the best provider
+        String provider = locationManager.getBestProvider(criteria, true);
+
+        // Getting Current Location
+        Location location = locationManager.getLastKnownLocation(provider);
+
+        if (location != null) {
+
+            // Getting latitude of the current location
+            double latitude = location.getLatitude();
+
+            // Getting longitude of the current location
+            double longitude = location.getLongitude();
+
+            // Creating a LatLng object for the current location
+            LatLng latLng = new LatLng(latitude, longitude);
+
+            // Showing the current location in Google Map
+            mMap.getMap().moveCamera(CameraUpdateFactory.newLatLng(latLng));
+            mMap.getMap().getUiSettings().setAllGesturesEnabled(false);
+            mMap.getMap().getUiSettings().setMyLocationButtonEnabled(false);
+
+        }
 
     }
 
@@ -312,8 +327,12 @@ public class HomeActivity extends ListActivity {
 
             Long storageSize = DynamixService.getDataStorageSize();
             if (storageSize > 0) {
+                pendingSendButton.setVisibility(View.VISIBLE);
+                pendingTextView.setVisibility(View.VISIBLE);
                 pendingTextView.setText(String.format(getString(R.string.pending_messages_template), storageSize));
             } else {
+                pendingSendButton.setVisibility(View.INVISIBLE);
+                pendingTextView.setVisibility(View.INVISIBLE);
                 pendingTextView.setText("");
             }
 

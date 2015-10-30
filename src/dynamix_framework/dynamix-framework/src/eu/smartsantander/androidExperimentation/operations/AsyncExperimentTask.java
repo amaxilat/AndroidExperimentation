@@ -165,14 +165,14 @@ public class AsyncExperimentTask extends AsyncTask<String, Void, String> {
                                         .getBundle());
                         DynamixService.removeExperiment();
                         DynamixService.setExperiment(experiment);
-                        //Thread.sleep(5000);
+                        Thread.sleep(5000);
                         DynamixService.startExperiment();
                         DynamixService.stopFramework();
                         DynamixService.setRestarting(true);
                         DynamixService.setTitleBarRestarting(true);
-                        //Thread.sleep(5000);
+                        Thread.sleep(5000);
                         DynamixService.startFramework();
-                        //Thread.sleep(7000);
+                        Thread.sleep(7000);
                         DynamixServiceListenerUtility.start();
                         DynamixService.setRestarting(false);
                         DynamixService.setTitleBarRestarting(false);
