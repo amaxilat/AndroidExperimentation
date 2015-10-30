@@ -26,6 +26,8 @@ public class RestDataController {
      * a log4j logger to print messages.
      */
     private static final Logger LOGGER = Logger.getLogger(RestDataController.class);
+    private static final String AMBIENT_TEMPERATURE = "org.ambientdynamix.contextplugins.AmbientTemperature";
+    private static final String NOISE_LEVEL = "org.ambientdynamix.contextplugins.NoiseLevel";
 
 
     @Autowired
@@ -42,7 +44,7 @@ public class RestDataController {
         }
         model.put("addressPoints", getExperimentData(experiment, deviceId, after).toString());
         LOGGER.debug("-----------------------------------");
-        return "experiment";
+        return "experiment-data";
     }
 
     @ResponseBody
@@ -52,7 +54,7 @@ public class RestDataController {
     }
 
     private JSONArray getExperimentData(final String experiment, final int deviceId, final String after) {
-        DecimalFormat df = new DecimalFormat("#.000000");
+        DecimalFormat df = new DecimalFormat("#.0000000000");
         long start;
         try {
             start = Long.parseLong(after);
@@ -69,7 +71,7 @@ public class RestDataController {
         if (deviceId == 0) {
             results = resultRepository.findByExperimentIdAndTimestampAfter(Integer.parseInt(experiment), start);
         } else {
-            results = resultRepository.findByExperimentIdAndDeviceIdAndTimestampAfter(Integer.parseInt(experiment), deviceId, start);
+            results = resultRepository.findByExperimentIdAndDeviceIdAndTimestampAfterOrderByTimestampAsc(Integer.parseInt(experiment), deviceId, start);
         }
 
         Map<String, Map<String, DescriptiveStatistics>> locationsHeatMap = new HashMap<String, Map<String, DescriptiveStatistics>>();
@@ -95,11 +97,21 @@ public class RestDataController {
                 } else {
                     if (longitude != null && latitude != null) {
                         try {
-                            locationsHeatMap.get(longitude).get(latitude).addValue(
-                                    message.getDouble("org.ambientdynamix.contextplugins.NoiseLevel")
-
-                            );
-                            wholeDataStatistics.addValue(message.getDouble("org.ambientdynamix.contextplugins.NoiseLevel"));
+                            if (message.has(NOISE_LEVEL)) {
+                                locationsHeatMap.get(longitude).get(latitude).addValue(
+                                        message.getDouble(NOISE_LEVEL)
+                                );
+                                wholeDataStatistics.addValue(message.getDouble(NOISE_LEVEL));
+                            }
+                        } catch (Exception e) {
+                            LOGGER.error(e, e);
+                        }
+                        try {
+                            if (message.has(AMBIENT_TEMPERATURE))
+                                locationsHeatMap.get(longitude).get(latitude).addValue(
+                                        message.getDouble(AMBIENT_TEMPERATURE)
+                                );
+                            wholeDataStatistics.addValue(message.getDouble(AMBIENT_TEMPERATURE));
                         } catch (Exception e) {
                             LOGGER.error(e, e);
                         }
@@ -119,7 +131,7 @@ public class RestDataController {
                     measurement.put(Double.parseDouble(latit));
                     measurement.put(Double.parseDouble(longit));
                     //measurement.put(String.valueOf(locationsHeatMap.get(longit).get(latit)));
-                    measurement.put(locationsHeatMap.get(longit).get(latit).getMean() / max);
+                    measurement.put(locationsHeatMap.get(longit).get(latit).getMean());
                     addressPoints.put(measurement);
                 } catch (JSONException e) {
                     LOGGER.error(e, e);

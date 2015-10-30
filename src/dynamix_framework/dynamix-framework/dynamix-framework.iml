@@ -107,8 +107,8 @@
     <orderEntry type="library" exported="" name="jackson-mapper-asl-1.9.8" level="project" />
     <orderEntry type="library" exported="" name="spring-android-rest-template-2.0.0.M1" level="project" />
     <orderEntry type="library" exported="" name="multidex-1.0.1" level="project" />
-    <orderEntry type="library" exported="" name="log4j-1.2.17" level="project" />
     <orderEntry type="library" exported="" name="bugsense-3.5" level="project" />
+    <orderEntry type="library" exported="" name="log4j-1.2.17" level="project" />
     <orderEntry type="library" exported="" name="eazegraph-1.2.5l" level="project" />
     <orderEntry type="library" exported="" name="jackson-databind-2.2.0" level="project" />
     <orderEntry type="library" exported="" name="parse-android-1.10.2" level="project" />
@@ -121,9 +121,9 @@
     <orderEntry type="library" exported="" name="dom4j-1.6.1" level="project" />
     <orderEntry type="library" exported="" name="gson-2.2.4" level="project" />
     <orderEntry type="library" exported="" name="play-services-gcm-8.1.0" level="project" />
-    <orderEntry type="library" exported="" name="jackson-annotations-2.2.0" level="project" />
     <orderEntry type="library" exported="" name="support-annotations-22.2.0" level="project" />
     <orderEntry type="library" exported="" name="bolts-android-1.2.1" level="project" />
+    <orderEntry type="library" exported="" name="jackson-annotations-2.2.0" level="project" />
     <orderEntry type="library" exported="" name="jackson-core-asl-1.9.8" level="project" />
     <orderEntry type="library" exported="" name="cglib-asm-1.0" level="project" />
     <orderEntry type="library" exported="" name="spring-android-core-2.0.0.M1" level="project" />

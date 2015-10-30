@@ -22,6 +22,9 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.res.Resources;
+import android.location.Criteria;
+import android.location.Location;
+import android.location.LocationManager;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.multidex.MultiDex;
@@ -31,19 +34,16 @@ import android.view.MenuItem.OnMenuItemClickListener;
 import android.widget.TabHost;
 import android.widget.TabHost.TabSpec;
 import android.widget.Toast;
-
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.android.gms.location.ActivityRecognition;
-
 import eu.smartsantander.androidExperimentation.ActivityRecognitionService;
-import eu.smartsantander.androidExperimentation.activity.HelpActivity;
 import eu.smartsantander.androidExperimentation.operations.NotificationHQManager;
+import eu.smartsantander.androidExperimentation.service.LocationUpdateService;
 import eu.smartsantander.androidExperimentation.tabs.jobsTab;
 import eu.smartsantander.androidExperimentation.tabs.reportTab;
 import eu.smartsantander.androidExperimentation.tabs.securityTab;
 import eu.smartsantander.androidExperimentation.tabs.statsTab;
-
 import org.ambientdynamix.data.DynamixPreferences;
 import org.ambientdynamix.util.AndroidNotification;
 
@@ -51,7 +51,7 @@ import org.ambientdynamix.util.AndroidNotification;
 /**
  * Base Activity for the Dynamix Framework UI. Responsible for hosting Tabs and
  * booting Dynamix, which launches the Dynamix background service.
- * <p/>
+ * <p>
  * Note: This Activity is registered as the 'application' in the
  * AndroidManifest.xml, so it's started first.
  *
@@ -91,6 +91,8 @@ public class BaseActivity extends TabActivity implements GoogleApiClient.Connect
     private TabHost tabHost = null;
     private final Handler uiHandler = new Handler();
     private static boolean activityVisible;
+    private static final long MINIMUM_DISTANCE_CHANGE_FOR_UPDATES = 1; // in Meters
+    private static final long MINIMUM_TIME_BETWEEN_UPDATES = 1000; // in Milliseconds
 
     // Android Experimentation Members
     private Boolean tabIntentListenerIsRegistered = false;
@@ -104,6 +106,8 @@ public class BaseActivity extends TabActivity implements GoogleApiClient.Connect
     private PendingIntent pIntent;
 
     public static Resources myRes;
+    private PendingIntent locationListener;
+    protected LocationManager locationManager;
 
     public static void close() {
         if (baseActivity != null)
@@ -307,7 +311,9 @@ public class BaseActivity extends TabActivity implements GoogleApiClient.Connect
         //
         DynamixService.ConfigureLog4J();
 
-
+        locationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
+        final Intent locationIntent = new Intent(this, LocationUpdateService.class);
+        locationListener = PendingIntent.getService(getApplicationContext(), 0, locationIntent, PendingIntent.FLAG_UPDATE_CURRENT);
     }
 
     /**
@@ -334,9 +340,18 @@ public class BaseActivity extends TabActivity implements GoogleApiClient.Connect
             public boolean onMenuItemClick(MenuItem item) {
 
                 if (!askDynamixIsEnabled()) {
+                    Log.d(TAG, "Adding Location Listener");
+
+                    // PendingIntent
+                    locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER,
+                            MINIMUM_TIME_BETWEEN_UPDATES,
+                            MINIMUM_DISTANCE_CHANGE_FOR_UPDATES, locationListener);
+
                     item.setIcon(R.drawable.power_icon);
                     DynamixService.startFramework();
                 } else {
+                    Log.d(TAG, "Removing Location Listener");
+                    locationManager.removeUpdates(locationListener);
                     item.setIcon(R.drawable.power_icon_off);
                     DynamixService.stopFramework();
                 }
@@ -358,14 +373,14 @@ public class BaseActivity extends TabActivity implements GoogleApiClient.Connect
         });
 
         // Setup Help Settings
-        MenuItem item2 = menu.add(2, Menu.FIRST + 2, Menu.NONE, "Help");
-        item2.setOnMenuItemClickListener(new OnMenuItemClickListener() {
-            public boolean onMenuItemClick(MenuItem item) {
-                startActivity(new Intent(BaseActivity.this,
-                        HelpActivity.class));
-                return true;
-            }
-        });
+//        MenuItem item2 = menu.add(2, Menu.FIRST + 2, Menu.NONE, "Help");
+//        item2.setOnMenuItemClickListener(new OnMenuItemClickListener() {
+//            public boolean onMenuItemClick(MenuItem item) {
+//                startActivity(new Intent(BaseActivity.this,
+//                        HelpActivity.class));
+//                return true;
+//            }
+//        });
 
         // Setup Default Settings
         MenuItem item3 = menu.add(3, Menu.FIRST + 3, Menu.NONE, "Shut Down");

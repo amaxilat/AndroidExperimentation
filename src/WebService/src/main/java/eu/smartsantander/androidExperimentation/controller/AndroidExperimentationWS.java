@@ -3,10 +3,7 @@ package eu.smartsantander.androidExperimentation.controller;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import eu.smartsantander.androidExperimentation.entities.Reading;
 import eu.smartsantander.androidExperimentation.entities.Report;
-import eu.smartsantander.androidExperimentation.model.Experiment;
-import eu.smartsantander.androidExperimentation.model.Plugin;
-import eu.smartsantander.androidExperimentation.model.Result;
-import eu.smartsantander.androidExperimentation.model.Smartphone;
+import eu.smartsantander.androidExperimentation.model.*;
 import eu.smartsantander.androidExperimentation.repository.ExperimentRepository;
 import eu.smartsantander.androidExperimentation.repository.ResultRepository;
 import eu.smartsantander.androidExperimentation.repository.SmartphoneRepository;
@@ -24,6 +21,8 @@ import org.springframework.web.bind.annotation.*;
 import javax.annotation.PostConstruct;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.*;
 
 @Controller
@@ -77,6 +76,58 @@ public class AndroidExperimentationWS extends BaseController {
         }
         return -1;
     }
+
+    @RequestMapping(value = "/devices/{entity_id}/readings", method = RequestMethod.GET)
+    public HistoricData experimentView(final Map<String, Object> model, @PathVariable("entity_id") final int entityId,
+                                       @RequestParam(value = "attribute_id") final String attributeId,
+                                       @RequestParam(value = "from") final String from,
+                                       @RequestParam(value = "to") final String to,
+                                       @RequestParam(value = "function") final String function) throws JSONException {
+
+
+        HistoricData historicData = new HistoricData();
+        historicData.setEntiry_id(entityId);
+        historicData.setAttribute_id(attributeId);
+        historicData.setFrom(from);
+        historicData.setTo(to);
+        historicData.setReadings(new ArrayList<List<Object>>());
+
+        final TimeZone tz = TimeZone.getTimeZone("UTC");
+        final SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm'Z'");
+        df.setTimeZone(tz);
+
+
+        long fromLong;
+        long toLong;
+        try {
+
+            fromLong = df.parse(from).getTime();
+            toLong = df.parse(to).getTime();
+
+            Set<Result> results = resultRepository.findByDeviceIdAndTimestampBetween(entityId, fromLong, toLong);
+
+            for (Result result : results) {
+                final JSONObject readingList = new JSONObject(result.getMessage());
+
+                final Iterator<String> keys = readingList.keys();
+                while (keys.hasNext()) {
+                    final String key = keys.next();
+                    if (key.contains(attributeId)) {
+                        List<Object> list = new ArrayList<Object>();
+                        list.add(df.format(result.getTimestamp()));
+                        list.add(readingList.getDouble(key));
+                        historicData.getReadings().add(list);
+                    }
+                }
+            }
+        } catch (ParseException e) {
+            LOGGER.error(e, e);
+        }
+
+
+        return historicData;
+    }
+
 
     /**
      * Lists all avalialalbe plugins in the system.

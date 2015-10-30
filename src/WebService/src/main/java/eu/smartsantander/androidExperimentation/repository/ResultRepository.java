@@ -21,7 +21,7 @@ public interface ResultRepository extends CrudRepository<Result, Long> {
 
     Set<Result> findByExperimentIdAndTimestampAfter(int experimentId, long start);
 
-    Set<Result> findByExperimentIdAndDeviceIdAndTimestampAfter(int experimentId, int deviceId, long start);
+    Set<Result> findByExperimentIdAndDeviceIdAndTimestampAfterOrderByTimestampAsc(int experimentId, int deviceId, long start);
 
     Set<Result> findByDeviceIdAndTimestampBetween(int deviceId, long start, long end);
 
