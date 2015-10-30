@@ -50,7 +50,7 @@ public class OrionService {
 
     @PostConstruct
     public void init() {
-        orionClient = new OrionClient("http://localhost:1026", "");
+        orionClient = new OrionClient("http://localhost:1026", "", "organicity", "/");
 
         TimeZone tz = TimeZone.getTimeZone("UTC");
         df = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm'Z'");

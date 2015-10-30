@@ -94,8 +94,11 @@
     <orderEntry type="sourceFolder" forTests="false" />
     <orderEntry type="library" exported="" name="play-services-base-8.1.0" level="project" />
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
     <orderEntry type="library" exported="" name="ksoap2-android-assembly-3.0.0-jar-with-dependencies" level="project" />
 =======
+=======
+>>>>>>> Stashed changes
     <orderEntry type="library" exported="" name="felix_3.2.2" level="project" />
     <orderEntry type="library" exported="" name="android-logging-log4j-1.0.3" level="project" />
     <orderEntry type="library" exported="" name="play-services-location-8.1.0" level="project" />
@@ -141,6 +144,9 @@
     <orderEntry type="library" exported="" name="db4o-7.12.156.14667-core-java5" level="project" />
     <orderEntry type="library" exported="" name="simple-xml-2.6.2" level="project" />
     <orderEntry type="library" exported="" name="spring-android-core-2.0.0.M1" level="project" />
+<<<<<<< Updated upstream
+>>>>>>> Stashed changes
+=======
 >>>>>>> Stashed changes
   </component>
 </module>
