@@ -18,6 +18,7 @@ package org.ambientdynamix.core;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.ListActivity;
+import android.app.PendingIntent;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.location.Criteria;
@@ -33,16 +34,26 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.*;
 import android.widget.AdapterView.AdapterContextMenuInfo;
+
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.GoogleApiAvailability;
+import com.google.android.gms.common.api.GoogleApiClient;
+import com.google.android.gms.common.api.PendingResult;
+import com.google.android.gms.common.api.Status;
+import com.google.android.gms.location.ActivityRecognition;
+import com.google.android.gms.location.LocationListener;
+import com.google.android.gms.location.LocationRequest;
 import com.google.android.gms.location.LocationServices;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.MapFragment;
 import com.google.android.gms.maps.model.LatLng;
+
+import eu.smartsantander.androidExperimentation.ActivityRecognitionService;
 import eu.smartsantander.androidExperimentation.operations.AsyncReportOnServerTask;
 import eu.smartsantander.androidExperimentation.operations.AsyncStatusRefreshTask;
 import eu.smartsantander.androidExperimentation.service.RegistrationIntentService;
 import eu.smartsantander.androidExperimentation.util.Constants;
+
 import org.ambientdynamix.data.DynamixPreferences;
 
 import java.util.ArrayList;
@@ -55,13 +66,16 @@ import java.util.TimerTask;
  *
  * @author Darren Carlson
  */
-public class HomeActivity extends ListActivity {
+public class HomeActivity extends ListActivity implements GoogleApiClient.ConnectionCallbacks,
+        GoogleApiClient.OnConnectionFailedListener, LocationListener {
     // Private data
-    private final String TAG = this.getClass().getSimpleName();
+    private final static String TAG = "HomeActivity";
     private static final int ENABLE_ID = Menu.FIRST + 1;
     private static final int DELETE_ID = Menu.FIRST + 2;
     private static final int ACTIVITY_EDIT = 1;
     private static HomeActivity activity;
+    private static boolean experimentationStatus = true;
+    private static boolean registered = false;
     //private static HomeActivity me;
     public DynamixApplicationAdapter adapter;
     public ListView appList = null;
@@ -78,6 +92,8 @@ public class HomeActivity extends ListActivity {
     private Button pendingSendButton;
     private MapFragment mMap;
 
+    private GoogleApiClient mGoogleApiClient;
+    private PendingIntent pIntent;
 
     private TextView pendingTextView;
     private TextView activityStatusTextView;
@@ -167,8 +183,20 @@ public class HomeActivity extends ListActivity {
         setContentView(R.layout.home_tab);
         appList = getListView();
         appList.setClickable(true);
-        pendingSendButton = (Button) findViewById(R.id.send_pending_now);
 
+        final Intent activityRecognitionIntent = new Intent(this, ActivityRecognitionService.class);
+        pIntent = PendingIntent.getService(getApplicationContext(), 0, activityRecognitionIntent, PendingIntent.FLAG_UPDATE_CURRENT);
+
+        mGoogleApiClient = new GoogleApiClient.Builder(this)
+                .addApi(ActivityRecognition.API)
+                .addConnectionCallbacks(this)
+                .addOnConnectionFailedListener(this)
+                .addApi(LocationServices.API)
+                .build();
+        org.ambientdynamix.util.Log.i(TAG, "Connecting Google APIS...");
+        mGoogleApiClient.connect();
+
+        pendingSendButton = (Button) findViewById(R.id.send_pending_now);
 
         pendingSendButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -222,40 +250,7 @@ public class HomeActivity extends ListActivity {
 
         mMap = ((MapFragment) getFragmentManager().findFragmentById(R.id.map_main));
         mMap.getMap().setMyLocationEnabled(true);
-
-
-        LocationManager locationManager = (LocationManager) getSystemService(LOCATION_SERVICE);
-
-        // Creating a criteria object to retrieve provider
-        Criteria criteria = new Criteria();
-
-        // Getting the name of the best provider
-        String provider = locationManager.getBestProvider(criteria, true);
-
-        // Getting Current Location
-        Location location = locationManager.getLastKnownLocation(provider);
-
-        if (location != null) {
-
-            // Getting latitude of the current location
-            double latitude = location.getLatitude();
-
-            // Getting longitude of the current location
-            double longitude = location.getLongitude();
-
-            // Creating a LatLng object for the current location
-            LatLng latLng = new LatLng(latitude, longitude);
-
-            // Showing the current location in Google Map
-            mMap.getMap().moveCamera(CameraUpdateFactory.newLatLng(latLng));
-            mMap.getMap().getUiSettings().setAllGesturesEnabled(false);
-            mMap.getMap().getUiSettings().setMyLocationButtonEnabled(false);
-
-        }
-
     }
-
-    ;
 
     @Override
     public void onCreateContextMenu(ContextMenu menu, View v, ContextMenuInfo menuInfo) {
@@ -312,6 +307,8 @@ public class HomeActivity extends ListActivity {
     }
 
     private void refresh() {
+
+
         if (DynamixService.isFrameworkInitialized()) {
             // Setup toggle button with proper state
             boolean dynamixEnabled = DynamixPreferences.isDynamixEnabled(this);
@@ -354,6 +351,39 @@ public class HomeActivity extends ListActivity {
                     Log.w(TAG, "PlayServices not available!");
                 }
             }
+
+            if (experimentationStatus && !registered) {
+                Log.i(TAG, "Add Location Listener");
+                // Getting Current Location
+                Location location = LocationServices.FusedLocationApi.getLastLocation(mGoogleApiClient);
+
+                if (location != null) {
+                    LocationRequest mLocationRequest = LocationRequest.create().setPriority(LocationRequest.PRIORITY_HIGH_ACCURACY)
+                            .setInterval(10 * 1000)        // 10 seconds, in milliseconds
+                            .setFastestInterval(2 * 1000); // 1 second, in milliseconds
+                    LocationServices.FusedLocationApi.requestLocationUpdates(mGoogleApiClient, mLocationRequest, this);
+
+
+                    registered = true;
+                    // Getting latitude of the current location
+                    double latitude = location.getLatitude();
+
+                    // Getting longitude of the current location
+                    double longitude = location.getLongitude();
+
+                    // Creating a LatLng object for the current location
+                    LatLng latLng = new LatLng(latitude, longitude);
+
+                    // Showing the current location in Google Map
+                    mMap.getMap().moveCamera(CameraUpdateFactory.newLatLng(latLng));
+                    mMap.getMap().getUiSettings().setAllGesturesEnabled(false);
+                    mMap.getMap().getUiSettings().setMyLocationButtonEnabled(false);
+                }
+            } else if (!experimentationStatus && registered) {
+                Log.i(TAG, "Remove Location Listener");
+                LocationServices.FusedLocationApi.removeLocationUpdates(mGoogleApiClient, this);
+                registered = false;
+            }
         }
         appList.setVisibility(View.GONE);//smartsantander
         AsyncStatusRefreshTask task = new AsyncStatusRefreshTask();
@@ -377,4 +407,43 @@ public class HomeActivity extends ListActivity {
         return true;
     }
 
+
+    @Override
+    public void onConnected(Bundle bundle) {
+        org.ambientdynamix.util.Log.d(TAG, "Google activity recognition services connected");
+        ActivityRecognition.ActivityRecognitionApi.requestActivityUpdates(mGoogleApiClient, 10000, pIntent);
+    }
+
+    @Override
+    public void onConnectionSuspended(int i) {
+        org.ambientdynamix.util.Log.d(TAG, "Google activity recognition services connection suspended");
+    }
+
+    @Override
+    public void onConnectionFailed(ConnectionResult connectionResult) {
+        org.ambientdynamix.util.Log.d(TAG, "Google activity recognition services disconnected");
+    }
+
+    @Override
+    public void onLocationChanged(Location location) {
+
+        Log.i(TAG, "onLocationChanged:" + location.toString());
+        // Getting latitude of the current location
+        double latitude = location.getLatitude();
+
+        // Getting longitude of the current location
+        double longitude = location.getLongitude();
+
+        // Creating a LatLng object for the current location
+        LatLng latLng = new LatLng(latitude, longitude);
+
+        // Showing the current location in Google Map
+        mMap.getMap().moveCamera(CameraUpdateFactory.newLatLng(latLng));
+        mMap.getMap().getUiSettings().setAllGesturesEnabled(false);
+        mMap.getMap().getUiSettings().setMyLocationButtonEnabled(false);
+    }
+
+    public static void changeStatus(boolean status) {
+        experimentationStatus = status;
+    }
 }
