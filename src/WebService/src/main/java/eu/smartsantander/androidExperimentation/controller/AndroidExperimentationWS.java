@@ -1,12 +1,14 @@
 package eu.smartsantander.androidExperimentation.controller;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import eu.smartsantander.androidExperimentation.GcmMessageData;
 import eu.smartsantander.androidExperimentation.entities.Reading;
 import eu.smartsantander.androidExperimentation.entities.Report;
 import eu.smartsantander.androidExperimentation.model.*;
 import eu.smartsantander.androidExperimentation.repository.ExperimentRepository;
 import eu.smartsantander.androidExperimentation.repository.ResultRepository;
 import eu.smartsantander.androidExperimentation.repository.SmartphoneRepository;
+import eu.smartsantander.androidExperimentation.service.GCMService;
 import eu.smartsantander.androidExperimentation.service.InfluxDbService;
 import eu.smartsantander.androidExperimentation.service.ModelManager;
 import eu.smartsantander.androidExperimentation.service.OrionService;
@@ -47,6 +49,8 @@ public class AndroidExperimentationWS extends BaseController {
     InfluxDbService influxDbService;
     @Autowired
     OrionService orionService;
+    @Autowired
+    GCMService gcmService;
 
 
     @PostConstruct
@@ -200,6 +204,26 @@ public class AndroidExperimentationWS extends BaseController {
             results.add(newResult);
 
             orionService.storeOrion(String.valueOf(phone.getId()), newResult);
+
+            long total = resultRepository.countByDeviceIdAndTimestampAfter(phone.getId(),
+                    new DateTime().withMillisOfDay(0).getMillis());
+
+            LOGGER.info("Total measurements : " + total + " device: " + phone.getId());
+
+            if (total == 200) {
+                GcmMessageData data = new GcmMessageData();
+                data.setType("encourage");
+                data.setCount((int) total);
+                gcmService.send2Device(phone.getId(), new ObjectMapper().writeValueAsString(data));
+
+            } else if (total == 1000) {
+                GcmMessageData data = new GcmMessageData();
+                data.setType("encourage");
+                data.setCount((int) total);
+                gcmService.send2Device(phone.getId(), new ObjectMapper().writeValueAsString(data));
+            } else {
+
+            }
 
 //            boolean res = influxDbService.store(newResult);
 //            LOGGER.info(res);

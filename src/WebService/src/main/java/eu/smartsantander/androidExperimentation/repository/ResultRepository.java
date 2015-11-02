@@ -4,6 +4,7 @@ import eu.smartsantander.androidExperimentation.controller.AndroidExperimentatio
 import eu.smartsantander.androidExperimentation.model.Result;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
 
 import java.util.Set;
@@ -31,4 +32,5 @@ public interface ResultRepository extends CrudRepository<Result, Long> {
 
     Set<Result> findByExperimentIdAndDeviceIdAndTimestampAndMessage(int experimentId, int deviceId,long timestamp ,String message);
 
+    long countByDeviceIdAndTimestampAfter(Integer id, long millis);
 }
