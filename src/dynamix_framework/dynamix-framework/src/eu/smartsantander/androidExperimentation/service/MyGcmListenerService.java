@@ -25,9 +25,14 @@ import android.os.Bundle;
 import android.support.v4.app.NotificationCompat;
 import android.util.Log;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.google.android.gms.gcm.GcmListenerService;
 
 import org.ambientdynamix.core.R;
+
+import java.io.IOException;
+
+import eu.smartsantander.androidExperimentation.util.GcmMessageData;
 
 public class MyGcmListenerService extends GcmListenerService {
 
@@ -50,18 +55,46 @@ public class MyGcmListenerService extends GcmListenerService {
         if (from.startsWith("/topics/")) {
             // message received from some topic.
 
-            NotificationCompat.Builder mBuilder =
-                    new NotificationCompat.Builder(this)
-                            .setSmallIcon(R.drawable.organicity_small_pink_grey)
-                            .setContentTitle(from)
-                            .setContentText(message);
+            String notificationTitle = null;
+            String notificationMessage = null;
+            String messageShort = null;
+            try {
+                GcmMessageData gcmMessageData = new ObjectMapper().readValue(message, GcmMessageData.class);
+                Log.i(TAG, gcmMessageData.toString());
+                switch (gcmMessageData.getType()) {
+                    case "encourage":
+                        Log.i(TAG, "is an encourage message");
+                        messageShort = new StringBuilder()
+                                .append(gcmMessageData.getCount())
+                                .append(" measurements collected!").toString();
+                        notificationMessage = new StringBuilder()
+                                .append("You collected ")
+                                .append(gcmMessageData.getCount())
+                                .append(" measurements so far today. ")
+                                .append("Keep up the good work.").toString();
+                        notificationTitle = "Horray!";
+                        break;
+                    default:
+                        return;
 
-            int mNotificationId = 002;
-            NotificationManager mNotifyMgr =
-                    (NotificationManager) getSystemService(NOTIFICATION_SERVICE);
-            mNotifyMgr.notify(mNotificationId, mBuilder.build());
+                }
 
+                NotificationCompat.Builder mBuilder =
+                        new NotificationCompat.Builder(this)
+                                .setSmallIcon(R.drawable.award)
+                                .setContentTitle(notificationTitle)
+                                .setContentText(messageShort)
+                                .setStyle(new NotificationCompat.BigTextStyle()
+                                        .bigText(notificationMessage));
 
+                int mNotificationId = 002;
+                NotificationManager mNotifyMgr =
+                        (NotificationManager) getSystemService(NOTIFICATION_SERVICE);
+                mNotifyMgr.notify(mNotificationId, mBuilder.build());
+
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
         } else {
             // normal downstream message.
         }
