@@ -106,10 +106,6 @@
             android:name="eu.smartsantander.androidExperimentation.ActivityRecognitionService"
             android:enabled="true"
             android:exported="true" />
-        <service
-            android:name="eu.smartsantander.androidExperimentation.service.LocationUpdateService"
-            android:enabled="true"
-            android:exported="true" />
 
 
         <!--
