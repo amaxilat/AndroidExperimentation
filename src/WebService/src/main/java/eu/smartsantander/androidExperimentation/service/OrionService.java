@@ -38,7 +38,7 @@ public class OrionService {
     private static final String ORION_SMARTPHONE_ID_FORMAT = "urn:oc:entity:%s:smartphone:phone:%s";
     private static final String ORION_SMARTPHONE_TYPE = "urn:oc:entitytype:smartphone";
 
-    @Value("${siteName:patras}")
+    @Value("${siteName:london}")
     private String siteName;
     private SimpleDateFormat df;
 
@@ -82,13 +82,38 @@ public class OrionService {
                     latitude = String.valueOf(readingList.get(key));
                 } else if (key.contains("Longitude")) {
                     longitude = String.valueOf(readingList.get(key));
-                } else if (key.contains("NoiseLevel")) {
+                } else if (key.startsWith(OrganicityAttributeTypes.Types.SOUND_PRESSURE_LEVEL.getUrn())) {
                     Attribute a = new Attribute(OrganicityAttributeTypes.Types.SOUND_PRESSURE_LEVEL, String.valueOf(readingList.get(key)));
                     Datatype dm = new Datatype(OrganicityDatatypes.DATATYPES.NUMERIC);
                     a.addMetadata(dm);
                     phoneEntity.addAttribute(a);
-                } else if (key.contains("AmbientTemperature")) {
+                } else if (key.contains(OrganicityAttributeTypes.Types.TEMPERATURE.getUrn())) {
                     Attribute a = new Attribute(OrganicityAttributeTypes.Types.TEMPERATURE, String.valueOf(readingList.get(key)));
+                    Datatype dm = new Datatype(OrganicityDatatypes.DATATYPES.NUMERIC);
+                    a.addMetadata(dm);
+                    phoneEntity.addAttribute(a);
+                } else if (key.contains(OrganicityAttributeTypes.Types.RELATIVE_HUMIDITY.getUrn())) {
+                    Attribute a = new Attribute(OrganicityAttributeTypes.Types.RELATIVE_HUMIDITY, String.valueOf(readingList.get(key)));
+                    Datatype dm = new Datatype(OrganicityDatatypes.DATATYPES.NUMERIC);
+                    a.addMetadata(dm);
+                    phoneEntity.addAttribute(a);
+                } else if (key.contains(OrganicityAttributeTypes.Types.ATMOSPHERIC_PRESSURE.getUrn())) {
+                    Attribute a = new Attribute(OrganicityAttributeTypes.Types.ATMOSPHERIC_PRESSURE, String.valueOf(readingList.get(key)));
+                    Datatype dm = new Datatype(OrganicityDatatypes.DATATYPES.NUMERIC);
+                    a.addMetadata(dm);
+                    phoneEntity.addAttribute(a);
+                } else if (key.contains(OrganicityAttributeTypes.Types.CARBON_MONOXIDE.getUrn())) {
+                    Attribute a = new Attribute(OrganicityAttributeTypes.Types.CARBON_MONOXIDE, String.valueOf(readingList.get(key)));
+                    Datatype dm = new Datatype(OrganicityDatatypes.DATATYPES.NUMERIC);
+                    a.addMetadata(dm);
+                    phoneEntity.addAttribute(a);
+                } else if (key.contains(OrganicityAttributeTypes.Types.ILLUMINANCE.getUrn())) {
+                    Attribute a = new Attribute(OrganicityAttributeTypes.Types.ILLUMINANCE, String.valueOf(readingList.get(key)));
+                    Datatype dm = new Datatype(OrganicityDatatypes.DATATYPES.NUMERIC);
+                    a.addMetadata(dm);
+                    phoneEntity.addAttribute(a);
+                } else if (key.contains(OrganicityAttributeTypes.Types.PARTICLES.getUrn())) {
+                    Attribute a = new Attribute(OrganicityAttributeTypes.Types.PARTICLES, String.valueOf(readingList.get(key)));
                     Datatype dm = new Datatype(OrganicityDatatypes.DATATYPES.NUMERIC);
                     a.addMetadata(dm);
                     phoneEntity.addAttribute(a);

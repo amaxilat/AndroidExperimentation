@@ -35,6 +35,7 @@ public class AndroidExperimentationWS extends BaseController {
      * a log4j logger to print messages.
      */
     private static final Logger LOGGER = Logger.getLogger(AndroidExperimentationWS.class);
+    private static final int LIDIA_PHONE_ID = 7;
 
 
     @Autowired
@@ -81,8 +82,9 @@ public class AndroidExperimentationWS extends BaseController {
         return -1;
     }
 
+    @ResponseBody
     @RequestMapping(value = "/devices/{entity_id}/readings", method = RequestMethod.GET)
-    public HistoricData experimentView(final Map<String, Object> model, @PathVariable("entity_id") final int entityId,
+    public HistoricData experimentView(final Map<String, Object> model, @PathVariable("entity_id") final String entityId,
                                        @RequestParam(value = "attribute_id") final String attributeId,
                                        @RequestParam(value = "from") final String from,
                                        @RequestParam(value = "to") final String to,
@@ -105,25 +107,46 @@ public class AndroidExperimentationWS extends BaseController {
         long toLong;
         try {
 
-            fromLong = df.parse(from).getTime();
-            toLong = df.parse(to).getTime();
+            try {
+                fromLong = Long.parseLong(from);
+            } catch (NumberFormatException e) {
+                fromLong = df.parse(from).getTime();
+            }
+            try {
+                toLong = Long.parseLong(to);
+            } catch (NumberFormatException e) {
+                toLong = df.parse(to).getTime();
+            }
 
-            Set<Result> results = resultRepository.findByDeviceIdAndTimestampBetween(entityId, fromLong, toLong);
+            final String[] parts = entityId.split(":");
+            final String phoneId = parts[parts.length - 1];
+
+            LOGGER.info("phoneId: " + phoneId + " from: " + from + " to: " + to);
+
+            Set<Result> results = resultRepository.findByDeviceIdAndTimestampBetween(Integer.parseInt(phoneId), fromLong, toLong);
+
+            Set<Result> resultsCleanup = new HashSet<Result>();
 
             for (Result result : results) {
-                final JSONObject readingList = new JSONObject(result.getMessage());
-
-                final Iterator<String> keys = readingList.keys();
-                while (keys.hasNext()) {
-                    final String key = keys.next();
-                    if (key.contains(attributeId)) {
-                        List<Object> list = new ArrayList<Object>();
-                        list.add(df.format(result.getTimestamp()));
-                        list.add(readingList.getDouble(key));
-                        historicData.getReadings().add(list);
+                try {
+                    final JSONObject readingList = new JSONObject(result.getMessage());
+                    final Iterator<String> keys = readingList.keys();
+                    while (keys.hasNext()) {
+                        final String key = keys.next();
+                        if (key.contains(attributeId)) {
+                            List<Object> list = new ArrayList<Object>();
+                            list.add(df.format(result.getTimestamp()));
+                            list.add(readingList.getDouble(key));
+                            historicData.getReadings().add(list);
+                        }
                     }
+                } catch (JSONException e) {
+                    resultsCleanup.add(result);
+                } catch (Exception e) {
+                    LOGGER.error(e, e);
                 }
             }
+            resultRepository.delete(resultsCleanup);
         } catch (ParseException e) {
             LOGGER.error(e, e);
         }
@@ -140,13 +163,16 @@ public class AndroidExperimentationWS extends BaseController {
      */
     @ResponseBody
     @RequestMapping(value = "/plugin", method = RequestMethod.GET, produces = "application/json")
-    public Set<Plugin> getPluginList() {
-        Experiment experiemnt = modelManager.getEnabledExperiments().get(0);
+    public Set<Plugin> getPluginList(@RequestParam(value = "phoneId", required = false, defaultValue = "0") final int phoneId) {
+        Experiment experiment = modelManager.getEnabledExperiments().get(0);
+        if (phoneId == LIDIA_PHONE_ID) {
+            experiment = experimentRepository.findById(7);
+        }
         Set<String> dependencies = new HashSet<String>();
-        for (String dependency : experiemnt.getSensorDependencies().split(",")) {
+        for (final String dependency : experiment.getSensorDependencies().split(",")) {
             dependencies.add(dependency);
         }
-        Set<Plugin> plugins = modelManager.getPlugins(dependencies);
+        final Set<Plugin> plugins = modelManager.getPlugins(dependencies);
         LOGGER.info("getPlugins Called: " + plugins);
         return plugins;
     }
@@ -155,18 +181,27 @@ public class AndroidExperimentationWS extends BaseController {
     @RequestMapping(value = "/experiment", method = RequestMethod.GET, produces = "application/json")
     public List<Experiment> getExperiment(@RequestParam(value = "phoneId", required = false, defaultValue = "0") final int phoneId) {
         try {
-            if (phoneId == 0) {
-                return modelManager.getEnabledExperiments();
+            if (phoneId == LIDIA_PHONE_ID) {
+                ArrayList<Experiment> experiements = new ArrayList<Experiment>();
+                experiements.add(experimentRepository.findById(7));
+                return experiements;
             } else {
-                final Smartphone smartphone = smartphoneRepository.findByPhoneId(phoneId);
-                final Experiment experiment = modelManager.getExperiment(smartphone);
-                LOGGER.debug("getExperiment: Device:" + phoneId);
-                LOGGER.debug("getExperiment:" + experiment);
-                LOGGER.debug("-----------------------------------");
-                final ArrayList<Experiment> list = new ArrayList<Experiment>();
-                list.add(experiment);
-                return list;
+                return modelManager.getEnabledExperiments();
             }
+//            } else {
+//
+//                final Smartphone smartphone = smartphoneRepository.findById(phoneId);
+//                Experiment experiment = modelManager.getExperiment(smartphone);
+//                if (phoneId == LIDIA_PHONE_ID) {
+//                    experiment = experimentRepository.findById(7);
+//                }
+//                LOGGER.debug("getExperiment: Device:" + phoneId);
+//                LOGGER.debug("getExperiment:" + experiment);
+//                LOGGER.debug("-----------------------------------");
+//                final ArrayList<Experiment> list = new ArrayList<Experiment>();
+//                list.add(experiment);
+//                return list;
+//            }
         } catch (Exception e) {
             e.printStackTrace();
             LOGGER.debug(e.getMessage());
@@ -176,7 +211,8 @@ public class AndroidExperimentationWS extends BaseController {
 
     @ResponseBody
     @RequestMapping(value = "/experiment", method = RequestMethod.POST, produces = "text/plain", consumes = "text/plain")
-    public JSONObject saveExperiment(@RequestBody final String body, final HttpServletResponse response) throws JSONException, IOException {
+    public JSONObject saveExperiment(@RequestBody final String body, final HttpServletResponse response) throws
+            JSONException, IOException {
         LOGGER.info("saveExperiment Called");
         Report result = new ObjectMapper().readValue(body, Report.class);
         LOGGER.info("saving for deviceId:" + result.getDeviceId() + " jobName:" + result.getJobName());
@@ -250,7 +286,8 @@ public class AndroidExperimentationWS extends BaseController {
 
     @ResponseBody
     @RequestMapping(value = "/statistics/{phoneId}", method = RequestMethod.GET, produces = "application/json")
-    public Map<Long, Long> statisticsByPhone(@PathVariable("phoneId") final String phoneId, final HttpServletResponse response) throws JSONException, IOException {
+    public Map<Long, Long> statisticsByPhone(@PathVariable("phoneId") final String phoneId,
+                                             final HttpServletResponse response) throws JSONException, IOException {
 
         final Map<Long, Long> counters = new HashMap<Long, Long>();
         for (long i = 0; i <= 7; i++) {

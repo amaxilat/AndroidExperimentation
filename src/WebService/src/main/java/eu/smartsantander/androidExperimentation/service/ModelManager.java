@@ -53,11 +53,10 @@ public class ModelManager {
     }
 
 
-    public Experiment getExperiment(final Smartphone smartphone) {
+    public Experiment getExperiment(final Smartphone device) {
 
-        Smartphone device = smartphoneRepository.findByPhoneId(smartphone.getPhoneId());
-        device.setSensorsRules(smartphone.getSensorsRules());
-        String[] smartphoneDependencies = smartphone.getSensorsRules().split(",");
+        device.setSensorsRules(device.getSensorsRules());
+        String[] smartphoneDependencies = device.getSensorsRules().split(",");
 
         Iterator<Experiment> experimentsListIterator = experimentRepository.findAll().iterator();
         Experiment experiment = null;
@@ -66,7 +65,7 @@ public class ModelManager {
         } while ((experimentsListIterator.hasNext()));
         if (experiment != null) {
             String[] experimentDependencies = experiment.getSensorDependencies().split(",");
-            if (!experiment.getStatus().equals("finished")
+            if (!"finished".equals(experiment.getStatus())
                     && match(smartphoneDependencies, experimentDependencies)) {
                 return experiment;
             }
