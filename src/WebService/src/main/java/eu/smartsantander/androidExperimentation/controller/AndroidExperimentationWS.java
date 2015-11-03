@@ -92,7 +92,7 @@ public class AndroidExperimentationWS extends BaseController {
 
 
         HistoricData historicData = new HistoricData();
-        historicData.setEntiry_id(entityId);
+        historicData.setEntity_id(entityId);
         historicData.setAttribute_id(attributeId);
         historicData.setFrom(from);
         historicData.setTo(to);

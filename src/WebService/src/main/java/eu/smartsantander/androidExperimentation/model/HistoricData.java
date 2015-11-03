@@ -7,19 +7,19 @@ import java.util.List;
  */
 public class HistoricData {
 
-    private int entiry_id;
+    private String entity_id;
     private String  attribute_id;
     private String function;
     private String from;
     private String to;
     private List<List<Object>> readings;
 
-    public int getEntiry_id() {
-        return entiry_id;
+    public String getEntity_id() {
+        return entity_id;
     }
 
-    public void setEntiry_id(int entiry_id) {
-        this.entiry_id = entiry_id;
+    public void setEntity_id(String entity_id) {
+        this.entity_id = entity_id;
     }
 
     public String getAttribute_id() {
