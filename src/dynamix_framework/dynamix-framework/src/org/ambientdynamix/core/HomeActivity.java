@@ -53,6 +53,7 @@ import eu.smartsantander.androidExperimentation.operations.AsyncReportOnServerTa
 import eu.smartsantander.androidExperimentation.operations.AsyncStatusRefreshTask;
 import eu.smartsantander.androidExperimentation.service.RegistrationIntentService;
 import eu.smartsantander.androidExperimentation.util.Constants;
+import us.feras.mdv.MarkdownView;
 
 import org.ambientdynamix.data.DynamixPreferences;
 
@@ -86,9 +87,10 @@ public class HomeActivity extends ListActivity implements GoogleApiClient.Connec
 
     //SmartSantander
     public TextView phoneIdTv;
-    public TextView expIdTv;
     public TextView expDescriptionTv;
     public TextView connectionStatus;
+    public MarkdownView markdownView;
+
     private Button pendingSendButton;
     private MapFragment mMap;
 
@@ -187,6 +189,10 @@ public class HomeActivity extends ListActivity implements GoogleApiClient.Connec
         final Intent activityRecognitionIntent = new Intent(this, ActivityRecognitionService.class);
         pIntent = PendingIntent.getService(getApplicationContext(), 0, activityRecognitionIntent, PendingIntent.FLAG_UPDATE_CURRENT);
 
+
+        markdownView = (MarkdownView) findViewById(R.id.markdownView);
+        markdownView.setVisibility(View.INVISIBLE);
+
         mGoogleApiClient = new GoogleApiClient.Builder(this)
                 .addApi(ActivityRecognition.API)
                 .addConnectionCallbacks(this)
@@ -242,9 +248,9 @@ public class HomeActivity extends ListActivity implements GoogleApiClient.Connec
 
         //SmartSantander
         phoneIdTv = (TextView) this.findViewById(R.id.deviceId_label);
-        expIdTv = (TextView) this.findViewById(R.id.experiment_id);
         expDescriptionTv = (TextView) this.findViewById(R.id.experiment_description);
         connectionStatus = (TextView) this.findViewById(R.id.connection_status);
+        connectionStatus.setVisibility(View.INVISIBLE);
         appList.setVisibility(View.GONE);
 
 
@@ -438,7 +444,7 @@ public class HomeActivity extends ListActivity implements GoogleApiClient.Connec
         LatLng latLng = new LatLng(latitude, longitude);
 
         // Showing the current location in Google Map
-        mMap.getMap().moveCamera(CameraUpdateFactory.newLatLng(latLng));
+        mMap.getMap().moveCamera(CameraUpdateFactory.newLatLngZoom(latLng, 15));
         mMap.getMap().getUiSettings().setAllGesturesEnabled(false);
         mMap.getMap().getUiSettings().setMyLocationButtonEnabled(false);
     }

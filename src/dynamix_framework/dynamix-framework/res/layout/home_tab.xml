@@ -4,35 +4,13 @@
     android:layout_height="fill_parent"
     android:orientation="vertical">
 
+
     <TextView
         android:id="@+id/deviceId_label"
-        android:layout_width="fill_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:background="@drawable/customcatborder"
-        android:editable="false"
         android:fontFamily="sans-serif-light"
-        android:text="@string/deviceId_label"
-        android:textAppearance="?android:attr/textAppearanceMedium" />
-
-
-    <TextView
-        android:id="@+id/experiment_label"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:background="@drawable/customcatborder"
-        android:fontFamily="sans-serif-light"
-        android:text="@string/experiment_label"
-        android:textAppearance="?android:attr/textAppearanceMedium" />
-
-
-    <TextView
-        android:id="@+id/experiment_id"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:background="@drawable/customsubcatborder"
-        android:fontFamily="sans-serif-light"
-        android:text="-"
-        android:textAppearance="?android:attr/textAppearanceMedium" />
+        android:text="@string/deviceId_label" />
 
     <TextView
         android:id="@+id/experiment_description"
@@ -43,34 +21,10 @@
         android:textAppearance="?android:attr/textAppearanceMedium" />
 
     <fragment
-            android:id="@+id/map_main"
-            android:name="com.google.android.gms.maps.MapFragment"
-            android:layout_width="match_parent"
-            android:layout_height="180dp" />
-
-    <TextView
-        android:id="@+id/pending"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:fontFamily="sans-serif-light"
-        android:text=""
-        android:textAppearance="?android:attr/textAppearanceMedium" />
-
-    <TextView
-        android:id="@+id/activity_status"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:background="@drawable/customsubcatborder"
-        android:fontFamily="sans-serif-light"
-        android:textAppearance="?android:attr/textAppearanceMedium" />
-    <TextView
-        android:id="@+id/connection_status"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:background="@drawable/customsubcatborder"
-        android:fontFamily="sans-serif-light"
-        android:text="-"
-        android:textAppearance="?android:attr/textAppearanceMedium" />
+        android:id="@+id/map_main"
+        android:name="com.google.android.gms.maps.MapFragment"
+        android:layout_width="match_parent"
+        android:layout_height="180dp" />
 
 
     <ListView
@@ -80,14 +34,23 @@
         android:layout_weight="1"
         android:visibility="gone" />
 
+    <!--<TextView-->
+    <!--android:id="@android:id/empty"-->
+    <!--android:layout_width="fill_parent"-->
+    <!--android:layout_height="wrap_content"-->
+    <!--android:layout_gravity="top"-->
+    <!--android:layout_weight="1"-->
+    <!--android:fontFamily="sans-serif-light"-->
+    <!--android:text="@string/noAuthApps" />-->
+
     <TextView
-        android:id="@android:id/empty"
+        android:id="@+id/pending"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:layout_gravity="top"
-        android:layout_weight="1"
         android:fontFamily="sans-serif-light"
-        android:text="@string/noAuthApps" />
+        android:text=""
+        android:textAppearance="?android:attr/textAppearanceMedium" />
+
 
     <Button
         android:id="@+id/send_pending_now"
@@ -96,6 +59,28 @@
         android:text="@string/send_data_now">
 
     </Button>
+
+
+    <TextView
+        android:id="@+id/activity_status"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:fontFamily="sans-serif-light"
+        android:textAppearance="?android:attr/textAppearanceMedium" />
+
+    <TextView
+        android:id="@+id/connection_status"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:fontFamily="sans-serif-light"
+        android:text="-"
+        android:textAppearance="?android:attr/textAppearanceMedium" />
+
+    <us.feras.mdv.MarkdownView
+        android:id="@+id/markdownView"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="1" />
 
     <!--<LinearLayout
         android:id="@+id/TableLayout01"
