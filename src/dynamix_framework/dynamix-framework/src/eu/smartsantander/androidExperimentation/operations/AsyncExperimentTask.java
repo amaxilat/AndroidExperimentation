@@ -121,7 +121,9 @@ public class AsyncExperimentTask extends AsyncTask<String, Void, String> {
         noteManager = NotificationHQManager.getInstance();
 
         try {
-            experimentList = DynamixService.getCommunication().getExperiments();
+//            experimentList = DynamixService.getCommunication().getExperiments();
+            experimentList = DynamixService.getCommunication().getExperimentsById(
+                    String.valueOf(DynamixService.getPhoneProfiler().getPhoneId()));
         } catch (Exception e) {
             e.printStackTrace();
             throw new Exception("Failed to fetch Experiment Info");

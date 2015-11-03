@@ -1,5 +1,6 @@
 package eu.smartsantander.androidExperimentation.operations;
 
+import android.net.Uri;
 import android.util.Log;
 
 import com.fasterxml.jackson.core.type.TypeReference;
@@ -19,8 +20,10 @@ import org.json.JSONException;
 import org.springframework.http.converter.StringHttpMessageConverter;
 import org.springframework.web.client.HttpClientErrorException;
 import org.springframework.web.client.RestTemplate;
+import org.springframework.web.util.UriComponentsBuilder;
 
 import java.io.IOException;
+import java.net.URI;
 import java.util.*;
 
 public class Communication extends Thread implements Runnable {
@@ -78,6 +81,12 @@ public class Communication extends Thread implements Runnable {
 
         // Make the HTTP GET request, marshaling the response to a String
         return restTemplate.getForObject(url, String.class, new ArrayList<String>());
+    }
+
+    private String get(final URI uri) throws IOException {
+
+        // Make the HTTP GET request, marshaling the response to a String
+        return restTemplate.getForObject(uri, String.class);
     }
 
 
@@ -159,6 +168,19 @@ public class Communication extends Thread implements Runnable {
         });
     }
 
+    public List<Experiment> getExperimentsById(final String phoneId) throws Exception {
+
+        URI targetUrl = UriComponentsBuilder.fromUriString(Constants.URL)
+                .path("/api/v1/experiment")
+                .queryParam("phoneId", phoneId)
+                .build()
+                .toUri();
+
+        String experimentsString = get(targetUrl);
+        return new ObjectMapper().readValue(experimentsString, new TypeReference<List<Experiment>>() {
+        });
+    }
+
     public int sendReportResults(String jsonReport) throws Exception {
 //        if (alreadySent.getIfPresent(jsonReport) != null) {
 //            return 0;
@@ -180,6 +202,19 @@ public class Communication extends Thread implements Runnable {
 
     public List<Plugin> sendGetPluginList() throws Exception {
         final String pluginListStr = get("/plugin");
+        return new ObjectMapper().readValue(pluginListStr, new TypeReference<List<Plugin>>() {
+        });
+    }
+
+    public List<Plugin> sendGetPluginList(final String phoneId) throws Exception {
+
+        URI targetUrl = UriComponentsBuilder.fromUriString(Constants.URL)
+                .path("/api/v1/plugin")
+                .queryParam("phoneId", phoneId)
+                .build()
+                .toUri();
+
+        final String pluginListStr = get(targetUrl);
         return new ObjectMapper().readValue(pluginListStr, new TypeReference<List<Plugin>>() {
         });
     }

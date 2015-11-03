@@ -11,6 +11,7 @@ package eu.smartsantander.androidExperimentation.jsonEntities;
 public class Experiment {
     private Integer id;
     private String description;
+    private String urlDescription;
     private long timestamp;
 
     public long getTimestamp() {
@@ -125,6 +126,14 @@ public class Experiment {
 
     public void setFilename(String filename) {
         this.filename = filename;
+    }
+
+    public String getUrlDescription() {
+        return urlDescription;
+    }
+
+    public void setUrlDescription(String urlDescription) {
+        this.urlDescription = urlDescription;
     }
 
     @Override

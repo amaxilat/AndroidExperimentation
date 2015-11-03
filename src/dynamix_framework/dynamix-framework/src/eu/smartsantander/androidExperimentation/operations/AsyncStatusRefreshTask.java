@@ -1,6 +1,7 @@
 package eu.smartsantander.androidExperimentation.operations;
 
 import android.os.AsyncTask;
+import android.view.View;
 
 import org.ambientdynamix.core.DynamixService;
 import org.ambientdynamix.core.HomeActivity;
@@ -30,6 +31,9 @@ public class AsyncStatusRefreshTask extends AsyncTask<HomeActivity, String, Inte
             publishProgress("phone", "Device ID: " + String.valueOf(DynamixService.getPhoneProfiler().getPhoneId()));
             publishProgress("experiment", "Id: " + String.valueOf(DynamixService.getExperiment().getId()) + " Name: ");
             publishProgress("experimentDescription", String.valueOf(DynamixService.getExperiment().getName()));
+            if (DynamixService.getExperiment().getUrlDescription() != null) {
+                publishProgress("experimentUrlDescription", String.valueOf(DynamixService.getExperiment().getUrlDescription()));
+            }
         }
 
         if (DynamixService.getConnectionStatus() && DynamixService.isEnabled()) {
@@ -54,12 +58,13 @@ public class AsyncStatusRefreshTask extends AsyncTask<HomeActivity, String, Inte
     protected void onProgressUpdate(String... values) {
         if ("phone".equals(values[0])) {
             activity.phoneIdTv.setText(String.valueOf(values[1]));
-        } else if ("experiment".equals(values[0])) {
-            activity.expIdTv.setText(values[1]);
         } else if ("experimentDescription".equals(values[0])) {
             activity.expDescriptionTv.setText(values[1]);
         } else if ("status".equals(values[0])) {
             activity.connectionStatus.setText(values[1]);
+        } else if ("experimentUrlDescription".equals(values[0])) {
+            activity.markdownView.loadMarkdownFile(values[1]);
+            activity.markdownView.setVisibility(View.VISIBLE);
         }
     }
 

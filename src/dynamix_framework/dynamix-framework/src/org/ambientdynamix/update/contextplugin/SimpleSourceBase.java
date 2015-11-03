@@ -91,7 +91,8 @@ public class SimpleSourceBase {
             dir.mkdirs();
         }
         Communication communication = new Communication();
-        List<Plugin> pluginList = communication.sendGetPluginList();
+        List<Plugin> pluginList = communication.sendGetPluginList(
+                String.valueOf(DynamixService.getPhoneProfiler().getPhoneId()));
         Plugin pluginXML = null;
         for (Plugin plugin : pluginList) {
             Log.i(TAG, "Found Plugin1:" + plugin.getName());
