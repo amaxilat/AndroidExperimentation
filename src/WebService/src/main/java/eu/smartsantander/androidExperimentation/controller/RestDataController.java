@@ -105,14 +105,19 @@ public class RestDataController {
                     if (!locationsHeatMap.get(longitude).containsKey(latitude)) {
                         locationsHeatMap.get(longitude).put(latitude, 0L);
                     }
-                    Long val = locationsHeatMap.get(longitude).get(latitude);
+                    final Long val = locationsHeatMap.get(longitude).get(latitude);
                     locationsHeatMap.get(longitude).put(latitude, val + 1);
 
-                } else {
-                    Iterator iterator = message.keys();
+
+                    final Iterator iterator = message.keys();
                     if (longitude != null && latitude != null) {
                         while (iterator.hasNext()) {
                             final String key = (String) iterator.next();
+                            if (key.equals("org.ambientdynamix.contextplugins.Latitude")
+                                    || key.equals("org.ambientdynamix.contextplugins.Longitude")) {
+                                continue;
+                            }
+
                             if (!dataAggregates.get(longitude).get(latitude).containsKey(key)) {
                                 dataAggregates.get(longitude).get(latitude).put(key, new DescriptiveStatistics());
                             }

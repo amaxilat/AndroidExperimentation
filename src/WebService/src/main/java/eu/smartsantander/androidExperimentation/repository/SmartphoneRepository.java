@@ -15,5 +15,5 @@ public interface SmartphoneRepository extends CrudRepository<Smartphone, Long> {
 
     Smartphone findById(int id);
 
-    Smartphone findByPhoneId(int phoneId);
+    Smartphone findByPhoneId(long phoneId);
 }

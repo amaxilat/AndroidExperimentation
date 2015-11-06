@@ -35,7 +35,7 @@ public class AndroidExperimentationWS extends BaseController {
      * a log4j logger to print messages.
      */
     private static final Logger LOGGER = Logger.getLogger(AndroidExperimentationWS.class);
-    private static final int LIDIA_PHONE_ID = 7;
+    private static final int LIDIA_PHONE_ID = 11;
 
 
     @Autowired
@@ -56,6 +56,18 @@ public class AndroidExperimentationWS extends BaseController {
 
     @PostConstruct
     public void init() {
+//        for (Result newResult : resultRepository.findAll()) {
+//            try {
+//                final Set<Result> res = resultRepository.findByExperimentIdAndDeviceIdAndTimestampAndMessage(newResult.getExperimentId(), newResult.getDeviceId(), newResult.getTimestamp(), newResult.getMessage());
+//                if (res == null || (res.isEmpty())) {
+//                } else {
+//                    if (res.size() > 1) {
+//                        resultRepository.delete(newResult);
+//                    }
+//                }
+//            } catch (Exception e) {
+//            }
+//        }
     }
 
     /**
@@ -83,7 +95,7 @@ public class AndroidExperimentationWS extends BaseController {
     }
 
     @ResponseBody
-    @RequestMapping(value = "/devices/{entity_id}/readings", method = RequestMethod.GET)
+    @RequestMapping(value = {"/entities/{entity_id}/readings", "/devices/{entity_id}/readings"}, method = RequestMethod.GET)
     public HistoricData experimentView(final Map<String, Object> model, @PathVariable("entity_id") final String entityId,
                                        @RequestParam(value = "attribute_id") final String attributeId,
                                        @RequestParam(value = "from") final String from,
@@ -220,26 +232,46 @@ public class AndroidExperimentationWS extends BaseController {
         final Experiment experiment = experimentRepository.findById(Integer.parseInt(result.getJobName()));
         LOGGER.info("saving for PhoneId:" + phone.getPhoneId() + " ExperimentName:" + experiment.getName());
 
-        final List<Result> results = new ArrayList<Result>();
+
+        final Result newResult = new Result();
+        final JSONObject objTotal = new JSONObject();
+
         for (final String jobResult : result.getJobResults()) {
+
+            LOGGER.info(jobResult);
+            if (jobResult.isEmpty()) {
+                continue;
+            }
 
             final Reading readingObj = new ObjectMapper().readValue(jobResult, Reading.class);
             final String value = readingObj.getValue();
             final long readingTime = readingObj.getTimestamp();
-            final Result newResult = new Result();
-            final Set<Result> res =
-                    resultRepository.findByExperimentIdAndDeviceIdAndTimestampAndMessage(experiment.getId(), phone.getId(), readingTime, value);
-            if (!res.isEmpty()) {
-                continue;
+
+            try {
+                final Set<Result> res =
+                        resultRepository.findByExperimentIdAndDeviceIdAndTimestampAndMessage(experiment.getId(), phone.getId(), readingTime, value);
+                if (!res.isEmpty()) {
+                    continue;
+                }
+            } catch (Exception e) {
+                LOGGER.error(e, e);
             }
             LOGGER.info(jobResult);
             newResult.setDeviceId(phone.getId());
             newResult.setExperimentId(experiment.getId());
-            newResult.setMessage(value);
+            final JSONObject obj = new JSONObject(value);
+            for (final String key : JSONObject.getNames(obj)) {
+                objTotal.put(key, obj.get(key));
+            }
             newResult.setTimestamp(readingTime);
-            results.add(newResult);
+        }
 
+        newResult.setMessage(objTotal.toString());
+
+        LOGGER.info(newResult.toString());
+        try {
             orionService.storeOrion(String.valueOf(phone.getId()), newResult);
+
 
             long total = resultRepository.countByDeviceIdAndTimestampAfter(phone.getId(),
                     new DateTime().withMillisOfDay(0).getMillis());
@@ -260,20 +292,27 @@ public class AndroidExperimentationWS extends BaseController {
             } else {
 
             }
+        } catch (Exception e) {
+            LOGGER.error(e, e);
+        }
 
 //            boolean res = influxDbService.store(newResult);
 //            LOGGER.info(res);
 
-        }
 
-        LOGGER.info("saving " + results.size() + " results");
+        LOGGER.info("saving result");
         try {
-            if (!results.isEmpty()) {
-                resultRepository.save(results);
+            try {
+                final Set<Result> res = resultRepository.findByExperimentIdAndDeviceIdAndTimestampAndMessage(newResult.getExperimentId(), newResult.getDeviceId(), newResult.getTimestamp(), newResult.getMessage());
+                if (res == null || (res.isEmpty())) {
+                    resultRepository.save(newResult);
+                }
+            } catch (Exception e) {
+                resultRepository.save(newResult);
             }
             response.setStatus(HttpServletResponse.SC_OK);
             LOGGER.info("saveExperiment: OK");
-            LOGGER.info("saveExperiment: Stored:" + results.size());
+            LOGGER.info("saveExperiment: Stored:");
             LOGGER.info("-----------------------------------");
             return ok(response);
         } catch (Exception e) {

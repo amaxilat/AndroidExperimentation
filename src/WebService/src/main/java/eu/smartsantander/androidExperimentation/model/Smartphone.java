@@ -33,16 +33,15 @@ public class Smartphone implements Serializable {
 
     public void setId(Integer id) {
         this.id = id;
-        this.phoneId = this.id;
     }
 
-    private Integer phoneId;
+    private Long phoneId;
 
-    public Integer getPhoneId() {
+    public Long getPhoneId() {
         return phoneId;
     }
 
-    public void setPhoneId(Integer phoneId) {
+    public void setPhoneId(Long phoneId) {
         this.phoneId = phoneId;
     }
 
@@ -72,8 +71,9 @@ public class Smartphone implements Serializable {
 
     @Override
     public int hashCode() {
-        int result = id;
-        result = 31 * result + phoneId;
+        int result = id != null ? id.hashCode() : 0;
+        result = 31 * result + (deviceType != null ? deviceType.hashCode() : 0);
+        result = 31 * result + (phoneId != null ? phoneId.hashCode() : 0);
         result = 31 * result + (sensorsRules != null ? sensorsRules.hashCode() : 0);
         return result;
     }
