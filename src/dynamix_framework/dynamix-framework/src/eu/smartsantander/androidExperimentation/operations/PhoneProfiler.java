@@ -5,10 +5,13 @@ import android.content.SharedPreferences;
 import android.content.SharedPreferences.Editor;
 import android.telephony.TelephonyManager;
 import android.util.Log;
+
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
+
 import eu.smartsantander.androidExperimentation.util.Constants;
 import eu.smartsantander.androidExperimentation.jsonEntities.Experiment;
+
 import org.ambientdynamix.api.application.AppConstants.PluginInstallStatus;
 import org.ambientdynamix.api.application.ContextPluginInformation;
 import org.ambientdynamix.core.DynamixService;
@@ -76,6 +79,18 @@ public class PhoneProfiler extends Thread implements Runnable {
         }
     }
 
+
+    public static void main(String[] args) {
+
+        String tmDevice = "866021024988643";
+        String tmSerial = "89300100110408729303";
+        String androidId = "4f7a558a8345ec73";
+
+        UUID deviceUuid = new UUID(androidId.hashCode(), ((long) tmDevice.hashCode() << 32) | tmSerial.hashCode());
+        String deviceId = deviceUuid.toString();
+        System.out.println(deviceId.hashCode());
+    }
+
     public void register() {
 
         if (!isInitialised) {
@@ -86,7 +101,7 @@ public class PhoneProfiler extends Thread implements Runnable {
             return;
         }
         int phoneId = Constants.PHONE_ID_UNITIALIZED;
-        int serverPhoneId;
+        final int[] serverPhoneId = new int[1];
 
         try {
             Log.d(TAG, String.valueOf(phoneId));
@@ -97,19 +112,36 @@ public class PhoneProfiler extends Thread implements Runnable {
             tmSerial = "" + tm.getSimSerialNumber();
             androidId = "" + android.provider.Settings.Secure.getString(DynamixService.getAndroidContext().getContentResolver(), android.provider.Settings.Secure.ANDROID_ID);
 
-            UUID deviceUuid = new UUID(androidId.hashCode(), ((long) tmDevice.hashCode() << 32) | tmSerial.hashCode());
-            String deviceId = deviceUuid.toString();
+            Log.i(TAG, "androidId:" + androidId);
+            Log.i(TAG, "tmDevice:" + tmDevice);
+            Log.i(TAG, "tmSerial:" + tmSerial);
 
-            serverPhoneId = DynamixService.getCommunication().registerSmartphone(deviceId.hashCode(), getSensorRules());
-            if (serverPhoneId <= 0)
-                serverPhoneId = Constants.PHONE_ID_UNITIALIZED;
-            else {
-                DynamixService.getPhoneProfiler().setPhoneId(serverPhoneId);
-                setLastOnlineLogin();
-            }
+            new Thread(new Runnable() {
+                @Override
+                public void run() {
+                    UUID deviceUuid = new UUID(androidId.hashCode(), ((long) tmDevice.hashCode() << 32) | tmSerial.hashCode());
+                    String deviceId = deviceUuid.toString();
 
+                    Log.i(TAG, "deviceId.hashCode():" + deviceId.hashCode());
+                    try {
+                        serverPhoneId[0] = DynamixService.getCommunication().registerSmartphone(deviceId.hashCode(), getSensorRules());
+                        Log.i(TAG, "serverPhoneId[0]:" + serverPhoneId[0]);
+                        if (serverPhoneId[0] <= 0)
+                            serverPhoneId[0] = Constants.PHONE_ID_UNITIALIZED;
+                        else {
+                            DynamixService.getPhoneProfiler().setPhoneId(serverPhoneId[0]);
+                            setLastOnlineLogin();
+                        }
+
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                        DynamixService.getPhoneProfiler().setPhoneId(Constants.PHONE_ID_UNITIALIZED);
+                    }
+                }
+            }).start();
 
         } catch (Exception e) {
+            e.printStackTrace();
             DynamixService.getPhoneProfiler().setPhoneId(Constants.PHONE_ID_UNITIALIZED);
         }
     }

@@ -121,7 +121,6 @@ class ContextManager implements IPluginContextListener, IPluginFacade {
      * Creates a new ContextManager.
      *
      * @param context          The Android context.
-     * @param eventHandler     The event handler to be used.
      * @param scheme           The initial PowerScheme.
      * @param maxCacheCapacity The maximum capacity of the ContextDataCache.
      * @param maxCacheMills    How long to cache context events (in milliseconds)
@@ -449,8 +448,8 @@ class ContextManager implements IPluginContextListener, IPluginFacade {
                             contextCache.cacheEvent(plug, sourcedSet);
                             // Only process if we have support registrations
                             if (contextSupport != null && contextSupport.size() > 0) {
-								/*
-								 * For each ContextSupport, get the highest fidelity event suitable for the context
+                                /*
+                                 * For each ContextSupport, get the highest fidelity event suitable for the context
 								 * support's DynamixApplication owner, adding it to the eventMap.
 								 */
                                 for (ContextSupport sub : contextSupport) {
@@ -520,7 +519,7 @@ class ContextManager implements IPluginContextListener, IPluginFacade {
                                                             eventList.add(event);
                                                             eventMap.put(sup.getDynamixListener(), eventList);
                                                         } else {
-														/*
+                                                        /*
 														 * TODO: Should we throw an Authentication exception here?
 														 * Perhaps the app can ask if it has permission
 														 */
@@ -978,7 +977,7 @@ class ContextManager implements IPluginContextListener, IPluginFacade {
      * 'postProcess'. Post processing removes calls 'removeContextListener' on the ContextManager for all discovered
      * dead apps.
      *
-     * @param appMap The apps to check for liveliness
+     * @param app The apps to check for liveliness
      */
     protected void checkAppLiveliness(DynamixApplication app) {
         SessionManager.sendEventCommand(app, new CheckAppLiveliness());
@@ -1447,9 +1446,12 @@ class ContextManager implements IPluginContextListener, IPluginFacade {
                                     || wrapper.getState() == PluginState.STARTED
                                     || wrapper.getState() == PluginState.STOPPING) {
                                 allInitialized = false;
-                                Log.d(TAG, "Waiting for plug-in to stop (for pause): "
-                                        + wrapper.getContextPluginRuntime().getParentPlugin() + ", which is in state "
-                                        + wrapper.getState());
+                                if (wrapper.getContextPluginRuntime() != null
+                                        && wrapper.getContextPluginRuntime().getParentPlugin() != null) {
+                                    Log.d(TAG, "Waiting for plug-in to stop (for pause): "
+                                            + wrapper.getContextPluginRuntime().getParentPlugin() + ", which is in state "
+                                            + wrapper.getState());
+                                }
                             }
                         }
                         if (allInitialized) {

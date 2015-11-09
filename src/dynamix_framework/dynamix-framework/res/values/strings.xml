@@ -79,8 +79,8 @@
 		&lt;p&gt;For more information regarding the Ambient Dynamix framework you can visit: 
 		&lt;a href=&quot;http://ambientdynamix.org&quot;&gt;http://ambientdynamix.org&lt;a&gt;
 	</string>
-	<string name="expIsEnabled">Experimentation is enabled</string>
-	<string name="expIsDisabled">Experimentation is disabled</string>
+    <string name="expIsEnabled">Experimentation is enabled</string>
+    <string name="expIsDisabled">Experimentation is disabled</string>
     <string name="noAuthApps"></string>
     <string name="no_context_plugins">No context Sensors</string>
     <string name="installed_context_plugins">Installed Sensors</string>
@@ -93,21 +93,21 @@
     <string name="plugin_not_conf">Not configured. Tap to configure.</string>
     <string name="plugin_enabled">Enabled. Tap and hold to disable or uninstall.</string>
     <string name="plugin_disabled">Disabled. Tap and hold to enable.</string>
-	<string name="placeholder_empty">-</string>
-	<string name="empty"/>
-	<string name="no_plugins_installed">No plug-ins installed.</string>
-	<string name="no_updates_found">No updates found.</string>
-	<string name="dynamix_framework">Dynamix Framework</string>
-	<string name="placeholder_from_empty">From: -</string>
-	<string name="placeholder_to_empty">To: -</string>
-	<string name="placeholder_item_name">Item name here...</string>
-	<string name="no_pending_applications">No pending applications</string>
-	<string name="low">LOW</string>
-	<string name="no_events_yet">No events yet...</string>
-	<string name="status">Status</string>
-	<string name="phone_id">PhoneId:</string>
-	<string name="time_reported">time reported</string>
-	<string name="expires">expires</string>
+    <string name="placeholder_empty">-</string>
+    <string name="empty" />
+    <string name="no_plugins_installed">No plug-ins installed.</string>
+    <string name="no_updates_found">No updates found.</string>
+    <string name="dynamix_framework">Dynamix Framework</string>
+    <string name="placeholder_from_empty">From: -</string>
+    <string name="placeholder_to_empty">To: -</string>
+    <string name="placeholder_item_name">Item name here...</string>
+    <string name="no_pending_applications">No pending applications</string>
+    <string name="low">LOW</string>
+    <string name="no_events_yet">No events yet...</string>
+    <string name="status">Status</string>
+    <string name="phone_id">PhoneId:</string>
+    <string name="time_reported">time reported</string>
+    <string name="expires">expires</string>
     <string name="getOrgDevID">Getting Organicity Device ID</string>
     <string name="orgDevID">Organicity Device ID</string>
     <string name="conWith">Connected with Organicity Server</string>
@@ -116,9 +116,10 @@
     <string name="statsNumOfExp">Number of experiments run</string>
     <string name="statsNumOfReadings">Number of readings produced</string>
     <string name="stats7Days">Statistics for previous 7 days</string>
-    <string name="pending_messages_template">%d measurements are ready to upload.</string>
+    <string name="pending_messages_template">Send %d pending measurements...</string>
     <string name="send_data_now">Send Pending measurements</string>
     <string name="gcm_defaultSenderId">770161861153</string>
     <string name="phone_id_generated">phone_id_generated</string>
     <string name="experiment_id_generated">experiment_id_generated</string>
+    <string name="no_experiment_installed">No experiment downloaded. Visit the plugins tab and install the plugins available.</string>
 </resources>

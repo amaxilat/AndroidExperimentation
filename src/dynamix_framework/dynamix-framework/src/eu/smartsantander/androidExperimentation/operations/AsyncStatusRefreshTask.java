@@ -18,7 +18,6 @@ public class AsyncStatusRefreshTask extends AsyncTask<HomeActivity, String, Inte
         if (DynamixService.isEnabled()) {
             if (!DynamixService.isDeviceRegistered()) {
                 DynamixService.getPhoneProfiler().register();
-                publishProgress("phone", "message");
             } else {
                 publishProgress("phone", "Device ID:" + String.valueOf(DynamixService.getPhoneProfiler().getPhoneId()));
                 DynamixService.getPhoneProfiler().savePrefs();
@@ -61,7 +60,7 @@ public class AsyncStatusRefreshTask extends AsyncTask<HomeActivity, String, Inte
         } else if ("experimentDescription".equals(values[0])) {
             activity.expDescriptionTv.setText(values[1]);
         } else if ("status".equals(values[0])) {
-            activity.connectionStatus.setText(values[1]);
+
         } else if ("experimentUrlDescription".equals(values[0])) {
             activity.markdownView.loadMarkdownFile(values[1]);
             activity.markdownView.setVisibility(View.VISIBLE);

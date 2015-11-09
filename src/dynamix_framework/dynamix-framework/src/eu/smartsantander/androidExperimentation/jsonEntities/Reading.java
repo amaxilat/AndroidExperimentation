@@ -11,7 +11,10 @@ public class Reading implements Serializable {
 	private String value;	
 	private Datatype type;
 	private long timestamp;
-	
+
+	public Reading() {
+	}
+
 	public Reading(Datatype t, String val, String context){
 		this.type=t;
 		this.value=val;

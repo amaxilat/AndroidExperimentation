@@ -1,6 +1,5 @@
 package eu.smartsantander.androidExperimentation.operations;
 
-import com.bugsense.trace.BugSenseHandler;
 
 import android.content.BroadcastReceiver;
 import android.content.Context;
@@ -9,37 +8,36 @@ import android.net.ConnectivityManager;
 import android.util.Log;
 
 public class NetworkChangeReceiver extends BroadcastReceiver {
-	private static final String TAG = "NetworkChangeReceiver";
-	private static AsyncReportOnServerTask reportT = null;
+    private static final String TAG = "NetworkChangeReceiver";
+    private static AsyncReportOnServerTask reportT = null;
 
-	@Override
-	public void onReceive(final Context context, final Intent intent) {
-		Log.d(TAG, "Started");
-		process(context);
-	}
+    @Override
+    public void onReceive(final Context context, final Intent intent) {
+        Log.d(TAG, "Started");
+        process(context);
+    }
 
-	public static synchronized void process(Context context) {
-		try {
+    public static synchronized void process(Context context) {
+        try {
 
-			final ConnectivityManager connMgr = (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);
-			final android.net.NetworkInfo wifi = connMgr.getNetworkInfo(ConnectivityManager.TYPE_WIFI);
+            final ConnectivityManager connMgr = (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);
+            final android.net.NetworkInfo wifi = connMgr.getNetworkInfo(ConnectivityManager.TYPE_WIFI);
 
-			if (wifi.isConnected()) {
-				Log.d(TAG, "WIFI is connected");
-				if (reportT == null || reportT.isFinished()) {
-					if (reportT!=null) {
-						reportT.cancel(true);
-					}
-					reportT = new AsyncReportOnServerTask();
-					reportT.execute();
-				}
-			} else {
-				Log.d(TAG, "WIFI not connected");
-			}
-		} catch (Exception e) {
-			BugSenseHandler.sendException(e);
-			Log.e(TAG, e.getMessage());
-		}
-	}
+            if (wifi.isConnected()) {
+                Log.d(TAG, "WIFI is connected");
+                if (reportT == null || reportT.isFinished()) {
+                    if (reportT != null) {
+                        reportT.cancel(true);
+                    }
+                    reportT = new AsyncReportOnServerTask();
+                    reportT.execute();
+                }
+            } else {
+                Log.d(TAG, "WIFI not connected");
+            }
+        } catch (Exception e) {
+            Log.e(TAG, e.getMessage());
+        }
+    }
 
 }

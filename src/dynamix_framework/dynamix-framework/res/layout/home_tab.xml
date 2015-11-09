@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
     android:orientation="vertical">
@@ -17,7 +18,7 @@
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:fontFamily="sans-serif-light"
-        android:text="-"
+        android:text="@string/no_experiment_installed"
         android:textAppearance="?android:attr/textAppearanceMedium" />
 
     <fragment
@@ -26,31 +27,21 @@
         android:layout_width="match_parent"
         android:layout_height="180dp" />
 
+    <org.lucasr.twowayview.TwoWayView xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:id="@+id/lvItems"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:drawSelectorOnTop="false"
+        android:paddingBottom="3dp"
+        android:paddingTop="3dp"
+        tools:context=".MainActivity" />
 
-    <ListView
-        android:id="@android:id/list"
+    <us.feras.mdv.MarkdownView
+        android:id="@+id/markdownView"
         android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:layout_weight="1"
-        android:visibility="gone" />
-
-    <!--<TextView-->
-    <!--android:id="@android:id/empty"-->
-    <!--android:layout_width="fill_parent"-->
-    <!--android:layout_height="wrap_content"-->
-    <!--android:layout_gravity="top"-->
-    <!--android:layout_weight="1"-->
-    <!--android:fontFamily="sans-serif-light"-->
-    <!--android:text="@string/noAuthApps" />-->
-
-    <TextView
-        android:id="@+id/pending"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:fontFamily="sans-serif-light"
-        android:text=""
-        android:textAppearance="?android:attr/textAppearanceMedium" />
-
+        android:layout_height="10dp"
+        android:layout_weight="1" />
 
     <Button
         android:id="@+id/send_pending_now"
@@ -59,42 +50,5 @@
         android:text="@string/send_data_now">
 
     </Button>
-
-
-    <TextView
-        android:id="@+id/activity_status"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:fontFamily="sans-serif-light"
-        android:textAppearance="?android:attr/textAppearanceMedium" />
-
-    <TextView
-        android:id="@+id/connection_status"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:fontFamily="sans-serif-light"
-        android:text="-"
-        android:textAppearance="?android:attr/textAppearanceMedium" />
-
-    <us.feras.mdv.MarkdownView
-        android:id="@+id/markdownView"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:layout_weight="1" />
-
-    <!--<LinearLayout
-        android:id="@+id/TableLayout01"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:layout_gravity="bottom">
-
-        <ToggleButton
-            android:id="@+id/DynamixActiveToggle"
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:layout_gravity="bottom"
-            android:textOff="@string/dynamix_enable_toggle_off"
-            android:textOn="@string/dynamix_enable_toggle_on" />
-    </LinearLayout>-->
 
 </LinearLayout>

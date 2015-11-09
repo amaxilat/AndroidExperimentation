@@ -50,6 +50,7 @@ import android.database.sqlite.SQLiteDatabase.CursorFactory;
 import android.graphics.Bitmap;
 import android.graphics.drawable.Drawable;
 import android.hardware.SensorManager;
+import android.location.LocationManager;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
@@ -58,6 +59,8 @@ import android.os.Looper;
 import android.os.UserHandle;
 import android.util.Log;
 import android.view.Display;
+
+import com.google.android.gms.location.LocationServices;
 
 /**
  * Secured version of an Android Context, which is provided to ContextPlugins during runtime. A SecuredContext is
@@ -74,6 +77,7 @@ public class SecuredContext extends Context {
     private volatile boolean permissionCheckingEnabled = true;
     private ClassLoader classLoader;
     private Looper plugLooper;
+    private LocationManager locationManager;
     private SecuredSensorManager ssm;
     private Handler mainThreadHandler;
     private List<BroadcastReceiver> receivers = new ArrayList<BroadcastReceiver>();
@@ -361,6 +365,13 @@ public class SecuredContext extends Context {
                     ssm = new SecuredSensorManager((SensorManager) c.getSystemService(serviceName), plugLooper);
                 }
                 return ssm;
+            } else if (serviceName.equalsIgnoreCase(Service.LOCATION_SERVICE)) {
+                // Only create a SecuredSensorManager once!
+                if (locationManager == null) {
+                    locationManager = (LocationManager) c.getSystemService(Context.LOCATION_SERVICE);
+                }
+                Log.i(TAG, "locationManager=" + locationManager);
+                return locationManager;
             } else if (serviceName.equalsIgnoreCase(Service.BLUETOOTH_SERVICE)) {
                 // Only create a SecuredSensorManager once!
                 if (sbm == null) {
@@ -368,17 +379,6 @@ public class SecuredContext extends Context {
                 }
                 Log.i(TAG, "sbm=" + sbm);
                 return sbm;
-            } else if (serviceName.equalsIgnoreCase("android.speech.SpeechRecognizer")) {
-                Log.v(TAG, "Trying to get SpeechRecognizer");
-                synchronized (speechRecognizerLock) {
-                    try {
-//						SecuredSpeechRecognizer sr = new SecuredSpeechRecognizer(c, mainThreadHandler);
-//						Log.v(TAG, "Returning SpeechRecognizer " + sr);
-//						return sr;
-                    } catch (Exception e) {
-                        Log.w(TAG, e.toString());
-                    }
-                }
             } else {
                 return c.getSystemService(serviceName);
             }

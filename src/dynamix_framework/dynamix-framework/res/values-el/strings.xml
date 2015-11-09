@@ -100,5 +100,5 @@
     <string name="statsNumOfExp">Πλήθος πειραμάτων που έχουν τρέξει</string>
     <string name="statsNumOfReadings">Πλήθος μετρήσεων</string>
     <string name="stats7Days">Στοιχεία για τις προηγούμενες 7 ημέρες</string>
-    <string name="pending_messages_template">%d μετρήσεις έτοιμες για αποστολή.</string>
+    <string name="pending_messages_template">Στείλε %d μετρήσεις σε αναμονή...</string>
 </resources>
