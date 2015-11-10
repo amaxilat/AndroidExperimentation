@@ -1,5 +1,6 @@
-package eu.smartsantander.androidExperimentation.controller;
+package eu.smartsantander.androidExperimentation.controller.ui;
 
+import eu.smartsantander.androidExperimentation.controller.BaseController;
 import eu.smartsantander.androidExperimentation.model.Result;
 import eu.smartsantander.androidExperimentation.repository.ResultRepository;
 import org.apache.log4j.Logger;
@@ -20,7 +21,7 @@ import java.util.Set;
  * @author Dimitrios Amaxilatis.
  */
 @Controller
-public class RestController {
+public class RestController extends BaseController {
     /**
      * a log4j logger to print messages.
      */
@@ -76,10 +77,9 @@ public class RestController {
             try {
                 final JSONObject message = new JSONObject(result.getMessage());
 
-                if (message.has("org.ambientdynamix.contextplugins.Latitude")
-                        && message.has("org.ambientdynamix.contextplugins.Longitude")) {
-                    String longitude = df.format(message.getDouble("org.ambientdynamix.contextplugins.Longitude"));
-                    String latitude = df.format(message.getDouble("org.ambientdynamix.contextplugins.Latitude"));
+                if (message.has(LATITUDE) && message.has(LONGITUDE)) {
+                    String longitude = df.format(message.getDouble(LONGITUDE));
+                    String latitude = df.format(message.getDouble(LATITUDE));
                     if (!locationsHeatMap.containsKey(longitude)) {
                         locationsHeatMap.put(longitude, new HashMap<String, Long>());
                     }

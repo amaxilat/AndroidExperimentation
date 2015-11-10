@@ -1,5 +1,6 @@
-package eu.smartsantander.androidExperimentation.controller;
+package eu.smartsantander.androidExperimentation.controller.ui;
 
+import eu.smartsantander.androidExperimentation.controller.BaseController;
 import eu.smartsantander.androidExperimentation.model.Result;
 import eu.smartsantander.androidExperimentation.repository.ResultRepository;
 import org.apache.commons.math3.stat.descriptive.DescriptiveStatistics;
@@ -22,14 +23,11 @@ import java.util.Set;
  * @author Dimitrios Amaxilatis.
  */
 @Controller
-public class RestDataController {
+public class RestDataController extends BaseController {
     /**
      * a log4j logger to print messages.
      */
     private static final Logger LOGGER = Logger.getLogger(RestDataController.class);
-    private static final String AMBIENT_TEMPERATURE = "org.ambientdynamix.contextplugins.AmbientTemperature";
-    private static final String NOISE_LEVEL = "org.ambientdynamix.contextplugins.NoiseLevel";
-
 
     @Autowired
     ResultRepository resultRepository;
@@ -75,11 +73,11 @@ public class RestDataController {
             results = resultRepository.findByExperimentIdAndDeviceIdAndTimestampAfterOrderByTimestampAsc(Integer.parseInt(experiment), deviceId, start);
         }
 
-        Map<String, Map<String, Map<String, DescriptiveStatistics>>> dataAggregates = new HashMap<String, Map<String, Map<String, DescriptiveStatistics>>>();
+        Map<String, Map<String, Map<String, DescriptiveStatistics>>> dataAggregates = new HashMap<>();
         String longitude = null;
         String latitude = null;
         DescriptiveStatistics wholeDataStatistics = new DescriptiveStatistics();
-        Map<String, Map<String, Long>> locationsHeatMap = new HashMap<String, Map<String, Long>>();
+        Map<String, Map<String, Long>> locationsHeatMap = new HashMap<>();
         for (Result result : results) {
             try {
                 if (!result.getMessage().startsWith("{")) {
@@ -87,20 +85,19 @@ public class RestDataController {
                 }
                 final JSONObject message = new JSONObject(result.getMessage());
 
-                if (message.has("org.ambientdynamix.contextplugins.Latitude")
-                        && message.has("org.ambientdynamix.contextplugins.Longitude")) {
-                    longitude = df.format(message.getDouble("org.ambientdynamix.contextplugins.Longitude"));
-                    latitude = df.format(message.getDouble("org.ambientdynamix.contextplugins.Latitude"));
+                if (message.has(LATITUDE) && message.has(LONGITUDE)) {
+                    longitude = df.format(message.getDouble(LONGITUDE));
+                    latitude = df.format(message.getDouble(LATITUDE));
                     if (!dataAggregates.containsKey(longitude)) {
-                        dataAggregates.put(longitude, new HashMap<String, Map<String, DescriptiveStatistics>>());
+                        dataAggregates.put(longitude, new HashMap<>());
                     }
                     if (!dataAggregates.get(longitude).containsKey(latitude)) {
-                        dataAggregates.get(longitude).put(latitude, new HashMap<String, DescriptiveStatistics>());
+                        dataAggregates.get(longitude).put(latitude, new HashMap<>());
                     }
 
                     //HeatMap
                     if (!locationsHeatMap.containsKey(longitude)) {
-                        locationsHeatMap.put(longitude, new HashMap<String, Long>());
+                        locationsHeatMap.put(longitude, new HashMap<>());
                     }
                     if (!locationsHeatMap.get(longitude).containsKey(latitude)) {
                         locationsHeatMap.get(longitude).put(latitude, 0L);
@@ -113,8 +110,7 @@ public class RestDataController {
                     if (longitude != null && latitude != null) {
                         while (iterator.hasNext()) {
                             final String key = (String) iterator.next();
-                            if (key.equals("org.ambientdynamix.contextplugins.Latitude")
-                                    || key.equals("org.ambientdynamix.contextplugins.Longitude")) {
+                            if (key.equals(LATITUDE) || key.equals(LONGITUDE)) {
                                 continue;
                             }
 

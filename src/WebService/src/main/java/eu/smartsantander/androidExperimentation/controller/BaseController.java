@@ -14,6 +14,8 @@ public class BaseController {
      * a log4j logger to print messages.
      */
     private static final Logger LOGGER = Logger.getLogger(BaseController.class);
+    protected static final String LATITUDE = "org.ambientdynamix.contextplugins.Latitude";
+    protected static final String LONGITUDE = "org.ambientdynamix.contextplugins.Longitude";
 
     protected JSONObject ok(final HttpServletResponse servletResponse) throws JSONException {
         servletResponse.setStatus(200);

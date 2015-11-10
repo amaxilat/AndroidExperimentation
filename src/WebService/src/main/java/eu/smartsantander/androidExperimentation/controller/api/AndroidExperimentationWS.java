@@ -1,7 +1,8 @@
-package eu.smartsantander.androidExperimentation.controller;
+package eu.smartsantander.androidExperimentation.controller.api;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import eu.smartsantander.androidExperimentation.GcmMessageData;
+import eu.smartsantander.androidExperimentation.controller.BaseController;
 import eu.smartsantander.androidExperimentation.entities.Reading;
 import eu.smartsantander.androidExperimentation.entities.Report;
 import eu.smartsantander.androidExperimentation.model.*;
@@ -12,8 +13,6 @@ import eu.smartsantander.androidExperimentation.service.GCMService;
 import eu.smartsantander.androidExperimentation.service.InfluxDbService;
 import eu.smartsantander.androidExperimentation.service.ModelManager;
 import eu.smartsantander.androidExperimentation.service.OrionService;
-import org.apache.commons.math3.stat.descriptive.DescriptiveStatistics;
-import org.apache.commons.math3.stat.descriptive.SummaryStatistics;
 import org.apache.log4j.Logger;
 import org.joda.time.DateTime;
 import org.json.JSONException;
@@ -25,8 +24,6 @@ import org.springframework.web.bind.annotation.*;
 import javax.annotation.PostConstruct;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.*;
 
 @Controller
@@ -71,171 +68,6 @@ public class AndroidExperimentationWS extends BaseController {
 //            }
 //        }
     }
-
-    /**
-     * Registers a {@see Smartphone} to the service.
-     *
-     * @return the phoneId generated or -1 if there was a error.
-     */
-    @ResponseBody
-    @RequestMapping(value = "/smartphone", method = RequestMethod.POST)
-    public Integer registerSmartphone(@RequestBody String smartphoneString) {
-        try {
-            LOGGER.info(smartphoneString);
-            Smartphone smartphone = new ObjectMapper().readValue(smartphoneString, Smartphone.class);
-            smartphone = modelManager.registerSmartphone(smartphone);
-            LOGGER.info("register Smartphone: Device:" + smartphone.getId());
-            LOGGER.info("register Smartphone: Device Sensor Rules:" + smartphone.getSensorsRules());
-            LOGGER.info("register Smartphone: Device Type:" + smartphone.getDeviceType());
-            LOGGER.info("----------------------.-------------");
-            return smartphone.getId();
-        } catch (Exception e) {
-            LOGGER.error(e, e);
-            LOGGER.debug(e.getMessage());
-        }
-        return -1;
-    }
-
-    @ResponseBody
-    @RequestMapping(value = {"/entities/{entity_id}/readings", "/devices/{entity_id}/readings"}, method = RequestMethod.GET)
-    public HistoricData experimentView(final Map<String, Object> model, @PathVariable("entity_id") final String entityId,
-                                       @RequestParam(value = "attribute_id") final String attributeId,
-                                       @RequestParam(value = "from") final String from,
-                                       @RequestParam(value = "to") final String to,
-                                       @RequestParam(value = "all_intervals", required = false, defaultValue = "true") final boolean allIntervals,
-                                       @RequestParam(value = "rollup", required = false, defaultValue = "") final String rollup,
-                                       @RequestParam(value = "function") final String function) throws JSONException {
-
-        HistoricData historicData = new HistoricData();
-        historicData.setEntity_id(entityId);
-        historicData.setAttribute_id(attributeId);
-        historicData.setFunction(function);
-        historicData.setRollup(rollup);
-        historicData.setFrom(from);
-        historicData.setTo(to);
-        historicData.setReadings(new ArrayList<>());
-
-        final TimeZone tz = TimeZone.getTimeZone("UTC");
-        final SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm'Z'");
-        df.setTimeZone(tz);
-
-        List<TempReading> tempReadings = new ArrayList<>();
-        long fromLong;
-        long toLong;
-        try {
-
-            try {
-                fromLong = Long.parseLong(from);
-            } catch (NumberFormatException e) {
-                fromLong = df.parse(from).getTime();
-            }
-            try {
-                toLong = Long.parseLong(to);
-            } catch (NumberFormatException e) {
-                toLong = df.parse(to).getTime();
-            }
-
-            final String[] parts = entityId.split(":");
-            final String phoneId = parts[parts.length - 1];
-
-            LOGGER.info("phoneId: " + phoneId + " from: " + from + " to: " + to);
-
-            Set<Result> results = resultRepository.findByDeviceIdAndTimestampBetween(Integer.parseInt(phoneId), fromLong, toLong);
-
-            Set<Result> resultsCleanup = new HashSet<>();
-
-            for (Result result : results) {
-                try {
-                    final JSONObject readingList = new JSONObject(result.getMessage());
-                    final Iterator<String> keys = readingList.keys();
-                    while (keys.hasNext()) {
-                        final String key = keys.next();
-                        if (key.contains(attributeId)) {
-                            tempReadings.add(new TempReading(result.getTimestamp(), readingList.getDouble(key)));
-                        }
-                    }
-                } catch (JSONException e) {
-                    resultsCleanup.add(result);
-                } catch (Exception e) {
-                    LOGGER.error(e, e);
-                }
-            }
-            resultRepository.delete(resultsCleanup);
-        } catch (ParseException e) {
-            LOGGER.error(e, e);
-        }
-
-        List<TempReading> rolledUpTempReadings = new ArrayList<>();
-
-        if ("".equals(rollup)) {
-            rolledUpTempReadings = tempReadings;
-        } else {
-            final Map<Long, SummaryStatistics> dataMap = new HashMap<>();
-            for (final TempReading tempReading : tempReadings) {
-                Long millis = null;
-                if (rollup.endsWith("m")) {
-                    millis = new DateTime(tempReading.getTimestamp())
-                            .withMillisOfSecond(0).withSecondOfMinute(0).getMillis();
-                } else if (rollup.endsWith("h")) {
-                    millis = new DateTime(tempReading.getTimestamp())
-                            .withMillisOfSecond(0).withSecondOfMinute(0).withMinuteOfHour(0).getMillis();
-                } else if (rollup.endsWith("d")) {
-                    millis = new DateTime(tempReading.getTimestamp())
-                            .withMillisOfDay(0).getMillis();
-                }
-                if (millis != null) {
-                    if (!dataMap.containsKey(millis)) {
-                        dataMap.put(millis, new SummaryStatistics());
-                    }
-                    dataMap.get(millis).addValue(tempReading.getValue());
-                }
-            }
-            for (final Long millis : dataMap.keySet()) {
-                rolledUpTempReadings.add(parse(millis, function, dataMap.get(millis)));
-            }
-        }
-
-        for (final TempReading tempReading : rolledUpTempReadings) {
-            List<Object> list = new ArrayList<>();
-            list.add(df.format(tempReading.getTimestamp()));
-            list.add(tempReading.getValue());
-            historicData.getReadings().add(list);
-        }
-        return historicData;
-    }
-
-    /**
-     * Parse a time instant and create a TempReading object.
-     *
-     * @param millis     the millis of the timestamp.
-     * @param function   the function to aggregate.
-     * @param statistics the data values
-     * @return the aggregated TempReading for this time instant.
-     */
-    private TempReading parse(final long millis, final String function, SummaryStatistics statistics) {
-        final Double value;
-        switch (function) {
-            case "avg":
-                value = statistics.getMean();
-                break;
-            case "max":
-                value = statistics.getMax();
-                break;
-            case "min":
-                value = statistics.getMin();
-                break;
-            case "var":
-                value = statistics.getVariance();
-                break;
-            case "sum":
-                value = statistics.getSum();
-                break;
-            default:
-                value = statistics.getMean();
-        }
-        return new TempReading(millis, value);
-    }
-
 
     /**
      * Lists all avalialalbe plugins in the system.
