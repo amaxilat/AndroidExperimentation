@@ -12,6 +12,8 @@ import eu.smartsantander.androidExperimentation.service.GCMService;
 import eu.smartsantander.androidExperimentation.service.InfluxDbService;
 import eu.smartsantander.androidExperimentation.service.ModelManager;
 import eu.smartsantander.androidExperimentation.service.OrionService;
+import org.apache.commons.math3.stat.descriptive.DescriptiveStatistics;
+import org.apache.commons.math3.stat.descriptive.SummaryStatistics;
 import org.apache.log4j.Logger;
 import org.joda.time.DateTime;
 import org.json.JSONException;
@@ -100,21 +102,24 @@ public class AndroidExperimentationWS extends BaseController {
                                        @RequestParam(value = "attribute_id") final String attributeId,
                                        @RequestParam(value = "from") final String from,
                                        @RequestParam(value = "to") final String to,
+                                       @RequestParam(value = "all_intervals", required = false, defaultValue = "true") final boolean allIntervals,
+                                       @RequestParam(value = "rollup", required = false, defaultValue = "") final String rollup,
                                        @RequestParam(value = "function") final String function) throws JSONException {
-
 
         HistoricData historicData = new HistoricData();
         historicData.setEntity_id(entityId);
         historicData.setAttribute_id(attributeId);
+        historicData.setFunction(function);
+        historicData.setRollup(rollup);
         historicData.setFrom(from);
         historicData.setTo(to);
-        historicData.setReadings(new ArrayList<List<Object>>());
+        historicData.setReadings(new ArrayList<>());
 
         final TimeZone tz = TimeZone.getTimeZone("UTC");
         final SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm'Z'");
         df.setTimeZone(tz);
 
-
+        List<TempReading> tempReadings = new ArrayList<>();
         long fromLong;
         long toLong;
         try {
@@ -137,7 +142,7 @@ public class AndroidExperimentationWS extends BaseController {
 
             Set<Result> results = resultRepository.findByDeviceIdAndTimestampBetween(Integer.parseInt(phoneId), fromLong, toLong);
 
-            Set<Result> resultsCleanup = new HashSet<Result>();
+            Set<Result> resultsCleanup = new HashSet<>();
 
             for (Result result : results) {
                 try {
@@ -146,10 +151,7 @@ public class AndroidExperimentationWS extends BaseController {
                     while (keys.hasNext()) {
                         final String key = keys.next();
                         if (key.contains(attributeId)) {
-                            List<Object> list = new ArrayList<Object>();
-                            list.add(df.format(result.getTimestamp()));
-                            list.add(readingList.getDouble(key));
-                            historicData.getReadings().add(list);
+                            tempReadings.add(new TempReading(result.getTimestamp(), readingList.getDouble(key)));
                         }
                     }
                 } catch (JSONException e) {
@@ -163,8 +165,75 @@ public class AndroidExperimentationWS extends BaseController {
             LOGGER.error(e, e);
         }
 
+        List<TempReading> rolledUpTempReadings = new ArrayList<>();
 
+        if ("".equals(rollup)) {
+            rolledUpTempReadings = tempReadings;
+        } else {
+            final Map<Long, SummaryStatistics> dataMap = new HashMap<>();
+            for (final TempReading tempReading : tempReadings) {
+                Long millis = null;
+                if (rollup.endsWith("m")) {
+                    millis = new DateTime(tempReading.getTimestamp())
+                            .withMillisOfSecond(0).withSecondOfMinute(0).getMillis();
+                } else if (rollup.endsWith("h")) {
+                    millis = new DateTime(tempReading.getTimestamp())
+                            .withMillisOfSecond(0).withSecondOfMinute(0).withMinuteOfHour(0).getMillis();
+                } else if (rollup.endsWith("d")) {
+                    millis = new DateTime(tempReading.getTimestamp())
+                            .withMillisOfDay(0).getMillis();
+                }
+                if (millis != null) {
+                    if (!dataMap.containsKey(millis)) {
+                        dataMap.put(millis, new SummaryStatistics());
+                    }
+                    dataMap.get(millis).addValue(tempReading.getValue());
+                }
+            }
+            for (final Long millis : dataMap.keySet()) {
+                rolledUpTempReadings.add(parse(millis, function, dataMap.get(millis)));
+            }
+        }
+
+        for (final TempReading tempReading : rolledUpTempReadings) {
+            List<Object> list = new ArrayList<>();
+            list.add(df.format(tempReading.getTimestamp()));
+            list.add(tempReading.getValue());
+            historicData.getReadings().add(list);
+        }
         return historicData;
+    }
+
+    /**
+     * Parse a time instant and create a TempReading object.
+     *
+     * @param millis     the millis of the timestamp.
+     * @param function   the function to aggregate.
+     * @param statistics the data values
+     * @return the aggregated TempReading for this time instant.
+     */
+    private TempReading parse(final long millis, final String function, SummaryStatistics statistics) {
+        final Double value;
+        switch (function) {
+            case "avg":
+                value = statistics.getMean();
+                break;
+            case "max":
+                value = statistics.getMax();
+                break;
+            case "min":
+                value = statistics.getMin();
+                break;
+            case "var":
+                value = statistics.getVariance();
+                break;
+            case "sum":
+                value = statistics.getSum();
+                break;
+            default:
+                value = statistics.getMean();
+        }
+        return new TempReading(millis, value);
     }
 
 

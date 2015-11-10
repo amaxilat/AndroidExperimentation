@@ -8,11 +8,12 @@ import java.util.List;
 public class HistoricData {
 
     private String entity_id;
-    private String  attribute_id;
+    private String attribute_id;
     private String function;
     private String from;
     private String to;
     private List<List<Object>> readings;
+    private String rollup;
 
     public String getEntity_id() {
         return entity_id;
@@ -60,5 +61,13 @@ public class HistoricData {
 
     public void setReadings(List<List<Object>> readings) {
         this.readings = readings;
+    }
+
+    public void setRollup(String rollup) {
+        this.rollup = rollup;
+    }
+
+    public String getRollup() {
+        return rollup;
     }
 }
