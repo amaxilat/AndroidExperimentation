@@ -1,6 +1,7 @@
 package eu.smartsantander.androidExperimentation.controller.api;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import eu.organicity.entities.namespace.OrganicityAttributeTypes;
 import eu.smartsantander.androidExperimentation.GcmMessageData;
 import eu.smartsantander.androidExperimentation.controller.BaseController;
 import eu.smartsantander.androidExperimentation.entities.Reading;
@@ -35,6 +36,7 @@ public class AndroidExperimentationWS extends BaseController {
      */
     private static final Logger LOGGER = Logger.getLogger(AndroidExperimentationWS.class);
     private static final int LIDIA_PHONE_ID = 11;
+    private static final int MYLONAS_PHONE_ID = 6;
 
 
     @Autowired
@@ -53,22 +55,6 @@ public class AndroidExperimentationWS extends BaseController {
     GCMService gcmService;
 
 
-    @PostConstruct
-    public void init() {
-//        for (Result newResult : resultRepository.findAll()) {
-//            try {
-//                final Set<Result> res = resultRepository.findByExperimentIdAndDeviceIdAndTimestampAndMessage(newResult.getExperimentId(), newResult.getDeviceId(), newResult.getTimestamp(), newResult.getMessage());
-//                if (res == null || (res.isEmpty())) {
-//                } else {
-//                    if (res.size() > 1) {
-//                        resultRepository.delete(newResult);
-//                    }
-//                }
-//            } catch (Exception e) {
-//            }
-//        }
-    }
-
     /**
      * Lists all avalialalbe plugins in the system.
      *
@@ -78,10 +64,10 @@ public class AndroidExperimentationWS extends BaseController {
     @RequestMapping(value = "/plugin", method = RequestMethod.GET, produces = "application/json")
     public Set<Plugin> getPluginList(@RequestParam(value = "phoneId", required = false, defaultValue = "0") final int phoneId) {
         Experiment experiment = modelManager.getEnabledExperiments().get(0);
-        if (phoneId == LIDIA_PHONE_ID) {
+        if (phoneId == LIDIA_PHONE_ID || phoneId == MYLONAS_PHONE_ID) {
             experiment = experimentRepository.findById(7);
         }
-        Set<String> dependencies = new HashSet<String>();
+        Set<String> dependencies = new HashSet<>();
         for (final String dependency : experiment.getSensorDependencies().split(",")) {
             dependencies.add(dependency);
         }
@@ -94,8 +80,8 @@ public class AndroidExperimentationWS extends BaseController {
     @RequestMapping(value = "/experiment", method = RequestMethod.GET, produces = "application/json")
     public List<Experiment> getExperiment(@RequestParam(value = "phoneId", required = false, defaultValue = "0") final int phoneId) {
         try {
-            if (phoneId == LIDIA_PHONE_ID) {
-                ArrayList<Experiment> experiements = new ArrayList<Experiment>();
+            if (phoneId == LIDIA_PHONE_ID || phoneId == MYLONAS_PHONE_ID) {
+                ArrayList<Experiment> experiements = new ArrayList<>();
                 experiements.add(experimentRepository.findById(7));
                 return experiements;
             } else {
@@ -124,9 +110,18 @@ public class AndroidExperimentationWS extends BaseController {
 
     @ResponseBody
     @RequestMapping(value = "/experiment", method = RequestMethod.POST, produces = "text/plain", consumes = "text/plain")
-    public JSONObject saveExperiment(@RequestBody final String body, final HttpServletResponse response) throws
+    public JSONObject saveExperiment(@RequestBody String body, final HttpServletResponse response) throws
             JSONException, IOException {
         LOGGER.info("saveExperiment Called");
+
+        body = body.replaceAll("org.ambientdynamix.contextplugins.10pm", OrganicityAttributeTypes.Types.PARTICLES10.getUrn())
+                .replaceAll("org.ambientdynamix.contextplugins.25pm", OrganicityAttributeTypes.Types.PARTICLES25.getUrn())
+                .replaceAll("org.ambientdynamix.contextplugins.co", OrganicityAttributeTypes.Types.CARBON_MONOXIDE.getUrn())
+                .replaceAll("org.ambientdynamix.contextplugins.lpg", OrganicityAttributeTypes.Types.LPG.getUrn())
+                .replaceAll("org.ambientdynamix.contextplugins.ch4", OrganicityAttributeTypes.Types.METHANE.getUrn())
+                .replaceAll("org.ambientdynamix.contextplugins.temperature", OrganicityAttributeTypes.Types.TEMPERATURE.getUrn())
+                .replaceAll("org.ambientdynamix.contextplugins.battery%", OrganicityAttributeTypes.Types.BATTERY_LEVEL.getUrn())
+                .replaceAll("org.ambientdynamix.contextplugins.batteryv", OrganicityAttributeTypes.Types.BATTERY_VOLTAGE.getUrn());
         Report result = new ObjectMapper().readValue(body, Report.class);
         LOGGER.info("saving for deviceId:" + result.getDeviceId() + " jobName:" + result.getJobName());
         final Smartphone phone = smartphoneRepository.findById(result.getDeviceId());
@@ -190,8 +185,6 @@ public class AndroidExperimentationWS extends BaseController {
                 data.setType("encourage");
                 data.setCount((int) total);
                 gcmService.send2Device(phone.getId(), new ObjectMapper().writeValueAsString(data));
-            } else {
-
             }
         } catch (Exception e) {
             LOGGER.error(e, e);
@@ -227,16 +220,16 @@ public class AndroidExperimentationWS extends BaseController {
     @ResponseBody
     @RequestMapping(value = "/statistics/{phoneId}", method = RequestMethod.GET, produces = "application/json")
     public Map<Long, Long> statisticsByPhone(@PathVariable("phoneId") final String phoneId,
-                                             final HttpServletResponse response) throws JSONException, IOException {
+                                             final HttpServletResponse response) {
 
-        final Map<Long, Long> counters = new HashMap<Long, Long>();
+        final Map<Long, Long> counters = new HashMap<>();
         for (long i = 0; i <= 7; i++) {
             counters.put(i, 0L);
         }
 
         final DateTime date = new DateTime().withMillisOfDay(0);
         final Set<Result> results = resultRepository.findByDeviceIdAndTimestampAfter(Integer.parseInt(phoneId), date.minusDays(7).getMillis());
-        final Map<DateTime, Long> datecounters = new HashMap<DateTime, Long>();
+        final Map<DateTime, Long> datecounters = new HashMap<>();
         for (final Result result : results) {
             final DateTime index = new DateTime(result.getTimestamp()).withMillisOfDay(0);
             if (!datecounters.containsKey(index)) {

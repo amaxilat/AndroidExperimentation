@@ -6,6 +6,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import java.io.Serializable;
+import java.util.Objects;
 
 /**
  * Created with IntelliJ IDEA.
@@ -164,7 +165,7 @@ public class Experiment implements Serializable {
 
         Experiment that = (Experiment) o;
 
-        if (id != that.id) return false;
+        if (!Objects.equals(id, that.id)) return false;
         if (contextType != null ? !contextType.equals(that.contextType) : that.contextType != null) return false;
         if (filename != null ? !filename.equals(that.filename) : that.filename != null) return false;
         if (fromTime != null ? !fromTime.equals(that.fromTime) : that.fromTime != null) return false;
@@ -174,9 +175,8 @@ public class Experiment implements Serializable {
         if (status != null ? !status.equals(that.status) : that.status != null) return false;
         if (toTime != null ? !toTime.equals(that.toTime) : that.toTime != null) return false;
         if (url != null ? !url.equals(that.url) : that.url != null) return false;
-        if (userId != null ? !userId.equals(that.userId) : that.userId != null) return false;
+        return !(userId != null ? !userId.equals(that.userId) : that.userId != null);
 
-        return true;
     }
 
     @Override

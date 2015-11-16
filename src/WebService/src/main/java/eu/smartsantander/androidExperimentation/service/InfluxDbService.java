@@ -18,6 +18,7 @@ import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 
 /**
@@ -41,15 +42,11 @@ public class InfluxDbService {
     @Value("${influxDBAuthorizationToken}")
     String influxDBAuthorizationToken;
 
-    @PostConstruct
-    public void init() {
-    }
-
 
     public boolean store(Result newResult) {
-        HashMap<String, Double> parameters = new HashMap<String, Double>();
-        parameters.put("experimentId", Double.valueOf(newResult.getExperimentId()));
-        parameters.put("deviceId", Double.valueOf(newResult.getDeviceId()));
+        HashMap<String, Double> parameters = new HashMap<>();
+        parameters.put("experimentId", (double) newResult.getExperimentId());
+        parameters.put("deviceId", (double) newResult.getDeviceId());
         int i = 1;
         Double val = null;
         for (String s : newResult.getMessage().split(",")) {
@@ -63,13 +60,10 @@ public class InfluxDbService {
         return store(newResult.getTimestamp(), parameters, val);
     }
 
-    public boolean store(final long timestamp, Map<String, Double> parameters, final Double val) {
+    private boolean store(final long timestamp, Map<String, Double> parameters, final Double val) {
 
         String data = "data,";
-        final Set<String> args = new HashSet<String>();
-        for (String s : parameters.keySet()) {
-            args.add(s + "=" + parameters.get(s));
-        }
+        final Set<String> args = parameters.keySet().stream().map(s -> s + "=" + parameters.get(s)).collect(Collectors.toSet());
         data += StringUtils.join(args, ",");
         data += " value=" + val;
         log.info(data);

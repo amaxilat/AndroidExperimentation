@@ -36,11 +36,9 @@ public class OrionService {
      */
     private static final Logger LOGGER = Logger.getLogger(OrionService.class);
     private static final String ORION_SMARTPHONE_ID_FORMAT = "urn:oc:entity:%s:smartphone:phone:%s";
-    private static final String ORION_SMARTPHONE_TYPE = "urn:oc:entitytype:smartphone";
 
     @Value("${siteName:london}")
     private String siteName;
-    private SimpleDateFormat df;
 
     private OrionClient orionClient;
 
@@ -51,11 +49,6 @@ public class OrionService {
     @PostConstruct
     public void init() {
         orionClient = new OrionClient("http://localhost:1026", "", "organicity", "/");
-
-        TimeZone tz = TimeZone.getTimeZone("UTC");
-        df = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm'Z'");
-        df.setTimeZone(tz);
-
     }
 
     @Async
@@ -73,11 +66,11 @@ public class OrionService {
             LOGGER.info(newResult.getMessage());
             final JSONObject readingList = new JSONObject(newResult.getMessage());
 
-            final Iterator<String> keys = readingList.keys();
+            final Iterator keys = readingList.keys();
             String latitude = null;
             String longitude = null;
             while (keys.hasNext()) {
-                final String key = keys.next();
+                final String key = (String) keys.next();
                 if (key.contains("Latitude")) {
                     latitude = String.valueOf(readingList.get(key));
                 } else if (key.contains("Longitude")) {
@@ -107,13 +100,38 @@ public class OrionService {
                     Datatype dm = new Datatype(OrganicityDatatypes.DATATYPES.NUMERIC);
                     a.addMetadata(dm);
                     phoneEntity.addAttribute(a);
+                } else if (key.contains(OrganicityAttributeTypes.Types.METHANE.getUrn())) {
+                    Attribute a = new Attribute(OrganicityAttributeTypes.Types.METHANE, String.valueOf(readingList.get(key)));
+                    Datatype dm = new Datatype(OrganicityDatatypes.DATATYPES.NUMERIC);
+                    a.addMetadata(dm);
+                    phoneEntity.addAttribute(a);
+                } else if (key.contains(OrganicityAttributeTypes.Types.LPG.getUrn())) {
+                    Attribute a = new Attribute(OrganicityAttributeTypes.Types.LPG, String.valueOf(readingList.get(key)));
+                    Datatype dm = new Datatype(OrganicityDatatypes.DATATYPES.NUMERIC);
+                    a.addMetadata(dm);
+                    phoneEntity.addAttribute(a);
                 } else if (key.contains(OrganicityAttributeTypes.Types.ILLUMINANCE.getUrn())) {
                     Attribute a = new Attribute(OrganicityAttributeTypes.Types.ILLUMINANCE, String.valueOf(readingList.get(key)));
                     Datatype dm = new Datatype(OrganicityDatatypes.DATATYPES.NUMERIC);
                     a.addMetadata(dm);
                     phoneEntity.addAttribute(a);
-                } else if (key.contains(OrganicityAttributeTypes.Types.PARTICLES.getUrn())) {
-                    Attribute a = new Attribute(OrganicityAttributeTypes.Types.PARTICLES, String.valueOf(readingList.get(key)));
+                } else if (key.contains(OrganicityAttributeTypes.Types.PARTICLES10.getUrn())) {
+                    Attribute a = new Attribute(OrganicityAttributeTypes.Types.PARTICLES10, String.valueOf(readingList.get(key)));
+                    Datatype dm = new Datatype(OrganicityDatatypes.DATATYPES.NUMERIC);
+                    a.addMetadata(dm);
+                    phoneEntity.addAttribute(a);
+                } else if (key.contains(OrganicityAttributeTypes.Types.PARTICLES25.getUrn())) {
+                    Attribute a = new Attribute(OrganicityAttributeTypes.Types.PARTICLES25, String.valueOf(readingList.get(key)));
+                    Datatype dm = new Datatype(OrganicityDatatypes.DATATYPES.NUMERIC);
+                    a.addMetadata(dm);
+                    phoneEntity.addAttribute(a);
+                } else if (key.contains(OrganicityAttributeTypes.Types.BATTERY_LEVEL.getUrn())) {
+                    Attribute a = new Attribute(OrganicityAttributeTypes.Types.BATTERY_LEVEL, String.valueOf(readingList.get(key)));
+                    Datatype dm = new Datatype(OrganicityDatatypes.DATATYPES.NUMERIC);
+                    a.addMetadata(dm);
+                    phoneEntity.addAttribute(a);
+                } else if (key.contains(OrganicityAttributeTypes.Types.BATTERY_VOLTAGE.getUrn())) {
+                    Attribute a = new Attribute(OrganicityAttributeTypes.Types.BATTERY_VOLTAGE, String.valueOf(readingList.get(key)));
                     Datatype dm = new Datatype(OrganicityDatatypes.DATATYPES.NUMERIC);
                     a.addMetadata(dm);
                     phoneEntity.addAttribute(a);

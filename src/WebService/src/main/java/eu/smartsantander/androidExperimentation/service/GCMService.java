@@ -2,18 +2,10 @@ package eu.smartsantander.androidExperimentation.service;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import eu.smartsantander.androidExperimentation.controller.BaseController;
 import org.apache.log4j.Logger;
-import org.json.JSONException;
-import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
 
-import javax.servlet.http.HttpServletResponse;
 import javax.ws.rs.client.ClientBuilder;
 import javax.ws.rs.client.Entity;
 import javax.ws.rs.core.Response;
@@ -35,19 +27,19 @@ public class GCMService {
 
 
     public String send2Experiment(int experiment, String message) {
-        Map<String, String> dataMap = new HashMap<String, String>();
+        Map<String, String> dataMap = new HashMap<>();
         dataMap.put("message", message);
         return send2Topic("/topics/experiment-" + experiment, dataMap);
     }
 
     public String send2Device(int deviceId, String message) {
-        Map<String, String> dataMap = new HashMap<String, String>();
+        Map<String, String> dataMap = new HashMap<>();
         dataMap.put("message", message);
         return send2Topic("/topics/device-" + deviceId, dataMap);
     }
 
     private String send2Topic(String topic, Map<String, String> dataMap) {
-        Map<String, Object> payloadMap = new HashMap<String, Object>();
+        Map<String, Object> payloadMap = new HashMap<>();
         payloadMap.put("data", dataMap);
         payloadMap.put("to", topic);
         return post(payloadMap);
@@ -68,8 +60,7 @@ public class GCMService {
                     .post(entity);
             Response.Status.Family statusFamily = response.getStatusInfo().getFamily();
             if (statusFamily == Response.Status.Family.SUCCESSFUL) {
-                final String responseString = response.readEntity(String.class);
-                return responseString;
+                return response.readEntity(String.class);
             } else {
                 return response.getStatusInfo().getReasonPhrase();
             }

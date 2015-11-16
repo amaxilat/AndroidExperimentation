@@ -10,7 +10,6 @@ package eu.smartsantander.androidExperimentation;
 public class Utilities {
 
     public static boolean isNullOrEmpty(String value) {
-        if (value == null || value.equals("")) return true;
-        return false;
+        return value == null || value.equals("");
     }
 }

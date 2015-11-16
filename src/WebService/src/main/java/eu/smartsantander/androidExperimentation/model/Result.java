@@ -13,7 +13,7 @@ import java.io.Serializable;
  * To change this template use File | Settings | File Templates.
  */
 @Entity
-public class Result  implements Serializable {
+public class Result implements Serializable {
     @Id
     @GeneratedValue
     private int id;
@@ -75,9 +75,8 @@ public class Result  implements Serializable {
         if (deviceId != that.deviceId) return false;
         if (experimentId != that.experimentId) return false;
         if (id != that.id) return false;
-        if (message != null ? !message.equals(that.message) : that.message != null) return false;
+        return !(message != null ? !message.equals(that.message) : that.message != null);
 
-        return true;
     }
 
     @Override

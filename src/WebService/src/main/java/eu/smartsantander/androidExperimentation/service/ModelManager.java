@@ -87,7 +87,7 @@ public class ModelManager {
     public List<Experiment> getExperiments() {
 
         Iterator<Experiment> experimentsListIterator = experimentRepository.findAll().iterator();
-        List<Experiment> experimentsList = new ArrayList<Experiment>();
+        List<Experiment> experimentsList = new ArrayList<>();
         while (experimentsListIterator.hasNext()) {
             experimentsList.add(experimentsListIterator.next());
         }
@@ -98,7 +98,7 @@ public class ModelManager {
     public List<Experiment> getEnabledExperiments() {
 
         Iterator<Experiment> experimentsListIterator = experimentRepository.findAll().iterator();
-        List<Experiment> experimentsList = new ArrayList<Experiment>();
+        List<Experiment> experimentsList = new ArrayList<>();
         while (experimentsListIterator.hasNext()) {
             Experiment experiment = experimentsListIterator.next();
             if (experiment.getEnabled()) {
@@ -173,63 +173,20 @@ public class ModelManager {
 
     public List<Result> getResults(Integer experimentId) {
         if (experimentId == null)
-            return new ArrayList<Result>();
+            return new ArrayList<>();
         final Set<Result> resultSet = resultRepository.findByExperimentId(experimentId);
-        return new ArrayList<Result>(resultSet);
+        return new ArrayList<>(resultSet);
     }
 
     public List<Result> getLastResults(Integer experimentId) {
-//        TODO: Replace
         return getResults(experimentId);
-
-//        if (experimentId == null)
-//            return new ArrayList<Result>();
-//        Query q = getCurrentSession().createQuery("from Result where experimentId = :expId order by timestamp desc");
-//        q.setFirstResult(0);
-//        q.setMaxResults(50);
-//        q.setParameter("expId", Integer.valueOf(experimentId));
-//        return (List<Result>) q.list();
     }
 
     public Long getResultSize(Integer experimentId) {
         if (experimentId == null)
             return 0L;
-        return Long.valueOf(getResults(experimentId).size());
+        return (long) getResults(experimentId).size();
     }
-
-
-    public String[] getResults(Integer experimentId, Long timestamp, int deviceID) {
-        //TODO: replace
-        return new String[]{""};
-//        Query q = getCurrentSession().createQuery("from Result where experimentId = :expId AND deviceId= :devId AND timestamp>= :t");
-//        q.setParameter("expId", Integer.valueOf(experimentId));
-//        q.setParameter("devId", Integer.valueOf(deviceID));
-//        q.setParameter("t", Long.valueOf(timestamp));
-//        List<Result> results = (List<Result>) q.list();
-//        if (results.size() == 0) return null;
-//
-//        HashMap<Long, Result> resultMap = new HashMap<Long, Result>();
-//        for (Result result : results) {
-//            if (result.getMessage() == null || result.getMessage().equals("")) continue;
-//            Reading r;
-//            try {
-//                r = Reading.fromJson(result.getMessage());
-//            } catch (Exception e) {
-//                //e.printStackTrace();
-//                continue;
-//            }
-//            resultMap.put(r.getTimestamp(), result);
-//        }
-//        Object[] times = resultMap.keySet().toArray();
-//        Arrays.sort(times);
-//        String[] messages = new String[times.length];
-//        int i = 0;
-//        for (Object time : times) {
-//            messages[i++] = resultMap.get(time).getMessage();
-//        }
-//        return messages;
-    }
-
 
     public String durationString(long millis) {
         long days = TimeUnit.MILLISECONDS.toDays(millis);
@@ -308,8 +265,7 @@ public class ModelManager {
     public float pert() {
         Random r = new Random();
         int x = r.nextInt(3);
-        float y = (float) x / 1000;
-        return y;
+        return (float) x / 1000;
     }
 
     public String formatDouble(Float d) {

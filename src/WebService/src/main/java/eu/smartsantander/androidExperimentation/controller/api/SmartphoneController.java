@@ -1,33 +1,16 @@
 package eu.smartsantander.androidExperimentation.controller.api;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import eu.smartsantander.androidExperimentation.GcmMessageData;
 import eu.smartsantander.androidExperimentation.controller.BaseController;
-import eu.smartsantander.androidExperimentation.entities.Reading;
-import eu.smartsantander.androidExperimentation.entities.Report;
-import eu.smartsantander.androidExperimentation.model.Experiment;
-import eu.smartsantander.androidExperimentation.model.Plugin;
-import eu.smartsantander.androidExperimentation.model.Result;
 import eu.smartsantander.androidExperimentation.model.Smartphone;
-import eu.smartsantander.androidExperimentation.repository.ExperimentRepository;
-import eu.smartsantander.androidExperimentation.repository.ResultRepository;
-import eu.smartsantander.androidExperimentation.repository.SmartphoneRepository;
-import eu.smartsantander.androidExperimentation.service.GCMService;
-import eu.smartsantander.androidExperimentation.service.InfluxDbService;
 import eu.smartsantander.androidExperimentation.service.ModelManager;
-import eu.smartsantander.androidExperimentation.service.OrionService;
 import org.apache.log4j.Logger;
-import org.joda.time.DateTime;
-import org.json.JSONException;
-import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.*;
-
-import javax.annotation.PostConstruct;
-import javax.servlet.http.HttpServletResponse;
-import java.io.IOException;
-import java.util.*;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 @Controller
 @RequestMapping(value = "/api/v1")

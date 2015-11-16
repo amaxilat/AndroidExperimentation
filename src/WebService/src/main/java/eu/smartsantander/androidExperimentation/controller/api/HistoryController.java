@@ -1,14 +1,10 @@
 package eu.smartsantander.androidExperimentation.controller.api;
 
 import eu.smartsantander.androidExperimentation.controller.BaseController;
-import eu.smartsantander.androidExperimentation.model.*;
-import eu.smartsantander.androidExperimentation.repository.ExperimentRepository;
+import eu.smartsantander.androidExperimentation.model.HistoricData;
+import eu.smartsantander.androidExperimentation.model.Result;
+import eu.smartsantander.androidExperimentation.model.TempReading;
 import eu.smartsantander.androidExperimentation.repository.ResultRepository;
-import eu.smartsantander.androidExperimentation.repository.SmartphoneRepository;
-import eu.smartsantander.androidExperimentation.service.GCMService;
-import eu.smartsantander.androidExperimentation.service.InfluxDbService;
-import eu.smartsantander.androidExperimentation.service.ModelManager;
-import eu.smartsantander.androidExperimentation.service.OrionService;
 import org.apache.commons.math3.stat.descriptive.SummaryStatistics;
 import org.apache.log4j.Logger;
 import org.joda.time.DateTime;
@@ -23,7 +19,6 @@ import java.text.SimpleDateFormat;
 import java.util.*;
 
 @Controller
-@RequestMapping(value = "/api/v1")
 public class HistoryController extends BaseController {
 
     /**
@@ -35,14 +30,14 @@ public class HistoryController extends BaseController {
     ResultRepository resultRepository;
 
     @ResponseBody
-    @RequestMapping(value = {"/entities/{entity_id}/readings", "/devices/{entity_id}/readings"}, method = RequestMethod.GET)
+    @RequestMapping(value = {"/api/v1/entities/{entity_id}/readings"}, method = RequestMethod.GET)
     public HistoricData experimentView(@PathVariable("entity_id") final String entityId,
                                        @RequestParam(value = "attribute_id") final String attributeId,
                                        @RequestParam(value = "from") final String from,
                                        @RequestParam(value = "to") final String to,
                                        @RequestParam(value = "all_intervals", required = false, defaultValue = "true") final boolean allIntervals,
                                        @RequestParam(value = "rollup", required = false, defaultValue = "") final String rollup,
-                                       @RequestParam(value = "function") final String function) throws JSONException {
+                                       @RequestParam(value = "function", required = false, defaultValue = "avg") final String function) {
 
         final HistoricData historicData = new HistoricData();
         historicData.setEntity_id(entityId);
@@ -56,21 +51,31 @@ public class HistoryController extends BaseController {
         final TimeZone tz = TimeZone.getTimeZone("UTC");
         final SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm'Z'");
         df.setTimeZone(tz);
+        final SimpleDateFormat df1 = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss'Z'");
+        df1.setTimeZone(tz);
 
         final List<TempReading> tempReadings = new ArrayList<>();
         long fromLong;
-        long toLong;
+        long toLong = 0;
         try {
 
             try {
                 fromLong = Long.parseLong(from);
             } catch (NumberFormatException e) {
-                fromLong = df.parse(from).getTime();
+                try {
+                    fromLong = df.parse(from).getTime();
+                } catch (Exception e1) {
+                    fromLong = df1.parse(from).getTime();
+                }
             }
             try {
                 toLong = Long.parseLong(to);
             } catch (NumberFormatException e) {
-                toLong = df.parse(to).getTime();
+                try {
+                    toLong = df.parse(to).getTime();
+                } catch (Exception e1) {
+                    toLong = df1.parse(to).getTime();
+                }
             }
 
             final String[] parts = entityId.split(":");
@@ -85,9 +90,9 @@ public class HistoryController extends BaseController {
             for (final Result result : results) {
                 try {
                     final JSONObject readingList = new JSONObject(result.getMessage());
-                    final Iterator<String> keys = readingList.keys();
+                    final Iterator keys = readingList.keys();
                     while (keys.hasNext()) {
-                        final String key = keys.next();
+                        final String key = (String) keys.next();
                         if (key.contains(attributeId)) {
                             tempReadings.add(new TempReading(result.getTimestamp(), readingList.getDouble(key)));
                         }
@@ -129,8 +134,20 @@ public class HistoryController extends BaseController {
                     dataMap.get(millis).addValue(tempReading.getValue());
                 }
             }
-            for (final Long millis : dataMap.keySet()) {
-                rolledUpTempReadings.add(parse(millis, function, dataMap.get(millis)));
+
+            final TreeSet<Long> treeSet = new TreeSet<>();
+            treeSet.addAll(dataMap.keySet());
+
+            if (allIntervals) {
+                fillMissingIntervals(treeSet, rollup, toLong);
+            }
+
+            for (final Long millis : treeSet) {
+                if (dataMap.containsKey(millis)) {
+                    rolledUpTempReadings.add(parse(millis, function, dataMap.get(millis)));
+                } else {
+                    rolledUpTempReadings.add(new TempReading(millis, 0));
+                }
             }
         }
 
@@ -141,6 +158,39 @@ public class HistoryController extends BaseController {
             historicData.getReadings().add(list);
         }
         return historicData;
+    }
+
+    private void fillMissingIntervals(TreeSet<Long> treeSet, String rollup, long toLong) {
+
+        //TODO: add non existing intervals
+        if (rollup.endsWith("d")) {
+            DateTime firstDate = new DateTime(treeSet.iterator().next());
+
+            while (firstDate.isBefore(toLong)) {
+                firstDate = firstDate.plusDays(1);
+                if (!treeSet.contains(firstDate.getMillis())) {
+                    treeSet.add(firstDate.getMillis());
+                }
+            }
+        } else if (rollup.endsWith("h")) {
+            DateTime firstDate = new DateTime(treeSet.iterator().next());
+
+            while (firstDate.isBefore(toLong)) {
+                firstDate = firstDate.plusHours(1);
+                if (!treeSet.contains(firstDate.getMillis())) {
+                    treeSet.add(firstDate.getMillis());
+                }
+            }
+        } else if (rollup.endsWith("m")) {
+            DateTime firstDate = new DateTime(treeSet.iterator().next());
+
+            while (firstDate.isBefore(toLong)) {
+                firstDate = firstDate.plusMinutes(1);
+                if (!treeSet.contains(firstDate.getMillis())) {
+                    treeSet.add(firstDate.getMillis());
+                }
+            }
+        }
     }
 
     /**

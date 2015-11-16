@@ -4,6 +4,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import java.io.Serializable;
+import java.util.Objects;
 
 /**
  * Created with IntelliJ IDEA.
@@ -62,11 +63,10 @@ public class Smartphone implements Serializable {
 
         Smartphone that = (Smartphone) o;
 
-        if (id != that.id) return false;
+        if (!Objects.equals(id, that.id)) return false;
         if (phoneId != that.phoneId) return false;
-        if (sensorsRules != null ? !sensorsRules.equals(that.sensorsRules) : that.sensorsRules != null) return false;
+        return !(sensorsRules != null ? !sensorsRules.equals(that.sensorsRules) : that.sensorsRules != null);
 
-        return true;
     }
 
     @Override

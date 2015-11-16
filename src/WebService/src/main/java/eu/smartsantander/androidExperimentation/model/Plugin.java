@@ -13,7 +13,7 @@ import java.io.Serializable;
  * To change this template use File | Settings | File Templates.
  */
 @Entity
-public class Plugin  implements Serializable {
+public class Plugin implements Serializable {
     @Id
     @GeneratedValue
     private int id;
@@ -99,10 +99,8 @@ public class Plugin  implements Serializable {
         if (filename != null ? !filename.equals(that.filename) : that.filename != null) return false;
         if (installUrl != null ? !installUrl.equals(that.installUrl) : that.installUrl != null) return false;
         if (name != null ? !name.equals(that.name) : that.name != null) return false;
-        if (runtimeFactoryClass != null ? !runtimeFactoryClass.equals(that.runtimeFactoryClass) : that.runtimeFactoryClass != null)
-            return false;
+        return !(runtimeFactoryClass != null ? !runtimeFactoryClass.equals(that.runtimeFactoryClass) : that.runtimeFactoryClass != null);
 
-        return true;
     }
 
     @Override

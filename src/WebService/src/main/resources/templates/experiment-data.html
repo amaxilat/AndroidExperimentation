@@ -37,7 +37,6 @@
 
 <script src="http://leaflet.github.io/Leaflet.heat/dist/leaflet-heat.js"></script>
 
-<script src="http://leaflet.github.io/Leaflet.markercluster/example/realworld.10000.js"></script>
 
 <script th:inline="javascript">
     /*<![CDATA[*/
@@ -59,7 +58,7 @@
 
     addressPoints.forEach(function (e) {
         var marker = L.marker([e[0], e[1]]).addTo(map);
-        var message = "Values:<br/>" + JSON.stringify(e[3], null, 2);
+        var message = "Values:<br/>" + JSON.stringify(e[3], null, 2).replace(/urn:oc:attributeType:/g, '');
         marker.bindPopup(message);
         markersList.push(marker);
     });
@@ -70,7 +69,6 @@
 
     var group = new L.featureGroup(markersList);
     map.fitBounds(group.getBounds());
-
 
     var baseMaps = {};
 

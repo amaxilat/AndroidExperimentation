@@ -33,7 +33,7 @@ public class RestController extends BaseController {
 
 
     @RequestMapping(value = "/experiment/{experimentId}", method = RequestMethod.GET)
-    public String experimentView(final Map<String, Object> model, @PathVariable("experimentId") final String experiment, @RequestParam(value = "deviceId", defaultValue = "0", required = false) final int deviceId, @RequestParam(value = "after", defaultValue = "0", required = false) final String after) throws JSONException {
+    public String experimentView(final Map<String, Object> model, @PathVariable("experimentId") final String experiment, @RequestParam(value = "deviceId", defaultValue = "0", required = false) final int deviceId, @RequestParam(value = "after", defaultValue = "0", required = false) final String after) {
         LOGGER.debug("experiment:" + experiment);
         if (deviceId == 0) {
             model.put("title", "Experiment " + experiment);
@@ -47,7 +47,7 @@ public class RestController extends BaseController {
 
     @ResponseBody
     @RequestMapping(value = "/api/v1/experiment/{experimentId}", method = RequestMethod.GET, produces = "application/json")
-    public String experimentViewApi(@PathVariable("experimentId") final String experiment, @RequestParam(value = "deviceId", defaultValue = "0", required = false) final int deviceId, @RequestParam(value = "after", defaultValue = "0", required = false) final String after) throws JSONException {
+    public String experimentViewApi(@PathVariable("experimentId") final String experiment, @RequestParam(value = "deviceId", defaultValue = "0", required = false) final int deviceId, @RequestParam(value = "after", defaultValue = "0", required = false) final String after) {
         return getExperimentData(experiment, deviceId, after).toString();
     }
 
@@ -57,12 +57,18 @@ public class RestController extends BaseController {
         try {
             start = Long.parseLong(after);
         } catch (Exception e) {
-            if (after.equals("Today") || after.equals("today")) {
-                start = new DateTime().withMillisOfDay(0).getMillis();
-            } else if (after.equals("Yesterday") || after.equals("yesterday")) {
-                start = new DateTime().withMillisOfDay(0).minusDays(1).getMillis();
-            } else {
-                start = 0;
+            switch (after) {
+                case "Today":
+                case "today":
+                    start = new DateTime().withMillisOfDay(0).getMillis();
+                    break;
+                case "Yesterday":
+                case "yesterday":
+                    start = new DateTime().withMillisOfDay(0).minusDays(1).getMillis();
+                    break;
+                default:
+                    start = 0;
+                    break;
             }
         }
         final Set<Result> results;
@@ -72,7 +78,7 @@ public class RestController extends BaseController {
             results = resultRepository.findByExperimentIdAndDeviceIdAndTimestampAfterOrderByTimestampAsc(Integer.parseInt(experiment), deviceId, start);
         }
 
-        Map<String, Map<String, Long>> locationsHeatMap = new HashMap<String, Map<String, Long>>();
+        Map<String, Map<String, Long>> locationsHeatMap = new HashMap<>();
         for (Result result : results) {
             try {
                 final JSONObject message = new JSONObject(result.getMessage());
@@ -81,7 +87,7 @@ public class RestController extends BaseController {
                     String longitude = df.format(message.getDouble(LONGITUDE));
                     String latitude = df.format(message.getDouble(LATITUDE));
                     if (!locationsHeatMap.containsKey(longitude)) {
-                        locationsHeatMap.put(longitude, new HashMap<String, Long>());
+                        locationsHeatMap.put(longitude, new HashMap<>());
                     }
                     if (!locationsHeatMap.get(longitude).containsKey(latitude)) {
                         locationsHeatMap.get(longitude).put(latitude, 0L);
