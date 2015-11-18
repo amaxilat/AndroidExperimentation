@@ -46,6 +46,20 @@ public class RestDataController extends BaseController {
         return "experiment-data";
     }
 
+    @RequestMapping(value = "/experiment/data2/{experimentId}", method = RequestMethod.GET)
+    public String experimentView2(final Map<String, Object> model, @PathVariable("experimentId") final String experiment, @RequestParam(value = "deviceId", defaultValue = "0", required = false) final int deviceId, @RequestParam(value = "after", defaultValue = "0", required = false) final String after) throws JSONException {
+        LOGGER.debug("experiment:" + experiment);
+        if (deviceId == 0) {
+            model.put("title", "Experiment " + experiment);
+        } else {
+            model.put("title", "Experiment " + experiment + " device:" + deviceId);
+        }
+        model.put("addressPoints", getExperimentData(experiment, deviceId, after).toString());
+        model.put("max", getExperimentDataMax(experiment, deviceId, after).toString());
+        LOGGER.debug("-----------------------------------");
+        return "experiment-data2";
+    }
+
     @ResponseBody
     @RequestMapping(value = "/api/v1/experiment/data/{experimentId}", method = RequestMethod.GET, produces = "application/json")
     public String experimentViewApi(@PathVariable("experimentId") final String experiment, @RequestParam(value = "deviceId", defaultValue = "0", required = false) final int deviceId, @RequestParam(value = "after", defaultValue = "0", required = false) final String after) {
@@ -53,7 +67,7 @@ public class RestDataController extends BaseController {
     }
 
     private JSONArray getExperimentData(final String experiment, final int deviceId, final String after) {
-        DecimalFormat df = new DecimalFormat("#.0000");
+        DecimalFormat df = new DecimalFormat("#.000");
         long start;
         try {
             start = Long.parseLong(after);
@@ -139,16 +153,14 @@ public class RestDataController extends BaseController {
             }
         }
         final JSONArray addressPoints = new JSONArray();
-        double max = wholeDataStatistics.getMax();
-        for (String longit : dataAggregates.keySet()) {
-            for (String latit : dataAggregates.get(longit).keySet()) {
+        for (final String longit : dataAggregates.keySet()) {
+            for (final String latit : dataAggregates.get(longit).keySet()) {
                 LOGGER.info("{" + longit + ":" + latit + "}");
-                JSONArray measurement = new JSONArray();
+                final JSONArray measurement = new JSONArray();
                 try {
                     measurement.put(Double.parseDouble(latit));
                     measurement.put(Double.parseDouble(longit));
-                    if (locationsHeatMap.containsKey(longit) &&
-                            locationsHeatMap.get(longit).containsKey(latit)) {
+                    if (locationsHeatMap.containsKey(longit) && locationsHeatMap.get(longit).containsKey(latit)) {
                         measurement.put(String.valueOf(locationsHeatMap.get(longit).get(latit)));
                     } else {
                         measurement.put(1);
@@ -168,5 +180,54 @@ public class RestDataController extends BaseController {
         }
         LOGGER.info(addressPoints.toString());
         return addressPoints;
+    }
+
+    private JSONObject getExperimentDataMax(final String experiment, final int deviceId, final String after) {
+        long start;
+        try {
+            start = Long.parseLong(after);
+        } catch (Exception e) {
+            if (after.equals("Today") || after.equals("today")) {
+                start = new DateTime().withMillisOfDay(0).getMillis();
+            } else if (after.equals("Yesterday") || after.equals("yesterday")) {
+                start = new DateTime().withMillisOfDay(0).minusDays(1).getMillis();
+            } else {
+                start = 0;
+            }
+        }
+        final Set<Result> results;
+        if (deviceId == 0) {
+            results = resultRepository.findByExperimentIdAndTimestampAfter(Integer.parseInt(experiment), start);
+        } else {
+            results = resultRepository.findByExperimentIdAndDeviceIdAndTimestampAfterOrderByTimestampAsc(Integer.parseInt(experiment), deviceId, start);
+        }
+
+        final Map<String, DescriptiveStatistics> maxValues = new HashMap<String, DescriptiveStatistics>();
+        final JSONObject maxJson = new JSONObject();
+        for (Result result : results) {
+            try {
+                if (!result.getMessage().startsWith("{")) {
+                    continue;
+                }
+                final JSONObject message = new JSONObject(result.getMessage());
+
+                Iterator iterator = message.keys();
+                while (iterator.hasNext()) {
+                    final String keyString = (String) iterator.next();
+                    if (!maxValues.containsKey(keyString)) {
+                        maxValues.put(keyString, new DescriptiveStatistics());
+                    }
+                    maxValues.get(keyString).addValue(message.getDouble(keyString));
+                    try {
+                        maxJson.put(keyString, maxValues.get(keyString).getMax());
+                    } catch (JSONException e) {
+                        //ignore
+                    }
+                }
+            } catch (Exception e) {
+                LOGGER.error(e, e);
+            }
+        }
+        return maxJson;
     }
 }

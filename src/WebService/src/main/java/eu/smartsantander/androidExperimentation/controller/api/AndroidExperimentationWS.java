@@ -36,7 +36,7 @@ public class AndroidExperimentationWS extends BaseController {
      */
     private static final Logger LOGGER = Logger.getLogger(AndroidExperimentationWS.class);
     private static final int LIDIA_PHONE_ID = 11;
-    private static final int MYLONAS_PHONE_ID = 6;
+    private static final int MYLONAS_PHONE_ID = -6;//6
 
 
     @Autowired
