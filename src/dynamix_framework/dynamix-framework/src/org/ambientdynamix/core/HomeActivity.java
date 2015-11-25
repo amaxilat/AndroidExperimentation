@@ -60,7 +60,6 @@ import eu.smartsantander.androidExperimentation.jsonEntities.Report;
 import eu.smartsantander.androidExperimentation.operations.AsyncReportOnServerTask;
 import eu.smartsantander.androidExperimentation.operations.AsyncStatusRefreshTask;
 import eu.smartsantander.androidExperimentation.service.RegistrationIntentService;
-import us.feras.mdv.MarkdownView;
 
 /**
  * Home user interface, which shows the current authorized Dynamix applications along with their status. This UI also
@@ -88,7 +87,7 @@ public class HomeActivity extends Activity implements GoogleApiClient.Connection
     //SmartSantander
     public TextView phoneIdTv;
     public TextView expDescriptionTv;
-    public MarkdownView markdownView;
+
 
     private Button pendingSendButton;
     private MapFragment mMap;
@@ -201,8 +200,6 @@ public class HomeActivity extends Activity implements GoogleApiClient.Connection
         //pIntent = PendingIntent.getService(getApplicationContext(), 0, activityRecognitionIntent, PendingIntent.FLAG_UPDATE_CURRENT);
 
 
-        markdownView = (MarkdownView) findViewById(R.id.markdownView);
-        markdownView.setVisibility(View.INVISIBLE);
 
         mGoogleApiClient = new GoogleApiClient.Builder(this)
                 .addApi(ActivityRecognition.API)

@@ -37,12 +37,6 @@
         android:paddingTop="3dp"
         tools:context=".MainActivity" />
 
-    <us.feras.mdv.MarkdownView
-        android:id="@+id/markdownView"
-        android:layout_width="fill_parent"
-        android:layout_height="10dp"
-        android:layout_weight="1" />
-
     <Button
         android:id="@+id/send_pending_now"
         android:layout_width="fill_parent"

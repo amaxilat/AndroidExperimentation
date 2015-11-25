@@ -62,8 +62,7 @@ public class AsyncStatusRefreshTask extends AsyncTask<HomeActivity, String, Inte
         } else if ("status".equals(values[0])) {
 
         } else if ("experimentUrlDescription".equals(values[0])) {
-            activity.markdownView.loadMarkdownFile(values[1]);
-            activity.markdownView.setVisibility(View.VISIBLE);
+
         }
     }
 

@@ -16,6 +16,8 @@ import android.widget.ToggleButton;
 import org.ambientdynamix.core.DynamixService;
 import org.ambientdynamix.core.R;
 
+import us.feras.mdv.MarkdownView;
+
 /**
  * This tab displays ....
  */
@@ -30,6 +32,7 @@ public class ExperimentTab extends Activity {
     private TextView experimentFromTv;
     private TextView experimentToTv;
     private TextView experimentDependenciesTv;
+    private MarkdownView markdownView;
     private Timer refresher;
     private static ExperimentTab activity;
     private final Handler uiHandler = new Handler();
@@ -68,6 +71,8 @@ public class ExperimentTab extends Activity {
                 .findViewById(R.id.experiment_to_JobTab);
         experimentDependenciesTv = (TextView) this
                 .findViewById(R.id.experiment_dependencies_JobTab);
+        markdownView = (MarkdownView) findViewById(R.id.markdownView);
+        markdownView.setVisibility(View.GONE);
 
         list1 = (ListView) findViewById(R.id.dependencies_list);
         listData[0] = "-";
@@ -156,7 +161,17 @@ public class ExperimentTab extends Activity {
             } else {
                 experimentToTv.setVisibility(View.GONE);
             }
-
+            if (DynamixService.getExperiment().getUrlDescription() != null) {
+                expDescriptionTv.setVisibility(View.GONE);
+                markdownView.setVisibility(View.VISIBLE);
+            } else {
+                expDescriptionTv.setVisibility(View.VISIBLE);
+                markdownView.setVisibility(View.GONE);
+            }
+            if (!DynamixService.getExperiment().getUrlDescription().equals(markdownView.getUrl())) {
+                markdownView.loadMarkdownFile(DynamixService.getExperiment().getUrlDescription());
+                markdownView.setVisibility(View.VISIBLE);
+            }
 
             if (button.isChecked()) {
                 listData = DynamixService.getCachedExperimentalMessages();
@@ -192,6 +207,7 @@ public class ExperimentTab extends Activity {
             experimentFromTv.setVisibility(View.GONE);
             experimentToTv.setVisibility(View.GONE);
             experimentDependenciesTv.setVisibility(View.GONE);
+            markdownView.setVisibility(View.GONE);
             list1.setVisibility(View.GONE);
             listData = new String[]{"-", "-"};
             depAdapter = new ArrayAdapter<>(this, R.layout.list_item, listData);
