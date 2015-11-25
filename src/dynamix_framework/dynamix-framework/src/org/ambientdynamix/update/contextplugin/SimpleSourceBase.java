@@ -51,7 +51,7 @@ public class SimpleSourceBase {
         // SmartSantander Modifications
         Log.i("AndroidExperimentation", "Start Plugin Discovery");
         String jsonPluginList = "";
-        final List<DiscoveredContextPlugin> plugs = new ArrayList<DiscoveredContextPlugin>();
+        final List<DiscoveredContextPlugin> plugs = new ArrayList<>();
         try {
             PluginList pluginList = getPluginList();
             Log.i(TAG, "Plugin List set");
@@ -107,18 +107,17 @@ public class SimpleSourceBase {
         Log.i(TAG, "Found Plugins:" + pluginList.size());
 
 
-        SharedPreferences pref = DynamixService.getAndroidContext()
+        final SharedPreferences pref = DynamixService.getAndroidContext()
                 .getApplicationContext().getSharedPreferences("runningJob", 0); // 0
         // -
         // for
         // private
         // mode
-        Editor editor = pref.edit();
-        editor = (DynamixService.getAndroidContext().getSharedPreferences(
+        final Editor editor = (DynamixService.getAndroidContext().getSharedPreferences(
                 "pluginObjects", 0)).edit();
-        String plistString = (new Gson()).toJson(plist, PluginList.class);
+        final String plistString = (new Gson()).toJson(plist, PluginList.class);
         editor.putString("pluginObjects", plistString);
-        editor.commit();
+        editor.apply();
 
         return plist;
 

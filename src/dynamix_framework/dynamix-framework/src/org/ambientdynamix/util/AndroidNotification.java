@@ -31,11 +31,11 @@ public class AndroidNotification implements Serializable {
 	private static final long serialVersionUID = -4636784405006579473L;
 	// For some reason, low ids are not clearable... starting higher
 	private static int id = 1337;
-	private int iconID;
-	private String description;
-	private int notificationID;
-	private Type type;
-	private int tabID;
+	private final int iconID;
+	private final String description;
+	private final int notificationID;
+	private final Type type;
+	private final int tabID;
 	
 	public enum Type{
 		PENDING_APP, PENDING_PLUGIN, PLUGIN_UPDATE, FRAMEWORK_UPDATE, PLUGIN_ALERT

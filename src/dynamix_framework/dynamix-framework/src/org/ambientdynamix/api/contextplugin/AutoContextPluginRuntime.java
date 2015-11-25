@@ -101,7 +101,7 @@ public abstract class AutoContextPluginRuntime extends ContextPluginRuntime {
 	 *            The SecuredContextData to send
 	 */
 	public final void sendContextEvent(SecuredContextInfo data) {
-		List<SecuredContextInfo> events = new Vector<SecuredContextInfo>();
+		List<SecuredContextInfo> events = new Vector<>();
 		events.add(data);
 		this.sendContextEvent(events);
 	}
@@ -115,7 +115,7 @@ public abstract class AutoContextPluginRuntime extends ContextPluginRuntime {
 	 *            The length of time the SecuredContextData is valid (in milliseconds)
 	 */
 	public final void sendContextEvent(SecuredContextInfo data, int expireMills) {
-		List<SecuredContextInfo> events = new Vector<SecuredContextInfo>();
+		List<SecuredContextInfo> events = new Vector<>();
 		events.add(data);
 		this.sendContextEvent(events, expireMills);
 	}

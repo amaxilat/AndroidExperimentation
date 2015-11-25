@@ -29,7 +29,7 @@ public interface IContextPluginConnector {
 	/**
 	 * Cancels a previously started call to 'getContextPlugins'
 	 */
-	public abstract void cancel();
+	void cancel();
 
 	/**
 	 * Returns a list of ContextPluginUpdates using a class-specific mechanism.
@@ -38,8 +38,8 @@ public interface IContextPluginConnector {
 	 * @throws Exception
 	 *             If the ContextPluginUpdates cannot be extracted.
 	 */
-	public abstract List<DiscoveredContextPlugin> getContextPlugins(PLATFORM platform, VersionInfo platformVersion,
-			VersionInfo frameworkVersion) throws Exception;
+	List<DiscoveredContextPlugin> getContextPlugins(PLATFORM platform, VersionInfo platformVersion,
+													VersionInfo frameworkVersion) throws Exception;
 
 	/*
 	 * TODO: Implement listener interface and methods for events: start, progress, completed, failed.

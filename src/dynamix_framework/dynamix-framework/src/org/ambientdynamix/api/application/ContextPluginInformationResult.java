@@ -40,7 +40,7 @@ public class ContextPluginInformationResult extends Result implements Parcelable
 		}
 	};
 	// Private data
-	private List<ContextPluginInformation> plugInfo = new ArrayList<ContextPluginInformation>();
+	private List<ContextPluginInformation> plugInfo = new ArrayList<>();
 
 
 	/**

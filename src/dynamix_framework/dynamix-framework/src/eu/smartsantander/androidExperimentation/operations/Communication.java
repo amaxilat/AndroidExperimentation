@@ -93,7 +93,7 @@ public class Communication extends Thread implements Runnable {
             String stats = get("/statistics/" + phoneId);
             Log.i(TAG, stats);
             Map values = (new Gson()).fromJson(stats, Map.class);
-            SortedMap<Integer, Double> sortedMap = new TreeMap<Integer, Double>(new Comparator<Integer>() {
+            SortedMap<Integer, Double> sortedMap = new TreeMap<>(new Comparator<Integer>() {
                 @Override
                 public int compare(Integer lhs, Integer rhs) {
                     return rhs - lhs;

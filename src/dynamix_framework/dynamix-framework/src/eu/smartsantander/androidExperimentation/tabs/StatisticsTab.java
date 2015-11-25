@@ -104,7 +104,7 @@ public class StatisticsTab extends Activity implements
 
         mMap.getMap().setMyLocationEnabled(true);
 
-        heatMapItems = new ArrayList<LatLng>();
+        heatMapItems = new ArrayList<>();
         heatMapItems.add(new LatLng(0, 0));
 
 

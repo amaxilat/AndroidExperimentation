@@ -30,8 +30,8 @@ import android.util.Log;
 public class WebListenerManager<String> extends ConcurrentLinkedQueue<String> {
 	// Private data
 	private final java.lang.String TAG = this.getClass().getSimpleName();
-	private Object lock = new Object();
-	private WebListener listener;
+	private final Object lock = new Object();
+	private final WebListener listener;
 	private Date lastAccess = new Date();
 	private boolean dead = false;
 

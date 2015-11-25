@@ -28,11 +28,11 @@ import org.ambientdynamix.api.contextplugin.ContextPlugin;
  */
 class ContextSupport {
 	// Private data
-	private String contextType;
-	private DynamixSession session;
-	private IDynamixListener listener;
-	private ContextPlugin plug;
-	private String supportId;
+	private final String contextType;
+	private final DynamixSession session;
+	private final IDynamixListener listener;
+	private final ContextPlugin plug;
+	private final String supportId;
 
 	/**
 	 * Creates a ContextSupport.
@@ -94,7 +94,7 @@ class ContextSupport {
 	 * Returns the ContextSupportInfo associated with this ContextSupport.
 	 */
 	public ContextSupportInfo getContextSupportInfo() {
-		return new ContextSupportInfo(supportId.toString(), plug.getContextPluginInformation(), contextType);
+		return new ContextSupportInfo(supportId, plug.getContextPluginInformation(), contextType);
 	}
 
 	// DynamixSession session, IDynamixListener listener, ContextPlugin plug, String contextType
@@ -122,12 +122,9 @@ class ContextSupport {
 		if (candidate == null || candidate.getClass() != getClass())
 			return false;
 		ContextSupport other = (ContextSupport) candidate;
-		if (this.listener.asBinder().equals(other.getDynamixListener().asBinder())
+		return this.listener.asBinder().equals(other.getDynamixListener().asBinder())
 				&& this.plug.equals(other.getContextPlugin())
 				&& this.contextType.equalsIgnoreCase(other.getContextType())
-				&& this.supportId.equalsIgnoreCase(other.getSupportId()))
-			return true;
-		else
-			return false;
+				&& this.supportId.equalsIgnoreCase(other.getSupportId());
 	}
 }

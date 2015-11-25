@@ -80,7 +80,7 @@ public class ExperimentTab extends Activity {
         TimerTask t = new TimerTask() {
             @Override
             public void run() {
-                ((ExperimentTab) activity).refreshData();
+                refreshData();
             }
         };
         refresher.scheduleAtFixedRate(t, 0, 1000);
@@ -90,7 +90,7 @@ public class ExperimentTab extends Activity {
             public void onClick(View v) {
                 if (button.isChecked()) {
                     listData = DynamixService.getCachedExperimentalMessages();
-                    depAdapter = new ArrayAdapter<String>(v.getContext(), R.layout.list_item, listData);
+                    depAdapter = new ArrayAdapter<>(v.getContext(), R.layout.list_item, listData);
                     list1.setAdapter(depAdapter);
                     depAdapter.notifyDataSetChanged();
                     experimentDependenciesTv.setText("Last Messages:");
@@ -102,7 +102,7 @@ public class ExperimentTab extends Activity {
                             listData[i] = dep.substring(dep.lastIndexOf(".") + 1).replace("Plugin", "-Sensor");
                             i++;
                         }
-                        depAdapter = new ArrayAdapter<String>(v.getContext(), R.layout.list_item, listData);
+                        depAdapter = new ArrayAdapter<>(v.getContext(), R.layout.list_item, listData);
                         list1.setAdapter(depAdapter);
                         depAdapter.notifyDataSetChanged();
                         experimentDependenciesTv.setText("Sensor Dependencies:");
@@ -127,9 +127,9 @@ public class ExperimentTab extends Activity {
             expNameTv.setText("Name: " + String.valueOf(DynamixService.getExperiment().getName()));
             expDescriptionTv.setText("Description:\n" + String.valueOf(DynamixService.getExperiment().getDescription()));
             if (DynamixService.isEnabled()) {
-                experimentPausedTv.setText("Experiment Enabled");
+                experimentPausedTv.setText(R.string.experimentEnabled);
             } else {
-                experimentPausedTv.setText("Experiment Disabled");
+                experimentPausedTv.setText(R.string.experimentDisabled);
             }
             Long tstamp = DynamixService.getExperiment().getTimestamp();
             if (tstamp != 0) {
@@ -184,7 +184,7 @@ public class ExperimentTab extends Activity {
             list1.setVisibility(View.VISIBLE);
             button.setVisibility(View.VISIBLE);
         } else {
-            expIdTv.setText("No Currently Installed Experiment");
+            expIdTv.setText(R.string.no_experiment_is_installed);
             expNameTv.setVisibility(View.GONE);
             expDescriptionTv.setVisibility(View.GONE);
             experimentPausedTv.setVisibility(View.GONE);

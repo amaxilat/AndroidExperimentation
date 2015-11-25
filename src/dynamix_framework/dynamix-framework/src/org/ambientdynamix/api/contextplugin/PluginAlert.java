@@ -22,8 +22,8 @@ package org.ambientdynamix.api.contextplugin;
  */
 public final class PluginAlert {
 	// Private data
-	private String alertTitle;
-	private String alertMessage;
+	private final String alertTitle;
+	private final String alertMessage;
 	private String requestedSettingsActivity;
 
 	/**

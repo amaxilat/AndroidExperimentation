@@ -84,10 +84,10 @@ public class ContextPlugin implements Serializable {
 		// Setup initial state
 		this.bundleId = -1;
 		this.installStat = PluginInstallStatus.NOT_INSTALLED;
-		supportedContextTypes = new Vector<String>();
-		supportedPrivacyRisks = new HashMap<PrivacyRiskLevel, String>();
-		permissions = new LinkedHashSet<Permission>();
-		featureDependencies = new LinkedHashSet<DynamixFeatureInfo>();
+		supportedContextTypes = new Vector<>();
+		supportedPrivacyRisks = new HashMap<>();
+		permissions = new LinkedHashSet<>();
+		featureDependencies = new LinkedHashSet<>();
 	}
 
 	/**
@@ -408,10 +408,7 @@ public class ContextPlugin implements Serializable {
 	 * Returns true if this ContextPlugin has feature dependencies; false otherwise.
 	 */
 	public boolean hasFeatureDependencies() {
-		if (featureDependencies != null && featureDependencies.size() > 0)
-			return true;
-		else
-			return false;
+		return featureDependencies != null && featureDependencies.size() > 0;
 	}
 
 	/**
@@ -432,10 +429,7 @@ public class ContextPlugin implements Serializable {
 	 * Returns true if this ContextPlugin has required Permissions; false otherwise.
 	 */
 	public boolean hasPermissions() {
-		if (permissions != null && permissions.size() > 0)
-			return true;
-		else
-			return false;
+		return permissions != null && permissions.size() > 0;
 	}
 
 	/**

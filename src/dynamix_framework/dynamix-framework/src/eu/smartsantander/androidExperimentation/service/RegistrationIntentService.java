@@ -1,14 +1,9 @@
 package eu.smartsantander.androidExperimentation.service;
 
 import android.app.IntentService;
-import android.content.BroadcastReceiver;
-import android.content.Context;
 import android.content.Intent;
-import android.content.IntentFilter;
-import android.content.SharedPreferences;
 import android.support.v4.content.LocalBroadcastManager;
 import android.util.Log;
-import android.widget.ProgressBar;
 
 import com.google.android.gms.gcm.GcmPubSub;
 import com.google.android.gms.gcm.GoogleCloudMessaging;
@@ -16,8 +11,6 @@ import com.google.android.gms.iid.InstanceID;
 
 import org.ambientdynamix.core.DynamixService;
 import org.ambientdynamix.core.R;
-
-import java.io.IOException;
 
 public class RegistrationIntentService extends IntentService {
 

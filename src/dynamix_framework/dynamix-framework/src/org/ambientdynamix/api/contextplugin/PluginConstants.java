@@ -27,7 +27,7 @@ public final class PluginConstants {
 	
 	public enum WEB_ENCODING{
 		NONE,
-		JSON;
+		JSON
 	}
 
 	// Supported formats for auto web encoding
@@ -53,8 +53,8 @@ public final class PluginConstants {
 	 */
 	public enum PLATFORM {
 		ANDROID("android");
-		private String name;
-		private static PLATFORM[] platforms = new PLATFORM[] { ANDROID };
+		private final String name;
+		private static final PLATFORM[] platforms = new PLATFORM[] { ANDROID };
 
 		PLATFORM(String name) {
 			this.name = name;

@@ -41,7 +41,7 @@ public class ContextSupportResult extends Result implements Parcelable {
 		}
 	};
 	// Private data
-	private List<ContextSupportInfo> supportInfo = new ArrayList<ContextSupportInfo>();
+	private List<ContextSupportInfo> supportInfo = new ArrayList<>();
 
 	/**
 	 * Creates a successful result using the incoming List of ContextSupportInfo.

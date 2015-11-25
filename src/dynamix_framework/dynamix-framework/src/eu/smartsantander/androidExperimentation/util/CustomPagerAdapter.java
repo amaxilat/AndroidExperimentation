@@ -16,15 +16,15 @@ import org.ambientdynamix.core.R;
 public class CustomPagerAdapter extends PagerAdapter {
 
 
-    int[] mResources = {
+    final int[] mResources = {
             R.drawable.help1,
             R.drawable.help2,
             R.drawable.help3
     };
 
 
-    Context mContext;
-    LayoutInflater mLayoutInflater;
+    final Context mContext;
+    final LayoutInflater mLayoutInflater;
 
     public CustomPagerAdapter(Context context) {
         mContext = context;
@@ -38,7 +38,7 @@ public class CustomPagerAdapter extends PagerAdapter {
 
     @Override
     public boolean isViewFromObject(View view, Object object) {
-        return view == ((LinearLayout) object);
+        return view == object;
     }
 
     @Override

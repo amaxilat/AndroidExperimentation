@@ -122,4 +122,10 @@
     <string name="phone_id_generated">phone_id_generated</string>
     <string name="experiment_id_generated">experiment_id_generated</string>
     <string name="no_experiment_installed">No experiment downloaded. Visit the plugins tab and install the plugins available.</string>
+    <string name="experimentEnabled">Experiment Enabled</string>
+    <string name="experimentDisabled">Experiment Disabled</string>
+    <string name="no_experiment_is_installed">No Currently Installed Experiment</string>
+    <string name="configure_plugin">Configure Plug-in</string>
+    <string name="configuration_offline">Configuration Offline</string>
+    <string name="no_configuration">No Configuration</string>
 </resources>

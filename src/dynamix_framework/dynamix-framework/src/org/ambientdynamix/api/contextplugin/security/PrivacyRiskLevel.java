@@ -49,10 +49,10 @@ public final class PrivacyRiskLevel implements Comparable<PrivacyRiskLevel>, Ser
 	/** Flag specifying Context information of maximum risk level */
 	public static final PrivacyRiskLevel MAX = new PrivacyRiskLevel(5, "MAX", "Maximum Privacy Risk");
 	// Private data
-	private int id;
-	private String name;
-	private String friendlyName;
-	private static PrivacyRiskLevel[] levels = new PrivacyRiskLevel[] { NONE, LOW, MEDIUM, HIGH, MAX };
+	private final int id;
+	private final String name;
+	private final String friendlyName;
+	private static final PrivacyRiskLevel[] levels = new PrivacyRiskLevel[] { NONE, LOW, MEDIUM, HIGH, MAX };
 
 	/*
 	 * Singleton constructor

@@ -15,14 +15,6 @@
  */
 package org.ambientdynamix.api.contextplugin.security;
 
-import java.lang.Thread.UncaughtExceptionHandler;
-
-import android.content.Context;
-import android.content.Intent;
-import android.os.Bundle;
-import android.os.Handler;
-import android.util.Log;
-
 /**
  * Secured wrapper for the Android SpeechRecognizer. Needed since the SpeechRecognizer can only run on the app's main
  * thread, and Dynamix context plug-ins are each running on their own threads. This class provides multi-threaded event

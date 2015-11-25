@@ -28,7 +28,7 @@ public class PluginStatsEvent {
 	private boolean error = false;
 	private String errorMessage = "No error";
 	private SourcedContextInfoSet event;
-	private Date timeStamp = new Date();
+	private final Date timeStamp = new Date();
 
 	/**
 	 * Creates a PluginStatsEvent that represents a ContextInfoSet.

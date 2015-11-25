@@ -30,5 +30,5 @@ package org.ambientdynamix.util;
  * @author Mark Wyszomierski (markww@gmail.com), foursquare.
  */
 public interface IObservableAdapter {
-	public void removeObserver();
+	void removeObserver();
 }

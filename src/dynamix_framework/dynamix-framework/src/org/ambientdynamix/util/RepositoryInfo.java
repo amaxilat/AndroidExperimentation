@@ -25,10 +25,10 @@ import android.util.Log;
  * @author Darren Carlson
  */
 public class RepositoryInfo implements Serializable {
-	public static String SIMPLE_FILE_SOURCE = "SIMPLE_FILE_SOURCE";
-	public static String SIMPLE_NETWORK_SOURCE = "SIMPLE_NETWORK_SOURCE";
-	public static String NEXUS_LUCENE_SOURCE = "NEXUS_LUCENE_SOURCE";
-	public static String NEXUS_INDEX_SOURCE = "NEXUS_INDEX_SOURCE";
+	public static final String SIMPLE_FILE_SOURCE = "SIMPLE_FILE_SOURCE";
+	public static final String SIMPLE_NETWORK_SOURCE = "SIMPLE_NETWORK_SOURCE";
+	public static final String NEXUS_LUCENE_SOURCE = "NEXUS_LUCENE_SOURCE";
+	public static final String NEXUS_INDEX_SOURCE = "NEXUS_INDEX_SOURCE";
 	// Private data
 	private final String TAG = this.getClass().getSimpleName();
 	private String alias;
@@ -126,9 +126,7 @@ public class RepositoryInfo implements Serializable {
 			return false;
 		// Make sure the id's and version numbers are the same
 		RepositoryInfo other = (RepositoryInfo) candidate;
-		if (other.getUrl().equalsIgnoreCase(this.getUrl()))
-			return true;
-		return false;
+		return other.getUrl().equalsIgnoreCase(this.getUrl());
 	}
 
 	@Override

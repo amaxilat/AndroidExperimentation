@@ -33,8 +33,8 @@ import android.util.Log;
  */
 class DynamixSecurityManager extends SecurityManager {
 	private final String TAG = this.getClass().getSimpleName();
-	static private Map<Thread, JavaPermissions> threadPerms = new ConcurrentHashMap<Thread, JavaPermissions>();
-	private static DynamixSecurityManager mgr = new DynamixSecurityManager();
+	static private final Map<Thread, JavaPermissions> threadPerms = new ConcurrentHashMap<>();
+	private static final DynamixSecurityManager mgr = new DynamixSecurityManager();
 
 	private DynamixSecurityManager() {
 	}

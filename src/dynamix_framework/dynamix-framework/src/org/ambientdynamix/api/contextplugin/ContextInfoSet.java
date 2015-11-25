@@ -38,7 +38,7 @@ public class ContextInfoSet extends Expirable {
 	private static final String TAG = ContextInfoSet.class.getSimpleName();
 	// Private data
 	private List<SecuredContextInfo> securedContextInfo;
-	private EventType eventType;
+	private final EventType eventType;
 	private String implementingClassname;
 	private UUID responseId;
 	private String contextType;

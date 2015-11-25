@@ -39,12 +39,12 @@ public interface IContextPluginInteractionViewFactory {
 	 * @param titleBarHeight The title bar height.
 	 * @return The initialized View.
 	 */
-	public View initializeView(Context context, InteractiveContextPluginRuntime runtime, UUID requestId,
-			String contextType, int titleBarHeight);
+	View initializeView(Context context, InteractiveContextPluginRuntime runtime, UUID requestId,
+						String contextType, int titleBarHeight);
 
 
 	/**
 	 * Destroy the view.
 	 */
-	public void destroyView();
+	void destroyView();
 }

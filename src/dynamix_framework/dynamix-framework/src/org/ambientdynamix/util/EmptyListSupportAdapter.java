@@ -29,8 +29,8 @@ import android.widget.ArrayAdapter;
 public abstract class EmptyListSupportAdapter<T> extends ArrayAdapter<T> {
 	// Private data
 	private final String TAG = this.getClass().getSimpleName();
-	private String emptyTitle;
-	private String emptyMessage;
+	private final String emptyTitle;
+	private final String emptyMessage;
 
 	public EmptyListSupportAdapter(Context context, int resource, int textViewResourceId, List<T> objects,
 			String emptyTitle, String emptyMessage) {

@@ -2,7 +2,6 @@ package eu.smartsantander.androidExperimentation.operations;
 
 import android.app.NotificationManager;
 import android.content.Context;
-import android.app.Activity;
 import android.content.Intent;
 import android.app.PendingIntent;
 import android.app.Notification;
@@ -20,12 +19,12 @@ import org.ambientdynamix.core.R;
 
 public class OrganicityNotificationManager {
 
-    private NotificationManager notificationManager;
-    private Context context;
+    private final NotificationManager notificationManager;
+    private final Context context;
 
     public OrganicityNotificationManager(Context androidContext) {
         this.context = androidContext.getApplicationContext();
-        notificationManager = (NotificationManager) this.context.getSystemService(context.NOTIFICATION_SERVICE);
+        notificationManager = (NotificationManager) this.context.getSystemService(Context.NOTIFICATION_SERVICE);
     }
 
 

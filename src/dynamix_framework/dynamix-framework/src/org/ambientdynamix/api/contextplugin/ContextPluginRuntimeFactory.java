@@ -33,7 +33,7 @@ public class ContextPluginRuntimeFactory implements IContextPluginRuntimeFactory
 	// Private data
 	private static final long serialVersionUID = -1520648719101645529L;
 	private final String TAG = this.getClass().getSimpleName();
-	private Class<ContextPluginRuntime> runtimeClass;
+	private final Class<ContextPluginRuntime> runtimeClass;
 	private Class<IContextPluginInteractionViewFactory> acquisitionViewFactory;
 	private Class<IContextPluginConfigurationViewFactory> settingsViewFactory;
 

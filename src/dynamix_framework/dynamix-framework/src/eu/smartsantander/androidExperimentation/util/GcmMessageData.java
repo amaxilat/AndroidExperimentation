@@ -1,7 +1,7 @@
 package eu.smartsantander.androidExperimentation.util;
 
 /**
- * Created by amaxilatis on 2/11/2015.
+ * Data from GCM.
  */
 public class GcmMessageData {
     private String type;

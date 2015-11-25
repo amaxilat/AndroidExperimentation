@@ -16,11 +16,8 @@
 package org.ambientdynamix.core;
 
 import java.util.ArrayList;
-import java.util.List;
 
-import org.ambientdynamix.api.contextplugin.security.Permission;
 import org.ambientdynamix.security.HighestTrustPrivacyPolicy;
-import org.ambientdynamix.security.PrivacyPolicy;
 
 import android.content.Context;
 import android.view.LayoutInflater;
@@ -37,8 +34,8 @@ import android.widget.TextView;
  * @author Darren Carlson
  */
 public class DynamixApplicationAdapter extends ArrayAdapter<DynamixApplication> {
-	private ArrayList<DynamixApplication> apps;
-	private boolean pending;
+	private final ArrayList<DynamixApplication> apps;
+	private final boolean pending;
 
 	/**
 	 * Public constructor. This class displays different icons depending on the value of 'pending', which refers to

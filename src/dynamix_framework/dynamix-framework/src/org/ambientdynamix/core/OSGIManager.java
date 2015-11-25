@@ -82,14 +82,14 @@ import android.util.Log;
  */
 class OSGIManager implements FrameworkListener, ServiceListener, BundleListener {
 	public final static String TAG = OSGIManager.class.getSimpleName();
-	private static final LinkedBlockingQueue<BundleInstaller> queue = new LinkedBlockingQueue<BundleInstaller>();
-	private static final Map<BundleInstallerWorker, Thread> installWorkers = new HashMap<BundleInstallerWorker, Thread>();
-	private Context androidContext;
+	private static final LinkedBlockingQueue<BundleInstaller> queue = new LinkedBlockingQueue<>();
+	private static final Map<BundleInstallerWorker, Thread> installWorkers = new HashMap<>();
+	private final Context androidContext;
 	private DynamixService service;
 	/*
 	 * Mapping of Bundles to their associated IContextPluginRuntimeFactory entity
 	 */
-	private Map<ContextPlugin, IContextPluginRuntimeFactory> factoryCache = new ConcurrentHashMap<ContextPlugin, IContextPluginRuntimeFactory>();
+	private final Map<ContextPlugin, IContextPluginRuntimeFactory> factoryCache = new ConcurrentHashMap<>();
 	/**
 	 * Our local OSGi Framework
 	 */
@@ -556,7 +556,7 @@ class OSGIManager implements FrameworkListener, ServiceListener, BundleListener 
 								try {
 									Log.d(TAG, "Waiting for Bundle to finish starting for: " + plug);
 									Thread.sleep(250);
-								} catch (InterruptedException e) {
+								} catch (InterruptedException ignored) {
 								}
 								if (bundleStartCount++ > 12)
 									throw new Exception("Bundle start timeout for: " + plug);
@@ -1090,7 +1090,7 @@ class OSGIManager implements FrameworkListener, ServiceListener, BundleListener 
 					try {
 						Log.d(TAG, "Waiting for Bundle to finish starting for: " + verify);
 						Thread.sleep(500);
-					} catch (InterruptedException e) {
+					} catch (InterruptedException ignored) {
 					}
 				}
 				// Verify that we can extract the Bundle's factoryClass - throws exceptions if not
@@ -1139,7 +1139,7 @@ class OSGIManager implements FrameworkListener, ServiceListener, BundleListener 
 	 */
 	private class BundleInstaller {
 		private ContextPlugin newPlug;
-		private IContextPluginInstallListener listener;
+		private final IContextPluginInstallListener listener;
 		private boolean done = false;
 		private ContextPlugin originalPlug;
 		private ContextPluginSettings originalSettings;
@@ -1330,7 +1330,7 @@ class OSGIManager implements FrameworkListener, ServiceListener, BundleListener 
 										try {
 											Log.d(TAG, "Waiting for Bundle to finish starting for: " + newPlug);
 											Thread.sleep(250);
-										} catch (InterruptedException e) {
+										} catch (InterruptedException ignored) {
 										}
 										if (bundleStartCount++ > 12)
 											throw new Exception("Bundle start timeout for: " + newPlug);
@@ -1533,7 +1533,7 @@ class OSGIManager implements FrameworkListener, ServiceListener, BundleListener 
 	 */
 	private class BundleInstallerWorker implements Runnable {
 		private boolean done = false;
-		LinkedBlockingQueue<BundleInstaller> queue;
+		final LinkedBlockingQueue<BundleInstaller> queue;
 		BundleInstaller currentInstaller = null;
 		private boolean installing = false;
 

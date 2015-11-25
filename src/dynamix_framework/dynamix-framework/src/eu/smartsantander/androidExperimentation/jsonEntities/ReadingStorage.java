@@ -6,10 +6,10 @@ import android.os.Bundle;
 
 public class ReadingStorage {
 
-	HashMap<String, Reading> store;
+	final HashMap<String, Reading> store;
 
 	public ReadingStorage() {
-		this.store = new HashMap<String, Reading>();
+		this.store = new HashMap<>();
 	}
 
 	public synchronized void pushReading(Reading r) {

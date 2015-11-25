@@ -23,8 +23,8 @@ import java.sql.Time;
  * @author Darren Carlson
  */
 public class TimeConstraint {
-	private Time _validFrom;
-	private Time _validUntil;
+	private final Time _validFrom;
+	private final Time _validUntil;
 
 	private TimeConstraint(Time validFrom, Time validUntil) {
 		_validFrom = validFrom;
@@ -33,9 +33,6 @@ public class TimeConstraint {
 
 	public boolean validNow() {
 		Time t = new Time(System.currentTimeMillis());
-		if (t.before(_validFrom) || t.after(_validUntil))
-			return false;
-		else
-			return true;
+		return !(t.before(_validFrom) || t.after(_validUntil));
 	}
 }

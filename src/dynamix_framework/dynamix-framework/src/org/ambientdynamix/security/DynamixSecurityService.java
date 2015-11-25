@@ -31,8 +31,8 @@ import android.util.Log;
  */
 public class DynamixSecurityService {
 	public final static String TAG = DynamixSecurityService.class.getSimpleName();
-	BundleContext bundleContext;
-	Context androidContext;
+	final BundleContext bundleContext;
+	final Context androidContext;
 
 	public DynamixSecurityService(Context androidContext, BundleContext bundleContext) {
 		this.bundleContext = bundleContext;

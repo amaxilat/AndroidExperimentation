@@ -37,7 +37,7 @@ public class SimpleNetworkSource  extends SimpleSourceBase implements IContextPl
 	// Private data
 	private static final long serialVersionUID = 876374968867546657L;
 	private final String TAG = this.getClass().getSimpleName();
-	private List<RepositoryInfo> repositoryServers = new Vector<RepositoryInfo>();
+	private final List<RepositoryInfo> repositoryServers = new Vector<>();
 	private boolean cancel;
 
 	public SimpleNetworkSource() {
@@ -82,10 +82,7 @@ public class SimpleNetworkSource  extends SimpleSourceBase implements IContextPl
 		if (this == candidate)
 			return true;
 		// make sure they are the same class
-		if (candidate == null || candidate.getClass() != getClass())
-			return false;
-		else
-			return true;
+		return !(candidate == null || candidate.getClass() != getClass());
 	}
 
 	/**
@@ -95,8 +92,8 @@ public class SimpleNetworkSource  extends SimpleSourceBase implements IContextPl
 	@Override
 	public List<DiscoveredContextPlugin> getContextPlugins(PLATFORM platform, VersionInfo platformVersion,
 			VersionInfo frameworkVersion) throws Exception {
-		List<DiscoveredContextPlugin> updates = new Vector<DiscoveredContextPlugin>();
-		List<ContextPlugin> plugs = new Vector<ContextPlugin>();
+		List<DiscoveredContextPlugin> updates = new Vector<>();
+		List<ContextPlugin> plugs = new Vector<>();
 		cancel = false;
 		InputStream stream = null;
 		for (RepositoryInfo repo : repositoryServers) {

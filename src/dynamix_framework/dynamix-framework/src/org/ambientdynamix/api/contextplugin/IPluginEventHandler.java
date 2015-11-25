@@ -26,12 +26,12 @@ public interface IPluginEventHandler {
 	/**
 	 * Registers the specified IPluginContextListener to receive events.
 	 */
-	public void addContextListener(IPluginContextListener listener);
+	void addContextListener(IPluginContextListener listener);
 
 	/**
 	 * Unregisters the specified IPluginContextListener from event reception.
 	 */
-	public void removeContextListener(IPluginContextListener listener);
+	void removeContextListener(IPluginContextListener listener);
 
 	/**
 	 * Sends an error message in response to a specific requestId.
@@ -43,11 +43,11 @@ public interface IPluginEventHandler {
 	 * @param errorMessage
 	 *            The error message.
 	 */
-	public void sendError(ContextPluginRuntime sender, UUID requestId, String errorMessage, int errorCode);
+	void sendError(ContextPluginRuntime sender, UUID requestId, String errorMessage, int errorCode);
 
 	/**
 	 * Sends the specified ContextDataSet to registered listeners using the specified ContextPluginRuntime as the event
 	 * sender.
 	 */
-	public void sendEvent(ContextPluginRuntime sender, ContextInfoSet dataSet);
+	void sendEvent(ContextPluginRuntime sender, ContextInfoSet dataSet);
 }

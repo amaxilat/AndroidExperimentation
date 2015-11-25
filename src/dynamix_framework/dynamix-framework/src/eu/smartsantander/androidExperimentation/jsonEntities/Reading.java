@@ -5,8 +5,8 @@ import java.io.Serializable;
 import com.google.gson.Gson;
 
 public class Reading implements Serializable {
-	public static enum Datatype {Integer,Float,String};
-	
+	public enum Datatype {Integer,Float,String}
+
 	private String context;
 	private String value;	
 	private Datatype type;

@@ -23,7 +23,6 @@ import android.net.NetworkInfo;
 import android.os.*;
 import android.util.Log;
 import android.util.Pair;
-import android.widget.Toast;
 
 import eu.smartsantander.androidExperimentation.util.Constants;
 import eu.smartsantander.androidExperimentation.DataStorage;
@@ -52,7 +51,6 @@ import org.ambientdynamix.update.contextplugin.DiscoveredContextPlugin;
 import org.ambientdynamix.update.contextplugin.IContextPluginConnector;
 import org.ambientdynamix.update.contextplugin.IContextPluginInstallListener;
 import org.ambientdynamix.util.AndroidForeground;
-import org.ambientdynamix.util.AndroidNotification;
 import org.ambientdynamix.util.ContextPluginRuntimeWrapper;
 import org.ambientdynamix.util.Utils;
 import org.osgi.framework.ServiceEvent;
@@ -64,7 +62,6 @@ import java.security.KeyStoreException;
 import java.security.NoSuchAlgorithmException;
 import java.security.cert.CertificateException;
 import java.security.cert.X509Certificate;
-import java.text.SimpleDateFormat;
 import java.util.*;
 
 /**
@@ -116,7 +113,7 @@ public final class DynamixService extends IntentService {
     private static volatile StartState startState = StartState.STOPPED;
     private static Activity baseActivity;
     private static UUID frameworkSessionId;
-    private static Handler uiHandler = new Handler();
+    private static final Handler uiHandler = new Handler();
     private static CountDownTimer contextPlugUpdateTimer;
     private static AppFacadeBinder facadeBinder = null;
     private static WebFacadeBinder webFacade = null;
@@ -132,23 +129,23 @@ public final class DynamixService extends IntentService {
     private ProgressDialog progressDialog = null;
     private static boolean embeddedMode = false; //smartsantander false->true
     private static ClassLoader embeddedHostClassLoader;
-    private static List<IDynamixFrameworkListener> frameworkListeners = new ArrayList<>();
+    private static final List<IDynamixFrameworkListener> frameworkListeners = new ArrayList<>();
     private static OrganicityNotificationManager notificationMgr;
     private static PendingIntent RESTART_INTENT;
     private static String keyStorePath;
     public static IDynamixListener dynamixCallback;
     public static IDynamixFacade dynamix;
     public static ServiceConnection sConnection;
-    public static ReadingStorage contextReadings = new ReadingStorage();
+    public static final ReadingStorage contextReadings = new ReadingStorage();
 
     //SmartSantanter
-    private static PhoneProfiler phoneProfiler = new PhoneProfiler();
+    private static final PhoneProfiler phoneProfiler = new PhoneProfiler();
     private static Boolean isInitialized = false;
-    private static Communication communication = new Communication();
+    private static final Communication communication = new Communication();
     private static Experiment experiment;
     private static Boolean connectionStatus = false;
-    private static LinkedList<String> experimentMessageQueue = new LinkedList<>();
-    private static Demon demon = new Demon();
+    private static final LinkedList<String> experimentMessageQueue = new LinkedList<>();
+    private static final Demon demon = new Demon();
     public static boolean sessionStarted;
     private static boolean restarting = false;
     private static long totalTimeConnectedOnline = 0;
@@ -564,16 +561,13 @@ public final class DynamixService extends IntentService {
         for (final int port : config.getWebConnectorPorts()) {
             try {
                 // loadAuthorizedCertsFromPath(Environment.getExternalStorageDirectory().getAbsolutePath());
-                if (startWebConnector(port, config.getWebConnectorTimeoutCheckMills(),
-                        config.getWebConnectorClientTimeoutMills(), getAuthorizedCertsFromKeyStore()))
-                    return true;
-                else
-                    return false;
+                return startWebConnector(port, config.getWebConnectorTimeoutCheckMills(),
+                        config.getWebConnectorClientTimeoutMills(), getAuthorizedCertsFromKeyStore());
             } catch (IOException e) {
                 Log.w(TAG, "Could not start web connector using port: " + port);
             }
         }
-        Log.w(TAG, "Failed to start web connector using specified ports: " + config.getWebConnectorPorts());
+        Log.w(TAG, "Failed to start web connector using specified ports: " + Arrays.toString(config.getWebConnectorPorts()));
         return false;
     }
 
@@ -583,7 +577,7 @@ public final class DynamixService extends IntentService {
      * protection on the keystore.
      */
     private synchronized static List<TrustedCert> getAuthorizedCertsFromKeyStore() {
-        final List<TrustedCert> authorizedCerts = new ArrayList<TrustedCert>();
+        final List<TrustedCert> authorizedCerts = new ArrayList<>();
         try {
             final KeyStore trusted = KeyStore.getInstance("BKS");
             final InputStream in = new FileInputStream(keyStorePath);
@@ -595,15 +589,7 @@ public final class DynamixService extends IntentService {
                 // Log.i(TAG, "Got Authorized Cert: " + cert);
                 authorizedCerts.add(new TrustedCert(alias, cert));
             }
-        } catch (KeyStoreException e) {
-            Log.w(TAG, e);
-        } catch (NotFoundException e) {
-            Log.w(TAG, e);
-        } catch (NoSuchAlgorithmException e) {
-            Log.w(TAG, e);
-        } catch (CertificateException e) {
-            Log.w(TAG, e);
-        } catch (IOException e) {
+        } catch (KeyStoreException | IOException | CertificateException | NoSuchAlgorithmException | NotFoundException e) {
             Log.w(TAG, e);
         }
         return authorizedCerts;
@@ -865,7 +851,7 @@ public final class DynamixService extends IntentService {
      */
     static void installPlugin(final ContextPlugin plug,
                               final IContextPluginInstallListener listener) {
-        final List<ContextPlugin> plugs = new Vector<ContextPlugin>();
+        final List<ContextPlugin> plugs = new Vector<>();
         plugs.add(plug);
         installPlugins(plugs, listener);
     }
@@ -2462,7 +2448,7 @@ public final class DynamixService extends IntentService {
                             try {
                                 Log.d(TAG, "Waiting for ContextManager to pause...");
                                 Thread.sleep(500);
-                            } catch (InterruptedException e) {
+                            } catch (InterruptedException ignored) {
                             }
                         }
                         /*
@@ -2517,7 +2503,7 @@ public final class DynamixService extends IntentService {
                         try {
                             Log.d(TAG, "Waiting for ContextManager to stop...");
                             Thread.sleep(500);
-                        } catch (InterruptedException e) {
+                        } catch (InterruptedException ignored) {
                         }
                     }
                     // Stop the OSGi manager
@@ -2543,7 +2529,7 @@ public final class DynamixService extends IntentService {
                     // Wait a bit so that final events can be sent out to clients
                     try {
                         Thread.sleep(1000);
-                    } catch (InterruptedException e) {
+                    } catch (InterruptedException ignored) {
                     }
                     // Kill the remote listeners
                     SessionManager.killRemoteListeners();
@@ -2610,7 +2596,7 @@ public final class DynamixService extends IntentService {
     /*
      * Boot state constants
      */
-    private static enum BootState {
+    private enum BootState {
         NOT_BOOTED, BOOTING, BOOTED
     }
 
@@ -2638,8 +2624,8 @@ public final class DynamixService extends IntentService {
             Log.i(TAG, "Received Dynamix Updates....");
             // Check if our trusted certs are up to date
             final List<TrustedCert> currentCerts = getAuthorizedCertsFromKeyStore();
-            final List<TrustedCert> removeCerts = new ArrayList<TrustedCert>();
-            final List<TrustedCertBinder> addCerts = new ArrayList<TrustedCertBinder>();
+            final List<TrustedCert> removeCerts = new ArrayList<>();
+            final List<TrustedCertBinder> addCerts = new ArrayList<>();
             // Create our lists of new certs to add
             for (final TrustedCertBinder cert : updates.getTrustedWebConnectorCerts()) {
                 boolean found = false;
@@ -2691,8 +2677,8 @@ public final class DynamixService extends IntentService {
      * Private internal class for handling checkForContextPluginUpdates()
      */
     private static class ContextPluginCallbackHandler implements IContextPluginUpdateListener {
-        IContextPluginUpdateListener callback;
-        Mode mode;
+        final IContextPluginUpdateListener callback;
+        final Mode mode;
 
         public ContextPluginCallbackHandler(final IContextPluginUpdateListener callback, final Mode mode) {
             this.callback = callback;

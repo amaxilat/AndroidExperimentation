@@ -118,7 +118,7 @@ public class ContextPluginConfigurationHostActivity extends Activity {
 					try {
 						Class<IContextPluginConfigurationViewFactory> factory = runtime.getSettingsViewFactory();
 						if (factory != null) {
-							viewFactory = (IContextPluginConfigurationViewFactory) factory.newInstance();
+							viewFactory = factory.newInstance();
 							final View v = viewFactory.initializeView(
 									runtime.getPluginFacade().getSecuredContext(runtime.getSessionId()), runtime,
 									TITLEBAR_HEIGHT);
@@ -170,7 +170,7 @@ public class ContextPluginConfigurationHostActivity extends Activity {
 				this.finish();
 			}
 		}
-	};
+	}
 
 	@Override
 	protected void onPause() {

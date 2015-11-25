@@ -35,7 +35,7 @@ public interface IPluginFacade {
 	 * @param sessionID
 	 *            The unique session id of the calling ContextPluginRuntime.
 	 */
-	public void closeConfigurationView(UUID sessionID);
+	void closeConfigurationView(UUID sessionID);
 
 	/**
 	 * Closes any context acquisition view associated with the Context Plugin.
@@ -43,7 +43,7 @@ public interface IPluginFacade {
 	 * @param sessionID
 	 *            The unique session id of the calling ContextPluginRuntime.
 	 */
-	public void closeContextAcquisitionView(UUID sessionID);
+	void closeContextAcquisitionView(UUID sessionID);
 
 	/**
 	 * Returns the ContextPluginSettings persisted for the given ContextPluginRuntime in the Dynamix Framework.
@@ -52,7 +52,7 @@ public interface IPluginFacade {
 	 *            The unique session id of the calling ContextPluginRuntime Returns a ContextPlugin-specific
 	 *            ContextPluginSettings object.
 	 */
-	public ContextPluginSettings getContextPluginSettings(UUID sessionID);
+	ContextPluginSettings getContextPluginSettings(UUID sessionID);
 
 	/**
 	 * Returns a secured version of the Android Context that is customized for the caller. The SecuredContext is
@@ -62,7 +62,7 @@ public interface IPluginFacade {
 	 *            The unique session id of the calling ContextPluginRuntime Returns a configured SecuredContext, or
 	 *            null if the sessionID is incorrect
 	 */
-	public Context getSecuredContext(UUID sessionID);
+	Context getSecuredContext(UUID sessionID);
 
 	/**
 	 * Returns the current PluginState for the ContextPluginRuntime
@@ -71,7 +71,7 @@ public interface IPluginFacade {
 	 *            The unique session id of the calling ContextPluginRuntime
 	 * @return The state of the calling ContextPluginRuntime
 	 */
-	public PluginState getState(UUID sessionID);
+	PluginState getState(UUID sessionID);
 
 	/**
 	 * Sets the ContextPluginRuntime's associated ContextPlugin to the configured or unconfigured state.
@@ -82,7 +82,7 @@ public interface IPluginFacade {
 	 *            True if the plugin is properly configured; false otherwise Returns true if the configuration status
 	 *            was set; false otherwise.
 	 */
-	public boolean setPluginConfiguredStatus(UUID sessionID, boolean configured);
+	boolean setPluginConfiguredStatus(UUID sessionID, boolean configured);
 
 	/**
 	 * Stores the ContextPluginSettings in the Dynamix Framework on behalf on the calling ContextPluginRuntime.
@@ -93,7 +93,7 @@ public interface IPluginFacade {
 	 *            The ContextPluginSettings to store Returns true if the settings were successfully stored; false
 	 *            otherwise.
 	 */
-	public boolean storeContextPluginSettings(UUID sessionID, ContextPluginSettings settings);
+	boolean storeContextPluginSettings(UUID sessionID, ContextPluginSettings settings);
 
 	/**
 	 * Adds a listener that will receive NFC events from Android
@@ -104,7 +104,7 @@ public interface IPluginFacade {
 	 *            The listener that should receive the event (as an Intent)
 	 * @return True if the listener was added; false otherwise.
 	 */
-	public boolean addNfcListener(UUID sessionID, NfcListener listener);
+	boolean addNfcListener(UUID sessionID, NfcListener listener);
 
 	/**
 	 * Removes a previously added NfcListener
@@ -115,7 +115,7 @@ public interface IPluginFacade {
 	 *            The NfcListener that should be removed.
 	 * @return True if the listener was removed; false otherwise.
 	 */
-	public boolean removeNfcListener(UUID sessionID, NfcListener listener);
+	boolean removeNfcListener(UUID sessionID, NfcListener listener);
 
 	/**
 	 * Sends a PluginAlert to Dynamix, which will show it to the user if the plug-in has permission.
@@ -126,7 +126,7 @@ public interface IPluginFacade {
 	 *            The PluginAlert
 	 * @return True if the alert was sent; false otherwise.
 	 */
-	public boolean sendPluginAlert(UUID sessionID, PluginAlert alert);
+	boolean sendPluginAlert(UUID sessionID, PluginAlert alert);
 
 	/**
 	 * Removes the context request id from Dynamix, which helps Dynamix lower its memory usage. This functionality
@@ -139,5 +139,5 @@ public interface IPluginFacade {
 	 *            The context requestId to be cancelled.
 	 * @return True if the request was cancelled; false otherwise.
 	 */
-	public boolean cancelContextRequestId(UUID sessionID, UUID requestId);
+	boolean cancelContextRequestId(UUID sessionID, UUID requestId);
 }

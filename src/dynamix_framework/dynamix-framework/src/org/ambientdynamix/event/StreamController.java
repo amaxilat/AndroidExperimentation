@@ -30,11 +30,11 @@ public class StreamController implements IStreamController {
 	private final String TAG = getClass().getSimpleName();
 	boolean cancel;
 	private boolean done;
-	private float maxPercentOfTotal;
-	private int checkPeriod;
-	private ActivityManager activityManager;
-	private long memoryThresholdBytes;
-	private long totalMemory;
+	private final float maxPercentOfTotal;
+	private final int checkPeriod;
+	private final ActivityManager activityManager;
+	private final long memoryThresholdBytes;
+	private final long totalMemory;
 
 	public StreamController(Context context, int checkPeriod, float maxPercentOfTotal) {
 		cancel = false;

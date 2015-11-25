@@ -29,7 +29,7 @@ import android.util.Log;
 public class PluginLooperThread extends Thread {
 	// Private data
 	private final String TAG = getClass().getSimpleName(); 
-	private ContextPlugin plug;
+	private final ContextPlugin plug;
 	private Looper looper;
 	// Public data
 	public Handler handler;

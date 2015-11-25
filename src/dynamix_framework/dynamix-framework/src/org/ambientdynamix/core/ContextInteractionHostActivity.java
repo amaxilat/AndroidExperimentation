@@ -177,7 +177,7 @@ public class ContextInteractionHostActivity extends Activity {
 														// Dynamically create the AcquisitionViewFactory
 														Class<IContextPluginInteractionViewFactory> factory = runtime
 																.getAcquisitionViewFactory();
-														viewFactory = (IContextPluginInteractionViewFactory) factory
+														viewFactory = factory
 																.newInstance();
 														// Create the View using the factory
 														View v = viewFactory.initializeView(runtime.getPluginFacade()
@@ -243,7 +243,7 @@ public class ContextInteractionHostActivity extends Activity {
 				this.finish();
 			}
 		}
-	};
+	}
 
 	@Override
 	protected void onPause() {

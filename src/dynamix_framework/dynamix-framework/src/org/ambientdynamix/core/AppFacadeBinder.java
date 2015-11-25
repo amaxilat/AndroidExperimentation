@@ -53,10 +53,10 @@ import android.util.Log;
 class AppFacadeBinder extends IDynamixFacade.Stub implements IDynamixFrameworkListener {
     // Private data
     private final String TAG = this.getClass().getSimpleName();
-    private Context context;
-    private boolean embeddedMode;
-    protected ContextManager conMgr;
-    protected static List<Integer> cachedUserIds = new Vector<Integer>();
+    private final Context context;
+    private final boolean embeddedMode;
+    protected final ContextManager conMgr;
+    protected static final List<Integer> cachedUserIds = new Vector<>();
 
     /**
      * Creates a AppFacadeBinder

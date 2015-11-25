@@ -36,10 +36,10 @@ import android.util.Log;
 public class SecuredSensorManager {
 	// Private data
 	private final String TAG = getClass().getSimpleName();
-	private SensorManager mgr;
-	private Handler handler;
-	private Looper plugLooper;
-	private Vector<SensorEventListener> listeners = new Vector<SensorEventListener>();
+	private final SensorManager mgr;
+	private final Handler handler;
+	private final Looper plugLooper;
+	private final Vector<SensorEventListener> listeners = new Vector<>();
 
 	/**
 	 * Creates a SecuredSensorManager using the incoming SensorManager and plug-in Looper.

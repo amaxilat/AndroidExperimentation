@@ -11,10 +11,10 @@ public class Demon extends Thread implements Runnable {
     private AsyncExpTask pingExp = new AsyncExpTask();
     private int counter = 0;
     private boolean started;
-    Handler handler;
+    final Handler handler;
     private final String TAG = this.getClass().getSimpleName();
 
-    private Runnable runnable = new Runnable() {
+    private final Runnable runnable = new Runnable() {
         @Override
         public void run() {
             if (DynamixService.isEnabled()) {

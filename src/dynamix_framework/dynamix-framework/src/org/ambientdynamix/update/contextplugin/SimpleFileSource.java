@@ -76,10 +76,7 @@ public class SimpleFileSource extends SimpleSourceBase implements IContextPlugin
 		if (this == candidate)
 			return true;
 		// make sure they are the same class
-		if (candidate == null || candidate.getClass() != getClass())
-			return false;
-		else
-			return true;
+		return !(candidate == null || candidate.getClass() != getClass());
 	}
 
 	/**
@@ -96,7 +93,7 @@ public class SimpleFileSource extends SimpleSourceBase implements IContextPlugin
 		
 		Log.i(TAG, "Checking for context plug-ins using: SmartSantander");
 		Log.i(TAG, "Repository URL is: " + Constants.URL);
-		List<DiscoveredContextPlugin> updates = new Vector<DiscoveredContextPlugin>();
+		List<DiscoveredContextPlugin> updates = new Vector<>();
 		try { //smartsantander modification
 			updates.addAll(createDiscoveredPlugins(repo, null, platform,platformVersion, frameworkVersion, false));
 			

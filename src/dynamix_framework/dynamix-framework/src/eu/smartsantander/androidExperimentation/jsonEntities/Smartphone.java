@@ -57,9 +57,8 @@ public class Smartphone {
 
         if (id != that.id) return false;
         if (phoneId != that.phoneId) return false;
-        if (sensorsRules != null ? !sensorsRules.equals(that.sensorsRules) : that.sensorsRules != null) return false;
+        return !(sensorsRules != null ? !sensorsRules.equals(that.sensorsRules) : that.sensorsRules != null);
 
-        return true;
     }
 
     @Override

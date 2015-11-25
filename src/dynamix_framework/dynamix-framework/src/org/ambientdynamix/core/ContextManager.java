@@ -94,25 +94,25 @@ import android.widget.Toast;
 class ContextManager implements IPluginContextListener, IPluginFacade {
     // Private data
     private final static String TAG = ContextManager.class.getSimpleName();
-    private Map<ContextPlugin, ContextPluginRuntimeWrapper> pluginMap = new ConcurrentHashMap<ContextPlugin, ContextPluginRuntimeWrapper>();
-    private Map<ContextPlugin, SecuredContext> securedContextMap = new ConcurrentHashMap<ContextPlugin, SecuredContext>();
-    private Map<ContextPlugin, PluginStats> statMap = new ConcurrentHashMap<ContextPlugin, PluginStats>();
-    private Map<ContextPlugin, List<NfcListener>> nfcListeners = new ConcurrentHashMap<ContextPlugin, List<NfcListener>>();
-    private static Map<ContextPlugin, PluginLooperThread> threadMap = new ConcurrentHashMap<ContextPlugin, PluginLooperThread>();
-    private Map<UUID, List<ContextRequest>> requestMap = new ConcurrentHashMap<UUID, List<ContextRequest>>();
-    private Map<ContextPlugin, Activity> configActivityMap = new ConcurrentHashMap<ContextPlugin, Activity>();
-    private Map<ContextPlugin, Activity> acquisitionActivityMap = new ConcurrentHashMap<ContextPlugin, Activity>();
-    private Map<ContextPlugin, PlugStopper> stopperMap = new ConcurrentHashMap<ContextPlugin, ContextManager.PlugStopper>();
+    private final Map<ContextPlugin, ContextPluginRuntimeWrapper> pluginMap = new ConcurrentHashMap<>();
+    private final Map<ContextPlugin, SecuredContext> securedContextMap = new ConcurrentHashMap<>();
+    private final Map<ContextPlugin, PluginStats> statMap = new ConcurrentHashMap<>();
+    private final Map<ContextPlugin, List<NfcListener>> nfcListeners = new ConcurrentHashMap<>();
+    private static final Map<ContextPlugin, PluginLooperThread> threadMap = new ConcurrentHashMap<>();
+    private final Map<UUID, List<ContextRequest>> requestMap = new ConcurrentHashMap<>();
+    private final Map<ContextPlugin, Activity> configActivityMap = new ConcurrentHashMap<>();
+    private final Map<ContextPlugin, Activity> acquisitionActivityMap = new ConcurrentHashMap<>();
+    private final Map<ContextPlugin, PlugStopper> stopperMap = new ConcurrentHashMap<>();
     /*
      * For pendingPluginStop: They key is the target plug-in, and the mapping (Boolean) is whether to destroy the
      * plug-in when the pending stop is executed.
      */
-    private Map<ContextPlugin, Boolean> pendingPluginStop = new ConcurrentHashMap<ContextPlugin, Boolean>();
+    private final Map<ContextPlugin, Boolean> pendingPluginStop = new ConcurrentHashMap<>();
     private static PowerScheme scheme = PowerScheme.BALANCED;
-    private Context context;
-    private ContextEventCache contextCache;
+    private final Context context;
+    private final ContextEventCache contextCache;
     private volatile StartState startState = StartState.STOPPED;
-    private Handler uiHandler = new Handler();
+    private final Handler uiHandler = new Handler();
     private int progressCount = 0;
     private ProgressDialog progressDialog = null;
     private Timer progressMonitorTimer = null;
@@ -263,34 +263,44 @@ class ContextManager implements IPluginContextListener, IPluginFacade {
                             String plugId = plug.getId();
                             Log.i(TAG, "AD:SmartSantander Installing Plugin " + plugId);
 
-                            if (plugId.equals("org.ambientdynamix.contextplugins.batteryLevelPlugin")) {
-                                sc = new SecuredContext(context, uiHandler, plt.getLooper(),
-                                        DynamixService.getContextPluginClassLoader(plug), false);
-                            } else if (plugId.equals("org.ambientdynamix.contextplugins.batteryTemperaturePlugin")) {
-                                sc = new SecuredContext(context, uiHandler, plt.getLooper(),
-                                        DynamixService.getContextPluginClassLoader(plug), false);
-                            } else if (plugId.equals("org.ambientdynamix.contextplugins.GpsPlugin")) {
-                                sc = new SecuredContext(context, uiHandler, plt.getLooper(),
-                                        DynamixService.getContextPluginClassLoader(plug), false);
-                            } else if (plugId.equals("org.ambientdynamix.contextplugins.WifiPlugin")) {
-                                sc = new SecuredContext(context, uiHandler, plt.getLooper(),
-                                        DynamixService.getContextPluginClassLoader(plug), false);
-                            } else if (plugId.equals("org.ambientdynamix.contextplugins.WifiScanPlugin")) {
-                                sc = new SecuredContext(context, uiHandler, plt.getLooper(),
-                                        DynamixService.getContextPluginClassLoader(plug), false);
-                            } else if (plugId.equals("org.ambientdynamix.contextplugins.TemperaturePlugin")) {
-                                sc = new SecuredContext(context, uiHandler, plt.getLooper(),
-                                        DynamixService.getContextPluginClassLoader(plug), false);
-                            } else if (plugId.equals("org.ambientdynamix.contextplugins.PressurePlugin")) {
-                                sc = new SecuredContext(context, uiHandler, plt.getLooper(),
-                                        DynamixService.getContextPluginClassLoader(plug), false);
-                            } else if (plugId.equals("org.ambientdynamix.contextplugins.HumidityPlugin")) {
-                                sc = new SecuredContext(context, uiHandler, plt.getLooper(),
-                                        DynamixService.getContextPluginClassLoader(plug), false);
-                            } else {
-                                sc = new SecuredContext(context, uiHandler, plt.getLooper(),
-                                        DynamixService.getContextPluginClassLoader(plug), true);
-                                securedContextMap.put(plug, sc);
+                            switch (plugId) {
+                                case "org.ambientdynamix.contextplugins.batteryLevelPlugin":
+                                    sc = new SecuredContext(context, uiHandler, plt.getLooper(),
+                                            DynamixService.getContextPluginClassLoader(plug), false);
+                                    break;
+                                case "org.ambientdynamix.contextplugins.batteryTemperaturePlugin":
+                                    sc = new SecuredContext(context, uiHandler, plt.getLooper(),
+                                            DynamixService.getContextPluginClassLoader(plug), false);
+                                    break;
+                                case "org.ambientdynamix.contextplugins.GpsPlugin":
+                                    sc = new SecuredContext(context, uiHandler, plt.getLooper(),
+                                            DynamixService.getContextPluginClassLoader(plug), false);
+                                    break;
+                                case "org.ambientdynamix.contextplugins.WifiPlugin":
+                                    sc = new SecuredContext(context, uiHandler, plt.getLooper(),
+                                            DynamixService.getContextPluginClassLoader(plug), false);
+                                    break;
+                                case "org.ambientdynamix.contextplugins.WifiScanPlugin":
+                                    sc = new SecuredContext(context, uiHandler, plt.getLooper(),
+                                            DynamixService.getContextPluginClassLoader(plug), false);
+                                    break;
+                                case "org.ambientdynamix.contextplugins.TemperaturePlugin":
+                                    sc = new SecuredContext(context, uiHandler, plt.getLooper(),
+                                            DynamixService.getContextPluginClassLoader(plug), false);
+                                    break;
+                                case "org.ambientdynamix.contextplugins.PressurePlugin":
+                                    sc = new SecuredContext(context, uiHandler, plt.getLooper(),
+                                            DynamixService.getContextPluginClassLoader(plug), false);
+                                    break;
+                                case "org.ambientdynamix.contextplugins.HumidityPlugin":
+                                    sc = new SecuredContext(context, uiHandler, plt.getLooper(),
+                                            DynamixService.getContextPluginClassLoader(plug), false);
+                                    break;
+                                default:
+                                    sc = new SecuredContext(context, uiHandler, plt.getLooper(),
+                                            DynamixService.getContextPluginClassLoader(plug), true);
+                                    securedContextMap.put(plug, sc);
+                                    break;
                             }
 
                             //
@@ -403,7 +413,7 @@ class ContextManager implements IPluginContextListener, IPluginFacade {
                     if (!plug.getSupportedContextTypes().contains(infoSet.getContextType()))
                         Log.e(TAG, "Context type: " + infoSet.getContextType() + " is not supported by plugin: " + plug);
                     // Get the context support associated with the infoSet's context type for all sessions.
-                    List<ContextSupport> contextSupport = new Vector<ContextSupport>();
+                    List<ContextSupport> contextSupport = new Vector<>();
                     for (DynamixSession session : SessionManager.getAllSessions()) {
                         contextSupport.addAll(session.getContextSupport(infoSet.getContextType()));
                     }
@@ -441,7 +451,7 @@ class ContextManager implements IPluginContextListener, IPluginFacade {
                         PluginStats stats = statMap.get(plug);
                         stats.handlePluginContextEvent(sourcedSet);
                         // Create a map of listeners and associated events
-                        Map<IDynamixListener, List<ContextEvent>> eventMap = new HashMap<IDynamixListener, List<ContextEvent>>();
+                        Map<IDynamixListener, List<ContextEvent>> eventMap = new HashMap<>();
                         // Handle event data of type BROADCAST
                         if (infoSet.getEventType() == EventType.BROADCAST) {
                             // Cache the SourcedContextInfoSet
@@ -471,12 +481,12 @@ class ContextManager implements IPluginContextListener, IPluginFacade {
                                                 List<ContextEvent> eventList = eventMap.get(sub.getDynamixListener());
                                                 // Create the List of ContextEvents, if necessary
                                                 if (eventList == null)
-                                                    eventList = new ArrayList<ContextEvent>();
+                                                    eventList = new ArrayList<>();
                                                 // Add the ContextEvent to the application's list of events
                                                 eventList.add(event);
                                             } else {
                                                 // Application does not yet exist in the eventMap... so add it
-                                                List<ContextEvent> eventList = new ArrayList<ContextEvent>();
+                                                List<ContextEvent> eventList = new ArrayList<>();
                                                 eventList.add(event);
                                                 eventMap.put(sub.getDynamixListener(), eventList);
                                             }
@@ -515,7 +525,7 @@ class ContextManager implements IPluginContextListener, IPluginFacade {
                                                         }
                                                         if (event != null) {
                                                             // Application does not yet exist in the eventMap... so add it
-                                                            List<ContextEvent> eventList = new ArrayList<ContextEvent>();
+                                                            List<ContextEvent> eventList = new ArrayList<>();
                                                             eventList.add(event);
                                                             eventMap.put(sup.getDynamixListener(), eventList);
                                                         } else {
@@ -771,11 +781,11 @@ class ContextManager implements IPluginContextListener, IPluginFacade {
     protected synchronized List<ContextSupport> addContextSupport(DynamixApplication app, IDynamixListener listener,
                                                                   String contextType, String pluginId) {
         // Create an empty list of supporting plugins to return
-        List<ContextSupport> supportInfo = new Vector<ContextSupport>();
+        List<ContextSupport> supportInfo = new Vector<>();
         // Grab the DynamixSession for the app
         DynamixSession session = SessionManager.getSession(app);
         // Create a combined list of plug-ins from the plugMap and available plug-ins (no duplicates!)
-        List<ContextPlugin> completePluginList = new ArrayList<ContextPlugin>();
+        List<ContextPlugin> completePluginList = new ArrayList<>();
         // First, add all installed plug-ins
         completePluginList.addAll(DynamixService.getInstalledContextPlugins());
         // Next, check the pluginMap for any stragglers (new, installing, etc).
@@ -821,7 +831,7 @@ class ContextManager implements IPluginContextListener, IPluginFacade {
             if (DynamixPreferences.autoContextPluginInstallEnabled(context)) {
                 Log.i(TAG, "addContextSupport did not find support for context type: " + contextType);
                 Log.i(TAG, "Checking for context support in available updates... ");
-                List<ContextPlugin> installPlugs = new ArrayList<ContextPlugin>();
+                List<ContextPlugin> installPlugs = new ArrayList<>();
                 // Check through the previously discovered plug-ins that have not yet been installed
                 for (PluginDiscoveryResult discoveryResult : UpdateManager.getNewContextPlugins()) {
                     // Check if the plug-in supports the specified context type
@@ -987,7 +997,7 @@ class ContextManager implements IPluginContextListener, IPluginFacade {
      * Returns an immutable list of all ContextPlugins currently managed by the ContextManager.
      */
     protected List<ContextPlugin> getAllContextPlugins() {
-        return new ArrayList<ContextPlugin>(Collections.unmodifiableSet((this.pluginMap.keySet())));
+        return new ArrayList<>(Collections.unmodifiableSet((this.pluginMap.keySet())));
     }
 
     /**
@@ -1030,7 +1040,7 @@ class ContextManager implements IPluginContextListener, IPluginFacade {
     protected ContextSupportResult getContextSupport(DynamixApplication app, IDynamixListener listener) {
         // Grab the cached app from Dynamix
         DynamixSession session = SessionManager.getSession(app);
-        List<ContextSupportInfo> subList = new Vector<ContextSupportInfo>();
+        List<ContextSupportInfo> subList = new Vector<>();
         if (session != null) {
             List<ContextSupport> subs = session.getContextSupport(listener);
             if (subs != null)
@@ -1146,7 +1156,7 @@ class ContextManager implements IPluginContextListener, IPluginFacade {
      */
     protected UUID registerRequestUUID(DynamixApplication app, IDynamixListener listener, ContextPlugin plug) {
         synchronized (requestMap) {
-            Vector<ContextRequest> request = new Vector<ContextRequest>();
+            Vector<ContextRequest> request = new Vector<>();
             request.add(new ContextRequest(app, listener, plug));
             UUID id = UUID.randomUUID();
             requestMap.put(id, request);
@@ -1714,7 +1724,7 @@ class ContextManager implements IPluginContextListener, IPluginFacade {
                         } else
                             Log.w(TAG, "NfcListener already registered for: " + plug);
                     } else {
-                        Vector<NfcListener> listeners = new Vector<NfcListener>();
+                        Vector<NfcListener> listeners = new Vector<>();
                         listeners.add(listener);
                         nfcListeners.put(plug, listeners);
                     }
@@ -1812,7 +1822,7 @@ class ContextManager implements IPluginContextListener, IPluginFacade {
             // if(!threadMap.containsKey(plug)){
             PluginLooperThread t = new PluginLooperThread(plug);
             // Set the thread name for performance profiling
-            t.setName(plug.getId().toString());
+            t.setName(plug.getId());
             // Set the plug-in's thread priority
             t.setPriority(getThreadPriorityForPowerScheme());
             // Start the plug-in's thread
@@ -1821,7 +1831,7 @@ class ContextManager implements IPluginContextListener, IPluginFacade {
             while (t.handler == null) {
                 try {
                     Thread.sleep(25);
-                } catch (InterruptedException e2) {
+                } catch (InterruptedException ignored) {
                 }
             }
             Log.d(TAG, "Registered LooperThread for: " + plug);
@@ -1993,7 +2003,7 @@ class ContextManager implements IPluginContextListener, IPluginFacade {
             // Check if the DynamixSession matches our requesting DynamixApplication
             if (session.isSessionOpen() && session.getApp().equals(app)) {
                 // Found it... now update the app with cached events
-                List<ContextEvent> events = new ArrayList<ContextEvent>();
+                List<ContextEvent> events = new ArrayList<>();
                 List<ContextEventCacheEntry> cacheSnapshot = null;
                 if (contextType != null)
                     cacheSnapshot = contextCache.getCachedEvents(contextType);
@@ -2048,7 +2058,7 @@ class ContextManager implements IPluginContextListener, IPluginFacade {
                     }
                 }
                 // Create an empty eventMap for event handling
-                Map<IDynamixListener, List<ContextEvent>> eventMap = new HashMap<IDynamixListener, List<ContextEvent>>();
+                Map<IDynamixListener, List<ContextEvent>> eventMap = new HashMap<>();
                 // If the SecuredEvent list is not empty, add the events to the eventMap
                 if (events.size() > 0) {
                     Log.v(TAG, "Found SecuredEvents for app: Total = " + events.size());
@@ -2161,13 +2171,12 @@ class ContextManager implements IPluginContextListener, IPluginFacade {
      */
     private class PlugStopper {
         private final String TAG = this.getClass().getSimpleName();
-        private ContextPlugin plug;
-        private ContextPluginRuntimeWrapper runtimeWrapper;
-        private PluginLooperThread thread;
-        private ContextPluginRuntime runtime;
-        ;
-        private boolean destroy;
-        private Timer timer = new Timer();
+        private final ContextPlugin plug;
+        private final ContextPluginRuntimeWrapper runtimeWrapper;
+        private final PluginLooperThread thread;
+        private final ContextPluginRuntime runtime;
+        private final boolean destroy;
+        private final Timer timer = new Timer();
 
         public PlugStopper(ContextPlugin plug, ContextPluginRuntimeWrapper runtimeWrapper, PluginLooperThread thread,
                            Context context, boolean destroy) {
@@ -2207,10 +2216,6 @@ class ContextManager implements IPluginContextListener, IPluginFacade {
                                 // TODO: This error handling is incomplete... we might still have state hanging
                                 // around
                                 cleanUp(true);
-                            } finally {
-                                // Quit the PluginLooper thread
-                                // Log.i(TAG, "Calling Quit on " + thread);
-                                // thread.quit();
                             }
                         } else
                             Log.e(TAG, "Runtime was null in PlugStopper for: " + plug);
@@ -2239,14 +2244,14 @@ class ContextManager implements IPluginContextListener, IPluginFacade {
 						 */
                         try {
                             Thread.sleep(1000);
-                        } catch (InterruptedException e1) {
+                        } catch (InterruptedException ignored) {
                         }
                         int count = 0;
                         while (runtimeWrapper.isExecuting()) {
                             count++;
                             try {
                                 Thread.sleep(100);
-                            } catch (InterruptedException e) {
+                            } catch (InterruptedException ignored) {
                             }
                             if (count > 40)
                                 break;
@@ -2261,7 +2266,7 @@ class ContextManager implements IPluginContextListener, IPluginFacade {
                             thread.interrupt();
                             try {
                                 Thread.sleep(1000);
-                            } catch (InterruptedException e) {
+                            } catch (InterruptedException ignored) {
                             }
                             if (runtimeWrapper.isExecuting()) {
                                 Log.e(TAG, plug + " did not stop in a timely manner... trying to kill thread");

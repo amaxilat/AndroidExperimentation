@@ -153,9 +153,8 @@ public class Experiment {
         if (status != null ? !status.equals(that.status) : that.status != null) return false;
         if (toTime != null ? !toTime.equals(that.toTime) : that.toTime != null) return false;
         if (url != null ? !url.equals(that.url) : that.url != null) return false;
-        if (userId != null ? !userId.equals(that.userId) : that.userId != null) return false;
+        return !(userId != null ? !userId.equals(that.userId) : that.userId != null);
 
-        return true;
     }
 
     @Override

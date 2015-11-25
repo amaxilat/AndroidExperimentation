@@ -58,11 +58,11 @@ import android.util.Log;
 public class WebConnector extends NanoHTTPD {
 	// Private data
 	private static WebConnector server;
-	private static Map<String, WebListenerManager<String>> listeners = new HashMap<String, WebListenerManager<String>>();
+	private static final Map<String, WebListenerManager<String>> listeners = new HashMap<>();
 	static final String TAG = WebConnector.class.getSimpleName();
 	private static RESTHandler restHandler;
 	private static WebFacadeBinder facade;
-	private static List<TrustedCert> authorizedCerts = new ArrayList<TrustedCert>();
+	private static final List<TrustedCert> authorizedCerts = new ArrayList<>();
 
 	/**
 	 * Singleton constructor.
@@ -292,15 +292,7 @@ public class WebConnector extends NanoHTTPD {
 								authorized.getCert().verify(cert.getPublicKey());
 								// Complete serve request
 								return doAuthorizedServe(r, uri, method, header, parms, files);
-							} catch (InvalidKeyException e) {
-								
-							} catch (CertificateException e) {
-								
-							} catch (NoSuchAlgorithmException e) {
-								
-							} catch (NoSuchProviderException e) {
-								
-							} catch (SignatureException e) {
+							} catch (InvalidKeyException | SignatureException | NoSuchProviderException | NoSuchAlgorithmException | CertificateException ignored) {
 								
 							}
 							// Log.i(TAG, cert.getSerialNumber() + " is VALID using " + authorized.getSerialNumber()
@@ -558,7 +550,7 @@ public class WebConnector extends NanoHTTPD {
 	protected void addListener(String token, String webAppUrl) {
 		synchronized (listeners) {
 			if (!listeners.keySet().contains(token)) {
-				WebListenerManager<String> q = new WebListenerManager<String>(new WebListener(webAppUrl, token, this));
+				WebListenerManager<String> q = new WebListenerManager<>(new WebListener(webAppUrl, token, this));
 				listeners.put(token, q);
 				Log.i(TAG, "Added WebListener: " + webAppUrl + " with token " + token);
 			} else
@@ -678,11 +670,11 @@ public class WebConnector extends NanoHTTPD {
 							try {
 								// Sleep for the check period
 								Thread.sleep(ListenerMonitor.checkPeriod);
-							} catch (InterruptedException e) {
+							} catch (InterruptedException ignored) {
 							}
 							if (!paused) {
 								// Create an ArrayList of tokens to remove
-								List<String> remove = new ArrayList<String>();
+								List<String> remove = new ArrayList<>();
 								// Remember the current time
 								Date now = new Date();
 								synchronized (listeners) {

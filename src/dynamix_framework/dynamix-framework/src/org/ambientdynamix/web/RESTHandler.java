@@ -61,7 +61,7 @@ public class RESTHandler {
 	public static final String RESEND_CACHED_EVENTS = "/resendCachedContextEvents";
 	public static final String OPEN_CONTEXT_PLUGIN_CONFIGURATION_VIEW = "/openContextPluginConfigurationView";
 	// Private data
-	private WebFacadeBinder facade;
+	private final WebFacadeBinder facade;
 	private final String TAG = this.getClass().getSimpleName();
 
 	/**
@@ -348,7 +348,7 @@ public class RESTHandler {
 	private void failOnMissingParam(Response r, String... missingParams) {
 		StringBuilder params = new StringBuilder();
 		for (String param : missingParams) {
-			params.append(param + " ");
+			params.append(param).append(" ");
 		}
 		Log.w(TAG, "Request missing parameters. Required Parameters: " + params.toString());
 		r.setText(ErrorCodes.MISSING_PARAMETERS + ",Required Parameters: " + params.toString());

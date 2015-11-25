@@ -4,7 +4,6 @@ import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
-import android.database.sqlite.SQLiteDatabase.CursorFactory;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.util.Pair;
 
@@ -63,14 +62,14 @@ public class DataStorage extends SQLiteOpenHelper {
 				+ ")";
 		SQLiteDatabase db = sInstance.getReadableDatabase();
 		Cursor cursor = db.rawQuery(query, null);
-		Pair<Long, String> idMessage = new Pair<Long, String>(0L, "");
+		Pair<Long, String> idMessage = new Pair<>(0L, "");
 		if (cursor.moveToFirst()) {
 			cursor.moveToFirst();
-			idMessage = new Pair<Long, String>(Long.parseLong(cursor
+			idMessage = new Pair<>(Long.parseLong(cursor
 					.getString(0)), cursor.getString(1));
 			cursor.close();
 		} else {
-			idMessage = new Pair<Long, String>(0L, "");
+			idMessage = new Pair<>(0L, "");
 		}
 		return idMessage;
 	}

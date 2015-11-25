@@ -76,8 +76,8 @@ public class ContextEvent extends Expirable implements Serializable, Parcelable 
 	private static final long serialVersionUID = 5110811252364172334L;
 	private final static String TAG = ContextEvent.class.getSimpleName();
 	private ContextPluginInformation eventSource;
-	private Map<String, String> contextRepresentationStrings = new HashMap<String, String>();
-	private Map<String, byte[]> contextRepresentationStringsBytes = new HashMap<String, byte[]>();
+	private Map<String, String> contextRepresentationStrings = new HashMap<>();
+	private final Map<String, byte[]> contextRepresentationStringsBytes = new HashMap<>();
 	private IContextInfo contextInfo;
 	private byte[] contextInfoBytes;
 	private String contextType;
@@ -87,7 +87,7 @@ public class ContextEvent extends Expirable implements Serializable, Parcelable 
 	private IStreamController streamController;
 	private UUID eventUUID = UUID.randomUUID();
 	private boolean useStreaming = false;
-	private boolean DEBUG = false;
+	private final boolean DEBUG = false;
 	private boolean autoWebEncode = true;
 	private String webEncodingFormat = PluginConstants.JSON_WEB_ENCODING;
 
@@ -114,10 +114,7 @@ public class ContextEvent extends Expirable implements Serializable, Parcelable 
 		super(timeStamp, expireMills);
 		this.contextInfo = eventInfo;
 		this.contextType = eventInfo.getContextType();
-		if (eventInfo != null)
-			attachContextInfo = true;
-		else
-			attachContextInfo = false;
+		attachContextInfo = eventInfo != null;
 		if (eventInfo.getStringRepresentationFormats() != null) {
 			for (String format : eventInfo.getStringRepresentationFormats()) {
 				contextRepresentationStrings.put(format, eventInfo.getStringRepresentation(format));
@@ -259,7 +256,7 @@ public class ContextEvent extends Expirable implements Serializable, Parcelable 
 			this.setExpireMills(in.readInt());
 			this.contextType = in.readString();
 			// Convert the byte stream back into string-based context representations
-			contextRepresentationStrings = new HashMap<String, String>();
+			contextRepresentationStrings = new HashMap<>();
 			// Read the number of formats present
 			int totalFormats = in.readInt();
 			// Read in each format
@@ -324,7 +321,7 @@ public class ContextEvent extends Expirable implements Serializable, Parcelable 
 						// Close the output stream
 						try {
 							out.close();
-						} catch (IOException e) {
+						} catch (IOException ignored) {
 						}
 					}
 				} else {

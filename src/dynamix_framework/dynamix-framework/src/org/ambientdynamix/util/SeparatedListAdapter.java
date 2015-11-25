@@ -42,12 +42,12 @@ import android.widget.BaseAdapter;
 public class SeparatedListAdapter extends BaseAdapter implements IObservableAdapter {
 	// Private data
 	private final String TAG = this.getClass().getSimpleName();
-	public final Map<String, EmptyListSupportAdapter<?>> sections = new LinkedHashMap<String, EmptyListSupportAdapter<?>>();
+	public final Map<String, EmptyListSupportAdapter<?>> sections = new LinkedHashMap<>();
 	public final ArrayAdapter<String> headers;
 	public final static int TYPE_SECTION_HEADER = 0;
 	//public final static int EMPTY = -2;
-	private Handler uiHandler = new Handler();
-	private DataSetObserver mDataSetObserver = new DataSetObserver() {
+	private final Handler uiHandler = new Handler();
+	private final DataSetObserver mDataSetObserver = new DataSetObserver() {
 		@Override
 		public void onChanged() {
 			uiHandler.post(new Runnable() {
@@ -62,12 +62,12 @@ public class SeparatedListAdapter extends BaseAdapter implements IObservableAdap
 	
 	public SeparatedListAdapter(Context context) {
 		super();
-		headers = new ArrayAdapter<String>(context, R.layout.list_header);
+		headers = new ArrayAdapter<>(context, R.layout.list_header);
 	}
 
 	public SeparatedListAdapter(Context context, int layoutId) {
 		super();
-		headers = new ArrayAdapter<String>(context, layoutId);
+		headers = new ArrayAdapter<>(context, layoutId);
 	}
 
 	public synchronized void addSection(String section, EmptyListSupportAdapter<?> adapter) {

@@ -16,9 +16,7 @@
 package org.ambientdynamix.core;
 
 import android.app.Activity;
-import android.app.AlertDialog;
 import android.app.PendingIntent;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.location.Location;
 import android.os.Bundle;
@@ -27,12 +25,8 @@ import android.util.Log;
 import android.view.ContextMenu;
 import android.view.ContextMenu.ContextMenuInfo;
 import android.view.Menu;
-import android.view.MenuItem;
 import android.view.View;
-import android.widget.AdapterView;
-import android.widget.AdapterView.AdapterContextMenuInfo;
 import android.widget.Button;
-import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.ToggleButton;
 
@@ -59,7 +53,6 @@ import java.util.Iterator;
 import java.util.Timer;
 import java.util.TimerTask;
 
-import eu.smartsantander.androidExperimentation.ActivityRecognitionService;
 import eu.smartsantander.androidExperimentation.fragment.SensorMeasurement;
 import eu.smartsantander.androidExperimentation.fragment.SensorMeasurementAdapter;
 import eu.smartsantander.androidExperimentation.jsonEntities.Reading;
@@ -67,7 +60,6 @@ import eu.smartsantander.androidExperimentation.jsonEntities.Report;
 import eu.smartsantander.androidExperimentation.operations.AsyncReportOnServerTask;
 import eu.smartsantander.androidExperimentation.operations.AsyncStatusRefreshTask;
 import eu.smartsantander.androidExperimentation.service.RegistrationIntentService;
-import eu.smartsantander.androidExperimentation.util.Constants;
 import us.feras.mdv.MarkdownView;
 
 /**
@@ -257,7 +249,7 @@ public class HomeActivity extends Activity implements GoogleApiClient.Connection
             @Override
             public void run() {
                 uiHandler.post(updateList);
-                ((HomeActivity) activity).refreshData();
+                refreshData();
             }
         };
         refresher.scheduleAtFixedRate(t, 0, 5000);
@@ -341,7 +333,7 @@ public class HomeActivity extends Activity implements GoogleApiClient.Connection
                 DynamixService.startFramework();
             }
             // Load the registered application List box
-            adapter = new DynamixApplicationAdapter(this, R.layout.icon_row, new ArrayList<DynamixApplication>(
+            adapter = new DynamixApplicationAdapter(this, R.layout.icon_row, new ArrayList<>(
                     DynamixService.SettingsManager.getAuthorizedApplications()), false);
             adapter.setNotifyOnChange(true);
 //            appList.setAdapter(adapter);
@@ -378,12 +370,12 @@ public class HomeActivity extends Activity implements GoogleApiClient.Connection
                                     // Add item to adapter
                                     try {
                                         if (next.contains("Longitude")) {
-                                            final Double doubleVal = new Double((Integer) obj.get(next));
+                                            final Double doubleVal = Double.valueOf((Integer) obj.get(next));
                                             if (doubleVal > 0) {
                                                 longitude = doubleVal;
                                             }
                                         } else if (next.contains("Latitude")) {
-                                            final Double doubleVal = new Double((Integer) obj.get(next));
+                                            final Double doubleVal = Double.valueOf((Integer) obj.get(next));
                                             if (doubleVal > 0) {
                                                 latitude = doubleVal;
                                             }
@@ -417,7 +409,7 @@ public class HomeActivity extends Activity implements GoogleApiClient.Connection
                                     }
                                 } catch (ClassCastException e) {
                                     try {
-                                        final Double doubleVal = new Double((Integer) obj.get(next));
+                                        final Double doubleVal = Double.valueOf((Integer) obj.get(next));
                                         if (doubleVal > 0) {
                                             SensorMeasurement measurement = new SensorMeasurement(next, doubleVal);
                                             sensorMeasurements.add(measurement);
@@ -488,17 +480,7 @@ public class HomeActivity extends Activity implements GoogleApiClient.Connection
     private boolean checkPlayServices() {
         GoogleApiAvailability apiAvailability = GoogleApiAvailability.getInstance();
         int resultCode = apiAvailability.isGooglePlayServicesAvailable(this);
-        if (resultCode != ConnectionResult.SUCCESS) {
-//            if (apiAvailability.isUserResolvableError(resultCode)) {
-////                apiAvailability.getErrorDialog(this, resultCode, PLAY_SERVICES_RESOLUTION_REQUEST)
-////                        .show();
-//            } else {
-//                Log.i(TAG, "This device is not supported.");
-//                finish();
-//            }
-            return false;
-        }
-        return true;
+        return resultCode == ConnectionResult.SUCCESS;
     }
 
 

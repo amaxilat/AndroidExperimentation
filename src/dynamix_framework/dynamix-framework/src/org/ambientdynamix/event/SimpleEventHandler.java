@@ -37,7 +37,7 @@ import android.util.Log;
 public class SimpleEventHandler implements IPluginEventHandler {
 	// Private data
 	private final String TAG = this.getClass().getSimpleName();
-	private List<IPluginContextListener> listeners = new Vector<IPluginContextListener>();
+	private final List<IPluginContextListener> listeners = new Vector<>();
 
 	/**
 	 * Adds a IPluginContextListener if it has not already been added.
@@ -62,7 +62,7 @@ public class SimpleEventHandler implements IPluginEventHandler {
 			final int errorCode) {
 		if (sender != null) {
 			if (responsetId != null) {
-				List<IPluginContextListener> snapshot = new Vector<IPluginContextListener>(listeners);
+				List<IPluginContextListener> snapshot = new Vector<>(listeners);
 				for (final IPluginContextListener l : snapshot) {
 					Utils.dispatch(new Runnable() {
 						@Override
@@ -90,7 +90,7 @@ public class SimpleEventHandler implements IPluginEventHandler {
 				if (infoSet.getEventType() == EventType.UNICAST && infoSet.getResponseId() == null) {
 					Log.w(TAG, "responseId was null for multicast event... aborting sendEvent");
 				} else {
-					List<IPluginContextListener> snapshot = new Vector<IPluginContextListener>(listeners);
+					List<IPluginContextListener> snapshot = new Vector<>(listeners);
 					for (final IPluginContextListener l : snapshot) {
 						Utils.dispatch(new Runnable() {
 							@Override

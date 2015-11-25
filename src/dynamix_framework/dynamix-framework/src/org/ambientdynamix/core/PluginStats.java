@@ -34,9 +34,9 @@ import android.util.Log;
 public class PluginStats {
 	// Private data
 	private final String TAG = this.getClass().getSimpleName();
-	private ArrayBlockingQueue<PluginStatsEvent> queue;
+	private final ArrayBlockingQueue<PluginStatsEvent> queue;
 	private int totalEvents;
-	private ContextPlugin plug;
+	private final ContextPlugin plug;
 
 	/**
 	 * Creates a PluginStats.
@@ -48,7 +48,7 @@ public class PluginStats {
 	 */
 	public PluginStats(ContextPlugin plug, int queueCapacity) {
 		this.plug = plug;
-		queue = new ArrayBlockingQueue<PluginStatsEvent>(queueCapacity);
+		queue = new ArrayBlockingQueue<>(queueCapacity);
 		if (FrameworkConstants.DEBUG)
 			Log.v(TAG, "Created PluginStats for: " + plug);
 	}
@@ -69,7 +69,7 @@ public class PluginStats {
 	public List<PluginStatsEvent> getPastEvents() {
 		synchronized (queue) {
 			PluginStatsEvent[] info = new PluginStatsEvent[queue.size()];
-			List<PluginStatsEvent> returnList = new ArrayList<PluginStatsEvent>();
+			List<PluginStatsEvent> returnList = new ArrayList<>();
 			Collections.addAll(returnList, queue.toArray(info));
 			return returnList;
 		}

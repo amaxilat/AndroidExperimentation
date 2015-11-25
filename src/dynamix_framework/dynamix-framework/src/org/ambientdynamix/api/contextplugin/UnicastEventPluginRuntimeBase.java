@@ -95,7 +95,7 @@ public abstract class UnicastEventPluginRuntimeBase extends ContextPluginRuntime
 	 *            The SecuredContextData to send
 	 */
 	public final void sendContextEvent(UUID responseId, SecuredContextInfo data) {
-		List<SecuredContextInfo> events = new Vector<SecuredContextInfo>();
+		List<SecuredContextInfo> events = new Vector<>();
 		events.add(data);
 		this.sendContextEvent(responseId, events);
 	}
@@ -111,7 +111,7 @@ public abstract class UnicastEventPluginRuntimeBase extends ContextPluginRuntime
 	 *            The length of time the SecuredContextData is valid (in milliseconds)
 	 */
 	public final void sendContextEvent(UUID responseId, SecuredContextInfo data, int expireMills) {
-		List<SecuredContextInfo> events = new Vector<SecuredContextInfo>();
+		List<SecuredContextInfo> events = new Vector<>();
 		events.add(data);
 		this.sendContextEvent(responseId, events, expireMills);
 	}

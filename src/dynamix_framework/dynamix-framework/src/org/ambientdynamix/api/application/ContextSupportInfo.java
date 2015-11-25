@@ -37,9 +37,9 @@ public class ContextSupportInfo implements Parcelable {
 		}
 	};
 	// Private data
-	private String contextType;
-	private String supportId;
-	private ContextPluginInformation plugin;
+	private final String contextType;
+	private final String supportId;
+	private final ContextPluginInformation plugin;
 
 	/**
 	 * Creates a ContextSupportInfo.

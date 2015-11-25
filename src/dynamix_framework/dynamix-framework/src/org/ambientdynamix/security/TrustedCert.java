@@ -28,9 +28,9 @@ import org.ambientdynamix.util.Utils;
  * 
  */
 public class TrustedCert {
-	private String alias;
+	private final String alias;
 	private String fingerprint; // SHA-1 hash of the cert
-	private X509Certificate cert;
+	private final X509Certificate cert;
 
 	public TrustedCert(String alias, X509Certificate cert) throws CertificateEncodingException,
 			NoSuchAlgorithmException {

@@ -220,7 +220,7 @@ public class PluginStatsActivity extends ListActivity {
 		if (stats != null) {
 			description.setText("Total events: " + stats.getTotalEvents());
 			//Log.i(TAG, "Got PluginStats for: " + stats.getPlug());
-			List<PluginStatsEvent> statList = new Vector<PluginStatsEvent>();
+			List<PluginStatsEvent> statList = new Vector<>();
 			statList.addAll(stats.getPastEvents());
 			adapter = new ContextPluginAdapter(this, R.layout.iconless_row, statList);
 			adapter.setNotifyOnChange(true);

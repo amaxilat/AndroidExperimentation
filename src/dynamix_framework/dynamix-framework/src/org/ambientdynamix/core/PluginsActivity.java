@@ -86,7 +86,7 @@ public class PluginsActivity extends ListActivity implements
     private static PluginsActivity activity;
     // final String INSTALLED_PLUGS_SECTION = "Installed Context Plug-ins";
     // final String NEW_PLUGS_SECTION = "Available Context Plug-ins";
-    private Map<PluginDiscoveryResult, Integer> installables = new Hashtable<PluginDiscoveryResult, Integer>();
+    private final Map<PluginDiscoveryResult, Integer> installables = new Hashtable<>();
     private ProgressDialog updateProgress = null;
     private InstalledContextPluginAdapter installedAdapter;
     private ContextPluginAdapter newPlugsAdapter;
@@ -134,8 +134,6 @@ public class PluginsActivity extends ListActivity implements
         if (newPlugsAdapter.getInstallableCount() == 0)
             refreshList();
     }
-
-    ;
 
     @Override
     public void onInstallProgress(ContextPlugin plug, int percentComplete) {
@@ -187,7 +185,7 @@ public class PluginsActivity extends ListActivity implements
                                             boolean toggleValue = !plug.isEnabled();
                                             plug.setEnabled(toggleValue);
                                         /*
-										 * This needs to re-init the plug-in
+                                         * This needs to re-init the plug-in
 										 * before starting it because the
 										 * plug-in had been destroyed.
 										 */
@@ -283,7 +281,7 @@ public class PluginsActivity extends ListActivity implements
         adapter.addSection(getString(R.string.available_context_plugins),
                 newPlugsAdapter);
         plugList.setAdapter(this.adapter);
-		/*
+        /*
 		 * Setup the OnItemClickListener for the plugList ListView. When
 		 * clicked, edit the plugin using the PluginDetailsActivity.
 		 */
@@ -321,7 +319,7 @@ public class PluginsActivity extends ListActivity implements
         btnInstallPlugs.setOnClickListener(new View.OnClickListener() {
             public void onClick(View view) {
                 // Send the selected updates to Dynamix for installation
-                List<ContextPlugin> plugs = new Vector<ContextPlugin>();
+                List<ContextPlugin> plugs = new Vector<>();
                 for (PluginDiscoveryResult ur : installables.keySet()) {
                     plugs.add(ur.getDiscoveredPlugin().getContextPlugin());
 
@@ -340,10 +338,9 @@ public class PluginsActivity extends ListActivity implements
 
     // SmartSantander
     private void updateSensorPermissionInfo() {
-        SharedPreferences pref = getApplicationContext().getSharedPreferences(
+        final SharedPreferences pref = getApplicationContext().getSharedPreferences(
                 "sensors", 0); // 0 - for private mode
-        Editor editor = pref.edit();
-
+        final Editor editor = pref.edit();
         for (ContextPluginInformation pl : DynamixService
                 .getAllContextPluginInfo()) {
             if (pl.isEnabled() == true) {
@@ -352,6 +349,7 @@ public class PluginsActivity extends ListActivity implements
                 editor.putBoolean(pl.getPluginName(), false);
             }
         }
+        editor.apply();
     }
 
     @Override
@@ -527,8 +525,7 @@ public class PluginsActivity extends ListActivity implements
             for (ContextPlugin plug : DynamixService.SettingsManager
                     .getInstalledContextPlugins()) {
                 if (plug.isInstalled()) {
-                    if (plug.getContextPluginInformation().getPluginId()
-                            .toString().contains("Experiment") == false)
+                    if (plug.getContextPluginInformation().getPluginId().contains("Experiment") == false)
                         installedAdapter.add(plug);
                 } else {
                     // Plug-in is registered in the settings, but not installed
@@ -625,8 +622,7 @@ public class PluginsActivity extends ListActivity implements
                         icon.setImageResource(di.getIconResId());
                     if (bt != null)
                         bt.setText(di.getStatusText());
-                    if (plug.getContextPluginInformation().getPluginId()
-                            .toString().contains("Experiment") == true) // SmartSantander
+                    if (plug.getContextPluginInformation().getPluginId().contains("Experiment") == true) // SmartSantander
                         v.setVisibility(View.GONE);
                 } else
                     Log.e(TAG, "Could not get ContextPlugin for position: "

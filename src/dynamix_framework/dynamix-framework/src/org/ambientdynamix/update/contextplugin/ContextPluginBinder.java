@@ -24,16 +24,12 @@ import java.util.Map;
 import org.ambientdynamix.api.application.AppConstants.ContextPluginType;
 import org.ambientdynamix.api.application.VersionInfo;
 import org.ambientdynamix.api.contextplugin.ContextPlugin;
-import org.ambientdynamix.api.contextplugin.DynamixFeatureInfo;
 import org.ambientdynamix.api.contextplugin.PluginConstants.PLATFORM;
 import org.ambientdynamix.api.contextplugin.PluginConstants.UpdatePriority;
 import org.ambientdynamix.api.contextplugin.security.Permission;
 import org.ambientdynamix.api.contextplugin.security.PrivacyRiskLevel;
 import org.ambientdynamix.util.RepositoryInfo;
 import org.ambientdynamix.util.Utils;
-import org.simpleframework.xml.Attribute;
-import org.simpleframework.xml.Element;
-import org.simpleframework.xml.ElementList;
 
 import eu.smartsantander.androidExperimentation.jsonEntities.Plugin;
 
@@ -46,27 +42,27 @@ import android.util.Log;
 //@Element(name = "contextPlugin")
 public class ContextPluginBinder
 {
-	private String TAG = getClass().getSimpleName();
+	private final String TAG = getClass().getSimpleName();
 	
-	String id = "";
-	String platform = "android";
-	String pluginVersion = "1.0.0";
-	String minPlatformVersion = "2.0";
-	String maxPlatformVersion = "3.0";
-	String minFrameworkVersion = "0.9.47";
-	String maxFrameworkVersion = "0.9.48";
-	String provider = "Dynamix Project";
-	boolean requiresConfiguration = false;
-	boolean hasConfigurationView = false;
-	String runtimeFactoryClass = "";
-	String name = "";
-	String description = "";
-	String pluginType = "REACTIVE";
-	List<String> supportedContextTypes = new ArrayList<String>();
-	List<String> permissions = new ArrayList<String>();
+	final String id = "";
+	final String platform = "android";
+	final String pluginVersion = "1.0.0";
+	final String minPlatformVersion = "2.0";
+	final String maxPlatformVersion = "3.0";
+	final String minFrameworkVersion = "0.9.47";
+	final String maxFrameworkVersion = "0.9.48";
+	final String provider = "Dynamix Project";
+	final boolean requiresConfiguration = false;
+	final boolean hasConfigurationView = false;
+	final String runtimeFactoryClass = "";
+	final String name = "";
+	final String description = "";
+	final String pluginType = "REACTIVE";
+	final List<String> supportedContextTypes = new ArrayList<>();
+	final List<String> permissions = new ArrayList<>();
 	String installUrl = "";
 	String updateUrl = "";
-	String repoType = "";
+	final String repoType = "";
 	
 	public DiscoveredContextPlugin createDiscoveredPlugin(RepositoryInfo source) throws Exception
 	{
@@ -93,7 +89,7 @@ public class ContextPluginBinder
 		newPlug.setContextPluginType(Utils.getEnumFromString(ContextPluginType.class, pluginType));
 		// Setup supported privacy risk levels
 
-		Map<PrivacyRiskLevel, String> riskLevelsMap = new HashMap<PrivacyRiskLevel, String>();			
+		Map<PrivacyRiskLevel, String> riskLevelsMap = new HashMap<>();
 //		for (PrivacyRiskLevelBinder rl : supportedPrivacyRiskLevels)
 //		{
 			PrivacyRiskLevel l = PrivacyRiskLevel.getLevelForString("LOW");
@@ -195,7 +191,7 @@ public class ContextPluginBinder
 		newPlug.setContextPluginType(Utils.getEnumFromString(ContextPluginType.class, pluginType));
 		// Setup supported privacy risk levels
 
-		Map<PrivacyRiskLevel, String> riskLevelsMap = new HashMap<PrivacyRiskLevel, String>();			
+		Map<PrivacyRiskLevel, String> riskLevelsMap = new HashMap<>();
 		PrivacyRiskLevel l = PrivacyRiskLevel.getLevelForString("LOW");
 		if (l != null && !riskLevelsMap.containsKey(l))
 			riskLevelsMap.put(l, description);
@@ -290,7 +286,7 @@ public class ContextPluginBinder
 			newPlug.setContextPluginType(Utils.getEnumFromString(ContextPluginType.class, pluginType));
 			// Setup supported privacy risk levels
 
-			Map<PrivacyRiskLevel, String> riskLevelsMap = new HashMap<PrivacyRiskLevel, String>();			
+			Map<PrivacyRiskLevel, String> riskLevelsMap = new HashMap<>();
 			PrivacyRiskLevel l = PrivacyRiskLevel.getLevelForString("LOW");
 			if (l != null && !riskLevelsMap.containsKey(l))
 				riskLevelsMap.put(l, description);

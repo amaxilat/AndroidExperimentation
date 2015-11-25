@@ -30,12 +30,9 @@ import java.security.cert.CertificateFactory;
 import java.security.cert.X509Certificate;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
 import java.util.TimeZone;
 
-import org.ambientdynamix.api.application.ContextPluginInformation;
-import org.ambientdynamix.api.application.ContextSupportInfo;
 import org.ambientdynamix.api.contextplugin.PluginConstants;
 import org.ambientdynamix.core.DynamixService;
 import org.ambientdynamix.util.base64.Base64;
@@ -59,9 +56,9 @@ import android.util.Log;
  * 
  */
 public class WebUtils {
-	private static String TAG = WebUtils.class.getSimpleName();
+	private static final String TAG = WebUtils.class.getSimpleName();
 	// Shared JSON Object mapper
-	private static ObjectMapper mapper = new ObjectMapper();
+	private static final ObjectMapper mapper = new ObjectMapper();
 	private static ActivityManager actMgr;
 	private static CertificateFactory certFactory;
 	private static PackageManager packMgr;
@@ -143,7 +140,7 @@ public class WebUtils {
 	 * apps.
 	 */
 	public static RunningAppProcessInfo getAppProcessForSocket(Socket socket) {
-		List<UidPortMapping> mappings = new ArrayList<WebUtils.UidPortMapping>();
+		List<UidPortMapping> mappings = new ArrayList<>();
 		// Check for connection type
 		if (socket.getInetAddress() instanceof java.net.Inet4Address) {
 			// Map all IPV4 connections
@@ -175,8 +172,8 @@ public class WebUtils {
 	 * Struct-like helper class that maps a locally bound network port to an app UID.
 	 */
 	private static class UidPortMapping {
-		private int uid; // The uid
-		private int port; // The uid's locally bound port
+		private final int uid; // The uid
+		private final int port; // The uid's locally bound port
 
 		UidPortMapping(int uid, int port) {
 			this.uid = uid;
@@ -191,7 +188,7 @@ public class WebUtils {
 	 */
 	private static List<UidPortMapping> getUidPortMappings(String path) {
 		// Create a return List of mappings
-		List<UidPortMapping> mappings = new ArrayList<WebUtils.UidPortMapping>();
+		List<UidPortMapping> mappings = new ArrayList<>();
 		try {
 			// Try to 'cat' the path
 			java.lang.Process proc = Runtime.getRuntime().exec(new String[] { "cat", path });

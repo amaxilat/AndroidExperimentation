@@ -140,10 +140,7 @@ public class DynamixPreferenceActivity extends PreferenceActivity {
 			public boolean onPreferenceChange(Preference preference, Object newValue) {
 				boolean enabled = (Boolean) newValue;
 				if (enabled) {
-					if (DynamixService.startWebConnectorUsingConfigData())
-						return true;
-					else
-						return false;
+					return DynamixService.startWebConnectorUsingConfigData();
 				} else {
 					DynamixService.stopWebConnector();
 					return true;

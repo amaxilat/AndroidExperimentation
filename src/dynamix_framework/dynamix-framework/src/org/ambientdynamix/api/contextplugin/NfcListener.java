@@ -26,5 +26,5 @@ public interface NfcListener {
 	/**
 	 * Event is raised when Dynamix dispatches a detected NFC event to requesting plug-ins.
 	 */
-	public void onNfcEvent(Intent i);
+	void onNfcEvent(Intent i);
 }

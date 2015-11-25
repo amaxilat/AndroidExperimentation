@@ -26,20 +26,20 @@ public interface IContextPluginInstallListener {
 	/**
 	 * Raised when the install is complete.
 	 */
-	public void onInstallComplete(ContextPlugin plug);
+	void onInstallComplete(ContextPlugin plug);
 
 	/**
 	 * Raised if the install fails.
 	 */
-	public void onInstallFailed(ContextPlugin plug, String message);
+	void onInstallFailed(ContextPlugin plug, String message);
 
 	/**
 	 * Raised when there is installation progress.
 	 */
-	public void onInstallProgress(ContextPlugin plug, int percentComplete);
+	void onInstallProgress(ContextPlugin plug, int percentComplete);
 
 	/**
 	 * Raised when the install is starts.
 	 */
-	public void onInstallStarted(ContextPlugin plug);
+	void onInstallStarted(ContextPlugin plug);
 }

@@ -33,80 +33,80 @@ public interface ISettingsManager {
 	/**
 	 * Adds the incoming application to the List of authorized applications.
 	 */
-	public abstract void addAuthorizedApplication(DynamixApplication app);
+	void addAuthorizedApplication(DynamixApplication app);
 
 	/**
 	 * Adds the specified ClassLoader to the ISettingsManager. Useful in some object-based database implementations.
 	 */
-	public abstract void addClassLoader(ClassLoader loader);
+	void addClassLoader(ClassLoader loader);
 
 	/**
 	 * Adds the ContextPlugin to the DynamixSettings object, for each authorized and pending application.
 	 */
-	public abstract boolean addContextPlugin(ContextPlugin plugin);
+	boolean addContextPlugin(ContextPlugin plugin);
 
 	/**
 	 * Adds the incoming application to the List of denied applications.
 	 */
-	public abstract void addDeniedApplication(DynamixApplication deniedApplication);
+	void addDeniedApplication(DynamixApplication deniedApplication);
 
 	/**
 	 * Adds the incoming application to the List of pending applications.
 	 */
-	public abstract boolean addPendingApplication(DynamixApplication app);
+	boolean addPendingApplication(DynamixApplication app);
 
 	/**
 	 * Adds the incoming application to the set of authorized applications. Note that the incoming app must be present
 	 * in the pending applications List. If it is, the application is removed from the pending list and added to the
 	 * authorized applications list. Returns true if the application was authorized; false, otherwise.
 	 */
-	public abstract boolean authorizePendingApplication(DynamixApplication app);
+	boolean authorizePendingApplication(DynamixApplication app);
 
 	/**
 	 * Returns true if the application ID is authorized; false, otherwise.
 	 */
-	public abstract boolean checkApplicationAuthorized(int appID);
+	boolean checkApplicationAuthorized(int appID);
 
 	/**
 	 * Returns true if the application ID is pending; false, otherwise.
 	 */
-	public abstract boolean checkApplicationPending(int appID);
+	boolean checkApplicationPending(int appID);
 
 	/**
 	 * Clears existing settings and creates a new, default settings object.
 	 */
-	public abstract void clearSettings();
+	void clearSettings();
 
 	/**
 	 * Closes the database and releases any acquired resources.
 	 */
-	public abstract void closeDatabase();
+	void closeDatabase();
 
 	/**
 	 * Returns the application for the provided appID from *either* the authorized or pending application lists. Returns
 	 * NULL, if the appID is not found.
 	 */
-	public abstract DynamixApplication getDynamixApplication(int appId);
+	DynamixApplication getDynamixApplication(int appId);
 
 	/**
 	 * Returns the authorized application for the provided appID. Returns NULL, if the appID is not found.
 	 */
-	public abstract DynamixApplication getAuthorizedApplication(int appId);
+	DynamixApplication getAuthorizedApplication(int appId);
 
 	/**
 	 * Returns a read-only List of authorized applications.
 	 */
-	public abstract List<DynamixApplication> getAuthorizedApplications();
+	List<DynamixApplication> getAuthorizedApplications();
 
 	/**
 	 * Returns the ContextPlugin associated with the incoming id.
 	 */
-	public abstract ContextPlugin getContextPlugin(String id);
+	ContextPlugin getContextPlugin(String id);
 
 	/**
 	 * Returns a read-only List of installed ContextPlugins.
 	 */
-	public abstract List<ContextPlugin> getInstalledContextPlugins();
+	List<ContextPlugin> getInstalledContextPlugins();
 
 	/**
 	 * Returns the ContextPluginSettings for the specified ContextPlugin
@@ -115,37 +115,37 @@ public interface ISettingsManager {
 	 *            The ContextPlugin requesting settings Returns the ContextPluginSettings for the specified
 	 *            ContextPlugin, or null if the ContextPlugin is not found.
 	 */
-	public abstract ContextPluginSettings getContextPluginSettings(ContextPlugin plug);
+	ContextPluginSettings getContextPluginSettings(ContextPlugin plug);
 
 	/**
 	 * Returns the List of pending ContextPlugins, which have been discovered but not installed.
 	 */
-	public abstract List<DiscoveredContextPlugin> getPendingContextPlugins();
+	List<DiscoveredContextPlugin> getPendingContextPlugins();
 
 	/**
 	 * Returns a read-only List of denied applications.
 	 */
-	public abstract List<DynamixApplication> getDeniedApplications();
+	List<DynamixApplication> getDeniedApplications();
 
 	/**
 	 * Returns a read-only List of pending applications.
 	 */
-	public abstract List<DynamixApplication> getPendingApplications();
+	List<DynamixApplication> getPendingApplications();
 
 	/**
 	 * Returns the current Dynamix Framework PowerScheme.
 	 */
-	public abstract PowerScheme getPowerScheme();
+	PowerScheme getPowerScheme();
 
 	/**
 	 * Returns the DynamixSettings object managed by the ISettingsManager
 	 */
-	public abstract DynamixSettings getSettings();
+	DynamixSettings getSettings();
 
 	/**
 	 * Returns True if Dynamix had a clean exit; false otherwise.
 	 */
-	public abstract Boolean hadCleanExit();
+	Boolean hadCleanExit();
 
 	/**
 	 * Opens the database using the specified database path. This method will always be called by the Dynamix Framework
@@ -156,24 +156,24 @@ public interface ISettingsManager {
 	 * @param path
 	 *            The path of the database to open.
 	 */
-	public abstract void openDatabase(String path) throws Exception;
+	void openDatabase(String path) throws Exception;
 
 	/**
 	 * Removes a DynamixApplication from the List of authorized applications. Returns true if the application was
 	 * remove; false, otherwise.
 	 */
-	public abstract boolean removeApplication(DynamixApplication app);
+	boolean removeApplication(DynamixApplication app);
 
 	/**
 	 * Removes the specified ClassLoader from the ISettingsManager. Useful in some object-based database
 	 * implementations.
 	 */
-	public abstract void removeClassLoader(ClassLoader loader);
+	void removeClassLoader(ClassLoader loader);
 
 	/**
 	 * Removes the ContextPlugin from the List of ContextPlugins.
 	 */
-	public abstract boolean removeContextPlugin(ContextPlugin plugin);
+	boolean removeContextPlugin(ContextPlugin plugin);
 
 	/**
 	 * Removes the ContextPluginSettings for the specified ContextPlugin.
@@ -181,12 +181,12 @@ public interface ISettingsManager {
 	 * @param plug
 	 *            Returns true if the ContextPluginSettings was removed; false otherwise.
 	 */
-	public abstract boolean removeContextPluginSettings(ContextPlugin plug);
+	boolean removeContextPluginSettings(ContextPlugin plug);
 
 	/**
 	 * Replaces the original plugin with the new plugin while maintaining all original settings
 	 */
-	public abstract boolean replaceContextPlugin(ContextPlugin originalPlugin, ContextPlugin newPlugin);
+	boolean replaceContextPlugin(ContextPlugin originalPlugin, ContextPlugin newPlugin);
 
 	/**
 	 * Sets if Dynamix had a clean exit.
@@ -194,17 +194,17 @@ public interface ISettingsManager {
 	 * @param cleanExit
 	 *            True if the exit was clean (no errors); false otherwise.
 	 */
-	public abstract void setCleanExit(Boolean cleanExit);
+	void setCleanExit(Boolean cleanExit);
 
 	/**
 	 * Sets the list of available ContextPluginUpdates.
 	 */
-	public abstract void setContextPluginUpdates(List<DiscoveredContextPlugin> updates);
+	void setContextPluginUpdates(List<DiscoveredContextPlugin> updates);
 
 	/**
 	 * Sets the current Dynamix Framework PowerScheme.
 	 */
-	public abstract void setPowerScheme(PowerScheme newScheme);
+	void setPowerScheme(PowerScheme newScheme);
 
 	/**
 	 * Replaces the specified ContextPlugin with the new ContextPluginSettings
@@ -215,22 +215,22 @@ public interface ISettingsManager {
 	 *            The new ContextPluginSettings object that should replace the existing settings. Returns true if the
 	 *            ContextPluginSettings was stored for the ContextPlugin; false otherwise.
 	 */
-	public abstract boolean storeContextPluginSettings(ContextPlugin plug, ContextPluginSettings settings);
+	boolean storeContextPluginSettings(ContextPlugin plug, ContextPluginSettings settings);
 
 	/**
 	 * Updates application privacy policies for all registered applications. Returns true if the policies were updated;
 	 * false otherwise.
 	 */
-	public abstract boolean updateAllApplicationPrivacyPolicies();
+	boolean updateAllApplicationPrivacyPolicies();
 
 	/**
 	 * Replaces the application with the incoming application, regardless if the app is pending or authorized. Returns
 	 * true if the application was updated; false, otherwise.
 	 */
-	public abstract boolean updateApplication(DynamixApplication app);
+	boolean updateApplication(DynamixApplication app);
 
 	/**
 	 * Updates the specified ContextPlugin.
 	 */
-	public abstract boolean updateContextPlugin(ContextPlugin plug);
+	boolean updateContextPlugin(ContextPlugin plug);
 }

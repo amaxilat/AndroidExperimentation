@@ -5,19 +5,19 @@ import java.util.Set;
 
 import eu.smartsantander.androidExperimentation.jsonEntities.Reading;
 public interface IPluginInfo {
-	public abstract String getStringRepresentation(String format);
+	String getStringRepresentation(String format);
 
-	public abstract String getImplementingClassname();
+	String getImplementingClassname();
 
-	public abstract String getContextType();
+	String getContextType();
 
-	public abstract Set<String> getStringRepresentationFormats();
+	Set<String> getStringRepresentationFormats();
 	
-	public abstract String getState();
+	String getState();
 
-	public abstract void setState(String state);
+	void setState(String state);
 	
-	public abstract String getPayload();
+	String getPayload();
 	
-	public abstract void setPayload(List<Reading> payload);
+	void setPayload(List<Reading> payload);
 }

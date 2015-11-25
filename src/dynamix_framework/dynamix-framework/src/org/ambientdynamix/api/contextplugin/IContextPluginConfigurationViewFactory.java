@@ -35,11 +35,11 @@ public interface IContextPluginConfigurationViewFactory {
 	 * @param titleBarHeight The title bar height.
 	 * @return The initialized View.
 	 */
-	public View initializeView(Context context, ContextPluginRuntime runtime, int titleBarHeight)
+	View initializeView(Context context, ContextPluginRuntime runtime, int titleBarHeight)
 			throws Exception;
 
 	/**
 	 * Destroy the view.
 	 */
-	public void destroyView() throws Exception;
+	void destroyView() throws Exception;
 }

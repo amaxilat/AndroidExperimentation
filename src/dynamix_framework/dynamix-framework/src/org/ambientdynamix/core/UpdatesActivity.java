@@ -61,7 +61,7 @@ public class UpdatesActivity extends ListActivity implements IContextPluginInsta
 	// Private data
 	private final String TAG = this.getClass().getSimpleName();
 	private static UpdatesActivity activity;
-	private Map<PluginDiscoveryResult, Integer> installables = new Hashtable<PluginDiscoveryResult, Integer>();
+	private final Map<PluginDiscoveryResult, Integer> installables = new Hashtable<>();
 	private SeparatedListAdapter adapter;
 	private ListView plugList = null;
 	private final Handler uiHandler = new Handler();
@@ -106,7 +106,7 @@ public class UpdatesActivity extends ListActivity implements IContextPluginInsta
 			installables.remove(r);
 		refreshList();
 		toast(message, Toast.LENGTH_LONG);
-	};
+	}
 
 	@Override
 	public void onInstallProgress(ContextPlugin plug, int percentComplete) {

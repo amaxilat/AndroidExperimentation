@@ -35,21 +35,20 @@ import android.util.Log;
  * A self-managing, threaded SecuredEvent cache that supports several configuration options. The ContextEventCache is
  * used to maintain a recent history of context events, along with their associated security information, for use in
  * re-provisioning context data on request by DynamixApplications.
- * 
+ *
  * @author Darren Carlson
  */
 public class ContextEventCache implements Runnable {
 	// Private data
 	private final String TAG = this.getClass().getSimpleName();
-	private int maxCacheMills;
-	private int cullInterval;
-	private int maxCapacity;
-	private volatile boolean running;
-	private ArrayBlockingQueue<ContextEventCacheEntry> queue;
+	private final int maxCacheMills;
+	private final int cullInterval;
+    private volatile boolean running;
+	private final ArrayBlockingQueue<ContextEventCacheEntry> queue;
 
 	/**
 	 * Creates a new ContextEventCache.
-	 * 
+	 *
 	 * @param maxCacheMills
 	 *            : The maximum time (in milliseconds) a CacheEntry is allowed to stay in the cache.
 	 * @param cullInterval
@@ -61,14 +60,13 @@ public class ContextEventCache implements Runnable {
 	public ContextEventCache(int maxCacheMills, int cullIntervalMills, int maxCapacity) {
 		this.maxCacheMills = maxCacheMills;
 		this.cullInterval = cullIntervalMills;
-		this.maxCapacity = maxCapacity;
-		queue = new ArrayBlockingQueue<ContextEventCacheEntry>(this.maxCapacity, true);
+		queue = new ArrayBlockingQueue<>(maxCapacity, true);
 	}
 
 	/* (non-Javadoc)
 	 * @see org.ambientdynamix.data.IContextEventCache#cacheEvent(org.ambientdynamix.api.contextplugin.ContextPlugin, org.ambientdynamix.event.SourcedContextInfoSet)
 	 */
-	
+
 	public synchronized void cacheEvent(ContextPlugin source, SourcedContextInfoSet eventGroup) {
 		if (FrameworkConstants.DEBUG)
 			Log.v(TAG, "Caching SourcedContextInfoSet: " + eventGroup + " from " + source);
@@ -91,7 +89,7 @@ public class ContextEventCache implements Runnable {
 	/* (non-Javadoc)
 	 * @see org.ambientdynamix.data.IContextEventCache#cacheEvent(org.ambientdynamix.api.application.IDynamixListener, org.ambientdynamix.api.contextplugin.ContextPlugin, org.ambientdynamix.event.SourcedContextInfoSet)
 	 */
-	
+
 	public synchronized void cacheEvent(IDynamixListener targetListener, ContextPlugin source,
 			SourcedContextInfoSet eventGroup) {
 		if (FrameworkConstants.DEBUG)
@@ -116,7 +114,7 @@ public class ContextEventCache implements Runnable {
 	/* (non-Javadoc)
 	 * @see org.ambientdynamix.data.IContextEventCache#cacheEvents(org.ambientdynamix.api.contextplugin.ContextPlugin, java.util.List)
 	 */
-	
+
 	public synchronized void cacheEvents(ContextPlugin source, List<SourcedContextInfoSet> eventGroups) {
 		for (SourcedContextInfoSet event : eventGroups) {
 			cacheEvent(source, event);
@@ -126,16 +124,16 @@ public class ContextEventCache implements Runnable {
 	/* (non-Javadoc)
 	 * @see org.ambientdynamix.data.IContextEventCache#getCachedEvents()
 	 */
-	
+
 	public List<ContextEventCacheEntry> getCachedEvents() {
-		return new Vector<ContextEventCacheEntry>(
+		return new Vector<>(
 				Arrays.asList(queue.toArray(new ContextEventCacheEntry[queue.size()])));
 	}
 
 	/* (non-Javadoc)
 	 * @see org.ambientdynamix.data.IContextEventCache#getCachedEvents(java.lang.String)
 	 */
-	
+
 	public List<ContextEventCacheEntry> getCachedEvents(String contextType) {
 		List<ContextEventCacheEntry> snapshot = getCachedEvents();
 		for (ContextEventCacheEntry e : snapshot) {
@@ -148,7 +146,7 @@ public class ContextEventCache implements Runnable {
 	/* (non-Javadoc)
 	 * @see org.ambientdynamix.data.IContextEventCache#removeContextEvents(org.ambientdynamix.api.contextplugin.ContextPlugin)
 	 */
-	
+
 	public void removeContextEvents(ContextPlugin plug) {
 		if (FrameworkConstants.DEBUG)
 			Log.v(TAG, "Removing events for: " + plug);
@@ -164,7 +162,7 @@ public class ContextEventCache implements Runnable {
 	/* (non-Javadoc)
 	 * @see org.ambientdynamix.data.IContextEventCache#removeContextEvents(org.ambientdynamix.api.application.IDynamixListener, java.lang.String)
 	 */
-	
+
 	public void removeContextEvents(IDynamixListener listener, String contextType) {
 		if (FrameworkConstants.DEBUG)
 			Log.v(TAG, "Removing events for: " + listener);
@@ -182,7 +180,7 @@ public class ContextEventCache implements Runnable {
 	/* (non-Javadoc)
 	 * @see org.ambientdynamix.data.IContextEventCache#run()
 	 */
-	
+
 	public void run() {
 		Log.i(TAG, "ContextEventCache is running!");
 		while (running) {
@@ -194,7 +192,7 @@ public class ContextEventCache implements Runnable {
 				e1.printStackTrace();
 				running = false;
 			}
-			List<ContextEventCacheEntry> remove = new ArrayList<ContextEventCacheEntry>();
+			List<ContextEventCacheEntry> remove = new ArrayList<>();
 			// Check for expired ContextData elements
 			Date now = new Date();
 			for (ContextEventCacheEntry e : queue) {
@@ -228,7 +226,7 @@ public class ContextEventCache implements Runnable {
 	/* (non-Javadoc)
 	 * @see org.ambientdynamix.data.IContextEventCache#start()
 	 */
-	
+
 	public synchronized void start() {
 		if (!running) {
 			Log.d(TAG, "Starting ContextEventCache...");
@@ -240,7 +238,7 @@ public class ContextEventCache implements Runnable {
 	/* (non-Javadoc)
 	 * @see org.ambientdynamix.data.IContextEventCache#stop()
 	 */
-	
+
 	public synchronized void stop() {
 		if (running) {
 			Log.d(TAG, "Stopping ContextEventCache...");

@@ -99,7 +99,7 @@ abstract class EventCommand extends IEventCommand {
 	 * EventCommand class used to process 'onContextSupportAdded' events.
 	 */
 	public static class ContextSupportAdded extends EventCommand {
-		protected ContextSupportInfo supportInfo;
+		protected final ContextSupportInfo supportInfo;
 
 		public ContextSupportAdded(ContextSupportInfo supportInfo) {
 			this.supportInfo = supportInfo;
@@ -121,7 +121,7 @@ abstract class EventCommand extends IEventCommand {
 	 * EventCommand class used to process 'onContextSupportRemoved' events.
 	 */
 	public static class ContextSupportRemoved extends EventCommand {
-		protected ContextSupportInfo supportInfo;
+		protected final ContextSupportInfo supportInfo;
 
 		public ContextSupportRemoved(ContextSupportInfo supportInfo) {
 			this.supportInfo = supportInfo;
@@ -143,7 +143,7 @@ abstract class EventCommand extends IEventCommand {
 	 * EventCommand class used to process 'onContextInfoTypeNotSupported' events.
 	 */
 	public static class ContextTypeNotSupported extends EventCommand {
-		protected String contextInfoType;
+		protected final String contextInfoType;
 
 		public ContextTypeNotSupported(String contextInfoType) {
 			this.contextInfoType = contextInfoType;
@@ -165,7 +165,7 @@ abstract class EventCommand extends IEventCommand {
 	 * EventCommand class used to process 'onContextPluginInstalled' events.
 	 */
 	public static class ContextPluginInstalled extends EventCommand {
-		private ContextPluginInformation plug;
+		private final ContextPluginInformation plug;
 
 		public ContextPluginInstalled(ContextPluginInformation plugin) {
 			this.plug = plugin;
@@ -187,8 +187,8 @@ abstract class EventCommand extends IEventCommand {
 	 * EventCommand class used to process 'onContextPluginInstalled' events.
 	 */
 	public static class ContextPluginInstallFailed extends EventCommand {
-		private ContextPluginInformation plug;
-		private String message;
+		private final ContextPluginInformation plug;
+		private final String message;
 
 		public ContextPluginInstallFailed(ContextPluginInformation plugin, String message) {
 			this.plug = plugin;
@@ -211,7 +211,7 @@ abstract class EventCommand extends IEventCommand {
 	 * EventCommand class used to process 'onContextPluginUninstalled' events.
 	 */
 	public static class ContextPluginUninstalledCommand extends EventCommand {
-		private ContextPluginInformation plug;
+		private final ContextPluginInformation plug;
 
 		public ContextPluginUninstalledCommand(ContextPluginInformation plugin) {
 			this.plug = plugin;
@@ -233,9 +233,9 @@ abstract class EventCommand extends IEventCommand {
 	 * EventCommand class used to process 'onContextRequestFailed' events.
 	 */
 	public static class ContextRequestFailed extends EventCommand {
-		private String requestId;
-		private String message;
-		private int errorCode;
+		private final String requestId;
+		private final String message;
+		private final int errorCode;
 
 		public ContextRequestFailed(String requestId, String message, int errorCode) {
 			this.requestId = requestId;
@@ -259,7 +259,7 @@ abstract class EventCommand extends IEventCommand {
 	 * EventCommand class used to process 'onInstallingContextPlugin' events.
 	 */
 	public static class ContextPluginInstalling extends EventCommand {
-		private ContextPluginInformation plug;
+		private final ContextPluginInformation plug;
 
 		public ContextPluginInstalling(ContextPluginInformation plugin) {
 			this.plug = plugin;
@@ -281,8 +281,8 @@ abstract class EventCommand extends IEventCommand {
 	 * EventCommand class used to process 'onContextPluginInstallProgress' events.
 	 */
 	public static class ContextPluginInstallProgress extends EventCommand {
-		private ContextPluginInformation plug;
-		private int percentComplete;
+		private final ContextPluginInformation plug;
+		private final int percentComplete;
 
 		public ContextPluginInstallProgress(ContextPluginInformation plugin, int percentComplete) {
 			this.plug = plugin;
@@ -305,8 +305,8 @@ abstract class EventCommand extends IEventCommand {
 	 * EventCommand class used to process 'onInstallingContextSupport' events.
 	 */
 	public static class InstallingContextSupport extends EventCommand {
-		protected ContextPluginInformation plugin;
-		protected String contextInfoType;
+		protected final ContextPluginInformation plugin;
+		protected final String contextInfoType;
 
 		public InstallingContextSupport(ContextPluginInformation plugin, String contextInfoType) {
 			this.plugin = plugin;
@@ -329,7 +329,7 @@ abstract class EventCommand extends IEventCommand {
 	 * EventCommand class used to process 'onListenerAdded' events.
 	 */
 	public static class ListenerAddedCommand extends EventCommand {
-		private String listenerId;
+		private final String listenerId;
 
 		public ListenerAddedCommand(String listenerId) {
 			this.listenerId = listenerId;
@@ -419,7 +419,7 @@ abstract class EventCommand extends IEventCommand {
 	 * EventCommand class used to process 'onSessionOpened' events
 	 */
 	public static class SessionOpenedCommand extends EventCommand {
-		private String sessionId;
+		private final String sessionId;
 
 		public SessionOpenedCommand(String sessionId) {
 			this.sessionId = sessionId;
@@ -461,7 +461,7 @@ abstract class EventCommand extends IEventCommand {
 	 * EventCommand class used to process 'onContextPluginDiscoveryFinished' events.
 	 */
 	public static class ContextPluginDiscoveryFinishedCommand extends EventCommand {
-		List<ContextPluginInformation> discoveredPlugins;
+		final List<ContextPluginInformation> discoveredPlugins;
 		
 		public ContextPluginDiscoveryFinishedCommand(List<ContextPluginInformation> discoveredPlugins){
 			this.discoveredPlugins = discoveredPlugins;
@@ -530,8 +530,8 @@ abstract class EventCommand extends IEventCommand {
 	 * EventCommand class used to process 'onContextPluginError' events.
 	 */
 	public static class ContextPluginErrorCommand extends EventCommand {
-		protected ContextPluginInformation plugin;
-		protected String errorMessage;
+		protected final ContextPluginInformation plugin;
+		protected final String errorMessage;
 
 		public ContextPluginErrorCommand(ContextPluginInformation plugin, String errorMessage) {
 			this.plugin = plugin;

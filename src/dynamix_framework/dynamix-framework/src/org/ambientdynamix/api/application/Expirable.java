@@ -44,7 +44,7 @@ public class Expirable implements Parcelable, Serializable {
 	};
 	// Private data
 	private Date timeStamp;
-	private Date expireTime;
+	private final Date expireTime;
 	private int expireMills = 0;
 
 	/**

@@ -18,6 +18,7 @@ package org.ambientdynamix.core;
 import java.lang.reflect.Field;
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Collections;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
@@ -74,9 +75,9 @@ import android.util.Log;
 class SessionManager {
 	// Private data
 	private final static String TAG = SessionManager.class.getSimpleName();
-	private static DynamixCallbackList<IDynamixListener> listeners = new DynamixCallbackList<IDynamixListener>();
-	private static Handler broadcastHandler = new Handler();
-	private static Map<Integer, DynamixSession> sessionMap = new ConcurrentHashMap<Integer, DynamixSession>();
+	private static DynamixCallbackList<IDynamixListener> listeners = new DynamixCallbackList<>();
+	private static final Handler broadcastHandler = new Handler();
+	private static final Map<Integer, DynamixSession> sessionMap = new ConcurrentHashMap<>();
 
 	// Singleton constructor
 	private SessionManager() {
@@ -158,7 +159,7 @@ class SessionManager {
 	 * Returns all context support provided by the specified ContextPlugin.
 	 */
 	protected static List<ContextSupport> getAllContextSupport(ContextPlugin plug) {
-		List<ContextSupport> subs = new ArrayList<ContextSupport>();
+		List<ContextSupport> subs = new ArrayList<>();
 		synchronized (sessionMap) {
 			for (DynamixSession s : sessionMap.values()) {
 				for (ContextSupport sub : s.getAllContextSupport()) {
@@ -226,7 +227,7 @@ class SessionManager {
 		broadcastHandler.post(new Runnable() {
 			public void run() {
 				listeners.kill();
-				listeners = new DynamixCallbackList<IDynamixListener>();
+				listeners = new DynamixCallbackList<>();
 			}
 		});
 	}
@@ -797,7 +798,7 @@ class SessionManager {
 	 */
 	protected static void sendEventCommand(final DynamixApplication app, final IDynamixListener receiver,
 			final IEventCommand eventCommand) {
-		List<IDynamixListener> receivers = new Vector<IDynamixListener>();
+		List<IDynamixListener> receivers = new Vector<>();
 		receivers.add(receiver);
 		DynamixSession session = getSession(app);
 		if (session != null)
@@ -822,7 +823,7 @@ class SessionManager {
 	 * have an established session yet (e.g., notifying that the listener was added).
 	 */
 	protected static void sendEventCommand(final IDynamixListener receiver, final IEventCommand eventCommand) {
-		List<IDynamixListener> receivers = new Vector<IDynamixListener>();
+		List<IDynamixListener> receivers = new Vector<>();
 		receivers.add(receiver);
 		doSendEventCommand(null, receivers, eventCommand, null);
 	}
@@ -833,7 +834,7 @@ class SessionManager {
 	 */
 	protected static void sendEventCommandAndRemoveReceiver(final IDynamixListener receiver,
 			final IEventCommand eventCommand) {
-		List<IDynamixListener> receivers = new Vector<IDynamixListener>();
+		List<IDynamixListener> receivers = new Vector<>();
 		receivers.add(receiver);
 		doSendEventCommand(null, receivers, eventCommand, receivers);
 	}
@@ -1063,10 +1064,8 @@ class SessionManager {
 	 *            The class to extract fields from.
 	 */
 	private static List<Field> getAllFields(Class<?> type) {
-		List<Field> fields = new ArrayList<Field>();
-		for (Field field : type.getDeclaredFields()) {
-			fields.add(field);
-		}
+		List<Field> fields = new ArrayList<>();
+		Collections.addAll(fields, type.getDeclaredFields());
 		if (type.getSuperclass() != null) {
 			fields.addAll(getAllFields(type.getSuperclass()));
 		}

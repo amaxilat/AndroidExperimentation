@@ -10,7 +10,7 @@ public class PluginList
 	
 	public PluginList()
 	{
-		plugList = new ArrayList<Plugin>();
+		plugList = new ArrayList<>();
 	}
 	
 	public void setPluginList(List<Plugin> plugList)

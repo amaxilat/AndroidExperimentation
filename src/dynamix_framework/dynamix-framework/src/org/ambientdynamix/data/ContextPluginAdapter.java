@@ -41,9 +41,9 @@ import android.widget.TextView;
 public class ContextPluginAdapter extends EmptyListSupportAdapter<PluginDiscoveryResult> {
 	// Private data
 	private final String TAG = this.getClass().getSimpleName();
-	private Map<PluginDiscoveryResult, Integer> installables;
-	private LayoutInflater inflator;
-	private boolean showAsUpdate;
+	private final Map<PluginDiscoveryResult, Integer> installables;
+	private final LayoutInflater inflator;
+	private final boolean showAsUpdate;
 
 	/**
 	 * Creates a ContextPluginAdapter.
@@ -134,9 +134,8 @@ public class ContextPluginAdapter extends EmptyListSupportAdapter<PluginDiscover
 				if (sum != null) {
 					if (showAsUpdate) {
 						StringBuilder updateText = new StringBuilder();
-						updateText.append(update.getTargetPlugin().getVersionInfo() + " to "
-								+ update.getDiscoveredPlugin().getContextPlugin().getVersionInfo() + "\n");
-						updateText.append(update.getDiscoveredPlugin().getPriority().toString() + " Update");
+						updateText.append(update.getTargetPlugin().getVersionInfo()).append(" to ").append(update.getDiscoveredPlugin().getContextPlugin().getVersionInfo()).append("\n");
+						updateText.append(update.getDiscoveredPlugin().getPriority().toString()).append(" Update");
 						sum.setText(updateText);
 					} else
 						sum.setText(update.getDiscoveredPlugin().getContextPlugin().getDescription());

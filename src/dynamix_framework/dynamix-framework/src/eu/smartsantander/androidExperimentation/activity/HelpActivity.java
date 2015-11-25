@@ -9,7 +9,7 @@ import org.ambientdynamix.core.R;
 import eu.smartsantander.androidExperimentation.util.CustomPagerAdapter;
 
 /**
- * Created by amaxilatis on 10/12/15.
+ * Help for new users.
  */
 public class HelpActivity extends Activity {
     private CustomPagerAdapter mCustomPagerAdapter;

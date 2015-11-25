@@ -43,11 +43,11 @@ public class AndroidForeground {
     public static final Class[] mStartForegroundSignature = new Class[]{int.class, Notification.class};
     public static final Class[] mStopForegroundSignature = new Class[]{boolean.class};
     // Private data
-    private NotificationManager mNM;
-    private Method mStartForeground;
-    private Method mStopForeground;
-    private Object[] mStartForegroundArgs = new Object[2];
-    private Object[] mStopForegroundArgs = new Object[1];
+    private final NotificationManager mNM;
+    private final Method mStartForeground;
+    private final Method mStopForeground;
+    private final Object[] mStartForegroundArgs = new Object[2];
+    private final Object[] mStopForegroundArgs = new Object[1];
 
     /**
      * Creates an AndroidForeground.
@@ -64,14 +64,11 @@ public class AndroidForeground {
     public void startForegroundCompat(int id, Notification notification, Service s) {
         // If we have the new startForeground API, then use it.
         if (mStartForeground != null) {
-            mStartForegroundArgs[0] = Integer.valueOf(id);
+            mStartForegroundArgs[0] = id;
             mStartForegroundArgs[1] = notification;
             try {
                 mStartForeground.invoke(s, mStartForegroundArgs);
-            } catch (InvocationTargetException e) {
-                // Should not happen.
-                Log.w(TAG, "Unable to invoke startForeground", e);
-            } catch (IllegalAccessException e) {
+            } catch (InvocationTargetException | IllegalAccessException e) {
                 // Should not happen.
                 Log.w(TAG, "Unable to invoke startForeground", e);
             }
@@ -93,10 +90,7 @@ public class AndroidForeground {
             mStopForegroundArgs[0] = Boolean.TRUE;
             try {
                 mStopForeground.invoke(s, mStopForegroundArgs);
-            } catch (InvocationTargetException e) {
-                // Should not happen.
-                Log.w(TAG, "Unable to invoke stopForeground", e);
-            } catch (IllegalAccessException e) {
+            } catch (InvocationTargetException | IllegalAccessException e) {
                 // Should not happen.
                 Log.w(TAG, "Unable to invoke stopForeground", e);
             }

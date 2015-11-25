@@ -70,7 +70,7 @@ public class Downloader
 		{
 		       Log.d("DownloadManager", "Error: " + e);
 			e.printStackTrace();
-		       throw (Exception) e;
+		       throw e;
 		}
 	}
 }

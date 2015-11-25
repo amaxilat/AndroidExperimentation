@@ -76,7 +76,7 @@ public class Utils {
 		} finally {
 			try {
 				baos.close();
-			} catch (IOException e) {
+			} catch (IOException ignored) {
 			}
 		}
 		Log.v(TAG, "Unzipped buffer decompressed size: " + buffer.length);
@@ -109,7 +109,7 @@ public class Utils {
 		} finally {
 			try {
 				baos.close();
-			} catch (IOException e) {
+			} catch (IOException ignored) {
 			}
 		}
 		Log.v(TAG, "Unzipping text has size: " + s.getBytes().length);
@@ -147,11 +147,11 @@ public class Utils {
 		} finally {
 			try {
 				gz.close();
-			} catch (Exception e) {
+			} catch (Exception ignored) {
 			}
 			try {
 				bos.close();
-			} catch (Exception e) {
+			} catch (Exception ignored) {
 			}
 		}
 		bArray = bos.toByteArray();
@@ -191,11 +191,11 @@ public class Utils {
 		} finally {
 			try {
 				gz.close();
-			} catch (IOException e) {
+			} catch (IOException ignored) {
 			}
 			try {
 				bos.close();
-			} catch (IOException e) {
+			} catch (IOException ignored) {
 			}
 		}
 		bArray = bos.toByteArray();

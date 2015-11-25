@@ -99,14 +99,14 @@ public class HTTPServer extends Thread {
 			StringTokenizer tokenizer = new StringTokenizer(headerLine);
 			String httpMethod = tokenizer.nextToken();
 			String httpQueryString = tokenizer.nextToken();
-			StringBuffer responseBuffer = new StringBuffer();
+			StringBuilder responseBuffer = new StringBuilder();
 			responseBuffer.append("<b> This is the HTTP Server Home Page.... </b><BR>");
 			responseBuffer.append("The HTTP Client request is ....<BR>");
 			String contentTypeLine = "Content-Type: text/html" + "\r\n";
 			System.out.println("The HTTP request string is ....");
 			while (inFromClient.ready()) {
 				// Read the HTTP complete HTTP Query
-				responseBuffer.append(requestString + "<BR>");
+				responseBuffer.append(requestString).append("<BR>");
 				System.out.println(requestString);
 				requestString = inFromClient.readLine();
 			}

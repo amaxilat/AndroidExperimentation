@@ -16,11 +16,6 @@ package eu.smartsantander.androidExperimentation.service;
  */
 
 import android.app.NotificationManager;
-import android.app.PendingIntent;
-import android.content.Context;
-import android.content.Intent;
-import android.media.RingtoneManager;
-import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.NotificationCompat;
 import android.util.Log;
@@ -64,14 +59,12 @@ public class MyGcmListenerService extends GcmListenerService {
                 switch (gcmMessageData.getType()) {
                     case "encourage":
                         Log.i(TAG, "is an encourage message");
-                        messageShort = new StringBuilder()
-                                .append(gcmMessageData.getCount())
-                                .append(" measurements collected!").toString();
-                        notificationMessage = new StringBuilder()
-                                .append("You collected ")
-                                .append(gcmMessageData.getCount())
-                                .append(" measurements so far today. ")
-                                .append("Keep up the good work.").toString();
+                        messageShort = String.valueOf(gcmMessageData.getCount()) +
+                                " measurements collected!";
+                        notificationMessage = "You collected " +
+                                gcmMessageData.getCount() +
+                                " measurements so far today. " +
+                                "Keep up the good work.";
                         notificationTitle = "Horray!";
                         break;
                     default:

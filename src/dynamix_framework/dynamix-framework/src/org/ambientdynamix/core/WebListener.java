@@ -19,7 +19,6 @@ import java.io.FileDescriptor;
 import java.text.SimpleDateFormat;
 import java.util.Iterator;
 import java.util.List;
-import java.util.Map;
 import java.util.TimeZone;
 
 import org.ambientdynamix.api.application.ContextEvent;
@@ -29,7 +28,6 @@ import org.ambientdynamix.api.application.IDynamixListener;
 import org.ambientdynamix.api.contextplugin.PluginConstants;
 import org.ambientdynamix.web.WebUtils;
 
-import com.fasterxml.jackson.core.TreeNode;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.node.ObjectNode;
@@ -49,12 +47,12 @@ import android.util.Log;
 public class WebListener implements IDynamixListener {
 	// Private data
 	private final String TAG = this.getClass().getSimpleName();
-	private WebConnector connector;
-	private IBinder binder;
-	private String webAppUrl;
-	private String token;
+	private final WebConnector connector;
+	private final IBinder binder;
+	private final String webAppUrl;
+	private final String token;
 	private boolean sessionOpen = false;
-	private ObjectMapper mapper = new ObjectMapper();
+	private final ObjectMapper mapper = new ObjectMapper();
 
 	/**
 	 * Creates a WebListener for the specified web app.
@@ -468,7 +466,7 @@ public class WebListener implements IDynamixListener {
 	 */
 	private class WebBinder implements IBinder {
 		// Private data
-		private int id;
+		private final int id;
 
 		public WebBinder(int id) {
 			this.id = id;

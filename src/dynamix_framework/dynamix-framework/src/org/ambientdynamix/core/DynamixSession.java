@@ -42,12 +42,12 @@ class DynamixSession implements Serializable {
 	// Private data
 	private static final long serialVersionUID = -2174448383460352412L;
 	private final String TAG = this.getClass().getSimpleName();
-	private int processId;
+	private final int processId;
 	private UUID sessionId;
 	private DynamixApplication app;
-	private Map<IBinder, IDynamixListener> binderMap = new ConcurrentHashMap<IBinder, IDynamixListener>();
-	private Map<IBinder, UUID> listenerMap = new ConcurrentHashMap<IBinder, UUID>();
-	private Map<IBinder, List<ContextSupport>> contextSupportMap = new ConcurrentHashMap<IBinder, List<ContextSupport>>();
+	private final Map<IBinder, IDynamixListener> binderMap = new ConcurrentHashMap<>();
+	private final Map<IBinder, UUID> listenerMap = new ConcurrentHashMap<>();
+	private final Map<IBinder, List<ContextSupport>> contextSupportMap = new ConcurrentHashMap<>();
 
 	/**
 	 * Creates a DynamixSession using the processId
@@ -134,7 +134,7 @@ class DynamixSession implements Serializable {
 						}
 					} else {
 						// No support yet, so set it up
-						List<ContextSupport> supportList = new Vector<ContextSupport>();
+						List<ContextSupport> supportList = new Vector<>();
 						supportList.add(contextSupport);
 						contextSupportMap.put(listener.asBinder(), supportList);
 						Log.d(TAG, "Added context support for: " + listener);
@@ -212,7 +212,7 @@ class DynamixSession implements Serializable {
 	 * Returns all context support registrations for the session.
 	 */
 	public List<ContextSupport> getAllContextSupport() {
-		List<ContextSupport> subs = new ArrayList<ContextSupport>();
+		List<ContextSupport> subs = new ArrayList<>();
 		synchronized (contextSupportMap) {
 			for (List<ContextSupport> l : contextSupportMap.values())
 				subs.addAll(l);
@@ -224,7 +224,7 @@ class DynamixSession implements Serializable {
 	 * Returns a list of the specified listener's context support.
 	 */
 	public List<ContextSupport> getContextSupport(IDynamixListener listener) {
-		Vector<ContextSupport> returnList = new Vector<ContextSupport>();
+		Vector<ContextSupport> returnList = new Vector<>();
 		List<ContextSupport> subs = contextSupportMap.get(listener.asBinder());
 		// Need a null check otherwise Vector 'addAll' throws NPEs
 		if (subs != null)
@@ -236,7 +236,7 @@ class DynamixSession implements Serializable {
 	 * Returns a list of registered context support matching the specified contextType string.
 	 */
 	public synchronized List<ContextSupport> getContextSupport(String contextType) {
-		List<ContextSupport> returnList = new Vector<ContextSupport>();
+		List<ContextSupport> returnList = new Vector<>();
 		for (List<ContextSupport> subs : contextSupportMap.values())
 			for (ContextSupport sub : subs)
 				if (sub.getContextType().equalsIgnoreCase(contextType))
@@ -290,7 +290,7 @@ class DynamixSession implements Serializable {
 	 * Returns the registered listeners for this session.
 	 */
 	public synchronized List<IDynamixListener> getDynamixListeners() {
-		return new Vector<IDynamixListener>(binderMap.values());
+		return new Vector<>(binderMap.values());
 	}
 
 	/**
@@ -389,7 +389,7 @@ class DynamixSession implements Serializable {
 	 */
 	public synchronized void removeAllContextSupport(boolean notify) {
 		// Create a snapshot of the support registrations
-		List<ContextSupport> supportSnapshot = new Vector<ContextSupport>();
+		List<ContextSupport> supportSnapshot = new Vector<>();
 		for (IBinder listener : contextSupportMap.keySet()) {
 			supportSnapshot.addAll(contextSupportMap.get(listener));
 		}
@@ -407,7 +407,7 @@ class DynamixSession implements Serializable {
 	 */
 	public synchronized void removeContextSupport(IDynamixListener listener, boolean notify) {
 		Log.d(TAG, "removeContextSupport for: " + listener);
-		List<ContextSupport> removeList = new ArrayList<ContextSupport>();
+		List<ContextSupport> removeList = new ArrayList<>();
 		List<ContextSupport> supportSnapshot = contextSupportMap.get(listener.asBinder());
 		if (supportSnapshot != null) {
 			for (ContextSupport support : supportSnapshot)
@@ -429,7 +429,7 @@ class DynamixSession implements Serializable {
 	 */
 	public synchronized void removeContextSupportFromPlugin(ContextPlugin plug, boolean notify) {
 		Log.d(TAG, "removeContextSupportForPlugin for: " + plug);
-		List<ContextSupport> removeList = new ArrayList<ContextSupport>();
+		List<ContextSupport> removeList = new ArrayList<>();
 		// Create a snapshot of all support registrations
 		Collection<List<ContextSupport>> allSupportRegistrations = contextSupportMap.values();
 		// Go through all support registrations, storing those that match the plug-in

@@ -51,23 +51,23 @@ public class DynamixSettings {
 	/**
 	 * List of all applications that are authorized to receive ContextEvents.
 	 */
-	private List<DynamixApplication> authorizedApplications = new Vector<DynamixApplication>();
+	private final List<DynamixApplication> authorizedApplications = new Vector<>();
 	/**
 	 * List of all applications that have requested Dynamix Service but are not yet authorized to receive ContextEvents.
 	 */
-	private List<DynamixApplication> pendingApplications = new Vector<DynamixApplication>();
+	private final List<DynamixApplication> pendingApplications = new Vector<>();
 	/**
 	 * List of all applications that have been denied Dynamix service and will not receive ContextEvents.
 	 */
-	private List<DynamixApplication> deniedApplications = new Vector<DynamixApplication>();
+	private final List<DynamixApplication> deniedApplications = new Vector<>();
 	/**
 	 * List of all installed ContextPlugins.
 	 */
-	private List<ContextPlugin> installedContextPlugins = new Vector<ContextPlugin>();
+	private final List<ContextPlugin> installedContextPlugins = new Vector<>();
 	/**
 	 * List of all pending DiscoveredContextPlugins.
 	 */
-	private List<DiscoveredContextPlugin> pendingContextPlugins = new Vector<DiscoveredContextPlugin>();
+	private List<DiscoveredContextPlugin> pendingContextPlugins = new Vector<>();
 
 	/**
 	 * Empty constructor to support DB4o searches.

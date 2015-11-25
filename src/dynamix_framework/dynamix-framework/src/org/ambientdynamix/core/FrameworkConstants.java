@@ -32,7 +32,7 @@ public class FrameworkConstants {
 	/*
 	 * Start state constants
 	 */
-	public static enum StartState {
+	public enum StartState {
 		STOPPED, STARTING, STARTED, STOPPING, PAUSING, PAUSED
 	}
 

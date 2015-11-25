@@ -11,7 +11,7 @@ import com.google.android.gms.location.DetectedActivity;
 import eu.smartsantander.androidExperimentation.util.Constants;
 
 /**
- * Created by amaxilatis on 10/5/15.
+ * Android ActivityRecognitionService.
  */
 public class ActivityRecognitionService extends IntentService {
 

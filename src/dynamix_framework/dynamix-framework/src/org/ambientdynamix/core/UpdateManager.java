@@ -49,7 +49,6 @@ import android.content.Context;
 import android.content.pm.FeatureInfo;
 import android.os.Environment;
 import android.util.Log;
-import android.widget.Toast;
 
 /**
  * Manages update discovery and notification for the Dynamix Framework. Currently, this class only discovers updates for
@@ -193,8 +192,8 @@ class UpdateManager {
 							}
 						});
 					}
-					List<DiscoveredContextPlugin> updates = new Vector<DiscoveredContextPlugin>();
-					final Map<IContextPluginConnector, String> errors = new HashMap<IContextPluginConnector, String>();
+					List<DiscoveredContextPlugin> updates = new Vector<>();
+					final Map<IContextPluginConnector, String> errors = new HashMap<>();
 					for (IContextPluginConnector source : plugSources) {
 						if (cancelled) {
 							Log.w(TAG, "Exiting checkForContextPluginUpdates with finished: " + cancelled);
@@ -208,7 +207,7 @@ class UpdateManager {
 							try {
 								Log.d(TAG, "Updating from PluginSource: " + source);
 								List<DiscoveredContextPlugin> potentialUpdates = source.getContextPlugins(platform,	platformVersion, frameworkVersion);
-								List<DiscoveredContextPlugin> remove = new ArrayList<DiscoveredContextPlugin>();
+								List<DiscoveredContextPlugin> remove = new ArrayList<>();
 								for (DiscoveredContextPlugin update : potentialUpdates) {
 									if (update.hasError()) {
 										errors.put(source, update.getErrorMessage());
@@ -256,7 +255,7 @@ class UpdateManager {
 							}
 						});
 					} else {
-						final List<PluginDiscoveryResult> results = new Vector<PluginDiscoveryResult>();
+						final List<PluginDiscoveryResult> results = new Vector<>();
 						for (DiscoveredContextPlugin update : updates){
 							results.add(new PluginDiscoveryResult(update));
 						}
@@ -285,7 +284,7 @@ class UpdateManager {
 	 * Returns the list of available IPluginSources, which are used for discovering new plug-ins and plug-in updates.
 	 */
 	static List<IContextPluginConnector> getContextPluginSources() {
-		List<IContextPluginConnector> sources = new Vector<IContextPluginConnector>();
+		List<IContextPluginConnector> sources = new Vector<>();
 		// Setup primary Dynamix context plug-in repository
 		if (DynamixPreferences.isDynamixRepositoryEnabled(DynamixService.getAndroidContext())) {
 			RepositoryInfo repo = DynamixService.getConfig().getPrimaryContextPluginRepo();
@@ -368,9 +367,9 @@ class UpdateManager {
 	 * Returns a List of ContextPlugins updates wrapped in UpdateResult objects.
 	 */
 	static List<PluginDiscoveryResult> getFilteredContextPluginUpdates() {
-		List<PluginDiscoveryResult> results = new Vector<PluginDiscoveryResult>();
+		List<PluginDiscoveryResult> results = new Vector<>();
 		List<PluginDiscoveryResult> updates = UpdateManager.filterDiscoveredPlugins();
-		if (updates==null) return new ArrayList<PluginDiscoveryResult>(); //smartsantander
+		if (updates==null) return new ArrayList<>(); //smartsantander
 		for (PluginDiscoveryResult update : updates) {
 			if (update.hasUpdateTarget())
 				results.add(update);
@@ -382,9 +381,9 @@ class UpdateManager {
 	 * Returns a List of new ContextPlugins wrapped in UpdateResult objects.
 	 */
 	static List<PluginDiscoveryResult> getNewContextPlugins() {
-		List<PluginDiscoveryResult> results = new Vector<PluginDiscoveryResult>();
+		List<PluginDiscoveryResult> results = new Vector<>();
 		List<PluginDiscoveryResult> updates = UpdateManager.filterDiscoveredPlugins();
-		if (updates==null) return new ArrayList<PluginDiscoveryResult>(); //smartsantander
+		if (updates==null) return new ArrayList<>(); //smartsantander
 		for (PluginDiscoveryResult update : updates) {
 			if (!update.hasUpdateTarget())
 				results.add(update);
@@ -399,7 +398,7 @@ class UpdateManager {
 	 */
 	static List<PluginDiscoveryResult> filterDiscoveredPlugins() {
 		// Create a list of updates to return after filtering
-		List<PluginDiscoveryResult> results = new Vector<PluginDiscoveryResult>();
+		List<PluginDiscoveryResult> results = new Vector<>();
 		List<DiscoveredContextPlugin> discoveredPlugs = DynamixService.SettingsManager.getPendingContextPlugins();
 		// Scan through each stored update from our SettingsManager
 		for (DiscoveredContextPlugin update : discoveredPlugs) {

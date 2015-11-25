@@ -58,7 +58,7 @@ public final class PluginState implements Serializable {
 	 */
 	public static final PluginState ERROR = new PluginState("ERROR");
 	// Private variables
-	private String name;
+	private final String name;
 
 	// Private constructor to ensure singleton
 	private PluginState(String name) {

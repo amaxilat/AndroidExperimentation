@@ -47,9 +47,9 @@ import android.util.Log;
  */
 public class NexusSource implements IContextPluginConnector {
 	// Private data
-	private String TAG = getClass().getSimpleName();
-	private DefaultHttpClient client = new DefaultHttpClient();
-	private RepositoryInfo[] nexusRepos;
+	private final String TAG = getClass().getSimpleName();
+	private final DefaultHttpClient client = new DefaultHttpClient();
+	private final RepositoryInfo[] nexusRepos;
 	private HttpGet getRequest;
 	private boolean cancel;
 
@@ -76,7 +76,7 @@ public class NexusSource implements IContextPluginConnector {
 	public synchronized List<DiscoveredContextPlugin> getContextPlugins(PLATFORM platform, VersionInfo platformVersion,
 			VersionInfo frameworkVersion) throws Exception {
 		cancel = false;
-		List<DiscoveredContextPlugin> plugs = new ArrayList<DiscoveredContextPlugin>();
+		List<DiscoveredContextPlugin> plugs = new ArrayList<>();
 		for (RepositoryInfo repo : nexusRepos) {
 			if (cancel)
 				break;
@@ -107,7 +107,7 @@ public class NexusSource implements IContextPluginConnector {
 		Serializer serializer = new Persister();
 		String xmlData = retrieve(repo.getUrl());
 		Reader reader = new StringReader(xmlData);
-		List<DiscoveredContextPlugin> plugs = new ArrayList<DiscoveredContextPlugin>();
+		List<DiscoveredContextPlugin> plugs = new ArrayList<>();
 		NexusMavenLuceneResultsBinder searchResults = serializer.read(NexusMavenLuceneResultsBinder.class, reader,
 				false);
 		NexusNGRepositoryDetail repoDetails = searchResults.repoDetails.repoDetail;
@@ -182,11 +182,11 @@ public class NexusSource implements IContextPluginConnector {
 		String repoId = Utils.getArgumentValueFromUrl(repo.getUrl(), "repositoryId");
 		String xmlData = retrieve(repo.getUrl());
 		Reader reader = new StringReader(xmlData);
-		List<DiscoveredContextPlugin> plugs = new ArrayList<DiscoveredContextPlugin>();
+		List<DiscoveredContextPlugin> plugs = new ArrayList<>();
 		NexusSearchResultsBinder searchResults = serializer.read(NexusSearchResultsBinder.class, reader, false);
 		if (searchResults != null && searchResults.totalCount > 0) {
 			// Gather the metadata artifacts from the search results
-			List<NexusArtifactBinder> metadata = new ArrayList<NexusArtifactBinder>();
+			List<NexusArtifactBinder> metadata = new ArrayList<>();
 			for (NexusArtifactBinder art : searchResults.data) {
 				if (repoId != null && art.repoId.equalsIgnoreCase(repoId)) {
 					if (art.classifier != null && art.classifier.equalsIgnoreCase("metadata"))
@@ -197,7 +197,7 @@ public class NexusSource implements IContextPluginConnector {
 				}
 			}
 			// Next gather the plugin artifacts for each associated metadata artifact
-			Map<NexusArtifactBinder, NexusArtifactBinder> metaMap = new HashMap<NexusArtifactBinder, NexusArtifactBinder>();
+			Map<NexusArtifactBinder, NexusArtifactBinder> metaMap = new HashMap<>();
 			for (NexusArtifactBinder meta : metadata) {
 				for (NexusArtifactBinder art : searchResults.data) {
 					if (repoId != null && art.repoId.equalsIgnoreCase(repoId)) {

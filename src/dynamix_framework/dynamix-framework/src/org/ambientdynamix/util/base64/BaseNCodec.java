@@ -376,9 +376,9 @@ public abstract class BaseNCodec implements BinaryEncoder, BinaryDecoder {
      *         <code>false</code>, otherwise
      */    
     public boolean isInAlphabet(byte[] arrayOctet, boolean allowWSPad) {
-        for (int i = 0; i < arrayOctet.length; i++) {
-            if (!isInAlphabet(arrayOctet[i]) &&
-                    (!allowWSPad || (arrayOctet[i] != PAD) && !isWhiteSpace(arrayOctet[i]))) {
+        for (byte anArrayOctet : arrayOctet) {
+            if (!isInAlphabet(anArrayOctet) &&
+                    (!allowWSPad || (anArrayOctet != PAD) && !isWhiteSpace(anArrayOctet))) {
                 return false;
             }
         }

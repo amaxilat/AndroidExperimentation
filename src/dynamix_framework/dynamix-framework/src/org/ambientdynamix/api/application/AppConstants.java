@@ -28,14 +28,14 @@ public class AppConstants {
 	/**
 	 * Indicates the type of the Plugin
 	 */
-	public static enum ContextPluginType {
-		AUTO, REACTIVE, INTERACTIVE, AUTO_REACTIVE, AUTO_INTERACTIVE, AUTO_REACTIVE_INTERACTIVE;
+	public enum ContextPluginType {
+		AUTO, REACTIVE, INTERACTIVE, AUTO_REACTIVE, AUTO_INTERACTIVE, AUTO_REACTIVE_INTERACTIVE
 	}
 
 	/**
 	 * Indicates the installation status of the Plugin.
 	 */
-	public static enum PluginInstallStatus {
+	public enum PluginInstallStatus {
 		INSTALLED, INSTALLING, PENDING_INSTALL, NOT_INSTALLED, ERROR
 	}
 }

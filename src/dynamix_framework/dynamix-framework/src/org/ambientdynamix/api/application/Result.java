@@ -38,9 +38,9 @@ public class Result implements Parcelable {
 		}
 	};
 	// Private data
-	private boolean success;
-	private String message;
-	private int errorCode;
+	private final boolean success;
+	private final String message;
+	private final int errorCode;
 
 	/**
 	 * Default constructor that creates a successful Result with status "success = true"

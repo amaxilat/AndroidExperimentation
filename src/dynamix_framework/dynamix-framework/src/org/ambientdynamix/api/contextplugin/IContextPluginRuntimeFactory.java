@@ -39,6 +39,6 @@ public interface IContextPluginRuntimeFactory extends Serializable {
 	 *            The globally unique session id for ContextPluginRuntime during the current Dynamix Framework run
 	 *            Returns a ContextPluginRuntime, or null if the runtime cannot be created
 	 */
-	public ContextPluginRuntime makeContextPluginRuntime(ContextPlugin parentPlugin, IPluginFacade facade,
-			IPluginEventHandler handler, UUID sessionId) throws Exception;
+	ContextPluginRuntime makeContextPluginRuntime(ContextPlugin parentPlugin, IPluginFacade facade,
+												  IPluginEventHandler handler, UUID sessionId) throws Exception;
 }

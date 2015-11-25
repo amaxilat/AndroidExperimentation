@@ -62,8 +62,8 @@ public class DynamixApplication implements Serializable {
 	private boolean mayInstallPlugins = false;
 	private PrivacyPolicy privacyPolicy;
 	private Date lastContact;
-	private List<PluginPrivacySettings> pluginPrivacySettings = new Vector<PluginPrivacySettings>();
-	private List<Permission> permissions = new Vector<Permission>();
+	private final List<PluginPrivacySettings> pluginPrivacySettings = new Vector<>();
+	private List<Permission> permissions = new Vector<>();
 	private boolean admin = false;
 	private boolean webApp = false;
 

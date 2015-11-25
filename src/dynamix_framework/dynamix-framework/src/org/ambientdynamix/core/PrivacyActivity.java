@@ -76,7 +76,7 @@ public class PrivacyActivity extends Activity {
 		super.onResume();
 		this.adapter = new PrivacyPolicyAdapter(this, R.layout.icon_row, DynamixService.getPrivacyPolicies());
 		policyList.setAdapter(adapter);
-	};
+	}
 
 	/**
 	 * Local class used as a datasource for PrivacyPolicy entities. This class extends a typed Generic ArrayAdapter and
@@ -85,7 +85,7 @@ public class PrivacyActivity extends Activity {
 	 * @author Darren Carlson
 	 */
 	private class PrivacyPolicyAdapter extends ArrayAdapter<PrivacyPolicy> {
-		private List<PrivacyPolicy> policies;
+		private final List<PrivacyPolicy> policies;
 
 		public PrivacyPolicyAdapter(Context context, int textViewResourceId, List<PrivacyPolicy> policies) {
 			super(context, textViewResourceId, policies);

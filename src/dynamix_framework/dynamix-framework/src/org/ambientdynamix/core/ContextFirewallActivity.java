@@ -75,7 +75,7 @@ public class ContextFirewallActivity extends Activity {
 	public boolean onContextItemSelected(final MenuItem item) {
 		// Get the selected PluginPrivacySettings from the UI
 		AdapterContextMenuInfo info = (AdapterContextMenuInfo) item.getMenuInfo();
-		PluginPrivacySettings policy = (PluginPrivacySettings) pluginSettingsAdapter.getItem(info.position);
+		PluginPrivacySettings policy = pluginSettingsAdapter.getItem(info.position);
 		/*
 		 * Get the PrivacyRiskLevel for the selected MenuItem's item id. Note that PrivacyRisk.getLevelForID returns
 		 * null if the item id is -1 (i.e. default level as set in 'onCreateContextMenu'). Null means that we should set
@@ -145,7 +145,7 @@ public class ContextFirewallActivity extends Activity {
 				 * Dynamically load available PrivacyPolicies into the privacyPolicyAdapter, which is used in
 				 * conjunction with the policySpinner.
 				 */
-				privacyPolicyAdapter = new ArrayAdapter<PrivacyPolicy>(this, android.R.layout.simple_spinner_item,
+				privacyPolicyAdapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item,
 						DynamixService.getPrivacyPolicies());
 				privacyPolicyAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
 				policySpinner.setAdapter(privacyPolicyAdapter);
@@ -194,7 +194,7 @@ public class ContextFirewallActivity extends Activity {
 			}
 		});
 		registerForContextMenu(plugList);
-	};
+	}
 
 	/**
 	 * {@inheritDoc}

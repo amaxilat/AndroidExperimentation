@@ -27,7 +27,7 @@ public class PhoneProfiler extends Thread implements Runnable {
     private Editor editor;
     private Boolean started = false;
     private int PHONE_ID = Constants.PHONE_ID_UNITIALIZED;
-    private List<Experiment> experiments = new ArrayList<Experiment>();
+    private List<Experiment> experiments = new ArrayList<>();
     private long totalReadingsProducedCounter;
 
     private final String TAG = this.getClass().getSimpleName();
@@ -71,7 +71,7 @@ public class PhoneProfiler extends Thread implements Runnable {
             } else {
                 this.totalReadingsProducedCounter = 0;
             }
-            editor.commit();
+            editor.apply();
             isInitialised = true;
 
         } catch (InterruptedException e) {
@@ -160,7 +160,7 @@ public class PhoneProfiler extends Thread implements Runnable {
         editor.putString("experiment", "");
         editor.putLong("lastOnlineLoginDate", (new Date()).getTime());
         editor.putLong("totalReadingsProducedCounter", 0);
-        editor.commit();
+        editor.apply();
     }
 
     public void savePrefs() {
@@ -173,7 +173,7 @@ public class PhoneProfiler extends Thread implements Runnable {
         editor.putString("experiments", experimentsJson);
         editor.putLong("lastOnlineLoginDate", (new Date()).getTime());
         editor.putLong("totalReadingsProducedCounter", totalReadingsProducedCounter);
-        editor.commit();
+        editor.apply();
     }
 
 
@@ -201,12 +201,12 @@ public class PhoneProfiler extends Thread implements Runnable {
             experiments = (new Gson()).fromJson(experimentsJson, listType);
         }
         if (experiments == null) {
-            experiments = new ArrayList<Experiment>();
+            experiments = new ArrayList<>();
         }
         experiments.add(exp);
         experimentsJson = (new Gson()).toJson(experiments);
         editor.putString("experiments", experimentsJson);
-        editor.commit();
+        editor.apply();
     }
 
     public List<Experiment> getExperiments() {
@@ -225,7 +225,7 @@ public class PhoneProfiler extends Thread implements Runnable {
         }
 
         editor.putLong("lastOnlineLoginDate", dat.getTime());
-        editor.commit();
+        editor.apply();
 
     }
 

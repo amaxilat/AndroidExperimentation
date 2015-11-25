@@ -39,7 +39,7 @@ public class PluginInfo implements IContextInfo,IPluginInfo  {
 
 	@Override
 	public Set<String> getStringRepresentationFormats() {
-		Set<String> formats = new HashSet<String>();
+		Set<String> formats = new HashSet<>();
 		formats.add("text/plain");
 		formats.add("dynamix/web");
 		return formats;
@@ -90,7 +90,7 @@ public class PluginInfo implements IContextInfo,IPluginInfo  {
 	@Override
 	public String toString() {
 		return this.getClass().getSimpleName();
-	};
+	}
 
 	public void writeToParcel(Parcel out, int flags)
 	{

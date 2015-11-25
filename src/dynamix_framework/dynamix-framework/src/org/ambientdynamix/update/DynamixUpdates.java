@@ -24,7 +24,7 @@ import java.util.List;
  *
  */
 public class DynamixUpdates {
-	private List<TrustedCertBinder> trustedWebConnectorCerts = new ArrayList<TrustedCertBinder>();
+	private List<TrustedCertBinder> trustedWebConnectorCerts = new ArrayList<>();
 
 	/**
 	 * Returns the list of TrustedCertBinders for the WebConnector.

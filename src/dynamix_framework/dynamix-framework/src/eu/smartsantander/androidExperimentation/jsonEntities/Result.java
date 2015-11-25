@@ -58,9 +58,8 @@ public class Result {
         if (deviceId != that.deviceId) return false;
         if (experimentId != that.experimentId) return false;
         if (id != that.id) return false;
-        if (message != null ? !message.equals(that.message) : that.message != null) return false;
+        return !(message != null ? !message.equals(that.message) : that.message != null);
 
-        return true;
     }
 
     @Override

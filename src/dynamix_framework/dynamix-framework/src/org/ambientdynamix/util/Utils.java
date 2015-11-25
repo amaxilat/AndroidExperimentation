@@ -74,7 +74,6 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.DialogInterface.OnClickListener;
 import android.content.Intent;
-import android.content.res.Resources;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.Build;
@@ -132,10 +131,10 @@ public class Utils {
 	 */
 	public static String hexify(byte bytes[]) {
 		char[] hexDigits = { '0', '1', '2', '3', '4', '5', '6', '7', '8', '9', 'a', 'b', 'c', 'd', 'e', 'f' };
-		StringBuffer buf = new StringBuffer(bytes.length * 2);
-		for (int i = 0; i < bytes.length; ++i) {
-			buf.append(hexDigits[(bytes[i] & 0xf0) >> 4]);
-			buf.append(hexDigits[bytes[i] & 0x0f]);
+		StringBuilder buf = new StringBuilder(bytes.length * 2);
+		for (byte aByte : bytes) {
+			buf.append(hexDigits[(aByte & 0xf0) >> 4]);
+			buf.append(hexDigits[aByte & 0x0f]);
 		}
 		return buf.toString();
 	}
@@ -165,7 +164,7 @@ public class Utils {
 		idUrl.append(url.getHost());
 		// Add the port, if present
 		if (url.getPort() != -1) {
-			idUrl.append(":" + Integer.toString(url.getPort()));
+			idUrl.append(":").append(Integer.toString(url.getPort()));
 			String port = Integer.toString(url.getPort());
 		}
 		// Add trailing slash for the hostname
@@ -607,7 +606,7 @@ public class Utils {
 	 *            The directory to start at.
 	 */
 	static private List<File> getFileListingNoSort(File aStartingDir) throws FileNotFoundException {
-		List<File> result = new ArrayList<File>();
+		List<File> result = new ArrayList<>();
 		File[] filesAndDirs = aStartingDir.listFiles();
 		List<File> filesDirs = Arrays.asList(filesAndDirs);
 		for (File file : filesDirs) {
@@ -656,7 +655,7 @@ public class Utils {
 					+ Long.parseLong(toks[6]) + Long.parseLong(toks[7]) + Long.parseLong(toks[8]);
 			try {
 				Thread.sleep(360);
-			} catch (Exception e) {
+			} catch (Exception ignored) {
 			}
 			reader.seek(0);
 			load = reader.readLine();
@@ -687,11 +686,11 @@ public class Utils {
 	 *            The List to sort.
 	 */
 	public static List<DynamixApplication> getSortedAppList(List<DynamixApplication> unsortedList) {
-		List<DynamixApplicationSorter> sortList = new Vector<DynamixApplicationSorter>();
+		List<DynamixApplicationSorter> sortList = new Vector<>();
 		for (DynamixApplication app : unsortedList)
 			sortList.add(new DynamixApplicationSorter(app));
-		Collections.<DynamixApplicationSorter> sort(sortList);
-		List<DynamixApplication> returnList = new Vector<DynamixApplication>();
+		Collections.sort(sortList);
+		List<DynamixApplication> returnList = new Vector<>();
 		for (DynamixApplicationSorter wrapper : sortList)
 			returnList.add(wrapper.app);
 		return returnList;
@@ -704,11 +703,11 @@ public class Utils {
 	 *            The List to sort.
 	 */
 	public static List<ContextPlugin> getSortedContextPluginList(List<ContextPlugin> unsortedList) {
-		List<ContextPluginSorter> sortList = new Vector<ContextPluginSorter>();
+		List<ContextPluginSorter> sortList = new Vector<>();
 		for (ContextPlugin plug : unsortedList)
 			sortList.add(new ContextPluginSorter(plug));
-		Collections.<ContextPluginSorter> sort(sortList);
-		List<ContextPlugin> returnList = new Vector<ContextPlugin>();
+		Collections.sort(sortList);
+		List<ContextPlugin> returnList = new Vector<>();
 		for (ContextPluginSorter wrapper : sortList)
 			returnList.add(wrapper.plug);
 		return returnList;
@@ -721,11 +720,11 @@ public class Utils {
 	 *            The List to sort.
 	 */
 	public static List<DiscoveredContextPlugin> getSortedDiscoveredPluginList(List<DiscoveredContextPlugin> unsortedList) {
-		List<ContextPluginUpdateSorter> sortList = new Vector<ContextPluginUpdateSorter>();
+		List<ContextPluginUpdateSorter> sortList = new Vector<>();
 		for (DiscoveredContextPlugin update : unsortedList)
 			sortList.add(new ContextPluginUpdateSorter(update));
-		Collections.<ContextPluginUpdateSorter> sort(sortList);
-		List<DiscoveredContextPlugin> returnList = new Vector<DiscoveredContextPlugin>();
+		Collections.sort(sortList);
+		List<DiscoveredContextPlugin> returnList = new Vector<>();
 		for (ContextPluginUpdateSorter wrapper : sortList)
 			returnList.add(wrapper.update);
 		return returnList;
@@ -735,7 +734,7 @@ public class Utils {
 	 * Local class for comparing ContextPlugins.
 	 */
 	private static class ContextPluginSorter implements Comparable<ContextPluginSorter> {
-		ContextPlugin plug;
+		final ContextPlugin plug;
 
 		ContextPluginSorter(ContextPlugin plug) {
 			this.plug = plug;
@@ -751,7 +750,7 @@ public class Utils {
 	 * Local class for comparing DiscoveredPlugins.
 	 */
 	private static class ContextPluginUpdateSorter implements Comparable<ContextPluginUpdateSorter> {
-		DiscoveredContextPlugin update;
+		final DiscoveredContextPlugin update;
 
 		ContextPluginUpdateSorter(DiscoveredContextPlugin update) {
 			this.update = update;
@@ -767,7 +766,7 @@ public class Utils {
 	 * Local class for comparing DynamixApplications.
 	 */
 	private static class DynamixApplicationSorter implements Comparable<DynamixApplicationSorter> {
-		DynamixApplication app;
+		final DynamixApplication app;
 
 		DynamixApplicationSorter(DynamixApplication app) {
 			this.app = app;

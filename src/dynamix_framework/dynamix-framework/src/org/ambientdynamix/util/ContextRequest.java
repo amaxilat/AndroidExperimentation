@@ -28,10 +28,10 @@ import org.ambientdynamix.core.DynamixApplication;
  */
 public class ContextRequest {
 	// Private data
-	private DynamixApplication app;
-	private IDynamixListener listener;
-	private Date createdTime;
-	private ContextPlugin plugin;
+	private final DynamixApplication app;
+	private final IDynamixListener listener;
+	private final Date createdTime;
+	private final ContextPlugin plugin;
 
 	/**
 	 * Creates a ContextRequest for the specified DynamixApplication and IDynamixListener.

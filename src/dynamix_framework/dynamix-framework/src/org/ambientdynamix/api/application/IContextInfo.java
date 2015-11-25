@@ -46,21 +46,21 @@ public interface IContextInfo extends Parcelable {
 	 * Returns the type of the context information represented by the IContextInfo. This string must match one of the
 	 * supported context information type strings described by the source ContextPlugin.
 	 */
-	public String getContextType();
+	String getContextType();
 
 	/**
 	 * Returns the fully qualified class-name of the class implementing the IContextInfo interface. This allows Dynamix
 	 * applications to dynamically cast IContextInfo objects to their original type using reflection. A Java
 	 * "instanceof" compare can also be used for this purpose.
 	 */
-	public String getImplementingClassname();
+	String getImplementingClassname();
 
 	/**
 	 * Returns a string-based representation of the IContextInfo for the specified format string (e.g.
 	 * "application/json") or null if the requested format is not supported.
 	 */
 	@JsonIgnore
-	public String getStringRepresentation(String format);
+	String getStringRepresentation(String format);
 
 	/**
 	 * Returns a Set of supported string-based context representation format types or null if no representation formats
@@ -68,5 +68,5 @@ public interface IContextInfo extends Parcelable {
 	 * supported representation types.
 	 */
 	@JsonIgnore
-	public Set<String> getStringRepresentationFormats();
+	Set<String> getStringRepresentationFormats();
 }

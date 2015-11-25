@@ -55,9 +55,9 @@ public class DynamixNotificationManager {
 	// Private data
 	private final static String TAG = DynamixNotificationManager.class.getSimpleName();
 	private static Handler uiHandler = new Handler();
-	private static List<AndroidNotification> notifications = new Vector<AndroidNotification>();
-	private NotificationManager nm;
-	private Context androidContext;
+	private static final List<AndroidNotification> notifications = new Vector<>();
+	private final NotificationManager nm;
+	private final Context androidContext;
 
 	DynamixNotificationManager(Context androidContext) {
 		this.androidContext = androidContext.getApplicationContext();

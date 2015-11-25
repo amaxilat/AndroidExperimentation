@@ -182,9 +182,7 @@ public final class Permission implements Serializable {
 			return false;
 		// Make sure the id's and version numbers are the same
 		Permission other = (Permission) candidate;
-		if (other.getPermissionString().equalsIgnoreCase(this.getPermissionString()))
-			return true;
-		return false;
+		return other.getPermissionString().equalsIgnoreCase(this.getPermissionString());
 	}
 
 	/**

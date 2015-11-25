@@ -49,7 +49,7 @@ public class ContextPluginInformation implements Parcelable {
 	private String pluginName;
 	private String pluginDescription;
 	private VersionInfo version;
-	private List<String> supportedContextTypes = new Vector<String>();
+	private List<String> supportedContextTypes = new Vector<>();
 	private int statusInt;
 	private int plugTypeInt;
 	private String requiresConfiguration;
@@ -250,10 +250,8 @@ public class ContextPluginInformation implements Parcelable {
 			return false;
 		// Make sure the id's and version numbers are the same
 		ContextPluginInformation other = (ContextPluginInformation) candidate;
-		if (this.getPluginId().equalsIgnoreCase(other.getPluginId())
-				&& this.getVersion().equals(other.getVersion()))
-			return true;
-		return false;
+		return this.getPluginId().equalsIgnoreCase(other.getPluginId())
+				&& this.getVersion().equals(other.getVersion());
 	}
 
 	@Override

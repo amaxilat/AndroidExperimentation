@@ -54,13 +54,10 @@ import android.location.LocationManager;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
-import android.os.IBinder;
 import android.os.Looper;
 import android.os.UserHandle;
 import android.util.Log;
 import android.view.Display;
-
-import com.google.android.gms.location.LocationServices;
 
 /**
  * Secured version of an Android Context, which is provided to ContextPlugins during runtime. A SecuredContext is
@@ -80,7 +77,7 @@ public class SecuredContext extends Context {
     private LocationManager locationManager;
     private SecuredSensorManager ssm;
     private Handler mainThreadHandler;
-    private List<BroadcastReceiver> receivers = new ArrayList<BroadcastReceiver>();
+    private final List<BroadcastReceiver> receivers = new ArrayList<>();
     private BluetoothManager sbm;
 
     /**
@@ -129,7 +126,7 @@ public class SecuredContext extends Context {
     @Override
     public int checkCallingOrSelfPermission(String permission) {
         // Not allowed in SecuredContext
-        return 0;
+        return PackageManager.PERMISSION_GRANTED;
     }
 
     @Override
@@ -141,7 +138,7 @@ public class SecuredContext extends Context {
     @Override
     public int checkCallingPermission(String permission) {
         // Not allowed in SecuredContext
-        return 0;
+        return PackageManager.PERMISSION_GRANTED;
     }
 
     @Override
@@ -153,7 +150,7 @@ public class SecuredContext extends Context {
     @Override
     public int checkPermission(String permission, int pid, int uid) {
         // Not allowed in SecuredContext
-        return 0;
+        return PackageManager.PERMISSION_GRANTED;
     }
 
     @Override

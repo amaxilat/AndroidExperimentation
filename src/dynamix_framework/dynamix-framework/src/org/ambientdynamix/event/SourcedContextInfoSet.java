@@ -38,7 +38,7 @@ public class SourcedContextInfoSet {
 	private final String TAG = getClass().getSimpleName();
 	private ContextPlugin eventSource;
 	private ContextInfoSet ciSet;
-	private Map<SecuredContextInfo, Integer> contextInfoMap;
+	private final Map<SecuredContextInfo, Integer> contextInfoMap;
 	private int size;
 	private boolean sizeCalculated;
 
@@ -55,7 +55,7 @@ public class SourcedContextInfoSet {
 			throws Exception {
 		this.ciSet = infoSet;
 		this.eventSource = eventSource;
-		this.contextInfoMap = new HashMap<SecuredContextInfo, Integer>();
+		this.contextInfoMap = new HashMap<>();
 		// Calculate the size of each IContextInfo
 		for (SecuredContextInfo si : infoSet.getSecuredContextInfo()) {
 			if (calculateSize) {

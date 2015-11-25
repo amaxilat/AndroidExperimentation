@@ -60,8 +60,8 @@ public final class PowerScheme implements Serializable {
 	public static final PowerScheme[] PowerSchemes = new PowerScheme[] { MANUAL, POWER_SAVER, BALANCED,
 			HIGH_PERFORMANCE };
 	// Private variables
-	private int id;
-	private String name;
+	private final int id;
+	private final String name;
 
 	// Private constructor to ensure singleton
 	private PowerScheme(int id, String name) {

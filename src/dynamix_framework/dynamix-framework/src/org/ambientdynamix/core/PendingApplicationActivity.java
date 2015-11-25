@@ -115,13 +115,13 @@ public class PendingApplicationActivity extends ListActivity {
 				break;
 			}
 		}
-	};
+	}
 
 	@Override
 	protected void onResume() {
 		super.onResume();
-		pendingApps = new ArrayList<DynamixApplication>(DynamixService.SettingsManager.getPendingApplications());
-		this.adapter = new DynamixApplicationAdapter(this, R.layout.icon_row, new ArrayList<DynamixApplication>(
+		pendingApps = new ArrayList<>(DynamixService.SettingsManager.getPendingApplications());
+		this.adapter = new DynamixApplicationAdapter(this, R.layout.icon_row, new ArrayList<>(
 				pendingApps), true);
 		pendingAppList.setAdapter(this.adapter);
 	}

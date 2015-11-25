@@ -42,7 +42,7 @@ abstract class ContextPluginRuntimeMethodRunners {
 	/**
 	 * Static ThreadPoolExecutor that submit Callable tasks, which can throw checked exceptions.
 	 */
-	private static ThreadPoolExecutor executor = new ThreadPoolExecutor(1, 10, 60, TimeUnit.SECONDS,
+	private static final ThreadPoolExecutor executor = new ThreadPoolExecutor(1, 10, 60, TimeUnit.SECONDS,
 			new LinkedBlockingQueue<Runnable>()) {
 		/*
 		 * See: http://stackoverflow.com/questions/4492273/catching-thread-exceptions-from-java-executorservice
@@ -136,7 +136,7 @@ abstract class ContextPluginRuntimeMethodRunners {
 	 */
 	public static class DoManualContextScan implements Callable<Object> {
 		private final String TAG = this.getClass().getSimpleName();
-		private AutoContextPluginRuntime target;
+		private final AutoContextPluginRuntime target;
 
 		public DoManualContextScan(AutoContextPluginRuntime target) {
 			this.target = target;
@@ -160,11 +160,11 @@ abstract class ContextPluginRuntimeMethodRunners {
 	 * @author Darren Carlson
 	 */
 	public static class HandleContextRequest implements Callable<Object> {
-		private ContextManager mgr;
-		private ReactiveContextPluginRuntime target;
-		private UUID requestId;
-		private String contextInfoType;
-		private Bundle scanConfig;
+		private final ContextManager mgr;
+		private final ReactiveContextPluginRuntime target;
+		private final UUID requestId;
+		private final String contextInfoType;
+		private final Bundle scanConfig;
 
 		public HandleContextRequest(ContextManager mgr, ReactiveContextPluginRuntime target, UUID requestId,
 				String contextInfoType, Bundle scanConfig) {
@@ -197,7 +197,7 @@ abstract class ContextPluginRuntimeMethodRunners {
 	 */
 	public static class StartContextScanning implements Callable<Object> {
 		private final String TAG = this.getClass().getSimpleName();
-		private ContextPluginRuntime target;
+		private final ContextPluginRuntime target;
 		private Handler handler;
 		private Looper looper;
 

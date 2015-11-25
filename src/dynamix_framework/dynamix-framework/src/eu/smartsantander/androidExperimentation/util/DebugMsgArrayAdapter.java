@@ -18,8 +18,8 @@ import eu.smartsantander.androidExperimentation.util.DebugMsg;
 
 public class DebugMsgArrayAdapter extends ArrayAdapter<DebugMsg> {
 
-	private ArrayList<DebugMsg> messages;
-    private Activity activity;
+	private final ArrayList<DebugMsg> messages;
+    private final Activity activity;
     private final String TAG = "DBG ADAPTER";
 	
 	public DebugMsgArrayAdapter(Activity act, int resource, ArrayList<DebugMsg> objects) {

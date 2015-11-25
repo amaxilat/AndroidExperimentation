@@ -78,12 +78,12 @@ public class BaseActivity extends TabActivity {
      * @param tabID
      */
     private static BaseActivity baseActivity;
-    private static Handler uiHander = new Handler();
+    private static final Handler uiHander = new Handler();
     private static Context context;
     public static int HOME_TAB_ID = 0;
     public static int PENDING_TAB_ID = 1;
     public static int PRIVACY_TAB_ID = 2;
-    public static int PLUGINS_TAB_ID = 3;
+    public static final int PLUGINS_TAB_ID = 3;
     public static int UPDATES_TAB_ID = 4;
     private TabHost tabHost = null;
     private final Handler uiHandler = new Handler();
@@ -388,8 +388,6 @@ public class BaseActivity extends TabActivity {
             }
         }
     }
-
-    ;
 
     @Override
     protected void onDestroy() {

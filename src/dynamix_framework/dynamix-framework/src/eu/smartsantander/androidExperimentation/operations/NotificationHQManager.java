@@ -19,10 +19,10 @@ import android.util.Log;
 public class NotificationHQManager {
 
 	private static NotificationHQManager manager;
-	private ArrayList<DebugMsg> notifications = new ArrayList<DebugMsg>();
-	private ArrayList<DebugMsg> tempList = new ArrayList<DebugMsg>();
+	private final ArrayList<DebugMsg> notifications = new ArrayList<>();
+	private ArrayList<DebugMsg> tempList = new ArrayList<>();
 	private final String TAG = "NOTIFICATION MANAGER";
-	private static int listSize = 16;
+	private static final int listSize = 16;
 	
 	private NotificationHQManager() {
 		
@@ -80,7 +80,7 @@ public class NotificationHQManager {
 		Log.w(TAG, "Contents of trimmed notifications list: " + notifications.toString());
 		
 		//return notifications.toArray(new String[0]);
-		tempList = new ArrayList<DebugMsg>(notifications);
+		tempList = new ArrayList<>(notifications);
 		return tempList;
 
 	}

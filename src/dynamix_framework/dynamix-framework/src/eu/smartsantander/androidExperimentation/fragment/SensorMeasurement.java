@@ -1,7 +1,7 @@
 package eu.smartsantander.androidExperimentation.fragment;
 
 /**
- * Created by amaxilatis on 4/11/2015.
+ * A measurement from a sensor.
  */
 public class SensorMeasurement {
 

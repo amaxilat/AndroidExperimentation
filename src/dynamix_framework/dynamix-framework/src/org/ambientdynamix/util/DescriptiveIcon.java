@@ -22,8 +22,8 @@ package org.ambientdynamix.util;
  */
 public class DescriptiveIcon {
 	// Private data
-	private int iconResId;
-	private String statusText;
+	private final int iconResId;
+	private final String statusText;
 
 	/**
 	 * Creates a DescriptiveIcon using the specified icon id and status text.
