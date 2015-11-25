@@ -150,9 +150,6 @@
         <activity
             android:name="eu.smartsantander.androidExperimentation.tabs.statsTab"
             android:label="statsTab"></activity>
-        <activity
-            android:name="eu.smartsantander.androidExperimentation.tabs.gpsActivity"
-            android:label="gps"></activity>
 
         <!--<service android:name="eu.smartsantander.androidExperimentation.AndroidExperimentationService">-->
         <!--<intent-filter>-->

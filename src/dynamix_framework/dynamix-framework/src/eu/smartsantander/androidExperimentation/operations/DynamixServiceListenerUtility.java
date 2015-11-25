@@ -88,10 +88,10 @@ public class DynamixServiceListenerUtility {
                 NotificationHQManager noteManager = NotificationHQManager.getInstance();
 
                 Log.w(TAG, "Event timestamp "
-                        + event.getTimeStamp().toLocaleString());
+                        + event.getTimeStamp().toString());
                 if (event.expires())
                     Log.w(TAG, "Event expires at "
-                            + event.getExpireTime().toLocaleString());
+                            + event.getExpireTime().toString());
                 else
                     Log.i(TAG, "Event does not expire");
                 // Log each string-based context type format supported by the
