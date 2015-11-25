@@ -65,7 +65,7 @@ public class StatisticsTab extends Activity implements
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.statisticsTab);
+        setContentView(R.layout.statistics_tab);
 
         pProfil = DynamixService.getPhoneProfiler();
 

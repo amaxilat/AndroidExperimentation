@@ -40,7 +40,7 @@ public class MessagesTab extends Activity {
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		setContentView(R.layout.messagesTab);
+		setContentView(R.layout.messages_tab);
 		
 		notesManager = NotificationHQManager.getInstance();
 		

@@ -51,7 +51,7 @@ public class ExperimentTab extends Activity {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.experimentTab);
+        setContentView(R.layout.experiment_tab);
         activity = this;
 
         expIdTv = (TextView) this.findViewById(R.id.experiment_id_JobTab);

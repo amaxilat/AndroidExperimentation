@@ -15,7 +15,7 @@ public class InfoTab extends Activity
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.infoTab);
+        setContentView(R.layout.info_tab);
         String text = "<html><body style=\"text-align:justify\"  text=\"white\"> %s </body></Html>";
         
         WebView webView = (WebView) findViewById(R.id.webview1);
