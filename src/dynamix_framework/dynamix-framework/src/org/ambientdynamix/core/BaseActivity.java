@@ -39,8 +39,8 @@ import org.ambientdynamix.data.DynamixPreferences;
 import org.ambientdynamix.util.AndroidNotification;
 
 import eu.smartsantander.androidExperimentation.operations.NotificationHQManager;
+import eu.smartsantander.androidExperimentation.tabs.InfoTab;
 import eu.smartsantander.androidExperimentation.tabs.jobsTab;
-import eu.smartsantander.androidExperimentation.tabs.reportTab;
 import eu.smartsantander.androidExperimentation.tabs.MessagesTab;
 import eu.smartsantander.androidExperimentation.tabs.statsTab;
 
@@ -264,7 +264,7 @@ public class BaseActivity extends TabActivity {
                 .setContent(intentJobs);
 
         // report tab
-        Intent intentReports = new Intent().setClass(this, reportTab.class);
+        Intent intentReports = new Intent().setClass(this, InfoTab.class);
         TabSpec tabSpecReports = tabHost
                 .newTabSpec("reports")
                 .setIndicator("",

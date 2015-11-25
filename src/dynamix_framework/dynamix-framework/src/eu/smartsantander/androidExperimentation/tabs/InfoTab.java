@@ -9,13 +9,13 @@ import android.webkit.WebView;
  
 
 
-public class reportTab extends Activity
+public class InfoTab extends Activity
 {
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.reporter);
+        setContentView(R.layout.infoTab);
         String text = "<html><body style=\"text-align:justify\"  text=\"white\"> %s </body></Html>";
         
         WebView webView = (WebView) findViewById(R.id.webview1);

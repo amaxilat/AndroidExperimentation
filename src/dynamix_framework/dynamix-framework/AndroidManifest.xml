@@ -142,7 +142,7 @@
             android:name="eu.smartsantander.androidExperimentation.tabs.jobsTab"
             android:label="jobsTab"></activity>
         <activity
-            android:name="eu.smartsantander.androidExperimentation.tabs.reportTab"
+            android:name="eu.smartsantander.androidExperimentation.tabs.InfoTab"
             android:label="reportsTab"></activity>
         <activity
             android:name="eu.smartsantander.androidExperimentation.tabs.MessagesTab"
