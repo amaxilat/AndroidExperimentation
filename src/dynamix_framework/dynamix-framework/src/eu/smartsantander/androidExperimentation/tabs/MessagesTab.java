@@ -10,6 +10,7 @@ import android.widget.ListView;
 import org.ambientdynamix.core.R;
 
 import eu.smartsantander.androidExperimentation.operations.NotificationHQManager;
+import eu.smartsantander.androidExperimentation.util.DebugMsg;
 
 /**
  * This tab displays various kinds of messages about the sensing plugins installed

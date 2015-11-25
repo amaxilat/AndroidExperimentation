@@ -2,17 +2,10 @@ package eu.smartsantander.androidExperimentation.operations;
 
 
 import java.util.ArrayList;
-import java.util.Calendar;
 import java.util.Date;
-import java.util.GregorianCalendar;
 
-import eu.smartsantander.androidExperimentation.tabs.DebugMsg;
+import eu.smartsantander.androidExperimentation.util.DebugMsg;
 
-import android.content.Context;
-import android.content.SharedPreferences;
-import android.content.SharedPreferences.Editor;
-import android.os.Handler;
-import android.os.Message;
 import android.util.Log;
 
 /* Singleton class for providing centralized notification mechanism to all

@@ -14,6 +14,8 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.TextView;
 
+import eu.smartsantander.androidExperimentation.util.DebugMsg;
+
 public class DebugMsgArrayAdapter extends ArrayAdapter<DebugMsg> {
 
 	private ArrayList<DebugMsg> messages;

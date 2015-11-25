@@ -1,4 +1,4 @@
-package eu.smartsantander.androidExperimentation.tabs;
+package eu.smartsantander.androidExperimentation.util;
 
 import java.util.Date;
 
