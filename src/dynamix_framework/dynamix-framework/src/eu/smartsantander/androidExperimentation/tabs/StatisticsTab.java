@@ -9,21 +9,16 @@ import android.net.NetworkInfo;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
-import android.webkit.WebSettings;
-import android.webkit.WebView;
-import android.webkit.WebViewClient;
 import android.widget.TextView;
 
 
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.MapFragment;
-import com.google.android.gms.maps.MapView;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.LatLngBounds;
 import com.google.android.gms.maps.model.TileOverlay;
 import com.google.android.gms.maps.model.TileOverlayOptions;
 import com.google.maps.android.heatmaps.HeatmapTileProvider;
-import com.google.maps.android.heatmaps.WeightedLatLng;
 
 import eu.smartsantander.androidExperimentation.operations.Communication;
 import eu.smartsantander.androidExperimentation.operations.PhoneProfiler;
@@ -50,7 +45,7 @@ import java.util.concurrent.TimeUnit;
  * TODO: CHANGE THE WAY WE HANDLE THE SERVER AND JSP URLs
  */
 
-public class statsTab extends Activity implements
+public class StatisticsTab extends Activity implements
         OnSharedPreferenceChangeListener {
 
     private static final String TAG = "StatsTab";
@@ -61,7 +56,7 @@ public class statsTab extends Activity implements
 
     private Communication communication;
     private BarChart mBarChart;
-    private statsTab thisActivity;
+    private StatisticsTab thisActivity;
     private MapFragment mMap;
     private HeatmapTileProvider mProvider;
     private TileOverlay mOverlay;
@@ -70,7 +65,7 @@ public class statsTab extends Activity implements
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.statistics);
+        setContentView(R.layout.statisticsTab);
 
         pProfil = DynamixService.getPhoneProfiler();
 

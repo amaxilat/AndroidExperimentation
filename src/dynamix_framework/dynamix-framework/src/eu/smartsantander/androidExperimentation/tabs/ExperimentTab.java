@@ -1,43 +1,26 @@
 package eu.smartsantander.androidExperimentation.tabs;
 
-import java.util.ArrayList;
 import java.util.Date;
-import java.util.HashMap;
-import java.util.List;
 import java.util.Timer;
 import java.util.TimerTask;
 
 import android.app.Activity;
-import android.app.AlertDialog;
-import android.content.Context;
-import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.view.View;
-import android.widget.AdapterView;
-import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ArrayAdapter;
-import android.widget.Button;
-import android.widget.ImageView;
 import android.widget.ListView;
-import android.widget.SimpleAdapter;
 import android.widget.TextView;
-import android.widget.Toast;
 import android.widget.ToggleButton;
 
-import org.ambientdynamix.api.application.ContextPluginInformation;
-import org.ambientdynamix.api.application.AppConstants.PluginInstallStatus;
 import org.ambientdynamix.core.DynamixService;
-import org.ambientdynamix.core.HomeActivity;
 import org.ambientdynamix.core.R;
-
-import eu.smartsantander.androidExperimentation.jsonEntities.Experiment;
 
 /**
  * This tab displays ....
  */
 
-public class jobsTab extends Activity {
+public class ExperimentTab extends Activity {
 
     private TextView expIdTv;
     private TextView expNameTv;
@@ -48,7 +31,7 @@ public class jobsTab extends Activity {
     private TextView experimentToTv;
     private TextView experimentDependenciesTv;
     private Timer refresher;
-    private static jobsTab activity;
+    private static ExperimentTab activity;
     private final Handler uiHandler = new Handler();
     private ListView list1;
     private String[] listData = new String[2];
@@ -68,7 +51,7 @@ public class jobsTab extends Activity {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.jobs);
+        setContentView(R.layout.experimentTab);
         activity = this;
 
         expIdTv = (TextView) this.findViewById(R.id.experiment_id_JobTab);
@@ -97,7 +80,7 @@ public class jobsTab extends Activity {
         TimerTask t = new TimerTask() {
             @Override
             public void run() {
-                ((jobsTab) activity).refreshData();
+                ((ExperimentTab) activity).refreshData();
             }
         };
         refresher.scheduleAtFixedRate(t, 0, 1000);

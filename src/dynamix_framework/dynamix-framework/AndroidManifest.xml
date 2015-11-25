@@ -139,7 +139,7 @@
 
         <!-- Organicity Android Experimentation -->
         <activity
-            android:name="eu.smartsantander.androidExperimentation.tabs.jobsTab"
+            android:name="eu.smartsantander.androidExperimentation.tabs.ExperimentTab"
             android:label="jobsTab"></activity>
         <activity
             android:name="eu.smartsantander.androidExperimentation.tabs.InfoTab"
@@ -148,7 +148,7 @@
             android:name="eu.smartsantander.androidExperimentation.tabs.MessagesTab"
             android:label="securityTab"></activity>
         <activity
-            android:name="eu.smartsantander.androidExperimentation.tabs.statsTab"
+            android:name="eu.smartsantander.androidExperimentation.tabs.StatisticsTab"
             android:label="statsTab"></activity>
 
         <!--<service android:name="eu.smartsantander.androidExperimentation.AndroidExperimentationService">-->
