@@ -15,51 +15,98 @@ import eu.smartsantander.androidExperimentation.jsonEntities.Experiment;
 
 public class AsyncExpTask extends AsyncTask<String, Void, String> {
     private final String TAG = this.getClass().getSimpleName();
+    private boolean stateActive = false;
+
+
+    public AsyncExpTask() {
+    }
+
+    public boolean isStateActive() {
+        return stateActive;
+    }
 
     @Override
     protected String doInBackground(String... params) {
-        try {
-            Log.i(TAG, "doInBackground");
-
-//            if (!DynamixService.sessionStarted) {
-//                DynamixServiceListenerUtility.start();
-//            } else {
-//                try {
-//                    final List<ContextPluginInformation> information = DynamixService.dynamix.getAllContextPluginInformation().getContextPluginInformation();
-//                    for (final ContextPluginInformation contextPluginInformation : information) {
-//                        Log.d(TAG, contextPluginInformation.getPluginName() + " status:" + contextPluginInformation.getInstallStatus() + " id:" + contextPluginInformation.getPluginId() + " context:" + contextPluginInformation.getContextPluginType().name());
-//                        if (contextPluginInformation.isEnabled()) {
-//                            DynamixService.dynamix.contextRequest(DynamixService.dynamixCallback, contextPluginInformation.getPluginId(), contextPluginInformation.getPluginId());
-//                        }
-//                    }
-//
-//                    if (DynamixService.getExperiment() != null) {
-//
-//                        if (!DynamixService.isExperimentInstalled("org.ambientdynamix.contextplugins.ExperimentPlugin")) {
-//                            DynamixService.startExperiment();
-//                        }
-//
-//                    }
-//                    // ping experiment....
-//                    final IdResult r = DynamixService.dynamix.configuredContextRequest(DynamixService.dynamixCallback, "org.ambientdynamix.contextplugins.ExperimentPlugin", "org.ambientdynamix.contextplugins.ExperimentPlugin", DynamixService.getReadingStorage().getBundle());
-//                    Log.i("contextRequest", r.getMessage());
-//
-//                    try {
-//                        manageExperiment();
-//                    } catch (Exception e) {
-//                        return e.getMessage();
-//                    }
-//                } catch (RemoteException e) {
-//                    // TODO Auto-generated catch block
-//                    e.printStackTrace();
-//                }
-//            }
-        } catch (Exception e) {
-            e.printStackTrace();
+        this.stateActive = true;
+        if (!DynamixService.isEnabled()) {
+            return "AndroidExperimentation Async Experiment Task Executed Dynamix Disabled";
         }
+        if (!DynamixService.sessionStarted) {
+            DynamixServiceListenerUtility.start();
+        } else {
+            try {
+                Log.i(TAG, "doInBackground");
+
+                if (!DynamixService.sessionStarted) {
+                    DynamixServiceListenerUtility.start();
+                } else {
+                    try {
+                        final List<ContextPluginInformation> information = DynamixService.dynamix.getAllContextPluginInformation().getContextPluginInformation();
+                        for (final ContextPluginInformation contextPluginInformation : information) {
+                            Log.d(TAG, contextPluginInformation.getPluginName() + " status:" + contextPluginInformation.getInstallStatus() + " id:" + contextPluginInformation.getPluginId() + " context:" + contextPluginInformation.getContextPluginType().name());
+                            if (contextPluginInformation.isEnabled()) {
+                                DynamixService.dynamix.contextRequest(DynamixService.dynamixCallback, contextPluginInformation.getPluginId(), contextPluginInformation.getPluginId());
+                            }
+                        }
+
+                        if (DynamixService.getExperiment() != null) {
+
+                            if (!DynamixService.isExperimentInstalled("org.ambientdynamix.contextplugins.ExperimentPlugin")) {
+                                DynamixService.startExperiment();
+                            }
+
+                        }
+                        // ping experiment....
+                        final IdResult r = DynamixService.dynamix.configuredContextRequest(DynamixService.dynamixCallback, "org.ambientdynamix.contextplugins.ExperimentPlugin", "org.ambientdynamix.contextplugins.ExperimentPlugin", DynamixService.getReadingStorage().getBundle());
+                        Log.i("contextRequest", r.getMessage());
+
+                        try {
+                            manageExperiment();
+                        } catch (Exception e) {
+                            return e.getMessage();
+                        }
+                    } catch (RemoteException e) {
+                        // TODO Auto-generated catch block
+                        e.printStackTrace();
+                    }
+                }
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+
+        }
+        this.stateActive = false;
         return "AndroidExperimentation Async Experiment Task Executed";
     }
 
+    @Override
+    protected void onPostExecute(String result) {
+        Log.i("AndroidExperimentation",
+                "AndroidExperimentation Async Experiment Task Post Execute:"
+                        + result);
+        this.stateActive = false;
+    }
+
+    @Override
+    protected void onPreExecute() {
+        Log.i("AndroidExperimentation",
+                "AndroidExperimentation Async Experiment Task pre execute");
+        this.stateActive = true;
+    }
+
+    @Override
+    protected void onProgressUpdate(Void... values) {
+        Log.i("AndroidExperimentation",
+                "AndroidExperimentation Async Experiment Task  update progress");
+        this.stateActive = true;
+    }
+
+    @Override
+    protected void onCancelled() {
+        Log.i("AndroidExperimentation",
+                "AndroidExperimentation Async Experiment Task cancelled");
+        this.stateActive = false;
+    }
 
     public String manageExperiment() throws Exception {
         Log.i(TAG, "manageExperiment");

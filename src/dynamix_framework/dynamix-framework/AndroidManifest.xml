@@ -103,11 +103,6 @@
                 <action android:name="eu.smartsantander.androidExperimentation.activity" />
             </intent-filter>
         </service>
-        <service
-            android:name="eu.smartsantander.androidExperimentation.operations.Demon"
-            android:enabled="true"
-            android:exported="true"
-            android:label="Dynamix Framework Demon" />
 
         <service
             android:name="eu.smartsantander.androidExperimentation.ActivityRecognitionService"

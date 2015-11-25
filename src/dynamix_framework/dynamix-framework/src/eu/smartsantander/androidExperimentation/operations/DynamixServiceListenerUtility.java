@@ -119,9 +119,6 @@ public class DynamixServiceListenerUtility {
                             Type listType = new TypeToken<ArrayList<Reading>>() {
                             }.getType();
                             List<Reading> readings = (new Gson()).fromJson(readingMsg, listType);
-                            Report rObject = new Report(DynamixService.getExperiment().getId().toString());
-                            rObject.setDeviceId(DynamixService.getPhoneProfiler().getPhoneId());
-                            List<String> mlist = new ArrayList<String>();
                             for (Reading reading : readings) {
                                 Log.w(TAG, "Received Reading: " + reading);
                                 //Toast.makeText(DynamixService.getAndroidContext(),readingMsg, 5000).show();
@@ -129,12 +126,16 @@ public class DynamixServiceListenerUtility {
                                 DynamixService.cacheExperimentalMessage(readingMsg);
                                 if (DynamixService.getExperiment() == null)
                                     return;
+                                Report rObject = new Report(DynamixService.getExperiment().getId().toString());
+                                rObject.setDeviceId(DynamixService.getPhoneProfiler().getPhoneId());
+                                List<String> mlist = new ArrayList<>();
                                 mlist.add(reading.getValue());
+                                rObject.setResults(mlist);
+                                final String message = rObject.toJson();
+                                Log.i(TAG, "ResultMessage:message " + message);
+                                new AsyncReportNowTask().execute(message);
                             }
-                            rObject.setResults(mlist);
-                            final String message = rObject.toJson();
-                            Log.i(TAG, "ResultMessage:message "+message);
-                            new AsyncReportNowTask().execute(message);
+
                         } else {
                             String readingMsg = plugInfo.getPayload();
                             Type listType = new TypeToken<ArrayList<Reading>>() {

@@ -2335,20 +2335,11 @@ public final class DynamixService extends IntentService {
                             DynamixService.getPhoneProfiler().startJob();
                         }
 
-
-                        Intent intent = new Intent(androidContext, Demon.class);
-                        PendingIntent pintent = PendingIntent.getService(androidContext, 0, intent, 0);
-                        AlarmManager alarm = (AlarmManager) getSystemService(Context.ALARM_SERVICE);
-                        alarm.setRepeating(AlarmManager.RTC_WAKEUP,
-                                1000,
-                                15000, pintent);
-                        Log.i(TAG, "Demon scheduled");
-
-//                        if (!DynamixService.getDemon().getStarted()) {
-//                            DynamixService.getDemon().start();
-//                        } else {
-//                            DynamixService.getDemon().startJob();
-//                        }
+                        if (!DynamixService.getDemon().getStarted()) {
+                            DynamixService.getDemon().start();
+                        } else {
+                            DynamixService.getDemon().startJob();
+                        }
 
 
                         if (!embeddedMode)
