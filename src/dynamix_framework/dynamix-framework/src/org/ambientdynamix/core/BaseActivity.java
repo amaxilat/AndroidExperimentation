@@ -16,7 +16,6 @@
 package org.ambientdynamix.core;
 
 import android.app.AlertDialog;
-import android.app.PendingIntent;
 import android.app.TabActivity;
 import android.content.Context;
 import android.content.DialogInterface;
@@ -42,7 +41,7 @@ import org.ambientdynamix.util.AndroidNotification;
 import eu.smartsantander.androidExperimentation.operations.NotificationHQManager;
 import eu.smartsantander.androidExperimentation.tabs.jobsTab;
 import eu.smartsantander.androidExperimentation.tabs.reportTab;
-import eu.smartsantander.androidExperimentation.tabs.securityTab;
+import eu.smartsantander.androidExperimentation.tabs.MessagesTab;
 import eu.smartsantander.androidExperimentation.tabs.statsTab;
 
 
@@ -249,7 +248,7 @@ public class BaseActivity extends TabActivity {
         // ressources.getDrawable(R.drawable.ic_tab_profile)).setContent(intentProfile);
 
         // security tab
-        Intent intentSecurity = new Intent().setClass(this, securityTab.class);
+        Intent intentSecurity = new Intent().setClass(this, MessagesTab.class);
         TabSpec tabSpecSecurity = tabHost
                 .newTabSpec("security")
                 .setIndicator("",

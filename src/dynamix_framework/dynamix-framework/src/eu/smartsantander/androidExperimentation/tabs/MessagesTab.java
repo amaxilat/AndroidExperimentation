@@ -1,33 +1,14 @@
 package eu.smartsantander.androidExperimentation.tabs;
 
 import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
 
 import android.app.Activity;
-import android.app.ListActivity;
-import android.content.Intent;
-import android.content.SharedPreferences;
-import android.content.SharedPreferences.Editor;
 import android.os.Bundle;
 import android.util.Log;
-import android.view.View;
-import android.view.View.OnClickListener;
-import android.widget.ArrayAdapter;
-import android.widget.CheckBox;
-import android.widget.LinearLayout;
 import android.widget.ListView;
-import android.widget.SimpleAdapter;
-import android.widget.TextView;
 
-import com.google.gson.Gson;
-
-import org.ambientdynamix.api.application.ContextPluginInformation;
-import org.ambientdynamix.api.application.AppConstants.PluginInstallStatus;
-import org.ambientdynamix.core.DynamixService;
 import org.ambientdynamix.core.R;
-import eu.smartsantander.androidExperimentation.jsonEntities.Plugin;
-import eu.smartsantander.androidExperimentation.jsonEntities.PluginList;
+
 import eu.smartsantander.androidExperimentation.operations.NotificationHQManager;
 
 /**
@@ -37,7 +18,7 @@ import eu.smartsantander.androidExperimentation.operations.NotificationHQManager
  *
  */
 
-public class securityTab extends Activity {
+public class MessagesTab extends Activity {
 
 	//List<HashMap<String,String>> sensorOptionsL=new ArrayList<HashMap<String,String>>();	
 	//HashMap<String, String> sensorOptions = new HashMap<String, String>();
@@ -57,7 +38,7 @@ public class securityTab extends Activity {
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		setContentView(R.layout.security);
+		setContentView(R.layout.messagesTab);
 		
 		notesManager = NotificationHQManager.getInstance();
 		

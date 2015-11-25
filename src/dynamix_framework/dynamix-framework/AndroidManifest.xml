@@ -145,7 +145,7 @@
             android:name="eu.smartsantander.androidExperimentation.tabs.reportTab"
             android:label="reportsTab"></activity>
         <activity
-            android:name="eu.smartsantander.androidExperimentation.tabs.securityTab"
+            android:name="eu.smartsantander.androidExperimentation.tabs.MessagesTab"
             android:label="securityTab"></activity>
         <activity
             android:name="eu.smartsantander.androidExperimentation.tabs.statsTab"
