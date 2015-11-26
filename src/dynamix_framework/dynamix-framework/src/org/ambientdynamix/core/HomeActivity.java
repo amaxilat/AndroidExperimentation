@@ -77,11 +77,9 @@ public class HomeActivity extends Activity implements GoogleApiClient.Connection
     private static HomeActivity activity;
     private static boolean experimentationStatus = true;
     private static boolean registered = false;
-    //private static HomeActivity me;
     public DynamixApplicationAdapter adapter;
     private Timer refresher;
     public final Handler uiHandler = new Handler();
-    private ToggleButton togglebutton = null;
     private boolean startedGcm = false;
 
     //SmartSantander
@@ -104,7 +102,6 @@ public class HomeActivity extends Activity implements GoogleApiClient.Connection
     };
     private ArrayList<SensorMeasurement> sensorMeasurements;
     private SensorMeasurementAdapter sensorMeasurementAdapter;
-
 
     // Refreshes the UI
     public static void refreshData() {
@@ -189,16 +186,14 @@ public class HomeActivity extends Activity implements GoogleApiClient.Connection
         sensorMeasurementAdapter = new SensorMeasurementAdapter(this, sensorMeasurements);
         // Attach the adapter to a ListView
         TwoWayView listView = (TwoWayView) findViewById(R.id.lvItems);
-        listView.setOrientation(TwoWayView.Orientation.HORIZONTAL);
+        listView.setOrientation(TwoWayView.Orientation.VERTICAL);
         listView.setPadding(0, 0, 0, 0);
         listView.setItemMargin(0);
         listView.setAdapter(sensorMeasurementAdapter);
 
-
         //Disable for now
         //final Intent activityRecognitionIntent = new Intent(this, ActivityRecognitionService.class);
         //pIntent = PendingIntent.getService(getApplicationContext(), 0, activityRecognitionIntent, PendingIntent.FLAG_UPDATE_CURRENT);
-
 
 
         mGoogleApiClient = new GoogleApiClient.Builder(this)
@@ -254,6 +249,7 @@ public class HomeActivity extends Activity implements GoogleApiClient.Connection
 
         //SmartSantander
         phoneIdTv = (TextView) this.findViewById(R.id.deviceId_label);
+
         expDescriptionTv = (TextView) this.findViewById(R.id.experiment_description);
 //        appList.setVisibility(View.GONE);
 
@@ -341,14 +337,12 @@ public class HomeActivity extends Activity implements GoogleApiClient.Connection
 
                 pendingSendButton.setText(String.format(getString(R.string.pending_messages_template), storageSize));
             } else {
-                pendingSendButton.setVisibility(View.INVISIBLE);
+                pendingSendButton.setVisibility(View.GONE);
             }
 
             String message = DynamixService.getCommunication().getLastMessage();
             if (message != null) {
                 // Add the fragment to the 'fragment_container' FrameLayout
-                sensorMeasurementAdapter.clear();
-                sensorMeasurements.clear();
                 try {
                     Report report = new ObjectMapper().readValue(message, Report.class);
                     for (String result : report.getJobResults()) {
@@ -401,15 +395,38 @@ public class HomeActivity extends Activity implements GoogleApiClient.Connection
                                 try {
                                     final Double doubleVal = (Double) obj.get(next);
                                     if (doubleVal > 0) {
-                                        SensorMeasurement measurement = new SensorMeasurement(next, doubleVal);
-                                        sensorMeasurements.add(measurement);
+                                        boolean found = false;
+                                        for (SensorMeasurement sensorMeasurement : sensorMeasurements) {
+                                            if (sensorMeasurement.getType().equals(next)) {
+                                                found = true;
+                                                sensorMeasurement.add(doubleVal);
+                                            }
+                                        }
+                                        if (!found) {
+                                            SensorMeasurement measurement = new SensorMeasurement(next, doubleVal);
+                                            Log.i(TAG, "Add to SMAdapter");
+                                            sensorMeasurements.add(measurement);
+                                            sensorMeasurementAdapter.notifyDataSetChanged();
+                                        }
                                     }
                                 } catch (ClassCastException e) {
                                     try {
                                         final Double doubleVal = Double.valueOf((Integer) obj.get(next));
                                         if (doubleVal > 0) {
-                                            SensorMeasurement measurement = new SensorMeasurement(next, doubleVal);
-                                            sensorMeasurements.add(measurement);
+                                            boolean found = false;
+                                            for (SensorMeasurement sensorMeasurement : sensorMeasurements) {
+                                                if (sensorMeasurement.getType().equals(next)) {
+                                                    found = true;
+                                                    sensorMeasurement.add(doubleVal);
+                                                }
+                                            }
+                                            if (!found) {
+                                                SensorMeasurement measurement = new SensorMeasurement(next, doubleVal);
+                                                Log.i(TAG, "Add to SMAdapter");
+                                                sensorMeasurements.add(measurement);
+                                                sensorMeasurementAdapter.notifyDataSetChanged();
+                                            }
+
                                         }
                                     } catch (Exception e1) {
                                         //ignore
@@ -417,6 +434,8 @@ public class HomeActivity extends Activity implements GoogleApiClient.Connection
                                 }
 
                             }
+                            sensorMeasurementAdapter.notifyDataSetChanged();
+
                         } catch (JSONException e) {
                             e.printStackTrace();
                         }

@@ -117,23 +117,22 @@ public class DynamixServiceListenerUtility {
                             String readingMsg = plugInfo.getPayload();
                             Type listType = new TypeToken<ArrayList<Reading>>() {
                             }.getType();
-                            List<Reading> readings = (new Gson()).fromJson(readingMsg, listType);
-                            for (Reading reading : readings) {
+                            final List<Reading> readings = (new Gson()).fromJson(readingMsg, listType);
+                            final Report rObject = new Report(DynamixService.getExperiment().getId().toString());
+                            rObject.setDeviceId(DynamixService.getPhoneProfiler().getPhoneId());
+                            final List<String> mlist = new ArrayList<>();
+                            for (final Reading reading : readings) {
                                 Log.w(TAG, "Received Reading: " + reading);
-                                //Toast.makeText(DynamixService.getAndroidContext(),readingMsg, 5000).show();
                                 noteManager.postNotification(readingMsg);
                                 DynamixService.cacheExperimentalMessage(readingMsg);
                                 if (DynamixService.getExperiment() == null)
                                     return;
-                                Report rObject = new Report(DynamixService.getExperiment().getId().toString());
-                                rObject.setDeviceId(DynamixService.getPhoneProfiler().getPhoneId());
-                                List<String> mlist = new ArrayList<>();
                                 mlist.add(reading.getValue());
-                                rObject.setResults(mlist);
-                                final String message = rObject.toJson();
-                                Log.i(TAG, "ResultMessage:message " + message);
-                                new AsyncReportNowTask().execute(message);
                             }
+                            rObject.setResults(mlist);
+                            final String message = rObject.toJson();
+                            Log.i(TAG, "ResultMessage:message " + message);
+                            new AsyncReportNowTask().execute(message);
 
                         } else {
                             String readingMsg = plugInfo.getPayload();

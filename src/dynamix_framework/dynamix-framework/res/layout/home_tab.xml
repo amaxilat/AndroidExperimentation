@@ -1,48 +1,55 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="fill_parent"
-    android:layout_height="fill_parent"
-    android:orientation="vertical">
+    android:layout_height="fill_parent">
 
-
-    <TextView
-        android:id="@+id/deviceId_label"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:fontFamily="sans-serif-light"
-        android:text="@string/deviceId_label" />
-
-    <TextView
-        android:id="@+id/experiment_description"
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:fontFamily="sans-serif-light"
-        android:text="@string/no_experiment_installed"
-        android:textAppearance="?android:attr/textAppearanceMedium" />
+        android:orientation="vertical">
 
-    <fragment
-        android:id="@+id/map_main"
-        android:name="com.google.android.gms.maps.MapFragment"
-        android:layout_width="match_parent"
-        android:layout_height="180dp" />
+        <TextView
+            android:id="@+id/deviceId_label"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="sans-serif-light"
+            android:text="@string/deviceId_label" />
 
-    <org.lucasr.twowayview.TwoWayView xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:tools="http://schemas.android.com/tools"
-        android:id="@+id/lvItems"
-        android:layout_width="match_parent"
-        android:layout_height="40dp"
-        android:drawSelectorOnTop="false"
-        android:paddingBottom="3dp"
-        android:paddingTop="3dp"
-        tools:context=".MainActivity" />
+        <TextView
+            android:id="@+id/experiment_description"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:fontFamily="sans-serif-light"
+            android:text="@string/no_experiment_installed"
+            android:textAppearance="?android:attr/textAppearanceMedium" />
 
-    <Button
-        android:id="@+id/send_pending_now"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:text="@string/send_data_now">
+        <fragment
+            android:id="@+id/map_main"
+            android:name="com.google.android.gms.maps.MapFragment"
+            android:layout_width="match_parent"
+            android:layout_height="180dp"
+            android:layout_marginTop="10dp" />
 
-    </Button>
+        <Button
+            android:id="@+id/send_pending_now"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:text="@string/send_data_now">
 
-</LinearLayout>
+        </Button>
+
+        <org.lucasr.twowayview.TwoWayView xmlns:android="http://schemas.android.com/apk/res/android"
+            xmlns:tools="http://schemas.android.com/tools"
+            android:id="@+id/lvItems"
+            android:layout_width="match_parent"
+            android:layout_height="200dp"
+            android:layout_marginTop="10dp"
+            android:drawSelectorOnTop="false"
+            android:minHeight="80dp"
+            android:paddingBottom="3dp"
+            android:paddingTop="3dp"
+            tools:context=".MainActivity" />
+
+    </LinearLayout>
+</ScrollView>
