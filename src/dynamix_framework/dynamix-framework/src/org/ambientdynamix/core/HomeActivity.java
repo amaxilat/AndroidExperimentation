@@ -33,6 +33,7 @@ import android.widget.ToggleButton;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.GoogleApiAvailability;
+import com.google.android.gms.common.GooglePlayServicesUtil;
 import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.android.gms.location.ActivityRecognition;
 import com.google.android.gms.location.LocationListener;
@@ -180,6 +181,15 @@ public class HomeActivity extends Activity implements GoogleApiClient.Connection
 //        appList = getListView();
 //        appList.setClickable(true);
 
+        mMap = ((MapFragment) getFragmentManager().findFragmentById(R.id.map_main));
+
+        // Check if we were successful in obtaining the map.
+        if (mMap == null) {
+            // check if google play service in the device is not available or out-dated.
+            GooglePlayServicesUtil.isGooglePlayServicesAvailable(this);
+            // nothing anymore, cuz android will take care of the rest (to remind user to update google play service).
+        }
+
         // Construct the data source
         sensorMeasurements = new ArrayList<>();
         // Create the adapter to convert the array to views
@@ -202,7 +212,7 @@ public class HomeActivity extends Activity implements GoogleApiClient.Connection
                 .addOnConnectionFailedListener(this)
                 .addApi(LocationServices.API)
                 .build();
-        org.ambientdynamix.util.Log.i(TAG, "Connecting Google APIS...");
+        Log.i(TAG, "Connecting Google APIS...");
         mGoogleApiClient.connect();
 
         pendingSendButton = (Button) findViewById(R.id.send_pending_now);
@@ -253,8 +263,6 @@ public class HomeActivity extends Activity implements GoogleApiClient.Connection
         expDescriptionTv = (TextView) this.findViewById(R.id.experiment_description);
 //        appList.setVisibility(View.GONE);
 
-
-        mMap = ((MapFragment) getFragmentManager().findFragmentById(R.id.map_main));
         mMap.getMap().setMyLocationEnabled(true);
         mMap.getMap().getUiSettings().setAllGesturesEnabled(false);
         mMap.getMap().getUiSettings().setMyLocationButtonEnabled(false);
@@ -466,6 +474,9 @@ public class HomeActivity extends Activity implements GoogleApiClient.Connection
                 LocationRequest mLocationRequest = LocationRequest.create().setPriority(LocationRequest.PRIORITY_HIGH_ACCURACY)
                         .setInterval(60 * 1000)        // 10 seconds, in milliseconds
                         .setFastestInterval(30 * 1000); // 1 second, in milliseconds
+                if (!mGoogleApiClient.isConnected()) {
+                    mGoogleApiClient.blockingConnect();
+                }
                 LocationServices.FusedLocationApi.requestLocationUpdates(mGoogleApiClient, mLocationRequest, this);
 
 
@@ -502,19 +513,19 @@ public class HomeActivity extends Activity implements GoogleApiClient.Connection
 
     @Override
     public void onConnected(Bundle bundle) {
-        org.ambientdynamix.util.Log.d(TAG, "Google activity recognition services connected");
+        Log.d(TAG, "Google activity recognition services connected");
         //Disable for now
         //ActivityRecognition.ActivityRecognitionApi.requestActivityUpdates(mGoogleApiClient, 10000, pIntent);
     }
 
     @Override
     public void onConnectionSuspended(int i) {
-        org.ambientdynamix.util.Log.d(TAG, "Google activity recognition services connection suspended");
+        Log.d(TAG, "Google activity recognition services connection suspended");
     }
 
     @Override
     public void onConnectionFailed(ConnectionResult connectionResult) {
-        org.ambientdynamix.util.Log.d(TAG, "Google activity recognition services disconnected");
+        Log.d(TAG, "Google activity recognition services disconnected");
     }
 
     @Override

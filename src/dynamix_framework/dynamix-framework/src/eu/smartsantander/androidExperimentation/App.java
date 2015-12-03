@@ -1,12 +1,12 @@
 package eu.smartsantander.androidExperimentation;
 
 import android.app.Application;
+import android.util.Log;
 
 import com.parse.Parse;
 import com.parse.ParseUser;
 import com.splunk.mint.Mint;
 
-import org.ambientdynamix.util.Log;
 
 import eu.smartsantander.androidExperimentation.operations.AsyncConstantsTask;
 

@@ -13,7 +13,6 @@ import org.ambientdynamix.api.application.IDynamixListener;
 import org.ambientdynamix.api.application.Result;
 import org.ambientdynamix.contextplugins.ExperimentPlugin.PluginInfo;
 import org.ambientdynamix.core.DynamixService;
-import org.ambientdynamix.util.Log;
 
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
@@ -27,12 +26,13 @@ import android.content.Intent;
 import android.content.ServiceConnection;
 import android.os.IBinder;
 import android.os.RemoteException;
+import android.util.Log;
 
 public class DynamixServiceListenerUtility {
 
-    public static IDynamixListener getListerner() {
+    public static IDynamixListener getListener() {
         return new IDynamixListener.Stub() {
-            private final String TAG = this.getClass().getSimpleName();
+            private final String TAG = "DSListenerUtility";
 
             @Override
             public void onDynamixListenerAdded(String listenerId)
@@ -122,7 +122,7 @@ public class DynamixServiceListenerUtility {
                             rObject.setDeviceId(DynamixService.getPhoneProfiler().getPhoneId());
                             final List<String> mlist = new ArrayList<>();
                             for (final Reading reading : readings) {
-                                Log.w(TAG, "Received Reading: " + reading);
+                                Log.i(TAG, "Received Reading: " + reading);
                                 noteManager.postNotification(readingMsg);
                                 DynamixService.cacheExperimentalMessage(readingMsg);
                                 if (DynamixService.getExperiment() == null)
@@ -300,7 +300,7 @@ public class DynamixServiceListenerUtility {
     }
 
     public static void start() {
-        DynamixService.dynamixCallback = DynamixServiceListenerUtility.getListerner();
+        DynamixService.dynamixCallback = DynamixServiceListenerUtility.getListener();
         DynamixService.sConnection = DynamixServiceListenerUtility.createServiceConnection();
         DynamixService.getAndroidContext().bindService(new Intent(DynamixService.getAndroidContext(), DynamixService.class), DynamixService.sConnection, Context.BIND_AUTO_CREATE);
     }

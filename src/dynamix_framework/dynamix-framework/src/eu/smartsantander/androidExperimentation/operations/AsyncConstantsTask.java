@@ -1,12 +1,12 @@
 package eu.smartsantander.androidExperimentation.operations;
 
 import android.os.AsyncTask;
+import android.util.Log;
 
 import com.parse.ParseException;
 import com.parse.ParseObject;
 import com.parse.ParseQuery;
 
-import org.ambientdynamix.util.Log;
 
 import eu.smartsantander.androidExperimentation.util.Constants;
 

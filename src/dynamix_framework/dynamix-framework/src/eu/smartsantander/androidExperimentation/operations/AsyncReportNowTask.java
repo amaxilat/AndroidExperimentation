@@ -16,12 +16,12 @@ public class AsyncReportNowTask extends AsyncTask<String, Void, String> {
             Log.d(TAG, "Offloading results:" + message);
             DynamixService.getCommunication().sendReportResults(message);//
             DynamixService.getCommunication().setLastMessage(message);
-            org.ambientdynamix.util.Log.i(TAG, "Experiment  Reading Network: " + message);
+            Log.i(TAG, "Experiment  Reading Network: " + message);
         } catch (HttpClientErrorException e) {
             //ignore
         } catch (Exception e) {
             DynamixService.addExperimentalMessage(message);
-            org.ambientdynamix.util.Log.i(TAG, "Stored Message Count " + DynamixService.getDataStorageSize());
+            Log.i(TAG, "Stored Message Count " + DynamixService.getDataStorageSize());
         }
         return "AndroidExperimentation Async Experiment Task Executed";
     }

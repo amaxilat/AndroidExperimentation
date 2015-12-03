@@ -37,6 +37,9 @@ public class SensorMeasurement {
     }
 
     public void add(Double doubleVal) {
+        if (this.series.getSeries().size() > 20) {
+            this.series.getSeries().remove(0);
+        }
         this.series.addPoint(new ValueLinePoint(doubleVal.floatValue()));
         this.value = doubleVal;
     }

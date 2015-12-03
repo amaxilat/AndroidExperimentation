@@ -1,6 +1,7 @@
 package eu.smartsantander.androidExperimentation.fragment;
 
 import android.content.Context;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -9,10 +10,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import org.ambientdynamix.core.R;
-import org.ambientdynamix.util.Log;
 import org.eazegraph.lib.charts.ValueLineChart;
-import org.eazegraph.lib.models.ValueLinePoint;
-import org.eazegraph.lib.models.ValueLineSeries;
 
 import java.util.ArrayList;
 
