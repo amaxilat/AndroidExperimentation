@@ -80,23 +80,9 @@ public class BaseActivity extends TabActivity {
     private static BaseActivity baseActivity;
     private static final Handler uiHander = new Handler();
     private static Context context;
-    public static int HOME_TAB_ID = 0;
-    public static int PENDING_TAB_ID = 1;
-    public static int PRIVACY_TAB_ID = 2;
     public static final int PLUGINS_TAB_ID = 3;
-    public static int UPDATES_TAB_ID = 4;
     private TabHost tabHost = null;
-    private final Handler uiHandler = new Handler();
     private static boolean activityVisible;
-    private static final long MINIMUM_DISTANCE_CHANGE_FOR_UPDATES = 1; // in Meters
-    private static final long MINIMUM_TIME_BETWEEN_UPDATES = 1000; // in Milliseconds
-
-    // Android Experimentation Members
-    private Boolean tabIntentListenerIsRegistered = false;
-    private Boolean serviceIntentListenerIsRegistered = false;
-
-
-    NotificationHQManager noteManager = NotificationHQManager.getInstance();
 
     public static Resources myRes;
 
@@ -189,13 +175,13 @@ public class BaseActivity extends TabActivity {
 		 * /views/hello-tabwidget.html
 		 */
         myRes = getResources();
-        Resources res = getResources(); // Resource object to get Drawables
+        final Resources res = getResources(); // Resource object to get Drawables
         tabHost = getTabHost(); // The activity TabHost
         TabHost.TabSpec spec; // Resusable TabSpec for each tab
         Intent intent; // Reusable Intent for each tab
         // Create an Intent to launch an Activity for the tab (to be reused)
         intent = new Intent().setClass(this, HomeActivity.class);
-        Bundle b = new Bundle();
+        final Bundle b = new Bundle();
         b.putBoolean("fromTab", true);
         // Initialize a TabSpec for each tab and add it to the TabHost
         spec = tabHost.newTabSpec("home")
@@ -238,8 +224,8 @@ public class BaseActivity extends TabActivity {
         // Boot Dynamix
         DynamixService.boot(this, true, false, false);
 
-        Resources ressources = getResources();
-        TabHost tabHost = getTabHost();
+        final Resources ressources = getResources();
+        final TabHost tabHost = getTabHost();
 
         // profile tab
         // Intent intentProfile = new Intent().setClass(this, profileTab.class);
@@ -248,34 +234,32 @@ public class BaseActivity extends TabActivity {
         // ressources.getDrawable(R.drawable.ic_tab_profile)).setContent(intentProfile);
 
         // security tab
-        Intent intentSecurity = new Intent().setClass(this, MessagesTab.class);
-        TabSpec tabSpecSecurity = tabHost
+        final Intent intentSecurity = new Intent().setClass(this, MessagesTab.class);
+        final TabSpec tabSpecSecurity = tabHost
                 .newTabSpec("security")
                 .setIndicator("",
                         ressources.getDrawable(R.drawable.ic_tab_security))
                 .setContent(intentSecurity);
 
         // jobs tab
-        Intent intentJobs = new Intent().setClass(this, ExperimentTab.class);
-        TabSpec tabSpecJobs = tabHost
+        final Intent intentJobs = new Intent().setClass(this, ExperimentTab.class);
+        final TabSpec tabSpecJobs = tabHost
                 .newTabSpec("jobs")
                 .setIndicator("",
                         ressources.getDrawable(R.drawable.ic_tab_jobs))
                 .setContent(intentJobs);
 
         // report tab
-        Intent intentReports = new Intent().setClass(this, InfoTab.class);
-        TabSpec tabSpecReports = tabHost
+        final Intent intentReports = new Intent().setClass(this, InfoTab.class);
+        final TabSpec tabSpecReports = tabHost
                 .newTabSpec("reports")
                 .setIndicator("",
                         ressources.getDrawable(R.drawable.ic_tab_reports))
                 .setContent(intentReports);
 
         // stats tab
-        // TODO: create new content for statistics
-        Intent intentStats = new Intent().setClass(this, StatisticsTab.class);
-
-        TabSpec tabSpecStats = tabHost
+        final Intent intentStats = new Intent().setClass(this, StatisticsTab.class);
+        final TabSpec tabSpecStats = tabHost
                 .newTabSpec("stats")
                 .setIndicator("",
                         ressources.getDrawable(R.drawable.ic_tab_stats))

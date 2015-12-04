@@ -28,9 +28,7 @@ import android.view.Menu;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
-import android.widget.ToggleButton;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.GoogleApiAvailability;
 import com.google.android.gms.common.GooglePlayServicesUtil;
@@ -44,20 +42,14 @@ import com.google.android.gms.maps.MapFragment;
 import com.google.android.gms.maps.model.LatLng;
 
 import org.ambientdynamix.data.DynamixPreferences;
-import org.json.JSONException;
-import org.json.JSONObject;
 import org.lucasr.twowayview.TwoWayView;
 
-import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.Timer;
 import java.util.TimerTask;
 
 import eu.smartsantander.androidExperimentation.fragment.SensorMeasurement;
 import eu.smartsantander.androidExperimentation.fragment.SensorMeasurementAdapter;
-import eu.smartsantander.androidExperimentation.jsonEntities.Reading;
-import eu.smartsantander.androidExperimentation.jsonEntities.Report;
 import eu.smartsantander.androidExperimentation.operations.AsyncReportOnServerTask;
 import eu.smartsantander.androidExperimentation.operations.AsyncStatusRefreshTask;
 import eu.smartsantander.androidExperimentation.service.RegistrationIntentService;
@@ -78,7 +70,6 @@ public class HomeActivity extends Activity implements GoogleApiClient.Connection
     private static HomeActivity activity;
     private static boolean experimentationStatus = true;
     private static boolean registered = false;
-    private Timer refresher;
     public final Handler uiHandler = new Handler();
     private boolean startedGcm = false;
 
@@ -91,7 +82,6 @@ public class HomeActivity extends Activity implements GoogleApiClient.Connection
     private MapFragment mMap;
 
     private GoogleApiClient mGoogleApiClient;
-    private PendingIntent pIntent;
 
     public ArrayList<SensorMeasurement> sensorMeasurements;
     public SensorMeasurementAdapter sensorMeasurementAdapter;
@@ -179,7 +169,7 @@ public class HomeActivity extends Activity implements GoogleApiClient.Connection
 
         // Setup an state refresh timer, which periodically updates application
         // state in the appList
-        refresher = new Timer(true);
+        Timer refresher = new Timer(true);
         TimerTask t = new TimerTask() {
             @Override
             public void run() {
