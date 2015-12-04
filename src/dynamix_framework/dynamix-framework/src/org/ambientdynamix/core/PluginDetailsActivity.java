@@ -15,16 +15,6 @@
  */
 package org.ambientdynamix.core;
 
-import java.util.ArrayList;
-import java.util.Map;
-import java.util.TreeMap;
-
-import org.ambientdynamix.api.application.Result;
-import org.ambientdynamix.api.contextplugin.ContextPlugin;
-import org.ambientdynamix.api.contextplugin.security.PrivacyRiskLevel;
-import org.ambientdynamix.util.DescriptiveIcon;
-import org.ambientdynamix.util.Utils;
-
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
@@ -40,6 +30,16 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
+
+import org.ambientdynamix.api.application.Result;
+import org.ambientdynamix.api.contextplugin.ContextPlugin;
+import org.ambientdynamix.api.contextplugin.security.PrivacyRiskLevel;
+import org.ambientdynamix.util.DescriptiveIcon;
+import org.ambientdynamix.util.Utils;
+
+import java.util.ArrayList;
+import java.util.Map;
+import java.util.TreeMap;
 
 /**
  * User interface showing the details of a specific ContextPlugin, such as its name, description and supported fidelity
@@ -90,10 +90,11 @@ public class PluginDetailsActivity extends Activity {
             statusText.setText(plugin.getVersionInfo().toString());
             description.setText(plugin.getDescription());
             DescriptiveIcon di = Utils.getDescriptiveIcon(plugin);
-            icon.setImageResource(di.getIconResId());
+            Utils.loadImage(icon, plugin.getName(), di);
+
             description.setText(plugin.getDescription());
             /*
-			 * For some reason, after the bundle is deserialized, the input TreeMap comes out a HashMap. Dump the
+             * For some reason, after the bundle is deserialized, the input TreeMap comes out a HashMap. Dump the
 			 * hashmap into a TreeMap to make sure our PrivacyRiskLevel sorting is correct
 			 */
             Map<PrivacyRiskLevel, String> sortedMap = new TreeMap(plugin.getSupportedPrivacyRiskLevels());

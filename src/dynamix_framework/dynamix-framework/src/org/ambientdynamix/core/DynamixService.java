@@ -18,6 +18,7 @@ package org.ambientdynamix.core;
 import android.app.*;
 import android.content.*;
 import android.content.res.Resources.NotFoundException;
+import android.graphics.Bitmap;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.*;
@@ -149,6 +150,8 @@ public final class DynamixService extends IntentService {
     public static boolean sessionStarted;
     private static boolean restarting = false;
     private static long totalTimeConnectedOnline = 0;
+    private static List<Plugin> discoveredPluginList;
+    private static Map<String, Bitmap> bitmaps = new HashMap<>();
 
     /**
      * Creates an IntentService.  Invoked by your subclass's constructor.
@@ -2591,6 +2594,30 @@ public final class DynamixService extends IntentService {
                         ContextMgr.checkAppLiveliness(session.getApp());
             }
         }, 0, checkPeriodMills);
+    }
+
+    public static void setDiscoveredPlugins(List<Plugin> pluginList) {
+        discoveredPluginList = pluginList;
+    }
+
+    public static Plugin getDiscoveredPlugin(String name) {
+        for (Plugin plugin : discoveredPluginList) {
+            if (plugin.getName().equals(name)) {
+                return plugin;
+            }
+        }
+        return null;
+    }
+
+    public static void storeBitmap(String url, Bitmap bitmap) {
+        bitmaps.put(url, bitmap);
+    }
+
+    public static Bitmap getBitmap(String url) {
+        if (bitmaps.containsKey(url)) {
+            return bitmaps.get(url);
+        }
+        return null;
     }
 
     /*

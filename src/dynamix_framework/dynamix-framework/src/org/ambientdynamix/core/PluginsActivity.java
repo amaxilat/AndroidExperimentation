@@ -15,24 +15,6 @@
  */
 package org.ambientdynamix.core;
 
-import java.util.ArrayList;
-import java.util.Hashtable;
-import java.util.List;
-import java.util.Map;
-import java.util.Vector;
-
-import org.ambientdynamix.api.application.ContextPluginInformation;
-import org.ambientdynamix.api.contextplugin.ContextPlugin;
-import org.ambientdynamix.core.UpdateManager.IContextPluginUpdateListener;
-import org.ambientdynamix.data.ContextPluginAdapter;
-import org.ambientdynamix.event.PluginDiscoveryResult;
-import org.ambientdynamix.update.contextplugin.IContextPluginConnector;
-import org.ambientdynamix.update.contextplugin.IContextPluginInstallListener;
-import org.ambientdynamix.util.DescriptiveIcon;
-import org.ambientdynamix.util.EmptyListSupportAdapter;
-import org.ambientdynamix.util.SeparatedListAdapter;
-import org.ambientdynamix.util.Utils;
-
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.ListActivity;
@@ -63,6 +45,24 @@ import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import org.ambientdynamix.api.application.ContextPluginInformation;
+import org.ambientdynamix.api.contextplugin.ContextPlugin;
+import org.ambientdynamix.core.UpdateManager.IContextPluginUpdateListener;
+import org.ambientdynamix.data.ContextPluginAdapter;
+import org.ambientdynamix.event.PluginDiscoveryResult;
+import org.ambientdynamix.update.contextplugin.IContextPluginConnector;
+import org.ambientdynamix.update.contextplugin.IContextPluginInstallListener;
+import org.ambientdynamix.util.DescriptiveIcon;
+import org.ambientdynamix.util.EmptyListSupportAdapter;
+import org.ambientdynamix.util.SeparatedListAdapter;
+import org.ambientdynamix.util.Utils;
+
+import java.util.ArrayList;
+import java.util.Hashtable;
+import java.util.List;
+import java.util.Map;
+import java.util.Vector;
 
 /**
  * User interface that provides an overview of the ContextPlugins installed in
@@ -282,7 +282,7 @@ public class PluginsActivity extends ListActivity implements
                 newPlugsAdapter);
         plugList.setAdapter(this.adapter);
         /*
-		 * Setup the OnItemClickListener for the plugList ListView. When
+         * Setup the OnItemClickListener for the plugList ListView. When
 		 * clicked, edit the plugin using the PluginDetailsActivity.
 		 */
         plugList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -301,8 +301,8 @@ public class PluginsActivity extends ListActivity implements
                     editPlugin(plug);
             }
         });
-		/*
-		 * Setup the update plugins button.
+        /*
+         * Setup the update plugins button.
 		 */
         Button btnFindPlugs = (Button) findViewById(R.id.btn_find_plugs);
         btnFindPlugs.setOnClickListener(new View.OnClickListener() {
@@ -312,8 +312,8 @@ public class PluginsActivity extends ListActivity implements
                 updateSensorPermissionInfo();
             }
         });
-		/*
-		 * Setup the update plugins button.
+        /*
+         * Setup the update plugins button.
 		 */
         Button btnInstallPlugs = (Button) findViewById(R.id.btn_install_plugs);
         btnInstallPlugs.setOnClickListener(new View.OnClickListener() {
@@ -356,8 +356,8 @@ public class PluginsActivity extends ListActivity implements
     public void onCreateContextMenu(ContextMenu menu, View v,
                                     ContextMenuInfo menuInfo) {
         super.onCreateContextMenu(menu, v, menuInfo);
-		/*
-		 * Make sure that we only show the context menu for installed context
+        /*
+         * Make sure that we only show the context menu for installed context
 		 * plug-ins.
 		 */
         AdapterView.AdapterContextMenuInfo info = (AdapterView.AdapterContextMenuInfo) menuInfo;
@@ -611,22 +611,29 @@ public class PluginsActivity extends ListActivity implements
                 v = vi.inflate(R.layout.icon_row, null);
                 ContextPlugin plug = this.getItem(position);
                 if (plug != null) {
-                    TextView tt = (TextView) v.findViewById(R.id.toptext);
-                    TextView bt = (TextView) v.findViewById(R.id.bottomtext);
-                    ImageView icon = (ImageView) v.findViewById(R.id.icon);
+                    final TextView tt = (TextView) v.findViewById(R.id.toptext);
                     if (tt != null) {
                         tt.setText(plug.getName());
                     }
-                    DescriptiveIcon di = Utils.getDescriptiveIcon(plug);
-                    if (icon != null)
-                        icon.setImageResource(di.getIconResId());
-                    if (bt != null)
+
+                    final DescriptiveIcon di = Utils.getDescriptiveIcon(plug);
+
+                    final TextView bt = (TextView) v.findViewById(R.id.bottomtext);
+                    if (bt != null) {
                         bt.setText(di.getStatusText());
-                    if (plug.getContextPluginInformation().getPluginId().contains("Experiment") == true) // SmartSantander
+                    }
+
+                    final ImageView icon = (ImageView) v.findViewById(R.id.icon);
+                    if (icon != null) {
+                        Utils.loadImage(icon, plug.getName(), di);
+                    }
+
+                    if (plug.getContextPluginInformation().getPluginId().contains("Experiment")) // SmartSantander
+                    {
                         v.setVisibility(View.GONE);
+                    }
                 } else
-                    Log.e(TAG, "Could not get ContextPlugin for position: "
-                            + position);
+                    Log.e(TAG, "Could not get ContextPlugin for position: " + position);
                 return v;
             }
         }

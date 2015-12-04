@@ -93,6 +93,7 @@ public class SimpleSourceBase {
         Communication communication = new Communication();
         List<Plugin> pluginList = communication.sendGetPluginList(
                 String.valueOf(DynamixService.getPhoneProfiler().getPhoneId()));
+        DynamixService.setDiscoveredPlugins(pluginList);
         Plugin pluginXML = null;
         for (Plugin plugin : pluginList) {
             Log.i(TAG, "Found Plugin1:" + plugin.getName());

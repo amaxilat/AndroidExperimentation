@@ -1,5 +1,7 @@
 package eu.smartsantander.androidExperimentation.jsonEntities;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 /**
  * Created with IntelliJ IDEA.
  * User: theodori
@@ -7,6 +9,7 @@ package eu.smartsantander.androidExperimentation.jsonEntities;
  * Time: 11:06 AM
  * To change this template use File | Settings | File Templates.
  */
+@JsonIgnoreProperties(ignoreUnknown = true)
 public class Plugin {
     private int id;
 
@@ -66,6 +69,16 @@ public class Plugin {
 
     public void setInstallUrl(String installUrl) {
         this.installUrl = installUrl;
+    }
+
+    private String imageUrl;
+
+    public String getImageUrl() {
+        return imageUrl;
+    }
+
+    public void setImageUrl(String imageUrl) {
+        this.imageUrl = imageUrl;
     }
 
     private String filename;

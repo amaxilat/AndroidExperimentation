@@ -74,6 +74,7 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.DialogInterface.OnClickListener;
 import android.content.Intent;
+import android.graphics.Bitmap;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.Build;
@@ -81,8 +82,12 @@ import android.util.Log;
 import android.view.View;
 import android.view.View.MeasureSpec;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.ListAdapter;
 import android.widget.ListView;
+
+import eu.smartsantander.androidExperimentation.jsonEntities.Plugin;
+import eu.smartsantander.androidExperimentation.operations.ImageDownloader;
 
 /**
  * Static utility methods for the Dynamix Framework.
@@ -825,4 +830,19 @@ public class Utils {
 			Log.w(TAG, "Could not find parent plug-in for " + wrapper.getContextPluginRuntime());
 		return false;
 	}
+
+	public static void loadImage(final ImageView icon, final String name, final DescriptiveIcon di) {
+		final Plugin plugin = DynamixService.getDiscoveredPlugin(name);
+		if (plugin != null && plugin.getImageUrl() != null && !"".equals(plugin.getImageUrl())) {
+			Bitmap bitmap = DynamixService.getBitmap(plugin.getImageUrl());
+			if (bitmap != null) {
+				icon.setImageBitmap(bitmap);
+			} else {
+				new ImageDownloader(icon).execute(plugin.getImageUrl());
+			}
+		} else {
+			icon.setImageResource(di.getIconResId());
+		}
+	}
+
 }
