@@ -4,7 +4,26 @@
               android:layout_height="?android:attr/listPreferredItemHeight"
               android:padding="0dip"
               android:layout_gravity="top"
-              android:layout_marginLeft="2dip">
+              android:layout_marginStart="2dip">
+
+    <!-- Preference should place its actual preference widget here. -->
+    <LinearLayout
+        android:id="@+id/widget_frame"
+        android:layout_width="wrap_content"
+        android:layout_height="fill_parent"
+        android:gravity="center_vertical"
+        android:orientation="vertical"
+        android:layout_marginStart="12dip">
+
+        <ImageView
+            android:id="@+id/icon"
+            android:layout_width="40dp"
+            android:layout_height="?android:attr/listPreferredItemHeight"
+            android:paddingStart="2dip"
+            android:paddingEnd="6dip"
+            android:src="@drawable/plugin_enabled"
+            android:gravity="center_vertical"/>
+    </LinearLayout>
 
     <LinearLayout
             android:orientation="vertical"
@@ -32,23 +51,6 @@
                 android:fadingEdge="horizontal"/>
     </LinearLayout>
 
-    <!-- Preference should place its actual preference widget here. -->
-    <LinearLayout
-            android:id="@+id/widget_frame"
-            android:layout_width="wrap_content"
-            android:layout_height="fill_parent"
-            android:gravity="center_vertical"
-            android:orientation="vertical"
-            android:layout_marginRight="12dip">
 
-        <ImageView
-                android:id="@+id/icon"
-                android:layout_width="fill_parent"
-                android:layout_height="?android:attr/listPreferredItemHeight"
-                android:paddingLeft="2dip"
-                android:paddingRight="6dip"
-                android:src="@drawable/icon"
-                android:gravity="center_vertical"/>
-    </LinearLayout>
 
 </LinearLayout>

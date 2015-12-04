@@ -78,7 +78,6 @@ public class HomeActivity extends Activity implements GoogleApiClient.Connection
     private static HomeActivity activity;
     private static boolean experimentationStatus = true;
     private static boolean registered = false;
-    public DynamixApplicationAdapter adapter;
     private Timer refresher;
     public final Handler uiHandler = new Handler();
     private boolean startedGcm = false;
@@ -94,25 +93,25 @@ public class HomeActivity extends Activity implements GoogleApiClient.Connection
     private GoogleApiClient mGoogleApiClient;
     private PendingIntent pIntent;
 
-    // Create runnable for updating the UI
-    final Runnable updateList = new Runnable() {
-        public void run() {
-            if (adapter != null)
-                adapter.notifyDataSetChanged();
-        }
-    };
-    private ArrayList<SensorMeasurement> sensorMeasurements;
-    private SensorMeasurementAdapter sensorMeasurementAdapter;
+    public ArrayList<SensorMeasurement> sensorMeasurements;
+    public SensorMeasurementAdapter sensorMeasurementAdapter;
+
+    final LocationRequest mLocationRequest = LocationRequest.create()
+            .setPriority(LocationRequest.PRIORITY_HIGH_ACCURACY)
+            .setInterval(60 * 1000)        // 10 seconds, in milliseconds
+            .setFastestInterval(30 * 1000); // 1 second, in milliseconds
+
 
     // Refreshes the UI
     public static void refreshData() {
-        if (activity != null)
+        if (activity != null) {
             activity.uiHandler.post(new Runnable() {
                 @Override
                 public void run() {
                     activity.refresh();
                 }
             });
+        }
     }
 
     /**
@@ -128,49 +127,6 @@ public class HomeActivity extends Activity implements GoogleApiClient.Connection
         }
     }
 
-//    @Override
-//    public boolean onContextItemSelected(final MenuItem item) {
-//        AdapterContextMenuInfo info = (AdapterContextMenuInfo) item.getMenuInfo();
-//        AlertDialog.Builder builder = null;
-//        final DynamixApplication app = (DynamixApplication) appList.getItemAtPosition(info.position);
-//        switch (item.getItemId()) {
-//            case ENABLE_ID:
-//                // Present "Are You Sure" dialog box
-//                builder = new AlertDialog.Builder(this);
-//                builder.setMessage(app.isEnabled() ? "Block " + app.getName() + "?" : "Unblock " + app.getName() + "?")
-//                        .setCancelable(false).setPositiveButton("Yes", new DialogInterface.OnClickListener() {
-//                    public void onClick(DialogInterface dialog, int id) {
-//                        app.setEnabled(!app.isEnabled());
-//                        adapter.notifyDataSetChanged();
-//                        DynamixService.changeApplicationEnabled(app, app.isEnabled());
-//                    }
-//                }).setNegativeButton("No", new DialogInterface.OnClickListener() {
-//                    public void onClick(DialogInterface dialog, int id) {
-//                        dialog.cancel();
-//                    }
-//                });
-//                builder.create().show();
-//                return true;
-//            case DELETE_ID:
-//                // Present "Are You Sure" dialog box
-//                builder = new AlertDialog.Builder(this);
-//                builder.setMessage("Remove " + app.getName() + "?").setCancelable(false)
-//                        .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
-//                            public void onClick(DialogInterface dialog, int id) {
-//                                adapter.remove(app);
-//                                DynamixService.revokeSecurityAuthorization(app);
-//                            }
-//                        }).setNegativeButton("No", new DialogInterface.OnClickListener() {
-//                    public void onClick(DialogInterface dialog, int id) {
-//                        dialog.cancel();
-//                    }
-//                });
-//                builder.create().show();
-//                return true;
-//        }
-//        return super.onContextItemSelected(item);
-//    }
-
     @Override
     public void onCreate(Bundle savedInstanceState) {
         Log.v(TAG, "Activity State: onCreate()");
@@ -178,8 +134,6 @@ public class HomeActivity extends Activity implements GoogleApiClient.Connection
         // Set our static reference
         activity = this;
         setContentView(R.layout.home_tab);
-//        appList = getListView();
-//        appList.setClickable(true);
 
         mMap = ((MapFragment) getFragmentManager().findFragmentById(R.id.map_main));
 
@@ -195,7 +149,7 @@ public class HomeActivity extends Activity implements GoogleApiClient.Connection
         // Create the adapter to convert the array to views
         sensorMeasurementAdapter = new SensorMeasurementAdapter(this, sensorMeasurements);
         // Attach the adapter to a ListView
-        TwoWayView listView = (TwoWayView) findViewById(R.id.lvItems);
+        final TwoWayView listView = (TwoWayView) findViewById(R.id.lvItems);
         listView.setOrientation(TwoWayView.Orientation.VERTICAL);
         listView.setPadding(0, 0, 0, 0);
         listView.setItemMargin(0);
@@ -204,7 +158,6 @@ public class HomeActivity extends Activity implements GoogleApiClient.Connection
         //Disable for now
         //final Intent activityRecognitionIntent = new Intent(this, ActivityRecognitionService.class);
         //pIntent = PendingIntent.getService(getApplicationContext(), 0, activityRecognitionIntent, PendingIntent.FLAG_UPDATE_CURRENT);
-
 
         mGoogleApiClient = new GoogleApiClient.Builder(this)
                 .addApi(ActivityRecognition.API)
@@ -216,7 +169,6 @@ public class HomeActivity extends Activity implements GoogleApiClient.Connection
         mGoogleApiClient.connect();
 
         pendingSendButton = (Button) findViewById(R.id.send_pending_now);
-
         pendingSendButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -225,47 +177,27 @@ public class HomeActivity extends Activity implements GoogleApiClient.Connection
             }
         });
 
-        // Set an OnItemClickListener on the appList to support editing the
-        // applications
-//        appList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-//            public void onItemClick(AdapterView<?> arg0, View arg1, int position, long arg3) {
-//                editApplication((DynamixApplication) appList.getItemAtPosition(position));
-//            }
-//        });
-
-        // Setup the Dynamix Enable/Disable button
-//        togglebutton = (ToggleButton) findViewById(R.id.DynamixActiveToggle);
-//        togglebutton.setOnClickListener(new View.OnClickListener() {
-//            public void onClick(View v) {
-//                if (togglebutton.isChecked()) {
-//                    DynamixService.startFramework();
-//                } else {
-//                    DynamixService.stopFramework();
-//                }
-//            }
-//        });
         // Setup an state refresh timer, which periodically updates application
         // state in the appList
         refresher = new Timer(true);
         TimerTask t = new TimerTask() {
             @Override
             public void run() {
-                uiHandler.post(updateList);
+                Log.i(TAG, "refresher");
                 refreshData();
             }
         };
         refresher.scheduleAtFixedRate(t, 0, 5000);
-//        registerForContextMenu(appList);
 
-        //SmartSantander
         phoneIdTv = (TextView) this.findViewById(R.id.deviceId_label);
 
         expDescriptionTv = (TextView) this.findViewById(R.id.experiment_description);
-//        appList.setVisibility(View.GONE);
 
-        mMap.getMap().setMyLocationEnabled(true);
-        mMap.getMap().getUiSettings().setAllGesturesEnabled(false);
-        mMap.getMap().getUiSettings().setMyLocationButtonEnabled(false);
+        if (mMap.getMap() != null) {
+            mMap.getMap().setMyLocationEnabled(true);
+            mMap.getMap().getUiSettings().setAllGesturesEnabled(false);
+            mMap.getMap().getUiSettings().setMyLocationButtonEnabled(false);
+        }
     }
 
     @Override
@@ -280,12 +212,12 @@ public class HomeActivity extends Activity implements GoogleApiClient.Connection
     protected void onActivityResult(int requestCode, int resultCode, Intent intent) {
         super.onActivityResult(requestCode, resultCode, intent);
         if (resultCode == Activity.RESULT_OK) {
-            Bundle extras = intent.getExtras();
+            final Bundle extras = intent.getExtras();
             switch (requestCode) {
                 case ACTIVITY_EDIT:
                     // Access the serialized app coming in from the Intent's Bundle
                     // extra
-                    DynamixApplication app = (DynamixApplication) extras.getSerializable("app");
+                    final DynamixApplication app = (DynamixApplication) extras.getSerializable("app");
                     // Update the DynamixService with the updated application
                     DynamixService.updateApplication(app);
                     refresh();
@@ -297,49 +229,24 @@ public class HomeActivity extends Activity implements GoogleApiClient.Connection
     @Override
     protected void onResume() {
         super.onResume();
-        Log.i(TAG, "onResume");
-
+        Log.d(TAG, "onResume");
         try {
             refresh();
-        } catch (Exception e) {
-            e.printStackTrace();
+        } catch (Exception ignore) {
         }
-    }
-
-
-    /**
-     * Edit the application by creating an intent to launch the ApplicationSettingsActivity, making sure to send along
-     * the application as a Bundle extra.
-     *
-     * @param app
-     */
-    private void editApplication(DynamixApplication app) {
-        Bundle bundle = new Bundle();
-        bundle.putBoolean("pending", false);
-        bundle.putSerializable("app", app);
-        Intent i = new Intent(this, ContextFirewallActivity.class);
-        i.putExtras(bundle);
-        startActivityForResult(i, ACTIVITY_EDIT);
     }
 
     private void refresh() {
 
-
         if (DynamixService.isFrameworkInitialized()) {
             // Setup toggle button with proper state
             boolean dynamixEnabled = DynamixPreferences.isDynamixEnabled(this);
-            //togglebutton.setChecked(dynamixEnabled);
             // If Dynamix is enabled, but the DynamixService is not running, then call startFramework
             if (dynamixEnabled && !DynamixService.isFrameworkStarted()) {
                 DynamixService.startFramework();
             }
-            // Load the registered application List box
-            adapter = new DynamixApplicationAdapter(this, R.layout.icon_row, new ArrayList<>(
-                    DynamixService.SettingsManager.getAuthorizedApplications()), false);
-            adapter.setNotifyOnChange(true);
-//            appList.setAdapter(adapter);
 
-            Long storageSize = DynamixService.getDataStorageSize();
+            final Long storageSize = DynamixService.getDataStorageSize();
             if (storageSize > 0) {
                 pendingSendButton.setVisibility(View.VISIBLE);
 
@@ -348,159 +255,48 @@ public class HomeActivity extends Activity implements GoogleApiClient.Connection
                 pendingSendButton.setVisibility(View.GONE);
             }
 
-            String message = DynamixService.getCommunication().getLastMessage();
-            if (message != null) {
-                // Add the fragment to the 'fragment_container' FrameLayout
-                try {
-                    Report report = new ObjectMapper().readValue(message, Report.class);
-                    for (String result : report.getJobResults()) {
-                        Log.i(TAG, result);
-                        Reading reading = Reading.fromJson(result);
-                        Log.i(TAG, reading.toString());
-                        if ("org.ambientdynamix.contextplugins.GpsPlugin".equals(reading.getContext())) {
-                            try {
-                                JSONObject obj = new JSONObject(reading.getValue());
-                                Double longitude = null;
-                                Double latitude = null;
-                                Iterator iter = obj.keys();
-                                while (iter.hasNext()) {
-                                    final String next = (String) iter.next();
-                                    Log.i(TAG, "next:" + next);
-                                    // Add item to adapter
-                                    try {
-                                        if (next.contains("Longitude")) {
-                                            final Double doubleVal = Double.valueOf((Integer) obj.get(next));
-                                            if (doubleVal > 0) {
-                                                longitude = doubleVal;
-                                            }
-                                        } else if (next.contains("Latitude")) {
-                                            final Double doubleVal = Double.valueOf((Integer) obj.get(next));
-                                            if (doubleVal > 0) {
-                                                latitude = doubleVal;
-                                            }
-                                        }
-                                    } catch (Exception e1) {
-                                        //ignore
-                                    }
-                                }
-
-                                if (longitude != null && latitude != null) {
-                                    updateMapLocation(longitude, latitude);
-                                }
-
-                            } catch (Exception e) {
-                                //ignore
-                            }
-                            continue;
-                        }
-
-                        try {
-                            JSONObject obj = new JSONObject(reading.getValue());
-                            Iterator iter = obj.keys();
-                            while (iter.hasNext()) {
-                                String next = (String) iter.next();
-                                // Add item to adapter
-                                try {
-                                    final Double doubleVal = (Double) obj.get(next);
-                                    if (doubleVal > 0) {
-                                        boolean found = false;
-                                        for (SensorMeasurement sensorMeasurement : sensorMeasurements) {
-                                            if (sensorMeasurement.getType().equals(next)) {
-                                                found = true;
-                                                sensorMeasurement.add(doubleVal);
-                                            }
-                                        }
-                                        if (!found) {
-                                            SensorMeasurement measurement = new SensorMeasurement(next, doubleVal);
-                                            Log.i(TAG, "Add to SMAdapter");
-                                            sensorMeasurements.add(measurement);
-                                            sensorMeasurementAdapter.notifyDataSetChanged();
-                                        }
-                                    }
-                                } catch (ClassCastException e) {
-                                    try {
-                                        final Double doubleVal = Double.valueOf((Integer) obj.get(next));
-                                        if (doubleVal > 0) {
-                                            boolean found = false;
-                                            for (SensorMeasurement sensorMeasurement : sensorMeasurements) {
-                                                if (sensorMeasurement.getType().equals(next)) {
-                                                    found = true;
-                                                    sensorMeasurement.add(doubleVal);
-                                                }
-                                            }
-                                            if (!found) {
-                                                SensorMeasurement measurement = new SensorMeasurement(next, doubleVal);
-                                                Log.i(TAG, "Add to SMAdapter");
-                                                sensorMeasurements.add(measurement);
-                                                sensorMeasurementAdapter.notifyDataSetChanged();
-                                            }
-
-                                        }
-                                    } catch (Exception e1) {
-                                        //ignore
-                                    }
-                                }
-
-                            }
-                            sensorMeasurementAdapter.notifyDataSetChanged();
-
-                        } catch (JSONException e) {
-                            e.printStackTrace();
-                        }
-                    }
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-            }
-
-            if (!startedGcm
-                    && DynamixService.isFrameworkInitialized()
-                    && dynamixEnabled
-                    && DynamixService.isFrameworkStarted()
-                    && DynamixService.getPhoneProfiler().getPhoneId() != -1
-                    && DynamixService.getExperiment() != null) {
-
-                if (checkPlayServices()) {
-                    startedGcm = true;
-                    Intent intent = new Intent(this, RegistrationIntentService.class);
-                    startService(intent);
-                } else {
-                    Log.w(TAG, "PlayServices not available!");
-                }
-            }
 
             if (experimentationStatus && !registered) {
                 Log.i(TAG, "Add Location Listener");
-                LocationRequest mLocationRequest = LocationRequest.create().setPriority(LocationRequest.PRIORITY_HIGH_ACCURACY)
-                        .setInterval(60 * 1000)        // 10 seconds, in milliseconds
-                        .setFastestInterval(30 * 1000); // 1 second, in milliseconds
                 if (!mGoogleApiClient.isConnected()) {
                     mGoogleApiClient.blockingConnect();
                 }
                 LocationServices.FusedLocationApi.requestLocationUpdates(mGoogleApiClient, mLocationRequest, this);
 
-
                 // Getting Current Location
-                Location location = LocationServices.FusedLocationApi.getLastLocation(mGoogleApiClient);
+                final Location location = LocationServices.FusedLocationApi.getLastLocation(mGoogleApiClient);
                 if (location != null) {
                     registered = true;
-                    // Getting latitude of the current location
-                    double latitude = location.getLatitude();
-
-                    // Getting longitude of the current location
-                    double longitude = location.getLongitude();
-
-                    //updateMapLocation(longitude, latitude);
+                    updateMapLocation(location);
                 }
             } else if (!experimentationStatus && registered) {
                 Log.i(TAG, "Remove Location Listener");
                 LocationServices.FusedLocationApi.removeLocationUpdates(mGoogleApiClient, this);
                 registered = false;
             }
+
+            if (!startedGcm && dynamixEnabled) {
+                connect2Gcm();
+            }
         }
-//        appList.setVisibility(View.GONE);//smartsantander
-        AsyncStatusRefreshTask task = new AsyncStatusRefreshTask();
-        task.execute(this);
+        final AsyncStatusRefreshTask task = new AsyncStatusRefreshTask(this);
+        task.execute();
+    }
+
+    private void connect2Gcm() {
+        if (DynamixService.isFrameworkInitialized()
+                && DynamixService.isFrameworkStarted()
+                && DynamixService.getPhoneProfiler().getPhoneId() != -1
+                && DynamixService.getExperiment() != null) {
+
+            if (checkPlayServices()) {
+                startedGcm = true;
+                final Intent intent = new Intent(this, RegistrationIntentService.class);
+                startService(intent);
+            } else {
+                Log.w(TAG, "PlayServices not available!");
+            }
+        }
     }
 
 
@@ -509,7 +305,6 @@ public class HomeActivity extends Activity implements GoogleApiClient.Connection
         int resultCode = apiAvailability.isGooglePlayServicesAvailable(this);
         return resultCode == ConnectionResult.SUCCESS;
     }
-
 
     @Override
     public void onConnected(Bundle bundle) {
@@ -531,14 +326,17 @@ public class HomeActivity extends Activity implements GoogleApiClient.Connection
     @Override
     public void onLocationChanged(Location location) {
         Log.d(TAG, "onLocationChanged:" + location.toString());
-        // Getting latitude of the current location
-        //double latitude = location.getLatitude();
-        // Getting longitude of the current location
-        //double longitude = location.getLongitude();
-        //updateMapLocation(longitude, latitude);
     }
 
-    private void updateMapLocation(final double longitude, final double latitude) {
+    private void updateMapLocation(final Location location) {
+        updateMapLocation(location.getLatitude(), location.getLongitude());
+    }
+
+    public void updateMapLocation(final String latitude, final String longitude) {
+        updateMapLocation(Double.parseDouble(latitude), Double.parseDouble(longitude));
+    }
+
+    private void updateMapLocation(final double latitude, final double longitude) {
         Log.i(TAG, "updateMapLocation:" + longitude + "/" + latitude);
         // Creating a LatLng object for the current location
         final LatLng latLng = new LatLng(latitude, longitude);
@@ -546,13 +344,13 @@ public class HomeActivity extends Activity implements GoogleApiClient.Connection
         try {
             // Showing the current location in Google Map
             mMap.getMap().moveCamera(CameraUpdateFactory.newLatLngZoom(latLng, 15));
-        } catch (NullPointerException e) {
-            //ignore
-            e.printStackTrace();
+        } catch (NullPointerException ignore) {
         }
     }
 
     public static void changeStatus(boolean status) {
         experimentationStatus = status;
     }
+
+
 }

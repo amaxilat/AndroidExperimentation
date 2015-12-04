@@ -29,14 +29,10 @@ public class ImageDownloader extends AsyncTask<String, Void, Bitmap> {
 
     @Override
     protected void onPreExecute() {
-        Log.i("Async-Example", "onPreExecute Called");
-
-
     }
 
     @Override
     protected void onPostExecute(Bitmap result) {
-        Log.i("Async-Example", "onPostExecute Called");
         imageView.setImageBitmap(result);
     }
 
@@ -45,7 +41,7 @@ public class ImageDownloader extends AsyncTask<String, Void, Bitmap> {
         // initilize the default HTTP client object
         final DefaultHttpClient client = new DefaultHttpClient();
 
-        //forming a HttoGet request
+        //forming a HttpGet request
         final HttpGet getRequest = new HttpGet(url);
         try {
 
