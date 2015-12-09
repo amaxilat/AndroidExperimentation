@@ -128,4 +128,10 @@
     <string name="configure_plugin">Configure Plug-in</string>
     <string name="configuration_offline">Configuration Offline</string>
     <string name="no_configuration">No Configuration</string>
+    <string name="enabled">Enabled</string>
+    <string name="disabled">Disabled</string>
+    <string name="sensor_temperature">Ambient Temperature</string>
+    <string name="sensor_relative_humidity">Relative Humidity</string>
+    <string name="sensor_pressure">Atmospheric Pressure</string>
+    <string name="sensor_noise">Ambient Noise</string>
 </resources>

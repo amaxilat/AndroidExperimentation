@@ -22,9 +22,11 @@ public class AsyncStatusRefreshTask extends AsyncTask<Void, String, Integer> {
     private final String TAG = this.getClass().getSimpleName();
     private static final String GPS_PLUGIN = "org.ambientdynamix.contextplugins.GpsPlugin";
     HomeActivity activity;
+    private String lastMessage;
 
     public AsyncStatusRefreshTask(final HomeActivity homeActivity) {
         this.activity = homeActivity;
+        this.lastMessage = lastMessage;
     }
 
     @Override
@@ -67,7 +69,7 @@ public class AsyncStatusRefreshTask extends AsyncTask<Void, String, Integer> {
 
 
     private void parseExperimentMessage(final String message) {
-        if (message != null) {
+        if (message != null && !message.equals(lastMessage)) {
             Log.i(TAG, message);
             // Add the fragment to the 'fragment_container' FrameLayout
             try {
@@ -84,12 +86,12 @@ public class AsyncStatusRefreshTask extends AsyncTask<Void, String, Integer> {
                                 final String next = (String) keysIterator.next();
                                 // Add item to adapter
                                 try {
-                                    if (next.contains("Longitude")) {
+                                    if (next.toLowerCase().contains("longitude")) {
                                         final Double doubleVal = Double.valueOf((Integer) obj.get(next));
                                         if (doubleVal > 0) {
                                             longitude = doubleVal;
                                         }
-                                    } else if (next.contains("Latitude")) {
+                                    } else if (next.toLowerCase().contains("latitude")) {
                                         final Double doubleVal = Double.valueOf((Integer) obj.get(next));
                                         if (doubleVal > 0) {
                                             latitude = doubleVal;
@@ -108,7 +110,7 @@ public class AsyncStatusRefreshTask extends AsyncTask<Void, String, Integer> {
                     }
                     try {
                         showMeasurementSparkLines(reading);
-                    } catch (JSONException ignore) {
+                    } catch (Exception ignore) {
                     }
 
                 }

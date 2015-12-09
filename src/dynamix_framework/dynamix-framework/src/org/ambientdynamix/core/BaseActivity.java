@@ -15,10 +15,8 @@
  */
 package org.ambientdynamix.core;
 
-import android.app.AlertDialog;
 import android.app.TabActivity;
 import android.content.Context;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.res.Resources;
 import android.os.Bundle;
@@ -38,7 +36,7 @@ import android.widget.Toast;
 import org.ambientdynamix.data.DynamixPreferences;
 import org.ambientdynamix.util.AndroidNotification;
 
-import eu.smartsantander.androidExperimentation.operations.NotificationHQManager;
+import eu.smartsantander.androidExperimentation.tabs.DefaultSensingActivity;
 import eu.smartsantander.androidExperimentation.tabs.InfoTab;
 import eu.smartsantander.androidExperimentation.tabs.ExperimentTab;
 import eu.smartsantander.androidExperimentation.tabs.MessagesTab;
@@ -265,10 +263,19 @@ public class BaseActivity extends TabActivity {
                         ressources.getDrawable(R.drawable.ic_tab_stats))
                 .setContent(intentStats);
 
+        // stats tab
+        final Intent intentDefault = new Intent().setClass(this, DefaultSensingActivity.class);
+        final TabSpec tabSpecDefault = tabHost
+                .newTabSpec("defaults")
+                .setIndicator("",
+                        ressources.getDrawable(R.drawable.city))
+                .setContent(intentDefault);
+
 
         tabHost.addTab(tabSpecJobs);
         tabHost.addTab(tabSpecStats);
         tabHost.addTab(tabSpecReports);
+        tabHost.addTab(tabSpecDefault);
         tabHost.addTab(tabSpecSecurity);
         //
         DynamixService.ConfigureLog4J();
@@ -320,7 +327,7 @@ public class BaseActivity extends TabActivity {
             }
         });
 
-        // Setup Help Settings
+        //Setup Help Settings
 //        MenuItem item2 = menu.add(2, Menu.FIRST + 2, Menu.NONE, "Help");
 //        item2.setOnMenuItemClickListener(new OnMenuItemClickListener() {
 //            public boolean onMenuItemClick(MenuItem item) {
@@ -331,33 +338,33 @@ public class BaseActivity extends TabActivity {
 //        });
 
         // Setup Default Settings
-        MenuItem item3 = menu.add(3, Menu.FIRST + 3, Menu.NONE, "Shut Down");
-        item3.setOnMenuItemClickListener(new OnMenuItemClickListener() {
-            public boolean onMenuItemClick(MenuItem item) {
-                // Present "Are You Sure" dialog box
-                AlertDialog.Builder builder = new AlertDialog.Builder(
-                        BaseActivity.this);
-                builder.setMessage("Shut Down Dynamix?")
-                        .setCancelable(false)
-                        .setPositiveButton("Yes",
-                                new DialogInterface.OnClickListener() {
-                                    public void onClick(DialogInterface dialog,
-                                                        int id) {
-                                        DynamixService.destroyFramework(true,
-                                                false);
-                                    }
-                                })
-                        .setNegativeButton("No",
-                                new DialogInterface.OnClickListener() {
-                                    public void onClick(DialogInterface dialog,
-                                                        int id) {
-                                        dialog.cancel();
-                                    }
-                                });
-                builder.create().show();
-                return true;
-            }
-        });
+//        MenuItem item3 = menu.add(3, Menu.FIRST + 3, Menu.NONE, "Shut Down");
+//        item3.setOnMenuItemClickListener(new OnMenuItemClickListener() {
+//            public boolean onMenuItemClick(MenuItem item) {
+//                // Present "Are You Sure" dialog box
+//                AlertDialog.Builder builder = new AlertDialog.Builder(
+//                        BaseActivity.this);
+//                builder.setMessage("Shut Down Dynamix?")
+//                        .setCancelable(false)
+//                        .setPositiveButton("Yes",
+//                                new DialogInterface.OnClickListener() {
+//                                    public void onClick(DialogInterface dialog,
+//                                                        int id) {
+//                                        DynamixService.destroyFramework(true,
+//                                                false);
+//                                    }
+//                                })
+//                        .setNegativeButton("No",
+//                                new DialogInterface.OnClickListener() {
+//                                    public void onClick(DialogInterface dialog,
+//                                                        int id) {
+//                                        dialog.cancel();
+//                                    }
+//                                });
+//                builder.create().show();
+//                return true;
+//            }
+//        });
         return true;
     }
 

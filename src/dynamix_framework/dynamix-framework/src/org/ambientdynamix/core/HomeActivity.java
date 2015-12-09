@@ -90,6 +90,7 @@ public class HomeActivity extends Activity implements GoogleApiClient.Connection
             .setPriority(LocationRequest.PRIORITY_HIGH_ACCURACY)
             .setInterval(60 * 1000)        // 10 seconds, in milliseconds
             .setFastestInterval(30 * 1000); // 1 second, in milliseconds
+    public static Location location = null;
 
 
     // Refreshes the UI
@@ -316,6 +317,7 @@ public class HomeActivity extends Activity implements GoogleApiClient.Connection
     @Override
     public void onLocationChanged(Location location) {
         Log.d(TAG, "onLocationChanged:" + location.toString());
+        this.location = location;
     }
 
     private void updateMapLocation(final Location location) {

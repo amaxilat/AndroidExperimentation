@@ -139,6 +139,9 @@
 
         <!-- Organicity Android Experimentation -->
         <activity
+            android:name="eu.smartsantander.androidExperimentation.tabs.DefaultSensingActivity"
+            android:label="defaults"></activity>
+        <activity
             android:name="eu.smartsantander.androidExperimentation.tabs.ExperimentTab"
             android:label="jobsTab"></activity>
         <activity

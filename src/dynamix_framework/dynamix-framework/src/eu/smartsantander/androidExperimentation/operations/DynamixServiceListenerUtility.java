@@ -120,10 +120,10 @@ public class DynamixServiceListenerUtility {
                             final List<Reading> readings = (new Gson()).fromJson(readingMsg, listType);
                             final Report rObject = new Report(DynamixService.getExperiment().getId().toString());
                             rObject.setDeviceId(DynamixService.getPhoneProfiler().getPhoneId());
+                            noteManager.postNotification(readingMsg);
                             final List<String> mlist = new ArrayList<>();
                             for (final Reading reading : readings) {
                                 Log.i(TAG, "Received Reading: " + reading);
-                                noteManager.postNotification(readingMsg);
                                 DynamixService.cacheExperimentalMessage(readingMsg);
                                 if (DynamixService.getExperiment() == null)
                                     return;
