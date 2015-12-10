@@ -2,7 +2,6 @@ package eu.smartsantander.androidExperimentation.operations;
 
 import android.os.AsyncTask;
 import android.util.Log;
-import android.view.View;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 
@@ -26,7 +25,6 @@ public class AsyncStatusRefreshTask extends AsyncTask<Void, String, Integer> {
 
     public AsyncStatusRefreshTask(final HomeActivity homeActivity) {
         this.activity = homeActivity;
-        this.lastMessage = lastMessage;
     }
 
     @Override
@@ -37,29 +35,20 @@ public class AsyncStatusRefreshTask extends AsyncTask<Void, String, Integer> {
             if (!DynamixService.isDeviceRegistered()) {
                 DynamixService.getPhoneProfiler().register();
             } else {
-                publishProgress("phone", "Device ID:" + String.valueOf(DynamixService.getPhoneProfiler().getPhoneId()));
+                publishProgress("phone", String.valueOf(DynamixService.getPhoneProfiler().getPhoneId()));
                 DynamixService.getPhoneProfiler().savePrefs();
             }
         } else {
-            publishProgress("phone", String.valueOf("Device ID: Not Connected"));
+            publishProgress("phone", String.valueOf("Not Connected"));
         }
 
+        //set the phone id and experiment description fields
         if (DynamixService.getExperiment() != null) {
-            publishProgress("phone", "Device ID: " + String.valueOf(DynamixService.getPhoneProfiler().getPhoneId()));
-            publishProgress("experiment", "Id: " + String.valueOf(DynamixService.getExperiment().getId()) + " Name: ");
+            publishProgress("phone", String.valueOf(DynamixService.getPhoneProfiler().getPhoneId()));
             publishProgress("experimentDescription", String.valueOf(DynamixService.getExperiment().getName()));
-            if (DynamixService.getExperiment().getUrlDescription() != null) {
-                publishProgress("experimentUrlDescription", String.valueOf(DynamixService.getExperiment().getUrlDescription()));
-            }
         }
 
-        if (DynamixService.getConnectionStatus() && DynamixService.isEnabled()) {
-            publishProgress("status", "Connected with Server");
-        } else {
-            publishProgress("status", "Disconnected from Server");
-        }
-
-
+        //parse the message and update the data sparklines
         if (DynamixService.isFrameworkInitialized()) {
             //get the last experiment message and show the changes in the home activity
             parseExperimentMessage(DynamixService.getCommunication().getLastMessage());
@@ -155,13 +144,9 @@ public class AsyncStatusRefreshTask extends AsyncTask<Void, String, Integer> {
     @Override
     protected void onProgressUpdate(String... values) {
         if ("phone".equals(values[0])) {
-            activity.phoneIdTv.setText(String.valueOf(values[1]));
+            activity.phoneIdTv.setText("Device ID: " + String.valueOf(values[1]));
         } else if ("experimentDescription".equals(values[0])) {
             activity.expDescriptionTv.setText(values[1]);
-        } else if ("status".equals(values[0])) {
-
-        } else if ("experimentUrlDescription".equals(values[0])) {
-
         } else if ("location-changed".equals(values[0])) {
             activity.updateMapLocation(values[1], values[2]);
         } else if ("spark-line".equals(values[0])) {
