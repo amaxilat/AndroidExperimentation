@@ -22,9 +22,11 @@ import android.graphics.Bitmap;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.*;
+import android.preference.PreferenceManager;
 import android.util.Log;
 import android.util.Pair;
 
+import eu.smartsantander.androidExperimentation.operations.AsyncReportNowTask;
 import eu.smartsantander.androidExperimentation.util.Constants;
 import eu.smartsantander.androidExperimentation.DataStorage;
 import eu.smartsantander.androidExperimentation.jsonEntities.Experiment;
@@ -2618,6 +2620,26 @@ public final class DynamixService extends IntentService {
             return bitmaps.get(url);
         }
         return null;
+    }
+
+    public static void publishMessage(final String message) {
+        final SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(androidContext);
+        final boolean wifiOnly = preferences.getBoolean(DynamixPreferences.USE_WIFI_NETWORK_ONLY, true);
+        if (wifiOnly) {
+            final ConnectivityManager connManager = (ConnectivityManager) androidContext.getSystemService(Context.CONNECTIVITY_SERVICE);
+            final NetworkInfo mWifi = connManager.getNetworkInfo(ConnectivityManager.TYPE_WIFI);
+
+            if (mWifi.isConnected()) {
+                Log.i(TAG, "WifiOnly:Enabled Sending");
+                new AsyncReportNowTask().execute(message);
+            } else {
+                Log.i(TAG, "WifiOnly:Enabled Storing");
+                DynamixService.addExperimentalMessage(message);
+            }
+        } else {
+            Log.i(TAG, "WifiOnly:False Sending");
+            new AsyncReportNowTask().execute(message);
+        }
     }
 
     /*

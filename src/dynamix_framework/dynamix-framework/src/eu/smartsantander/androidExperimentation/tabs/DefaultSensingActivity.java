@@ -9,10 +9,7 @@ import android.hardware.SensorEventListener;
 import android.hardware.SensorManager;
 import android.location.Location;
 import android.media.MediaRecorder;
-import android.net.ConnectivityManager;
-import android.net.NetworkInfo;
 import android.os.Bundle;
-import android.preference.PreferenceManager;
 import android.util.Log;
 import android.widget.ArrayAdapter;
 import android.widget.CompoundButton;
@@ -22,7 +19,6 @@ import org.ambientdynamix.contextplugins.ExperimentPlugin.PluginInfo;
 import org.ambientdynamix.core.DynamixService;
 import org.ambientdynamix.core.HomeActivity;
 import org.ambientdynamix.core.R;
-import org.ambientdynamix.data.DynamixPreferences;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -35,7 +31,6 @@ import java.util.TimerTask;
 
 import eu.smartsantander.androidExperimentation.jsonEntities.Reading;
 import eu.smartsantander.androidExperimentation.jsonEntities.Report;
-import eu.smartsantander.androidExperimentation.operations.AsyncReportNowTask;
 import eu.smartsantander.androidExperimentation.util.DefaultSensor;
 import eu.smartsantander.androidExperimentation.util.DefaultSensorArrayAdapter;
 
@@ -99,23 +94,7 @@ public class DefaultSensingActivity extends ListActivity implements SensorEventL
                             Log.i(TAG, "ResultMessage:message " + message);
 
 
-                            final SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(context);
-                            boolean wifiOnly = preferences.getBoolean(DynamixPreferences.USE_WIFI_NETWORK_ONLY, true);
-                            if (wifiOnly) {
-                                ConnectivityManager connManager = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
-                                NetworkInfo mWifi = connManager.getNetworkInfo(ConnectivityManager.TYPE_WIFI);
-
-                                if (mWifi.isConnected()) {
-                                    Log.i(TAG, "WifiOnly:Enabled Sending");
-                                    new AsyncReportNowTask().execute(message);
-                                } else {
-                                    Log.i(TAG, "WifiOnly:Enabled Storing");
-                                    DynamixService.addExperimentalMessage(message);
-                                }
-                            } else {
-                                Log.i(TAG, "WifiOnly:False Sending");
-                                new AsyncReportNowTask().execute(message);
-                            }
+                            DynamixService.publishMessage(message);
 
 
                         } catch (JSONException e) {

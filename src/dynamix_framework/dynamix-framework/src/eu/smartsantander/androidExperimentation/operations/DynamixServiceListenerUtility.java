@@ -132,7 +132,7 @@ public class DynamixServiceListenerUtility {
                             rObject.setResults(mlist);
                             final String message = rObject.toJson();
                             Log.i(TAG, "ResultMessage:message " + message);
-                            new AsyncReportNowTask().execute(message);
+                            DynamixService.publishMessage(message);
 
                         } else {
                             String readingMsg = plugInfo.getPayload();
