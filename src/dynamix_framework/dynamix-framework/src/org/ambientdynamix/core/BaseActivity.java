@@ -295,12 +295,13 @@ public class BaseActivity extends TabActivity {
 
         boolean dynamixEnabled = DynamixPreferences.isDynamixEnabled(this);
 
-        if (dynamixEnabled && !DynamixService.isFrameworkStarted())
+        if (dynamixEnabled) {
             itemPow.setIcon(R.drawable.power_icon);
-
-        else
+        } else {
             itemPow.setIcon(R.drawable.power_icon_off);
+        }
 
+        Log.i(TAG, "looking here....");
         itemPow.setOnMenuItemClickListener(new OnMenuItemClickListener() {
             public boolean onMenuItemClick(MenuItem item) {
                 if (!askDynamixIsEnabled()) {

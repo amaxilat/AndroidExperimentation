@@ -74,6 +74,9 @@ public class AsyncStatusRefreshTask extends AsyncTask<Void, String, Integer> {
             // Add the fragment to the 'fragment_container' FrameLayout
             try {
                 final Report report = new ObjectMapper().readValue(message, Report.class);
+                if (report.getJobName().equals("0")) {
+                    return;
+                }
                 for (final String result : report.getJobResults()) {
                     final Reading reading = Reading.fromJson(result);
                     if (GPS_PLUGIN.equals(reading.getContext())) {
