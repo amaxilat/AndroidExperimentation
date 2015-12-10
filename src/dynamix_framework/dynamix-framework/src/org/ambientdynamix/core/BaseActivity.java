@@ -19,6 +19,9 @@ import android.app.TabActivity;
 import android.content.Context;
 import android.content.Intent;
 import android.content.res.Resources;
+import android.graphics.Color;
+import android.graphics.PorterDuff;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.multidex.MultiDex;
@@ -222,7 +225,6 @@ public class BaseActivity extends TabActivity {
         // Boot Dynamix
         DynamixService.boot(this, true, false, false);
 
-        final Resources ressources = getResources();
         final TabHost tabHost = getTabHost();
 
         // profile tab
@@ -231,54 +233,19 @@ public class BaseActivity extends TabActivity {
         // tabHost.newTabSpec("profile").setIndicator("",
         // ressources.getDrawable(R.drawable.ic_tab_profile)).setContent(intentProfile);
 
-        // security tab
-        final Intent intentSecurity = new Intent().setClass(this, MessagesTab.class);
-        final TabSpec tabSpecSecurity = tabHost
-                .newTabSpec("security")
-                .setIndicator("",
-                        ressources.getDrawable(R.drawable.ic_tab_security))
-                .setContent(intentSecurity);
-
-        // jobs tab
-        final Intent intentJobs = new Intent().setClass(this, ExperimentTab.class);
-        final TabSpec tabSpecJobs = tabHost
-                .newTabSpec("jobs")
-                .setIndicator("",
-                        ressources.getDrawable(R.drawable.ic_tab_jobs))
-                .setContent(intentJobs);
-
-        // report tab
-        final Intent intentReports = new Intent().setClass(this, InfoTab.class);
-        final TabSpec tabSpecReports = tabHost
-                .newTabSpec("reports")
-                .setIndicator("",
-                        ressources.getDrawable(R.drawable.ic_tab_reports))
-                .setContent(intentReports);
-
-        // stats tab
-        final Intent intentStats = new Intent().setClass(this, StatisticsTab.class);
-        final TabSpec tabSpecStats = tabHost
-                .newTabSpec("stats")
-                .setIndicator("",
-                        ressources.getDrawable(R.drawable.ic_tab_stats))
-                .setContent(intentStats);
-
-        // stats tab
-        final Intent intentDefault = new Intent().setClass(this, DefaultSensingActivity.class);
-        final TabSpec tabSpecDefault = tabHost
-                .newTabSpec("defaults")
-                .setIndicator("",
-                        ressources.getDrawable(R.drawable.city))
-                .setContent(intentDefault);
-
-
-        tabHost.addTab(tabSpecJobs);
-        tabHost.addTab(tabSpecStats);
-        tabHost.addTab(tabSpecReports);
-        tabHost.addTab(tabSpecDefault);
-        tabHost.addTab(tabSpecSecurity);
+        tabHost.addTab(buildTab(ExperimentTab.class, R.drawable.ic_tab_jobs, "jobs"));
+        tabHost.addTab(buildTab(StatisticsTab.class, R.drawable.ic_tab_stats, "stats"));
+        tabHost.addTab(buildTab(InfoTab.class, R.drawable.ic_tab_reports, "reports"));
+        tabHost.addTab(buildTab(DefaultSensingActivity.class, R.drawable.ic_tab_city, "defaults"));
+        tabHost.addTab(buildTab(MessagesTab.class, R.drawable.ic_tab_security, "security"));
         //
         DynamixService.ConfigureLog4J();
+    }
+
+    private TabSpec buildTab(Class tabClass, int drawableRes, String name) {
+        final Intent intent = new Intent().setClass(this, tabClass);
+        final Drawable icon = getResources().getDrawable(drawableRes);
+        return tabHost.newTabSpec(name).setIndicator("", icon).setContent(intent);
     }
 
     /**
