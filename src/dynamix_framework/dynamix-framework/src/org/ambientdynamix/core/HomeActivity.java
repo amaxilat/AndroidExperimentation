@@ -16,7 +16,6 @@
 package org.ambientdynamix.core;
 
 import android.app.Activity;
-import android.app.PendingIntent;
 import android.content.Intent;
 import android.location.Location;
 import android.os.Bundle;
@@ -70,6 +69,7 @@ public class HomeActivity extends Activity implements GoogleApiClient.Connection
     private static HomeActivity activity;
     private static boolean experimentationStatus = true;
     private static boolean registered = false;
+    public static Location location = null;
     public final Handler uiHandler = new Handler();
     private boolean startedGcm = false;
 
@@ -79,7 +79,7 @@ public class HomeActivity extends Activity implements GoogleApiClient.Connection
 
 
     private Button pendingSendButton;
-    private MapFragment mMap;
+    public MapFragment mMap;
 
     private GoogleApiClient mGoogleApiClient;
 
@@ -90,7 +90,6 @@ public class HomeActivity extends Activity implements GoogleApiClient.Connection
             .setPriority(LocationRequest.PRIORITY_HIGH_ACCURACY)
             .setInterval(60 * 1000)        // 10 seconds, in milliseconds
             .setFastestInterval(30 * 1000); // 1 second, in milliseconds
-    public static Location location = null;
 
 
     // Refreshes the UI
@@ -164,14 +163,13 @@ public class HomeActivity extends Activity implements GoogleApiClient.Connection
             @Override
             public void onClick(View v) {
                 new AsyncReportOnServerTask().execute();
-                refresh();
             }
         });
 
         // Setup an state refresh timer, which periodically updates application
         // state in the appList
-        Timer refresher = new Timer(true);
-        TimerTask t = new TimerTask() {
+        final Timer refresher = new Timer(true);
+        final TimerTask t = new TimerTask() {
             @Override
             public void run() {
                 Log.i(TAG, "refresher");
@@ -220,11 +218,6 @@ public class HomeActivity extends Activity implements GoogleApiClient.Connection
     @Override
     protected void onResume() {
         super.onResume();
-        Log.d(TAG, "onResume");
-        try {
-            refresh();
-        } catch (Exception ignore) {
-        }
     }
 
     private void refresh() {
@@ -258,7 +251,10 @@ public class HomeActivity extends Activity implements GoogleApiClient.Connection
                 final Location location = LocationServices.FusedLocationApi.getLastLocation(mGoogleApiClient);
                 if (location != null) {
                     registered = true;
+                    this.location = location;
                     updateMapLocation(location);
+                    //Load organicity points
+                    //new AsyncGetOrganicityMarkersTask().execute(this);
                 }
             } else if (!experimentationStatus && registered) {
                 Log.i(TAG, "Remove Location Listener");
@@ -335,7 +331,7 @@ public class HomeActivity extends Activity implements GoogleApiClient.Connection
 
         try {
             // Showing the current location in Google Map
-            mMap.getMap().moveCamera(CameraUpdateFactory.newLatLngZoom(latLng, 15));
+            mMap.getMap().moveCamera(CameraUpdateFactory.newLatLngZoom(latLng, 14));
         } catch (NullPointerException ignore) {
         }
     }
