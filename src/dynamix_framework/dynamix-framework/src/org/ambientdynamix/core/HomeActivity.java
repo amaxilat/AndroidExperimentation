@@ -243,7 +243,8 @@ public class HomeActivity extends Activity implements GoogleApiClient.Connection
             if (experimentationStatus && !registered) {
                 Log.i(TAG, "Add Location Listener");
                 if (!mGoogleApiClient.isConnected()) {
-                    mGoogleApiClient.blockingConnect();
+                    //TODO : use this in a blocking connect mode - needed to do the below stuff
+                    mGoogleApiClient.connect();
                 }
                 LocationServices.FusedLocationApi.requestLocationUpdates(mGoogleApiClient, mLocationRequest, this);
 
