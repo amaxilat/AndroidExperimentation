@@ -245,17 +245,18 @@ public class HomeActivity extends Activity implements GoogleApiClient.Connection
                 if (!mGoogleApiClient.isConnected()) {
                     //TODO : use this in a blocking connect mode - needed to do the below stuff
                     mGoogleApiClient.connect();
-                }
-                LocationServices.FusedLocationApi.requestLocationUpdates(mGoogleApiClient, mLocationRequest, this);
+                } else {
+                    LocationServices.FusedLocationApi.requestLocationUpdates(mGoogleApiClient, mLocationRequest, this);
 
-                // Getting Current Location
-                final Location location = LocationServices.FusedLocationApi.getLastLocation(mGoogleApiClient);
-                if (location != null) {
-                    registered = true;
-                    this.location = location;
-                    updateMapLocation(location);
-                    //Load organicity points
-                    //new AsyncGetOrganicityMarkersTask().execute(this);
+                    // Getting Current Location
+                    final Location location = LocationServices.FusedLocationApi.getLastLocation(mGoogleApiClient);
+                    if (location != null) {
+                        registered = true;
+                        HomeActivity.location = location;
+                        updateMapLocation(location);
+                        //Load organicity points
+                        //new AsyncGetOrganicityMarkersTask().execute(this);
+                    }
                 }
             } else if (!experimentationStatus && registered) {
                 Log.i(TAG, "Remove Location Listener");
@@ -314,7 +315,7 @@ public class HomeActivity extends Activity implements GoogleApiClient.Connection
     @Override
     public void onLocationChanged(Location location) {
         Log.d(TAG, "onLocationChanged:" + location.toString());
-        this.location = location;
+        HomeActivity.location = location;
     }
 
     private void updateMapLocation(final Location location) {

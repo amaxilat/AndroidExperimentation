@@ -119,7 +119,7 @@ public final class DynamixService extends IntentService {
     private static final Handler uiHandler = new Handler();
     private static CountDownTimer contextPlugUpdateTimer;
     private static AppFacadeBinder facadeBinder = null;
-    private static WebFacadeBinder webFacade = null;
+//    private static WebFacadeBinder webFacade = null;
     // Protected static data
     public static ISettingsManager SettingsManager;
     // Private instance data
@@ -540,40 +540,42 @@ public final class DynamixService extends IntentService {
      */
     public static boolean startWebConnector(final int port, final int checkPeriodMills, final int timeoutMills,
                                             final List<TrustedCert> authorizedCerts) throws IOException {
-        if (config.isWebConnectorEnabled()) {
-            if (isFrameworkInitialized()) {
-                if (!WebConnector.isStarted()) {
-                    WebConnector.startServer(webFacade, port, checkPeriodMills, timeoutMills, authorizedCerts);
-                    return true;
-                } else {
-                    Log.d(TAG, "Web connector already started");
-                    return true;
-                }
-            } else {
-                Log.w(TAG, "Cannot start web connector because Dynamix is not initialized");
-                return false;
-            }
-        } else {
-            Log.w(TAG, "Cannot start web connector because it's disabled");
-            return false;
-        }
+//        if (config.isWebConnectorEnabled()) {
+//            if (isFrameworkInitialized()) {
+//                if (!WebConnector.isStarted()) {
+//                    WebConnector.startServer(webFacade, port, checkPeriodMills, timeoutMills, authorizedCerts);
+//                    return true;
+//                } else {
+//                    Log.d(TAG, "Web connector already started");
+//                    return true;
+//                }
+//            } else {
+//                Log.w(TAG, "Cannot start web connector because Dynamix is not initialized");
+//                return false;
+//            }
+//        } else {
+//            Log.w(TAG, "Cannot start web connector because it's disabled");
+//            return false;
+//        }
+        return true;
     }
 
     /**
      * Starts the WebConnector using the values specified in framework configuration.
      */
     public static boolean startWebConnectorUsingConfigData() {
-        for (final int port : config.getWebConnectorPorts()) {
-            try {
-                // loadAuthorizedCertsFromPath(Environment.getExternalStorageDirectory().getAbsolutePath());
-                return startWebConnector(port, config.getWebConnectorTimeoutCheckMills(),
-                        config.getWebConnectorClientTimeoutMills(), getAuthorizedCertsFromKeyStore());
-            } catch (IOException e) {
-                Log.w(TAG, "Could not start web connector using port: " + port);
-            }
-        }
-        Log.w(TAG, "Failed to start web connector using specified ports: " + Arrays.toString(config.getWebConnectorPorts()));
-        return false;
+//        for (final int port : config.getWebConnectorPorts()) {
+//            try {
+//                // loadAuthorizedCertsFromPath(Environment.getExternalStorageDirectory().getAbsolutePath());
+//                return startWebConnector(port, config.getWebConnectorTimeoutCheckMills(),
+//                        config.getWebConnectorClientTimeoutMills(), getAuthorizedCertsFromKeyStore());
+//            } catch (IOException e) {
+//                Log.w(TAG, "Could not start web connector using port: " + port);
+//            }
+//        }
+//        Log.w(TAG, "Failed to start web connector using specified ports: " + Arrays.toString(config.getWebConnectorPorts()));
+//        return false;
+        return true;
     }
 
     /*
@@ -591,7 +593,6 @@ public final class DynamixService extends IntentService {
             while (aliases.hasMoreElements()) {
                 final String alias = aliases.nextElement();
                 final X509Certificate cert = (X509Certificate) trusted.getCertificate(alias);
-                // Log.i(TAG, "Got Authorized Cert: " + cert);
                 authorizedCerts.add(new TrustedCert(alias, cert));
             }
         } catch (KeyStoreException | IOException | CertificateException | NoSuchAlgorithmException | NotFoundException e) {
@@ -608,7 +609,6 @@ public final class DynamixService extends IntentService {
      * @throws Exception
      */
     protected synchronized static void storeAuthorizedCert(final String alias, final X509Certificate cert) throws Exception {
-        Log.i(TAG, "Storing authorized cert for " + alias);
         // Load the KeyStore
         final KeyStore trusted = KeyStore.getInstance("BKS");
         // trusted.
@@ -624,8 +624,8 @@ public final class DynamixService extends IntentService {
         final OutputStream keyStoreStream = new java.io.FileOutputStream(keyStorePath);
         trusted.store(keyStoreStream, "".toCharArray());
         // If the WebConnector is started, update it
-        if (WebConnector.isStarted())
-            WebConnector.addAuthorizedCert(new TrustedCert(alias, cert));
+//        if (WebConnector.isStarted())
+//            WebConnector.addAuthorizedCert(new TrustedCert(alias, cert));
         /*
          * NOTE: Store example
 		 * https://github.com/k9mail/k-9/blob/master/src/com/fsck/k9/mail/store/TrustManagerFactory.java
@@ -639,7 +639,6 @@ public final class DynamixService extends IntentService {
      * @throws Exception
      */
     protected synchronized static void removeAuthorizedCert(final String alias) throws Exception {
-        Log.i(TAG, "Removing authorized cert for " + alias);
         // Load the KeyStore
         final KeyStore trusted = KeyStore.getInstance("BKS");
         final InputStream in = new FileInputStream(keyStorePath);
@@ -652,8 +651,8 @@ public final class DynamixService extends IntentService {
         final OutputStream keyStoreStream = new java.io.FileOutputStream(keyStorePath);
         trusted.store(keyStoreStream, "".toCharArray());
         // If the WebConnector is started, update it
-        if (cert != null && WebConnector.isStarted())
-            WebConnector.removeAuthorizedCert(new TrustedCert(alias, cert));
+//        if (cert != null && WebConnector.isStarted())
+//            WebConnector.removeAuthorizedCert(new TrustedCert(alias, cert));
         /*
          * NOTE: Store example
 		 * https://github.com/k9mail/k-9/blob/master/src/com/fsck/k9/mail/store/TrustManagerFactory.java
@@ -693,22 +692,22 @@ public final class DynamixService extends IntentService {
      * Stops the WebConnector, which prevents web clients from accessing Dynamix services via its REST interface.
      */
     public static void stopWebConnector() {
-        if (isFrameworkInitialized() && WebConnector.isStarted())
-            WebConnector.stopServer();
+//        if (isFrameworkInitialized() && WebConnector.isStarted())
+//            WebConnector.stopServer();
     }
 
     /**
      * Sets the time period (in milliseconds) between checks for web client timeouts.
      */
     protected static void setWebClientTimeoutCheckPeriod(final int checkPeriodMills) {
-        WebConnector.setWebClientTimeoutCheckPeriod(checkPeriodMills);
+//        WebConnector.setWebClientTimeoutCheckPeriod(checkPeriodMills);
     }
 
     /**
      * Sets the web client timeout duration (in milliseconds).
      */
     protected static void setWebClientTimeoutMills(final int timeoutMills) {
-        WebConnector.setWebClientTimeoutMills(timeoutMills);
+//        WebConnector.setWebClientTimeoutMills(timeoutMills);
     }
 
     /**
@@ -974,7 +973,6 @@ public final class DynamixService extends IntentService {
      */
     static Result revokeSecurityAuthorization(final DynamixApplication app) {
         if (app != null) {
-            Log.i(TAG, "revokeSecurityAuthorization for: " + app);
             if (SettingsManager.removeApplication(app)) {
                 // Notify the app that their security authorization has been revoked
                 SessionManager.notifySecurityAuthorizationRevoked(app);
@@ -1257,7 +1255,6 @@ public final class DynamixService extends IntentService {
      */
     static FrameworkConfiguration createFrameworkConfigurationFromPropsFile(final Context context)
             throws Exception {
-        Log.i(TAG, "Creating FrameworkConfiguration...");
         // Get the Dynamix data path
         final String dataPath = Utils.getDataDirectoryPath(context);
         // Ensure the 'conf' directory exists in the dataPath
@@ -1289,7 +1286,6 @@ public final class DynamixService extends IntentService {
      * @throws Exception
      */
     static void initKeyStore(final Context context) throws Exception {
-        Log.i(TAG, "Initializing KeyStore...");
         // Get the Dynamix data path
         final String dataPath = Utils.getDataDirectoryPath(context);
         // Ensure the 'conf' directory exists in the dataPath
@@ -1934,7 +1930,7 @@ public final class DynamixService extends IntentService {
                  * Setup our internal Web server to handle web clients. Note that we can only start the WebConnector
 				 * after booting, since it needs the webFacade to be properly initialized.
 				 */
-                DynamixService.startWebConnectorUsingConfigData();
+                //DynamixService.startWebConnectorUsingConfigData();
                 /*
                  * TODO: Now we just check for updates in the background, which means the PluginActivity may not show
 				 * all available plug-ins until it's refreshed. Find a better way!
@@ -2100,7 +2096,7 @@ public final class DynamixService extends IntentService {
                  * Create our binders, which allow client's to connect the Dynamix.
 				 */
                 facadeBinder = new AppFacadeBinder(this, ContextMgr, embeddedMode);
-                webFacade = new WebFacadeBinder(this, ContextMgr, embeddedMode);
+//                webFacade = new WebFacadeBinder(this, ContextMgr, embeddedMode);
                 // Setup support for self-signed certs, if requested
                 if (config.allowSelfSignedCertsDefault()) {
                     Utils.acceptAllSelfSignedSSLcertificates();
@@ -2241,7 +2237,7 @@ public final class DynamixService extends IntentService {
                                 Log.i(TAG, "Resuming Dynamix");
                                 ContextMgr.startContextManager();
                                 startAppChecker(DynamixService.getConfig().getAppLivelinessCheckIntervalMills());
-                                WebConnector.resumeTimeoutChecking();
+//                                WebConnector.resumeTimeoutChecking();
                                 // Notify apps that we're active
                                 SessionManager.notifyAllDynamixFrameworkActive();
                             }
@@ -2261,7 +2257,7 @@ public final class DynamixService extends IntentService {
                                 ContextMgr.pauseContextHandling();
                                 if (appChecker != null)
                                     appChecker.cancel();
-                                WebConnector.pauseTimeoutChecking();
+//                                WebConnector.pauseTimeoutChecking();
                                 // Notify apps that we're inactive
                                 SessionManager.notifyAllDynamixFrameworkInactive();
                             } else

@@ -59,7 +59,7 @@ public class AsyncStatusRefreshTask extends AsyncTask<Void, String, Integer> {
 
     private void parseExperimentMessage(final String message) {
         if (message != null && !message.equals(lastMessage)) {
-            Log.i(TAG, message);
+            Log.d(TAG, message);
             // Add the fragment to the 'fragment_container' FrameLayout
             try {
                 final Report report = new ObjectMapper().readValue(message, Report.class);
@@ -150,10 +150,8 @@ public class AsyncStatusRefreshTask extends AsyncTask<Void, String, Integer> {
         } else if ("location-changed".equals(values[0])) {
             activity.updateMapLocation(values[1], values[2]);
         } else if ("spark-line".equals(values[0])) {
-            Log.i(TAG, "Progress: spark-line");
-            String next = values[1];
-            double value = Double.parseDouble(values[2]);
-            Log.i(TAG, "Progress: sensors:" + activity.sensorMeasurements.size());
+            final String next = values[1];
+            final double value = Double.parseDouble(values[2]);
             boolean found = false;
             for (final SensorMeasurement sensorMeasurement : activity.sensorMeasurements) {
                 if (sensorMeasurement.getType().equals(next)) {

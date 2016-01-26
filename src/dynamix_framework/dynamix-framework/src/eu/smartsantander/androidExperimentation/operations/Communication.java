@@ -75,7 +75,7 @@ public class Communication extends Thread implements Runnable {
             serverPhoneId = Integer.parseInt(serverPhoneId_s);
         } catch (Exception e) {
             serverPhoneId = Constants.PHONE_ID_UNITIALIZED;
-            Log.i(TAG, "Device Registration Exception:" + e.getMessage());
+            Log.e(TAG, "Device Registration Exception:" + e.getMessage(), e);
         }
         return serverPhoneId;
     }
@@ -90,16 +90,15 @@ public class Communication extends Thread implements Runnable {
     public SortedMap<Integer, Double> getLastStatistics(final int phoneId) {
 
         try {
-            String stats = get("/statistics/" + phoneId);
-            Log.i(TAG, stats);
-            Map values = (new Gson()).fromJson(stats, Map.class);
-            SortedMap<Integer, Double> sortedMap = new TreeMap<>(new Comparator<Integer>() {
+            final String stats = get("/statistics/" + phoneId);
+            final Map values = (new Gson()).fromJson(stats, Map.class);
+            final SortedMap<Integer, Double> sortedMap = new TreeMap<>(new Comparator<Integer>() {
                 @Override
                 public int compare(Integer lhs, Integer rhs) {
                     return rhs - lhs;
                 }
             });
-            for (Object key : values.keySet()) {
+            for (final Object key : values.keySet()) {
                 sortedMap.put(Integer.valueOf(((String) key)), (Double) values.get(key));
             }
             return sortedMap;
@@ -118,21 +117,20 @@ public class Communication extends Thread implements Runnable {
      */
     public JSONArray getLastPoints(int phoneId) {
         if (DynamixService.getExperiment() == null || DynamixService.getExperiment().getId() == null) {
-            Log.e(TAG, "No Experiment");
+            Log.e(TAG, "No Experiment is installed!");
             return null;
         }
         final String path = "/experiment/" + DynamixService.getExperiment().getId() + "?deviceId=" + phoneId + "&after=today";
         try {
             final String stats = get(path);
-            Log.i(TAG, stats);
             try {
                 return new JSONArray(stats);
             } catch (JSONException e) {
-                Log.e(TAG, e.getMessage());
+                Log.e(TAG, e.getMessage(), e);
                 return null;
             }
         } catch (IOException e) {
-            Log.e(TAG, e.getMessage());
+            Log.e(TAG, e.getMessage(), e);
             return null;
         }
 
@@ -185,10 +183,8 @@ public class Communication extends Thread implements Runnable {
         }
 
         DynamixService.logToFile(jsonReport);
-        Log.i(TAG, "Report Call " + jsonReport);
         try {
-            Log.i(TAG, jsonReport);
-            post("/experiment", jsonReport);
+            post("/data", jsonReport);
             lastHash = jsonReport.hashCode();
             return 0;
         } catch (HttpClientErrorException e) {
@@ -231,7 +227,7 @@ public class Communication extends Thread implements Runnable {
     }
 
     private String sendRegisterSmartphone(String jsonSmartphone) throws Exception {
-        Log.i(TAG, "send register smartphone: " + jsonSmartphone);
+        Log.d(TAG, "Register Smartphone" + jsonSmartphone);
         return post("/smartphone", jsonSmartphone);
     }
 

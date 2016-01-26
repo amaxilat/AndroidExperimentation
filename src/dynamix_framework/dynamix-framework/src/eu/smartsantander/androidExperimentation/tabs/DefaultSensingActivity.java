@@ -65,7 +65,6 @@ public class DefaultSensingActivity extends ListActivity implements SensorEventL
             @Override
             public void run() {
                 if (!sensorReadings.isEmpty()) {
-                    Log.i(TAG, "Sending Measurements");
                     Location location = HomeActivity.location;
                     if (location != null) {
 
@@ -78,7 +77,7 @@ public class DefaultSensingActivity extends ListActivity implements SensorEventL
                             obj.put("org.ambientdynamix.contextplugins.Latitude", location.getLatitude());
                             obj.put("org.ambientdynamix.contextplugins.Longitude", location.getLongitude());
                             sensorReadings.put(-1, new Reading(Reading.Datatype.Float, obj.toString(), "DefaultPlugin"));
-                            Log.i(TAG, location.toString());
+                            Log.d(TAG, location.toString());
 
 
                             final List<Reading> readings = new ArrayList<>();
@@ -91,7 +90,7 @@ public class DefaultSensingActivity extends ListActivity implements SensorEventL
                             }
                             info.setPayload(readings);
                             final String message = rObject.toJson();
-                            Log.i(TAG, "ResultMessage:message " + message);
+                            Log.d(TAG, "ResultMessage:message " + message);
 
 
                             DynamixService.publishMessage(message);
@@ -113,8 +112,7 @@ public class DefaultSensingActivity extends ListActivity implements SensorEventL
             @Override
             public void run() {
                 final double db = captureNoiseLevel();
-                Log.i(TAG, "Noise " + db);
-                JSONObject obj = new JSONObject();
+                final JSONObject obj = new JSONObject();
                 try {
                     obj.put("urn:oc:attributeType:soundPressureLevel:ambient", db);
                     sensorReadings.put(-2,
@@ -141,10 +139,8 @@ public class DefaultSensingActivity extends ListActivity implements SensorEventL
                         ma = sum / i;
 
                     }
-                    Log.w(TAG, "NoiseLevel Max Anplitute AVG:" + ma);
                     value = (ma / 51805.5336);
                     double db = 20 * Math.log10(value / REFERENCE);
-                    Log.w(TAG, "NoiseLevel db:" + db);
                     mRecorder.stop();
                     mRecorder.reset();
                     mRecorder.release();
@@ -254,8 +250,8 @@ public class DefaultSensingActivity extends ListActivity implements SensorEventL
             case Sensor.TYPE_AMBIENT_TEMPERATURE:
                 if (System.currentTimeMillis() - lastTemperature > 30000) {
                     lastTemperature = System.currentTimeMillis();
-                    Log.i(TAG, event.sensor.getName() + " " + event.values[0]);
-                    JSONObject obj = new JSONObject();
+                    Log.d(TAG, event.sensor.getName() + " " + event.values[0]);
+                    final JSONObject obj = new JSONObject();
                     try {
                         obj.put("urn:oc:attributeType:temperature:ambient", event.values[0]);
                         sensorReadings.put(Sensor.TYPE_AMBIENT_TEMPERATURE,
@@ -267,8 +263,8 @@ public class DefaultSensingActivity extends ListActivity implements SensorEventL
             case Sensor.TYPE_RELATIVE_HUMIDITY:
                 if (System.currentTimeMillis() - lastHumidity > 30000) {
                     lastHumidity = System.currentTimeMillis();
-                    Log.i(TAG, event.sensor.getName() + " " + event.values[0]);
-                    JSONObject obj = new JSONObject();
+                    Log.d(TAG, event.sensor.getName() + " " + event.values[0]);
+                    final JSONObject obj = new JSONObject();
                     try {
                         obj.put("urn:oc:attributeType:relativeHumidity", event.values[0]);
                         sensorReadings.put(Sensor.TYPE_RELATIVE_HUMIDITY,
@@ -280,8 +276,8 @@ public class DefaultSensingActivity extends ListActivity implements SensorEventL
             case Sensor.TYPE_PRESSURE:
                 if (System.currentTimeMillis() - lastPressure > 30000) {
                     lastPressure = System.currentTimeMillis();
-                    Log.i(TAG, event.sensor.getName() + " " + event.values[0]);
-                    JSONObject obj = new JSONObject();
+                    Log.d(TAG, event.sensor.getName() + " " + event.values[0]);
+                    final JSONObject obj = new JSONObject();
                     try {
                         obj.put("urn:oc:atributeType:atmosphericPressure", event.values[0]);
                         sensorReadings.put(Sensor.TYPE_PRESSURE,
@@ -296,11 +292,11 @@ public class DefaultSensingActivity extends ListActivity implements SensorEventL
 
     @Override
     public void onAccuracyChanged(android.hardware.Sensor sensor, int accuracy) {
-        Log.d(TAG, sensor.toString() + " accuracy: " + String.valueOf(accuracy));
+        //ignore
     }
 
     private boolean hasSensor(int sensorType) {
-        for (Sensor sensor : sensorList) {
+        for (final Sensor sensor : sensorList) {
             if (sensor.getType() == sensorType) {
                 return true;
             }

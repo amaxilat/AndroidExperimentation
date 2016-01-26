@@ -849,9 +849,9 @@ class AppFacadeBinder extends IDynamixFacade.Stub implements IDynamixFrameworkLi
      * @return The caller's unique id
      */
     private int getCallerId(IDynamixListener listener) {
-        if (listener instanceof WebListener) {
-            return ((WebListener) listener).getWebAppId();
-        } else {
+//        if (listener instanceof WebListener) {
+//            return ((WebListener) listener).getWebAppId();
+//        } else {
             if (embeddedMode)
                 return android.os.Process.myUid();
             else {
@@ -861,7 +861,7 @@ class AppFacadeBinder extends IDynamixFacade.Stub implements IDynamixFrameworkLi
                 } else
                     return Binder.getCallingUid();
             }
-        }
+//        }
     }
 
     /**

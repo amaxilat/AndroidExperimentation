@@ -296,6 +296,10 @@ class ContextManager implements IPluginContextListener, IPluginFacade {
                                     sc = new SecuredContext(context, uiHandler, plt.getLooper(),
                                             DynamixService.getContextPluginClassLoader(plug), false);
                                     break;
+                                case "org.ambientdynamix.contextplugins.StepCounterPlugin":
+                                    sc = new SecuredContext(context, uiHandler, plt.getLooper(),
+                                            DynamixService.getContextPluginClassLoader(plug), false);
+                                    break;
                                 default:
                                     sc = new SecuredContext(context, uiHandler, plt.getLooper(),
                                             DynamixService.getContextPluginClassLoader(plug), true);

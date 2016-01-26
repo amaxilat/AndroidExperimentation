@@ -53,7 +53,7 @@ public class DynamixServiceListenerUtility {
                     }
                 }
                 DynamixService.sessionStarted = true;
-                Log.w(TAG, "SESSION STATUS" + r.getMessage());
+                Log.d(TAG, "SESSION STATUS" + r.getMessage());
             }
 
             @Override
@@ -86,20 +86,20 @@ public class DynamixServiceListenerUtility {
 
                 NotificationHQManager noteManager = NotificationHQManager.getInstance();
 
-                Log.w(TAG, "Event timestamp "
+                Log.d(TAG, "Event timestamp "
                         + event.getTimeStamp().toString());
                 if (event.expires())
-                    Log.w(TAG, "Event expires at "
+                    Log.d(TAG, "Event expires at "
                             + event.getExpireTime().toString());
                 else
                     Log.i(TAG, "Event does not expire");
                 // Log each string-based context type format supported by the
                 // event
                 for (String format : event.getStringRepresentationFormats()) {
-                    Log.w(TAG, "Event string-based format: " + format
+                    Log.d(TAG, "Event string-based format: " + format
                             + " size: "
                             + event.getStringRepresentation(format).length());
-                    Log.w(TAG,
+                    Log.d(TAG,
                             "Event string-based format: " + format
                                     + " contained: "
                                     + event.getStringRepresentation(format));
@@ -107,11 +107,11 @@ public class DynamixServiceListenerUtility {
                 // Check for native IContextInfo
                 if (event.hasIContextInfo()) {
 
-                    Log.w(TAG, "Event contains native IContextInfo: " + event.getIContextInfo());
+                    Log.d(TAG, "Event contains native IContextInfo: " + event.getIContextInfo());
                     IContextInfo nativeInfo = event.getIContextInfo();
                     String msg = nativeInfo.getStringRepresentation("");
                     try {
-                        Log.w(TAG, "Received Experiment/Plugin Info: " + msg);
+                        Log.d(TAG, "Received Experiment/Plugin Info: " + msg);
                         PluginInfo plugInfo = (new Gson()).fromJson(msg, PluginInfo.class);
                         if (plugInfo != null && plugInfo.getContext() != null && plugInfo.getContext().equals("org.ambientdynamix.contextplugins.ExperimentPlugin")) {
                             String readingMsg = plugInfo.getPayload();
@@ -123,7 +123,7 @@ public class DynamixServiceListenerUtility {
                             noteManager.postNotification(readingMsg);
                             final List<String> mlist = new ArrayList<>();
                             for (final Reading reading : readings) {
-                                Log.i(TAG, "Received Reading: " + reading);
+                                Log.d(TAG, "Received Reading: " + reading);
                                 DynamixService.cacheExperimentalMessage(readingMsg);
                                 if (DynamixService.getExperiment() == null)
                                     return;
@@ -131,7 +131,7 @@ public class DynamixServiceListenerUtility {
                             }
                             rObject.setResults(mlist);
                             final String message = rObject.toJson();
-                            Log.i(TAG, "ResultMessage:message " + message);
+                            Log.d(TAG, "ResultMessage:message " + message);
                             DynamixService.publishMessage(message);
 
                         } else {
@@ -146,7 +146,6 @@ public class DynamixServiceListenerUtility {
                                     notification += ":" + reading.getValue();
                                 }
                                 noteManager.postNotification(notification);
-                                Log.w(TAG, "Plugin Reading: " + reading);
                                 DynamixService.getReadingStorage().pushReading(reading);
                                 DynamixService.getPhoneProfiler().incMsgCounter();
                             }
@@ -161,7 +160,7 @@ public class DynamixServiceListenerUtility {
             @Override
             public void onContextSupportAdded(ContextSupportInfo supportInfo)
                     throws RemoteException {
-                Log.w(TAG, "CONTENT SUPPORT ADDED: "
+                Log.d(TAG, "CONTENT SUPPORT ADDED: "
                         + supportInfo.getPlugin().getPluginId());
                 DynamixService.sessionStarted = true;
             }
@@ -176,7 +175,7 @@ public class DynamixServiceListenerUtility {
             @Override
             public void onContextTypeNotSupported(String contextType)
                     throws RemoteException {
-                Log.w(TAG, "CONTENT NO SUPPORTED" + contextType);
+                Log.d(TAG, "CONTENT NO SUPPORTED" + contextType);
                 DynamixService.sessionStarted = false;
             }
 
@@ -262,7 +261,7 @@ public class DynamixServiceListenerUtility {
             @Override
             public void onContextPluginError(ContextPluginInformation plug,
                                              String message) throws RemoteException {
-                Log.i(TAG, "Pluginf Error " + plug.getPluginDescription() + ","
+                Log.d(TAG, "Pluginf Error " + plug.getPluginDescription() + ","
                         + message);
 
             }
@@ -280,7 +279,7 @@ public class DynamixServiceListenerUtility {
                     DynamixService.dynamix = IDynamixFacade.Stub.asInterface(service);
                     DynamixService.dynamix.addDynamixListener(DynamixService.dynamixCallback);
                     DynamixService.dynamix.openSession();
-                    Log.w(TAG, "Experiment Connected");
+                    Log.d(TAG, "Experiment Connected");
                 } catch (Exception e) {
                     Log.w(TAG, e.getMessage());
                 }

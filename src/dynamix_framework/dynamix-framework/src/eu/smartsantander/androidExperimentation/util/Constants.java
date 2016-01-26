@@ -5,6 +5,7 @@ import java.io.File;
 import eu.smartsantander.androidExperimentation.operations.Downloader;
 
 public class Constants {
+    public static final String EXPERIMENT_PLUGIN_CONTEXT_TYPE = "org.ambientdynamix.contextplugins.ExperimentPlugin";
     public static String URL = "http://195.220.224.231:8080";
     public static final int PHONE_ID_UNITIALIZED = -1;
     public static String activityStatus = "unknown";
