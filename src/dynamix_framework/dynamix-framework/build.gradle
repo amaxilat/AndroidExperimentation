@@ -19,8 +19,6 @@ apply plugin: 'com.android.application'
 dependencies {
     compile fileTree(include: '*.jar', dir: 'libs')
     //    compile 'com.google.guava:guava:12.0'
-    compile 'com.parse.bolts:bolts-android:1.2.1'
-    compile 'com.parse:parse-android:1.10.2'
     compile 'com.github.blackfizz:eazegraph:1.2.5l@aar'
     compile 'com.nineoldandroids:library:2.4.0'
     compile 'org.springframework.android:spring-android-rest-template:2.0.0.M1'

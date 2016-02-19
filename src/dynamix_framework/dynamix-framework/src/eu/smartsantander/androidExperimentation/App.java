@@ -8,8 +8,6 @@ import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.toolbox.ImageLoader;
 import com.android.volley.toolbox.Volley;
-import com.parse.Parse;
-import com.parse.ParseUser;
 import com.splunk.mint.Mint;
 
 import eu.smartsantander.androidExperimentation.util.LruBitmapCache;
@@ -29,12 +27,6 @@ public class App extends Application {
         Log.i(TAG, "Initializing...");
 
         Mint.initAndStartSession(getApplicationContext(), "6d443500");
-
-
-        Parse.enableLocalDatastore(this.getApplicationContext());
-        Parse.initialize(this.getApplicationContext(), "0MnJVDC7k6ySseWr771fSxhsE9IwDwrY9tvwEDeC", "A51n4N3wjX9AxWs0XbtQ99omRbRmYYAZh1WUicmm"); // Your Application ID and Client Key are defined elsewhere
-        ParseUser.enableAutomaticUser();
-
     }
 
 
