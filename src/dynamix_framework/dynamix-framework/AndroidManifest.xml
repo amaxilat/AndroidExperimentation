@@ -145,6 +145,9 @@
             android:name="eu.smartsantander.androidExperimentation.tabs.ExperimentTab"
             android:label="jobsTab"></activity>
         <activity
+            android:name="eu.smartsantander.androidExperimentation.tabs.NewExperimentTab"
+            android:label="newJobsTab"></activity>
+        <activity
             android:name="eu.smartsantander.androidExperimentation.tabs.InfoTab"
             android:label="reportsTab"></activity>
         <activity

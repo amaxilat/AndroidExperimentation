@@ -46,6 +46,9 @@ import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.android.volley.toolbox.ImageLoader;
+import com.android.volley.toolbox.NetworkImageView;
+
 import org.ambientdynamix.api.application.ContextPluginInformation;
 import org.ambientdynamix.api.contextplugin.ContextPlugin;
 import org.ambientdynamix.core.UpdateManager.IContextPluginUpdateListener;
@@ -63,6 +66,9 @@ import java.util.Hashtable;
 import java.util.List;
 import java.util.Map;
 import java.util.Vector;
+
+import eu.smartsantander.androidExperimentation.App;
+import eu.smartsantander.androidExperimentation.jsonEntities.Plugin;
 
 /**
  * User interface that provides an overview of the ContextPlugins installed in
@@ -588,6 +594,8 @@ public class PluginsActivity extends ListActivity implements
      */
     private class InstalledContextPluginAdapter extends
             EmptyListSupportAdapter<ContextPlugin> {
+        ImageLoader imageLoader = App.getInstance().getImageLoader();
+
         public InstalledContextPluginAdapter(Context context,
                                              int textViewResourceId, List<ContextPlugin> plugs,
                                              String emptyTitle, String emptyMessage) {
@@ -623,9 +631,10 @@ public class PluginsActivity extends ListActivity implements
                         bt.setText(di.getStatusText());
                     }
 
-                    final ImageView icon = (ImageView) v.findViewById(R.id.icon);
+                    NetworkImageView icon = (NetworkImageView) v.findViewById(R.id.icon);
                     if (icon != null) {
-                        Utils.loadImage(icon, plug.getName(), di);
+                        final Plugin plugin = DynamixService.getDiscoveredPlugin(plug.getName());
+                        icon.setImageUrl(plugin.getImageUrl(), imageLoader);
                     }
 
                     if (plug.getContextPluginInformation().getPluginId().contains("Experiment")) // SmartSantander

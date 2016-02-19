@@ -43,6 +43,7 @@ import eu.smartsantander.androidExperimentation.tabs.DefaultSensingActivity;
 import eu.smartsantander.androidExperimentation.tabs.InfoTab;
 import eu.smartsantander.androidExperimentation.tabs.ExperimentTab;
 import eu.smartsantander.androidExperimentation.tabs.MessagesTab;
+import eu.smartsantander.androidExperimentation.tabs.NewExperimentTab;
 import eu.smartsantander.androidExperimentation.tabs.StatisticsTab;
 
 
@@ -233,7 +234,8 @@ public class BaseActivity extends TabActivity {
         // tabHost.newTabSpec("profile").setIndicator("",
         // ressources.getDrawable(R.drawable.ic_tab_profile)).setContent(intentProfile);
 
-        tabHost.addTab(buildTab(ExperimentTab.class, R.drawable.ic_tab_jobs, "jobs"));
+        //tabHost.addTab(buildTab(ExperimentTab.class, R.drawable.ic_tab_jobs, "jobs"));
+        tabHost.addTab(buildTab(NewExperimentTab.class, R.drawable.ic_tab_jobs, "jobs"));
         tabHost.addTab(buildTab(StatisticsTab.class, R.drawable.ic_tab_stats, "stats"));
         tabHost.addTab(buildTab(InfoTab.class, R.drawable.ic_tab_reports, "reports"));
         tabHost.addTab(buildTab(DefaultSensingActivity.class, R.drawable.ic_tab_city, "defaults"));

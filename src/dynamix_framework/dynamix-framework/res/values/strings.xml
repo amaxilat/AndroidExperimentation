@@ -49,6 +49,7 @@
     <string name="btn_do_updates">Install Updates</string>
     <string name="btn_configure_context_plugin">Configure Plugin</string>
     <string name="pref_audible_alerts_title">Audible Alerts</string>
+    <string name="find_experiments">Find Experiments</string>
     <string name="plug_stats_label">Most recent events</string>
     <string name="plug_stats_summary_label">Sensors Statistics</string>
     <string name="btn_see_plugin_stats">View Statistics</string>

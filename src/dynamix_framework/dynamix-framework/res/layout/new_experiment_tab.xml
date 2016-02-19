@@ -1,0 +1,20 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:fontFamily="sans-serif-light"
+    android:orientation="vertical">
+
+    <ListView
+        android:id="@+id/experiments_list"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:fontFamily="sans-serif-light" />
+
+
+    <Button
+        android:id="@+id/btn_update_experiments"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:fontFamily="sans-serif-light"
+        android:text="@string/find_experiments" />
+</LinearLayout>
