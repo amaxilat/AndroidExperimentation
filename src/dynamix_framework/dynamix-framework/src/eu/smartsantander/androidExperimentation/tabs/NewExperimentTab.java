@@ -16,14 +16,18 @@ import android.widget.TextView;
 import com.android.volley.toolbox.ImageLoader;
 import com.android.volley.toolbox.NetworkImageView;
 
+import org.ambientdynamix.core.DynamixService;
 import org.ambientdynamix.core.R;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.Locale;
 
 import eu.smartsantander.androidExperimentation.App;
 import eu.smartsantander.androidExperimentation.jsonEntities.Experiment;
+import eu.smartsantander.androidExperimentation.jsonEntities.Plugin;
 import eu.smartsantander.androidExperimentation.operations.Communication;
 
 /**
@@ -33,21 +37,23 @@ import eu.smartsantander.androidExperimentation.operations.Communication;
 public class NewExperimentTab extends Activity {
     private final static String TAG = "NewExperimentTab";
 
-    private Button updateExperiments;
-    private ListView list;
     private AsyncTask<Void, String, List<Experiment>> runnableUpdate;
-    private ExperimentSelectAdapter adapter;
+    private ExperimentSelectAdapter experimentSelectAdapter;
     private List<Experiment> experiments;
+    private SimpleDateFormat sdf;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.new_experiment_tab);
+
+        sdf = new SimpleDateFormat("dd/MM/yyyy", Locale.US);
         experiments = new ArrayList<>();
-        updateExperiments = (Button) findViewById(R.id.btn_update_experiments);
-        list = (ListView) findViewById(R.id.experiments_list);
-        adapter = new ExperimentSelectAdapter(this, experiments);
-        list.setAdapter(adapter);
+
+        experimentSelectAdapter = new ExperimentSelectAdapter(this);
+        final ListView experimentListView = (ListView) findViewById(R.id.experiments_list);
+        experimentListView.setAdapter(experimentSelectAdapter);
+
         runnableUpdate = new AsyncTask<Void, String, List<Experiment>>() {
             @Override
             protected List<Experiment> doInBackground(Void... params) {
@@ -65,7 +71,7 @@ public class NewExperimentTab extends Activity {
                 if (experiments != null) {
                     experiments.clear();
                     experiments.addAll(newExperiments);
-                    adapter.notifyDataSetChanged();
+                    experimentSelectAdapter.notifyDataSetChanged();
                     for (final Experiment experiment : newExperiments) {
                         Log.i(TAG, experiment.getName());
                     }
@@ -75,7 +81,8 @@ public class NewExperimentTab extends Activity {
 
         runnableUpdate.execute();
 
-        updateExperiments.setOnClickListener(new View.OnClickListener() {
+        final Button updateExperimentsButton = (Button) findViewById(R.id.btn_update_experiments);
+        updateExperimentsButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(final View v) {
                 Log.i(TAG, runnableUpdate.getStatus().name());
@@ -97,7 +104,7 @@ public class NewExperimentTab extends Activity {
                             if (experiments != null) {
                                 experiments.clear();
                                 experiments.addAll(newExperiments);
-                                adapter.notifyDataSetChanged();
+                                experimentSelectAdapter.notifyDataSetChanged();
                                 for (final Experiment experiment : newExperiments) {
                                     Log.i(TAG, experiment.getName());
                                 }
@@ -111,14 +118,10 @@ public class NewExperimentTab extends Activity {
 
 
     class ExperimentSelectAdapter extends BaseAdapter {
-        private Activity activity;
-        private LayoutInflater inflater;
-        private List<Experiment> experiments;
-        ImageLoader imageLoader = App.getInstance().getImageLoader();
+        final private Activity activity;
 
-        public ExperimentSelectAdapter(Activity activity, List<Experiment> experiments) {
+        public ExperimentSelectAdapter(final Activity activity) {
             this.activity = activity;
-            this.experiments = experiments;
         }
 
         @Override
@@ -141,49 +144,55 @@ public class NewExperimentTab extends Activity {
         }
 
         @Override
-        public View getView(int position, View convertView, ViewGroup parent) {
-            if (inflater == null)
-                inflater = (LayoutInflater) activity
-                        .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-            if (convertView == null)
-                convertView = inflater.inflate(R.layout.experiments_list_row, null);
+        public View getView(final int position, final View convertView, final ViewGroup parent) {
 
-            if (imageLoader == null)
-                imageLoader = App.getInstance().getImageLoader();
-            NetworkImageView thumbNail = (NetworkImageView) convertView
-                    .findViewById(R.id.thumbnail);
+            final View finalConvertView;
+            if (convertView == null) {
+                final LayoutInflater inflater = (LayoutInflater) activity.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+                finalConvertView = inflater.inflate(R.layout.experiments_list_row, null);
+            } else {
+                finalConvertView = convertView;
+            }
+            final ImageLoader imageLoader = App.getInstance().getImageLoader();
 
-            TextView title = (TextView) convertView.findViewById(R.id.title);
-            TextView rating = (TextView) convertView.findViewById(R.id.rating);
-            TextView genre = (TextView) convertView.findViewById(R.id.genre);
-            TextView year = (TextView) convertView.findViewById(R.id.releaseYear);
+            //get elements
+            final NetworkImageView thumbNail = (NetworkImageView) finalConvertView.findViewById(R.id.thumbnail);
+            final TextView titleTextView = (TextView) finalConvertView.findViewById(R.id.ex_title);
+            final TextView statusTextView = (TextView) finalConvertView.findViewById(R.id.ex_status);
+            final TextView pluginsTextView = (TextView) finalConvertView.findViewById(R.id.ex_plugins);
+            final TextView startDateTextView = (TextView) finalConvertView.findViewById(R.id.ex_start_date);
 
             // getting movie data for the row
-            Experiment e = experiments.get(position);
+            final Experiment e = experiments.get(position);
+            if (e != null) {
+                // ex_image
+                thumbNail.setImageUrl("http://images.sensorflare.com/resources/Location.png", imageLoader);
 
-            // thumbnail image
-            thumbNail.setImageUrl("http://images.sensorflare.com/resources/Location.png", imageLoader);
+                // ex_title
+                titleTextView.setText(e.getName());
 
-            // title
-            title.setText(e.getName());
+                // ex_status
+                final String statusString = "Status: " + ("1".equals(e.getStatus()) ? "Running" : "Disabled");
+                statusTextView.setText(statusString);
 
-            // rating
-            rating.setText("Status: " + String.valueOf(e.getStatus()));
+                // ex_plugins
+                final StringBuilder genreStr = new StringBuilder("Sensors: ");
+                final List<String> pluginNames = new ArrayList<>();
+                for (final String contextType : e.getSensorDependencies().split(",")) {
+                    final Plugin plugin = DynamixService.getDiscoveredPluginByContextType(contextType);
+                    if (plugin != null) {
+                        pluginNames.add(plugin.getName());
+                    }
+                }
+                genreStr.append(android.text.TextUtils.join(", ", pluginNames));
+                pluginsTextView.setText(genreStr.toString());
 
-            // genre
-            String genreStr = "";
-            for (String str : e.getSensorDependencies().split(",")) {
-                String[] parts = str.split("\\.");
-                genreStr += parts[parts.length - 1] + ", ";
+                // ex_start_date
+                final String formattedDate = "Added: " + sdf.format(new Date(e.getTimestamp()));
+                startDateTextView.setText(formattedDate);
+                return finalConvertView;
             }
-            genreStr = genreStr.length() > 0 ? genreStr.substring(0,
-                    genreStr.length() - 2) : genreStr;
-            genre.setText(genreStr);
-
-            // release year
-            year.setText(new Date(e.getTimestamp()).toString());
-
-            return convertView;
+            return null;
         }
 
 

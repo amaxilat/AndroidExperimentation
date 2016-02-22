@@ -119,7 +119,7 @@ public final class DynamixService extends IntentService {
     private static final Handler uiHandler = new Handler();
     private static CountDownTimer contextPlugUpdateTimer;
     private static AppFacadeBinder facadeBinder = null;
-//    private static WebFacadeBinder webFacade = null;
+    //    private static WebFacadeBinder webFacade = null;
     // Protected static data
     public static ISettingsManager SettingsManager;
     // Private instance data
@@ -2599,8 +2599,17 @@ public final class DynamixService extends IntentService {
     }
 
     public static Plugin getDiscoveredPlugin(String name) {
-        for (Plugin plugin : discoveredPluginList) {
+        for (final Plugin plugin : discoveredPluginList) {
             if (plugin.getName().equals(name)) {
+                return plugin;
+            }
+        }
+        return null;
+    }
+
+    public static Plugin getDiscoveredPluginByContextType(String contextType) {
+        for (final Plugin plugin : discoveredPluginList) {
+            if (plugin.getContextType().equals(contextType)) {
                 return plugin;
             }
         }

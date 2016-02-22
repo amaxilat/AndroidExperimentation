@@ -3,15 +3,6 @@
    android:layout_width="fill_parent"
    android:layout_height="fill_parent"
 	android:fontFamily="sans-serif-light">
-<!--
-<TextView android:text="@string/plug_list_label"
-				android:id="@+id/plug_list_label"
-				android:layout_width="fill_parent"
-				android:layout_height="wrap_content"
-				android:editable="false"
-				android:textAppearance="?android:attr/textAppearanceMedium"/>
-				 android:textAppearance="?android:attr/textAppearanceMedium" -->
-
 
 	<ListView android:id="@android:id/list"
 			android:layout_height="wrap_content"

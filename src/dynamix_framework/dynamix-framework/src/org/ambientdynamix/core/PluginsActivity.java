@@ -313,7 +313,7 @@ public class PluginsActivity extends ListActivity implements
         Button btnFindPlugs = (Button) findViewById(R.id.btn_find_plugs);
         btnFindPlugs.setOnClickListener(new View.OnClickListener() {
             public void onClick(View view) {
-                DynamixService.checkForNewContextPlugins(PluginsActivity.this);
+                DynamixService.checkForNewContextPlugins(activity);
                 // SmartSantander
                 updateSensorPermissionInfo();
             }
@@ -349,7 +349,7 @@ public class PluginsActivity extends ListActivity implements
         final Editor editor = pref.edit();
         for (ContextPluginInformation pl : DynamixService
                 .getAllContextPluginInfo()) {
-            if (pl.isEnabled() == true) {
+            if (pl.isEnabled()) {
                 editor.putBoolean(pl.getPluginName(), true);
             } else {
                 editor.putBoolean(pl.getPluginName(), false);
@@ -388,8 +388,16 @@ public class PluginsActivity extends ListActivity implements
     @Override
     public void onUpdateComplete(List<PluginDiscoveryResult> incomingUpdates,
                                  Map<IContextPluginConnector, String> errors) {
-        if (updateProgress != null)
+        Log.i(TAG, "Updates:" + incomingUpdates.size());
+        if (updateProgress != null) {
             updateProgress.dismiss();
+        }
+
+        if (incomingUpdates.size() == 0) {
+            DynamixService.checkForNewContextPlugins(activity);
+            return;
+        }
+
         if (errors != null && errors.size() > 0) {
             String messageBuilder = "";
             for (IContextPluginConnector ps : errors.keySet()) {
@@ -409,12 +417,15 @@ public class PluginsActivity extends ListActivity implements
                     builder.create().show();
                 }
             });
+
+
         }
         refresh();
         if (!newPlugsAdapter.isEmpty()) {
             scrollTo(PluginsActivity.this.adapter
                     .getPositionForSection(getString(R.string.available_context_plugins)));
         }
+
     }
 
     @Override
