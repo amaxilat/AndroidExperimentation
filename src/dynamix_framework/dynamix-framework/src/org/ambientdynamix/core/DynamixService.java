@@ -270,7 +270,7 @@ public final class DynamixService extends IntentService {
             installPlugin(contextPlugin, null);
             Thread.sleep(5000);
         } catch (Exception e) {
-            e.printStackTrace();
+            Log.e(TAG,e.getMessage(),e);
         }
     }
 
@@ -1226,6 +1226,16 @@ public final class DynamixService extends IntentService {
         plugInfoList.addAll(getInstalledContextPluginInfo());
         plugInfoList.addAll(getPendingContextPluginInfo());
         return plugInfoList;
+    }
+
+
+    public static boolean isContextPluginInstalled(final String contextType) {
+        for (ContextPluginInformation plugin : getInstalledContextPluginInfo()) {
+            if (plugin.getPluginId().equals(contextType)) {
+                return true;
+            }
+        }
+        return false;
     }
 
     /**
@@ -2646,6 +2656,7 @@ public final class DynamixService extends IntentService {
             new AsyncReportNowTask().execute(message);
         }
     }
+
 
     /*
      * Boot state constants

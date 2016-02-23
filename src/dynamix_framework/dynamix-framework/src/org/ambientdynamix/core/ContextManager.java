@@ -534,7 +534,7 @@ class ContextManager implements IPluginContextListener, IPluginFacade {
                                                             eventMap.put(sup.getDynamixListener(), eventList);
                                                         } else {
                                                         /*
-														 * TODO: Should we throw an Authentication exception here?
+                                                         * TODO: Should we throw an Authentication exception here?
 														 * Perhaps the app can ask if it has permission
 														 */
                                                             Log.v(TAG, "App was blocked from receiving event");
@@ -833,8 +833,8 @@ class ContextManager implements IPluginContextListener, IPluginFacade {
         if (supportInfo.isEmpty()) {
             // Check if auto-install is allowed
             if (DynamixPreferences.autoContextPluginInstallEnabled(context)) {
-                Log.i(TAG, "addContextSupport did not find support for context type: " + contextType);
-                Log.i(TAG, "Checking for context support in available updates... ");
+                Log.d(TAG, "addContextSupport did not find support for context type: " + contextType);
+                Log.d(TAG, "Checking for context support in available updates... ");
                 List<ContextPlugin> installPlugs = new ArrayList<>();
                 // Check through the previously discovered plug-ins that have not yet been installed
                 for (PluginDiscoveryResult discoveryResult : UpdateManager.getNewContextPlugins()) {
@@ -861,8 +861,9 @@ class ContextManager implements IPluginContextListener, IPluginFacade {
 				 * Install the discovered plug-ins.
 				 */
                 DynamixService.installPlugins(installPlugs, null);
-            } else
-                Log.w(TAG, "Not installing context support because auto context plug-in install is disabled");
+            } else {
+                //Log.w(TAG, "Not installing context support because auto context plug-in install is disabled");
+            }
         }
         return supportInfo;
     }

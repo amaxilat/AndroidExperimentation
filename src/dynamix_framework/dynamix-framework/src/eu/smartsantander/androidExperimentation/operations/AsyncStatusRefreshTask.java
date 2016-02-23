@@ -68,7 +68,7 @@ public class AsyncStatusRefreshTask extends AsyncTask<Void, String, Integer> {
                 }
                 for (final String result : report.getJobResults()) {
                     final Reading reading = Reading.fromJson(result);
-                    if (GPS_PLUGIN.equals(reading.getContext())) {
+                    if (reading != null && GPS_PLUGIN.equals(reading.getContext())) {
                         try {
                             final JSONObject obj = new JSONObject(reading.getValue());
                             Double longitude = null;

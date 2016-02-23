@@ -122,75 +122,7 @@ public class AsyncExpTask extends AsyncTask<String, Void, String> {
             DynamixService.removeExperiment();
             throw new Exception("No experiment Fetched");
         } else {
-            try {
-                final Experiment experiment = experimentList.get(0);
-                Log.i(TAG, "Experiment:" + experiment.getId());
-                final String[] smarDeps = DynamixService.getPhoneProfiler()
-                        .getSensorRules().split(",");
-                final String[] expDeps = experiment.getSensorDependencies()
-                        .split(",");
-                if (Constants.match(smarDeps, expDeps)) {
-                    int oldExpId = -1;
-                    if (DynamixService.getExperiment() != null) {
-                        oldExpId = DynamixService.getExperiment().getId();
-                    }
-                    if (experiment.getId() == oldExpId
-                            && DynamixService.isExperimentInstalled(experiment.getContextType())) {
-                        DynamixService.addTotalTimeConnectedOnline(Constants.EXPERIMENT_POLL_INTERVAL);
-                        Log.i(TAG, "Experiment still the same");
-                        return "Experiment still the same";
-                    }
-
-                    final String url = experiment.getUrl();
-                    final Downloader downloader = new Downloader();
-                    try {
-
-
-                        Log.i(TAG, "Downloading Experiment NOW");
-                        downloader.DownloadFromUrl(url,
-                                experiment.getFilename());
-
-                        DynamixService.dynamix.configuredContextRequest(DynamixService.dynamixCallback,
-                                Constants.EXPERIMENT_PLUGIN_CONTEXT_TYPE,
-                                Constants.EXPERIMENT_PLUGIN_CONTEXT_TYPE,
-                                DynamixService.getReadingStorage().getBundle());
-                        DynamixService.removeExperiment();
-                        DynamixService.setExperiment(experiment);
-                        Thread.sleep(5000);
-                        DynamixService.startExperiment();
-                        DynamixService.stopFramework();
-                        DynamixService.setRestarting(true);
-                        DynamixService.setTitleBarRestarting(true);
-                        Thread.sleep(5000);
-                        DynamixService.startFramework();
-                        Thread.sleep(7000);
-                        DynamixServiceListenerUtility.start();
-                        DynamixService.setRestarting(false);
-                        DynamixService.setTitleBarRestarting(false);
-                    } catch (Exception e) {
-                        Log.e(TAG, e.getMessage(), e);
-                        if (!DynamixService.isNetworkAvailable()) {
-                            // Toast.makeText(DynamixService.getAndroidContext(),
-                            // "Please Check Internet Connection!",
-                            // 10000).show();
-                        } else {
-                            // Toast.makeText(DynamixService.getAndroidContext(),
-                            // "Please Check Internet Connection!",
-                            // 10000).show();
-                        }
-                        throw new Exception("Failed to Download Experiment");
-                    }
-
-                    // Toast.makeText(DynamixService.getAndroidContext(),
-                    // "Experiment Pushed", 8000).show();
-
-                    return "Experiment Commited";
-                } else {
-                    throw new Exception("Experiment violates Sensor Rules");
-                }
-            } catch (Exception e) {
-                throw new Exception("Exception in consuming experiment:" + e.getMessage());
-            }
+           return "";
         }
     }
 }

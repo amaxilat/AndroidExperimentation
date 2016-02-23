@@ -628,7 +628,7 @@ public class PluginsActivity extends ListActivity implements
                 View v = convertView;
                 LayoutInflater vi = (LayoutInflater) getSystemService(Context.LAYOUT_INFLATER_SERVICE);
                 v = vi.inflate(R.layout.icon_row, null);
-                ContextPlugin plug = this.getItem(position);
+                ContextPlugin plug = this.getItem(position);// tODO:ArrayIndexOutOfBoundsException
                 if (plug != null) {
                     final TextView tt = (TextView) v.findViewById(R.id.toptext);
                     if (tt != null) {

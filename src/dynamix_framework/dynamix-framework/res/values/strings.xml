@@ -122,7 +122,7 @@
     <string name="gcm_defaultSenderId">770161861153</string>
     <string name="phone_id_generated">phone_id_generated</string>
     <string name="experiment_id_generated">experiment_id_generated</string>
-    <string name="no_experiment_installed">No experiment downloaded. Visit the plugins tab and install the plugins available.</string>
+    <string name="no_experiment_installed">No experiment downloaded. Visit the plugins tab and select the sensors you want to share and the experiments tab to select the experiment you want to participate in.</string>
     <string name="experimentEnabled">Experiment Enabled</string>
     <string name="experimentDisabled">Experiment Disabled</string>
     <string name="no_experiment_is_installed">No Currently Installed Experiment</string>

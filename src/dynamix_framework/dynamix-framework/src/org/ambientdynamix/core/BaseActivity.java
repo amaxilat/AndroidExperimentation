@@ -39,7 +39,7 @@ import android.widget.Toast;
 import org.ambientdynamix.data.DynamixPreferences;
 import org.ambientdynamix.util.AndroidNotification;
 
-import eu.smartsantander.androidExperimentation.tabs.DefaultSensingActivity;
+//import eu.smartsantander.androidExperimentation.tabs.DefaultSensingActivity;
 import eu.smartsantander.androidExperimentation.tabs.InfoTab;
 import eu.smartsantander.androidExperimentation.tabs.ExperimentTab;
 import eu.smartsantander.androidExperimentation.tabs.MessagesTab;
@@ -238,7 +238,7 @@ public class BaseActivity extends TabActivity {
         tabHost.addTab(buildTab(NewExperimentTab.class, R.drawable.ic_tab_jobs, "jobs"));
         tabHost.addTab(buildTab(StatisticsTab.class, R.drawable.ic_tab_stats, "stats"));
         tabHost.addTab(buildTab(InfoTab.class, R.drawable.ic_tab_reports, "reports"));
-        tabHost.addTab(buildTab(DefaultSensingActivity.class, R.drawable.ic_tab_city, "defaults"));
+//        tabHost.addTab(buildTab(DefaultSensingActivity.class, R.drawable.ic_tab_city, "defaults"));
         tabHost.addTab(buildTab(MessagesTab.class, R.drawable.ic_tab_security, "security"));
         //
         DynamixService.ConfigureLog4J();
