@@ -17,10 +17,13 @@ import android.widget.Toast;
 
 import com.android.volley.toolbox.ImageLoader;
 import com.android.volley.toolbox.NetworkImageView;
+import com.mixpanel.android.mpmetrics.MixpanelAPI;
 
 import org.ambientdynamix.core.DynamixService;
 import org.ambientdynamix.core.R;
 import org.ambientdynamix.util.Utils;
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -48,6 +51,7 @@ public class NewExperimentTab extends Activity {
     private List<Experiment> experiments;
     private Integer installingNow;
     private SimpleDateFormat sdf;
+    private MixpanelAPI mMixpanel;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -56,6 +60,9 @@ public class NewExperimentTab extends Activity {
 
         sdf = new SimpleDateFormat("dd/MM/yyyy", Locale.US);
         experiments = new ArrayList<>();
+
+        mMixpanel = MixpanelAPI.getInstance(this, Constants.MIXPANEL_TOKEN);
+        mMixpanel.identify(String.valueOf(DynamixService.getPhoneProfiler().getPhoneId()));
 
         experimentSelectAdapter = new ExperimentSelectAdapter(this);
         final ListView experimentListView = (ListView) findViewById(R.id.experiments_list);
@@ -253,6 +260,9 @@ public class NewExperimentTab extends Activity {
                                                         && DynamixService.isExperimentInstalled(experiment.getContextType())) {
                                                     //clicked the same experiment
                                                 } else {
+                                                    mMixpanel.timeEvent("install-experiment");
+
+
                                                     Log.i(TAG, "Starting Experiment " + experiment.getId());
                                                     installingNow = experiment.getId();
                                                     activity.runOnUiThread(
@@ -293,6 +303,12 @@ public class NewExperimentTab extends Activity {
                                                         DynamixService.setRestarting(false);
                                                         DynamixService.setTitleBarRestarting(false);
                                                         installingNow = null;
+                                                        try {
+                                                            final JSONObject props = new JSONObject();
+                                                            props.put("install", experiment.getId());
+                                                            mMixpanel.track("install-experiment", props);
+                                                        } catch (JSONException ignore) {
+                                                        }
                                                         activity.runOnUiThread(
                                                                 new Runnable() {
                                                                     @Override

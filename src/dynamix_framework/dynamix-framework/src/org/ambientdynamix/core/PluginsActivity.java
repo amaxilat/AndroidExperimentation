@@ -41,13 +41,13 @@ import android.widget.AdapterView;
 import android.widget.AdapterView.AdapterContextMenuInfo;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
-import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.android.volley.toolbox.ImageLoader;
 import com.android.volley.toolbox.NetworkImageView;
+import com.mixpanel.android.mpmetrics.MixpanelAPI;
 
 import org.ambientdynamix.api.application.ContextPluginInformation;
 import org.ambientdynamix.api.contextplugin.ContextPlugin;
@@ -60,6 +60,8 @@ import org.ambientdynamix.util.DescriptiveIcon;
 import org.ambientdynamix.util.EmptyListSupportAdapter;
 import org.ambientdynamix.util.SeparatedListAdapter;
 import org.ambientdynamix.util.Utils;
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.Hashtable;
@@ -69,6 +71,7 @@ import java.util.Vector;
 
 import eu.smartsantander.androidExperimentation.App;
 import eu.smartsantander.androidExperimentation.jsonEntities.Plugin;
+import eu.smartsantander.androidExperimentation.util.Constants;
 
 /**
  * User interface that provides an overview of the ContextPlugins installed in
@@ -96,6 +99,7 @@ public class PluginsActivity extends ListActivity implements
     private ProgressDialog updateProgress = null;
     private InstalledContextPluginAdapter installedAdapter;
     private ContextPluginAdapter newPlugsAdapter;
+    private MixpanelAPI mMixpanel;
 
     public static PluginsActivity getInstance() {
         return activity;
@@ -125,6 +129,16 @@ public class PluginsActivity extends ListActivity implements
         installables.remove(r);
         removeUpdate(r);
         refreshList();
+
+        try {
+            final JSONObject props = new JSONObject();
+            props.put("installed", plug.getId());
+            mMixpanel.track("installed-plugin", props);
+            mMixpanel.flush();
+        } catch (JSONException ignore) {
+        }
+
+
 //        if (newPlugsAdapter.getInstallableCount() == 0) {
 //            scrollTo(0);
 //        }
@@ -263,6 +277,10 @@ public class PluginsActivity extends ListActivity implements
         setContentView(R.layout.plugin_tab);
         activity = this;
         createElements();
+
+        mMixpanel = MixpanelAPI.getInstance(this, Constants.MIXPANEL_TOKEN);
+        mMixpanel.identify(String.valueOf(DynamixService.getPhoneProfiler().getPhoneId()));
+
     }
 
     private void createElements() {
@@ -324,12 +342,23 @@ public class PluginsActivity extends ListActivity implements
         Button btnInstallPlugs = (Button) findViewById(R.id.btn_install_plugs);
         btnInstallPlugs.setOnClickListener(new View.OnClickListener() {
             public void onClick(View view) {
+
+
                 // Send the selected updates to Dynamix for installation
+                List<String> pluginIds = new ArrayList<>();
                 List<ContextPlugin> plugs = new Vector<>();
                 for (PluginDiscoveryResult ur : installables.keySet()) {
                     plugs.add(ur.getDiscoveredPlugin().getContextPlugin());
-
+                    pluginIds.add(ur.getDiscoveredPlugin().getContextPlugin().getId());
                 }
+                try {
+                    final JSONObject props = new JSONObject();
+                    props.put("install", android.text.TextUtils.join(",", pluginIds));
+                    mMixpanel.track("try-install-plugins", props);
+                    mMixpanel.flush();
+                } catch (JSONException ignore) {
+                }
+
                 DynamixService.installPlugins(
                         Utils.getSortedContextPluginList(plugs),
                         PluginsActivity.this);

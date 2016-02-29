@@ -33,6 +33,7 @@ dependencies {
     compile 'org.lucasr.twowayview:twowayview:0.1.4'
     compile "com.splunk.mint:mint:4.4.0"
     compile 'com.mcxiaoke.volley:library:1.0.19'
+    compile "com.mixpanel.android:mixpanel-android:4.8.0"
 }
 
 android {

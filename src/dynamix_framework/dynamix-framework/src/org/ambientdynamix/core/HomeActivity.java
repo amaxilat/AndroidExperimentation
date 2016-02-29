@@ -39,8 +39,11 @@ import com.google.android.gms.location.LocationServices;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.MapFragment;
 import com.google.android.gms.maps.model.LatLng;
+import com.mixpanel.android.mpmetrics.MixpanelAPI;
 
 import org.ambientdynamix.data.DynamixPreferences;
+import org.json.JSONException;
+import org.json.JSONObject;
 import org.lucasr.twowayview.TwoWayView;
 
 import java.util.ArrayList;
@@ -52,6 +55,7 @@ import eu.smartsantander.androidExperimentation.fragment.SensorMeasurementAdapte
 import eu.smartsantander.androidExperimentation.operations.AsyncReportOnServerTask;
 import eu.smartsantander.androidExperimentation.operations.AsyncStatusRefreshTask;
 import eu.smartsantander.androidExperimentation.service.RegistrationIntentService;
+import eu.smartsantander.androidExperimentation.util.Constants;
 
 /**
  * Home user interface, which shows the current authorized Dynamix applications along with their status. This UI also
@@ -76,7 +80,7 @@ public class HomeActivity extends Activity implements GoogleApiClient.Connection
     //SmartSantander
     public TextView phoneIdTv;
     public TextView expDescriptionTv;
-
+    private MixpanelAPI mMixpanel;
 
     private Button pendingSendButton;
     public MapFragment mMap;
@@ -125,6 +129,9 @@ public class HomeActivity extends Activity implements GoogleApiClient.Connection
         activity = this;
         setContentView(R.layout.home_tab);
 
+
+        mMixpanel = MixpanelAPI.getInstance(this, Constants.MIXPANEL_TOKEN);
+
         mMap = ((MapFragment) getFragmentManager().findFragmentById(R.id.map_main));
 
         // Check if we were successful in obtaining the map.
@@ -163,6 +170,13 @@ public class HomeActivity extends Activity implements GoogleApiClient.Connection
             @Override
             public void onClick(View v) {
                 new AsyncReportOnServerTask().execute();
+                try {
+                    final JSONObject props = new JSONObject();
+                    props.put("count", DynamixService.getDataStorageSize());
+                    mMixpanel.track("send-stored-readings", props);
+                } catch (JSONException ignore) {
+                }
+
             }
         });
 
@@ -241,6 +255,9 @@ public class HomeActivity extends Activity implements GoogleApiClient.Connection
 
 
             if (experimentationStatus && !registered) {
+
+                mMixpanel.identify(String.valueOf(DynamixService.getPhoneProfiler().getPhoneId()));
+
                 Log.i(TAG, "Add Location Listener");
                 if (!mGoogleApiClient.isConnected()) {
                     //TODO : use this in a blocking connect mode - needed to do the below stuff
@@ -343,4 +360,7 @@ public class HomeActivity extends Activity implements GoogleApiClient.Connection
     }
 
 
+    public void logEvent(String message) {
+        mMixpanel.track(message);
+    }
 }

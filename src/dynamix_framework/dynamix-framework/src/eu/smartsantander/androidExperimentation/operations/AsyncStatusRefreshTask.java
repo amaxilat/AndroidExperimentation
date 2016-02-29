@@ -25,6 +25,7 @@ public class AsyncStatusRefreshTask extends AsyncTask<Void, String, Integer> {
 
     public AsyncStatusRefreshTask(final HomeActivity homeActivity) {
         this.activity = homeActivity;
+
     }
 
     @Override
@@ -59,6 +60,7 @@ public class AsyncStatusRefreshTask extends AsyncTask<Void, String, Integer> {
 
     private void parseExperimentMessage(final String message) {
         if (message != null && !message.equals(lastMessage)) {
+            activity.logEvent("new-reading");
             Log.d(TAG, message);
             // Add the fragment to the 'fragment_container' FrameLayout
             try {
@@ -145,6 +147,7 @@ public class AsyncStatusRefreshTask extends AsyncTask<Void, String, Integer> {
     protected void onProgressUpdate(String... values) {
         if ("phone".equals(values[0])) {
             activity.phoneIdTv.setText("Device ID: " + String.valueOf(values[1]));
+
         } else if ("experimentDescription".equals(values[0])) {
             activity.expDescriptionTv.setText(values[1]);
         } else if ("location-changed".equals(values[0])) {

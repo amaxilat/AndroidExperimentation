@@ -19,8 +19,6 @@ import android.app.TabActivity;
 import android.content.Context;
 import android.content.Intent;
 import android.content.res.Resources;
-import android.graphics.Color;
-import android.graphics.PorterDuff;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.os.Handler;
@@ -39,12 +37,12 @@ import android.widget.Toast;
 import org.ambientdynamix.data.DynamixPreferences;
 import org.ambientdynamix.util.AndroidNotification;
 
-//import eu.smartsantander.androidExperimentation.tabs.DefaultSensingActivity;
 import eu.smartsantander.androidExperimentation.tabs.InfoTab;
-import eu.smartsantander.androidExperimentation.tabs.ExperimentTab;
 import eu.smartsantander.androidExperimentation.tabs.MessagesTab;
 import eu.smartsantander.androidExperimentation.tabs.NewExperimentTab;
 import eu.smartsantander.androidExperimentation.tabs.StatisticsTab;
+
+//import eu.smartsantander.androidExperimentation.tabs.DefaultSensingActivity;
 
 
 /**
@@ -87,6 +85,7 @@ public class BaseActivity extends TabActivity {
     private static boolean activityVisible;
 
     public static Resources myRes;
+
 
     public static void close() {
         if (baseActivity != null)
@@ -161,8 +160,7 @@ public class BaseActivity extends TabActivity {
         super.onCreate(savedInstanceState);
         getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
         context = this;
-
-        // Set the Dynamix base activity so it can use our context
+    // Set the Dynamix base activity so it can use our context
         DynamixService.setBaseActivity(this);
         // Request for the progress bar to be shown in the title
         // requestWindowFeature(Window.FEATURE_INDETERMINATE_PROGRESS);

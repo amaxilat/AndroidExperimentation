@@ -9,9 +9,6 @@ import android.util.Log;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 
-import eu.smartsantander.androidExperimentation.util.Constants;
-import eu.smartsantander.androidExperimentation.jsonEntities.Experiment;
-
 import org.ambientdynamix.api.application.AppConstants.PluginInstallStatus;
 import org.ambientdynamix.api.application.ContextPluginInformation;
 import org.ambientdynamix.core.DynamixService;
@@ -21,6 +18,9 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.UUID;
+
+import eu.smartsantander.androidExperimentation.jsonEntities.Experiment;
+import eu.smartsantander.androidExperimentation.util.Constants;
 
 public class PhoneProfiler extends Thread implements Runnable {
     private SharedPreferences pref;
@@ -49,6 +49,7 @@ public class PhoneProfiler extends Thread implements Runnable {
     }
 
     public void startJob() {
+
         try {
             Log.d(TAG, "running");
             Thread.sleep(2000);
@@ -126,9 +127,9 @@ public class PhoneProfiler extends Thread implements Runnable {
                     try {
                         serverPhoneId[0] = DynamixService.getCommunication().registerSmartphone(deviceId.hashCode(), getSensorRules());
                         Log.i(TAG, "serverPhoneId[0]:" + serverPhoneId[0]);
-                        if (serverPhoneId[0] <= 0)
+                        if (serverPhoneId[0] <= 0) {
                             serverPhoneId[0] = Constants.PHONE_ID_UNITIALIZED;
-                        else {
+                        } else {
                             DynamixService.getPhoneProfiler().setPhoneId(serverPhoneId[0]);
                             setLastOnlineLogin();
                         }
