@@ -99,13 +99,13 @@ public class AsyncExpTask extends AsyncTask<String, Void, String> {
     }
 
     public String manageExperiment() throws Exception {
-        if (DynamixService.getExperiment() != null) {
-            if (DynamixService.getExperiment().getToTime() != null
-                    && DynamixService.getExperiment().getToTime() < System
-                    .currentTimeMillis()) {
-                // DynamixService.removeExperiment();
-            }
-        }
+//        if (DynamixService.getExperiment() != null) {
+//            if (DynamixService.getExperiment().getToTime() != null
+//                    && DynamixService.getExperiment().getToTime() < System
+//                    .currentTimeMillis()) {
+//                // DynamixService.removeExperiment();
+//            }
+//        }
 
         List<Experiment> experimentList = null;
 

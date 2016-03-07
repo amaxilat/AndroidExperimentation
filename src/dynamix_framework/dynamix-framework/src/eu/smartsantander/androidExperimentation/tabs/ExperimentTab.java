@@ -145,22 +145,22 @@ public class ExperimentTab extends Activity {
             } else {
                 experimentSubmitedTv.setVisibility(View.GONE);
             }
-            tstamp = DynamixService.getExperiment().getFromTime();
-            if (tstamp != 0) {
-                Date d = new Date(tstamp);
-                experimentFromTv.setText("Submitted: " + d.toLocaleString());
-                experimentFromTv.setVisibility(View.VISIBLE);
-            } else {
+//            tstamp = DynamixService.getExperiment().getFromTime();
+//            if (tstamp != 0) {
+//                Date d = new Date(tstamp);
+//                experimentFromTv.setText("Submitted: " + d.toLocaleString());
+//                experimentFromTv.setVisibility(View.VISIBLE);
+//            } else {
                 experimentFromTv.setVisibility(View.GONE);
-            }
-            tstamp = DynamixService.getExperiment().getToTime();
-            if (tstamp != 0) {
-                Date d = new Date(tstamp);
-                experimentToTv.setText("Submitted: " + d.toLocaleString());
-                experimentToTv.setVisibility(View.VISIBLE);
-            } else {
+//            }
+//            tstamp = DynamixService.getExperiment().getToTime();
+//            if (tstamp != 0) {
+//                Date d = new Date(tstamp);
+//                experimentToTv.setText("Submitted: " + d.toLocaleString());
+//                experimentToTv.setVisibility(View.VISIBLE);
+//            } else {
                 experimentToTv.setVisibility(View.GONE);
-            }
+//            }
             if (DynamixService.getExperiment().getUrlDescription() != null) {
                 expDescriptionTv.setVisibility(View.GONE);
                 markdownView.setVisibility(View.VISIBLE);

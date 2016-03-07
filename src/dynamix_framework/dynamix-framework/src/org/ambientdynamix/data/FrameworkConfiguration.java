@@ -90,7 +90,7 @@ public class FrameworkConfiguration {
 	private boolean allowPrimaryContextPluginRepoDeactivate = true;
 	private boolean allowAdditionalContextPluginRepos = true;
 	private boolean allowSelfSignedCertsDefault = false;
-	private boolean allowAutoContextPluginInstall = true;
+	private boolean allowAutoContextPluginInstall = false;
 	private boolean localContextPluginDiscoveryEnabled = true;
 	private RepositoryInfo localPluginRepo;
 	private RepositoryInfo externalPluginRepo;

@@ -49,6 +49,7 @@ import com.android.volley.toolbox.ImageLoader;
 import com.android.volley.toolbox.NetworkImageView;
 import com.mixpanel.android.mpmetrics.MixpanelAPI;
 
+import org.ambientdynamix.api.application.AppConstants;
 import org.ambientdynamix.api.application.ContextPluginInformation;
 import org.ambientdynamix.api.contextplugin.ContextPlugin;
 import org.ambientdynamix.core.UpdateManager.IContextPluginUpdateListener;
@@ -64,13 +65,17 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.Hashtable;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 import java.util.Vector;
 
 import eu.smartsantander.androidExperimentation.App;
 import eu.smartsantander.androidExperimentation.jsonEntities.Plugin;
+import eu.smartsantander.androidExperimentation.operations.Communication;
+import eu.smartsantander.androidExperimentation.operations.PhoneProfiler;
 import eu.smartsantander.androidExperimentation.util.Constants;
 
 /**
@@ -123,20 +128,26 @@ public class PluginsActivity extends ListActivity implements
     }
 
     @Override
-    public void onInstallComplete(ContextPlugin plug) {
+    public void onInstallComplete(final ContextPlugin plug) {
         Log.i(TAG, "installComplete for " + plug);
         PluginDiscoveryResult r = findUpdate(plug);
         installables.remove(r);
         removeUpdate(r);
         refreshList();
 
-        try {
-            final JSONObject props = new JSONObject();
-            props.put("installed", plug.getId());
-            mMixpanel.track("installed-plugin", props);
-            mMixpanel.flush();
-        } catch (JSONException ignore) {
-        }
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                notifySensors();
+                try {
+                    final JSONObject props = new JSONObject();
+                    props.put("installed", plug.getId());
+                    mMixpanel.track("installed-plugin", props);
+                    mMixpanel.flush();
+                } catch (JSONException ignore) {
+                }
+            }
+        }).start();
 
 
 //        if (newPlugsAdapter.getInstallableCount() == 0) {
@@ -144,10 +155,30 @@ public class PluginsActivity extends ListActivity implements
 //        }
     }
 
+    /**
+     * Sends a post request to the backend to save the installed plugin selection.
+     */
+    private void notifySensors() {
+        final Set<String> sensorRules = new HashSet<>();
+        for (final ContextPluginInformation plugin : DynamixService.getAllContextPluginInfo()) {
+            if (plugin.getInstallStatus() == AppConstants.PluginInstallStatus.INSTALLED) {
+                sensorRules.add(plugin.getPluginId());
+            }
+        }
+        Log.i(TAG, "installComplete for " + sensorRules);
+        try {
+            DynamixService.getCommunication().registerSmartphone(
+                    DynamixService.getPhoneProfiler().getDeviceIdHash(),
+                    android.text.TextUtils.join(",", sensorRules));
+        } catch (Exception e) {
+            Log.e(TAG, e.getMessage(), e);
+        }
+    }
+
     @Override
     public void onInstallFailed(ContextPlugin plug, String message) {
         Log.i(TAG, "installFailed for " + plug + " with message: " + message);
-        PluginDiscoveryResult r = findUpdate(plug);
+        final PluginDiscoveryResult r = findUpdate(plug);
         if (r != null)
             installables.remove(r);
         BaseActivity.toast(message, Toast.LENGTH_LONG);
@@ -160,7 +191,7 @@ public class PluginsActivity extends ListActivity implements
         Log.d(TAG, "installProgress " + percentComplete + " for " + plug);
         // We only update the installable if it's still in the list (another
         // event may have removed it i.e. completed)
-        PluginDiscoveryResult up = findUpdate(plug);
+        final PluginDiscoveryResult up = findUpdate(plug);
         if (up != null) {
             installables.put(up, percentComplete);
             refreshList();
@@ -172,10 +203,11 @@ public class PluginsActivity extends ListActivity implements
         Log.d(TAG, "install started for " + plug);
     }
 
+
     @Override
     public boolean onContextItemSelected(final MenuItem item) {
         // Log.e(TAG, "onContextItemSelected for: " + item.getItemId());
-        AdapterContextMenuInfo info = (AdapterContextMenuInfo) item
+        final AdapterContextMenuInfo info = (AdapterContextMenuInfo) item
                 .getMenuInfo();
         AlertDialog.Builder builder = null;
         Object test = plugList.getItemAtPosition(info.position);
@@ -655,9 +687,9 @@ public class PluginsActivity extends ListActivity implements
                 return v;
             } else {
                 View v = convertView;
-                LayoutInflater vi = (LayoutInflater) getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+                final LayoutInflater vi = (LayoutInflater) getSystemService(Context.LAYOUT_INFLATER_SERVICE);
                 v = vi.inflate(R.layout.icon_row, null);
-                ContextPlugin plug = this.getItem(position);// tODO:ArrayIndexOutOfBoundsException
+                final ContextPlugin plug = this.getItem(position);// tODO:ArrayIndexOutOfBoundsException
                 if (plug != null) {
                     final TextView tt = (TextView) v.findViewById(R.id.toptext);
                     if (tt != null) {
@@ -671,14 +703,13 @@ public class PluginsActivity extends ListActivity implements
                         bt.setText(di.getStatusText());
                     }
 
-                    NetworkImageView icon = (NetworkImageView) v.findViewById(R.id.icon);
+                    final NetworkImageView icon = (NetworkImageView) v.findViewById(R.id.icon);
                     if (icon != null) {
                         final Plugin plugin = DynamixService.getDiscoveredPlugin(plug.getName());
                         icon.setImageUrl(plugin.getImageUrl(), imageLoader);
                     }
 
-                    if (plug.getContextPluginInformation().getPluginId().contains("Experiment")) // SmartSantander
-                    {
+                    if (plug.getContextPluginInformation().getPluginId().contains("Experiment")) {
                         v.setVisibility(View.GONE);
                     }
                 } else

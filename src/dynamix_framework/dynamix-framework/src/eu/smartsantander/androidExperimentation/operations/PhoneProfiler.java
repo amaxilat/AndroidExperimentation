@@ -33,6 +33,7 @@ public class PhoneProfiler extends Thread implements Runnable {
     private final String TAG = this.getClass().getSimpleName();
 
     private boolean isInitialised = false;
+    private int deviceIdHash = -1;
 
     public PhoneProfiler() {
         this.PHONE_ID = Constants.PHONE_ID_UNITIALIZED;
@@ -123,6 +124,8 @@ public class PhoneProfiler extends Thread implements Runnable {
                     UUID deviceUuid = new UUID(androidId.hashCode(), ((long) tmDevice.hashCode() << 32) | tmSerial.hashCode());
                     String deviceId = deviceUuid.toString();
 
+                    DynamixService.getPhoneProfiler().setDeviceIdHash(deviceId.hashCode());
+
                     Log.i(TAG, "deviceId.hashCode():" + deviceId.hashCode());
                     try {
                         serverPhoneId[0] = DynamixService.getCommunication().registerSmartphone(deviceId.hashCode(), getSensorRules());
@@ -145,6 +148,40 @@ public class PhoneProfiler extends Thread implements Runnable {
             e.printStackTrace();
             DynamixService.getPhoneProfiler().setPhoneId(Constants.PHONE_ID_UNITIALIZED);
         }
+    }
+
+
+    public int getDeviceIdHash() {
+        pref = DynamixService.getAndroidContext().getApplicationContext().getSharedPreferences("OrganicityConfigurations", 0);
+        editor = pref.edit();
+        deviceIdHash = pref.getInt("deviceIdHash", -1);
+
+        if (deviceIdHash == -1) {
+            final TelephonyManager tm = (TelephonyManager) DynamixService.getAndroidContext().getSystemService(Context.TELEPHONY_SERVICE);
+
+            final String tmDevice, tmSerial, androidId;
+            tmDevice = "" + tm.getDeviceId();
+            tmSerial = "" + tm.getSimSerialNumber();
+            androidId = "" + android.provider.Settings.Secure.getString(DynamixService.getAndroidContext().getContentResolver(), android.provider.Settings.Secure.ANDROID_ID);
+
+            final UUID deviceUuid = new UUID(androidId.hashCode(), ((long) tmDevice.hashCode() << 32) | tmSerial.hashCode());
+            final String deviceId = deviceUuid.toString();
+            deviceIdHash = deviceId.hashCode();
+            setDeviceIdHash(deviceIdHash);
+            return deviceIdHash;
+        }
+        Log.d(TAG, "deviceIdHash:" + deviceIdHash);
+        return deviceIdHash;
+    }
+
+    public void setDeviceIdHash(int hash) {
+        this.deviceIdHash = hash;
+        if (editor == null || pref == null) {
+            pref = DynamixService.getAndroidContext().getApplicationContext().getSharedPreferences("OrganicityConfigurations", 0);
+            editor = pref.edit();
+        }
+        editor.putInt("deviceIdHash", this.deviceIdHash);
+        editor.apply();
     }
 
     public int getPhoneId() {

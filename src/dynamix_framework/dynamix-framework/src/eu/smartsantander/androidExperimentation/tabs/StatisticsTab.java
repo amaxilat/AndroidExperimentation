@@ -52,7 +52,6 @@ public class StatisticsTab extends Activity implements
     private OnSharedPreferenceChangeListener listener;
     private PhoneProfiler pProfil;
     private SharedPreferences prefs;
-    private loadJPGstatsTask jpgTask;
 
     private Communication communication;
     private BarChart mBarChart;
@@ -98,10 +97,6 @@ public class StatisticsTab extends Activity implements
         mBarChart = (BarChart) findViewById(R.id.barchart);
         mMap = ((MapFragment) getFragmentManager().findFragmentById(R.id.map));
 
-        jpgTask = new loadJPGstatsTask();
-        jpgTask.execute();
-
-
         mMap.getMap().setMyLocationEnabled(true);
 
         heatMapItems = new ArrayList<>();
@@ -111,75 +106,14 @@ public class StatisticsTab extends Activity implements
         mProvider = new HeatmapTileProvider.Builder().data(heatMapItems).build();
         mOverlay = mMap.getMap().addTileOverlay(new TileOverlayOptions().tileProvider(mProvider));
 
+
     }
+
 
     @Override
     public void onSharedPreferenceChanged(SharedPreferences sharedPreferences,
                                           String key) {
         // TODO Auto-generated method stub
-
-    }
-
-
-    // handle the downloading of the statistics JPG from the server as an asyncTask
-    // otherwise, the UI blocks in case of network connectivity issues
-
-    private class loadJPGstatsTask extends AsyncTask<String, Integer, String> {
-
-        String theJPGData;
-
-
-        @Override
-        protected void onPreExecute() {
-            System.out.println("ENTERING ASYNC TASK");
-        }
-
-
-        @Override
-        protected void onPostExecute(String j) {
-            runOnUiThread(new Runnable() {
-                @Override
-                public void run() {
-                    mOverlay.clearTileCache();
-                }
-            });
-        }
-
-
-        @Override
-        protected String doInBackground(String... params) {
-
-
-            final SortedMap<Integer, Double> sortedMap = communication.getLastStatistics(
-                    DynamixService.getPhoneProfiler().getPhoneId()
-            );
-
-            thisActivity.runOnUiThread(new Runnable() {
-                @Override
-                public void run() {
-                    mBarChart.clearChart();
-                    for (Integer integer : sortedMap.keySet()) {
-                        mBarChart.addBar(new BarModel(integer.toString(), sortedMap.get(integer).floatValue(), 0xFF1FF4AC));
-                    }
-                    mBarChart.startAnimation();
-                }
-            });
-
-
-            final LatLngBounds bounds = updateExperimentDeviceHeatMap();
-            if (bounds != null) {
-                thisActivity.runOnUiThread(new Runnable() {
-                    @Override
-                    public void run() {
-                        mMap.getMap().moveCamera(CameraUpdateFactory.newLatLngZoom(bounds.getCenter(), 10));
-                    }
-                });
-            }
-
-            return theJPGData;
-        }
-
-
     }
 
     private LatLngBounds updateExperimentDeviceHeatMap() {
@@ -207,51 +141,68 @@ public class StatisticsTab extends Activity implements
     public void onResume() {
 
         fillStatsFields();
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
 
-        try {
-            jpgTask.execute();
-        } catch (Exception e) {
-            Log.e(TAG, "Stats:" + e.getMessage());
-        }
+                final SortedMap<Integer, Double> sortedMap = communication.getLastStatistics(
+                        DynamixService.getPhoneProfiler().getPhoneId()
+                );
+
+                thisActivity.runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        mBarChart.clearChart();
+                        for (Integer integer : sortedMap.keySet()) {
+                            mBarChart.addBar(new BarModel(integer.toString(), sortedMap.get(integer).floatValue(), 0xFF1FF4AC));
+                        }
+                        mBarChart.startAnimation();
+                    }
+                });
+
+
+                final LatLngBounds bounds = updateExperimentDeviceHeatMap();
+                if (bounds != null) {
+                    thisActivity.runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() {
+                            mMap.getMap().moveCamera(CameraUpdateFactory.newLatLngZoom(bounds.getCenter(), 10));
+                        }
+                    });
+                }
+                runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        mOverlay.clearTileCache();
+                    }
+                });
+
+            }
+        }).start();
         super.onResume();
 
     }
 
     public void fillStatsFields() {
 
-        TextView statsTextView1 = (TextView) findViewById(R.id.stats_time_title);
-        TextView statsTextView2 = (TextView) findViewById(R.id.stats_time_value);
-        TextView statsTextView3 = (TextView) findViewById(R.id.stats_number_exp_title);
-        TextView statsTextView4 = (TextView) findViewById(R.id.stats_number_exp_value);
-        TextView statsTextView5 = (TextView) findViewById(R.id.stats_number_readings_title);
-        TextView statsTextView6 = (TextView) findViewById(R.id.stats_number_readings_value);
-        TextView statsTextView9 = (TextView) findViewById(R.id.stats_graph_title);
+        final TextView statsTextView1 = (TextView) findViewById(R.id.stats_time_title);
+        final TextView statsTextView2 = (TextView) findViewById(R.id.stats_time_value);
+        final TextView statsTextView3 = (TextView) findViewById(R.id.stats_number_exp_title);
+        final TextView statsTextView4 = (TextView) findViewById(R.id.stats_number_exp_value);
+        final TextView statsTextView5 = (TextView) findViewById(R.id.stats_number_readings_title);
+        final TextView statsTextView6 = (TextView) findViewById(R.id.stats_number_readings_value);
+        final TextView statsTextView9 = (TextView) findViewById(R.id.stats_graph_title);
 
         statsTextView1.setText(getString(R.string.statsTotalTime));
 
         statsTextView2.setText(String.format("%.3g%n",
-                (float) TimeUnit.MILLISECONDS.toSeconds(DynamixService
-                        .getTotalTimeConnectedOnline()) / 3600));
-        int experiments = DynamixService.getPhoneProfiler().getExperiments()
-                .size();
+                (float) TimeUnit.MILLISECONDS.toSeconds(DynamixService.getTotalTimeConnectedOnline()) / 3600));
+        final int experiments = DynamixService.getPhoneProfiler().getExperiments().size();
         statsTextView3.setText(getString(R.string.statsNumOfExp));
         statsTextView4.setText(String.valueOf(experiments));
         statsTextView5.setText(getString(R.string.statsNumOfReadings));
-        long totalMsg = DynamixService.getPhoneProfiler()
-                .getTotalReadingsProduced();
+        final long totalMsg = DynamixService.getPhoneProfiler().getTotalReadingsProduced();
         statsTextView6.setText(Long.toString(totalMsg));
         statsTextView9.setText(getString(R.string.stats7Days));
-
     }
-
-    public boolean checkNetworkIsAvailable() {
-        ConnectivityManager cm = (ConnectivityManager) this
-                .getSystemService(Context.CONNECTIVITY_SERVICE);
-
-        NetworkInfo activeNetwork = cm.getActiveNetworkInfo();
-        boolean isConnected = activeNetwork != null
-                && activeNetwork.isConnectedOrConnecting();
-        return isConnected;
-    }
-
 }

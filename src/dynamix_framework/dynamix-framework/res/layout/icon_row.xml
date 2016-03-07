@@ -22,8 +22,7 @@
             android:layout_height="40dp"
             android:gravity="center_vertical"
             android:paddingEnd="6dip"
-            android:paddingStart="2dip"
-            android:src="@drawable/plugin_enabled" />
+            android:paddingStart="2dip" />
 
     </LinearLayout>
 

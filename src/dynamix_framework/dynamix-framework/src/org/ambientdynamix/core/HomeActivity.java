@@ -92,8 +92,8 @@ public class HomeActivity extends Activity implements GoogleApiClient.Connection
 
     final LocationRequest mLocationRequest = LocationRequest.create()
             .setPriority(LocationRequest.PRIORITY_HIGH_ACCURACY)
-            .setInterval(60 * 1000)        // 10 seconds, in milliseconds
-            .setFastestInterval(30 * 1000); // 1 second, in milliseconds
+            .setInterval(30 * 1000)        // 30 seconds, in milliseconds
+            .setFastestInterval(10 * 1000); // 10 seconds, in milliseconds
 
 
     // Refreshes the UI
@@ -173,7 +173,7 @@ public class HomeActivity extends Activity implements GoogleApiClient.Connection
                 try {
                     final JSONObject props = new JSONObject();
                     props.put("count", DynamixService.getDataStorageSize());
-                    mMixpanel.track("send-stored-readings", props);
+                    //mMixpanel.track("send-stored-readings", props);
                 } catch (JSONException ignore) {
                 }
 

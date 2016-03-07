@@ -7,7 +7,7 @@ import eu.smartsantander.androidExperimentation.operations.Downloader;
 public class Constants {
     public static final String EXPERIMENT_PLUGIN_CONTEXT_TYPE = "org.ambientdynamix.contextplugins.ExperimentPlugin";
     public static final String MIXPANEL_TOKEN = "2341a661b1da35ad47227521fbf6945f";
-    public static String URL = "http://smartphone-experimentation.eu:8080";
+    public static String URL = "http://195.220.224.30:8080";
     public static final int PHONE_ID_UNITIALIZED = -1;
     public static String activityStatus = "unknown";
     public static final long EXPERIMENT_POLL_INTERVAL = 15000;

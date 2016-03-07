@@ -31,6 +31,8 @@
         android:layout_height="80dp"
         android:layout_marginEnd="10dp"
         android:layout_marginStart="5dp"
+        app:egCurveSmoothness="0.4"
+        app:egLegendColor="#0000FF"
         app:egLegendHeight="40dp" />
 
 </LinearLayout>

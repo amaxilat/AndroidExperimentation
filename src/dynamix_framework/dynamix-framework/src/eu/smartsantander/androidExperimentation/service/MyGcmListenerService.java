@@ -65,7 +65,7 @@ public class MyGcmListenerService extends GcmListenerService {
                                 gcmMessageData.getCount() +
                                 " measurements so far today. " +
                                 "Keep up the good work.";
-                        notificationTitle = "Horray!";
+                        notificationTitle = "Hooray!";
                         break;
                     default:
                         return;

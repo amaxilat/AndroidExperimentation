@@ -116,11 +116,7 @@ public class Communication extends Thread implements Runnable {
      * @return
      */
     public JSONArray getLastPoints(int phoneId) {
-        if (DynamixService.getExperiment() == null || DynamixService.getExperiment().getId() == null) {
-            Log.e(TAG, "No Experiment is installed!");
-            return null;
-        }
-        final String path = "/experiment/" + DynamixService.getExperiment().getId() + "?deviceId=" + phoneId + "&after=today";
+        final String path = "/data?deviceId=" + phoneId + "&after=today";
         try {
             final String stats = get(path);
             try {
@@ -133,7 +129,6 @@ public class Communication extends Thread implements Runnable {
             Log.e(TAG, e.getMessage(), e);
             return null;
         }
-
     }
 
     /**

@@ -184,7 +184,7 @@ public class DynamixPreferenceActivity extends PreferenceActivity {
 		toggleBackgroundMode.setKey(DynamixPreferences.BACKGROUND_MODE);
 		toggleBackgroundMode.setTitle("Background Mode");
 		toggleBackgroundMode.setSummary("Continue to model context, even when the screen is off");
-		toggleBackgroundMode.setDefaultValue(false);
+		toggleBackgroundMode.setDefaultValue(true);
 		basicOptionsCat.addPreference(toggleBackgroundMode);
 		CheckBoxPreference toggleSelfSignedCerts = new CheckBoxPreference(this);
 		toggleSelfSignedCerts.setKey(DynamixPreferences.ACCEPT_SELF_SIGNED_CERTS);
