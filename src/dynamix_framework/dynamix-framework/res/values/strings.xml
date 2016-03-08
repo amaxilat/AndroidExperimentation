@@ -49,7 +49,8 @@
     <string name="btn_do_updates">Install Updates</string>
     <string name="btn_configure_context_plugin">Configure Plugin</string>
     <string name="pref_audible_alerts_title">Audible Alerts</string>
-    <string name="find_experiments">Find Experiments</string>
+    <string name="btn_find_experiments">Find Experiments</string>
+    <string name="btn_install_experiments">Install Experiment</string>
     <string name="plug_stats_label">Most recent events</string>
     <string name="plug_stats_summary_label">Sensors Statistics</string>
     <string name="btn_see_plugin_stats">View Statistics</string>
@@ -84,10 +85,15 @@
     <string name="expIsDisabled">Experimentation is disabled</string>
     <string name="noAuthApps"></string>
     <string name="no_context_plugins">No context Sensors</string>
+    <string name="no_experiments">No Experiments</string>
     <string name="installed_context_plugins">Installed Sensors</string>
-    <string name="available_context_plugins">Available Sensors</string>
+    <string name="installed_experiments">Active Experiments</string>
+    <string name="available_context_plugins">Other Available Sensors</string>
+    <string name="available_experiments">Available Experiments</string>
     <string name="no_available_context_plugins">No available Sensors</string>
+    <string name="no_available_experiments">No available Experiments</string>
     <string name="tap_find_plugins">"Tap 'Find Sensors' to search for compatible Sensors"</string>
+    <string name="tap_find_experiments">"Tap 'Find Experiments' to search for available Experiments"</string>
     <string name="sensor_rules">Sensor Rules</string>
     <string name="executed_experiment">Executed Experiment</string>
     <string name="install_pending">Install pending&#8230;</string>
@@ -122,7 +128,7 @@
     <string name="gcm_defaultSenderId">770161861153</string>
     <string name="phone_id_generated">phone_id_generated</string>
     <string name="experiment_id_generated">experiment_id_generated</string>
-    <string name="no_experiment_installed">No experiment downloaded. Visit the plugins tab and select the sensors you want to share and the experiments tab to select the experiment you want to participate in.</string>
+    <string name="no_experiment_installed">No experiment downloaded. Visit the plugins tab to select the sensors you want to share and the experiments tab to select the experiment you want to participate in.</string>
     <string name="experimentEnabled">Experiment Enabled</string>
     <string name="experimentDisabled">Experiment Disabled</string>
     <string name="no_experiment_is_installed">No Currently Installed Experiment</string>

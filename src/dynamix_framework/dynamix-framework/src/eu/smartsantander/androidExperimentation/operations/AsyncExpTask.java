@@ -35,7 +35,7 @@ public class AsyncExpTask extends AsyncTask<String, Void, String> {
             DynamixServiceListenerUtility.start();
         } else {
             try {
-                Log.d(TAG, "doInBackground");
+                Log.d(TAG, "doInBackground " + DynamixService.sessionStarted);
 
                 if (!DynamixService.sessionStarted) {
                     DynamixServiceListenerUtility.start();
@@ -122,7 +122,7 @@ public class AsyncExpTask extends AsyncTask<String, Void, String> {
             DynamixService.removeExperiment();
             throw new Exception("No experiment Fetched");
         } else {
-           return "";
+            return "";
         }
     }
 }

@@ -265,8 +265,7 @@ public final class DynamixService extends IntentService {
         ContextPluginBinder plugBinder = new ContextPluginBinder();
 
         try {
-            final ContextPlugin contextPlugin = plugBinder.createContextPlugin(
-                    DynamixService.getConfig().getPrimaryContextPluginRepo(), plugin);
+            final ContextPlugin contextPlugin = plugBinder.createContextPlugin(null, plugin);
             installPlugin(contextPlugin, null);
             Thread.sleep(5000);
         } catch (Exception e) {
@@ -533,49 +532,6 @@ public final class DynamixService extends IntentService {
                 Log.w(TAG, "boot called when in bootState: " + bootState);
             }
         }
-    }
-
-    /**
-     * Starts the WebConnector, which allows web clients to access Dynamix services via its REST interface.
-     */
-    public static boolean startWebConnector(final int port, final int checkPeriodMills, final int timeoutMills,
-                                            final List<TrustedCert> authorizedCerts) throws IOException {
-//        if (config.isWebConnectorEnabled()) {
-//            if (isFrameworkInitialized()) {
-//                if (!WebConnector.isStarted()) {
-//                    WebConnector.startServer(webFacade, port, checkPeriodMills, timeoutMills, authorizedCerts);
-//                    return true;
-//                } else {
-//                    Log.d(TAG, "Web connector already started");
-//                    return true;
-//                }
-//            } else {
-//                Log.w(TAG, "Cannot start web connector because Dynamix is not initialized");
-//                return false;
-//            }
-//        } else {
-//            Log.w(TAG, "Cannot start web connector because it's disabled");
-//            return false;
-//        }
-        return true;
-    }
-
-    /**
-     * Starts the WebConnector using the values specified in framework configuration.
-     */
-    public static boolean startWebConnectorUsingConfigData() {
-//        for (final int port : config.getWebConnectorPorts()) {
-//            try {
-//                // loadAuthorizedCertsFromPath(Environment.getExternalStorageDirectory().getAbsolutePath());
-//                return startWebConnector(port, config.getWebConnectorTimeoutCheckMills(),
-//                        config.getWebConnectorClientTimeoutMills(), getAuthorizedCertsFromKeyStore());
-//            } catch (IOException e) {
-//                Log.w(TAG, "Could not start web connector using port: " + port);
-//            }
-//        }
-//        Log.w(TAG, "Failed to start web connector using specified ports: " + Arrays.toString(config.getWebConnectorPorts()));
-//        return false;
-        return true;
     }
 
     /*
@@ -1777,14 +1733,14 @@ public final class DynamixService extends IntentService {
      * Starts the context plug-in update timer using the update interval set in the Dynamix preferences.
      */
     static void startContextPluginUpdateTimer() {
-        uiHandler.post(new Runnable() {
-            @Override
-            public void run() {
-                if (DynamixPreferences.autoContextPluginUpdateCheck(androidContext)) {
-                    updateContextPluginUpdateTimer(DynamixPreferences.getContextPluginUpdateInterval(androidContext));
-                }
-            }
-        });
+//        uiHandler.post(new Runnable() {
+//            @Override
+//            public void run() {
+//                if (DynamixPreferences.autoContextPluginUpdateCheck(androidContext)) {
+//                    updateContextPluginUpdateTimer(DynamixPreferences.getContextPluginUpdateInterval(androidContext));
+//                }
+//            }
+//        });
     }
 
     /**
@@ -1849,18 +1805,10 @@ public final class DynamixService extends IntentService {
         contextPlugUpdateTimer = new CountDownTimer(interval, interval) {
             @Override
             public void onFinish() {
-                Log.i(TAG, "Auto Context Plug-in Update!");
-                // Use the update manager to check for updates
-                checkForContextPluginUpdates();
-                // Restart another update check, if necessary
-                if (DynamixPreferences.autoContextPluginUpdateCheck(androidContext)) {
-                    updateContextPluginUpdateTimer(DynamixPreferences.getContextPluginUpdateInterval(androidContext));
-                }
             }
 
             @Override
             public void onTick(long millisUntilFinished) {
-                // Log.i(TAG, "Time until update: " + millisUntilFinished);
             }
         }.start();
     }
@@ -2320,8 +2268,6 @@ public final class DynamixService extends IntentService {
                         // Handle notifications
                         onDynamixStarted();
                         SessionManager.notifyAllDynamixFrameworkActive();
-                        UpdateManager.checkForDynamixUpdates(getAndroidContext(), DynamixService.getConfig()
-                                .getPrimaryDynamixServer().getUrl(), new DynamixUpdatesCallbackHandler());
                         Log.i(TAG, "Dynamix Service Started!");
 
 

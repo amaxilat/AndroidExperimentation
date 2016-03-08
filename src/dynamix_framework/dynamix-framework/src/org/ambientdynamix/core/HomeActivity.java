@@ -16,8 +16,13 @@
 package org.ambientdynamix.core;
 
 import android.app.Activity;
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.pm.PackageInfo;
+import android.content.pm.PackageManager;
 import android.location.Location;
+import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
 import android.util.Log;
@@ -42,10 +47,17 @@ import com.google.android.gms.maps.model.LatLng;
 import com.mixpanel.android.mpmetrics.MixpanelAPI;
 
 import org.ambientdynamix.data.DynamixPreferences;
+import org.apache.http.HttpResponse;
+import org.apache.http.client.methods.HttpGet;
+import org.apache.http.impl.client.DefaultHttpClient;
+import org.apache.http.util.ExceptionUtils;
 import org.json.JSONException;
 import org.json.JSONObject;
 import org.lucasr.twowayview.TwoWayView;
 
+import java.io.BufferedReader;
+import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.Timer;
 import java.util.TimerTask;
@@ -130,6 +142,8 @@ public class HomeActivity extends Activity implements GoogleApiClient.Connection
         setContentView(R.layout.home_tab);
 
 
+        updateCheck();
+
         mMixpanel = MixpanelAPI.getInstance(this, Constants.MIXPANEL_TOKEN);
 
         mMap = ((MapFragment) getFragmentManager().findFragmentById(R.id.map_main));
@@ -186,7 +200,7 @@ public class HomeActivity extends Activity implements GoogleApiClient.Connection
         final TimerTask t = new TimerTask() {
             @Override
             public void run() {
-                Log.i(TAG, "refresher");
+
                 refreshData();
             }
         };
@@ -201,6 +215,67 @@ public class HomeActivity extends Activity implements GoogleApiClient.Connection
             mMap.getMap().getUiSettings().setAllGesturesEnabled(false);
             mMap.getMap().getUiSettings().setMyLocationButtonEnabled(false);
         }
+    }
+
+    private void updateCheck() {
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                try {
+                    PackageInfo pInfo = getPackageManager().getPackageInfo(getPackageName(), 0);
+                    int verCode = pInfo.versionCode;
+                    DefaultHttpClient client = new DefaultHttpClient();
+                    HttpGet httpGet = new HttpGet("http://repo.smartphone-experimentation.eu/app/");
+                    try {
+                        HttpResponse execute = client.execute(httpGet);
+                        InputStream content = execute.getEntity().getContent();
+
+                        BufferedReader buffer = new BufferedReader(new InputStreamReader(content));
+                        StringBuilder builder = new StringBuilder();
+                        String s = "";
+                        while ((s = buffer.readLine()) != null) {
+                            builder.append(s);
+                        }
+
+                        try {
+                            if (verCode != Integer.parseInt(builder.toString())) {
+                                Log.i(TAG, builder.toString());
+                                Log.i(TAG, "WE NEED TO UPDATE!");
+                                {
+                                    final AlertDialog.Builder alertBuilder = new AlertDialog.Builder(activity);
+                                    alertBuilder.setTitle("Update Available");
+                                    alertBuilder.setMessage("There is a newer version available for Organicity Experimentation. " +
+                                            "Please click 'Update' to download and install the latest version.");
+                                    alertBuilder.setPositiveButton("Update", new DialogInterface.OnClickListener() {
+                                        public void onClick(DialogInterface dialog, int id) {
+                                            Intent browserIntent = new Intent(Intent.ACTION_DEFAULT, Uri.parse("http://repo.smartphone-experimentation.eu/app/dynamix-framework-debug.apk"));
+                                            startActivity(browserIntent);
+                                        }
+                                    });
+                                    alertBuilder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+                                        public void onClick(DialogInterface dialog, int id) {
+                                            // User cancelled the dialog
+                                        }
+                                    });
+                                    runOnUiThread(new Runnable() {
+                                        @Override
+                                        public void run() {
+                                            alertBuilder.show();
+                                        }
+                                    });
+                                }
+                            }
+                        } catch (Exception e) {
+                            Log.d(TAG, "ignore");
+                        }
+                    } catch (Exception e) {
+                        Log.d(TAG, "ignore");
+                    }
+                } catch (PackageManager.NameNotFoundException e) {
+                    Log.d(TAG, "ignore");
+                }
+            }
+        }).start();
     }
 
     @Override
@@ -235,7 +310,7 @@ public class HomeActivity extends Activity implements GoogleApiClient.Connection
     }
 
     private void refresh() {
-
+        Log.i(TAG, "refresher");
         if (DynamixService.isFrameworkInitialized()) {
             // Setup toggle button with proper state
             boolean dynamixEnabled = DynamixPreferences.isDynamixEnabled(this);

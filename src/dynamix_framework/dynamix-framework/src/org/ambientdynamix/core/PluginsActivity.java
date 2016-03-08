@@ -74,8 +74,6 @@ import java.util.Vector;
 
 import eu.smartsantander.androidExperimentation.App;
 import eu.smartsantander.androidExperimentation.jsonEntities.Plugin;
-import eu.smartsantander.androidExperimentation.operations.Communication;
-import eu.smartsantander.androidExperimentation.operations.PhoneProfiler;
 import eu.smartsantander.androidExperimentation.util.Constants;
 
 /**

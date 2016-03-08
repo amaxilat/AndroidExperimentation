@@ -85,37 +85,25 @@ public class DynamixServiceListenerUtility {
                     throws RemoteException {
 
                 NotificationHQManager noteManager = NotificationHQManager.getInstance();
-
-                Log.d(TAG, "Event timestamp "
-                        + event.getTimeStamp().toString());
-                if (event.expires())
-                    Log.d(TAG, "Event expires at "
-                            + event.getExpireTime().toString());
-                else
-                    Log.i(TAG, "Event does not expire");
+                Log.d(TAG, "Event timestamp " + event.getTimeStamp().toString());
                 // Log each string-based context type format supported by the
                 // event
-                for (String format : event.getStringRepresentationFormats()) {
-                    Log.d(TAG, "Event string-based format: " + format
-                            + " size: "
+                for (final String format : event.getStringRepresentationFormats()) {
+                    Log.d(TAG, "Event string-based format: " + format + " size: "
                             + event.getStringRepresentation(format).length());
-                    Log.d(TAG,
-                            "Event string-based format: " + format
-                                    + " contained: "
-                                    + event.getStringRepresentation(format));
                 }
                 // Check for native IContextInfo
                 if (event.hasIContextInfo()) {
 
                     Log.d(TAG, "Event contains native IContextInfo: " + event.getIContextInfo());
-                    IContextInfo nativeInfo = event.getIContextInfo();
-                    String msg = nativeInfo.getStringRepresentation("");
+                    final IContextInfo nativeInfo = event.getIContextInfo();
+                    final String msg = nativeInfo.getStringRepresentation("");
                     try {
                         Log.d(TAG, "Received Experiment/Plugin Info: " + msg);
-                        PluginInfo plugInfo = (new Gson()).fromJson(msg, PluginInfo.class);
+                        final PluginInfo plugInfo = (new Gson()).fromJson(msg, PluginInfo.class);
                         if (plugInfo != null && plugInfo.getContext() != null && plugInfo.getContext().equals("org.ambientdynamix.contextplugins.ExperimentPlugin")) {
-                            String readingMsg = plugInfo.getPayload();
-                            Type listType = new TypeToken<ArrayList<Reading>>() {
+                            final String readingMsg = plugInfo.getPayload();
+                            final Type listType = new TypeToken<ArrayList<Reading>>() {
                             }.getType();
                             final List<Reading> readings = (new Gson()).fromJson(readingMsg, listType);
                             final Report rObject = new Report(DynamixService.getExperiment().getId().toString());
@@ -125,21 +113,21 @@ public class DynamixServiceListenerUtility {
                             for (final Reading reading : readings) {
                                 Log.d(TAG, "Received Reading: " + reading);
                                 DynamixService.cacheExperimentalMessage(readingMsg);
-                                if (DynamixService.getExperiment() == null)
+                                if (DynamixService.getExperiment() == null) {
                                     return;
+                                }
                                 mlist.add(reading.getValue());
                             }
                             rObject.setResults(mlist);
                             final String message = rObject.toJson();
                             Log.d(TAG, "ResultMessage:message " + message);
                             DynamixService.publishMessage(message);
-
                         } else {
-                            String readingMsg = plugInfo.getPayload();
-                            Type listType = new TypeToken<ArrayList<Reading>>() {
+                            final String readingMsg = plugInfo.getPayload();
+                            final Type listType = new TypeToken<ArrayList<Reading>>() {
                             }.getType();
-                            List<Reading> readings = (new Gson()).fromJson(readingMsg, listType);
-                            for (Reading reading : readings) {
+                            final List<Reading> readings = (new Gson()).fromJson(readingMsg, listType);
+                            for (final Reading reading : readings) {
                                 //Toast.makeText(DynamixService.getAndroidContext(),reading.getContext(), 500).show();
                                 String notification = reading.getContext();
                                 if (notification.contains("Gps")) {
@@ -149,7 +137,6 @@ public class DynamixServiceListenerUtility {
                                 DynamixService.getReadingStorage().pushReading(reading);
                                 DynamixService.getPhoneProfiler().incMsgCounter();
                             }
-
                         }
                     } catch (Exception e) {
                         Log.w(TAG, "Bad Formed Reading" + msg);
@@ -158,40 +145,33 @@ public class DynamixServiceListenerUtility {
             }
 
             @Override
-            public void onContextSupportAdded(ContextSupportInfo supportInfo)
-                    throws RemoteException {
+            public void onContextSupportAdded(ContextSupportInfo info) throws RemoteException {
                 Log.d(TAG, "CONTENT SUPPORT ADDED: "
-                        + supportInfo.getPlugin().getPluginId());
+                        + info.getPlugin().getPluginId());
                 DynamixService.sessionStarted = true;
             }
 
             @Override
-            public void onContextSupportRemoved(ContextSupportInfo supportInfo)
-                    throws RemoteException {
+            public void onContextSupportRemoved(ContextSupportInfo info) throws RemoteException {
                 // TODO Auto-generated method stub
-
             }
 
             @Override
-            public void onContextTypeNotSupported(String contextType)
-                    throws RemoteException {
+            public void onContextTypeNotSupported(String contextType) throws RemoteException {
                 Log.d(TAG, "CONTENT NO SUPPORTED" + contextType);
                 DynamixService.sessionStarted = false;
             }
 
             @Override
-            public void onInstallingContextSupport(
-                    ContextPluginInformation plugin, String contextType)
-                    throws RemoteException {
+            public void onInstallingContextSupport(final ContextPluginInformation plugin,
+                                                   String contextType) throws RemoteException {
                 // TODO Auto-generated method stub
-
             }
 
             @Override
-            public void onInstallingContextPlugin(
-                    ContextPluginInformation plugin) throws RemoteException {
+            public void onInstallingContextPlugin(ContextPluginInformation plugin)
+                    throws RemoteException {
                 // TODO Auto-generated method stub
-
             }
 
             @Override
@@ -199,71 +179,57 @@ public class DynamixServiceListenerUtility {
                     ContextPluginInformation plugin, int percentComplete)
                     throws RemoteException {
                 // TODO Auto-generated method stub
-
             }
 
             @Override
             public void onContextPluginInstalled(ContextPluginInformation plugin)
                     throws RemoteException {
                 // TODO Auto-generated method stub
-
             }
 
             @Override
             public void onContextPluginUninstalled(
                     ContextPluginInformation plugin) throws RemoteException {
                 // TODO Auto-generated method stub
-
             }
 
             @Override
-            public void onContextPluginInstallFailed(
-                    ContextPluginInformation plug, String message)
+            public void onContextPluginInstallFailed(ContextPluginInformation plug, String message)
                     throws RemoteException {
                 // TODO Auto-generated method stub
-
             }
 
             @Override
-            public void onContextRequestFailed(String requestId,
-                                               String message, int errorCode) throws RemoteException {
-                // TODO Auto-generated method stub
-
-            }
-
-            @Override
-            public void onContextPluginDiscoveryStarted()
+            public void onContextRequestFailed(String requestId, String message, int errorCode)
                     throws RemoteException {
                 // TODO Auto-generated method stub
+            }
 
+            @Override
+            public void onContextPluginDiscoveryStarted() throws RemoteException {
+                // TODO Auto-generated method stub
             }
 
             @Override
             public void onContextPluginDiscoveryFinished(
-                    List<ContextPluginInformation> discoveredPlugins)
-                    throws RemoteException {
+                    final List<ContextPluginInformation> discoveredPlugins) throws RemoteException {
                 // TODO Auto-generated method stub
-
             }
 
             @Override
             public void onDynamixFrameworkActive() throws RemoteException {
                 // TODO Auto-generated method stub
-
             }
 
             @Override
             public void onDynamixFrameworkInactive() throws RemoteException {
                 // TODO Auto-generated method stub
-
             }
 
             @Override
             public void onContextPluginError(ContextPluginInformation plug,
                                              String message) throws RemoteException {
-                Log.d(TAG, "Pluginf Error " + plug.getPluginDescription() + ","
-                        + message);
-
+                Log.d(TAG, "Plugin Error " + plug.getPluginDescription() + "," + message);
             }
         };
 

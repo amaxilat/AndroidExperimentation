@@ -8,6 +8,8 @@
     <string name="deviceId_label">Organicity ID συσκευής:</string>
     <string name="experiment_label">Πείραμα Organicity:</string>
     <string name="app_list_label">Εφαρμογές με έγκριση</string>
+    <string name="available_experiments">Διαθέσιμα Πειράματα</string>
+    <string name="installed_experiments">Ενεργά Πειράματα</string>
     <string name="app_contextmenu_remove">Αφαίρεση εφαρμογής</string>
     <string name="app_settings">Ρυθμίσεις εφαρμογής</string>
     <string name="save_app_authorization">Αποθήκευση ρυθμίσεων</string>
@@ -53,7 +55,9 @@
     <string name="plug_stats_summary_label">Στατιστικά στοιχεία Plugin</string>
     <string name="btn_see_plugin_stats">Στατιστικά στοιχεία</string>
     <string name="btn_find_plugs">Εύρεση Αισθητήρων</string>
+    <string name="btn_find_experiments">Εύρεση Πειραμάτων</string>
     <string name="btn_install_plugs">Εγκατάσταση Αισθητήρων</string>
+    <string name="btn_install_experiments">Εγκατάσταση Πειραμάτων</string>
     <string name="btn_see_plugin_details">Λεπτομέρειες plugin</string>
     <string name="update_description_label">Ανανέωση περιγραφής</string>
     <string name="update_priority_label">Προτεραιότητα update</string>
@@ -79,13 +83,16 @@
 		&lt;a href=&quot;http://ambientdynamix.org&quot;&gt;http://ambientdynamix.org&lt;a&gt;
 	</string>
     <string name="expIsEnabled">Πειραματισμός ενεργός</string>
-	<string name="expIsDisabled">Πειραματισμός ανενεργός</string>
-	<string name="noAuthApps"></string>
-	<string name="no_context_plugins">Δεν υπάρχουν εγκατεστημένοι Αισθητήρες</string>
+    <string name="expIsDisabled">Πειραματισμός ανενεργός</string>
+    <string name="noAuthApps"></string>
+    <string name="no_context_plugins">Δεν υπάρχουν εγκατεστημένοι Αισθητήρες</string>
+    <string name="no_experiments">Δεν υπάρχουν εγκατεστημένα Πειράματα</string>
     <string name="installed_context_plugins">Εγκατεστημένοι Αισθητήρες</string>
     <string name="available_context_plugins">Διαθέσιμοι Αισθητήρες</string>
     <string name="no_available_context_plugins">Δεν υπάρχουν διαθέσιμοι Αισθητήρες</string>
+    <string name="no_available_experiments">Δεν υπάρχουν διαθέσιμα Πειράματα</string>
     <string name="tap_find_plugins">"Πατήστε 'Εύρεση Αισθητήρων' για να βρείτε Αισθητήρες"</string>
+    <string name="tap_find_experiments">"Πατήστε 'Εύρεση Πειραμάτων' για να βρείτε Πειράματα"</string>
     <string name="sensor_rules">Κανόνες για τους αισθητήρες</string>
     <string name="executed_experiment">Πείραμα που εκτελείται</string>
     <string name="install_pending">Αναμονή εγκατάστασης&#8230;</string>
@@ -101,4 +108,5 @@
     <string name="statsNumOfReadings">Πλήθος μετρήσεων</string>
     <string name="stats7Days">Στοιχεία για τις προηγούμενες 7 ημέρες</string>
     <string name="pending_messages_template">Στείλε %d μετρήσεις σε αναμονή...</string>
+    <string name="no_experiment_installed">Δεν εχει επιλεγεί πείραμα. Επισκευθείτε την καρτέλα των αισθητήρων για να επιλέξετε τους αισθητήρες που θα μοιραστείτε με το Organicity και στην συνέχεια την καρτέλα των πειραμάτων για να επιλέξετε το πείραμα που θα συμμετάσχετε.</string>
 </resources>

@@ -77,7 +77,7 @@ class UpdateManager {
         // Assume we're allowed to update
         boolean updateAllowed = true;
         /*
-		 * Don't allow updates if the user specified WIFI only, but WIFI is not connected. Note that if Dynamix is
+         * Don't allow updates if the user specified WIFI only, but WIFI is not connected. Note that if Dynamix is
 		 * embedded, updates are always allowed.
 		 */
         if ((DynamixPreferences.useWifiNetworkOnly(c) && !Utils.isWifiConnected(c))) {
@@ -93,29 +93,29 @@ class UpdateManager {
                 public void run() {
                     Log.i(TAG, "Starting Dynamix Framework Update....");
                     listener.onUpdateStarted();
-                    try {
-                        URL server = new URL(updateUrl);
-                        InputStream input = server.openStream();
-                        Serializer serializer = new Persister();
-                        SAXReader reader = new SAXReader(); // dom4j SAXReader
-						/*
-						 * TODO: Using the dom4j Document here, since it can load input from a variety of sources
-						 * automatically (file and network). We could explore providing our own low-overhead transport
-						 * mechanisms, if the Document gets too heavy.
-						 */
-                        Document document = reader.read(input);
-                        String xml = document.asXML();
-                        input.close();
-                        Reader metaReader = new StringReader(xml);
-                        DynamixUpdatesBinder updatesBinder = serializer.read(DynamixUpdatesBinder.class, metaReader,
-                                false);
-                        DynamixUpdates updates = new DynamixUpdates();
-                        updates.setTrustedWebConnectorCerts(updatesBinder.getTrustedWebConnectorCerts());
-                        listener.onUpdateComplete(updates);
-                    } catch (Exception e) {
-                        Log.w(TAG, "Dynamix Update Failed: " + e);
-                        listener.onUpdateError(e.getMessage());
-                    }
+//                    try {
+//                        URL server = new URL(updateUrl);
+//                        InputStream input = server.openStream();
+//                        Serializer serializer = new Persister();
+//                        SAXReader reader = new SAXReader(); // dom4j SAXReader
+//						/*
+//						 * TODO: Using the dom4j Document here, since it can load input from a variety of sources
+//						 * automatically (file and network). We could explore providing our own low-overhead transport
+//						 * mechanisms, if the Document gets too heavy.
+//						 */
+//                        Document document = reader.read(input);
+//                        String xml = document.asXML();
+//                        input.close();
+//                        Reader metaReader = new StringReader(xml);
+//                        DynamixUpdatesBinder updatesBinder = serializer.read(DynamixUpdatesBinder.class, metaReader,
+//                                false);
+//                        DynamixUpdates updates = new DynamixUpdates();
+//                        updates.setTrustedWebConnectorCerts(updatesBinder.getTrustedWebConnectorCerts());
+//                        listener.onUpdateComplete(updates);
+//                    } catch (Exception e) {
+//                        Log.w(TAG, "Dynamix Update Failed: " + e);
+//                        listener.onUpdateError(e.getMessage());
+//                    }
                 }
             });
         } else {
@@ -151,7 +151,7 @@ class UpdateManager {
                                                                  final List<IContextPluginConnector> plugSources, final PluginConstants.PLATFORM platform,
                                                                  final VersionInfo platformVersion, final VersionInfo frameworkVersion,
                                                                  final IContextPluginUpdateListener callback, final FeatureInfo[] availableFeatures) {
-		/*
+        /*
 		 * Don't allow network updates if the user specified WIFI only and WIFI is not connected. Note that if Dynamix
 		 * is embedded, updates are always allowed.
 		 */
@@ -280,23 +280,11 @@ class UpdateManager {
         List<IContextPluginConnector> sources = new Vector<>();
         // Setup primary Dynamix context plug-in repository
         if (DynamixPreferences.isDynamixRepositoryEnabled(DynamixService.getAndroidContext())) {
-            RepositoryInfo repo = DynamixService.getConfig().getPrimaryContextPluginRepo();
-            if (repo != null) {
-                if (!DynamixService.isEmbedded())
-                    repo.setUrl(DynamixPreferences.getNetworkContextPluginDiscoveryPath(DynamixService
-                            .getAndroidContext()));
-                try {
-                    sources.add(ContextPluginConnectorFactory.makeContextPluginConnector(repo));
-                } catch (Exception e) {
-                    Log.e(TAG, "Could not make repository using: " + repo);
-                }
-            }
         }
         // Setup local Dynamix context plug-in repository (if enabled)
         if (DynamixPreferences.localContextPluginDiscoveryEnabled(DynamixService.getAndroidContext())) {
             RepositoryInfo repo = null;
             if (DynamixService.isEmbedded()) {
-                repo = DynamixService.getConfig().getLocalPluginRepo();
                 if (repo != null) {
                     String baseUrl = repo.getUrl();
                     String storageDirectory = Environment.getExternalStorageDirectory().getAbsolutePath();
@@ -324,7 +312,6 @@ class UpdateManager {
         if (DynamixPreferences.isExternalRepositoryEnabled(DynamixService.getAndroidContext())) {
             RepositoryInfo repo = null;
             if (DynamixService.isEmbedded()) {
-                repo = DynamixService.getConfig().getExternalPluginRepo();
             } else {
                 repo = new RepositoryInfo();
                 repo.setAlias("3rd Party Repository");

@@ -69,7 +69,7 @@ import android.util.Log;
 /**
  * Manages sessions for Dynamix applications. Includes remote communications facilities. Apps are assigned to one
  * session, but may have multiple listeners. Closing a session automatically removes all associated listeners.
- * 
+ *
  * @author Darren Carlson
  */
 class SessionManager {
@@ -86,7 +86,7 @@ class SessionManager {
 	/**
 	 * Adds the IDynamixListener to the RemoteCallbackList and sessionMap. Note: For thread safety, all interactions
 	 * with the RemoteCallbackList are handled using a single Handler.
-	 * 
+	 *
 	 * @param listener
 	 *            The IDynamixListener to add.
 	 */
@@ -279,7 +279,7 @@ class SessionManager {
 				sendEventCommand(session.getApp(), new ContextPluginInstalling(plug.getContextPluginInformation()));
 		}
 	}
-	
+
 	/**
 	 * Notifies all applications about installing context plug-in progress.
 	 * @param plug The installing plug-in.
@@ -338,7 +338,7 @@ class SessionManager {
 
 	/**
 	 * Notifies the application that the requested context type could not be supported.
-	 * 
+	 *
 	 * @param app
 	 *            the application to receive the event
 	 * @param contextType
@@ -399,13 +399,12 @@ class SessionManager {
 	 * the remote side (necessary for resolving the ContextData's Percelable eventData.) In this case, null out the
 	 * eventData and re-send the event, which still contains strings. The client can still use the string representation
 	 * of the eventData.
-	 * 
+	 *
 	 * @param eventMap
 	 *            A Map containing DynamixSession entities and their associated SecuredEvents.
 	 */
 	protected static void notifyContextListeners(final Map<IDynamixListener, List<ContextEvent>> eventMap) {
-		if (FrameworkConstants.DEBUG)
-			Log.v(TAG, "notifyContextListeners with eventMap of size: " + eventMap.size());
+		Log.d(TAG, "notifyContextListeners with eventMap of size: " + eventMap.size());
 		/*
 		 * To ensure thread safety, we always manage our listeners using the eventHandler. Note that only one broadcast
 		 * can be active at a time, so you must be sure to always call this from the same thread (usually by scheduling
@@ -510,7 +509,7 @@ class SessionManager {
 
 	/**
 	 * Notifies the listener that context support has been added.
-	 * 
+	 *
 	 * @param app
 	 *            the application to receive the event
 	 * @param plugin
@@ -525,7 +524,7 @@ class SessionManager {
 
 	/**
 	 * Notifies the listener that context support has been removed.
-	 * 
+	 *
 	 * @param app
 	 *            The application to receive the event
 	 * @param listener
@@ -549,7 +548,7 @@ class SessionManager {
 
 	/**
 	 * Notifies the application that a context plugin is being installed
-	 * 
+	 *
 	 * @param app
 	 *            the application to receive the event
 	 * @param plugin
@@ -562,7 +561,7 @@ class SessionManager {
 
 	/**
 	 * Notifies the application that context support is being installed for a previously requested context type.
-	 * 
+	 *
 	 * @param app
 	 *            the application to receive the event
 	 * @param plugin
@@ -577,7 +576,7 @@ class SessionManager {
 
 	/**
 	 * Notifies the application that its security authorization has been granted
-	 * 
+	 *
 	 * @param app
 	 *            the application to receive the event
 	 */
@@ -594,7 +593,7 @@ class SessionManager {
 
 	/**
 	 * Notifies the application that its security authorization has been revoked
-	 * 
+	 *
 	 * @param app
 	 *            the application to receive the event
 	 */
@@ -632,7 +631,7 @@ class SessionManager {
 
 	/**
 	 * Opens the session for the specified app.
-	 * 
+	 *
 	 * @param app
 	 *            The Dynmaix app wishing to open a session
 	 * @return A active DynamixSession
@@ -666,7 +665,7 @@ class SessionManager {
 
 	/**
 	 * Closes the session for the specified app.
-	 * 
+	 *
 	 * @param app
 	 *            The Dynmaix app wishing to open a session
 	 * @param notify
@@ -694,7 +693,7 @@ class SessionManager {
 
 	/**
 	 * Closes all sessions
-	 * 
+	 *
 	 * @param notify
 	 *            True to notify sessions of close; false otherwise.
 	 */
@@ -707,7 +706,7 @@ class SessionManager {
 	/**
 	 * Removes the IDynamixListener from its associated session and the RemoteCallbackList of registered listeners.
 	 * Note: For thread safety, all interactions with the RemoteCallbackList are handled using a single Handler.
-	 * 
+	 *
 	 * @param listener
 	 *            The IDynamixListener to remove.
 	 */
@@ -736,7 +735,7 @@ class SessionManager {
 
 	/**
 	 * Removes all context support for the specified plug-in.
-	 * 
+	 *
 	 * @param plug
 	 *            The plug-in to remove context support from.
 	 * @param notify
@@ -753,7 +752,7 @@ class SessionManager {
 	/**
 	 * Removes the IDynamixListener from the specified session and the RemoteCallbackList of registered listeners. Note:
 	 * For thread safety, all interactions with the RemoteCallbackList are handled using a single Handler.
-	 * 
+	 *
 	 * @param listener
 	 *            The IDynamixListener to remove.
 	 */
@@ -858,7 +857,7 @@ class SessionManager {
 
 	/**
 	 * Handles event sending logic
-	 * 
+	 *
 	 * @param session
 	 *            The session to receive the IEventCommand
 	 * @param receivers
@@ -1047,7 +1046,7 @@ class SessionManager {
 
 	/**
 	 * Returns true if the Object implements the specified interface; false otherwise.
-	 * 
+	 *
 	 * @param object
 	 *            The Object to check.
 	 * @param interf
@@ -1059,7 +1058,7 @@ class SessionManager {
 
 	/**
 	 * Returns all the fields of the specified Class, and it's super-classes.
-	 * 
+	 *
 	 * @param type
 	 *            The class to extract fields from.
 	 */
@@ -1074,7 +1073,7 @@ class SessionManager {
 
 	/**
 	 * Utility RemoteCallbackList that removes ContextListeners using the ContextManager if onCallbackDied is called.
-	 * 
+	 *
 	 * @author Darren Carlson
 	 */
 	private static class DynamixCallbackList<E> extends RemoteCallbackList<IDynamixListener> {

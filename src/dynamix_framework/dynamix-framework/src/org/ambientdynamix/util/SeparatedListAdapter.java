@@ -192,8 +192,12 @@ public class SeparatedListAdapter extends BaseAdapter implements IObservableAdap
                 if (position > 0) {
                     View v = adapter.getView(position - 1, convertView, parent);
                     // Focusable needs to be false: http://code.google.com/p/android/issues/detail?id=3414
-                    v.setFocusable(false);
-                    return v;
+                    if (v != null) {
+                        v.setFocusable(false);
+                        return v;
+                    } else {
+                        return null;
+                    }
                 } else {
                     return null;
                 }

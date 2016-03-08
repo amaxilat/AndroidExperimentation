@@ -827,44 +827,44 @@ class ContextManager implements IPluginContextListener, IPluginFacade {
                     Log.w(TAG, "Dynamix Service could not find an DynamixSession for: " + app);
             }
         }
-		/*
-		 * Try to auto-install supporting plugins if we haven't found any and the app is allowed to install plug-ins.
-		 */
-        if (supportInfo.isEmpty()) {
-            // Check if auto-install is allowed
-            if (DynamixPreferences.autoContextPluginInstallEnabled(context)) {
-                Log.d(TAG, "addContextSupport did not find support for context type: " + contextType);
-                Log.d(TAG, "Checking for context support in available updates... ");
-                List<ContextPlugin> installPlugs = new ArrayList<>();
-                // Check through the previously discovered plug-ins that have not yet been installed
-                for (PluginDiscoveryResult discoveryResult : UpdateManager.getNewContextPlugins()) {
-                    // Check if the plug-in supports the specified context type
-                    if (discoveryResult.getDiscoveredPlugin().getContextPlugin().supportsContextType(contextType)) {
-                        Log.i(TAG, discoveryResult.getDiscoveredPlugin().getContextPlugin()
-                                + " supports context type: " + contextType);
-                        // Set PENDING_INSTALL so that add context support calls work properly
-                        discoveryResult.getDiscoveredPlugin().getContextPlugin()
-                                .setInstallStatus(PluginInstallStatus.PENDING_INSTALL);
-                        // Add the plug-in to the install list
-                        installPlugs.add(discoveryResult.getDiscoveredPlugin().getContextPlugin());
-                        // Also, create a ContextSupport
-                        ContextSupport sub = new ContextSupport(session, listener, discoveryResult
-                                .getDiscoveredPlugin().getContextPlugin(), contextType);
-                        // Add the support to the session
-                        if (session.addContextSupport(listener, sub)) {
-                            // Add the support to the list returned to the caller
-                            supportInfo.add(sub);
-                        }
-                    }
-                }
-				/*
-				 * Install the discovered plug-ins.
-				 */
-                DynamixService.installPlugins(installPlugs, null);
-            } else {
-                //Log.w(TAG, "Not installing context support because auto context plug-in install is disabled");
-            }
-        }
+//		/*
+//		 * Try to auto-install supporting plugins if we haven't found any and the app is allowed to install plug-ins.
+//		 */
+//        if (supportInfo.isEmpty()) {
+//            // Check if auto-install is allowed
+////            if (DynamixPreferences.autoContextPluginInstallEnabled(context)) {
+////                Log.d(TAG, "addContextSupport did not find support for context type: " + contextType);
+////                Log.d(TAG, "Checking for context support in available updates... ");
+////                List<ContextPlugin> installPlugs = new ArrayList<>();
+////                // Check through the previously discovered plug-ins that have not yet been installed
+////                for (PluginDiscoveryResult discoveryResult : UpdateManager.getNewContextPlugins()) {
+////                    // Check if the plug-in supports the specified context type
+////                    if (discoveryResult.getDiscoveredPlugin().getContextPlugin().supportsContextType(contextType)) {
+////                        Log.i(TAG, discoveryResult.getDiscoveredPlugin().getContextPlugin()
+////                                + " supports context type: " + contextType);
+////                        // Set PENDING_INSTALL so that add context support calls work properly
+////                        discoveryResult.getDiscoveredPlugin().getContextPlugin()
+////                                .setInstallStatus(PluginInstallStatus.PENDING_INSTALL);
+////                        // Add the plug-in to the install list
+////                        installPlugs.add(discoveryResult.getDiscoveredPlugin().getContextPlugin());
+////                        // Also, create a ContextSupport
+////                        ContextSupport sub = new ContextSupport(session, listener, discoveryResult
+////                                .getDiscoveredPlugin().getContextPlugin(), contextType);
+////                        // Add the support to the session
+////                        if (session.addContextSupport(listener, sub)) {
+////                            // Add the support to the list returned to the caller
+////                            supportInfo.add(sub);
+////                        }
+////                    }
+////                }
+////				/*
+////				 * Install the discovered plug-ins.
+////				 */
+////                DynamixService.installPlugins(installPlugs, null);
+////            } else {
+////                //Log.w(TAG, "Not installing context support because auto context plug-in install is disabled");
+////            }
+//        }
         return supportInfo;
     }
 

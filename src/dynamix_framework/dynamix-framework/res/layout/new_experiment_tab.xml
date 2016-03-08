@@ -5,16 +5,45 @@
     android:orientation="vertical">
 
     <ListView
-        android:id="@+id/experiments_list"
+        android:id="@android:id/list"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
+        android:layout_weight="1"
         android:fontFamily="sans-serif-light" />
 
-
-    <Button
-        android:id="@+id/btn_update_experiments"
-        android:layout_width="match_parent"
-        android:layout_height="60dp"
+    <TextView
+        android:id="@android:id/empty"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="top"
+        android:layout_weight="1"
         android:fontFamily="sans-serif-light"
-        android:text="@string/find_experiments" />
+        android:text="No experiment running."
+
+        />
+
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_horizontal|bottom">
+
+        <Button
+            android:id="@+id/btn_update_experiments"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:fontFamily="sans-serif-light"
+            android:text="@string/btn_find_experiments" />
+
+
+        <Button
+            android:id="@+id/btn_install_experiments"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:fontFamily="sans-serif-light"
+            android:text="@string/btn_install_experiments" />
+    </LinearLayout>
+
+
 </LinearLayout>
