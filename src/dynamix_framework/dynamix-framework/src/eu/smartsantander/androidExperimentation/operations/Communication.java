@@ -17,21 +17,13 @@ import org.springframework.web.util.UriComponentsBuilder;
 import java.io.IOException;
 import java.net.URI;
 import java.util.ArrayList;
-import java.util.Comparator;
 import java.util.List;
-import java.util.Map;
-import java.util.SortedMap;
-import java.util.TreeMap;
 
 import eu.smartsantander.androidExperimentation.jsonEntities.Experiment;
 import eu.smartsantander.androidExperimentation.util.Constants;
 import gr.cti.android.experimentation.model.Plugin;
-import gr.cti.android.experimentation.model.RankingEntry;
 import gr.cti.android.experimentation.model.Smartphone;
 import gr.cti.android.experimentation.model.SmartphoneStatistics;
-
-//import com.google.common.cache.Cache;
-//import com.google.common.cache.CacheBuilder;
 
 public class Communication extends Thread implements Runnable {
     //private Handler handler;
@@ -82,73 +74,6 @@ public class Communication extends Thread implements Runnable {
         return serverPhoneId;
     }
 
-    /**
-     * Retrieve the latest statistics of the user's phone.
-     *
-     * @param phoneId the phoneId that queries for statistics.
-     * @return measurement counts for the last week.
-     * @throws Exception
-     */
-    public SortedMap<Integer, Double> getLastStatistics(final int phoneId) {
-
-        try {
-            final String stats = get("/statistics/" + phoneId);
-            final Map values = (new Gson()).fromJson(stats, Map.class);
-            final SortedMap<Integer, Double> sortedMap = new TreeMap<>(new Comparator<Integer>() {
-                @Override
-                public int compare(Integer lhs, Integer rhs) {
-                    return rhs - lhs;
-                }
-            });
-            for (final Object key : values.keySet()) {
-                sortedMap.put(Integer.valueOf(((String) key)), (Double) values.get(key));
-            }
-            return sortedMap;
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-
-        return null;
-    }
-
-
-    public List<RankingEntry> getRankings() {
-        try {
-            final String stats = get("/ranking");
-            Log.i(TAG, stats);
-            List<RankingEntry> myObjects = new ObjectMapper().readValue(stats, new TypeReference<List<RankingEntry>>() {
-            });
-            return myObjects;
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        return null;
-    }
-
-    public List<RankingEntry> getRankingsByExperiment(final int experimentId) {
-        try {
-            final String stats = get("/ranking?experimentId" + experimentId);
-            Log.i(TAG, stats);
-            List<RankingEntry> myObjects = new ObjectMapper().readValue(stats, new TypeReference<List<RankingEntry>>() {
-            });
-            return myObjects;
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        return null;
-    }
-
-    public Map getStatistics(Integer id) {
-        try {
-            final String stats = get("/statistics?deviceId=" + id);
-            final Map values = (new Gson()).fromJson(stats, Map.class);
-            return values;
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-
-        return null;
-    }
 
     public SmartphoneStatistics getSmartphoneStatistics(Integer id) {
         try {
@@ -248,18 +173,6 @@ public class Communication extends Thread implements Runnable {
             return 0;
 
         }
-    }
-
-    /**
-     * Retrieve a list of all the available plugins.
-     *
-     * @return a list of plugins the user can install on his smartphone.
-     * @throws Exception
-     */
-    public List<Plugin> sendGetPluginList() throws Exception {
-        final String pluginListStr = get("/plugin");
-        return new ObjectMapper().readValue(pluginListStr, new TypeReference<List<Plugin>>() {
-        });
     }
 
     /**
