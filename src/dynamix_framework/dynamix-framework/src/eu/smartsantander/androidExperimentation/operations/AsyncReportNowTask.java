@@ -15,8 +15,8 @@ public class AsyncReportNowTask extends AsyncTask<String, Void, String> {
         try { //try to send to server, on fail save it in SQLite
             Log.i(TAG, "Offloading results...");
             Log.d(TAG, message);
-            DynamixService.getCommunication().sendReportResults(message);//
             DynamixService.getCommunication().setLastMessage(message);
+            DynamixService.getCommunication().sendReportResults(message);//
         } catch (HttpClientErrorException e) {
             //ignore
         } catch (Exception e) {

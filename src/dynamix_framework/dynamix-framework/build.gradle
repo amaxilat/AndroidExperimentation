@@ -34,6 +34,7 @@ dependencies {
     compile "com.splunk.mint:mint:4.4.0"
     compile 'com.mcxiaoke.volley:library:1.0.19'
     compile "com.mixpanel.android:mixpanel-android:4.8.0"
+    compile 'com.google.android.gms:play-services-appindexing:8.1.0'
 }
 
 android {

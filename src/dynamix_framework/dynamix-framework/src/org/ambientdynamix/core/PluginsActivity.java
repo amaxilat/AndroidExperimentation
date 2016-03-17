@@ -87,7 +87,7 @@ import eu.smartsantander.androidExperimentation.util.Constants;
 public class PluginsActivity extends ListActivity implements
         IContextPluginInstallListener, IContextPluginUpdateListener {
     // Private data
-    private final String TAG = this.getClass().getSimpleName();
+    private final String TAG = "PluginsActivity";
     private static final int ACTIVITY_EDIT = 1;
     private SeparatedListAdapter adapter;
     private ListView plugList = null;
@@ -103,6 +103,7 @@ public class PluginsActivity extends ListActivity implements
     private InstalledContextPluginAdapter installedAdapter;
     private ContextPluginAdapter newPlugsAdapter;
     private MixpanelAPI mMixpanel;
+    private ImageLoader imageLoader;
 
     public static PluginsActivity getInstance() {
         return activity;
@@ -131,7 +132,7 @@ public class PluginsActivity extends ListActivity implements
         PluginDiscoveryResult r = findUpdate(plug);
         installables.remove(r);
         removeUpdate(r);
-        refreshList();
+        installedAdapter.notifyDataSetChanged();
 
         new Thread(new Runnable() {
             @Override
@@ -180,8 +181,9 @@ public class PluginsActivity extends ListActivity implements
         if (r != null)
             installables.remove(r);
         BaseActivity.toast(message, Toast.LENGTH_LONG);
-        if (newPlugsAdapter.getInstallableCount() == 0)
-            refreshList();
+        if (newPlugsAdapter.getInstallableCount() == 0) {
+//            newPlugsAdapter.notifyDataSetChanged();
+        }
     }
 
     @Override
@@ -192,7 +194,7 @@ public class PluginsActivity extends ListActivity implements
         final PluginDiscoveryResult up = findUpdate(plug);
         if (up != null) {
             installables.put(up, percentComplete);
-            refreshList();
+            newPlugsAdapter.notifyDataSetChanged();
         }
     }
 
@@ -248,7 +250,7 @@ public class PluginsActivity extends ListActivity implements
                                                 DynamixService
                                                         .updateContextPluginValues(
                                                                 plug, true);
-                                            adapter.notifyDataSetChanged();
+//                                            newPlugsAdapter.notifyDataSetChanged();
                                         }
                                     })
                             .setNegativeButton("No",
@@ -306,11 +308,12 @@ public class PluginsActivity extends ListActivity implements
         super.onCreate(savedInstanceState);
         setContentView(R.layout.plugin_tab);
         activity = this;
-        createElements();
 
+        imageLoader = App.getInstance().getImageLoader();
+
+        createElements();
         mMixpanel = MixpanelAPI.getInstance(this, Constants.MIXPANEL_TOKEN);
         mMixpanel.identify(String.valueOf(DynamixService.getPhoneProfiler().getPhoneId()));
-
     }
 
     private void createElements() {
@@ -334,7 +337,7 @@ public class PluginsActivity extends ListActivity implements
         newPlugsAdapter.setNotifyOnChange(true);
         adapter.addSection(getString(R.string.available_context_plugins),
                 newPlugsAdapter);
-        plugList.setAdapter(this.adapter);
+        plugList.setAdapter(adapter);
         /*
          * Setup the OnItemClickListener for the plugList ListView. When
 		 * clicked, edit the plugin using the PluginDetailsActivity.
@@ -343,22 +346,22 @@ public class PluginsActivity extends ListActivity implements
             public void onItemClick(AdapterView<?> arg0, View arg1,
                                     int position, long arg3) {
                 ContextPlugin plug = null;
-                Object item = plugList.getItemAtPosition(position);
-                if (item instanceof ContextPlugin)
+                final Object item = plugList.getItemAtPosition(position);
+                if (item instanceof ContextPlugin) {
                     plug = (ContextPlugin) item;
-                if (item instanceof PluginDiscoveryResult)
-                    plug = ((PluginDiscoveryResult) item).getDiscoveredPlugin()
-                            .getContextPlugin();
-                // Log.i(TAG, "onItemClick: " + item + " at position: " +
-                // installedAdapter.getPosition(item));
-                if (plug != null)
+                }
+                if (item instanceof PluginDiscoveryResult) {
+                    plug = ((PluginDiscoveryResult) item).getDiscoveredPlugin().getContextPlugin();
+                }
+                if (plug != null) {
                     editPlugin(plug);
+                }
             }
         });
         /*
          * Setup the update plugins button.
 		 */
-        Button btnFindPlugs = (Button) findViewById(R.id.btn_find_plugs);
+        final Button btnFindPlugs = (Button) findViewById(R.id.btn_find_plugs);
         btnFindPlugs.setOnClickListener(new View.OnClickListener() {
             public void onClick(View view) {
                 DynamixService.checkForNewContextPlugins(activity);
@@ -369,15 +372,14 @@ public class PluginsActivity extends ListActivity implements
         /*
          * Setup the update plugins button.
 		 */
-        Button btnInstallPlugs = (Button) findViewById(R.id.btn_install_plugs);
+        final Button btnInstallPlugs = (Button) findViewById(R.id.btn_install_plugs);
         btnInstallPlugs.setOnClickListener(new View.OnClickListener() {
             public void onClick(View view) {
 
-
                 // Send the selected updates to Dynamix for installation
-                List<String> pluginIds = new ArrayList<>();
-                List<ContextPlugin> plugs = new Vector<>();
-                for (PluginDiscoveryResult ur : installables.keySet()) {
+                final List<String> pluginIds = new ArrayList<>();
+                final List<ContextPlugin> plugs = new Vector<>();
+                for (final PluginDiscoveryResult ur : installables.keySet()) {
                     plugs.add(ur.getDiscoveredPlugin().getContextPlugin());
                     pluginIds.add(ur.getDiscoveredPlugin().getContextPlugin().getId());
                 }
@@ -389,8 +391,7 @@ public class PluginsActivity extends ListActivity implements
                 } catch (JSONException ignore) {
                 }
 
-                DynamixService.installPlugins(
-                        Utils.getSortedContextPluginList(plugs),
+                DynamixService.installPlugins(Utils.getSortedContextPluginList(plugs),
                         PluginsActivity.this);
                 // SmartSantander
                 updateSensorPermissionInfo();
@@ -403,11 +404,10 @@ public class PluginsActivity extends ListActivity implements
 
     // SmartSantander
     private void updateSensorPermissionInfo() {
-        final SharedPreferences pref = getApplicationContext().getSharedPreferences(
-                "sensors", 0); // 0 - for private mode
+        // 0 - for private mode
+        final SharedPreferences pref = getApplicationContext().getSharedPreferences("sensors", 0);
         final Editor editor = pref.edit();
-        for (ContextPluginInformation pl : DynamixService
-                .getAllContextPluginInfo()) {
+        for (final ContextPluginInformation pl : DynamixService.getAllContextPluginInfo()) {
             if (pl.isEnabled()) {
                 editor.putBoolean(pl.getPluginName(), true);
             } else {
@@ -418,16 +418,14 @@ public class PluginsActivity extends ListActivity implements
     }
 
     @Override
-    public void onCreateContextMenu(ContextMenu menu, View v,
-                                    ContextMenuInfo menuInfo) {
+    public void onCreateContextMenu(ContextMenu menu, View v, ContextMenuInfo menuInfo) {
         super.onCreateContextMenu(menu, v, menuInfo);
         /*
          * Make sure that we only show the context menu for installed context
 		 * plug-ins.
 		 */
         AdapterView.AdapterContextMenuInfo info = (AdapterView.AdapterContextMenuInfo) menuInfo;
-        int newPlugStart = adapter
-                .getPositionForSection(getString(R.string.available_context_plugins));
+        int newPlugStart = adapter.getPositionForSection(getString(R.string.available_context_plugins));
         if (info.position < newPlugStart) {
             menu.setHeaderTitle(R.string.plug_list_context_menu_title);
             menu.add(0, ENABLE_ID, 0, R.string.enable_disable_label);
@@ -452,10 +450,10 @@ public class PluginsActivity extends ListActivity implements
             updateProgress.dismiss();
         }
 
-        if (incomingUpdates.size() == 0) {
-            DynamixService.checkForNewContextPlugins(activity);
-            return;
-        }
+//        if (incomingUpdates.size() == 0) {
+//            DynamixService.checkForNewContextPlugins(activity);
+//            return;
+//        }
 
         if (errors != null && errors.size() > 0) {
             String messageBuilder = "";
@@ -476,13 +474,10 @@ public class PluginsActivity extends ListActivity implements
                     builder.create().show();
                 }
             });
-
-
         }
         refresh();
         if (!newPlugsAdapter.isEmpty()) {
-            scrollTo(PluginsActivity.this.adapter
-                    .getPositionForSection(getString(R.string.available_context_plugins)));
+            scrollTo(adapter.getPositionForSection(getString(R.string.available_context_plugins)));
         }
 
     }
@@ -592,34 +587,25 @@ public class PluginsActivity extends ListActivity implements
     private void refresh() {
         if (newPlugsAdapter != null) {
             newPlugsAdapter.clear();
-            for (PluginDiscoveryResult update : UpdateManager
-                    .getNewContextPlugins())
+            for (final PluginDiscoveryResult update : UpdateManager.getNewContextPlugins()) {
                 newPlugsAdapter.add(update);
+            }
         }
         if (installedAdapter != null) {
             installedAdapter.clear();
-            for (ContextPlugin plug : DynamixService.SettingsManager
-                    .getInstalledContextPlugins()) {
+            for (final ContextPlugin plug : DynamixService.SettingsManager.getInstalledContextPlugins()) {
                 if (plug.isInstalled()) {
-                    if (plug.getContextPluginInformation().getPluginId().contains("Experiment") == false)
+                    if (!plug.getContextPluginInformation().getPluginId().contains("Experiment")) {
                         installedAdapter.add(plug);
+                    }
                 } else {
                     // Plug-in is registered in the settings, but not installed
                     installedAdapter.add(plug);
                 }
             }
         }
-        refreshList();
     }
 
-    private void refreshList() {
-        uiHandler.post(new Runnable() {
-            @Override
-            public void run() {
-                adapter.notifyDataSetChanged();
-            }
-        });
-    }
 
     private void removeAllPlugs() {
         List<ContextPlugin> plugs = DynamixService.getInstalledContextPlugins();
@@ -634,11 +620,7 @@ public class PluginsActivity extends ListActivity implements
         uiHandler.post(new Runnable() {
             @Override
             public void run() {
-                int position = newPlugsAdapter.getPosition(update);
-                // Log.i(TAG, "Removing UpdateResult: " + update +
-                // " at position: " + position);
                 newPlugsAdapter.remove(update);
-                adapter.notifyDataSetChanged();
             }
         });
     }
@@ -664,7 +646,7 @@ public class PluginsActivity extends ListActivity implements
      */
     private class InstalledContextPluginAdapter extends
             EmptyListSupportAdapter<ContextPlugin> {
-        ImageLoader imageLoader = App.getInstance().getImageLoader();
+
 
         public InstalledContextPluginAdapter(Context context,
                                              int textViewResourceId, List<ContextPlugin> plugs,
@@ -675,19 +657,17 @@ public class PluginsActivity extends ListActivity implements
         @Override
         public View getView(int position, View convertView, ViewGroup parent) {
             if (super.isListEmpty()) {
-                View v = convertView;
-                LayoutInflater vi = (LayoutInflater) getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-                v = vi.inflate(R.layout.iconless_row, null);
-                TextView tt = (TextView) v.findViewById(R.id.toptext);
-                TextView bt = (TextView) v.findViewById(R.id.bottomtext);
+                final LayoutInflater vi = (LayoutInflater) getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+                final View v = vi.inflate(R.layout.iconless_row, null);
+                final TextView tt = (TextView) v.findViewById(R.id.toptext);
+                final TextView bt = (TextView) v.findViewById(R.id.bottomtext);
                 tt.setText(getEmptyTitle());
                 bt.setText(getEmptyMessage());
                 return v;
             } else {
-                View v = convertView;
                 final LayoutInflater vi = (LayoutInflater) getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-                v = vi.inflate(R.layout.icon_row, null);
-                final ContextPlugin plug = this.getItem(position);// tODO:ArrayIndexOutOfBoundsException
+                final View v = vi.inflate(R.layout.icon_row, null);
+                final ContextPlugin plug = getItem(position);// tODO:ArrayIndexOutOfBoundsException
                 if (plug != null) {
                     final TextView tt = (TextView) v.findViewById(R.id.toptext);
                     if (tt != null) {

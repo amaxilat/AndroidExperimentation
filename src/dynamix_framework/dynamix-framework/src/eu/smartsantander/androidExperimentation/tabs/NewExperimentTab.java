@@ -1,6 +1,5 @@
 package eu.smartsantander.androidExperimentation.tabs;
 
-import android.app.Activity;
 import android.app.ListActivity;
 import android.content.Context;
 import android.os.AsyncTask;
@@ -10,7 +9,6 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.BaseAdapter;
 import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -20,16 +18,11 @@ import com.android.volley.toolbox.ImageLoader;
 import com.android.volley.toolbox.NetworkImageView;
 import com.mixpanel.android.mpmetrics.MixpanelAPI;
 
-import org.ambientdynamix.api.contextplugin.ContextPlugin;
 import org.ambientdynamix.core.DynamixService;
 import org.ambientdynamix.core.R;
-import org.ambientdynamix.data.ContextPluginAdapter;
 import org.ambientdynamix.data.ExperimentAdapter;
-import org.ambientdynamix.event.PluginDiscoveryResult;
-import org.ambientdynamix.util.DescriptiveIcon;
 import org.ambientdynamix.util.EmptyListSupportAdapter;
 import org.ambientdynamix.util.SeparatedListAdapter;
-import org.ambientdynamix.util.Utils;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -60,7 +53,6 @@ public class NewExperimentTab extends ListActivity {
     private AsyncTask<Void, String, List<Experiment>> runnableUpdate;
     private SeparatedListAdapter adapter;
     private List<Experiment> experiments;
-    private Integer installingNow;
     private SimpleDateFormat sdf;
     private MixpanelAPI mMixpanel;
     private InstalledExperimentAdapter installedAdapter;
@@ -180,7 +172,6 @@ public class NewExperimentTab extends ListActivity {
 
 
                                             Log.i(TAG, "Starting Experiment " + experiment.getId());
-                                            installingNow = experiment.getId();
                                             installables.put(experiment, 1);
                                             newExperimentsAdapter.notifyDataSetChanged();
 
@@ -221,7 +212,6 @@ public class NewExperimentTab extends ListActivity {
                                                 DynamixServiceListenerUtility.start();
                                                 DynamixService.setRestarting(false);
                                                 DynamixService.setTitleBarRestarting(false);
-                                                installingNow = null;
                                                 incStatus(experiment, 0, 10);
                                                 newExperimentsAdapter.notifyDataSetChanged();
                                                 try {

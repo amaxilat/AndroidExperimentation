@@ -44,13 +44,15 @@ import com.google.android.gms.location.LocationServices;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.MapFragment;
 import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.Marker;
+import com.google.android.gms.maps.model.MarkerOptions;
+import com.google.android.gms.maps.model.PolylineOptions;
 import com.mixpanel.android.mpmetrics.MixpanelAPI;
 
 import org.ambientdynamix.data.DynamixPreferences;
 import org.apache.http.HttpResponse;
 import org.apache.http.client.methods.HttpGet;
 import org.apache.http.impl.client.DefaultHttpClient;
-import org.apache.http.util.ExceptionUtils;
 import org.json.JSONException;
 import org.json.JSONObject;
 import org.lucasr.twowayview.TwoWayView;
@@ -59,6 +61,8 @@ import java.io.BufferedReader;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.Set;
 import java.util.Timer;
 import java.util.TimerTask;
 
@@ -101,11 +105,13 @@ public class HomeActivity extends Activity implements GoogleApiClient.Connection
 
     public ArrayList<SensorMeasurement> sensorMeasurements;
     public SensorMeasurementAdapter sensorMeasurementAdapter;
+    Set<LatLng> points;
 
     final LocationRequest mLocationRequest = LocationRequest.create()
             .setPriority(LocationRequest.PRIORITY_HIGH_ACCURACY)
             .setInterval(30 * 1000)        // 30 seconds, in milliseconds
             .setFastestInterval(10 * 1000); // 10 seconds, in milliseconds
+    private PolylineOptions line = null;
 
 
     // Refreshes the UI
@@ -144,6 +150,7 @@ public class HomeActivity extends Activity implements GoogleApiClient.Connection
 
         updateCheck();
 
+        points = new HashSet<>();
         mMixpanel = MixpanelAPI.getInstance(this, Constants.MIXPANEL_TOKEN);
 
         mMap = ((MapFragment) getFragmentManager().findFragmentById(R.id.map_main));
@@ -422,10 +429,17 @@ public class HomeActivity extends Activity implements GoogleApiClient.Connection
         Log.i(TAG, "updateMapLocation:" + longitude + "/" + latitude);
         // Creating a LatLng object for the current location
         final LatLng latLng = new LatLng(latitude, longitude);
-
         try {
             // Showing the current location in Google Map
             mMap.getMap().moveCamera(CameraUpdateFactory.newLatLngZoom(latLng, 14));
+            if (points.size() > 30) {
+                points.clear();
+                mMap.getMap().clear();
+            }
+            if (!points.contains(latLng)) {
+                points.add(latLng);
+                mMap.getMap().addMarker(new MarkerOptions().position(latLng));
+            }
         } catch (NullPointerException ignore) {
         }
     }

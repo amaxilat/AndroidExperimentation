@@ -60,7 +60,7 @@ public class AsyncStatusRefreshTask extends AsyncTask<Void, String, Integer> {
 
     private void parseExperimentMessage(final String message) {
         if (message != null && !message.equals(lastMessage)) {
-            activity.logEvent("new-reading");
+            //activity.logEvent("new-reading");
             Log.d(TAG, message);
             // Add the fragment to the 'fragment_container' FrameLayout
             try {

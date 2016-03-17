@@ -2,6 +2,8 @@ package eu.smartsantander.androidExperimentation.operations;
 
 import android.util.Log;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.google.gson.Gson;
@@ -17,6 +19,7 @@ import org.springframework.web.util.UriComponentsBuilder;
 import java.io.IOException;
 import java.net.URI;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.Comparator;
 import java.util.List;
 import java.util.Map;
@@ -25,7 +28,9 @@ import java.util.TreeMap;
 
 import eu.smartsantander.androidExperimentation.jsonEntities.Experiment;
 import eu.smartsantander.androidExperimentation.jsonEntities.Plugin;
+import eu.smartsantander.androidExperimentation.jsonEntities.RankingEntry;
 import eu.smartsantander.androidExperimentation.jsonEntities.Smartphone;
+import eu.smartsantander.androidExperimentation.jsonEntities.SmartphoneStatistics;
 import eu.smartsantander.androidExperimentation.util.Constants;
 
 //import com.google.common.cache.Cache;
@@ -106,6 +111,65 @@ public class Communication extends Thread implements Runnable {
             e.printStackTrace();
         }
 
+        return null;
+    }
+
+
+    public List<RankingEntry> getRankings() {
+        try {
+            final String stats = get("/ranking");
+            Log.i(TAG, stats);
+            List<RankingEntry> myObjects = new ObjectMapper().readValue(stats, new TypeReference<List<RankingEntry>>() {
+            });
+            return myObjects;
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
+    public List<RankingEntry> getRankingsByExperiment(final int experimentId) {
+        try {
+            final String stats = get("/ranking?experimentId" + experimentId);
+            Log.i(TAG, stats);
+            List<RankingEntry> myObjects = new ObjectMapper().readValue(stats, new TypeReference<List<RankingEntry>>() {
+            });
+            return myObjects;
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
+    public Map getStatistics(Integer id) {
+        try {
+            final String stats = get("/statistics?deviceId=" + id);
+            final Map values = (new Gson()).fromJson(stats, Map.class);
+            return values;
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        return null;
+    }
+
+    public SmartphoneStatistics getSmartphoneStatistics(Integer id) {
+        try {
+            final String stats = get("/smartphone/" + id + "/statistics");
+            return new ObjectMapper().readValue(stats, SmartphoneStatistics.class);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
+    public SmartphoneStatistics getSmartphoneStatistics(int id, int experimentId) {
+        try {
+            final String stats = get("/smartphone/" + id + "/statistics/" + experimentId);
+            return new ObjectMapper().readValue(stats, SmartphoneStatistics.class);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
         return null;
     }
 
@@ -255,4 +319,5 @@ public class Communication extends Thread implements Runnable {
     public String getLastMessage() {
         return this.message;
     }
+
 }

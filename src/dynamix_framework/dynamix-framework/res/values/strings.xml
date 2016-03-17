@@ -120,9 +120,9 @@
     <string name="conWith">Connected with Organicity Server</string>
     <string name="disConWith">Disconnected from Organicity Server</string>
     <string name="statsTotalTime">Total time online (Hours)</string>
-    <string name="statsNumOfExp">Number of experiments run</string>
-    <string name="statsNumOfReadings">Number of readings produced</string>
-    <string name="stats7Days">Statistics for previous 7 days</string>
+    <string name="statsNumOfExp">Experiments Run</string>
+    <string name="statsNumOfReadings">Measurements Gathered</string>
+    <string name="stats7Days">Histogram of data collected last week</string>
     <string name="pending_messages_template">Send %d pending measurements...</string>
     <string name="send_data_now">Send Pending measurements</string>
     <string name="gcm_defaultSenderId">770161861153</string>
@@ -141,4 +141,7 @@
     <string name="sensor_relative_humidity">Relative Humidity</string>
     <string name="sensor_pressure">Atmospheric Pressure</string>
     <string name="sensor_noise">Ambient Noise</string>
+    <string name="today">Today</string>
+    <string name="all_time">All time</string>
+    <string name="dataToday">Heatmap of data collected today</string>
 </resources>

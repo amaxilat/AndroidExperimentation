@@ -2183,7 +2183,7 @@ public final class DynamixService extends IntentService {
                 }
                 onDynamixStarting();
                 // Update UI
-                launchProgressDialog("Enabling Experimentation", "Starting Sensors. Please wait...");
+                //launchProgressDialog("Enabling Experimentation", "Starting Sensors. Please wait...");
                 // Set a BroadcastReceiver to startContextDetection on ACTION_SCREEN_ON events
                 wakeReceiver = new BroadcastReceiver() {
                     @Override
