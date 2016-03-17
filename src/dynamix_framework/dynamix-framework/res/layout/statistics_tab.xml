@@ -11,24 +11,25 @@
         <ImageView
             android:layout_width="match_parent"
             android:layout_height="40dip"
-            android:layout_weight="2"
+            android:layout_marginBottom="20dip"
             android:src="@drawable/profile_unselected" />
 
+        <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+            xmlns:tools="http://schemas.android.com/tools"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            tools:context=".MainActivity">
 
-        <TableLayout
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:fontFamily="sans-serif-light"
-            android:orientation="vertical">
-
-            <TableRow
-                android:layout_width="fill_parent"
-                android:layout_height="wrap_content">
+            <LinearLayout
+                android:id="@+id/allTimeLayout"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_toLeftOf="@+id/secondView"
+                android:orientation="vertical">
 
                 <TextView
                     android:layout_width="fill_parent"
                     android:layout_height="20dip"
-                    android:fontFamily="sans-serif-light"
                     android:text="@string/all_time"
                     android:textAlignment="center"
                     android:textAllCaps="true" />
@@ -37,32 +38,7 @@
                     android:layout_width="fill_parent"
                     android:layout_height="20dip"
                     android:fontFamily="sans-serif-light"
-                    android:text="Current Experiment"
-                    android:textAlignment="center"
-                    android:textAllCaps="true" />
-            </TableRow>
-
-            <TableRow
-                android:layout_width="fill_parent"
-                android:layout_height="wrap_content">
-
-                <TextView
-                    android:layout_width="fill_parent"
-                    android:layout_height="20dip"
-                    android:fontFamily="sans-serif-light"
                     android:text="@string/statsNumOfExp" />
-
-                <TextView
-                    android:layout_width="fill_parent"
-                    android:layout_height="20dip"
-                    android:fontFamily="sans-serif-light"
-                    android:text="" />
-
-            </TableRow>
-
-            <TableRow
-                android:layout_width="fill_parent"
-                android:layout_height="wrap_content">
 
                 <TextView
                     android:id="@+id/stats_number_exp_value_a"
@@ -71,32 +47,10 @@
                     android:fontFamily="sans-serif-light" />
 
                 <TextView
-                    android:id="@+id/stats_number_exp_value"
-                    android:layout_width="fill_parent"
-                    android:layout_height="wrap_content"
-                    android:fontFamily="sans-serif-light" />
-            </TableRow>
-
-            <TableRow
-                android:layout_width="fill_parent"
-                android:layout_height="wrap_content">
-
-                <TextView
                     android:layout_width="fill_parent"
                     android:layout_height="20dip"
                     android:fontFamily="sans-serif-light"
                     android:text="@string/statsTotalTime" />
-
-                <TextView
-                    android:layout_width="fill_parent"
-                    android:layout_height="20dip"
-                    android:fontFamily="sans-serif-light"
-                    android:text="@string/statsTotalTime" />
-            </TableRow>
-
-            <TableRow
-                android:layout_width="fill_parent"
-                android:layout_height="wrap_content">
 
                 <TextView
                     android:id="@+id/stats_time_value_a"
@@ -105,36 +59,11 @@
                     android:fontFamily="sans-serif-light" />
 
                 <TextView
-                    android:id="@+id/stats_time_value"
-                    android:layout_width="fill_parent"
-                    android:layout_height="wrap_content"
-                    android:fontFamily="sans-serif-light" />
-
-            </TableRow>
-
-            <TableRow
-                android:layout_width="fill_parent"
-                android:layout_height="wrap_content">
-
-                <TextView
                     android:layout_width="fill_parent"
                     android:layout_height="20dip"
                     android:fontFamily="sans-serif-light"
                     android:text="@string/statsNumOfReadings"
                     android:textAppearance="?android:attr/textAppearanceSmall" />
-
-                <TextView
-                    android:layout_width="fill_parent"
-                    android:layout_height="20dip"
-                    android:fontFamily="sans-serif-light"
-                    android:text="@string/statsNumOfReadings"
-                    android:textAppearance="?android:attr/textAppearanceSmall" />
-
-            </TableRow>
-
-            <TableRow
-                android:layout_width="fill_parent"
-                android:layout_height="wrap_content">
 
                 <TextView
                     android:id="@+id/stats_number_readings_value_a"
@@ -144,32 +73,11 @@
                     android:textAppearance="?android:attr/textAppearanceSmall" />
 
                 <TextView
-                    android:id="@+id/stats_number_readings_value"
-                    android:layout_width="fill_parent"
-                    android:layout_height="wrap_content"
-                    android:fontFamily="sans-serif-light"
-                    android:textAppearance="?android:attr/textAppearanceSmall" />
-
-            </TableRow>
-
-            <TableRow>
-
-                <TextView
                     android:layout_width="fill_parent"
                     android:layout_height="wrap_content"
                     android:fontFamily="sans-serif-light"
                     android:text="Ranking"
                     android:textAppearance="?android:attr/textAppearanceSmall" />
-
-                <TextView
-                    android:layout_width="fill_parent"
-                    android:layout_height="wrap_content"
-                    android:fontFamily="sans-serif-light"
-                    android:text="Ranking"
-                    android:textAppearance="?android:attr/textAppearanceSmall" />
-            </TableRow>
-
-            <TableRow>
 
                 <TextView
                     android:id="@+id/rankingMessage"
@@ -179,31 +87,11 @@
                     android:textAppearance="?android:attr/textAppearanceSmall" />
 
                 <TextView
-                    android:id="@+id/rankingExperimentMessage"
-                    android:layout_width="fill_parent"
-                    android:layout_height="wrap_content"
-                    android:fontFamily="sans-serif-light"
-                    android:textAppearance="?android:attr/textAppearanceSmall" />
-            </TableRow>
-
-            <TableRow>
-
-                <TextView
                     android:layout_width="fill_parent"
                     android:layout_height="wrap_content"
                     android:fontFamily="sans-serif-light"
                     android:text="Badges"
                     android:textAppearance="?android:attr/textAppearanceSmall" />
-
-                <TextView
-                    android:layout_width="fill_parent"
-                    android:layout_height="wrap_content"
-                    android:fontFamily="sans-serif-light"
-                    android:text="Badges"
-                    android:textAppearance="?android:attr/textAppearanceSmall" />
-            </TableRow>
-
-            <TableRow>
 
                 <TextView
                     android:id="@+id/badgesMessage"
@@ -212,19 +100,101 @@
                     android:fontFamily="sans-serif-light"
                     android:textAppearance="?android:attr/textAppearanceSmall" />
 
+            </LinearLayout>
+
+            <View
+                android:id="@+id/secondView"
+                android:layout_width="0dip"
+                android:layout_height="match_parent"
+                android:layout_centerHorizontal="true" />
+
+            <LinearLayout
+                android:id="@+id/currentExperimentLayout"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_toRightOf="@+id/secondView"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="fill_parent"
+                    android:layout_height="20dip"
+                    android:text="Current Experiment"
+                    android:textAlignment="center"
+                    android:textAllCaps="true" />
+
+                <TextView
+                    android:layout_width="fill_parent"
+                    android:layout_height="20dip"
+                    android:fontFamily="sans-serif-light"
+                    android:text="" />
+
+                <TextView
+                    android:id="@+id/stats_number_exp_value"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="sans-serif-light" />
+
+                <TextView
+                    android:layout_width="fill_parent"
+                    android:layout_height="20dip"
+                    android:fontFamily="sans-serif-light"
+                    android:text="@string/statsTotalTime" />
+
+                <TextView
+                    android:id="@+id/stats_time_value"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="sans-serif-light" />
+
+                <TextView
+                    android:layout_width="fill_parent"
+                    android:layout_height="20dip"
+                    android:fontFamily="sans-serif-light"
+                    android:text="@string/statsNumOfReadings"
+                    android:textAppearance="?android:attr/textAppearanceSmall" />
+
+                <TextView
+                    android:id="@+id/stats_number_readings_value"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="sans-serif-light"
+                    android:textAppearance="?android:attr/textAppearanceSmall" />
+
+                <TextView
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="sans-serif-light"
+                    android:text="Ranking"
+                    android:textAppearance="?android:attr/textAppearanceSmall" />
+
+                <TextView
+                    android:id="@+id/rankingExperimentMessage"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="sans-serif-light"
+                    android:textAppearance="?android:attr/textAppearanceSmall" />
+
+                <TextView
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="sans-serif-light"
+                    android:text="Badges"
+                    android:textAppearance="?android:attr/textAppearanceSmall" />
+
                 <TextView
                     android:id="@+id/badgesExperimentMessage"
                     android:layout_width="fill_parent"
                     android:layout_height="wrap_content"
                     android:fontFamily="sans-serif-light"
                     android:textAppearance="?android:attr/textAppearanceSmall" />
-            </TableRow>
-        </TableLayout>
+
+            </LinearLayout>
+        </RelativeLayout>
 
         <TextView
             android:layout_width="fill_parent"
             android:layout_height="20dip"
-            android:fontFamily="sans-serif-light"
+            android:layout_marginTop="20dip"
             android:text="@string/dataToday"
             android:textAppearance="?android:attr/textAppearanceSmall" />
 
@@ -232,23 +202,23 @@
             android:id="@+id/map"
             android:name="com.google.android.gms.maps.MapFragment"
             android:layout_width="fill_parent"
-            android:layout_height="180dp" />
+            android:layout_height="180dip" />
 
         <TextView
             android:layout_width="fill_parent"
             android:layout_height="20dip"
-            android:fontFamily="sans-serif-light"
+            android:layout_marginTop="20dip"
             android:text="@string/stats7Days"
             android:textAppearance="?android:attr/textAppearanceSmall" />
 
         <org.eazegraph.lib.charts.BarChart xmlns:app="http://schemas.android.com/apk/res-auto"
             android:id="@+id/barchart"
             android:layout_width="fill_parent"
-            android:layout_height="150dp"
-            android:padding="10dp"
-            app:egBarWidth="20dp"
+            android:layout_height="150dip"
+            android:padding="10dip"
+            app:egBarWidth="20dip"
             app:egFixedBarWidth="true"
-            app:egLegendHeight="40dp" />
+            app:egLegendHeight="40dip" />
 
 
     </LinearLayout>

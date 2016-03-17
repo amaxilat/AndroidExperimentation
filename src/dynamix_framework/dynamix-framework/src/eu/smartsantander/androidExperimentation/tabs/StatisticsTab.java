@@ -4,18 +4,13 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.content.SharedPreferences.OnSharedPreferenceChangeListener;
-import android.net.ConnectivityManager;
-import android.net.NetworkInfo;
-import android.net.Uri;
-import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
-import android.widget.TableRow;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 
-import com.google.android.gms.appindexing.Action;
 import com.google.android.gms.appindexing.AppIndex;
 import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.android.gms.maps.CameraUpdateFactory;
@@ -26,12 +21,10 @@ import com.google.android.gms.maps.model.TileOverlay;
 import com.google.android.gms.maps.model.TileOverlayOptions;
 import com.google.maps.android.heatmaps.HeatmapTileProvider;
 
-import eu.smartsantander.androidExperimentation.jsonEntities.Badge;
 import eu.smartsantander.androidExperimentation.jsonEntities.Experiment;
 import eu.smartsantander.androidExperimentation.jsonEntities.RankingEntry;
 import eu.smartsantander.androidExperimentation.jsonEntities.SmartphoneStatistics;
 import eu.smartsantander.androidExperimentation.operations.Communication;
-import eu.smartsantander.androidExperimentation.operations.PhoneProfiler;
 
 import org.ambientdynamix.core.DynamixService;
 import org.ambientdynamix.core.R;
@@ -43,7 +36,6 @@ import org.json.JSONException;
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
-import java.util.Map;
 import java.util.SortedMap;
 import java.util.SortedSet;
 import java.util.TreeMap;
@@ -140,7 +132,7 @@ public class StatisticsTab extends Activity implements
                 int phoneId = DynamixService.getPhoneProfiler().getPhoneId();
                 Experiment exp = DynamixService.getExperiment();
 
-                SmartphoneStatistics tempStats = null;
+                SmartphoneStatistics tempStats;
                 if (exp == null) {
                     tempStats = new Communication().getSmartphoneStatistics(phoneId);
                 } else {
@@ -205,6 +197,13 @@ public class StatisticsTab extends Activity implements
                 //-------------------------------------//
 
                 if (smartphoneStatistics.getExperimentRankings() != null) {
+                    final LinearLayout currentExperimentLayout = (LinearLayout) findViewById(R.id.currentExperimentLayout);
+                    runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() {
+                            currentExperimentLayout.setVisibility(View.VISIBLE);
+                        }
+                    });
                     try {
                         final SortedSet<RankingEntry> list = new TreeSet<>(new Comparator<RankingEntry>() {
                             @Override
@@ -212,7 +211,7 @@ public class StatisticsTab extends Activity implements
                                 return (int) (o2.getCount() - o1.getCount());
                             }
                         });
-                        list.addAll(smartphoneStatistics.getRankings());
+                        list.addAll(smartphoneStatistics.getExperimentRankings());
                         int ranking = 0;
                         for (final RankingEntry entry : list) {
                             ranking++;
@@ -222,20 +221,23 @@ public class StatisticsTab extends Activity implements
                                 runOnUiThread(new Runnable() {
                                     @Override
                                     public void run() {
-                                        final TextView rankingTextView = (TextView) findViewById(R.id.rankingExperimentMessage);
-                                        rankingTextView.setText("Position " + finalRanking + " of " + list.size());
+                                        final TextView experimentRankingTextView = (TextView) findViewById(R.id.rankingExperimentMessage);
+                                        experimentRankingTextView.setText("Position " + finalRanking + " of " + list.size());
                                     }
                                 });
                             }
                         }
-                    } catch (NullPointerException e) {
-                        runOnUiThread(new Runnable() {
-                            @Override
-                            public void run() {
-                                //TODO: not here no experiment
-                            }
-                        });
+                    } catch (NullPointerException ignore) {
+
                     }
+                } else {
+                    final LinearLayout currentExperimentLayout = (LinearLayout) findViewById(R.id.currentExperimentLayout);
+                    runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() {
+                            currentExperimentLayout.setVisibility(View.GONE);
+                        }
+                    });
                 }
                 if (smartphoneStatistics.getRankings() != null) {
                     try {
@@ -261,65 +263,38 @@ public class StatisticsTab extends Activity implements
                                 });
                             }
                         }
-                    } catch (NullPointerException e) {
-                        runOnUiThread(new Runnable() {
-                            @Override
-                            public void run() {
-                                //TODO: not here no rankings
-                            }
-                        });
+                    } catch (NullPointerException ignore) {
+
                     }
                 }
 
                 if (smartphoneStatistics.getExperimentBadges() != null) {
                     try {
-                        final SortedSet<Badge> badgesList = new TreeSet<>(new Comparator<Badge>() {
-                            @Override
-                            public int compare(Badge o1, Badge o2) {
-                                return (int) (o2.getTimestamp() - o1.getTimestamp());
-                            }
-                        });
-                        badgesList.addAll(smartphoneStatistics.getExperimentBadges());
+
                         runOnUiThread(new Runnable() {
                             @Override
                             public void run() {
-                                final TextView rankingTextView = (TextView) findViewById(R.id.badgesExperimentMessage);
-                                rankingTextView.setText(badgesList.size() + " badges earned");
+                                final TextView experimnetBadgesTextView = (TextView) findViewById(R.id.badgesExperimentMessage);
+                                experimnetBadgesTextView.setText(
+                                        smartphoneStatistics.getExperimentBadges().size() + " badges earned");
                             }
                         });
 
-                    } catch (NullPointerException e) {
-                        runOnUiThread(new Runnable() {
-                            @Override
-                            public void run() {
-                                //TODO: not here no experiment
-                            }
-                        });
+                    } catch (NullPointerException ignore) {
+
                     }
                 }
                 if (smartphoneStatistics.getBadges() != null) {
                     try {
-                        final SortedSet<Badge> badgesList = new TreeSet<>(new Comparator<Badge>() {
-                            @Override
-                            public int compare(Badge o1, Badge o2) {
-                                return (int) (o2.getTimestamp() - o1.getTimestamp());
-                            }
-                        });
-                        badgesList.addAll(smartphoneStatistics.getBadges());
                         runOnUiThread(new Runnable() {
                             @Override
                             public void run() {
-                                final TextView rankingTextView = (TextView) findViewById(R.id.badgesMessage);
-                                rankingTextView.setText(badgesList.size() + " badges earned");
+                                final TextView badgesTextView = (TextView) findViewById(R.id.badgesMessage);
+                                badgesTextView.setText(
+                                        smartphoneStatistics.getBadges().size() + " badges earned");
                             }
                         });
-                    } catch (NullPointerException e) {
-                        runOnUiThread(new Runnable() {
-                            @Override
-                            public void run() {
-                                //TODO: not here no rankings
-                            }
-                        });
+                    } catch (NullPointerException ignore) {
                     }
                 }
             }
@@ -331,23 +306,12 @@ public class StatisticsTab extends Activity implements
     public void fillStatsFields() {
 
         final TextView timeTodayTextView = (TextView) findViewById(R.id.stats_time_value);
-        final TextView experimentsTodayTextView = (TextView) findViewById(R.id.stats_number_exp_value);
-        final TextView readingsTodayTextView = (TextView) findViewById(R.id.stats_number_readings_value);
         final TextView timeAllTextView = (TextView) findViewById(R.id.stats_time_value_a);
-        final TextView experimentsAllTextView = (TextView) findViewById(R.id.stats_number_exp_value_a);
-        final TextView readingsAllTextView = (TextView) findViewById(R.id.stats_number_readings_value_a);
 
         timeTodayTextView.setText(String.format("%.3g",
                 (float) TimeUnit.MILLISECONDS.toSeconds(DynamixService.getTotalTimeConnectedOnline()) / 3600));
         timeAllTextView.setText(String.format("%.3g",
                 (float) TimeUnit.MILLISECONDS.toSeconds(DynamixService.getTotalTimeConnectedOnline()) / 3600));
-        final int experiments = DynamixService.getPhoneProfiler().getExperiments().size();
-        experimentsTodayTextView.setText(String.valueOf(experiments));
-        experimentsAllTextView.setText(String.valueOf(experiments));
-        final long totalMsg = DynamixService.getPhoneProfiler().getTotalReadingsProduced();
-        readingsTodayTextView.setText(Long.toString(totalMsg));
-        readingsAllTextView.setText(Long.toString(totalMsg));
-
     }
 
     @Override
