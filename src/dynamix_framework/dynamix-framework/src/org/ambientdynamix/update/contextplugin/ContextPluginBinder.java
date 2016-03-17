@@ -31,9 +31,10 @@ import org.ambientdynamix.api.contextplugin.security.PrivacyRiskLevel;
 import org.ambientdynamix.util.RepositoryInfo;
 import org.ambientdynamix.util.Utils;
 
-import eu.smartsantander.androidExperimentation.jsonEntities.Plugin;
-
 import android.util.Log;
+
+import gr.cti.android.experimentation.model.Plugin;
+
 /**
  * Simple Framework binder class for XML parsing.
  * @author Darren Carlson

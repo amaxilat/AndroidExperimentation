@@ -36,11 +36,11 @@ import java.util.Map;
 
 import eu.smartsantander.androidExperimentation.App;
 import eu.smartsantander.androidExperimentation.jsonEntities.Experiment;
-import eu.smartsantander.androidExperimentation.jsonEntities.Plugin;
 import eu.smartsantander.androidExperimentation.operations.Communication;
 import eu.smartsantander.androidExperimentation.operations.Downloader;
 import eu.smartsantander.androidExperimentation.operations.DynamixServiceListenerUtility;
 import eu.smartsantander.androidExperimentation.util.Constants;
+import gr.cti.android.experimentation.model.Plugin;
 
 /**
  * This tab displays ....

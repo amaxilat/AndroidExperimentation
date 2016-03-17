@@ -22,9 +22,9 @@ import com.google.android.gms.maps.model.TileOverlayOptions;
 import com.google.maps.android.heatmaps.HeatmapTileProvider;
 
 import eu.smartsantander.androidExperimentation.jsonEntities.Experiment;
-import eu.smartsantander.androidExperimentation.jsonEntities.RankingEntry;
-import eu.smartsantander.androidExperimentation.jsonEntities.SmartphoneStatistics;
 import eu.smartsantander.androidExperimentation.operations.Communication;
+import gr.cti.android.experimentation.model.RankingEntry;
+import gr.cti.android.experimentation.model.SmartphoneStatistics;
 
 import org.ambientdynamix.core.DynamixService;
 import org.ambientdynamix.core.R;

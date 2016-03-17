@@ -73,8 +73,8 @@ import java.util.Set;
 import java.util.Vector;
 
 import eu.smartsantander.androidExperimentation.App;
-import eu.smartsantander.androidExperimentation.jsonEntities.Plugin;
 import eu.smartsantander.androidExperimentation.util.Constants;
+import gr.cti.android.experimentation.model.Plugin;
 
 /**
  * User interface that provides an overview of the ContextPlugins installed in

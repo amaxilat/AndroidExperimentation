@@ -2,8 +2,6 @@ package eu.smartsantander.androidExperimentation.operations;
 
 import android.util.Log;
 
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.google.gson.Gson;
@@ -19,7 +17,6 @@ import org.springframework.web.util.UriComponentsBuilder;
 import java.io.IOException;
 import java.net.URI;
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.Comparator;
 import java.util.List;
 import java.util.Map;
@@ -27,11 +24,11 @@ import java.util.SortedMap;
 import java.util.TreeMap;
 
 import eu.smartsantander.androidExperimentation.jsonEntities.Experiment;
-import eu.smartsantander.androidExperimentation.jsonEntities.Plugin;
-import eu.smartsantander.androidExperimentation.jsonEntities.RankingEntry;
-import eu.smartsantander.androidExperimentation.jsonEntities.Smartphone;
-import eu.smartsantander.androidExperimentation.jsonEntities.SmartphoneStatistics;
 import eu.smartsantander.androidExperimentation.util.Constants;
+import gr.cti.android.experimentation.model.Plugin;
+import gr.cti.android.experimentation.model.RankingEntry;
+import gr.cti.android.experimentation.model.Smartphone;
+import gr.cti.android.experimentation.model.SmartphoneStatistics;
 
 //import com.google.common.cache.Cache;
 //import com.google.common.cache.CacheBuilder;
@@ -71,7 +68,7 @@ public class Communication extends Thread implements Runnable {
         int serverPhoneId = 0;
 
         final Smartphone smartphone = new Smartphone();
-        smartphone.setPhoneId(phoneId);
+        smartphone.setPhoneId((long) phoneId);
         smartphone.setSensorsRules(sensorsRules);
         final String jsonSmartphone = (new Gson()).toJson(smartphone);
         final String serverPhoneId_s;

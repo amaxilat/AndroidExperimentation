@@ -30,9 +30,9 @@ import org.ambientdynamix.util.RepositoryInfo;
 import com.google.gson.Gson;
 
 import eu.smartsantander.androidExperimentation.util.Constants;
-import eu.smartsantander.androidExperimentation.jsonEntities.Plugin;
 import eu.smartsantander.androidExperimentation.jsonEntities.PluginList;
 import eu.smartsantander.androidExperimentation.operations.Communication;
+import gr.cti.android.experimentation.model.Plugin;
 
 import android.content.SharedPreferences;
 import android.content.SharedPreferences.Editor;

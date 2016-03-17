@@ -30,12 +30,12 @@ import eu.smartsantander.androidExperimentation.operations.AsyncReportNowTask;
 import eu.smartsantander.androidExperimentation.util.Constants;
 import eu.smartsantander.androidExperimentation.DataStorage;
 import eu.smartsantander.androidExperimentation.jsonEntities.Experiment;
-import eu.smartsantander.androidExperimentation.jsonEntities.Plugin;
 import eu.smartsantander.androidExperimentation.jsonEntities.ReadingStorage;
 import eu.smartsantander.androidExperimentation.operations.Communication;
 import eu.smartsantander.androidExperimentation.operations.Demon;
 import eu.smartsantander.androidExperimentation.operations.OrganicityNotificationManager;
 import eu.smartsantander.androidExperimentation.operations.PhoneProfiler;
+import gr.cti.android.experimentation.model.Plugin;
 
 import org.ambientdynamix.api.application.AppConstants.PluginInstallStatus;
 import org.ambientdynamix.api.application.*;

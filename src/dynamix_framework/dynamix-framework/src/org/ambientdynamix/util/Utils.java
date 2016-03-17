@@ -86,8 +86,8 @@ import android.widget.ImageView;
 import android.widget.ListAdapter;
 import android.widget.ListView;
 
-import eu.smartsantander.androidExperimentation.jsonEntities.Plugin;
 import eu.smartsantander.androidExperimentation.operations.ImageDownloader;
+import gr.cti.android.experimentation.model.Plugin;
 
 /**
  * Static utility methods for the Dynamix Framework.

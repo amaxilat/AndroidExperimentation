@@ -9,6 +9,7 @@ buildscript {
 
 repositories {
     mavenCentral()
+    mavenLocal()
     maven { url "https://jitpack.io" }
     maven { url 'http://repo.spring.io/milestone' }
     maven { url "https://mint.splunk.com/gradle/" }
@@ -35,6 +36,12 @@ dependencies {
     compile 'com.mcxiaoke.volley:library:1.0.19'
     compile "com.mixpanel.android:mixpanel-android:4.8.0"
     compile 'com.google.android.gms:play-services-appindexing:8.1.0'
+    compile('cti.organicity:web-service-model:1.0-SNAPSHOT') {
+        exclude module: 'dom4j'
+        exclude module: 'jackson-annotations'
+        exclude module: 'javax.transaction'
+        exclude module: 'javax.transaction-api'
+    }
 }
 
 android {

@@ -16,7 +16,6 @@
 package org.ambientdynamix.data;
 
 import android.content.Context;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -37,7 +36,7 @@ import java.util.Locale;
 import java.util.Map;
 
 import eu.smartsantander.androidExperimentation.jsonEntities.Experiment;
-import eu.smartsantander.androidExperimentation.jsonEntities.Plugin;
+import gr.cti.android.experimentation.model.Plugin;
 
 /**
  * Local class used as a data-source for UpdateResults. This class extends a typed Generic ArrayAdapter and overrides
