@@ -97,11 +97,11 @@ public class Communication extends Thread implements Runnable {
 
     /**
      * Get the last points of measurements by the user.
-     *
+     * TODO : move it to the backend for statistics
      * @param phoneId the if of the user's phone.
      * @return
      */
-    public JSONArray getLastPoints(int phoneId) {
+    public JSONArray getLastPoints(final int phoneId) {
         final String path = "/data?deviceId=" + phoneId + "&after=today";
         try {
             final String stats = get(path);

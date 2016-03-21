@@ -49,7 +49,10 @@ import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.android.gms.maps.model.PolylineOptions;
 import com.mixpanel.android.mpmetrics.MixpanelAPI;
 
+import org.ambientdynamix.api.contextplugin.ContextPlugin;
 import org.ambientdynamix.data.DynamixPreferences;
+import org.ambientdynamix.event.PluginDiscoveryResult;
+import org.ambientdynamix.util.Utils;
 import org.apache.http.HttpResponse;
 import org.apache.http.client.methods.HttpGet;
 import org.apache.http.impl.client.DefaultHttpClient;
@@ -62,16 +65,20 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 import java.util.Timer;
 import java.util.TimerTask;
+import java.util.Vector;
 
 import eu.smartsantander.androidExperimentation.fragment.SensorMeasurement;
 import eu.smartsantander.androidExperimentation.fragment.SensorMeasurementAdapter;
 import eu.smartsantander.androidExperimentation.operations.AsyncReportOnServerTask;
 import eu.smartsantander.androidExperimentation.operations.AsyncStatusRefreshTask;
+import eu.smartsantander.androidExperimentation.operations.Communication;
 import eu.smartsantander.androidExperimentation.service.RegistrationIntentService;
 import eu.smartsantander.androidExperimentation.util.Constants;
+import gr.cti.android.experimentation.model.SmartphoneStatistics;
 
 /**
  * Home user interface, which shows the current authorized Dynamix applications along with their status. This UI also
@@ -366,6 +373,8 @@ public class HomeActivity extends Activity implements GoogleApiClient.Connection
             if (!startedGcm && dynamixEnabled) {
                 connect2Gcm();
             }
+        } else {
+
         }
         final AsyncStatusRefreshTask task = new AsyncStatusRefreshTask(this);
         task.execute();

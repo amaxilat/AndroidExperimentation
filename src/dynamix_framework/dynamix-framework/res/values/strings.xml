@@ -119,7 +119,7 @@
     <string name="orgDevID">Organicity Device ID</string>
     <string name="conWith">Connected with Organicity Server</string>
     <string name="disConWith">Disconnected from Organicity Server</string>
-    <string name="statsTotalTime">Total time online (Hours)</string>
+    <string name="statsTotalTime">Total time online</string>
     <string name="statsNumOfExp">Experiments Run</string>
     <string name="statsNumOfReadings">Measurements Gathered</string>
     <string name="stats7Days">Histogram of data collected last week</string>

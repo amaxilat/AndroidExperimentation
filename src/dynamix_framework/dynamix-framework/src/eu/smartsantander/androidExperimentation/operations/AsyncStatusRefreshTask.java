@@ -5,17 +5,25 @@ import android.util.Log;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 
+import org.ambientdynamix.api.contextplugin.ContextPlugin;
 import org.ambientdynamix.core.DynamixService;
 import org.ambientdynamix.core.HomeActivity;
+import org.ambientdynamix.core.PluginsActivity;
+import org.ambientdynamix.event.PluginDiscoveryResult;
+import org.ambientdynamix.util.Utils;
 import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Iterator;
+import java.util.List;
+import java.util.Vector;
 
 import eu.smartsantander.androidExperimentation.fragment.SensorMeasurement;
 import eu.smartsantander.androidExperimentation.jsonEntities.Reading;
 import eu.smartsantander.androidExperimentation.jsonEntities.Report;
+import gr.cti.android.experimentation.model.SmartphoneStatistics;
 
 public class AsyncStatusRefreshTask extends AsyncTask<Void, String, Integer> {
     private final String TAG = this.getClass().getSimpleName();
@@ -30,7 +38,7 @@ public class AsyncStatusRefreshTask extends AsyncTask<Void, String, Integer> {
 
     @Override
     protected Integer doInBackground(Void... params) {
-        Log.i(TAG,"doInBackground");
+        Log.i(TAG, "doInBackground");
         //SmartSantander
         if (DynamixService.isEnabled()) {
             if (!DynamixService.isDeviceRegistered()) {

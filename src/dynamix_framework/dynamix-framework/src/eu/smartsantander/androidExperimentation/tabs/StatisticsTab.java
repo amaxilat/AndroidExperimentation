@@ -25,6 +25,7 @@ import eu.smartsantander.androidExperimentation.jsonEntities.Experiment;
 import eu.smartsantander.androidExperimentation.operations.Communication;
 import gr.cti.android.experimentation.model.RankingEntry;
 import gr.cti.android.experimentation.model.SmartphoneStatistics;
+import gr.cti.android.experimentation.model.UsageEntry;
 
 import org.ambientdynamix.core.DynamixService;
 import org.ambientdynamix.core.R;
@@ -101,7 +102,7 @@ public class StatisticsTab extends Activity implements
 
     }
 
-    private LatLngBounds updateExperimentDeviceHeatMap() {
+    private LatLngBounds updateExperimentDeviceHeatMap(final SmartphoneStatistics smartphoneStatistics) {
         final JSONArray mapStats = new Communication().getLastPoints(DynamixService.getPhoneProfiler().getPhoneId());
         if (mapStats != null) {
             final LatLngBounds.Builder boundsBuilder = LatLngBounds.builder();
@@ -159,7 +160,7 @@ public class StatisticsTab extends Activity implements
                 });
 
                 try {
-                    final LatLngBounds bounds = updateExperimentDeviceHeatMap();
+                    final LatLngBounds bounds = updateExperimentDeviceHeatMap(smartphoneStatistics);
                     if (bounds != null) {
                         thisActivity.runOnUiThread(new Runnable() {
                             @Override
@@ -292,6 +293,46 @@ public class StatisticsTab extends Activity implements
                                 final TextView badgesTextView = (TextView) findViewById(R.id.badgesMessage);
                                 badgesTextView.setText(
                                         smartphoneStatistics.getBadges().size() + " badges earned");
+                            }
+                        });
+                    } catch (NullPointerException ignore) {
+                    }
+                }
+                if (smartphoneStatistics.getExperimentUsage() != null) {
+                    try {
+                        long total = 0;
+                        for (UsageEntry
+                                entry : smartphoneStatistics.getExperimentUsage()) {
+                            total += entry.getTime();
+                        }
+                        final long totalF = total;
+                        runOnUiThread(new Runnable() {
+                            @Override
+                            public void run() {
+                                final TextView badgesTextView = (TextView) findViewById(R.id.stats_time_value);
+                                badgesTextView.setText(
+                                        (totalF / 60) + " hours");
+                            }
+                        });
+
+                    } catch (NullPointerException ignore) {
+
+                    }
+                }
+                if (smartphoneStatistics.getUsage() != null) {
+                    try {
+                        long total = 0;
+                        for (UsageEntry
+                                entry : smartphoneStatistics.getUsage()) {
+                            total += entry.getTime();
+                        }
+                        final long totalF = total;
+                        runOnUiThread(new Runnable() {
+                            @Override
+                            public void run() {
+                                final TextView badgesTextView = (TextView) findViewById(R.id.stats_time_value_a);
+                                badgesTextView.setText(
+                                        (totalF / 60) + " hours");
                             }
                         });
                     } catch (NullPointerException ignore) {

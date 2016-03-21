@@ -111,7 +111,7 @@ http: //ambientdynamix.org
 <string name="orgDevID">Organicity Device ID</string>
 <string name="conWith">Tilsluttet Organicity server</string>
 <string name="disConWith">Frakoblet Organicity server</string>
-<string name="statsTotalTime">Total tid online (timer)</string>
+<string name="statsTotalTime">Total tid online</string>
 <string name="statsNumOfExp">Antal kørte eksperimenter</string>
 <string name="statsNumOfReadings">Antal aflæsninger</string>
 <string name="stats7Days">Statistik for seneste uge</string>

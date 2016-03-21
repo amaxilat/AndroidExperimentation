@@ -103,7 +103,7 @@
     <string name="orgrgDevID">Ταυτότητα συσκευής</string>
     <string name="conWith">Σύνδεση με Organicity Ενεργή</string>
     <string name="disConWith">Σύνδεση με Organicity Απενεργοποιημένη</string>
-    <string name="statsTotalTime">Συνολικός χρόνος (ώρες)</string>
+    <string name="statsTotalTime">Συνολικός χρόνος</string>
     <string name="statsNumOfExp">Πλήθος πειραμάτων που έχουν τρέξει</string>
     <string name="statsNumOfReadings">Πλήθος μετρήσεων</string>
     <string name="stats7Days">Στοιχεία για τις προηγούμενες 7 ημέρες</string>
