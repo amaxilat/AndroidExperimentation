@@ -102,7 +102,7 @@ public class NewExperimentTab extends ListActivity {
                 try {
                     return communication.getExperiments();
                 } catch (Exception e) {
-                    Log.e(TAG, e.getMessage(), e);
+                    e.printStackTrace();
                 }
                 return null;
             }
@@ -232,7 +232,7 @@ public class NewExperimentTab extends ListActivity {
                                                 newExperimentsAdapter.remove(experiment);
                                                 newExperimentsAdapter.notifyDataSetChanged();
                                             } catch (Exception e) {
-                                                Log.e(TAG, e.getMessage(), e);
+                                                e.printStackTrace();
                                                 if (!DynamixService.isNetworkAvailable()) {
                                                     Toast.makeText(DynamixService.getAndroidContext(),
                                                             "Please Check Internet Connection!",
@@ -289,7 +289,7 @@ public class NewExperimentTab extends ListActivity {
                             try {
                                 return communication.getExperiments();
                             } catch (Exception e) {
-                                Log.e(TAG, e.getMessage(), e);
+                                e.printStackTrace();
                             }
                             return null;
                         }
@@ -347,7 +347,13 @@ public class NewExperimentTab extends ListActivity {
             } else {
                 final LayoutInflater vi = (LayoutInflater) getSystemService(Context.LAYOUT_INFLATER_SERVICE);
                 final View v = vi.inflate(R.layout.experiment_icon_row, null);
-                final Experiment experiment = this.getItem(position);// tODO:ArrayIndexOutOfBoundsException
+                Experiment experiment;
+                try {
+                    experiment = this.getItem(position);// tODO:ArrayIndexOutOfBoundsException
+                } catch (Exception e) {
+                    Log.e(TAG, e.getMessage());
+                    return convertView;
+                }
                 if (experiment != null) {
                     final TextView titleTextView = (TextView) v.findViewById(R.id.ex1_title);
                     final TextView pluginsTextView = (TextView) v.findViewById(R.id.ex1_plugins);

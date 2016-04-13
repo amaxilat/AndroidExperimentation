@@ -2,6 +2,7 @@ package eu.smartsantander.androidExperimentation.operations;
 
 import java.lang.reflect.Type;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 import org.ambientdynamix.api.application.ContextEvent;
@@ -46,18 +47,21 @@ public class DynamixServiceListenerUtility {
 
             @Override
             public void onSessionOpened(String sessionId) throws RemoteException {
+                Log.i(TAG, "onSessionOpened:" + sessionId);
                 final Result r = DynamixService.dynamix.addContextSupport(DynamixService.dynamixCallback, "org.ambientdynamix.contextplugins.ExperimentPlugin");
                 for (final ContextPluginInformation pluginInformation : DynamixService.dynamix.getAllContextPluginInformation().getContextPluginInformation()) {
                     if (pluginInformation.isEnabled()) {
                         DynamixService.dynamix.addContextSupport(DynamixService.dynamixCallback, pluginInformation.getPluginId());
                     }
                 }
+                Log.i(TAG, "onSessionOpened SESSION_STARTED:" + true);
                 DynamixService.sessionStarted = true;
-                Log.d(TAG, "SESSION STATUS" + r.getMessage());
+                //Log.d(TAG, "SESSION STATUS" + r.getMessage());
             }
 
             @Override
             public void onSessionClosed() throws RemoteException {
+                Log.i(TAG, "SESSION_STARTED:" + false);
                 DynamixService.sessionStarted = false;
             }
 
@@ -85,21 +89,20 @@ public class DynamixServiceListenerUtility {
                     throws RemoteException {
 
                 NotificationHQManager noteManager = NotificationHQManager.getInstance();
-                Log.d(TAG, "Event timestamp " + event.getTimeStamp().toString());
+                //Log.d(TAG, "Event timestamp " + event.getTimeStamp().toString());
                 // Log each string-based context type format supported by the
                 // event
                 for (final String format : event.getStringRepresentationFormats()) {
-                    Log.d(TAG, "Event string-based format: " + format + " size: "
-                            + event.getStringRepresentation(format).length());
+                    //Log.d(TAG, "Event string-based format: " + format + " size: "+event.getStringRepresentation(format).length());
                 }
                 // Check for native IContextInfo
                 if (event.hasIContextInfo()) {
 
-                    Log.d(TAG, "Event contains native IContextInfo: " + event.getIContextInfo());
+                    //Log.d(TAG, "Event contains native IContextInfo: " + event.getIContextInfo());
                     final IContextInfo nativeInfo = event.getIContextInfo();
                     final String msg = nativeInfo.getStringRepresentation("");
                     try {
-                        Log.d(TAG, "Received Experiment/Plugin Info: " + msg);
+                        //Log.d(TAG, "Received Experiment/Plugin Info: " + msg);
                         final PluginInfo plugInfo = (new Gson()).fromJson(msg, PluginInfo.class);
                         if (plugInfo != null && plugInfo.getContext() != null && plugInfo.getContext().equals("org.ambientdynamix.contextplugins.ExperimentPlugin")) {
                             final String readingMsg = plugInfo.getPayload();
@@ -111,7 +114,7 @@ public class DynamixServiceListenerUtility {
                             noteManager.postNotification(readingMsg);
                             final List<String> mlist = new ArrayList<>();
                             for (final Reading reading : readings) {
-                                Log.d(TAG, "Received Reading: " + reading);
+                                //Log.d(TAG, "Received Reading: " + reading);
                                 DynamixService.cacheExperimentalMessage(readingMsg);
                                 if (DynamixService.getExperiment() == null) {
                                     return;
@@ -120,7 +123,7 @@ public class DynamixServiceListenerUtility {
                             }
                             rObject.setResults(mlist);
                             final String message = rObject.toJson();
-                            Log.d(TAG, "ResultMessage:message " + message);
+                            //Log.d(TAG, "ResultMessage:message " + message);
                             DynamixService.publishMessage(message);
                         } else {
                             final String readingMsg = plugInfo.getPayload();
@@ -139,15 +142,15 @@ public class DynamixServiceListenerUtility {
                             }
                         }
                     } catch (Exception e) {
-                        Log.w(TAG, "Bad Formed Reading" + msg);
+                        Log.e(TAG, "Bad Formed Reading" + msg);
                     }
                 }
             }
 
             @Override
             public void onContextSupportAdded(ContextSupportInfo info) throws RemoteException {
-                Log.d(TAG, "CONTENT SUPPORT ADDED: "
-                        + info.getPlugin().getPluginId());
+                //Log.d(TAG, "CONTENT SUPPORT ADDED: "+ info.getPlugin().getPluginId());
+                Log.i(TAG, "onContextSupportAdded SESSION_STARTED:" + true);
                 DynamixService.sessionStarted = true;
             }
 
@@ -159,7 +162,8 @@ public class DynamixServiceListenerUtility {
             @Override
             public void onContextTypeNotSupported(String contextType) throws RemoteException {
                 Log.d(TAG, "CONTENT NO SUPPORTED" + contextType);
-                DynamixService.sessionStarted = false;
+                Log.i(TAG, "SESSION_STARTED:" + false);
+                //DynamixService.sessionStarted = false;
             }
 
             @Override
@@ -229,7 +233,7 @@ public class DynamixServiceListenerUtility {
             @Override
             public void onContextPluginError(ContextPluginInformation plug,
                                              String message) throws RemoteException {
-                Log.d(TAG, "Plugin Error " + plug.getPluginDescription() + "," + message);
+                Log.e(TAG, "Error " + plug.getPluginDescription() + "," + message);
             }
         };
 
@@ -245,9 +249,9 @@ public class DynamixServiceListenerUtility {
                     DynamixService.dynamix = IDynamixFacade.Stub.asInterface(service);
                     DynamixService.dynamix.addDynamixListener(DynamixService.dynamixCallback);
                     DynamixService.dynamix.openSession();
-                    Log.d(TAG, "Experiment Connected");
+                    //Log.d(TAG, "Experiment Connected");
                 } catch (Exception e) {
-                    Log.w(TAG, e.getMessage());
+                    Log.e(TAG, e.getMessage());
                 }
             }
 

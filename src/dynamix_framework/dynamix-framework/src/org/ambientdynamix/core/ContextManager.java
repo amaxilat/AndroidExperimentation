@@ -549,8 +549,8 @@ class ContextManager implements IPluginContextListener, IPluginFacade {
                                     Log.w(TAG, "Could not find receipients for responseId: " + infoSet.getResponseId());
                             } else
                                 throw new RuntimeException("Unknown event type: " + infoSet.getEventType());
-						/*
-						 * Finally, notify the context listeners of the new events
+                        /*
+                         * Finally, notify the context listeners of the new events
 						 */
                         if (FrameworkConstants.DEBUG)
                             Log.v(TAG, "onPluginContextEvent generated an eventMap of size: " + eventMap.size());
@@ -1299,7 +1299,7 @@ class ContextManager implements IPluginContextListener, IPluginFacade {
      * @param plug The ContextPlugin to start.
      */
     protected synchronized boolean startPlugin(final ContextPlugin plug) {
-        Log.d(TAG, "startPlugin for: " + plug);
+        //Log.d(TAG, "startPlugin for: " + plug);
         // Only start the ContextPlugin if the ContextManager is started or starting
         if (startState == StartState.STARTED || startState == StartState.STARTING) {
             // Make sure the plug-in has at least one context support registration
@@ -1317,11 +1317,11 @@ class ContextManager implements IPluginContextListener, IPluginFacade {
                                 Log.w(TAG, "Cannot start unconfigured plugin: " + plug);
                             } else {
                                 // Handle start based on the wrapper's state
-                                if (wrapper.getState() == PluginState.STARTING
-                                        || wrapper.getState() == PluginState.STARTED) {
-                                    Log.d(TAG,
-                                            "Ignoring start since the ContextPlugin is starting or was already started: "
-                                                    + wrapper.getState());
+                                if (wrapper.getState() == PluginState.STARTING) {
+                                    Log.d(TAG, "Ignoring start since the ContextPlugin is starting");
+                                    return true;
+                                } else if (wrapper.getState() == PluginState.STARTED) {
+                                    Log.d(TAG, "Ignoring start since the ContextPlugin was already started");
                                     return true;
                                 } else if (wrapper.getState() == PluginState.INITIALIZED
                                         || wrapper.getState() == PluginState.ERROR

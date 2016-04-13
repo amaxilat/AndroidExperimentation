@@ -269,7 +269,7 @@ public final class DynamixService extends IntentService {
             installPlugin(contextPlugin, null);
             Thread.sleep(5000);
         } catch (Exception e) {
-            Log.e(TAG,e.getMessage(),e);
+            Log.e(TAG, e.getMessage(), e);
         }
     }
 
@@ -1706,8 +1706,10 @@ public final class DynamixService extends IntentService {
      * Utility method for setting the BaseActivity.
      */
     static void setBaseActivity(final Activity activity) {
-        baseActivity = activity;
-        Log.i(TAG, "setBaseActivity with " + activity);
+        if (activity != null) {
+            baseActivity = activity;
+            Log.i(TAG, "setBaseActivity with " + activity);
+        }
     }
 
     /**
@@ -2520,12 +2522,13 @@ public final class DynamixService extends IntentService {
     private void launchProgressDialog(final String title, final String message) {
         if (!embeddedMode) {
             closeProgressDialog();
-            if (getBaseActivity() != null) {
-                try {
-                    progressDialog = ProgressDialog.show(getBaseActivity(), title, message);
-                } catch (Exception e) {
-                    progressDialog = null;
-                }
+            Activity activity = getBaseActivity();
+            if (activity != null) {
+//                try {
+//                    progressDialog = ProgressDialog.show(getBaseActivity(), title, message);
+//                } catch (Exception e) {
+//                    progressDialog = null;
+//                }
             }
         }
     }

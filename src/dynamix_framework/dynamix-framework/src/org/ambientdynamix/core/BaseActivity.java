@@ -34,6 +34,9 @@ import android.widget.TabHost;
 import android.widget.TabHost.TabSpec;
 import android.widget.Toast;
 
+import com.github.amlcurran.showcaseview.ShowcaseView;
+import com.github.amlcurran.showcaseview.targets.ActionViewTarget;
+
 import org.ambientdynamix.data.DynamixPreferences;
 import org.ambientdynamix.util.AndroidNotification;
 
@@ -160,7 +163,7 @@ public class BaseActivity extends TabActivity {
         super.onCreate(savedInstanceState);
         getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
         context = this;
-    // Set the Dynamix base activity so it can use our context
+        // Set the Dynamix base activity so it can use our context
         DynamixService.setBaseActivity(this);
         // Request for the progress bar to be shown in the title
         // requestWindowFeature(Window.FEATURE_INDETERMINATE_PROGRESS);
@@ -351,7 +354,7 @@ public class BaseActivity extends TabActivity {
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        DynamixService.setBaseActivity(null);
+        //DynamixService.setBaseActivity(null);
     }
 
     @Override

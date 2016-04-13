@@ -31,32 +31,28 @@ public class AsyncExpTask extends AsyncTask<String, Void, String> {
         if (!DynamixService.isEnabled()) {
             return "AndroidExperimentation Async Experiment Task Executed Dynamix Disabled";
         }
-        if (!DynamixService.sessionStarted) {
-            DynamixServiceListenerUtility.start();
-        } else {
-            try {
-                Log.d(TAG, "doInBackground " + DynamixService.sessionStarted);
+        Log.d(TAG, "doInBackground " + DynamixService.sessionStarted);
+        try {
+            if (!DynamixService.sessionStarted) {
+                DynamixServiceListenerUtility.start();
+            } else {
 
-                if (!DynamixService.sessionStarted) {
-                    DynamixServiceListenerUtility.start();
-                } else {
+                if (DynamixService.getExperiment() != null) {
                     try {
                         final List<ContextPluginInformation> information = DynamixService.dynamix.getAllContextPluginInformation().getContextPluginInformation();
                         for (final ContextPluginInformation contextPluginInformation : information) {
-                            Log.d(TAG, contextPluginInformation.getPluginId() + " [" + contextPluginInformation.getInstallStatus() + "]");
                             if (contextPluginInformation.isEnabled()) {
+                                Log.d(TAG, contextPluginInformation.getPluginId() + " [" + contextPluginInformation.getInstallStatus() + "]");
                                 DynamixService.dynamix.contextRequest(DynamixService.dynamixCallback, contextPluginInformation.getPluginId(), contextPluginInformation.getPluginId());
                             }
                         }
 
-                        if (DynamixService.getExperiment() != null) {
 
-                            if (!DynamixService.isExperimentInstalled(Constants.EXPERIMENT_PLUGIN_CONTEXT_TYPE)) {
-                                DynamixService.startExperiment();
-                            }
-
+                        if (!DynamixService.isExperimentInstalled(Constants.EXPERIMENT_PLUGIN_CONTEXT_TYPE)) {
+                            DynamixService.startExperiment();
                         }
                         // ping experiment....
+                        Log.i(TAG, "Ping Experiment");
                         DynamixService.dynamix.configuredContextRequest(DynamixService.dynamixCallback,
                                 Constants.EXPERIMENT_PLUGIN_CONTEXT_TYPE,
                                 Constants.EXPERIMENT_PLUGIN_CONTEXT_TYPE,
@@ -70,9 +66,10 @@ public class AsyncExpTask extends AsyncTask<String, Void, String> {
                         Log.e(TAG, e.getMessage(), e);
                     }
                 }
-            } catch (Exception e) {
-                Log.e(TAG, e.getMessage(), e);
+
             }
+        } catch (Exception e) {
+            Log.e(TAG, e.getMessage(), e);
         }
         this.stateActive = false;
         return "AndroidExperimentation Async Experiment Task Executed";

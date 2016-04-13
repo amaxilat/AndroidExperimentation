@@ -108,11 +108,11 @@
             android:layout_height="wrap_content"
             android:text="@string/placeholder_empty"
             android:textAppearance="?android:attr/textAppearanceMedium"/>
-    <us.feras.mdv.MarkdownView
-        android:id="@+id/markdownView"
-        android:layout_width="fill_parent"
-        android:layout_height="10dp"
-        android:layout_weight="1" />
+    <!--<us.feras.mdv.MarkdownView-->
+        <!--android:id="@+id/markdownView"-->
+        <!--android:layout_width="fill_parent"-->
+        <!--android:layout_height="10dp"-->
+        <!--android:layout_weight="1" />-->
 
     <ToggleButton
             android:id="@+id/cachedMessages"

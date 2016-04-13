@@ -3,7 +3,7 @@ buildscript {
         mavenCentral()
     }
     dependencies {
-        classpath 'com.android.tools.build:gradle:1.+'
+        classpath 'com.android.tools.build:gradle:2.0.0'
     }
 }
 
@@ -24,18 +24,17 @@ dependencies {
     compile 'com.nineoldandroids:library:2.4.0'
     compile 'org.springframework.android:spring-android-rest-template:2.0.0.M1'
     compile 'com.android.support:multidex:1.0.1'
+    compile 'com.google.android.gms:play-services-gcm:8.1.0'
     compile 'com.google.android.gms:play-services-maps:8.1.0'
     compile 'com.google.android.gms:play-services-location:8.1.0'
+    compile 'com.google.android.gms:play-services-appindexing:8.1.0'
     compile 'com.google.maps.android:android-maps-utils:0.4'
-    compile 'com.google.android.gms:play-services-gcm:8.1.0'
-    compile 'com.github.falnatsheh:MarkdownView:98b0db192b'
-    compile 'com.github.kanytu:android-parallax-listview:v1.1'
     compile 'de.hdodenhof:circleimageview:1.2.0'
     compile 'org.lucasr.twowayview:twowayview:0.1.4'
     compile "com.splunk.mint:mint:4.4.0"
     compile 'com.mcxiaoke.volley:library:1.0.19'
     compile "com.mixpanel.android:mixpanel-android:4.8.0"
-    compile 'com.google.android.gms:play-services-appindexing:8.1.0'
+    compile 'com.github.amlcurran.showcaseview:library:5.4.1'
     compile('cti.organicity:web-service-model:1.0-SNAPSHOT') {
         exclude module: 'dom4j'
         exclude module: 'jackson-annotations'

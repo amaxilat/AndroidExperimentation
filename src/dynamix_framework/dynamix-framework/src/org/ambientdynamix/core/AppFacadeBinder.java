@@ -893,7 +893,7 @@ class AppFacadeBinder extends IDynamixFacade.Stub implements IDynamixFrameworkLi
         Utils.dispatch(new Runnable() {
             @Override
             public void run() {
-                Log.d(TAG, "doAddContextSupport for " + contextType);
+                //Log.d(TAG, "doAddContextSupport for " + contextType);
                 List<ContextSupport> supporting = conMgr.addContextSupport(app, listener, contextType, pluginId);
                 // The return list contains (potentially several) elements if the contextDataType is supported
                 if (supporting != null && supporting.size() > 0) {
