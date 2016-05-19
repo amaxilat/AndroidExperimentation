@@ -123,7 +123,7 @@ public class DynamixServiceListenerUtility {
                             }
                             rObject.setResults(mlist);
                             final String message = rObject.toJson();
-                            //Log.d(TAG, "ResultMessage:message " + message);
+//                            Log.d(TAG, "ResultMessage:message " + message);
                             DynamixService.publishMessage(message);
                         } else {
                             final String readingMsg = plugInfo.getPayload();

@@ -122,6 +122,7 @@ public final class DynamixService extends IntentService {
     //    private static WebFacadeBinder webFacade = null;
     // Protected static data
     public static ISettingsManager SettingsManager;
+    private static String preVmessage = null;
     // Private instance data
     private BroadcastReceiver sleepReceiver;
     private BroadcastReceiver wakeReceiver;
@@ -2589,20 +2590,20 @@ public final class DynamixService extends IntentService {
     public static void publishMessage(final String message) {
         final SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(androidContext);
         final boolean wifiOnly = preferences.getBoolean(DynamixPreferences.USE_WIFI_NETWORK_ONLY, true);
-        if (wifiOnly) {
-            final ConnectivityManager connManager = (ConnectivityManager) androidContext.getSystemService(Context.CONNECTIVITY_SERVICE);
-            final NetworkInfo mWifi = connManager.getNetworkInfo(ConnectivityManager.TYPE_WIFI);
 
-            if (mWifi.isConnected()) {
-                Log.i(TAG, "WifiOnly:Enabled Sending");
-                new AsyncReportNowTask().execute(message);
-            } else {
-                Log.i(TAG, "WifiOnly:Enabled Storing");
-                DynamixService.addExperimentalMessage(message);
-            }
-        } else {
-            Log.i(TAG, "WifiOnly:False Sending");
+        final ConnectivityManager connManager = (ConnectivityManager) androidContext.getSystemService(Context.CONNECTIVITY_SERVICE);
+        final NetworkInfo mWifi = connManager.getNetworkInfo(ConnectivityManager.TYPE_WIFI);
+
+        if (message.equals(preVmessage)) {
+            return;
+        }
+        preVmessage = message;
+        if ((wifiOnly && mWifi.isConnected()) || !wifiOnly) {
+            Log.i(TAG, "Sending now");
             new AsyncReportNowTask().execute(message);
+        } else {
+            Log.i(TAG, "WifiOnly:Enabled Storing");
+            DynamixService.addExperimentalMessage(message);
         }
     }
 

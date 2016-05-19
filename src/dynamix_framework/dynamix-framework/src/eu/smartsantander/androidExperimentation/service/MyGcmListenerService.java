@@ -56,6 +56,10 @@ public class MyGcmListenerService extends GcmListenerService {
             try {
                 GcmMessageData gcmMessageData = new ObjectMapper().readValue(message, GcmMessageData.class);
                 Log.i(TAG, gcmMessageData.toString());
+                NotificationCompat.Builder mBuilder =
+                        new NotificationCompat.Builder(this);
+
+
                 switch (gcmMessageData.getType()) {
                     case "encourage":
                         Log.i(TAG, "is an encourage message");
@@ -66,19 +70,24 @@ public class MyGcmListenerService extends GcmListenerService {
                                 " measurements so far today. " +
                                 "Keep up the good work.";
                         notificationTitle = "Hooray!";
+                        mBuilder.setSmallIcon(R.drawable.award);
+                        break;
+                    case "text":
+                        Log.i(TAG, "is a text message");
+                        messageShort = gcmMessageData.getText();
+                        notificationMessage = gcmMessageData.getText();
+                        notificationTitle = "Experiment Message";
+                        mBuilder.setSmallIcon(R.drawable.organicity_small_pink);
                         break;
                     default:
                         return;
 
                 }
 
-                NotificationCompat.Builder mBuilder =
-                        new NotificationCompat.Builder(this)
-                                .setSmallIcon(R.drawable.award)
-                                .setContentTitle(notificationTitle)
-                                .setContentText(messageShort)
-                                .setStyle(new NotificationCompat.BigTextStyle()
-                                        .bigText(notificationMessage));
+                mBuilder.setContentTitle(notificationTitle)
+                        .setContentText(messageShort)
+                        .setStyle(new NotificationCompat.BigTextStyle()
+                                .bigText(notificationMessage));
 
                 int mNotificationId = 002;
                 NotificationManager mNotifyMgr =

@@ -63,10 +63,13 @@ public class Communication extends Thread implements Runnable {
         smartphone.setPhoneId((long) phoneId);
         smartphone.setSensorsRules(sensorsRules);
         final String jsonSmartphone = (new Gson()).toJson(smartphone);
-        final String serverPhoneId_s;
         try {
-            serverPhoneId_s = sendRegisterSmartphone(jsonSmartphone);
-            serverPhoneId = Integer.parseInt(serverPhoneId_s);
+            Smartphone smartphoneReceived = sendRegisterSmartphone(jsonSmartphone);
+            if (smartphoneReceived != null) {
+                serverPhoneId = smartphoneReceived.getId();
+            } else {
+                serverPhoneId = Constants.PHONE_ID_UNITIALIZED;
+            }
         } catch (Exception e) {
             serverPhoneId = Constants.PHONE_ID_UNITIALIZED;
             Log.e(TAG, "Device Registration Exception:" + e.getMessage(), e);
@@ -98,6 +101,7 @@ public class Communication extends Thread implements Runnable {
     /**
      * Get the last points of measurements by the user.
      * TODO : move it to the backend for statistics
+     *
      * @param phoneId the if of the user's phone.
      * @return
      */
@@ -195,9 +199,14 @@ public class Communication extends Thread implements Runnable {
         });
     }
 
-    private String sendRegisterSmartphone(String jsonSmartphone) throws Exception {
+    private Smartphone sendRegisterSmartphone(String jsonSmartphone) throws Exception {
         Log.d(TAG, "Register Smartphone" + jsonSmartphone);
-        return post("/smartphone", jsonSmartphone);
+        String responseString = post("/smartphone", jsonSmartphone);
+        if (responseString != null) {
+            return new ObjectMapper().readValue(responseString, Smartphone.class);
+        } else {
+            return null;
+        }
     }
 
     private String post(final String path, final String entity) throws IOException {

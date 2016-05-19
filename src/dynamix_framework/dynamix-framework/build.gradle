@@ -3,7 +3,7 @@ buildscript {
         mavenCentral()
     }
     dependencies {
-        classpath 'com.android.tools.build:gradle:2.0.0'
+        classpath 'com.android.tools.build:gradle:2.1.0'
     }
 }
 
@@ -47,8 +47,6 @@ android {
     compileSdkVersion 'Google Inc.:Google APIs:18'
     buildToolsVersion '23.0.2'
     defaultConfig {
-        // Enable the experimental Jack build tools.
-        useJack = false
         // Enabling multidex support.
         multiDexEnabled true
     }

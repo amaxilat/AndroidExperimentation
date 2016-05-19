@@ -10,7 +10,6 @@ import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-
 import com.google.android.gms.appindexing.AppIndex;
 import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.android.gms.maps.CameraUpdateFactory;
@@ -21,12 +20,7 @@ import com.google.android.gms.maps.model.TileOverlay;
 import com.google.android.gms.maps.model.TileOverlayOptions;
 import com.google.maps.android.heatmaps.HeatmapTileProvider;
 
-import eu.smartsantander.androidExperimentation.jsonEntities.Experiment;
-import eu.smartsantander.androidExperimentation.operations.Communication;
-import gr.cti.android.experimentation.model.RankingEntry;
-import gr.cti.android.experimentation.model.SmartphoneStatistics;
-import gr.cti.android.experimentation.model.UsageEntry;
-
+import org.ambientdynamix.core.BaseActivity;
 import org.ambientdynamix.core.DynamixService;
 import org.ambientdynamix.core.R;
 import org.eazegraph.lib.charts.BarChart;
@@ -42,6 +36,14 @@ import java.util.SortedSet;
 import java.util.TreeMap;
 import java.util.TreeSet;
 import java.util.concurrent.TimeUnit;
+
+import eu.smartsantander.androidExperimentation.jsonEntities.Experiment;
+import eu.smartsantander.androidExperimentation.jsonEntities.OrganicityProfile;
+import eu.smartsantander.androidExperimentation.operations.Communication;
+import eu.smartsantander.androidExperimentation.operations.OrganicityAAA;
+import gr.cti.android.experimentation.model.RankingEntry;
+import gr.cti.android.experimentation.model.SmartphoneStatistics;
+import gr.cti.android.experimentation.model.UsageEntry;
 
 /**
  * This tab displays overall stats about the activity of this specific device
@@ -68,6 +70,8 @@ public class StatisticsTab extends Activity implements
      * See https://g.co/AppIndexing/AndroidStudio for more information.
      */
     private GoogleApiClient client;
+    private OrganicityProfile profile;
+    private int phoneId = -1;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -89,6 +93,21 @@ public class StatisticsTab extends Activity implements
         mMap.getMap().setMyLocationEnabled(true);
         heatMapItems = new ArrayList<>();
         heatMapItems.add(new LatLng(0, 0));
+
+        final TextView title = (TextView) findViewById(R.id.heatmaptitle);
+        final View map = findViewById(R.id.map);
+        runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+                if (heatMapItems.size() == 1) {
+                    title.setVisibility(View.GONE);
+                    map.setVisibility(View.GONE);
+                } else {
+                    title.setVisibility(View.VISIBLE);
+                    map.setVisibility(View.VISIBLE);
+                }
+            }
+        });
         mProvider = new HeatmapTileProvider.Builder().data(heatMapItems).build();
         mOverlay = mMap.getMap().addTileOverlay(new TileOverlayOptions().tileProvider(mProvider));
         // ATTENTION: This was auto-generated to implement the App Indexing API.
@@ -130,8 +149,29 @@ public class StatisticsTab extends Activity implements
         new Thread(new Runnable() {
             @Override
             public void run() {
-                int phoneId = DynamixService.getPhoneProfiler().getPhoneId();
-                Experiment exp = DynamixService.getExperiment();
+                Log.i(TAG, "profile:" + BaseActivity.access_token);
+
+                if (profile == null) {
+                    final String accessToken = getApplicationContext().getSharedPreferences("aaa", MODE_PRIVATE).getString("access_token", null);
+                    if (accessToken != null) {
+                        profile = new OrganicityAAA().getProfile(accessToken);
+                        Log.i(TAG, "profile:" + profile);
+                        if (profile != null) {
+                            final TextView statsName = (TextView) findViewById(R.id.stats_name);
+                            final TextView statsUsername = (TextView) findViewById(R.id.stats_email);
+                            runOnUiThread(new Runnable() {
+                                @Override
+                                public void run() {
+                                    statsName.setText(profile.getName());
+                                    statsUsername.setText(profile.getEmail());
+                                }
+                            });
+                        }
+                    }
+                }
+
+                phoneId = DynamixService.getPhoneProfiler().getPhoneId();
+                final Experiment exp = DynamixService.getExperiment();
 
                 SmartphoneStatistics tempStats;
                 if (exp == null) {
@@ -358,40 +398,12 @@ public class StatisticsTab extends Activity implements
     @Override
     public void onStart() {
         super.onStart();
-
-        // ATTENTION: This was auto-generated to implement the App Indexing API.
-        // See https://g.co/AppIndexing/AndroidStudio for more information.
         client.connect();
-//        Action viewAction = Action.newAction(
-//                Action.TYPE_VIEW, // TODO: choose an action type.
-//                "StatisticsTab Page", // TODO: Define a title for the content shown.
-//                // TODO: If you have web page content that matches this app activity's content,
-//                // make sure this auto-generated web page URL is correct.
-//                // Otherwise, set the URL to null.
-//                Uri.parse("http://host/path"),
-//                // TODO: Make sure this auto-generated app URL is correct.
-//                Uri.parse("android-app://eu.smartsantander.androidExperimentation.tabs/http/host/path")
-//        );
-//        AppIndex.AppIndexApi.start(client, viewAction);
     }
 
     @Override
     public void onStop() {
         super.onStop();
-
-//        // ATTENTION: This was auto-generated to implement the App Indexing API.
-//        // See https://g.co/AppIndexing/AndroidStudio for more information.
-//        Action viewAction = Action.newAction(
-//                Action.TYPE_VIEW, // TODO: choose an action type.
-//                "StatisticsTab Page", // TODO: Define a title for the content shown.
-//                // TODO: If you have web page content that matches this app activity's content,
-//                // make sure this auto-generated web page URL is correct.
-//                // Otherwise, set the URL to null.
-//                Uri.parse("http://host/path"),
-//                // TODO: Make sure this auto-generated app URL is correct.
-//                Uri.parse("android-app://eu.smartsantander.androidExperimentation.tabs/http/host/path")
-//        );
-//        AppIndex.AppIndexApi.end(client, viewAction);
         client.disconnect();
     }
 }

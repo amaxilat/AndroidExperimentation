@@ -17,8 +17,10 @@ public class ActivityRecognitionService extends IntentService {
 
     private static final String TAG = "ActivityRecognition";
     private Context context;
-    private int activityConfidence;
-    private int activityCode;
+    private static int activityConfidence;
+    private static int activityCode;
+    private static String activityStatus;
+
 
     /**
      * Creates an IntentService.  Invoked by your subclass's constructor.
@@ -47,8 +49,8 @@ public class ActivityRecognitionService extends IntentService {
 
             activityConfidence = result.getMostProbableActivity().getConfidence();
             activityCode = result.getMostProbableActivity().getType();
-            Constants.activityStatus = getType(result.getMostProbableActivity().getType());
-            Log.d("o3nWatcherLog", " ACTIVITY CODE : " + activityCode + " ACTIVITY CONFIDENCE : " + activityConfidence);
+            activityStatus = getType(result.getMostProbableActivity().getType());
+            Log.d("o3nWatcherLog", " ACTIVITY CODE : " + getType(activityCode) + " ACTIVITY CONFIDENCE : " + activityConfidence);
         }
     }
 
@@ -82,4 +84,15 @@ public class ActivityRecognitionService extends IntentService {
         }
     }
 
+    public static int getActivityCode() {
+        return activityCode;
+    }
+
+    public static int getActivityConfidence() {
+        return activityConfidence;
+    }
+
+    public static String getActivityStatus() {
+        return activityStatus;
+    }
 }

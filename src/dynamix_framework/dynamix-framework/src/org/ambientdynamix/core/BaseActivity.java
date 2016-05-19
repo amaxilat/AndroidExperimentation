@@ -18,6 +18,7 @@ package org.ambientdynamix.core;
 import android.app.TabActivity;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.content.res.Resources;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
@@ -30,23 +31,23 @@ import android.view.MenuItem.OnMenuItemClickListener;
 import android.view.View;
 import android.view.ViewParent;
 import android.view.WindowManager;
+import android.webkit.CookieSyncManager;
 import android.widget.TabHost;
 import android.widget.TabHost.TabSpec;
 import android.widget.Toast;
 
-import com.github.amlcurran.showcaseview.ShowcaseView;
-import com.github.amlcurran.showcaseview.targets.ActionViewTarget;
-
 import org.ambientdynamix.data.DynamixPreferences;
 import org.ambientdynamix.util.AndroidNotification;
+
+import java.security.SecureRandom;
 
 import eu.smartsantander.androidExperimentation.tabs.InfoTab;
 import eu.smartsantander.androidExperimentation.tabs.MessagesTab;
 import eu.smartsantander.androidExperimentation.tabs.NewExperimentTab;
 import eu.smartsantander.androidExperimentation.tabs.StatisticsTab;
-
-//import eu.smartsantander.androidExperimentation.tabs.DefaultSensingActivity;
-
+import eu.smartsantander.androidExperimentation.util.Constants;
+import eu.smartsantander.androidExperimentation.util.GenericDialogListener;
+import eu.smartsantander.androidExperimentation.util.OrganicityOAuthDialog;
 
 /**
  * Base Activity for the Dynamix Framework UI. Responsible for hosting Tabs and
@@ -84,10 +85,13 @@ public class BaseActivity extends TabActivity {
     private static final Handler uiHander = new Handler();
     private static Context context;
     public static final int PLUGINS_TAB_ID = 3;
+
     private TabHost tabHost = null;
     private static boolean activityVisible;
 
     public static Resources myRes;
+    public static String access_token;
+    private long nonce;
 
 
     public static void close() {
@@ -290,6 +294,9 @@ public class BaseActivity extends TabActivity {
 
         // Setup Change Settings
         MenuItem item1 = menu.add(1, Menu.FIRST + 1, Menu.NONE, "Change Settings");
+        final MenuItem item3 = menu.add(1, Menu.FIRST + 1, Menu.NONE, "Disconnect Organicity Account");
+        final MenuItem item2 = menu.add(1, Menu.FIRST + 1, Menu.NONE, "Connect Organicity Account");
+
         item1.setOnMenuItemClickListener(new OnMenuItemClickListener() {
             public boolean onMenuItemClick(MenuItem item) {
                 startActivity(new Intent(BaseActivity.this,
@@ -297,6 +304,87 @@ public class BaseActivity extends TabActivity {
                 return true;
             }
         });
+
+        item2.setOnMenuItemClickListener(new OnMenuItemClickListener() {
+            public boolean onMenuItemClick(MenuItem item) {
+
+                //NotifierHelper.displayToast(mContext, "onClick_fsqLogin", NotifierHelper.SHORT_TOAST);
+                baseActivity.nonce = new SecureRandom().nextLong();
+                String authRequestRedirect = Constants.ORGANICITY_APP_OAUTH_BASEURL + Constants.ORGANICITY_APP_OAUTH_URL
+                        + "?client_id=" + Constants.ORGANICITY_APP_KEY
+                        + "&redirect_uri=" + Constants.ORGANICITY_APP_CALLBACK_OAUTHCALLBACK
+//                        + "&scope=user"
+                        + "&response_type=id_token token"
+                        + "&state=" + System.currentTimeMillis()
+                        + "&nonce=" + nonce
+//                        + "&display=touch"
+                        ;
+                Log.d(TAG, "authRequestRedirect->" + authRequestRedirect);
+
+                CookieSyncManager.createInstance(context);
+                new OrganicityOAuthDialog(context, authRequestRedirect
+                        , new GenericDialogListener() {
+                    public void onComplete(final Bundle values) {
+                        Log.d(TAG, "onComplete->" + values);
+
+                        try {
+                            final SharedPreferences sharedPref = getApplicationContext().getSharedPreferences("aaa", Context.MODE_PRIVATE);
+                            final SharedPreferences.Editor editor = sharedPref.edit();
+                            editor.putString("access_token", BaseActivity.access_token);
+                            editor.apply();
+                        } catch (Exception e) {
+                            Log.e(TAG, e.getMessage(), e);
+                        }
+                        runOnUiThread(new Runnable() {
+                            @Override
+                            public void run() {
+                                item3.setVisible(true);
+                                item2.setVisible(false);
+                            }
+                        });
+
+                    }
+
+                    public void onError(String e) {
+                        Log.d(TAG, "onError->" + e);
+                    }
+
+                    public void onCancel() {
+                        Log.d(TAG, "onCancel()");
+                    }
+                }).show();
+
+
+                return true;
+            }
+        });
+
+        item3.setOnMenuItemClickListener(new OnMenuItemClickListener() {
+            @Override
+            public boolean onMenuItemClick(MenuItem item) {
+                try {
+                    final SharedPreferences sharedPref = getApplicationContext().getSharedPreferences("aaa", Context.MODE_PRIVATE);
+                    final SharedPreferences.Editor editor = sharedPref.edit();
+                    editor.remove("access_token");
+                    editor.apply();
+                    item2.setVisible(true);
+                    item3.setVisible(false);
+                } catch (Exception e) {
+                    Log.e(TAG, e.getMessage(), e);
+                }
+                return false;
+            }
+        });
+
+        final String accessToken = getApplicationContext().getSharedPreferences("aaa", MODE_PRIVATE).getString("access_token", null);
+        if (accessToken == null) {
+            item3.setVisible(false);
+            item2.setVisible(true);
+        } else {
+            item3.setVisible(true);
+            item2.setVisible(false);
+        }
+
 
         //Setup Help Settings
 //        MenuItem item2 = menu.add(2, Menu.FIRST + 2, Menu.NONE, "Help");

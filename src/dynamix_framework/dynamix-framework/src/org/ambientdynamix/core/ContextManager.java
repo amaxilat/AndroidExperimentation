@@ -498,7 +498,7 @@ class ContextManager implements IPluginContextListener, IPluginFacade {
                                     }
                                 }
                             }
-                        } else
+                        } else {
                             // Handle event data of type UNICAST
                             if (infoSet.getEventType() == EventType.UNICAST) {
                                 // Translate the responseId into a specific request list for the event
@@ -542,22 +542,28 @@ class ContextManager implements IPluginContextListener, IPluginFacade {
                                                     }
                                                 }
                                             }
-                                        } else
+                                        } else {
                                             Log.w(TAG, "Could not find session for: " + request.getApp());
+                                        }
                                     }
-                                } else
+                                } else {
                                     Log.w(TAG, "Could not find receipients for responseId: " + infoSet.getResponseId());
-                            } else
+                                }
+                            } else {
                                 throw new RuntimeException("Unknown event type: " + infoSet.getEventType());
+                            }
+                        }
                         /*
                          * Finally, notify the context listeners of the new events
 						 */
-                        if (FrameworkConstants.DEBUG)
-                            Log.v(TAG, "onPluginContextEvent generated an eventMap of size: " + eventMap.size());
-                        if (eventMap.size() > 0)
+                        Log.v(TAG, "onPluginContextEvent generated an eventMap of size: " + eventMap.size());
+
+                        if (eventMap.size() > 0) {
                             SessionManager.notifyContextListeners(eventMap);
-                    } else
+                        }
+                    } else {
                         Log.w(TAG, "eventData was NULL... this should not happen!");
+                    }
                 }
             });
             t.setDaemon(true);
@@ -653,16 +659,16 @@ class ContextManager implements IPluginContextListener, IPluginFacade {
                             t = registerLooperThreadForPlug(plug);
                         }
                     }
-					/*
-					 * Create the plug-in's runtime using its Looper thread
+                    /*
+                     * Create the plug-in's runtime using its Looper thread
 					 */
                     t.handler.post(new Runnable() {
                         @Override
                         public void run() {
                             // Set initializing state
                             pluginWrapper.setState(PluginState.INITIALIZING);
-							/*
-							 * For security, ensure that the incoming IContextPluginRuntimeFactory is implemented by
+                            /*
+                             * For security, ensure that the incoming IContextPluginRuntimeFactory is implemented by
 							 * org.ambientdynamix.api.contextplugin.ContextPluginRuntimeFactory
 							 */
                             if (factory instanceof org.ambientdynamix.api.contextplugin.ContextPluginRuntimeFactory) {

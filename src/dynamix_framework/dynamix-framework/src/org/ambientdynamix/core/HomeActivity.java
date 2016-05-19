@@ -17,6 +17,7 @@ package org.ambientdynamix.core;
 
 import android.app.Activity;
 import android.app.AlertDialog;
+import android.app.PendingIntent;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageInfo;
@@ -65,6 +66,7 @@ import java.util.Set;
 import java.util.Timer;
 import java.util.TimerTask;
 
+import eu.smartsantander.androidExperimentation.ActivityRecognitionService;
 import eu.smartsantander.androidExperimentation.fragment.SensorMeasurement;
 import eu.smartsantander.androidExperimentation.fragment.SensorMeasurementAdapter;
 import eu.smartsantander.androidExperimentation.operations.AsyncReportOnServerTask;
@@ -108,9 +110,10 @@ public class HomeActivity extends Activity implements GoogleApiClient.Connection
 
     final LocationRequest mLocationRequest = LocationRequest.create()
             .setPriority(LocationRequest.PRIORITY_HIGH_ACCURACY)
-            .setInterval(30 * 1000)        // 30 seconds, in milliseconds
-            .setFastestInterval(10 * 1000); // 10 seconds, in milliseconds
+            .setInterval(120 * 1000)        // 30 seconds, in milliseconds
+            .setFastestInterval(30 * 1000); // 10 seconds, in milliseconds
     private PolylineOptions line = null;
+    private PendingIntent activityRecognitionPendingIntent;
 
 
     // Refreshes the UI
@@ -173,8 +176,8 @@ public class HomeActivity extends Activity implements GoogleApiClient.Connection
         listView.setAdapter(sensorMeasurementAdapter);
 
         //Disable for now
-        //final Intent activityRecognitionIntent = new Intent(this, ActivityRecognitionService.class);
-        //pIntent = PendingIntent.getService(getApplicationContext(), 0, activityRecognitionIntent, PendingIntent.FLAG_UPDATE_CURRENT);
+        final Intent activityRecognitionIntent = new Intent(this, ActivityRecognitionService.class);
+        activityRecognitionPendingIntent = PendingIntent.getService(getApplicationContext(), 0, activityRecognitionIntent, PendingIntent.FLAG_UPDATE_CURRENT);
 
         mGoogleApiClient = new GoogleApiClient.Builder(this)
                 .addApi(ActivityRecognition.API)
@@ -399,7 +402,7 @@ public class HomeActivity extends Activity implements GoogleApiClient.Connection
     public void onConnected(Bundle bundle) {
         Log.d(TAG, "Google activity recognition services connected");
         //Disable for now
-        //ActivityRecognition.ActivityRecognitionApi.requestActivityUpdates(mGoogleApiClient, 10000, pIntent);
+        ActivityRecognition.ActivityRecognitionApi.requestActivityUpdates(mGoogleApiClient, 10000, activityRecognitionPendingIntent);
     }
 
     @Override

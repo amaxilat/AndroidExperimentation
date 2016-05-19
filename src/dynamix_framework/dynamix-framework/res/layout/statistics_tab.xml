@@ -8,11 +8,44 @@
         android:fontFamily="sans-serif-light"
         android:orientation="vertical">
 
-        <ImageView
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="40dip"
-            android:layout_marginBottom="20dip"
-            android:src="@drawable/profile_unselected" />
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <ImageView
+                android:layout_width="40dp"
+                android:layout_height="40dip"
+                android:layout_marginBottom="20dip"
+                android:layout_marginStart="20dip"
+                android:layout_marginTop="20dip"
+                android:src="@drawable/profile_unselected" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="20dip"
+                android:layout_marginStart="20dip"
+                android:layout_marginTop="20dip"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/stats_name"
+                    android:layout_width="fill_parent"
+                    android:layout_height="20dip"
+                    android:text=""
+                    android:textAlignment="center" />
+
+                <TextView
+                    android:id="@+id/stats_email"
+                    android:layout_width="fill_parent"
+                    android:layout_height="20dip"
+                    android:fontFamily="sans-serif-light"
+                    android:text="" />
+
+            </LinearLayout>
+
+        </LinearLayout>
 
         <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
             xmlns:tools="http://schemas.android.com/tools"
@@ -192,6 +225,7 @@
         </RelativeLayout>
 
         <TextView
+            android:id="@+id/heatmaptitle"
             android:layout_width="fill_parent"
             android:layout_height="20dip"
             android:layout_marginTop="20dip"
