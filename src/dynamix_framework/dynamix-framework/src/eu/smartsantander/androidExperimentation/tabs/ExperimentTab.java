@@ -125,7 +125,7 @@ public class ExperimentTab extends Activity {
     }
 
     public void setSmartSantanderInfo() {
-        // SmartSantander
+        // Organicity
 
         if (DynamixService.getExperiment() != null) {
             expIdTv.setText("Id: " + String.valueOf(DynamixService.getExperiment().getId()));

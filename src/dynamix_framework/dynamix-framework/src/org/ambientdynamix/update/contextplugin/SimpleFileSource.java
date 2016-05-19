@@ -91,7 +91,7 @@ public class SimpleFileSource extends SimpleSourceBase implements IContextPlugin
 		 */
 		cancel = false;
 		
-		Log.i(TAG, "Checking for context plug-ins using: SmartSantander");
+		Log.i(TAG, "Checking for context plug-ins using: Organicity");
 		Log.i(TAG, "Repository URL is: " + Constants.URL);
 		List<DiscoveredContextPlugin> updates = new Vector<>();
 		try { //smartsantander modification

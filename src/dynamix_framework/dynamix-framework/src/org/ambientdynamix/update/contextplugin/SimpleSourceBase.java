@@ -48,7 +48,7 @@ public class SimpleSourceBase {
             VersionInfo platformVersion, VersionInfo frameworkVersion,
             boolean processSingle) throws Exception {
 
-        // SmartSantander Modifications
+        // Organicity Modifications
         Log.i("AndroidExperimentation", "Start Plugin Discovery");
         String jsonPluginList = "";
         final List<DiscoveredContextPlugin> plugs = new ArrayList<>();

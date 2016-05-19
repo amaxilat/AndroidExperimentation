@@ -39,7 +39,7 @@ public class AsyncStatusRefreshTask extends AsyncTask<Void, String, Integer> {
     @Override
     protected Integer doInBackground(Void... params) {
         Log.i(TAG, "doInBackground");
-        //SmartSantander
+        //Organicity
         if (DynamixService.isEnabled()) {
             if (!DynamixService.isDeviceRegistered()) {
                 DynamixService.getPhoneProfiler().register();

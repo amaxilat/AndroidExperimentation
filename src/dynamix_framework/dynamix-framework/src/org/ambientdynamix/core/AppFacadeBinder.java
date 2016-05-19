@@ -857,7 +857,7 @@ class AppFacadeBinder extends IDynamixFacade.Stub implements IDynamixFrameworkLi
             else {
                 if (Binder.getCallingUid() == android.os.Process.myUid()) {
                     Log.v(TAG, "Caller was Dynamix when not running in embedded mode... invalid");
-                    return Binder.getCallingUid(); //SmartSantander shortcut...
+                    return Binder.getCallingUid(); //Organicity shortcut...
                 } else
                     return Binder.getCallingUid();
             }

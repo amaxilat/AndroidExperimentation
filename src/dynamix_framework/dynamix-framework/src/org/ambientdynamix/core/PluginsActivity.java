@@ -365,7 +365,7 @@ public class PluginsActivity extends ListActivity implements
         btnFindPlugs.setOnClickListener(new View.OnClickListener() {
             public void onClick(View view) {
                 DynamixService.checkForNewContextPlugins(activity);
-                // SmartSantander
+                // Organicity
                 updateSensorPermissionInfo();
             }
         });
@@ -393,7 +393,7 @@ public class PluginsActivity extends ListActivity implements
 
                 DynamixService.installPlugins(Utils.getSortedContextPluginList(plugs),
                         PluginsActivity.this);
-                // SmartSantander
+                // Organicity
                 updateSensorPermissionInfo();
             }
         });
@@ -402,7 +402,7 @@ public class PluginsActivity extends ListActivity implements
 
     }
 
-    // SmartSantander
+    // Organicity
     private void updateSensorPermissionInfo() {
         // 0 - for private mode
         final SharedPreferences pref = getApplicationContext().getSharedPreferences("sensors", 0);

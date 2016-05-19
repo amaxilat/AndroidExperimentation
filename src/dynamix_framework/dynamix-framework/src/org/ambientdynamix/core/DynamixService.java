@@ -2274,7 +2274,7 @@ public final class DynamixService extends IntentService {
                         Log.i(TAG, "Dynamix Service Started!");
 
 
-                        //SmartSantander
+                        //Organicity
                         if (!DynamixService.getPhoneProfiler().getStarted()) {
                             DynamixService.getPhoneProfiler().start();
                         } else {

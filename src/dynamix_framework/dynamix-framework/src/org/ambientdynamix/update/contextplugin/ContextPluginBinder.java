@@ -154,7 +154,7 @@ public class ContextPluginBinder
 			throw new Exception("Context Plugin Invalid");
 	}
 	
-	//SmartSantander Modification
+	//Organicity Modification
 	public DiscoveredContextPlugin createDiscoveredPlugin(RepositoryInfo source, Plugin plugInfo) throws Exception
 	{
 		String id = String.valueOf(plugInfo.getContextType());
@@ -249,7 +249,7 @@ public class ContextPluginBinder
 	}
 	
 	
-	//SmartSantander Modification
+	//Organicity Modification
 		public ContextPlugin createContextPlugin(RepositoryInfo source, Plugin plugInfo) throws Exception
 		{
 			String id = String.valueOf(plugInfo.getContextType());

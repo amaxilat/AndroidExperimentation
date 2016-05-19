@@ -94,7 +94,7 @@ public class HomeActivity extends Activity implements GoogleApiClient.Connection
     public final Handler uiHandler = new Handler();
     private boolean startedGcm = false;
 
-    //SmartSantander
+    //Organicity
     public TextView phoneIdTv;
     public TextView expDescriptionTv;
     private MixpanelAPI mMixpanel;

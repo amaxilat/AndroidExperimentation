@@ -258,10 +258,10 @@ class ContextManager implements IPluginContextListener, IPluginFacade {
                         ClassLoader cl = DynamixService.getContextPluginClassLoader(plug);
                         if (cl != null) {
 
-                            // -- SmartSantander modification here //todo fix this to generic
+                            // -- Organicity modification here //todo fix this to generic
 
                             String plugId = plug.getId();
-                            Log.i(TAG, "AD:SmartSantander Installing Plugin " + plugId);
+                            Log.i(TAG, "AD:Organicity Installing Plugin " + plugId);
 
                             switch (plugId) {
                                 case "org.ambientdynamix.contextplugins.batteryLevelPlugin":
