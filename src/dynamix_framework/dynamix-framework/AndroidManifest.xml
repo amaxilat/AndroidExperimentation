@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="org.ambientdynamix.core"
-    android:versionCode="6"
+    android:versionCode="7"
     android:versionName="1.0">
 
     <uses-sdk
@@ -141,9 +141,9 @@
         <activity
             android:name="eu.smartsantander.androidExperimentation.tabs.DefaultSensingActivity"
             android:label="defaults"></activity>
-        <activity
-            android:name="eu.smartsantander.androidExperimentation.tabs.ExperimentTab"
-            android:label="jobsTab"></activity>
+        <!--<activity-->
+            <!--android:name="eu.smartsantander.androidExperimentation.tabs.ExperimentTab"-->
+            <!--android:label="jobsTab"></activity>-->
         <activity
             android:name="eu.smartsantander.androidExperimentation.tabs.NewExperimentTab"
             android:label="newJobsTab"></activity>
@@ -217,6 +217,7 @@
     <uses-permission android:name="android.permission.CHANGE_WIFI_STATE" />
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <uses-permission android:name="android.permission.WRITE_INTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.WAKE_LOCK" />
     <uses-permission android:name="android.permission.VIBRATE" />
