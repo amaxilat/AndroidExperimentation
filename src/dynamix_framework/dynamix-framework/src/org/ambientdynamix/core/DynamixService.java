@@ -1964,6 +1964,12 @@ public final class DynamixService extends IntentService {
         } catch (Exception e2) {
             Log.w(TAG, "Problem extracting keystore: " + e2);
         }
+
+        //Prepare our looper, if needed.
+        if (Looper.myLooper() == null) {
+            Looper.prepare();
+        }
+
         // Check boot state
         synchronized (bootState) {
             /*
@@ -1982,11 +1988,7 @@ public final class DynamixService extends IntentService {
 				 * the SessionManager's Handler is bound to our main thread. DO NOT REMOVE THIS CALL FROM THIS LOCATION.
 				 */
                 SessionManager.getAllSessions();
-                /*
-                 * Prepare our looper, if needed.
-				 */
-                if (Looper.myLooper() == null)
-                    Looper.prepare();
+
                 // Set service is running
                 androidServiceRunning = true;
                 // Create a framework session id for secure internal communications
