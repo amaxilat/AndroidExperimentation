@@ -85,7 +85,7 @@ public class Communication extends Thread implements Runnable {
                 return new ObjectMapper().readValue(stats, SmartphoneStatistics.class);
             }
             return null;
-        } catch (IOException e) {
+        } catch (Exception e) {
             e.printStackTrace();
         }
         return null;
@@ -94,8 +94,11 @@ public class Communication extends Thread implements Runnable {
     public SmartphoneStatistics getSmartphoneStatistics(int id, int experimentId) {
         try {
             final String stats = get("/smartphone/" + id + "/statistics/" + experimentId);
-            return new ObjectMapper().readValue(stats, SmartphoneStatistics.class);
-        } catch (IOException e) {
+            if (stats != null) {
+                return new ObjectMapper().readValue(stats, SmartphoneStatistics.class);
+            }
+            return null;
+        } catch (Exception e) {
             e.printStackTrace();
         }
         return null;
@@ -118,7 +121,7 @@ public class Communication extends Thread implements Runnable {
                 Log.e(TAG, e.getMessage(), e);
                 return null;
             }
-        } catch (IOException e) {
+        } catch (Exception e) {
             Log.e(TAG, e.getMessage(), e);
             return null;
         }
@@ -212,7 +215,7 @@ public class Communication extends Thread implements Runnable {
         }
     }
 
-    private String post(final String path, final String entity) throws IOException {
+    private String post(final String path, final String entity) throws Exception {
 
         final String url = Constants.URL + "/api/v1" + path;
 
@@ -220,7 +223,7 @@ public class Communication extends Thread implements Runnable {
         return restTemplate.postForObject(url, entity, String.class, new ArrayList<String>());
     }
 
-    private String get(final String path) throws IOException {
+    private String get(final String path) throws Exception {
 
         final String url = Constants.URL + "/api/v1" + path;
 
@@ -228,7 +231,7 @@ public class Communication extends Thread implements Runnable {
         return restTemplate.getForObject(url, String.class, new ArrayList<String>());
     }
 
-    private String get(final URI uri) throws IOException {
+    private String get(final URI uri) throws Exception {
 
         // Make the HTTP GET request, marshaling the response to a String
         return restTemplate.getForObject(uri, String.class);
