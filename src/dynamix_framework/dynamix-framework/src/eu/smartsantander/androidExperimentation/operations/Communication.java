@@ -81,7 +81,10 @@ public class Communication extends Thread implements Runnable {
     public SmartphoneStatistics getSmartphoneStatistics(Integer id) {
         try {
             final String stats = get("/smartphone/" + id + "/statistics");
-            return new ObjectMapper().readValue(stats, SmartphoneStatistics.class);
+            if (stats != null) {
+                return new ObjectMapper().readValue(stats, SmartphoneStatistics.class);
+            }
+            return null;
         } catch (IOException e) {
             e.printStackTrace();
         }
