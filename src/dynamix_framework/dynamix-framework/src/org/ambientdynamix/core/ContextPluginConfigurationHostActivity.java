@@ -114,7 +114,6 @@ public class ContextPluginConfigurationHostActivity extends Activity {
 					final ContextPlugin plug = DynamixService.getInstalledContextPlugin(pluginId);
 					// Check if app is allowed to launch plug-in
 					final ContextPluginRuntime runtime = plugWrapper.getContextPluginRuntime();
-					Log.i(TAG, "getContextPluginRuntime result was: " + runtime);
 					try {
 						Class<IContextPluginConfigurationViewFactory> factory = runtime.getSettingsViewFactory();
 						if (factory != null) {
@@ -123,7 +122,6 @@ public class ContextPluginConfigurationHostActivity extends Activity {
 									runtime.getPluginFacade().getSecuredContext(runtime.getSessionId()), runtime,
 									TITLEBAR_HEIGHT);
 							// setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
-							Log.i(TAG, "Got viewFactory: " + viewFactory);
 							// Register our Activity so Dynamix can close us later on request from the
 							// IPluginFacade
 							DynamixService.registerConfigurationActivity(runtime,

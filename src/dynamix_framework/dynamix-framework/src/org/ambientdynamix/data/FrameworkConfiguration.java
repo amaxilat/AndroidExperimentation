@@ -82,7 +82,6 @@ public class FrameworkConfiguration {
      * @throws Exception If the properties file cannot be parsed (includes a detailed error message).
      */
     public static FrameworkConfiguration createFromPropsFile(String propsFilePath) throws Exception {
-        Log.i(TAG, "Creating FrameworkConfiguration using path: " + propsFilePath);
         // Create a new FrameworkConfiguration
         FrameworkConfiguration config = new FrameworkConfiguration();
         // Create a Properties entity

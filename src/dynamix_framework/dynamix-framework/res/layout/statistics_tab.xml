@@ -33,7 +33,7 @@
                     android:id="@+id/stats_name"
                     android:layout_width="fill_parent"
                     android:layout_height="20dip"
-                    android:text=""
+                    android:text="@string/empty"
                     android:textAlignment="center" />
 
                 <TextView
@@ -41,7 +41,7 @@
                     android:layout_width="fill_parent"
                     android:layout_height="20dip"
                     android:fontFamily="sans-serif-light"
-                    android:text="" />
+                    android:text="@string/empty" />
 
             </LinearLayout>
 
@@ -109,7 +109,7 @@
                     android:layout_width="fill_parent"
                     android:layout_height="wrap_content"
                     android:fontFamily="sans-serif-light"
-                    android:text="Ranking"
+                    android:text="@string/Ranking"
                     android:textAppearance="?android:attr/textAppearanceSmall" />
 
                 <TextView
@@ -123,7 +123,7 @@
                     android:layout_width="fill_parent"
                     android:layout_height="wrap_content"
                     android:fontFamily="sans-serif-light"
-                    android:text="Badges"
+                    android:text="@string/Badges"
                     android:textAppearance="?android:attr/textAppearanceSmall" />
 
                 <TextView
@@ -151,7 +151,7 @@
                 <TextView
                     android:layout_width="fill_parent"
                     android:layout_height="20dip"
-                    android:text="Current Experiment"
+                    android:text="@string/Current_Experiment"
                     android:textAlignment="center"
                     android:textAllCaps="true" />
 
@@ -159,7 +159,7 @@
                     android:layout_width="fill_parent"
                     android:layout_height="20dip"
                     android:fontFamily="sans-serif-light"
-                    android:text="" />
+                    android:text="@string/empty" />
 
                 <TextView
                     android:id="@+id/stats_number_exp_value"
@@ -197,7 +197,7 @@
                     android:layout_width="fill_parent"
                     android:layout_height="wrap_content"
                     android:fontFamily="sans-serif-light"
-                    android:text="Ranking"
+                    android:text="@string/Ranking"
                     android:textAppearance="?android:attr/textAppearanceSmall" />
 
                 <TextView
@@ -211,7 +211,7 @@
                     android:layout_width="fill_parent"
                     android:layout_height="wrap_content"
                     android:fontFamily="sans-serif-light"
-                    android:text="Badges"
+                    android:text="@string/Badges"
                     android:textAppearance="?android:attr/textAppearanceSmall" />
 
                 <TextView

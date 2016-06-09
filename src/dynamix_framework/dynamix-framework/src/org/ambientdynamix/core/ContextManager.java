@@ -154,7 +154,6 @@ class ContextManager implements IPluginContextListener, IPluginFacade {
         synchronized (statMap) {
             PluginStats stats = statMap.get(plug);
             if (stats != null) {
-                Log.d(TAG, "Clearing statistics for: " + plug);
                 stats.clear();
                 return true;
             }
@@ -174,7 +173,6 @@ class ContextManager implements IPluginContextListener, IPluginFacade {
         if (plug != null) {
             if (configActivityMap.containsKey(plug)) {
                 Activity act = configActivityMap.remove(plug);
-                Log.d(TAG, "Closing Activity: " + act);
                 Intent i = new Intent();
                 i.putExtra("plug", plug);
                 if (act.getParent() != null) {
@@ -202,7 +200,6 @@ class ContextManager implements IPluginContextListener, IPluginFacade {
             synchronized (acquisitionActivityMap) {
                 if (acquisitionActivityMap.containsKey(plug)) {
                     Activity act = acquisitionActivityMap.remove(plug);
-                    Log.d(TAG, "Closing Activity: " + act);
                     act.finish();
                 } else {
                     Log.w(TAG, "closeContextAcquisitionView could not find an activity for plugin: " + plug);
@@ -261,8 +258,6 @@ class ContextManager implements IPluginContextListener, IPluginFacade {
                             // -- Organicity modification here //todo fix this to generic
 
                             String plugId = plug.getId();
-                            Log.i(TAG, "AD:Organicity Installing Plugin " + plugId);
-
                             switch (plugId) {
                                 case "org.ambientdynamix.contextplugins.batteryLevelPlugin":
                                     sc = new SecuredContext(context, uiHandler, plt.getLooper(),
@@ -445,8 +440,7 @@ class ContextManager implements IPluginContextListener, IPluginFacade {
                                     }
                                 }
                             }
-                        } else
-                            Log.d(TAG, "SourcedContextInfoSet error had a BROADCAST target... ignoring");
+                        }
                     }
                     // Make sure that we have event data to process
                     if (sourcedSet.getContextInfoSet() != null
@@ -618,7 +612,6 @@ class ContextManager implements IPluginContextListener, IPluginFacade {
      */
     protected synchronized void initializeContextPlugin(final ContextPlugin plug,
                                                         final IContextPluginRuntimeFactory factory, final ContextPluginSettings settings, final Runnable finalizer) {
-        Log.d(TAG, "Initialize plug-in: " + plug);
         // Only init if installed
         if (plug.isInstalled()) {
             // Only init if enabled
@@ -628,7 +621,6 @@ class ContextManager implements IPluginContextListener, IPluginFacade {
                     // Handle pluginMap updating
                     synchronized (pluginMap) {
                         if (!pluginMap.containsKey(plug)) {
-                            Log.d(TAG, "Adding a new runtime wrapper for " + plug);
                             pluginMap.put(plug, new ContextPluginRuntimeWrapper());
                         } else {
                             // Plug-in is already in the pluginMap, make sure it's new
@@ -638,10 +630,6 @@ class ContextManager implements IPluginContextListener, IPluginFacade {
                                         "Ignoring init for existing plug-in " + plug + " with state: "
                                                 + tmpWrapper.getState());
                                 return;
-                            } else {
-                                Log.d(TAG,
-                                        "Found existing runtime wrapper for " + plug + " with state: "
-                                                + tmpWrapper.getState());
                             }
                         }
                     }
@@ -649,7 +637,6 @@ class ContextManager implements IPluginContextListener, IPluginFacade {
                     final ContextPluginRuntimeWrapper pluginWrapper = pluginMap.get(plug);
                     PluginLooperThread t = null;
                     synchronized (threadMap) {
-                        Log.d(TAG, "Creating runtime thread for " + plug);
                         if (threadMap.containsKey(plug)) {
                             Log.e(TAG, "NEW plug-in already had thread... this should not happen. Plugin: " + plug);
                             // PluginLooperThread oldThread = threadMap.remove(plug);
@@ -685,8 +672,8 @@ class ContextManager implements IPluginContextListener, IPluginFacade {
                                 if (runtime != null) {
                                     // Setup the pluginWrapper using the runtime
                                     pluginWrapper.setContextPluginRuntime(runtime);
-									/*
-									 * Initialize the ContextPluginRuntime using the event handler, power scheme and
+                                    /*
+                                     * Initialize the ContextPluginRuntime using the event handler, power scheme and
 									 * settings.
 									 */
                                     try {
@@ -698,8 +685,8 @@ class ContextManager implements IPluginContextListener, IPluginFacade {
                                         // Clear any previous status messages
                                         runtime.clearStatusMessage();
                                         Log.v(TAG, "Runtime is initialized for: " + plug);
-										/*
-										 * Add ourselves as a context listener... remember, we can only add listeners
+                                        /*
+                                         * Add ourselves as a context listener... remember, we can only add listeners
 										 * after INIT!
 										 */
                                         runtime.addContextListener(ContextManager.this);
@@ -712,13 +699,11 @@ class ContextManager implements IPluginContextListener, IPluginFacade {
                                                 statMap.put(plug, stats);
                                             }
                                         }
-                                        Log.d(TAG, "Checking for pending stop...");
                                         // Check for a pending stop request
                                         if (pendingPluginStop.keySet().contains(plug)) {
                                             Boolean destroy = pendingPluginStop.remove(plug);
                                             stopPlugin(plug, true, destroy);
                                         } else {
-                                            Log.d(TAG, "Checking for start...");
                                             // Start the plugin (startPlugin checks for proper start state)
                                             startPlugin(plug);
                                         }
@@ -754,16 +739,12 @@ class ContextManager implements IPluginContextListener, IPluginFacade {
                         }
                     });
                 } else {
-                    if (DynamixService.isFrameworkStarted())
+                    if (DynamixService.isFrameworkStarted()) {
                         Log.w(TAG, "factory was NULL in initializeContextPlugin");
-                    else
-                        Log.d(TAG, "initializeContextPlugin called when Dynamix is disabled, ignoring request for "
-                                + plug);
+                    }
                 }
-            } else
-                Log.d(TAG, "Ignoring initializeContextPlugin request for disabled plug-in: " + plug);
-        } else
-            Log.d(TAG, "Ignoring initializeContextPlugin for uninstalled plug-in: " + plug);
+            }
+        }
     }
 
     /**
@@ -804,16 +785,16 @@ class ContextManager implements IPluginContextListener, IPluginFacade {
                 if (!completePluginList.contains(plug))
                     completePluginList.add(plug);
         }
-		/*
-		 * Scan through the completePluginList looking for plug-ins that support the specified contextType.
+        /*
+         * Scan through the completePluginList looking for plug-ins that support the specified contextType.
 		 */
         for (ContextPlugin plug : completePluginList) {
             // If a pluginId is specified, only setup support for that particular plug-in
             if (pluginId != null)
                 if (!plug.getId().equalsIgnoreCase(pluginId))
                     break;
-			/*
-			 * Check if the ContextPlugin supports the requested contextDataType. It's ok to setup context support for
+            /*
+             * Check if the ContextPlugin supports the requested contextDataType. It's ok to setup context support for
 			 * installing plug-ins.
 			 */
             if (plug.supportsContextType(contextType)) {
@@ -824,8 +805,8 @@ class ContextManager implements IPluginContextListener, IPluginFacade {
                     if (session.addContextSupport(listener, sub)) {
                         // Add the support to the list returned to the caller
                         supportInfo.add(sub);
-						/*
-						 * Call startPlugin to ensure the plug-in is started, since we added context support
+                        /*
+                         * Call startPlugin to ensure the plug-in is started, since we added context support
 						 */
                         startPlugin(plug);
                     }
@@ -887,11 +868,10 @@ class ContextManager implements IPluginContextListener, IPluginFacade {
                 ContextPlugin plug = sub.getContextPlugin();
                 Result r = session.removeContextSupport(listener, sub, true);
                 if (r.wasSuccessful()) {
-					/*
-					 * Call stopPlugin if there are no more context support registrations for the plug-in
+                    /*
+                     * Call stopPlugin if there are no more context support registrations for the plug-in
 					 */
                     if (SessionManager.getContextSupportCount(plug) == 0) {
-                        Log.d(TAG, "Stopping plug-in because it has no more context support registrations: " + plug);
                         stopPlugin(plug, false, false);
                     }
                 }
@@ -974,12 +954,11 @@ class ContextManager implements IPluginContextListener, IPluginFacade {
      * @param plug The new ContextPlugin to add.
      */
     protected boolean addNewContextPlugin(ContextPlugin plug) {
-        Log.d(TAG, "addNewContextPlugin for: " + plug + " with InstallStatus: " + plug.getInstallStatus());
         synchronized (pluginMap) {
             // Check if the plugin's runtime is already being managed (i.e., it's listed in the pluginMap)
             if (!pluginMap.containsKey(plug)) {
-				/*
-				 * Add an EmptyContextPluginRuntime to the pluginMap to serve as a place-holder while the plug-in's
+                /*
+                 * Add an EmptyContextPluginRuntime to the pluginMap to serve as a place-holder while the plug-in's
 				 * Bundle is being installed.
 				 */
                 EmptyContextPluginRuntime rt = new EmptyContextPluginRuntime();
@@ -1101,19 +1080,6 @@ class ContextManager implements IPluginContextListener, IPluginFacade {
                 // Check if the runtime is already bound to an Activity
                 if (!acquisitionActivityMap.containsKey(plug)) {
                     acquisitionActivityMap.put(plug, activity);
-                } else {
-					/*
-					 * The runtime is already bound to an Activity. Log warnings.
-					 */
-                    Activity existing = acquisitionActivityMap.get(runtime);
-                    if (existing != null) {
-                        if (existing.equals(activity))
-                            Log.d(TAG, runtime + " is already bound to context acquisition activity: " + activity);
-                        else
-                            Log.w(TAG, runtime + " is bound, but not to context acquisition activity: " + activity);
-                    } else
-                        Log.w(TAG, "registerContextAcquisitionActivity could not find existing Activity for: "
-                                + runtime);
                 }
             }
         } else
@@ -1126,19 +1092,12 @@ class ContextManager implements IPluginContextListener, IPluginFacade {
      * @param runtime The runtime unregister.
      */
     protected void unregisterContextAcquisitionActivity(ContextPluginRuntime runtime) {
-        Log.d(TAG, "unregisterContextAcquisitionActivity for " + runtime);
         if (runtime != null) {
             ContextPlugin plug = getContextPlugin(runtime.getSessionId());
             if (plug != null) {
-                Activity a = acquisitionActivityMap.remove(plug);
-                if (a != null)
-                    Log.d(TAG, "Unregistered context acquisition activity for " + runtime);
-                else
-                    Log.d(TAG, "Could not find context acquisition activity... probably closed by " + runtime);
-            } else
-                Log.w(TAG, "unregisterContextAcquisitionActivity could not find a plugin for: " + runtime);
-        } else
-            Log.w(TAG, "unregisterContextAcquisitionActivity received null runtime");
+                acquisitionActivityMap.remove(plug);
+            }
+        }
     }
 
     /**
@@ -1147,19 +1106,12 @@ class ContextManager implements IPluginContextListener, IPluginFacade {
      * @param runtime The runtime to unregister.
      */
     protected void unRegisterConfigurationActivity(ContextPluginRuntime runtime) {
-        Log.d(TAG, "unRegisterConfigurationActivity for " + runtime);
         if (runtime != null) {
             ContextPlugin plug = getContextPlugin(runtime.getSessionId());
             if (plug != null) {
-                Activity a = configActivityMap.remove(plug);
-                if (a != null)
-                    Log.d(TAG, "Unregistered plugin configuration activity for " + runtime);
-                else
-                    Log.d(TAG, "Could not find plugin configuration activity... probably closed by " + runtime);
-            } else
-                Log.w(TAG, "unRegisterConfigurationActivity could not find a plugin for: " + runtime);
-        } else
-            Log.w(TAG, "unRegisterConfigurationActivity received null runtime");
+                configActivityMap.remove(plug);
+            }
+        }
     }
 
     /**
@@ -1201,10 +1153,8 @@ class ContextManager implements IPluginContextListener, IPluginFacade {
      * @return True if the original plug-in was replaced by the new plug-in; false otherwise.
      */
     protected boolean replaceContextPlugin(ContextPlugin originalPlug, ContextPlugin newPlug) {
-        Log.d(TAG, "Updating " + originalPlug + " with: " + newPlug);
         if (originalPlug.isInstalled()) {
             // Remove any of the existing ContextPlugin's events that might remain in the contextCache
-            Log.d(TAG, "Removing cached events for: " + originalPlug);
             contextCache.removeContextEvents(originalPlug);
             // Remove management for originalPlug
             stopPlugin(originalPlug, true, true);
@@ -1276,7 +1226,6 @@ class ContextManager implements IPluginContextListener, IPluginFacade {
     protected synchronized void startContextManager() {
         synchronized (startState) {
             if (startState == StartState.STOPPED || startState == StartState.PAUSED) {
-                Log.d(TAG, "ContextManager starting! PluginMap count: " + pluginMap.size());
                 startState = StartState.STARTING;
                 // Start our contextCache
                 contextCache.start();
@@ -1324,16 +1273,13 @@ class ContextManager implements IPluginContextListener, IPluginFacade {
                             } else {
                                 // Handle start based on the wrapper's state
                                 if (wrapper.getState() == PluginState.STARTING) {
-                                    Log.d(TAG, "Ignoring start since the ContextPlugin is starting");
                                     return true;
                                 } else if (wrapper.getState() == PluginState.STARTED) {
-                                    Log.d(TAG, "Ignoring start since the ContextPlugin was already started");
                                     return true;
                                 } else if (wrapper.getState() == PluginState.INITIALIZED
                                         || wrapper.getState() == PluginState.ERROR
                                     //|| wrapper.getState() == PluginState.NEW //smartsantander
                                         ) {
-                                    Log.d(TAG, "Starting: " + runtime);
                                     // Set STARTING state
                                     wrapper.setState(PluginState.STARTING);
                                     final PluginLooperThread t = threadMap.get(plug);
@@ -1342,8 +1288,8 @@ class ContextManager implements IPluginContextListener, IPluginFacade {
                                             @Override
                                             public void run() {
                                                 try {
-													/*
-													 * Set a default exception handler to catch any weird problems from
+                                                    /*
+                                                     * Set a default exception handler to catch any weird problems from
 													 * the runtime.
 													 */
                                                     t.setUncaughtExceptionHandler(new UncaughtExceptionHandler() {
@@ -1372,8 +1318,8 @@ class ContextManager implements IPluginContextListener, IPluginFacade {
                                                         Boolean destroy = pendingPluginStop.remove(plug);
                                                         stopPlugin(plug, true, destroy);
                                                     } else {
-														/*
-														 * We need to set STARTED on the wrapper since the
+                                                        /*
+                                                         * We need to set STARTED on the wrapper since the
 														 * 'runtime.start()' method may block.
 														 */
                                                         wrapper.setState(PluginState.STARTED);
@@ -1384,11 +1330,9 @@ class ContextManager implements IPluginContextListener, IPluginFacade {
 														 */
                                                         if (startState == StartState.STARTED
                                                                 || startState == StartState.STARTING) {
-                                                            Log.d(TAG, "Start executing for: " + runtime);
                                                             wrapper.setExecuting(true);
                                                             runtime.start();
                                                             wrapper.setExecuting(false);
-                                                            Log.d(TAG, "Start finished executing for: " + runtime);
                                                         } else
                                                             Log.w(TAG,
                                                                     "ContextManager was stopped before plug-in could be started");
@@ -1413,20 +1357,13 @@ class ContextManager implements IPluginContextListener, IPluginFacade {
                                     updateManagerState();
                                     // Return true
                                     return true;
-                                } else
-                                    Log.w(TAG, "Cannot start " + plug + " from state: " + wrapper.getState());
+                                }
                             }
-                        } else
-                            Log.w(TAG, "Cannot start disabled plugin: " + plug);
-                    } else
-                        Log.w(TAG, "Could not find runtime for " + plug);
-                } else
-                    Log.w(TAG, "Could not find wrapper for: " + plug);
-            } else {
-                Log.d(TAG, "Not starting " + plug + " because it has no context support registrations");
+                        }
+                    }
+                }
             }
-        } else
-            Log.w(TAG, "Cannot start " + plug + " when the context manager is in state " + startState);
+        }
         // Update date
         updateManagerState();
         // Return false
@@ -1447,9 +1384,6 @@ class ContextManager implements IPluginContextListener, IPluginFacade {
                     // When stopping, we only set started to false when ALL plugins have been removed.
                     if (pluginMap.isEmpty()) {
                         startState = StartState.STOPPED;
-                    } else {
-                        for (ContextPlugin plug : pluginMap.keySet())
-                            Log.d(TAG, "Waiting for plug-in to stop: " + plug);
                     }
                 }
 				/*
@@ -1469,9 +1403,6 @@ class ContextManager implements IPluginContextListener, IPluginFacade {
                                 allInitialized = false;
                                 if (wrapper.getContextPluginRuntime() != null
                                         && wrapper.getContextPluginRuntime().getParentPlugin() != null) {
-                                    Log.d(TAG, "Waiting for plug-in to stop (for pause): "
-                                            + wrapper.getContextPluginRuntime().getParentPlugin() + ", which is in state "
-                                            + wrapper.getState());
                                 }
                             }
                         }
@@ -1498,18 +1429,16 @@ class ContextManager implements IPluginContextListener, IPluginFacade {
 									 * We only consider plug-ins that have at least one context support registration.
 									 * Otherwise, they are not started to conserve power.
 									 */
-                                    if (SessionManager.getContextSupportCount(plug) > 0)
-                                        // Check if the plug-in is already started
+                                    if (SessionManager.getContextSupportCount(plug) > 0) {// Check if the plug-in is already started
                                         if (runtime.getState() != PluginState.STARTED) {
-                                            Log.d(TAG, "Waiting for plug-in to start: " + plug);
                                             // We have a plug-in that has not started yet
                                             started = false;
                                             break;
                                         }
+                                    }
                                 }
                             }
-                        } else
-                            Log.d(TAG, "Plug-in is disabled: " + plug);
+                        }
                     }
                     if (started) {
                         startState = StartState.STARTED;
@@ -1530,7 +1459,6 @@ class ContextManager implements IPluginContextListener, IPluginFacade {
         synchronized (startState) {
             // Only pause if started
             if (startState == StartState.STARTED) {
-                Log.d(TAG, "ContextManager is pausing...");
                 startState = StartState.PAUSING;
                 // Stop each ContextPlugin that we're managing.
                 synchronized (pluginMap) {
@@ -1564,7 +1492,6 @@ class ContextManager implements IPluginContextListener, IPluginFacade {
             // Only stop if starting, started, or paused
             if (startState == StartState.STARTED || startState == StartState.STARTING
                     || startState == StartState.PAUSED) {
-                Log.i(TAG, "ContextManager is stopping... ");
                 startState = StartState.STOPPING;
                 // Stop the context cache (removes cached events)
                 contextCache.stop();
@@ -1574,7 +1501,6 @@ class ContextManager implements IPluginContextListener, IPluginFacade {
                         for (ContextPlugin plug : pluginMap.keySet())
                             stopPlugin(plug, true, true);
                     } else {
-                        Log.d(TAG, "No context plug-ins to stop");
                         synchronized (startState) {
                             startState = StartState.STOPPED;
                         }
@@ -1601,7 +1527,6 @@ class ContextManager implements IPluginContextListener, IPluginFacade {
      * @param plug The ContextPlugin to stop.
      */
     protected synchronized void stopPlugin(ContextPlugin plug, boolean clearCachedEvents, boolean destroy) {
-        Log.d(TAG, "stopPlugin for: " + plug + " with destroy: " + destroy);
         // Access the ContextPlugin's runtime wrapper
         ContextPluginRuntimeWrapper wrapper = pluginMap.get(plug);
         // Make sure we get a wrapper
@@ -1643,15 +1568,13 @@ class ContextManager implements IPluginContextListener, IPluginFacade {
                     pendingPluginStop.remove(plug);
                     // Add the new stop request
                     pendingPluginStop.put(plug, destroy);
-                } else
-                    Log.d(TAG, "Already destroying: " + plug);
-            } else
-                Log.w(TAG, "Cannot stop plugin " + plug + " from state " + wrapper.getState());
+                }
+            }
             // Remove any cached events from the contextCache for the plugin, if requested
-            if (clearCachedEvents)
+            if (clearCachedEvents) {
                 contextCache.removeContextEvents(plug);
-        } else
-            Log.w(TAG, "stopPlugin found NULL runtime for: " + plug + " | " + plug.getInstallStatus());
+            }
+        }
     }
 
     /**
@@ -1780,7 +1703,6 @@ class ContextManager implements IPluginContextListener, IPluginFacade {
                 String requestedActivity = alert.getRequestedSettingsActivity();
                 try {
                     Field f = Settings.class.getDeclaredField(requestedActivity);
-                    Log.d(TAG, "Opening Settings Activity Intent: " + requestedActivity);
                     // TODO: Finish this section - for now we do not launch the requested intent
                     // context.startActivity(new Intent(requestedActivity));
                     return true;
@@ -1845,7 +1767,6 @@ class ContextManager implements IPluginContextListener, IPluginFacade {
                 } catch (InterruptedException ignored) {
                 }
             }
-            Log.d(TAG, "Registered LooperThread for: " + plug);
             // Update the threadMap with the PluginLooperThread
             PluginLooperThread oldThread = threadMap.put(plug, t);
             if (oldThread != null) {
@@ -1878,7 +1799,6 @@ class ContextManager implements IPluginContextListener, IPluginFacade {
         if (startState == StartState.STOPPED || startState == StartState.PAUSED) {
             stopProgressMonitorTimer();
             closeProgressDialog();
-            Log.i(TAG, "ContextManager has stopped");
         } else {
             progressCount++;
             if (progressCount > 50) {
@@ -1893,7 +1813,6 @@ class ContextManager implements IPluginContextListener, IPluginFacade {
                     }
                 });
             }
-            Log.d(TAG, "Waiting for plug-ins to stop... current state is: " + startState);
         }
     }
 
@@ -2008,7 +1927,6 @@ class ContextManager implements IPluginContextListener, IPluginFacade {
      */
     private void doResendCachedEvents(DynamixApplication app, IDynamixListener listener, String contextType,
                                       int previousMills) {
-        Log.d(TAG, "doResendCachedEvents for app: " + app + " and listener: " + listener);
         // Iterate over the cached apps
         for (DynamixSession session : SessionManager.getAllSessions()) {
             // Check if the DynamixSession matches our requesting DynamixApplication
@@ -2196,15 +2114,12 @@ class ContextManager implements IPluginContextListener, IPluginFacade {
             this.thread = thread;
             this.destroy = destroy;
             runtime = runtimeWrapper.getContextPluginRuntime();
-            Log.d(TAG, "PlugStopper created for " + plug + " with destroy: " + destroy + " and plug-in state "
-                    + runtimeWrapper.getState());
         }
 
         /*
          * Launch the ThreadStopper, which initiates a timer that checks for stop completion.
          */
         public void launch() {
-            Log.d(TAG, "PlugStopper has launched for " + plug + " running on thread " + thread);
             if (thread != null) {
                 // Start by nicely asking the plug-in to stop
                 Thread t1 = new Thread(new Runnable() {
@@ -2213,10 +2128,8 @@ class ContextManager implements IPluginContextListener, IPluginFacade {
                         if (runtime != null) {
                             try {
                                 if (destroy) {
-                                    Log.d(TAG, "Requesting runtime destroy for: " + plug);
                                     runtimeWrapper.getContextPluginRuntime().destroy();
                                 } else {
-                                    Log.d(TAG, "Requesting runtime stop for: " + plug);
                                     runtimeWrapper.getContextPluginRuntime().stop();
                                 }
                             } catch (Exception e) {
@@ -2292,7 +2205,6 @@ class ContextManager implements IPluginContextListener, IPluginFacade {
                 t2.setDaemon(true);
                 t2.start();
             } else {
-                Log.d(TAG, "Plug-in had no runtime thread... it was probably not started: " + plug);
                 // Since we don't have a thread to stop, just clean up
                 cleanUp(false);
             }
@@ -2302,7 +2214,6 @@ class ContextManager implements IPluginContextListener, IPluginFacade {
          * Handles state cleanup for the PlugStopper.
          */
         private void cleanUp(boolean pluginException) {
-            Log.d(TAG, "PlugStopper Cleanup for " + plug);
             timer.cancel();
             // Destroy the plugin, if needed
             if (destroy) {
@@ -2329,7 +2240,6 @@ class ContextManager implements IPluginContextListener, IPluginFacade {
                     stats = null;
                 }
                 // Remove the plug-ins SecuredContext (if created)
-                Log.d(TAG, "Removing SecuredContext for: " + plug);
                 synchronized (securedContextMap) {
                     SecuredContext c = securedContextMap.remove(plug);
                     if (c != null) {
@@ -2338,15 +2248,14 @@ class ContextManager implements IPluginContextListener, IPluginFacade {
                     }
                 }
                 runtimeWrapper.setState(PluginState.DESTROYED);
-                Log.d(TAG, "PlugStopper destroyed: " + plug);
             } else {
-                if (pluginException)
+                if (pluginException) {
                     // Set ERROR state
                     runtimeWrapper.setState(PluginState.ERROR);
-                else
+                } else {
                     // Set plug-in state back to INITIALIZED
                     runtimeWrapper.setState(PluginState.INITIALIZED);
-                Log.d(TAG, "PlugStopper stopped: " + plug);
+                }
             }
             // Remove the PlugStopper from the stopperMap
             stopperMap.remove(plug);

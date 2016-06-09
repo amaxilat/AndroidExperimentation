@@ -38,7 +38,6 @@ public class AsyncStatusRefreshTask extends AsyncTask<Void, String, Integer> {
 
     @Override
     protected Integer doInBackground(Void... params) {
-        Log.i(TAG, "doInBackground");
         //Organicity
         if (DynamixService.isEnabled()) {
             if (!DynamixService.isDeviceRegistered()) {
@@ -69,7 +68,6 @@ public class AsyncStatusRefreshTask extends AsyncTask<Void, String, Integer> {
     private void parseExperimentMessage(final String message) {
         if (message != null && !message.equals(lastMessage)) {
             //activity.logEvent("new-reading");
-            Log.d(TAG, message);
             // Add the fragment to the 'fragment_container' FrameLayout
             try {
                 final Report report = new ObjectMapper().readValue(message, Report.class);

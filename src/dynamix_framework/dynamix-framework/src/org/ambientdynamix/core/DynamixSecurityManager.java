@@ -278,58 +278,46 @@ class DynamixSecurityManager extends SecurityManager {
 
 	@Override
 	protected int classDepth(String name) {
-		Log.i(TAG, "classDepth for: " + Thread.currentThread());
 		return super.classDepth(name);
 	}
 
 	@Override
 	protected int classLoaderDepth() {
-		Log.i(TAG, "classLoaderDepth for: " + Thread.currentThread());
 		return super.classLoaderDepth();
 	}
 
 	@Override
 	protected Object clone() throws CloneNotSupportedException {
-		Log.i(TAG, "clone for: " + Thread.currentThread());
 		return super.clone();
 	}
 
 	@Override
 	protected ClassLoader currentClassLoader() {
-		Log.i(TAG, "currentClassLoader for: " + Thread.currentThread());
 		return super.currentClassLoader();
 	}
 
 	@Override
 	protected Class<?> currentLoadedClass() {
-		Log.i(TAG, "currentLoadedClass for: " + Thread.currentThread());
 		return super.currentLoadedClass();
 	}
 
 	@Override
 	protected Class[] getClassContext() {
-		Log.i(TAG, "getClassContext for: " + Thread.currentThread());
 		return super.getClassContext();
 	}
 
 	@Override
 	protected boolean inClass(String name) {
-		Log.i(TAG, "inClass for: " + Thread.currentThread());
 		return super.inClass(name);
 	}
 
 	@Override
 	protected boolean inClassLoader() {
-		Log.i(TAG, "inClassLoader for: " + Thread.currentThread());
 		return super.inClassLoader();
 	}
 
 	private JavaPermissions getPermissions(Thread t) {
 		JavaPermissions perms = threadPerms.get(t);
-		if (perms != null)
-			Log.i(TAG, "Found permissions for Thread: " + t.toString());
-		else
-			Log.i(TAG, "No permissions for Thread: " + t.toString());
 		return perms;
 	}
 }

@@ -149,13 +149,10 @@ public class StatisticsTab extends Activity implements
         new Thread(new Runnable() {
             @Override
             public void run() {
-                Log.i(TAG, "profile:" + BaseActivity.access_token);
-
                 if (profile == null) {
                     final String accessToken = getApplicationContext().getSharedPreferences("aaa", MODE_PRIVATE).getString("access_token", null);
                     if (accessToken != null) {
                         profile = new OrganicityAAA().getProfile(accessToken);
-                        Log.i(TAG, "profile:" + profile);
                         if (profile != null) {
                             final TextView statsName = (TextView) findViewById(R.id.stats_name);
                             final TextView statsUsername = (TextView) findViewById(R.id.stats_email);
@@ -257,7 +254,6 @@ public class StatisticsTab extends Activity implements
                         for (final RankingEntry entry : list) {
                             ranking++;
                             if (entry.getPhoneId() == phoneId) {
-                                Log.i(TAG, "My Ranking " + ranking);
                                 final int finalRanking = ranking;
                                 runOnUiThread(new Runnable() {
                                     @Override
@@ -293,7 +289,6 @@ public class StatisticsTab extends Activity implements
                         for (final RankingEntry entry : list) {
                             ranking++;
                             if (entry.getPhoneId() == phoneId) {
-                                Log.i(TAG, "My Ranking " + ranking);
                                 final int finalRanking = ranking;
                                 runOnUiThread(new Runnable() {
                                     @Override

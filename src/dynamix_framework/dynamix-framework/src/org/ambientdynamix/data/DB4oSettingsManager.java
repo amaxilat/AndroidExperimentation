@@ -16,10 +16,12 @@
 package org.ambientdynamix.data;
 
 import android.util.Log;
+
 import com.db4o.Db4oEmbedded;
 import com.db4o.ObjectContainer;
 import com.db4o.ObjectSet;
 import com.db4o.config.EmbeddedConfiguration;
+
 import org.ambientdynamix.api.application.VersionInfo;
 import org.ambientdynamix.api.contextplugin.ContextPlugin;
 import org.ambientdynamix.api.contextplugin.ContextPluginSettings;
@@ -209,7 +211,6 @@ public class DB4oSettingsManager implements ISettingsManager {
             while (!_db.close())
                 ;
             _db = null;
-            Log.i(TAG, "Settings database is closed.");
         } else {
             Log.e(TAG, "Settings was NULL!");
         }
@@ -329,11 +330,10 @@ public class DB4oSettingsManager implements ISettingsManager {
         if (isDatabaseOpen()) {
             // Perform a DB4o queryByExample for the single settings object in the database.
             DynamixSettings proto = new DynamixSettings();
-            Log.i(TAG, "Constructing query using DynamixSettings: " + proto);
             // ObjectSet<DynamixSettings> result = _db.queryByExample(proto);
             ObjectSet<DynamixSettings> result = _db.queryByExample(DynamixSettings.class);
             /*
-			 * Query query=_db.query(); query.constrain(DynamixSettings.class); ObjectSet<DynamixSettings>
+             * Query query=_db.query(); query.constrain(DynamixSettings.class); ObjectSet<DynamixSettings>
 			 * result=query.execute();
 			 */
             // Warn if there are more than 1 settings entity
@@ -373,14 +373,12 @@ public class DB4oSettingsManager implements ISettingsManager {
      * {@inheritDoc}
      */
     public synchronized void openDatabase(String path) throws Exception {
-        Log.i(TAG, "Opening database using: " + path + " on thread: " + Thread.currentThread());
         if (path != null) {
 			/*
 			 * Open the DB4o database and setup object handling (e.g. updateDepth, cascadeOnDelete, etc.)
 			 */
             try {
                 if (!isDatabaseOpen()) {
-                    Log.i(TAG, "Database was closed... opening");
                     // Setup database
                     final EmbeddedConfiguration c1 = Db4oEmbedded.newConfiguration();
                     c1.common().objectClass(DynamixSettings.class).cascadeOnActivate(true);
@@ -426,7 +424,6 @@ public class DB4oSettingsManager implements ISettingsManager {
                         parent.mkdirs();
                         dbFile.createNewFile();
                     }
-                    Log.i(TAG, "Opening database using path: " + dbFile);
                     new Thread(new Runnable() {
                         @Override
                         public void run() {
@@ -440,7 +437,6 @@ public class DB4oSettingsManager implements ISettingsManager {
                     }).start();
 
                 }
-                Log.i(TAG, "Database is open!");
             } catch (Exception e) {
                 closeDatabase();
                 e.printStackTrace();
@@ -526,11 +522,11 @@ public class DB4oSettingsManager implements ISettingsManager {
                 // Store the updated settings
                 storeSettings(settings);
                 return true;
-            } else
-                Log.i(TAG, "No settings found for ContextPlugin: " + plug);
-        } else
+            }
+
+        } else {
             throw new RuntimeException("Database was closed after open... this is bad: " + _db);
-        Log.i(TAG, "No ContextPluginSettingsMapping found in database for: " + plug);
+        }
         return false;
     }
 

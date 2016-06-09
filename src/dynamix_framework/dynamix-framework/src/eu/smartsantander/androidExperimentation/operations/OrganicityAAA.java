@@ -99,14 +99,12 @@ public class OrganicityAAA extends Thread implements Runnable {
             }
             result = sb.toString();
         } catch (Exception e) {
-            Log.i(TAG, "Error reading InputStream");
             result = null;
         } finally {
             if (is != null) {
                 try {
                     is.close();
                 } catch (IOException e) {
-                    Log.i(TAG, "Error closing InputStream");
                 }
             }
         }

@@ -23,7 +23,6 @@ public class SensorMeasurementAdapter extends ArrayAdapter<SensorMeasurement> {
 
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
-        Log.i(TAG, "getView:" + position);
         // Get the data item for this position
         final SensorMeasurement sensorFragment = getItem(position);
         // Check if an existing view is being reused, otherwise inflate the view
@@ -37,7 +36,6 @@ public class SensorMeasurementAdapter extends ArrayAdapter<SensorMeasurement> {
         text.setText(String.valueOf(sensorFragment.getValue().intValue()));
 
         final ValueLineChart mCubicValueLineChart = (ValueLineChart) convertView.findViewById(R.id.sparkline);
-        Log.i(TAG, "Series:" + sensorFragment.getSeries().getSeries().size());
 //        if (mCubicValueLineChart.getDataSeries() == null || mCubicValueLineChart.getDataSeries().isEmpty()) {
 //        mCubicValueLineChart.startAnimation();
         mCubicValueLineChart.setAxisTextColor(0x00fffffff);

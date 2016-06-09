@@ -23,99 +23,97 @@ import android.util.Log;
 
 /**
  * Monitors memory consumption during event streaming.
- * 
+ *
  * @author Darren Carlson
  */
 public class StreamController implements IStreamController {
-	private final String TAG = getClass().getSimpleName();
-	boolean cancel;
-	private boolean done;
-	private final float maxPercentOfTotal;
-	private final int checkPeriod;
-	private final ActivityManager activityManager;
-	private final long memoryThresholdBytes;
-	private final long totalMemory;
+    private final String TAG = getClass().getSimpleName();
+    boolean cancel;
+    private boolean done;
+    private final float maxPercentOfTotal;
+    private final int checkPeriod;
+    private final ActivityManager activityManager;
+    private final long memoryThresholdBytes;
+    private final long totalMemory;
 
-	public StreamController(Context context, int checkPeriod, float maxPercentOfTotal) {
-		cancel = false;
+    public StreamController(Context context, int checkPeriod, float maxPercentOfTotal) {
+        cancel = false;
 
-		this.maxPercentOfTotal = maxPercentOfTotal;
-		this.checkPeriod = checkPeriod;
-		activityManager = (ActivityManager) context.getSystemService(Context.ACTIVITY_SERVICE);
-		// Log.i(TAG, "Total Memory: " + activityManager.getMemoryClass());
-		totalMemory = Runtime.getRuntime().maxMemory(); // activityManager.getMemoryClass() * 1048576;
-		memoryThresholdBytes = (long) (totalMemory * maxPercentOfTotal);
-		// Log.d(TAG, "Created StreamController for device with " + totalMemory + " with a memory threshold of "
-		// + memoryThresholdBytes);
-	}
+        this.maxPercentOfTotal = maxPercentOfTotal;
+        this.checkPeriod = checkPeriod;
+        activityManager = (ActivityManager) context.getSystemService(Context.ACTIVITY_SERVICE);
+        // Log.i(TAG, "Total Memory: " + activityManager.getMemoryClass());
+        totalMemory = Runtime.getRuntime().maxMemory(); // activityManager.getMemoryClass() * 1048576;
+        memoryThresholdBytes = (long) (totalMemory * maxPercentOfTotal);
+        // Log.d(TAG, "Created StreamController for device with " + totalMemory + " with a memory threshold of "
+        // + memoryThresholdBytes);
+    }
 
-	@Override
-	public boolean outOfMemory() {
-		return cancel;
-	}
+    @Override
+    public boolean outOfMemory() {
+        return cancel;
+    }
 
-	/*
-	 * http://stackoverflow.com/questions/2298208/how-to-discover-memory-usage-of-my-application-in-android
-	 * http://stackoverflow.com/questions/3118234/how-to-get-memory-usage-and-cpu-usage-in-android
-	 * http://macgyverdev.blogspot.com/2011/11/android-track-down-memory-leaks.html
-	 */
-	public boolean isMemoryLimitReached() {
-		// MemoryInfo mem = new ActivityManager.MemoryInfo();
-		// activityManager..getMemoryInfo(mem);
-		// Log.i(TAG, "Memory Heap size: " + Debug.getNativeHeapSize());
-		// Log.i(TAG, "Memory Heap allocated: " + Debug.getNativeHeapAllocatedSize());
-		// Log.i(TAG, "Memory Heap free: " + Debug.getNativeHeapFreeSize());
-		// Log.i(TAG, "Memory Runtime available: " + Runtime.getRuntime().totalMemory());
-		// Log.i(TAG, "Memory Runtime freeMemory: " + Runtime.getRuntime().freeMemory());
-		// Log.i(TAG, "Memory Runtime maxMemory: " + Runtime.getRuntime().maxMemory());
+    /*
+     * http://stackoverflow.com/questions/2298208/how-to-discover-memory-usage-of-my-application-in-android
+     * http://stackoverflow.com/questions/3118234/how-to-get-memory-usage-and-cpu-usage-in-android
+     * http://macgyverdev.blogspot.com/2011/11/android-track-down-memory-leaks.html
+     */
+    public boolean isMemoryLimitReached() {
+        // MemoryInfo mem = new ActivityManager.MemoryInfo();
+        // activityManager..getMemoryInfo(mem);
+        // Log.i(TAG, "Memory Heap size: " + Debug.getNativeHeapSize());
+        // Log.i(TAG, "Memory Heap allocated: " + Debug.getNativeHeapAllocatedSize());
+        // Log.i(TAG, "Memory Heap free: " + Debug.getNativeHeapFreeSize());
+        // Log.i(TAG, "Memory Runtime available: " + Runtime.getRuntime().totalMemory());
+        // Log.i(TAG, "Memory Runtime freeMemory: " + Runtime.getRuntime().freeMemory());
+        // Log.i(TAG, "Memory Runtime maxMemory: " + Runtime.getRuntime().maxMemory());
 
-		// Runtime.getRuntime().totalMemory() >
-		// long available = Runtime.getRuntime().freeMemory();
-		android.os.Debug.MemoryInfo[] memInfo = activityManager.getProcessMemoryInfo(new int[] { android.os.Process
-				.myPid() });
-		long total = memInfo[0].getTotalPss() * 1024;
-		Log.i(TAG, "Total memory: " + total + " threshold " + memoryThresholdBytes + " | Cancel: "
-				+ (total >= memoryThresholdBytes));
-		return (total >= memoryThresholdBytes);
-		// long remainingMem = mem.availMem - mem.threshold;
-		// Log.v(TAG, "StreamController memory check: " + remainingMem + " bytes remaining.");
-		// return remainingMem < minMemoryThresholdBytes;
-	}
+        // Runtime.getRuntime().totalMemory() >
+        // long available = Runtime.getRuntime().freeMemory();
+        android.os.Debug.MemoryInfo[] memInfo = activityManager.getProcessMemoryInfo(new int[]{android.os.Process
+                .myPid()});
+        long total = memInfo[0].getTotalPss() * 1024;
+        return (total >= memoryThresholdBytes);
+        // long remainingMem = mem.availMem - mem.threshold;
+        // Log.v(TAG, "StreamController memory check: " + remainingMem + " bytes remaining.");
+        // return remainingMem < minMemoryThresholdBytes;
+    }
 
-	public void start() {
-		done = false;
-		if (isMemoryLimitReached()) {
-			Log.e(TAG, "Memory limit reached on first pass!");
-			cancel = true;
-		} else {
-			Thread t = new Thread(new Runnable() {
-				@Override
-				public void run() {
-					int count = 0;
-					Log.v(TAG, "StreamController started!");
-					while (!done) {
-						Log.i(TAG, "Checking memory usage: " + count++);
-						if (isMemoryLimitReached()) {
-							Log.e(TAG, "Memory limit reached... canceling streaming!");
-							stop();
-							cancel = true;
-						}
-						try {
-							Thread.sleep(checkPeriod);
-						} catch (InterruptedException e) {
-							Log.w(TAG, "StreamController interrupted!" + e);
-							stop();
-						}
-					}
-					Log.v(TAG, "StreamController stopped!");
-				}
-			});
-			t.setDaemon(true);
-			t.start();
-		}
-	}
+    public void start() {
+        done = false;
+        if (isMemoryLimitReached()) {
+            Log.e(TAG, "Memory limit reached on first pass!");
+            cancel = true;
+        } else {
+            Thread t = new Thread(new Runnable() {
+                @Override
+                public void run() {
+                    int count = 0;
+                    Log.v(TAG, "StreamController started!");
+                    while (!done) {
+                        count++;
+                        if (isMemoryLimitReached()) {
+                            Log.e(TAG, "Memory limit reached... canceling streaming!");
+                            stop();
+                            cancel = true;
+                        }
+                        try {
+                            Thread.sleep(checkPeriod);
+                        } catch (InterruptedException e) {
+                            Log.w(TAG, "StreamController interrupted!" + e);
+                            stop();
+                        }
+                    }
+                    Log.v(TAG, "StreamController stopped!");
+                }
+            });
+            t.setDaemon(true);
+            t.start();
+        }
+    }
 
-	public void stop() {
-		done = true;
-	}
+    public void stop() {
+        done = true;
+    }
 }

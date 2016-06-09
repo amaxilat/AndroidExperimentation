@@ -108,15 +108,9 @@ public class OrganicityOAuthDialog extends Dialog {
         @Override
         public boolean shouldOverrideUrlLoading(WebView view, String url) {
             if (url.startsWith(OAUTHCALLBACK_URI)) {
-                Log.i(TAG, url);
                 Uri uri = Uri.parse(url.split("#")[0] + "?" + url.split("#")[1]);
-                Log.i(TAG, uri.toString());
-                Log.i(TAG, String.valueOf(uri.getQueryParameterNames()));
                 BaseActivity.access_token = uri.getQueryParameter("access_token");
-
-                Log.i(TAG, BaseActivity.access_token);
                 view.stopLoading();
-
                 return false;
             }
             return true;
@@ -134,14 +128,12 @@ public class OrganicityOAuthDialog extends Dialog {
 
         @Override
         public void onPageStarted(WebView view, String url, Bitmap favicon) {
-            Log.d(TAG, "onPageStarted->Webview loading URL: " + url);
             super.onPageStarted(view, url, favicon);
             mSpinner.show();
         }
 
         @Override
         public void onPageFinished(WebView view, String url) {
-            Log.d(TAG, "onPageFinished->Webview URL: " + url);
             super.onPageFinished(view, url);
 
             String title = mWebView.getTitle();

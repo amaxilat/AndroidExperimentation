@@ -93,7 +93,6 @@ public class DynamixNotificationManager {
 	 */
 	void clearAllNotifications() {
 		for (AndroidNotification n : notifications) {
-			Log.d(TAG, "Cancelling notification id: " + n.getNotificationId());
 			nm.cancel(n.getNotificationId());
 		}
 		nm.cancelAll();
@@ -106,7 +105,6 @@ public class DynamixNotificationManager {
 	 */
 	private void showNotification(final AndroidNotification notification) {
 		// Only show notifications if Dynamix is running
-		Log.d(TAG, "showNotification " + notification.getNotificationId() + " for androidContext: " + androidContext);
 		//Log.d(TAG, "Using DynamixNotificationManager: " + nm);
 		// Create the new Notification using the DynamixNotification as a template
 		//Notification n = new Notification(notification.getIconID(),

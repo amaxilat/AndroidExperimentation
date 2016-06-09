@@ -114,7 +114,6 @@ public final class Permission implements Serializable {
 		String shortName = permissionString.substring(permissionString.lastIndexOf('.')+1);
 		try {
 			Manifest.permission.class.getDeclaredField(shortName);
-			Log.i(TAG, "Created Permissionclass with name: " + permissionString);
 			return new Permission(shortName, permissionString, permissionString, true);
 		} catch (SecurityException e1) {
 			Log.e(TAG, "Received Security error!");

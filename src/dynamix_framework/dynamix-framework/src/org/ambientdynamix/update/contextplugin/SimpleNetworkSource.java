@@ -100,8 +100,6 @@ public class SimpleNetworkSource  extends SimpleSourceBase implements IContextPl
 			if (cancel)
 				break;
 			try {
-				Log.i(TAG, "Checking for context plug-ins using: " + repo.getAlias());
-				Log.i(TAG, "Repository URL is: " + repo.getUrl());
 				URL server = new URL(repo.getUrl());
 				stream = server.openStream();
 				List<DiscoveredContextPlugin> tmp = createDiscoveredPlugins(repo, stream, platform,

@@ -19,13 +19,10 @@ public class AsyncReportOnServerTask extends AsyncTask<String, Void, String> {
 	@Override
 	protected String doInBackground(String... params) {
 		finished = false;
-		Log.i(TAG, "Offloading Data Started...");
 		while (DynamixService.getDataStorageSize() > 0){
 			Pair<Long, String> value = DynamixService.getOldestExperimentalMessage();
 			try {
-				Log.i(TAG,"Offloading : "+value.first + " mess:"+value.second);
 				if (value.first != 0 && value.second != null&& value.second.length() > 0) {
-					Log.i(TAG, "Reporting To Server...");
 					DynamixService.getCommunication().sendReportResults(value.second);//
 					DynamixService.deleteExperimentalMessage(value.first);
 					DynamixService.logToFile("SQLITE OFFLOAT:"+value.second);
@@ -37,7 +34,6 @@ public class AsyncReportOnServerTask extends AsyncTask<String, Void, String> {
 				counter=0;
 			} catch (Exception e) {
 				// no communication do nothing
-				Log.i(TAG,"Experiment Reporting Exception:" + e.getMessage());
 				if (counter>=2){
 					break;
 				}else{

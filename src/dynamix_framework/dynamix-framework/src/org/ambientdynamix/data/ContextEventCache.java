@@ -182,7 +182,6 @@ public class ContextEventCache implements Runnable {
 	 */
 
 	public void run() {
-		Log.i(TAG, "ContextEventCache is running!");
 		while (running) {
 			// Sleep for the cullInterval
 			try {

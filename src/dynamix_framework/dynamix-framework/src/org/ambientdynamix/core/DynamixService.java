@@ -173,7 +173,6 @@ public final class DynamixService extends IntentService {
     }
 
     public static void ConfigureLog4J() {
-        Log.d(TAG, "Log Started -------------------------------");
     }
 
     public static synchronized void logToFile(String message) {
@@ -227,7 +226,6 @@ public final class DynamixService extends IntentService {
             DataStorage.getInstance(androidContext).addMessage(message);
         } catch (Exception e) {
             e.printStackTrace();
-            Log.d(TAG, "Message: " + e.getMessage());
         }
     }
 
@@ -504,8 +502,6 @@ public final class DynamixService extends IntentService {
      */
     static synchronized void boot(final Context context, final boolean showProgress,
                                   final boolean bootFromService, final boolean embeddedMode) {
-        Log.d(TAG, "boot called with Context " + context + " and embedded mode " + embeddedMode
-                + " and boot state " + bootState);
         synchronized (bootState) {
             // Only boot if we're in state NOT_BOOTED
             if (bootState == BootState.NOT_BOOTED) {
@@ -519,11 +515,8 @@ public final class DynamixService extends IntentService {
                     // Service is not running, so start it
                     if (!embeddedMode) {
                         // Launch the service using the appContext
-                        Log.i(TAG, "Starting the Dynamix Service...");
                         final Context appContext = context.getApplicationContext();
-                        Log.i(TAG, "Starting service...");
                         appContext.startService(new Intent(appContext, DynamixService.class));
-                        Log.i(TAG, "Service started");
                     } else {
                         // Manually call onCreate, since Android won't because we're running embedded
                         service.onCreate();
@@ -683,7 +676,6 @@ public final class DynamixService extends IntentService {
      * @param enabled True to enable a DynamixApplication; false to disable it.
      */
     static void changeApplicationEnabled(final DynamixApplication app, final boolean enabled) {
-        Log.d(TAG, "changeApplicationEnabled for " + app + " enabled == " + enabled);
         // Set the application to the requested enabled state
         app.setEnabled(enabled);
         // Update the application
@@ -777,7 +769,6 @@ public final class DynamixService extends IntentService {
     static void installContextPluginUpdate(final PluginDiscoveryResult update,
                                            final IContextPluginInstallListener listener) {
         if (update.hasUpdateTarget()) {
-            Log.i(TAG, "Updating: " + update.getTargetPlugin());
             // Grab the originalPlug
             final ContextPlugin originalPlug = update.getTargetPlugin();
             // Grab the originalPlug's existing settings (if there are any)
@@ -826,7 +817,6 @@ public final class DynamixService extends IntentService {
     synchronized static void installPlugins(final List<ContextPlugin> contextPlugins,
                                             final IContextPluginInstallListener listener) {
         for (final ContextPlugin plug : contextPlugins) {
-            Log.d(TAG, "Install plug-in " + plug + " with install state " + plug.getInstallStatus());
             if (!plug.isInstalled()) {
                 // Use the OsgiMgr to install the plugin's OSGi Bundle
                 if (OsgiMgr.installBundle(plug, listener)) {
@@ -993,7 +983,6 @@ public final class DynamixService extends IntentService {
                 Log.w(TAG, "Cannot start framework while in state: " + startState);
         } else {
             // Cache the boot request
-            Log.i(TAG, "startFramework called while Dynamix is not yet initialized... start request cached");
             startRequested = true;
             return true;
         }
@@ -1038,7 +1027,6 @@ public final class DynamixService extends IntentService {
      * to operate normally during this process.
      */
     static boolean uninstallPlugin(final ContextPlugin plug, final boolean notifyListeners) {
-        Log.i(TAG, "Uninstalling " + plug);
         /*
          * Remove the plugin from the Context Manager, which remove its context support registrations and destroys the
 		 * plugin.
@@ -1409,7 +1397,6 @@ public final class DynamixService extends IntentService {
                             originalSettings, new Runnable() {
                                 @Override
                                 public void run() {
-                                    Log.i(TAG, "ContextPlugin: " + originalPlug + " was updated to: " + newPlug);
                                     // Remove the originalSettings from the original plug-in
                                     if (originalSettings != null) {
                                         SettingsManager.removeContextPluginSettings(originalPlug);
@@ -1441,7 +1428,6 @@ public final class DynamixService extends IntentService {
      * started. This method completes the Dynamix boot sequence, if necessary.
      */
     static void onOSGiFrameworkStarted() {
-        Log.d(TAG, "onOSGiFrameworkStarted with bootState: " + bootState);
         synchronized (bootState) {
             if (bootState == BootState.BOOTING) {
                 completeBoot();
@@ -1454,7 +1440,6 @@ public final class DynamixService extends IntentService {
      * Callback for the OSGi stopped event.
      */
     static void onOSGiFrameworkStopped() {
-        Log.d(TAG, "onOSGiFrameworkStopped");
     }
 
     /**
@@ -1556,9 +1541,6 @@ public final class DynamixService extends IntentService {
                                     } else {
                                         // No UI for the context type, so handle as ReactiveContextPluginRuntime
                                         UUID requestId = registerRequestUUID(app, listener, plug);
-                                        if (FrameworkConstants.DEBUG)
-                                            Log.i(TAG, "requestContextScan for application: " + app
-                                                    + " is launching a context scan request");
                                         /*
                                          * Launch the context scan. Note that the 'HandleContextRequest' class
 										 * determined whether to use a general or configured context scan based on
@@ -1579,9 +1561,6 @@ public final class DynamixService extends IntentService {
                                 // Check for ReactiveContextPluginRuntimes
                                 else if (runtime instanceof ReactiveContextPluginRuntime) {
                                     UUID requestId = registerRequestUUID(app, listener, plug);
-                                    if (FrameworkConstants.DEBUG)
-                                        Log.i(TAG, "requestContextScan for application: " + app
-                                                + " is launching a context scan request");
                                     /*
                                      * Launch the context scan. Note that the 'HandleContextRequest' class determined
 									 * whether to use a general or configured context scan based on whether the
@@ -1709,7 +1688,6 @@ public final class DynamixService extends IntentService {
     static void setBaseActivity(final Activity activity) {
         if (activity != null) {
             baseActivity = activity;
-            Log.i(TAG, "setBaseActivity with " + activity);
         }
     }
 
@@ -1804,7 +1782,6 @@ public final class DynamixService extends IntentService {
      */
     static void updateContextPluginUpdateTimer(final int interval) {
         stopContextPluginUpdateTimer();
-        Log.i(TAG, "Setting timer for update check every: " + interval + " milliseconds");
         contextPlugUpdateTimer = new CountDownTimer(interval, interval) {
             @Override
             public void onFinish() {
@@ -1873,7 +1850,6 @@ public final class DynamixService extends IntentService {
         // Only completeBoot if we're BOOTING
         synchronized (bootState) {
             if (bootState == BootState.BOOTING) {
-                Log.i(TAG, "Completing the Dynamix Service boot sequence...");
                 // Set booted state
                 bootState = BootState.BOOTED;
                 // Update HomeActivity UI
@@ -1920,7 +1896,6 @@ public final class DynamixService extends IntentService {
                 if (!embeddedMode) {
                     HomeActivity.refreshData();
                 }
-                Log.i(TAG, "Dynamix has finished booting!");
             } else {
                 Log.w(TAG, "completeBoot called when not booting");
             }
@@ -1946,7 +1921,6 @@ public final class DynamixService extends IntentService {
 
     @Override
     protected void onHandleIntent(final Intent intent) {
-        Log.i(TAG, intent.getAction());
     }
 
     /**
@@ -1955,7 +1929,6 @@ public final class DynamixService extends IntentService {
     @Override
     public void onCreate() {
         super.onCreate();
-        Log.i(TAG, "Initializing Dynamix from state: " + bootState);
         // Notify initializing
         onDynamixInitializing();
         // Ensure the keystore is created
@@ -2032,7 +2005,6 @@ public final class DynamixService extends IntentService {
                 // Setup the database
                 try {
                     setupDatabase(DynamixService.getConfig(), service);
-                    Log.i(TAG, "Database is ready");
                 } catch (Exception e) {
                     Log.e(TAG, e.toString());
                     Utils.showGlobalAlert(getBaseActivity(), e.toString(), true);
@@ -2045,15 +2017,11 @@ public final class DynamixService extends IntentService {
                         ContextMgr.pauseContextHandling();
                     }
                 } else {
-                    Log.i(TAG, "CacheMaxEvents:" + DynamixService.getConfig().getContextCacheMaxEvents());
-                    Log.i(TAG, "CacheMaxDurationMills:" + DynamixService.getConfig().getContextCacheMaxDurationMills());
-                    Log.i(TAG, "CacheCullIntervalMills:" + DynamixService.getConfig().getContextCacheCullIntervalMills());
                     // Create the Context Manager
                     ContextMgr = new ContextManager(DynamixService.androidContext, SettingsManager.getPowerScheme(),
                             DynamixService.getConfig().getContextCacheMaxEvents(), DynamixService.getConfig()
                             .getContextCacheMaxDurationMills(), DynamixService.getConfig()
                             .getContextCacheCullIntervalMills());
-                    Log.i(TAG, "Created the Dynamix ContextManager");
                 }
                 /*
                  * Create our binders, which allow client's to connect the Dynamix.
@@ -2091,7 +2059,6 @@ public final class DynamixService extends IntentService {
                 }
                 OsgiMgr = new OSGIManager(this);
                 OsgiMgr.init();
-                Log.i(TAG, "Initializing the Dynamix OSGi Manager...");
             } else {
                 Log.e(TAG, "Init was called in state " + bootState);
                 throw new RuntimeException("Init was called in state " + bootState);
@@ -2120,14 +2087,12 @@ public final class DynamixService extends IntentService {
      */
     @Override
     public int onStartCommand(final Intent intent, final int flags, final int startId) {
-        Log.d(TAG, "onStartCommand with bootState: " + bootState);
         // Return START_STICKY so that Android tries to keep us alive (or restarts us)
         return Service.START_STICKY;
     }
 
     @Override
     public boolean onUnbind(final Intent intent) {
-        Log.i(TAG, "App onUnbind for UID: " + Binder.getCallingUid());
         super.onUnbind(intent);
         /*
          * The Context Manager listens for onCallbackDied events from connected applications, and calls
@@ -2146,7 +2111,6 @@ public final class DynamixService extends IntentService {
      * ConditionalPermissionAdmin
      */
     protected synchronized void handleServiceEvent(final ServiceEvent event) {
-        Log.d(TAG, "handleServiceEvent of type: " + event.getType());
         /*
          * Event type int values: Type == 1 (Registered?) Type == 4 (Unregistered?)
 		 */
@@ -2180,7 +2144,6 @@ public final class DynamixService extends IntentService {
      * Start the Dynamix Framework.
      */
     private synchronized void doStartFramework() {
-        Log.d(TAG, "doStartFramework() with bootState: " + bootState);
         if (isFrameworkInitialized()) {
             if (startState == StartState.STOPPED) {
                 synchronized (startState) {
@@ -2197,7 +2160,6 @@ public final class DynamixService extends IntentService {
                         Log.v(TAG, "wakeReceiver onReceive called");
                         if (isFrameworkStarted()) {
                             if (!DynamixPreferences.backgroundModeEnabled(androidContext)) {
-                                Log.i(TAG, "Resuming Dynamix");
                                 ContextMgr.startContextManager();
                                 startAppChecker(DynamixService.getConfig().getAppLivelinessCheckIntervalMills());
 //                                WebConnector.resumeTimeoutChecking();
@@ -2216,15 +2178,13 @@ public final class DynamixService extends IntentService {
                         Log.v(TAG, "sleepReceiver onReceive called");
                         if (isFrameworkStarted()) {
                             if (!DynamixPreferences.backgroundModeEnabled(androidContext)) {
-                                Log.i(TAG, "Pausing Dynamix");
                                 ContextMgr.pauseContextHandling();
                                 if (appChecker != null)
                                     appChecker.cancel();
 //                                WebConnector.pauseTimeoutChecking();
                                 // Notify apps that we're inactive
                                 SessionManager.notifyAllDynamixFrameworkInactive();
-                            } else
-                                Log.i(TAG, "Keeping context scanning alive when screen is off");
+                            }
                         }
                     }
                 };
@@ -2254,14 +2214,12 @@ public final class DynamixService extends IntentService {
                         // Init our plugins (ignores initializing plug-ins)
                         initializePlugins();
                         while (!ContextMgr.isStarted()) {
-                            Log.d(TAG, "Waiting for ContextManager to start...");
                             try {
                                 Thread.sleep(2000);
                             } catch (InterruptedException e) {
                                 e.printStackTrace();
                             }
                         }
-                        Log.d(TAG, "ContextManager has started!");
                         // We are initialized (set our static reference)
                         DynamixService.service = DynamixService.this;
                         // Setup a Timer to check periodically for application liveliness...
@@ -2273,8 +2231,6 @@ public final class DynamixService extends IntentService {
                         // Handle notifications
                         onDynamixStarted();
                         SessionManager.notifyAllDynamixFrameworkActive();
-                        Log.i(TAG, "Dynamix Service Started!");
-
 
                         //Organicity
                         if (!DynamixService.getPhoneProfiler().getStarted()) {
@@ -2362,9 +2318,8 @@ public final class DynamixService extends IntentService {
                                               final boolean restartProcess) {
         if (startState == StartState.STOPPED)
             doDestroyFramework(killProcess, restartProcess);
-        else if (startState == StartState.STOPPING)
-            Log.i(TAG, "Already stopping... please wait");
-        else {
+        else if (startState == StartState.STOPPING) {
+        } else {
             // Set stopping state
             synchronized (startState) {
                 startState = StartState.STOPPING;
@@ -2408,7 +2363,6 @@ public final class DynamixService extends IntentService {
                         // Wait for the ContextManager to stop
                         while (!ContextMgr.isPaused()) {
                             try {
-                                Log.d(TAG, "Waiting for ContextManager to pause...");
                                 Thread.sleep(500);
                             } catch (InterruptedException ignored) {
                             }
@@ -2458,12 +2412,10 @@ public final class DynamixService extends IntentService {
             Utils.dispatch(new Runnable() {
                 @Override
                 public void run() {
-                    Log.i(TAG, "Destroying Dynamix Framework...");
                     ContextMgr.stopContextHandling();
                     // Wait for the ContextManager to stop
                     while (!ContextMgr.isStopped()) {
                         try {
-                            Log.d(TAG, "Waiting for ContextManager to stop...");
                             Thread.sleep(500);
                         } catch (InterruptedException ignored) {
                         }
@@ -2499,7 +2451,6 @@ public final class DynamixService extends IntentService {
                     synchronized (bootState) {
                         bootState = BootState.NOT_BOOTED;
                     }
-                    Log.i(TAG, "Destroyed Dynamix Framework");
                     // Handle kill process request
                     if (killProcess) {
                         // Setup a restart, if requested
@@ -2601,10 +2552,8 @@ public final class DynamixService extends IntentService {
         }
         preVmessage = message;
         if ((wifiOnly && mWifi.isConnected()) || !wifiOnly) {
-            Log.i(TAG, "Sending now");
             new AsyncReportNowTask().execute(message);
         } else {
-            Log.i(TAG, "WifiOnly:Enabled Storing");
             DynamixService.addExperimentalMessage(message);
         }
     }
@@ -2638,7 +2587,6 @@ public final class DynamixService extends IntentService {
 
         @Override
         public void onUpdateComplete(DynamixUpdates updates) {
-            Log.i(TAG, "Received Dynamix Updates....");
             // Check if our trusted certs are up to date
             final List<TrustedCert> currentCerts = getAuthorizedCertsFromKeyStore();
             final List<TrustedCert> removeCerts = new ArrayList<>();
@@ -2653,7 +2601,6 @@ public final class DynamixService extends IntentService {
                     }
                 }
                 if (!found) {
-                    Log.i(TAG, "Found new cert to add: " + cert.getAlias());
                     addCerts.add(cert);
                 }
             }
@@ -2667,7 +2614,6 @@ public final class DynamixService extends IntentService {
                     }
                 }
                 if (!found) {
-                    Log.i(TAG, "Found cert to remove: " + currentCert.getAlias());
                     removeCerts.add(currentCert);
                 }
             }
@@ -2730,7 +2676,6 @@ public final class DynamixService extends IntentService {
             SettingsManager.setContextPluginUpdates(finalUpdates);
             // Notify clients about the plug-ins
             SessionManager.notifyAllContextPluginDiscoveryFinished(discoveredPlugins);
-            Log.d(TAG, "checkForContextPluginUpdates is completed with total updates: " + finalUpdates.size());
             if (callback != null)
                 if (mode == Mode.UPDATE) {
                     callback.onUpdateComplete(UpdateManager.getFilteredContextPluginUpdates(), errors);

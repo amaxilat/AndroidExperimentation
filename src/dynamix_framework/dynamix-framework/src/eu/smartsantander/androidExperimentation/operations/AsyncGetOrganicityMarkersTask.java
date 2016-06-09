@@ -45,7 +45,6 @@ public class AsyncGetOrganicityMarkersTask extends AsyncTask<HomeActivity, LatLn
                     new TypeReference<List<Entities>>() {
                     });
             for (final Entities entity : entities) {
-                Log.i(TAG, "Adding : " + entity);
                 double lat = entity.getData().getLocation().getLatitude();
                 double lon = entity.getData().getLocation().getLongitude();
                 publishProgress(new LatLng(lat, lon));

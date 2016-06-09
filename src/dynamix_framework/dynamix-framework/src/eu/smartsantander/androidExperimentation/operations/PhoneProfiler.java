@@ -52,13 +52,11 @@ public class PhoneProfiler extends Thread implements Runnable {
     public void startJob() {
 
         try {
-            Log.d(TAG, "running");
             Thread.sleep(2000);
             pref = DynamixService.getAndroidContext().getApplicationContext().getSharedPreferences("OrganicityConfigurations", 0);
             editor = pref.edit();
             if ((pref.contains("phoneId"))) {
                 this.PHONE_ID = pref.getInt("phoneId", 0);
-                Log.d(TAG, "PhoneId:" + this.PHONE_ID);
                 if (this.PHONE_ID < 1) {
                     setPhoneId(Constants.PHONE_ID_UNITIALIZED);
                 }
@@ -106,7 +104,6 @@ public class PhoneProfiler extends Thread implements Runnable {
         final int[] serverPhoneId = new int[1];
 
         try {
-            Log.d(TAG, String.valueOf(phoneId));
             final TelephonyManager tm = (TelephonyManager) DynamixService.getAndroidContext().getSystemService(Context.TELEPHONY_SERVICE);
 
             final String tmDevice, tmSerial, androidId;
@@ -114,9 +111,6 @@ public class PhoneProfiler extends Thread implements Runnable {
             tmSerial = "" + tm.getSimSerialNumber();
             androidId = "" + android.provider.Settings.Secure.getString(DynamixService.getAndroidContext().getContentResolver(), android.provider.Settings.Secure.ANDROID_ID);
 
-            Log.i(TAG, "androidId:" + androidId);
-            Log.i(TAG, "tmDevice:" + tmDevice);
-            Log.i(TAG, "tmSerial:" + tmSerial);
 
             new Thread(new Runnable() {
                 @Override
@@ -126,10 +120,8 @@ public class PhoneProfiler extends Thread implements Runnable {
 
                     DynamixService.getPhoneProfiler().setDeviceIdHash(deviceId.hashCode());
 
-                    Log.i(TAG, "deviceId.hashCode():" + deviceId.hashCode());
                     try {
                         serverPhoneId[0] = DynamixService.getCommunication().registerSmartphone(deviceId.hashCode(), getSensorRules());
-                        Log.i(TAG, "serverPhoneId[0]:" + serverPhoneId[0]);
                         if (serverPhoneId[0] <= 0) {
                             serverPhoneId[0] = Constants.PHONE_ID_UNITIALIZED;
                         } else {
@@ -170,7 +162,6 @@ public class PhoneProfiler extends Thread implements Runnable {
             setDeviceIdHash(deviceIdHash);
             return deviceIdHash;
         }
-        Log.d(TAG, "deviceIdHash:" + deviceIdHash);
         return deviceIdHash;
     }
 

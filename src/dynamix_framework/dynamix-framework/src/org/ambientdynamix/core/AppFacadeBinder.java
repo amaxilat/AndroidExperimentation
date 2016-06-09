@@ -177,7 +177,6 @@ class AppFacadeBinder extends IDynamixFacade.Stub implements IDynamixFrameworkLi
     @Override
     public void addDynamixListener(IDynamixListener listener) throws RemoteException {
         if (listener != null) {
-            Log.d(TAG, "addDynamixListener for: " + listener);
             // Make sure Looper.prepare has been called for the incoming Thread
             setupThreadLooper();
             SessionManager.addDynamixListener(getCallerId(listener), listener);
@@ -190,7 +189,6 @@ class AppFacadeBinder extends IDynamixFacade.Stub implements IDynamixFrameworkLi
      */
     @Override
     public void removeDynamixListener(IDynamixListener listener) throws RemoteException {
-        Log.d(TAG, "removeDynamixListener for: " + listener);
         // Make sure Looper.prepare has been called for the incoming Thread
         setupThreadLooper();
         // Access the application securely... returns null if the app is not authorized
@@ -329,7 +327,6 @@ class AppFacadeBinder extends IDynamixFacade.Stub implements IDynamixFrameworkLi
         // Make sure Looper.prepare has been called for the incoming Thread
         setupThreadLooper();
         int userId = getCallerId(null);
-        Log.d(TAG, "openSession for process: " + userId);
         if (DynamixService.isFrameworkInitialized()) {
             doOpenSession(userId);
         } else {
@@ -715,7 +712,6 @@ class AppFacadeBinder extends IDynamixFacade.Stub implements IDynamixFrameworkLi
     protected void processCachedUserIds() {
         synchronized (cachedUserIds) {
             for (Integer userId : cachedUserIds) {
-                Log.d(TAG, "Processing openSession for cached ID: " + userId);
                 doOpenSession(userId);
             }
             cachedUserIds.clear();
@@ -788,10 +784,8 @@ class AppFacadeBinder extends IDynamixFacade.Stub implements IDynamixFrameworkLi
                 }
             } else {
                 // The application is new... so set it up as pending
-                if (FrameworkConstants.DEBUG)
-                    Log.d(TAG, "Application ID " + userId + " is new!");
-                // Construct a new application for the caller
-                DynamixApplication newApp = createNewApplicationFromCaller(userId, false);
+                    // Construct a new application for the caller
+                    DynamixApplication newApp = createNewApplicationFromCaller(userId, false);
                 if (newApp != null) {
                     // Add a new pendingApp to the SettingsManager
                     if (DynamixService.SettingsManager.addPendingApplication(newApp)) {
@@ -838,8 +832,6 @@ class AppFacadeBinder extends IDynamixFacade.Stub implements IDynamixFrameworkLi
                 Log.v(TAG, "Application " + id + " is authorized!");
             return app;
         }
-        if (FrameworkConstants.DEBUG)
-            Log.d(TAG, "App is not authorized");
         return null;
     }
 
@@ -852,15 +844,15 @@ class AppFacadeBinder extends IDynamixFacade.Stub implements IDynamixFrameworkLi
 //        if (listener instanceof WebListener) {
 //            return ((WebListener) listener).getWebAppId();
 //        } else {
-            if (embeddedMode)
-                return android.os.Process.myUid();
-            else {
-                if (Binder.getCallingUid() == android.os.Process.myUid()) {
-                    Log.v(TAG, "Caller was Dynamix when not running in embedded mode... invalid");
-                    return Binder.getCallingUid(); //Organicity shortcut...
-                } else
-                    return Binder.getCallingUid();
-            }
+        if (embeddedMode)
+            return android.os.Process.myUid();
+        else {
+            if (Binder.getCallingUid() == android.os.Process.myUid()) {
+                Log.v(TAG, "Caller was Dynamix when not running in embedded mode... invalid");
+                return Binder.getCallingUid(); //Organicity shortcut...
+            } else
+                return Binder.getCallingUid();
+        }
 //        }
     }
 
@@ -876,7 +868,6 @@ class AppFacadeBinder extends IDynamixFacade.Stub implements IDynamixFrameworkLi
                 }
             }
         }
-        Log.d(TAG, "App is not pending");
         return null;
     }
 

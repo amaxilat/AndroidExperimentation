@@ -44,10 +44,6 @@ public class Communication extends Thread implements Runnable {
         lastHash = 0;
     }
 
-    public void run() {
-        Log.d(TAG, "running");
-    }
-
     /**
      * Register a smartphone to the server.
      *
@@ -206,7 +202,6 @@ public class Communication extends Thread implements Runnable {
     }
 
     private Smartphone sendRegisterSmartphone(String jsonSmartphone) throws Exception {
-        Log.d(TAG, "Register Smartphone" + jsonSmartphone);
         String responseString = post("/smartphone", jsonSmartphone);
         if (responseString != null) {
             return new ObjectMapper().readValue(responseString, Smartphone.class);

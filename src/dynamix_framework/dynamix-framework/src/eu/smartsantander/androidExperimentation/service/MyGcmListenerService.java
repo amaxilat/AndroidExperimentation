@@ -43,9 +43,7 @@ public class MyGcmListenerService extends GcmListenerService {
     // [START receive_message]
     @Override
     public void onMessageReceived(String from, Bundle data) {
-        String message = data.getString("message");
-        Log.d(TAG, "From: " + from);
-        Log.d(TAG, "Message: " + message);
+        final String message = data.getString("message");
 
         if (from.startsWith("/topics/")) {
             // message received from some topic.
@@ -55,14 +53,12 @@ public class MyGcmListenerService extends GcmListenerService {
             String messageShort = null;
             try {
                 GcmMessageData gcmMessageData = new ObjectMapper().readValue(message, GcmMessageData.class);
-                Log.i(TAG, gcmMessageData.toString());
                 NotificationCompat.Builder mBuilder =
                         new NotificationCompat.Builder(this);
 
 
                 switch (gcmMessageData.getType()) {
                     case "encourage":
-                        Log.i(TAG, "is an encourage message");
                         messageShort = String.valueOf(gcmMessageData.getCount()) +
                                 " measurements collected!";
                         notificationMessage = "You collected " +
@@ -73,7 +69,6 @@ public class MyGcmListenerService extends GcmListenerService {
                         mBuilder.setSmallIcon(R.drawable.award);
                         break;
                     case "text":
-                        Log.i(TAG, "is a text message");
                         messageShort = gcmMessageData.getText();
                         notificationMessage = gcmMessageData.getText();
                         notificationTitle = "Experiment Message";

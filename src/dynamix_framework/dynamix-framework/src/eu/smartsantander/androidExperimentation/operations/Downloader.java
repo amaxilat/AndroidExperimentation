@@ -12,65 +12,52 @@ import org.apache.http.util.ByteArrayBuffer;
 
 import android.util.Log;
 
-public class Downloader
-{
-	public Downloader()
-	{
-		//
-	}
-	
-	public void DownloadFromUrl(String DownloadUrl, String fileName) throws Exception
-	{
-		try
-		{
-			File root = android.os.Environment.getExternalStorageDirectory();               
+public class Downloader {
+    public Downloader() {
+        //
+    }
 
-		    File dir = new File (root.getAbsolutePath() + "/dynamix");
-		    if(!dir.exists())
-		    {
-		    	dir.mkdirs();
-		    }
+    public void DownloadFromUrl(String DownloadUrl, String fileName) throws Exception {
+        try {
+            File root = android.os.Environment.getExternalStorageDirectory();
 
-		    URL url = new URL(DownloadUrl); //you can write here any link
-		    File file = new File(dir, fileName);
+            File dir = new File(root.getAbsolutePath() + "/dynamix");
+            if (!dir.exists()) {
+                dir.mkdirs();
+            }
 
-		    long startTime = System.currentTimeMillis();
-		    Log.d("DownloadManager", "download begining");
-		    Log.d("DownloadManager", "download url:" + url);
-		    Log.d("DownloadManager", "downloaded file name:" + fileName);
+            URL url = new URL(DownloadUrl); //you can write here any link
+            File file = new File(dir, fileName);
+
+            long startTime = System.currentTimeMillis();
 
 		    /* Open a connection to that URL. */
-		    URLConnection ucon = url.openConnection();
+            URLConnection ucon = url.openConnection();
 
 		    /*
-		     * Define InputStreams to read from the URLConnection.
+             * Define InputStreams to read from the URLConnection.
 		     */
-		    InputStream is = ucon.getInputStream();
-		    BufferedInputStream bis = new BufferedInputStream(is);
+            InputStream is = ucon.getInputStream();
+            BufferedInputStream bis = new BufferedInputStream(is);
 
 		    /*
 		     * Read bytes to the Buffer until there is nothing more to read(-1).
 		     */
-		    ByteArrayBuffer baf = new ByteArrayBuffer(5000);
-		    int current = 0;
-		    while ((current = bis.read()) != -1)
-		    {
-		    	baf.append((byte) current);
-		    }
+            ByteArrayBuffer baf = new ByteArrayBuffer(5000);
+            int current = 0;
+            while ((current = bis.read()) != -1) {
+                baf.append((byte) current);
+            }
 
 		    /* Convert the Bytes read to a String. */
-		    FileOutputStream fos = new FileOutputStream(file);
-		    fos.write(baf.toByteArray());
-		    fos.flush();
-		    fos.close();
-		    Log.d("DownloadManager", "download ready in" + ((System.currentTimeMillis() - startTime) / 1000) + " sec");
+            FileOutputStream fos = new FileOutputStream(file);
+            fos.write(baf.toByteArray());
+            fos.flush();
+            fos.close();
 
-		}
-		catch (IOException e)
-		{
-		       Log.d("DownloadManager", "Error: " + e);
-			e.printStackTrace();
-		       throw e;
-		}
-	}
+        } catch (IOException e) {
+            e.printStackTrace();
+            throw e;
+        }
+    }
 }

@@ -117,7 +117,6 @@ public class ContextInteractionHostActivity extends Activity {
 			final String contextType = extras.getString("contextType");
 			// Check for sessionId and listenerId
 			if (sessionIdString != null && listenerIdString != null && appRequestIdString != null) {
-				Log.i(TAG, "Running ContextInteractionHostActivity 1");
 				UUID sessionId = UUID.fromString(sessionIdString);
 				UUID listenerId = UUID.fromString(listenerIdString);
 				final UUID responseId = UUID.fromString(appRequestIdString);
@@ -133,8 +132,6 @@ public class ContextInteractionHostActivity extends Activity {
 									.getContextPluginRuntime(pluginId);
 							// Make sure we got a wrapper
 							if (wrapper != null) {
-								Log.i(TAG, "Running ContextInteractionHostActivity 2");
-								
 								// Make sure the plug-in is configured
 								if (!plug.isConfigured()) {
 									Log.w(TAG, "Plugin Not Configured: " + pluginId);
@@ -166,7 +163,6 @@ public class ContextInteractionHostActivity extends Activity {
 											
 											handler.post(new Runnable() {
 												public void run() {
-													Log.i(TAG, "Running ContextInteractionHostActivity 3");
 													try {
 														/*
 														 * Register our Activity so Dynamix can close us later on

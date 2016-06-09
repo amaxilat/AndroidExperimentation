@@ -103,7 +103,6 @@ public class BaseActivity extends TabActivity {
         uiHander.post(new Runnable() {
             @Override
             public void run() {
-                Log.i(TAG, "TOASTING: " + message);
                 Toast.makeText(context, message, duration).show();
             }
         });
@@ -275,7 +274,6 @@ public class BaseActivity extends TabActivity {
             itemPow.setIcon(R.drawable.power_icon_off);
         }
 
-        Log.i(TAG, "looking here....");
         itemPow.setOnMenuItemClickListener(new OnMenuItemClickListener() {
             public boolean onMenuItemClick(MenuItem item) {
                 if (!askDynamixIsEnabled()) {
@@ -319,14 +317,11 @@ public class BaseActivity extends TabActivity {
                         + "&nonce=" + nonce
 //                        + "&display=touch"
                         ;
-                Log.d(TAG, "authRequestRedirect->" + authRequestRedirect);
 
                 CookieSyncManager.createInstance(context);
                 new OrganicityOAuthDialog(context, authRequestRedirect
                         , new GenericDialogListener() {
                     public void onComplete(final Bundle values) {
-                        Log.d(TAG, "onComplete->" + values);
-
                         try {
                             final SharedPreferences sharedPref = getApplicationContext().getSharedPreferences("aaa", Context.MODE_PRIVATE);
                             final SharedPreferences.Editor editor = sharedPref.edit();
@@ -346,11 +341,9 @@ public class BaseActivity extends TabActivity {
                     }
 
                     public void onError(String e) {
-                        Log.d(TAG, "onError->" + e);
                     }
 
                     public void onCancel() {
-                        Log.d(TAG, "onCancel()");
                     }
                 }).show();
 
@@ -458,7 +451,6 @@ public class BaseActivity extends TabActivity {
         // If we have a notification, set the current tab to the notification's
         // tab id, otherwise set it to 0 (Home)
         if (notification != null) {
-            Log.i(TAG, "Opening tab: " + notification.getTabID());
             tabHost.setCurrentTab(notification.getTabID());
         } else
             tabHost.setCurrentTab(0);

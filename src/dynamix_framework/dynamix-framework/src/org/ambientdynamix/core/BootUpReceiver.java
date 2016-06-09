@@ -25,22 +25,20 @@ import android.util.Log;
 /**
  * BootUpReceiver provides the logic to auto-start Dynamix at the completion of the Android boot process (if requested).
  * BootUpReceiver is registered in AndroidManifest.xml to receive 'android.intent.action.BOOT_COMPLETED' events.
- * 
+ *
  * @author Darren Carlson
  */
 public class BootUpReceiver extends BroadcastReceiver {
-	private final String TAG = this.getClass().getSimpleName();
+    private final String TAG = this.getClass().getSimpleName();
 
-	@Override
-	public void onReceive(Context context, Intent intent) {
-		boolean restart = intent.getBooleanExtra("restart", false);
-		// Start if Dynamix is enabled, auto-start is true and the DynamixService is not running
-		if (DynamixPreferences.isDynamixEnabled(context) && (restart || DynamixPreferences.autoStartDynamix(context))
-				&& !DynamixService.isFrameworkStarted()) {
-			Log.i(TAG, "BootUpReceiver is launching Dynamix");
-			// Use the incoming context to start the Dynamix service
-			context.startService(new Intent(context, DynamixService.class));
-		} else
-			Log.i(TAG, "BootUpReceiver is NOT launching Dynamix");
-	}
+    @Override
+    public void onReceive(Context context, Intent intent) {
+        boolean restart = intent.getBooleanExtra("restart", false);
+        // Start if Dynamix is enabled, auto-start is true and the DynamixService is not running
+        if (DynamixPreferences.isDynamixEnabled(context) && (restart || DynamixPreferences.autoStartDynamix(context))
+                && !DynamixService.isFrameworkStarted()) {
+            // Use the incoming context to start the Dynamix service
+            context.startService(new Intent(context, DynamixService.class));
+        }
+    }
 }

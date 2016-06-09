@@ -91,7 +91,6 @@ class UpdateManager {
             Utils.dispatch(new Runnable() {
                 @Override
                 public void run() {
-                    Log.i(TAG, "Starting Dynamix Framework Update....");
                     listener.onUpdateStarted();
 //                    try {
 //                        URL server = new URL(updateUrl);

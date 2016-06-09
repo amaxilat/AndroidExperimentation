@@ -185,7 +185,6 @@ public class HomeActivity extends Activity implements GoogleApiClient.Connection
                 .addOnConnectionFailedListener(this)
                 .addApi(LocationServices.API)
                 .build();
-        Log.i(TAG, "Connecting Google APIS...");
         mGoogleApiClient.connect();
 
         pendingSendButton = (Button) findViewById(R.id.send_pending_now);
@@ -248,8 +247,6 @@ public class HomeActivity extends Activity implements GoogleApiClient.Connection
 
                         try {
                             if (verCode != Integer.parseInt(builder.toString())) {
-                                Log.i(TAG, builder.toString());
-                                Log.i(TAG, "WE NEED TO UPDATE!");
                                 {
                                     final AlertDialog.Builder alertBuilder = new AlertDialog.Builder(activity);
                                     alertBuilder.setTitle("Update Available");
@@ -274,14 +271,11 @@ public class HomeActivity extends Activity implements GoogleApiClient.Connection
                                     });
                                 }
                             }
-                        } catch (Exception e) {
-                            Log.d(TAG, "ignore");
+                        } catch (Exception ignore) {
                         }
-                    } catch (Exception e) {
-                        Log.d(TAG, "ignore");
+                    } catch (Exception ignore) {
                     }
                 } catch (PackageManager.NameNotFoundException e) {
-                    Log.d(TAG, "ignore");
                 }
             }
         }).start();
@@ -319,7 +313,6 @@ public class HomeActivity extends Activity implements GoogleApiClient.Connection
     }
 
     private void refresh() {
-        Log.i(TAG, "refresher");
         if (DynamixService.isFrameworkInitialized()) {
             // Setup toggle button with proper state
             boolean dynamixEnabled = DynamixPreferences.isDynamixEnabled(this);
@@ -342,7 +335,6 @@ public class HomeActivity extends Activity implements GoogleApiClient.Connection
 
                 mMixpanel.identify(String.valueOf(DynamixService.getPhoneProfiler().getPhoneId()));
 
-                Log.i(TAG, "Add Location Listener");
                 if (!mGoogleApiClient.isConnected()) {
                     //TODO : use this in a blocking connect mode - needed to do the below stuff
                     mGoogleApiClient.connect();
@@ -360,7 +352,6 @@ public class HomeActivity extends Activity implements GoogleApiClient.Connection
                     }
                 }
             } else if (!experimentationStatus && registered) {
-                Log.i(TAG, "Remove Location Listener");
                 LocationServices.FusedLocationApi.removeLocationUpdates(mGoogleApiClient, this);
                 registered = false;
             }
@@ -400,24 +391,20 @@ public class HomeActivity extends Activity implements GoogleApiClient.Connection
 
     @Override
     public void onConnected(Bundle bundle) {
-        Log.d(TAG, "Google activity recognition services connected");
         //Disable for now
         ActivityRecognition.ActivityRecognitionApi.requestActivityUpdates(mGoogleApiClient, 10000, activityRecognitionPendingIntent);
     }
 
     @Override
     public void onConnectionSuspended(int i) {
-        Log.d(TAG, "Google activity recognition services connection suspended");
     }
 
     @Override
     public void onConnectionFailed(ConnectionResult connectionResult) {
-        Log.d(TAG, "Google activity recognition services disconnected");
     }
 
     @Override
     public void onLocationChanged(Location location) {
-        Log.d(TAG, "onLocationChanged:" + location.toString());
         HomeActivity.location = location;
     }
 
@@ -430,7 +417,6 @@ public class HomeActivity extends Activity implements GoogleApiClient.Connection
     }
 
     private void updateMapLocation(final double latitude, final double longitude) {
-        Log.i(TAG, "updateMapLocation:" + longitude + "/" + latitude);
         // Creating a LatLng object for the current location
         final LatLng latLng = new LatLng(latitude, longitude);
         try {

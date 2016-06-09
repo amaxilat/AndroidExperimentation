@@ -230,10 +230,8 @@ public class Utils {
 			Pattern p = Pattern.compile(argument + "=([^&]+)");
 			Matcher m = p.matcher(url);
 			if (m.find()) {
-				Log.i(TAG, "Found argument  " + argument + " in url " + url);
 				return m.group(1);
-			} else
-				Log.i(TAG, "Could not find argument  " + argument + " in url " + url);
+			}
 		} catch (PatternSyntaxException ex) {
 			Log.w(TAG, "PatternSyntaxException: " + ex.toString());
 		}
@@ -249,7 +247,6 @@ public class Utils {
 		 * certificates-using-httpclient-over-https This idea may work:
 		 * http://jcalcote.wordpress.com/2010/06/22/managing-a-dynamic-java-trust-store/
 		 */
-		Log.i(TAG, "Setting acceptAllSelfSignedSSLcertificates");
 		initCertManagement();
 		// Create a trust manager that does not validate certificate chains
 		TrustManager[] trustAllCerts = new TrustManager[] { new X509TrustManager() {
@@ -284,8 +281,6 @@ public class Utils {
 			sc.getClientSessionContext().setSessionCacheSize(1);
 			HttpsURLConnection.setDefaultSSLSocketFactory(sc.getSocketFactory());
 			HttpsURLConnection.setDefaultHostnameVerifier(hv);
-			Log.i(TAG, "SSL Server Session Timeout is: " + sc.getServerSessionContext().getSessionTimeout());
-			Log.i(TAG, "SSL Client Session Timeout is: " + sc.getClientSessionContext().getSessionTimeout());
 		} catch (Exception e) {
 			Log.e(TAG, "SSLContext Error: " + e.toString());
 		}
@@ -295,21 +290,17 @@ public class Utils {
 	 * Forces Dynamix to deny all self-signed certificates.
 	 */
 	public static void denyAllSelfSignedSSLcertificates() {
-		Log.i(TAG, "Setting denyAllSelfSignedSSLcertificates");
 		initCertManagement();
 		try {
-			Log.i(TAG, "Invalidating existing SSLSessions");
 			Enumeration serverContext = sc.getServerSessionContext().getIds();
 			while (serverContext.hasMoreElements()) {
 				SSLSession session = sc.getServerSessionContext().getSession((byte[]) serverContext.nextElement());
-				Log.i(TAG, "Invalidating server session: " + session);
 				session.getSessionContext().setSessionTimeout(1);
 				session.invalidate();
 			}
 			Enumeration clientContext = sc.getClientSessionContext().getIds();
 			while (clientContext.hasMoreElements()) {
 				SSLSession session = sc.getClientSessionContext().getSession((byte[]) clientContext.nextElement());
-				Log.i(TAG, "Invalidating client session: " + session);
 				session.getSessionContext().setSessionTimeout(1);
 				session.invalidate();
 			}
@@ -484,7 +475,6 @@ public class Utils {
 	 *            If true, Dynamix is closed; if false, Dynamix is restarted.
 	 */
 	public static void showGlobalAlert(final Activity context, String message, final boolean exit) {
-		Log.i(TAG, "showGlobalAlert: " + message);
 		if (context != null && !DynamixService.isEmbedded()) {
 			try {
 				AlertDialog dialog = new AlertDialog.Builder(context).create();

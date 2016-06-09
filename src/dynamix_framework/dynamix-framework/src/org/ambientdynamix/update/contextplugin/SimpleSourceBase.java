@@ -49,18 +49,15 @@ public class SimpleSourceBase {
             boolean processSingle) throws Exception {
 
         // Organicity Modifications
-        Log.i("AndroidExperimentation", "Start Plugin Discovery");
         String jsonPluginList = "";
         final List<DiscoveredContextPlugin> plugs = new ArrayList<>();
         try {
             PluginList pluginList = getPluginList();
-            Log.i(TAG, "Plugin List set");
             final List<Plugin> plugList = pluginList.getPluginList();
             for (Plugin plugInfo : plugList) {
                 if (isEnabled(plugInfo)) {
                     continue;
                 }
-                Log.i(TAG, "Found Plugin:" + plugInfo.getName());
                 ContextPluginBinder plugBinder = new ContextPluginBinder();
                 DiscoveredContextPlugin plug = plugBinder
                         .createDiscoveredPlugin(repo, plugInfo);
@@ -96,7 +93,6 @@ public class SimpleSourceBase {
         DynamixService.setDiscoveredPlugins(pluginList);
         Plugin pluginXML = null;
         for (Plugin plugin : pluginList) {
-            Log.i(TAG, "Found Plugin1:" + plugin.getName());
             Constants.checkFile(plugin.getFilename(), plugin.getInstallUrl());
             if (plugin.getName().equals("plugs.xml")) {
                 pluginXML = plugin;
@@ -105,9 +101,6 @@ public class SimpleSourceBase {
         pluginList.remove(pluginXML);
         PluginList plist = new PluginList();
         plist.setPluginList(pluginList);
-        Log.i(TAG, "Found Plugins:" + pluginList.size());
-
-
         final SharedPreferences pref = DynamixService.getAndroidContext()
                 .getApplicationContext().getSharedPreferences("runningJob", 0); // 0
         // -

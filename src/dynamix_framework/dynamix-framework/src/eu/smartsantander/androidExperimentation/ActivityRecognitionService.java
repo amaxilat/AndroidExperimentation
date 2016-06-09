@@ -42,15 +42,12 @@ public class ActivityRecognitionService extends IntentService {
     protected void onHandleIntent(Intent intent) {
         if (ActivityRecognitionResult.hasResult(intent)) {
             ActivityRecognitionResult result = ActivityRecognitionResult.extractResult(intent);
-            Log.i(TAG, getType(result.getMostProbableActivity().getType()) + "t" + result.getMostProbableActivity().getConfidence());
 
             context = getApplicationContext();
-            Log.d("o3nWatcherLog", "ActivityRecognitionService onHandleIntent called...");
 
             activityConfidence = result.getMostProbableActivity().getConfidence();
             activityCode = result.getMostProbableActivity().getType();
             activityStatus = getType(result.getMostProbableActivity().getType());
-            Log.d("o3nWatcherLog", " ACTIVITY CODE : " + getType(activityCode) + " ACTIVITY CONFIDENCE : " + activityConfidence);
         }
     }
 

@@ -116,7 +116,6 @@ public class ContextPluginAdapter extends EmptyListSupportAdapter<PluginDiscover
 				checked.setOnClickListener(new OnClickListener() {
 					@Override
 					public void onClick(View v) {
-						Log.i(TAG, "View clicekd " + v);
 						CheckedTextView tv = (CheckedTextView) v;
 						if (!tv.isChecked()) {
 							installables.put(update, -1);

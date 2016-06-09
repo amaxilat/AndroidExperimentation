@@ -24,7 +24,6 @@ public class App extends Application {
     public void onCreate() {
         super.onCreate();
         mInstance = this;
-        Log.i(TAG, "Initializing...");
 
         Mint.initAndStartSession(getApplicationContext(), "6d443500");
     }

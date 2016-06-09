@@ -18,7 +18,7 @@
         android:layout_gravity="top"
         android:layout_weight="1"
         android:fontFamily="sans-serif-light"
-        android:text="No experiment running."
+        android:text="@string/No_experiment_running"
 
         />
 

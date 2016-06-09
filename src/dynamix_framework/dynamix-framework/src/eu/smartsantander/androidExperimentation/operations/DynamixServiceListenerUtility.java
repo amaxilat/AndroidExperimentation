@@ -47,21 +47,18 @@ public class DynamixServiceListenerUtility {
 
             @Override
             public void onSessionOpened(String sessionId) throws RemoteException {
-                Log.i(TAG, "onSessionOpened:" + sessionId);
                 final Result r = DynamixService.dynamix.addContextSupport(DynamixService.dynamixCallback, "org.ambientdynamix.contextplugins.ExperimentPlugin");
                 for (final ContextPluginInformation pluginInformation : DynamixService.dynamix.getAllContextPluginInformation().getContextPluginInformation()) {
                     if (pluginInformation.isEnabled()) {
                         DynamixService.dynamix.addContextSupport(DynamixService.dynamixCallback, pluginInformation.getPluginId());
                     }
                 }
-                Log.i(TAG, "onSessionOpened SESSION_STARTED:" + true);
                 DynamixService.sessionStarted = true;
                 //Log.d(TAG, "SESSION STATUS" + r.getMessage());
             }
 
             @Override
             public void onSessionClosed() throws RemoteException {
-                Log.i(TAG, "SESSION_STARTED:" + false);
                 DynamixService.sessionStarted = false;
             }
 
@@ -150,7 +147,6 @@ public class DynamixServiceListenerUtility {
             @Override
             public void onContextSupportAdded(ContextSupportInfo info) throws RemoteException {
                 //Log.d(TAG, "CONTENT SUPPORT ADDED: "+ info.getPlugin().getPluginId());
-                Log.i(TAG, "onContextSupportAdded SESSION_STARTED:" + true);
                 DynamixService.sessionStarted = true;
             }
 
@@ -161,8 +157,6 @@ public class DynamixServiceListenerUtility {
 
             @Override
             public void onContextTypeNotSupported(String contextType) throws RemoteException {
-                Log.d(TAG, "CONTENT NO SUPPORTED" + contextType);
-                Log.i(TAG, "SESSION_STARTED:" + false);
                 //DynamixService.sessionStarted = false;
             }
 

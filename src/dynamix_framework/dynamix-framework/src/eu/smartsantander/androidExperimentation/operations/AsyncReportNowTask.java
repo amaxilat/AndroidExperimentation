@@ -13,15 +13,12 @@ public class AsyncReportNowTask extends AsyncTask<String, Void, String> {
     protected String doInBackground(String... params) {
         String message = params[0];
         try { //try to send to server, on fail save it in SQLite
-            Log.i(TAG, "Offloading results...");
-            Log.d(TAG, message);
             DynamixService.getCommunication().setLastMessage(message);
             DynamixService.getCommunication().sendReportResults(message);//
         } catch (HttpClientErrorException e) {
             //ignore
         } catch (Exception e) {
             DynamixService.addExperimentalMessage(message);
-            Log.d(TAG, "Stored Message Count " + DynamixService.getDataStorageSize());
         }
         return "AndroidExperimentation Async Experiment Task Executed";
     }

@@ -44,8 +44,6 @@ public class ApplicationStatusReceiver extends BroadcastReceiver {
 						// Check if there was an app registered under the incoming uid
 						DynamixApplication app = DynamixService.getDynamixApplicationByUid(uid);
 						if (app != null) {
-							Log.i(TAG, "Android uninstalled: " + app);
-							Log.i(TAG, "Removing: " + app);
 							DynamixService.revokeSecurityAuthorization(app);
 						}
 					}

@@ -119,8 +119,8 @@
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="bottom"
-            android:textOff="Show Last Messages"
-            android:textOn="Show Sensor Dependencies"/>
+            android:textOff="@string/Show_Last_Messages"
+            android:textOn="@string/Show_Sensor_Dependencies"/>
 
     <TextView
             android:id="@+id/experiment_dependencies_JobTab"

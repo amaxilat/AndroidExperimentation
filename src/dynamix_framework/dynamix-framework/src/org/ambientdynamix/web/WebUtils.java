@@ -84,7 +84,6 @@ public class WebUtils {
 	 *            True if the cert should be written as a binary file; false to encode using Base64.
 	 */
 	public static void exportCertificate(java.security.cert.Certificate cert, File file, boolean binary) {
-		Log.i(TAG, "Writing cert to: " + file.getAbsolutePath());
 		try {
 			// Get the encoded form which is suitable for exporting
 			byte[] buf = cert.getEncoded();

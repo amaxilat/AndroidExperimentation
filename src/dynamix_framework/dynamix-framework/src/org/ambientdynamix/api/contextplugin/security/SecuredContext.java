@@ -367,14 +367,12 @@ public class SecuredContext extends Context {
                 if (locationManager == null) {
                     locationManager = (LocationManager) c.getSystemService(Context.LOCATION_SERVICE);
                 }
-                Log.i(TAG, "locationManager=" + locationManager);
                 return locationManager;
             } else if (serviceName.equalsIgnoreCase(Service.BLUETOOTH_SERVICE)) {
                 // Only create a SecuredSensorManager once!
                 if (sbm == null) {
                     sbm = (BluetoothManager) c.getSystemService(Service.BLUETOOTH_SERVICE);
                 }
-                Log.i(TAG, "sbm=" + sbm);
                 return sbm;
             } else {
                 return c.getSystemService(serviceName);
@@ -440,9 +438,7 @@ public class SecuredContext extends Context {
 
     @Override
     public Intent registerReceiver(BroadcastReceiver receiver, IntentFilter filter) {
-        Log.d(TAG, "registerReceiver for: " + receiver);
         if (checkPermission(Permissions.MANAGE_BROADCAST_RECEIVERS)) {
-            Log.d(TAG, "Registering receiver");
             synchronized (receivers) {
                 if (!receivers.contains(receiver))
                     receivers.add(receiver);
@@ -456,9 +452,7 @@ public class SecuredContext extends Context {
     @Override
     public Intent registerReceiver(BroadcastReceiver receiver, IntentFilter filter, String broadcastPermission,
                                    Handler scheduler) {
-        Log.d(TAG, "registerReceiver for: " + receiver);
         if (checkPermission(Permissions.MANAGE_BROADCAST_RECEIVERS)) {
-            Log.d(TAG, "Registering receiver");
             synchronized (receivers) {
                 if (!receivers.contains(receiver))
                     receivers.add(receiver);
@@ -650,16 +644,13 @@ public class SecuredContext extends Context {
     }
 
     private boolean checkPermission(String permString) {
-        Log.d(TAG, "Checking permissions for: " + permString);
         if (false && permissionCheckingEnabled) {
             for (Permission p : permissions) {
                 if (p.getPermissionString().equalsIgnoreCase(permString) && p.isPermissionGranted()) {
-                    Log.d(TAG, "Permission granted: " + permString);
                     return true;
                 }
             }
         } else {
-            Log.d(TAG, "Permission checking disabled... granting: " + permString);
             return true;
         }
         Log.w(TAG, "Permission NOT granted: " + permString);

@@ -19,7 +19,6 @@ public class Demon extends Thread implements Runnable {
         public void run() {
             if (DynamixService.isEnabled()) {
                 if (!DynamixService.isDeviceRegistered()) {
-                    Log.d(TAG, "AndroidExperimentation Running Unregistered Device");
                     DynamixService.getPhoneProfiler().register();
                 } else if (DynamixService.isInitialized()) {
                     if (!pingExp.isStateActive() || counter > 30) {
@@ -27,8 +26,6 @@ public class Demon extends Thread implements Runnable {
                         pingExp.cancel(true);
                         pingExp = new AsyncExpTask();
                         pingExp.execute();
-                    } else {
-                        Log.d(TAG, "AndroidExperimentation Still Active Experiment Management Process:" + counter);
                     }
                     counter++;
                 }
@@ -55,11 +52,9 @@ public class Demon extends Thread implements Runnable {
 
     public void startJob() {
         try {
-            Log.d(TAG, "AndroidExperimentation Running");
             handler.postDelayed(runnable, Constants.EXPERIMENT_POLL_INTERVAL + 5000);
         } catch (Exception e) {
             e.printStackTrace();
-            Log.d(TAG, "AndroidExperimentation:" + e.getMessage());
         }
     }
 

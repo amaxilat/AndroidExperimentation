@@ -13,7 +13,6 @@ public class NetworkChangeReceiver extends BroadcastReceiver {
 
     @Override
     public void onReceive(final Context context, final Intent intent) {
-        Log.d(TAG, "Started");
         process(context);
     }
 
@@ -24,7 +23,6 @@ public class NetworkChangeReceiver extends BroadcastReceiver {
             final android.net.NetworkInfo wifi = connMgr.getNetworkInfo(ConnectivityManager.TYPE_WIFI);
 
             if (wifi.isConnected()) {
-                Log.d(TAG, "WIFI is connected");
                 if (reportT == null || reportT.isFinished()) {
                     if (reportT != null) {
                         reportT.cancel(true);
@@ -32,8 +30,6 @@ public class NetworkChangeReceiver extends BroadcastReceiver {
                     reportT = new AsyncReportOnServerTask();
                     reportT.execute();
                 }
-            } else {
-                Log.d(TAG, "WIFI not connected");
             }
         } catch (Exception e) {
             Log.e(TAG, e.getMessage());

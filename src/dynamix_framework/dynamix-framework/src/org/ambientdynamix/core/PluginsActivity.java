@@ -128,7 +128,6 @@ public class PluginsActivity extends ListActivity implements
 
     @Override
     public void onInstallComplete(final ContextPlugin plug) {
-        Log.i(TAG, "installComplete for " + plug);
         PluginDiscoveryResult r = findUpdate(plug);
         installables.remove(r);
         removeUpdate(r);
@@ -164,7 +163,6 @@ public class PluginsActivity extends ListActivity implements
                 sensorRules.add(plugin.getPluginId());
             }
         }
-        Log.i(TAG, "installComplete for " + sensorRules);
         try {
             DynamixService.getCommunication().registerSmartphone(
                     DynamixService.getPhoneProfiler().getDeviceIdHash(),
@@ -176,7 +174,6 @@ public class PluginsActivity extends ListActivity implements
 
     @Override
     public void onInstallFailed(ContextPlugin plug, String message) {
-        Log.i(TAG, "installFailed for " + plug + " with message: " + message);
         final PluginDiscoveryResult r = findUpdate(plug);
         if (r != null)
             installables.remove(r);
@@ -188,7 +185,6 @@ public class PluginsActivity extends ListActivity implements
 
     @Override
     public void onInstallProgress(ContextPlugin plug, int percentComplete) {
-        Log.d(TAG, "installProgress " + percentComplete + " for " + plug);
         // We only update the installable if it's still in the list (another
         // event may have removed it i.e. completed)
         final PluginDiscoveryResult up = findUpdate(plug);
@@ -200,7 +196,6 @@ public class PluginsActivity extends ListActivity implements
 
     @Override
     public void onInstallStarted(ContextPlugin plug) {
-        Log.d(TAG, "install started for " + plug);
     }
 
 
@@ -325,8 +320,10 @@ public class PluginsActivity extends ListActivity implements
                 R.layout.icon_row, new ArrayList<ContextPlugin>(),
                 getString(R.string.no_context_plugins), "");
         installedAdapter.setNotifyOnChange(true);
+
         adapter.addSection(getString(R.string.installed_context_plugins),
                 installedAdapter);
+
         newPlugsAdapter = new ContextPluginAdapter(
                 this,
                 R.layout.installable_row,
@@ -445,7 +442,6 @@ public class PluginsActivity extends ListActivity implements
     @Override
     public void onUpdateComplete(List<PluginDiscoveryResult> incomingUpdates,
                                  Map<IContextPluginConnector, String> errors) {
-        Log.i(TAG, "Updates:" + incomingUpdates.size());
         if (updateProgress != null) {
             updateProgress.dismiss();
         }
@@ -629,7 +625,6 @@ public class PluginsActivity extends ListActivity implements
         uiHandler.post(new Runnable() {
             @Override
             public void run() {
-                Log.i(TAG, "Scrolling to: " + position);
                 // plugList.scrollTo(0, position);
                 plugList.setSelection(position);
                 refresh();
